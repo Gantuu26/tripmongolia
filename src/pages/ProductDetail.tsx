@@ -587,9 +587,9 @@ export const ProductDetail: React.FC = () => {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://mongolryokou.com/" },
-            { "@type": "ListItem", "position": 2, "name": "몽골투어 상품", "item": "https://mongolryokou.com/products" },
-            { "@type": "ListItem", "position": 3, "name": product.name, "item": `https://mongolryokou.com/products/${id}` }
+            { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://tripmongolia.kr/" },
+            { "@type": "ListItem", "position": 2, "name": "몽골투어 상품", "item": "https://tripmongolia.kr/products" },
+            { "@type": "ListItem", "position": 3, "name": product.name, "item": `https://tripmongolia.kr/products/${id}` }
         ]
     };
 

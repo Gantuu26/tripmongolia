@@ -10,7 +10,7 @@
 
 ## 1. 프로젝트 정체
 
-- **사이트**: [mongolryokou.com](https://mongolryokou.com) (도메인의 `ryokou`는 旅行의 일본어 로마자 — 일본 시절 잔재이며 사이트 내용은 현재 한국어)
+- **사이트**: [tripmongolia.kr](https://tripmongolia.kr) (2026-06-08 연결, Cloudflare Pages `tripmongolia` 프로젝트의 커스텀 도메인). 배포 URL `tripmongolia.pages.dev`도 유효. 구 도메인 `mongolryokou.com`은 일본 시절 잔재(이메일 주소에만 일부 잔존)
 - **서비스/브랜드명: Trip Mongolia** (2026-06-08 리브랜딩). 법인명은 Сүүнзам трэйд(몽골 현지). 구 브랜드 `몽골리아 은하수`/`Milkyway Japan`은 SEO 연속성을 위해 JSON-LD `alternateName`·키워드에만 잔존
 - **사업**: 몽골 현지 여행사 (B2C)
 - **운영 언어**: **한국어** (관리자 페이지는 **키릴 몽골어**)
@@ -56,7 +56,7 @@
 - 미리보기 URL 패턴: `https://<branch-slug>.milkyway-japan-axy.pages.dev`
   - 슬래시(`/`)는 하이픈으로 변환됨 (예: `fix/sitemap-categories` → `fix-sitemap-categories`)
 - `https://milkyway-japan-axy.pages.dev` (브랜치 prefix 없음) = 운영 별칭(main 미러)
-- 운영 도메인: `https://mongolryokou.com` (Cloudflare 캐시 1시간, max-age=3600)
+- 운영 도메인: `https://tripmongolia.kr` (Cloudflare Pages 커스텀 도메인). 구 milkyway-japan은 mongolryokou.com
 
 검증 시 캐시 우회: `?bust=$(date +%s)` 쿼리 붙이거나 Cache-Control: no-cache 헤더.
 
@@ -91,7 +91,7 @@
 ### 5.3 Sitemap (`functions/sitemap.xml.ts`)
 
 - 동적 생성. D1에서 products / categories / magazines를 읽음
-- robots.txt에서 참조: `https://mongolryokou.com/sitemap.xml`
+- robots.txt에서 참조: `https://tripmongolia.kr/sitemap.xml`
 - xmlns:image 네임스페이스 선언됨
 
 ## 6. ⚠️ 주의해야 할 함정

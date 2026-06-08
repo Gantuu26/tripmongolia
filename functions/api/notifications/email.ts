@@ -10,7 +10,7 @@ interface Env {
 const app = new Hono<{ Bindings: Env }>();
 
 const FROM = 'Milkyway Japan <noreply@mongolryokou.com>';
-const SITE_URL = 'https://mongolryokou.com';
+const SITE_URL = 'https://tripmongolia.kr';
 const CONTACT_EMAIL = 'info@mongolryokou.com';
 
 async function sendEmail(apiKey: string, to: string | string[], subject: string, html: string) {
@@ -118,7 +118,7 @@ function footer() {
     return `
         <div class="footer">
             Milkyway Japan / Mongolia Milky Way Travel<br>
-            <a href="${SITE_URL}">mongolryokou.com</a> · <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>
+            <a href="${SITE_URL}">tripmongolia.kr</a> · <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>
         </div>
     `;
 }

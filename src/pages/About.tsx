@@ -13,14 +13,14 @@ export const About: React.FC = () => {
             '@context': 'https://schema.org',
             '@type': 'AboutPage',
             name: '회사 소개 | Trip Mongolia',
-            url: 'https://mongolryokou.com/about',
+            url: 'https://tripmongolia.kr/about',
             inLanguage: 'ko',
             mainEntity: {
                 '@type': 'TravelAgency',
                 name: 'Trip Mongolia',
                 alternateName: ['Trip Mongolia', 'Trip Mongolia'],
-                url: 'https://mongolryokou.com',
-                logo: 'https://mongolryokou.com/favicon.png',
+                url: 'https://tripmongolia.kr',
+                logo: 'https://tripmongolia.kr/favicon.png',
                 founder: [
                     { '@type': 'Person', name: 'Bilguun', jobTitle: '대표' },
                     { '@type': 'Person', name: 'Gantuu', jobTitle: '부대표' },
@@ -41,8 +41,8 @@ export const About: React.FC = () => {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             itemListElement: [
-                { '@type': 'ListItem', position: 1, name: '홈', item: 'https://mongolryokou.com/' },
-                { '@type': 'ListItem', position: 2, name: '회사 소개', item: 'https://mongolryokou.com/about' },
+                { '@type': 'ListItem', position: 1, name: '홈', item: 'https://tripmongolia.kr/' },
+                { '@type': 'ListItem', position: 2, name: '회사 소개', item: 'https://tripmongolia.kr/about' },
             ],
         },
     ];

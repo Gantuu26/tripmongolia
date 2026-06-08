@@ -229,8 +229,8 @@ export const TourProducts: React.FC = () => {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
         itemListElement: [
-            { '@type': 'ListItem', position: 1, name: '홈', item: 'https://mongolryokou.com/' },
-            { '@type': 'ListItem', position: 2, name: '몽골투어 상품', item: 'https://mongolryokou.com/products' },
+            { '@type': 'ListItem', position: 1, name: '홈', item: 'https://tripmongolia.kr/' },
+            { '@type': 'ListItem', position: 2, name: '몽골투어 상품', item: 'https://tripmongolia.kr/products' },
         ],
     };
 
@@ -241,7 +241,7 @@ export const TourProducts: React.FC = () => {
         itemListElement: products.slice(0, 30).map((p, i) => ({
             '@type': 'ListItem',
             position: i + 1,
-            url: `https://mongolryokou.com/products/${p.id}`,
+            url: `https://tripmongolia.kr/products/${p.id}`,
             name: p.name,
         })),
     };
@@ -251,9 +251,9 @@ export const TourProducts: React.FC = () => {
         '@type': 'CollectionPage',
         name: '몽골투어 상품 목록 | Trip Mongolia',
         description: t('products.seo_description'),
-        url: 'https://mongolryokou.com/products',
+        url: 'https://tripmongolia.kr/products',
         inLanguage: 'ja',
-        isPartOf: { '@type': 'WebSite', name: 'Trip Mongolia', url: 'https://mongolryokou.com' },
+        isPartOf: { '@type': 'WebSite', name: 'Trip Mongolia', url: 'https://tripmongolia.kr' },
     };
 
     return (

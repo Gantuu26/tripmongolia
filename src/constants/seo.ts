@@ -16,6 +16,6 @@ export const SEO_CONSTANTS = {
         "게르숙박",
         "Trip Mongolia"
     ].join(", "),
-    SITE_URL: "https://mongolryokou.com",
+    SITE_URL: "https://tripmongolia.kr",
     OG_IMAGE: "/og-image.jpg"
 };

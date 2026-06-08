@@ -99,15 +99,15 @@ export const CategoryPage: React.FC = () => {
 
     // ─── Structured Data (JSON-LD) for SEO ──────────────────────────
     const seoDescription = category.landing_hero_subtitle || category.description || `${category.name} 몽골투어를 안내해 드립니다.`;
-    const seoUrl = `https://mongolryokou.com/category/${slug}`;
+    const seoUrl = `https://tripmongolia.kr/category/${slug}`;
     const heroOgImage = heroImages[0]?.startsWith('http') ? heroImages[0] : undefined;
 
     const breadcrumbLd = {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
         itemListElement: [
-            { '@type': 'ListItem', position: 1, name: '홈', item: 'https://mongolryokou.com/' },
-            { '@type': 'ListItem', position: 2, name: '투어 상품', item: 'https://mongolryokou.com/products' },
+            { '@type': 'ListItem', position: 1, name: '홈', item: 'https://tripmongolia.kr/' },
+            { '@type': 'ListItem', position: 2, name: '투어 상품', item: 'https://tripmongolia.kr/products' },
             { '@type': 'ListItem', position: 3, name: category.name, item: seoUrl },
         ],
     };
@@ -119,7 +119,7 @@ export const CategoryPage: React.FC = () => {
         itemListElement: products.slice(0, 20).map((p: any, i: number) => ({
             '@type': 'ListItem',
             position: i + 1,
-            url: `https://mongolryokou.com/products/${p.id}`,
+            url: `https://tripmongolia.kr/products/${p.id}`,
             name: p.name,
         })),
     };
@@ -131,7 +131,7 @@ export const CategoryPage: React.FC = () => {
         description: seoDescription,
         url: seoUrl,
         inLanguage: 'ja',
-        isPartOf: { '@type': 'WebSite', name: 'Trip Mongolia', url: 'https://mongolryokou.com' },
+        isPartOf: { '@type': 'WebSite', name: 'Trip Mongolia', url: 'https://tripmongolia.kr' },
     };
 
     return (

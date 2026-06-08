@@ -248,7 +248,7 @@ export const GuideApply: React.FC = () => {
                 </form>
 
                 <p className="text-center text-xs text-gray-400 mt-4">
-                    © Trip Mongolia — mongolryokou.com
+                    © Trip Mongolia — tripmongolia.kr
                 </p>
             </div>
         </div>

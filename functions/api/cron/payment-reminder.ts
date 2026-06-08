@@ -36,10 +36,10 @@ function tplPaymentReminder(data: { customerName: string; reservationNumber: str
   <p style="font-size:14px;color:#4a6b64;">
     ご不明な点は <a href="mailto:info@mongolryokou.com" style="color:#1eb496;">info@mongolryokou.com</a> までご連絡ください。
   </p>
-  <a class="btn" href="https://mongolryokou.com/mypage/reservations">予約を確認する</a>
+  <a class="btn" href="https://tripmongolia.kr/mypage/reservations">予約を確認する</a>
 </div>
 <div class="footer">
-  <a href="https://mongolryokou.com">mongolryokou.com</a> |
+  <a href="https://tripmongolia.kr">tripmongolia.kr</a> |
   <a href="mailto:info@mongolryokou.com">info@mongolryokou.com</a>
 </div>`);
 }

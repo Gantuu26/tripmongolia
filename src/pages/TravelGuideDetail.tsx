@@ -200,10 +200,10 @@ export const TravelGuideDetail: React.FC = () => {
 
     // ─── SEO: Article JSON-LD (BlogPosting) + BreadcrumbList ───────────
     const canonicalPath = `/travel-guide/${id}`;
-    const absoluteUrl = `https://mongolryokou.com${canonicalPath}`;
+    const absoluteUrl = `https://tripmongolia.kr${canonicalPath}`;
     const absoluteImage = magazine.image
-        ? (magazine.image.startsWith('http') ? magazine.image : `https://mongolryokou.com${magazine.image}`)
-        : 'https://mongolryokou.com/favicon.png';
+        ? (magazine.image.startsWith('http') ? magazine.image : `https://tripmongolia.kr${magazine.image}`)
+        : 'https://tripmongolia.kr/favicon.png';
 
     const articleLd = {
         '@context': 'https://schema.org',
@@ -222,7 +222,7 @@ export const TravelGuideDetail: React.FC = () => {
             name: 'Trip Mongolia',
             logo: {
                 '@type': 'ImageObject',
-                url: 'https://mongolryokou.com/favicon.png',
+                url: 'https://tripmongolia.kr/favicon.png',
             },
         },
         mainEntityOfPage: {
@@ -238,8 +238,8 @@ export const TravelGuideDetail: React.FC = () => {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
         itemListElement: [
-            { '@type': 'ListItem', position: 1, name: '홈', item: 'https://mongolryokou.com/' },
-            { '@type': 'ListItem', position: 2, name: '여행 가이드', item: 'https://mongolryokou.com/travel-guide' },
+            { '@type': 'ListItem', position: 1, name: '홈', item: 'https://tripmongolia.kr/' },
+            { '@type': 'ListItem', position: 2, name: '여행 가이드', item: 'https://tripmongolia.kr/travel-guide' },
             { '@type': 'ListItem', position: 3, name: magazine.title, item: absoluteUrl },
         ],
     };

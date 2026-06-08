@@ -77,7 +77,7 @@ function tplDailyDigest(data: {
     ${newRows}
   </table>
 
-  <a class="btn" href="https://mongolryokou.com/admin/reservations" style="margin-top:28px;">管理画面を開く</a>
+  <a class="btn" href="https://tripmongolia.kr/admin/reservations" style="margin-top:28px;">管理画面を開く</a>
 </div>
 <div class="footer">Milkyway Japan 管理システム | 自動送信メール</div>`);
 }

@@ -33,11 +33,11 @@ export const Home: React.FC = () => {
                 {
                     "@context": "https://schema.org",
                     "@type": "TravelAgency",
-                    "@id": "https://mongolryokou.com/#organization",
+                    "@id": "https://tripmongolia.kr/#organization",
                     "name": "Trip Mongolia",
                     "alternateName": "밀키웨이 재팬",
-                    "image": "https://mongolryokou.com/og-image.jpg",
-                    "url": "https://mongolryokou.com",
+                    "image": "https://tripmongolia.kr/og-image.jpg",
+                    "url": "https://tripmongolia.kr",
                     "email": "info@mongolryokou.com",
                     "address": {
                         "@type": "PostalAddress",
@@ -53,16 +53,16 @@ export const Home: React.FC = () => {
                 {
                     "@context": "https://schema.org",
                     "@type": "WebSite",
-                    "@id": "https://mongolryokou.com/#website",
-                    "url": "https://mongolryokou.com",
+                    "@id": "https://tripmongolia.kr/#website",
+                    "url": "https://tripmongolia.kr",
                     "name": "Trip Mongolia | 몽골여행 전문",
-                    "publisher": { "@id": "https://mongolryokou.com/#organization" },
+                    "publisher": { "@id": "https://tripmongolia.kr/#organization" },
                     "inLanguage": "ja",
                     "potentialAction": {
                         "@type": "SearchAction",
                         "target": {
                             "@type": "EntryPoint",
-                            "urlTemplate": "https://mongolryokou.com/products?q={search_term_string}"
+                            "urlTemplate": "https://tripmongolia.kr/products?q={search_term_string}"
                         },
                         "query-input": "required name=search_term_string"
                     }

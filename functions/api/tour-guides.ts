@@ -62,7 +62,7 @@ app.post('/apply', async (c) => {
                            <p><strong>電話:</strong> ${data.phone}</p>
                            <p><strong>言語:</strong> ${(data.languages || []).join(', ')}</p>
                            <p><strong>専門分野:</strong> ${(data.specialties || []).join(', ')}</p>
-                           <p><a href="https://mongolryokou.com/admin/guides">管理画面で確認する</a></p>`,
+                           <p><a href="https://tripmongolia.kr/admin/guides">管理画面で確認する</a></p>`,
                 }),
             }).catch(() => {});
         }

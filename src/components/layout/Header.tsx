@@ -174,7 +174,7 @@ export const Header: React.FC = () => {
                     {unreadCount > 0 && (
                         <p className="mb-2 text-primary font-semibold">알림 {unreadCount}건</p>
                     )}
-                    <p>Trip Mongolia · mongolryokou.com</p>
+                    <p>Trip Mongolia · tripmongolia.kr</p>
                 </div>
             </aside>
         </header>

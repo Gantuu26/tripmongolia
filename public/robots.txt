@@ -5,4 +5,4 @@ Disallow: /admin/
 Disallow: /shop_view
 Disallow: /*?idx=
 
-Sitemap: https://mongolryokou.com/sitemap.xml
+Sitemap: https://tripmongolia.kr/sitemap.xml

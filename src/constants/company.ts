@@ -11,7 +11,7 @@ export const COMPANY_INFO = {
     registrationNumber: '9011640064',     // 사업자등록번호
     registrationNote: 'Сүүнзам трэйд',
     email: 'info@mongolryokou.com',
-    website: 'mongolryokou.com',
+    website: 'tripmongolia.kr',
     stampImage: '/stamp.png',             // public/stamp.png 위치에 도장 이미지를 둡니다
 };
 

@@ -129,7 +129,7 @@ const UserReviewsMobile: React.FC = () => {
         "@context": "https://schema.org",
         "@type": "TravelAgency",
         "name": "Trip Mongolia",
-        "url": "https://mongolryokou.com",
+        "url": "https://tripmongolia.kr",
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": averageRating,
