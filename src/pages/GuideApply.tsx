@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { uploadImage } from '../utils/upload';
 
-const LANGUAGES = ['日本語', '英語', 'モンゴル語', '中国語', '韓国語'];
-const SPECIALTIES = ['ゴビ砂漠', 'ホブスゴル', 'テレルジ', '乗馬', '文化体験', '写真撮影'];
+const LANGUAGES = ['한국어', '영어', '몽골어', '중국어', '일본어'];
+const SPECIALTIES = ['고비사막', '홉스굴', '테렐지', '승마', '문화체험', '사진촬영'];
 
 export const GuideApply: React.FC = () => {
     const [form, setForm] = useState({
@@ -38,7 +38,7 @@ export const GuideApply: React.FC = () => {
             const url = await uploadImage(file, 'guides');
             setForm(prev => ({ ...prev, image: url }));
         } catch {
-            setError('画像のアップロードに失敗しました。もう一度お試しください。');
+            setError('이미지 업로드에 실패했습니다. 다시 시도해 주세요.');
         } finally {
             setImageUploading(false);
         }
@@ -47,11 +47,11 @@ export const GuideApply: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!form.name.trim() || !form.phone.trim()) {
-            setError('お名前と電話番号は必須です。');
+            setError('성함과 전화번호는 필수 항목입니다.');
             return;
         }
         if (imageUploading) {
-            setError('画像のアップロードが完了するまでお待ちください。');
+            setError('이미지 업로드가 완료될 때까지 기다려 주세요.');
             return;
         }
         setLoading(true);
@@ -65,10 +65,10 @@ export const GuideApply: React.FC = () => {
                     experience_years: form.experience_years ? Number(form.experience_years) : 0,
                 }),
             });
-            if (!res.ok) throw new Error('送信に失敗しました。');
+            if (!res.ok) throw new Error('전송에 실패했습니다.');
             setSubmitted(true);
         } catch (e: any) {
-            setError(e.message || '送信に失敗しました。もう一度お試しください。');
+            setError(e.message || '전송에 실패했습니다. 다시 시도해 주세요.');
         } finally {
             setLoading(false);
         }
@@ -81,10 +81,10 @@ export const GuideApply: React.FC = () => {
                     <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <span className="material-symbols-outlined text-teal-600 text-3xl">check_circle</span>
                     </div>
-                    <h2 className="text-2xl font-bold text-gray-800 mb-3">申請を受け付けました</h2>
+                    <h2 className="text-2xl font-bold text-gray-800 mb-3">신청이 접수되었습니다</h2>
                     <p className="text-gray-600 leading-relaxed">
-                        ご申請ありがとうございます。<br />
-                        担当者が内容を確認し、<strong>2〜3営業日以内</strong>にご連絡いたします。
+                        신청해 주셔서 감사합니다.<br />
+                        담당자가 내용을 확인한 후 <strong>2~3 영업일 이내</strong>에 연락드리겠습니다.
                     </p>
                 </div>
             </div>
@@ -99,15 +99,15 @@ export const GuideApply: React.FC = () => {
                     <div className="inline-flex items-center gap-2 bg-teal-600 text-white px-4 py-2 rounded-full text-sm font-bold mb-4">
                         🐴 Milkyway Japan
                     </div>
-                    <h1 className="text-3xl font-bold text-gray-800 mb-2">ガイド登録申請</h1>
-                    <p className="text-gray-500 text-sm">モンゴル旅行の公認ガイドとして登録申請ができます</p>
+                    <h1 className="text-3xl font-bold text-gray-800 mb-2">가이드 등록 신청</h1>
+                    <p className="text-gray-500 text-sm">몽골여행 공인 가이드로 등록 신청을 하실 수 있습니다</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm p-6 space-y-5">
 
                     {/* Profile Photo */}
                     <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2">プロフィール写真</label>
+                        <label className="block text-sm font-bold text-gray-700 mb-2">프로필 사진</label>
                         <div className="flex items-center gap-4">
                             <div className="w-20 h-20 rounded-full overflow-hidden bg-gray-100 flex-shrink-0 flex items-center justify-center">
                                 {imagePreview ? (
@@ -119,7 +119,7 @@ export const GuideApply: React.FC = () => {
                             <div className="flex-1">
                                 <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-50 transition-colors">
                                     <span className="material-symbols-outlined text-base">upload</span>
-                                    {imageUploading ? 'アップロード中...' : '写真を選択'}
+                                    {imageUploading ? '업로드 중...' : '사진 선택'}
                                     <input
                                         type="file"
                                         accept="image/*"
@@ -128,7 +128,7 @@ export const GuideApply: React.FC = () => {
                                         disabled={imageUploading}
                                     />
                                 </label>
-                                <p className="text-xs text-gray-400 mt-1">JPG、PNG、WEBPに対応</p>
+                                <p className="text-xs text-gray-400 mt-1">JPG, PNG, WEBP 지원</p>
                             </div>
                         </div>
                     </div>
@@ -136,13 +136,13 @@ export const GuideApply: React.FC = () => {
                     {/* Name */}
                     <div>
                         <label className="block text-sm font-bold text-gray-700 mb-1.5">
-                            お名前 <span className="text-red-500">*</span>
+                            성함 <span className="text-red-500">*</span>
                         </label>
                         <input
                             type="text"
                             value={form.name}
                             onChange={e => setForm({ ...form, name: e.target.value })}
-                            placeholder="山田 太郎"
+                            placeholder="홍길동"
                             className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
                         />
                     </div>
@@ -150,20 +150,20 @@ export const GuideApply: React.FC = () => {
                     {/* Phone */}
                     <div>
                         <label className="block text-sm font-bold text-gray-700 mb-1.5">
-                            電話番号 <span className="text-red-500">*</span>
+                            전화번호 <span className="text-red-500">*</span>
                         </label>
                         <input
                             type="tel"
                             value={form.phone}
                             onChange={e => setForm({ ...form, phone: e.target.value })}
-                            placeholder="090-0000-0000"
+                            placeholder="010-0000-0000"
                             className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
                         />
                     </div>
 
                     {/* Experience Years */}
                     <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-1.5">ガイド経験年数</label>
+                        <label className="block text-sm font-bold text-gray-700 mb-1.5">가이드 경력 연수</label>
                         <div className="flex items-center gap-3">
                             <input
                                 type="number"
@@ -174,17 +174,17 @@ export const GuideApply: React.FC = () => {
                                 placeholder="0"
                                 className="w-28 px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 text-center"
                             />
-                            <span className="text-sm text-gray-600">年</span>
+                            <span className="text-sm text-gray-600">년</span>
                         </div>
                     </div>
 
                     {/* Bio */}
                     <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-1.5">自己紹介</label>
+                        <label className="block text-sm font-bold text-gray-700 mb-1.5">자기소개</label>
                         <textarea
                             value={form.bio}
                             onChange={e => setForm({ ...form, bio: e.target.value })}
-                            placeholder="ガイド経験、得意な地域、資格などをご記入ください"
+                            placeholder="가이드 경력, 자신 있는 지역, 자격증 등을 기입해 주세요"
                             rows={4}
                             className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 resize-none"
                         />
@@ -192,7 +192,7 @@ export const GuideApply: React.FC = () => {
 
                     {/* Languages */}
                     <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2">対応言語</label>
+                        <label className="block text-sm font-bold text-gray-700 mb-2">가능 언어</label>
                         <div className="flex flex-wrap gap-2">
                             {LANGUAGES.map(lang => (
                                 <button
@@ -213,7 +213,7 @@ export const GuideApply: React.FC = () => {
 
                     {/* Specialties */}
                     <div>
-                        <label className="block text-sm font-bold text-gray-700 mb-2">専門分野</label>
+                        <label className="block text-sm font-bold text-gray-700 mb-2">전문 분야</label>
                         <div className="flex flex-wrap gap-2">
                             {SPECIALTIES.map(sp => (
                                 <button
@@ -242,8 +242,8 @@ export const GuideApply: React.FC = () => {
                         className="w-full bg-teal-600 text-white font-bold py-4 rounded-xl hover:bg-teal-700 transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
                     >
                         {loading ? (
-                            <><div className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />送信中...</>
-                        ) : '申請を送信する'}
+                            <><div className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />전송 중...</>
+                        ) : '신청서 제출하기'}
                     </button>
                 </form>
 

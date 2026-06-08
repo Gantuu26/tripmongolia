@@ -69,12 +69,12 @@ export function UserReviewsDesktop({ contentWidth = 1280 }: { contentWidth?: num
                 if (!Array.isArray(data)) return [];
                 return (data as ApiReview[]).map((r): Review => ({
                     id: r.id,
-                    author: r.user_name || r.userName || '匿名',
+                    author: r.user_name || r.userName || '익명',
                     avatar: r.user_image || r.userImage,
                     date: formatDate(r.created_at || r.createdAt),
                     rating: r.rating || 5,
                     title: r.title || '',
-                    productName: r.product_name || r.productName || 'モンゴルツアー',
+                    productName: r.product_name || r.productName || '몽골 투어',
                     productId: r.product_id || r.productId,
                     content: r.content || '',
                     images: parseImages(r.images),
@@ -109,11 +109,11 @@ export function UserReviewsDesktop({ contentWidth = 1280 }: { contentWidth?: num
         <div style={{ background: '#fff' }}>
             <PageHero
                 eyebrow="Real Reviews"
-                title="実際の旅行者のレビュー"
-                subtitle="日本語ガイド同行で安心のモンゴルツアー、お客様の声を集めました。"
+                title="실제 여행자 리뷰"
+                subtitle="한국어 가이드 동행으로 안심할 수 있는 몽골 투어, 고객님들의 후기를 모았습니다."
                 breadcrumbs={[
-                    { label: 'ホーム', path: '/' },
-                    { label: 'レビュー' },
+                    { label: '홈', path: '/' },
+                    { label: '리뷰' },
                 ]}
                 contentWidth={contentWidth}
                 aside={
@@ -137,7 +137,7 @@ export function UserReviewsDesktop({ contentWidth = 1280 }: { contentWidth?: num
                         }}
                     >
                         <MatIcon name="edit" size={18} color="#fff" />
-                        レビューを書く
+                        리뷰 작성하기
                     </button>
                 }
             />
@@ -170,7 +170,7 @@ export function UserReviewsDesktop({ contentWidth = 1280 }: { contentWidth?: num
                                 />
                             ))}
                         </div>
-                        <div style={{ fontSize: 14, color: 'var(--fg-4)', marginTop: 12 }}>累計 {reviews.length} 件のレビュー</div>
+                        <div style={{ fontSize: 14, color: 'var(--fg-4)', marginTop: 12 }}>누적 {reviews.length} 건의 리뷰</div>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 8, justifyContent: 'center' }}>
                         {[5, 4, 3, 2, 1].map((s, i) => (
@@ -207,14 +207,14 @@ export function UserReviewsDesktop({ contentWidth = 1280 }: { contentWidth?: num
             <section style={{ maxWidth: contentWidth, margin: '0 auto', padding: '32px 32px 0' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
                     <h2 style={{ fontSize: 22, fontWeight: 700, color: 'var(--fg-1)', margin: 0, letterSpacing: '-0.01em' }}>
-                        全てのレビュー <span style={{ color: 'var(--fg-5)', fontWeight: 500, fontSize: 16, marginLeft: 8 }}>({sorted.length})</span>
+                        전체 리뷰 <span style={{ color: 'var(--fg-5)', fontWeight: 500, fontSize: 16, marginLeft: 8 }}>({sorted.length})</span>
                     </h2>
                     <div style={{ display: 'flex', gap: 8 }}>
                         {(
                             [
-                                { v: 'latest' as const, l: '最新順' },
-                                { v: 'rating' as const, l: '評価高い順' },
-                                { v: 'photo' as const, l: '写真付き' },
+                                { v: 'latest' as const, l: '최신순' },
+                                { v: 'rating' as const, l: '평점순' },
+                                { v: 'photo' as const, l: '사진 리뷰만' },
                             ]
                         ).map((f) => {
                             const on = filter === f.v;
@@ -243,7 +243,7 @@ export function UserReviewsDesktop({ contentWidth = 1280 }: { contentWidth?: num
                 </div>
 
                 {isLoading ? (
-                    <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>読み込み中...</div>
+                    <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>불러오는 중...</div>
                 ) : sorted.length === 0 ? (
                     <div
                         style={{
@@ -270,8 +270,8 @@ export function UserReviewsDesktop({ contentWidth = 1280 }: { contentWidth?: num
                         >
                             <MatIcon name="reviews" size={28} color="var(--fg-5)" />
                         </div>
-                        <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--fg-1)' }}>レビューがまだありません</div>
-                        <div style={{ fontSize: 13, color: 'var(--fg-4)' }}>あなたが最初のレビュアーになりませんか？</div>
+                        <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--fg-1)' }}>아직 리뷰가 없습니다</div>
+                        <div style={{ fontSize: 13, color: 'var(--fg-4)' }}>첫 번째 리뷰어가 되어 보시겠어요?</div>
                         <button
                             type="button"
                             onClick={() => navigate('/reviews/write')}
@@ -288,7 +288,7 @@ export function UserReviewsDesktop({ contentWidth = 1280 }: { contentWidth?: num
                                 fontFamily: 'inherit',
                             }}
                         >
-                            レビューを書く
+                            리뷰 작성하기
                         </button>
                     </div>
                 ) : (
@@ -352,7 +352,7 @@ function ReviewCard({ r, onClick }: { r: Review; onClick: () => void }) {
                     {!r.avatar && r.author.charAt(0)}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--fg-1)', marginBottom: 3 }}>{r.author} 様</div>
+                    <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--fg-1)', marginBottom: 3 }}>{r.author} 님</div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                         <div style={{ display: 'flex', gap: 1 }}>
                             {Array.from({ length: 5 }).map((_, i) => (

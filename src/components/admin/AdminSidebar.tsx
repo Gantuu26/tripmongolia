@@ -19,22 +19,22 @@ interface NavItem {
 }
 
 const primaryItems: NavItem[] = [
-    { id: 'dashboard', icon: 'dashboard', label: '대시보드', href: '/admin' },
-    { id: 'reservations', icon: 'assignment', label: '통합 예약 관리', href: '/admin/reservations' },
-    { id: 'calendar', icon: 'calendar_today', label: '투어 캘린더', href: '/admin/calendar' },
-    { id: 'products', icon: 'inventory_2', label: '상품 관리', href: '/admin/products' },
-    { id: 'magazines', icon: 'menu_book', label: '매거진 관리', href: '/admin/magazines' },
-    { id: 'templates', icon: 'folder_special', label: '템플릿 관리', href: '/admin/templates' },
-    { id: 'reviews', icon: 'reviews', label: '후기 관리', href: '/admin/reviews' },
-    { id: 'faq', icon: 'help', label: 'FAQ 관리', href: '/admin/faq' },
+    { id: 'dashboard', icon: 'dashboard', label: 'Хяналтын самбар', href: '/admin' },
+    { id: 'reservations', icon: 'assignment', label: 'Нэгдсэн захиалгын удирдлага', href: '/admin/reservations' },
+    { id: 'calendar', icon: 'calendar_today', label: 'Аяллын хуанли', href: '/admin/calendar' },
+    { id: 'products', icon: 'inventory_2', label: 'Бүтээгдэхүүний удирдлага', href: '/admin/products' },
+    { id: 'magazines', icon: 'menu_book', label: 'Сэтгүүлийн удирдлага', href: '/admin/magazines' },
+    { id: 'templates', icon: 'folder_special', label: 'Загварын удирдлага', href: '/admin/templates' },
+    { id: 'reviews', icon: 'reviews', label: 'Сэтгэгдлийн удирдлага', href: '/admin/reviews' },
+    { id: 'faq', icon: 'help', label: 'FAQ удирдлага', href: '/admin/faq' },
 ];
 
 const settingItems: NavItem[] = [
-    { id: 'banners', icon: 'ad_units', label: '홈 화면 관리', href: '/admin/banners' },
-    { id: 'categories', icon: 'category', label: '카테고리 관리', href: '/admin/categories' },
-    { id: 'hotels', icon: 'hotel', label: '호텔 마스터', href: '/admin/hotels' },
-    { id: 'tourist-spots', icon: 'location_on', label: '관광지 마스터', href: '/admin/tourist-spots' },
-    { id: 'guide-intro', icon: 'translate', label: '가이드 소개 (공통)', href: '/admin/guide-intro' },
+    { id: 'banners', icon: 'ad_units', label: 'Нүүр хуудасны удирдлага', href: '/admin/banners' },
+    { id: 'categories', icon: 'category', label: 'Ангиллын удирдлага', href: '/admin/categories' },
+    { id: 'hotels', icon: 'hotel', label: 'Зочид буудлын мастер', href: '/admin/hotels' },
+    { id: 'tourist-spots', icon: 'location_on', label: 'Үзвэрийн газрын мастер', href: '/admin/tourist-spots' },
+    { id: 'guide-intro', icon: 'translate', label: 'Хөтчийн танилцуулга (нийтлэг)', href: '/admin/guide-intro' },
 ];
 
 export const AdminSidebar: React.FC<AdminSidebarProps> = ({ activePage }) => {
@@ -60,7 +60,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ activePage }) => {
 
     return (
         <aside className="side">
-            <a href="/admin" className="side-brand" aria-label="MILKYWAY 관리자 홈">
+            <a href="/admin" className="side-brand" aria-label="MILKYWAY админ нүүр">
                 <span className="brand-mark"><Icon name="flight_takeoff" /></span>
                 <div>
                     <div className="brand-name">MILKYWAY</div>
@@ -70,18 +70,18 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({ activePage }) => {
 
             <nav className="side-nav">
                 {primaryItems.map(renderItem)}
-                <div className="nav-group-label">사이트 설정</div>
+                <div className="nav-group-label">Сайтын тохиргоо</div>
                 {settingItems.map(renderItem)}
             </nav>
 
             <div className="side-foot">
                 <div className="side-account">
-                    <span className="av">관</span>
+                    <span className="av">А</span>
                     <div className="who">
-                        <b>관리자</b>
-                        <span>운영 계정 · 마스터</span>
+                        <b>Админ</b>
+                        <span>Үйл ажиллагааны бүртгэл · Мастер</span>
                     </div>
-                    <button className="out" title="로그아웃" onClick={handleLogout}>
+                    <button className="out" title="Гарах" onClick={handleLogout}>
                         <Icon name="logout" />
                     </button>
                 </div>

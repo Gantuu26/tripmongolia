@@ -20,14 +20,14 @@ const EMPTY_SPOT: TouristSpot = {
 type RegionFilter = 'all' | SpotRegion | 'uncat';
 
 const REGION_FILTER_TABS: { value: RegionFilter; label: string }[] = [
-    { value: 'all', label: '전체' },
-    { value: 'central', label: '중앙몽골' },
-    { value: 'gobi', label: '고비사막' },
-    { value: 'hovsgol', label: '홉스굴' },
-    { value: 'ulaanbaatar', label: '울란바타르' },
-    { value: 'experience', label: '체험' },
-    { value: 'food', label: '음식' },
-    { value: 'uncat', label: '미분류' },
+    { value: 'all', label: 'Бүгд' },
+    { value: 'central', label: 'Төв Монгол' },
+    { value: 'gobi', label: 'Говь цөл' },
+    { value: 'hovsgol', label: 'Хөвсгөл' },
+    { value: 'ulaanbaatar', label: 'Улаанбаатар' },
+    { value: 'experience', label: 'Туршлага' },
+    { value: 'food', label: 'Хоол' },
+    { value: 'uncat', label: 'Ангилаагүй' },
 ];
 
 const regionLabel = (r?: SpotRegion | null): string | null => {
@@ -103,7 +103,7 @@ export const AdminTouristSpotManage: React.FC = () => {
     const handleSave = async () => {
         if (!editing) return;
         if (!editing.name_kr.trim()) {
-            alert('대제목은 필수입니다.');
+            alert('Гарчиг заавал шаардлагатай.');
             return;
         }
         setSaving(true);
@@ -117,7 +117,7 @@ export const AdminTouristSpotManage: React.FC = () => {
             setEditing(null);
             setIsNew(false);
         } catch (e: any) {
-            alert('저장 실패: ' + (e?.message || '알 수 없는 오류'));
+            alert('Хадгалахад алдаа гарлаа: ' + (e?.message || 'Тодорхойгүй алдаа'));
         } finally {
             setSaving(false);
         }
@@ -125,13 +125,13 @@ export const AdminTouristSpotManage: React.FC = () => {
 
     const handleDelete = async () => {
         if (!editing || isNew) return;
-        if (!confirm(`"${editing.name_kr}" 관광지를 삭제하시겠습니까?\n\n이 관광지를 사용 중인 상품의 일정에는 영향이 없습니다(스냅샷으로 저장되어 있음).`)) return;
+        if (!confirm(`"${editing.name_kr}" аялал жуулчлалын газрыг устгах уу?\n\nЭнэ газрыг ашиглаж буй бүтээгдэхүүний хөтөлбөрт нөлөөлөхгүй (агшин зураг хэлбэрээр хадгалагдсан).`)) return;
         try {
             await api.touristSpots.delete(editing.id);
             await load();
             setEditing(null);
         } catch (e: any) {
-            alert('삭제 실패: ' + (e?.message || '알 수 없는 오류'));
+            alert('Устгахад алдаа гарлаа: ' + (e?.message || 'Тодорхойгүй алдаа'));
         }
     };
 
@@ -146,7 +146,7 @@ export const AdminTouristSpotManage: React.FC = () => {
             setEditing({ ...editing, images: [...(editing.images || []), ...urls] });
         } catch (e) {
             console.error(e);
-            alert('이미지 업로드 실패');
+            alert('Зураг байршуулахад алдаа гарлаа');
         }
     };
 
@@ -161,11 +161,11 @@ export const AdminTouristSpotManage: React.FC = () => {
     return (
         <AdminLayout
             activePage="tourist-spots"
-            title="관광지 마스터"
+            title="Аялал жуулчлалын газрын сан"
             actions={
                 <button type="button" onClick={startNew} className="btn btn-ink">
                     <Icon name="add" />
-                    관광지 추가
+                    Аялал жуулчлалын газар нэмэх
                 </button>
             }
         >
@@ -175,7 +175,7 @@ export const AdminTouristSpotManage: React.FC = () => {
                     <label className="tb-search">
                         <Icon name="search" />
                         <input
-                            placeholder="관광지명, 지역 검색"
+                            placeholder="Газрын нэр, бүс нутгаар хайх"
                             value={q}
                             onChange={(e) => setQ(e.target.value)}
                         />
@@ -203,17 +203,17 @@ export const AdminTouristSpotManage: React.FC = () => {
                         value={filterActive}
                         onChange={(e) => setFilterActive(e.target.value as 'all' | 'active' | 'inactive')}
                     >
-                        <option value="all">전체 상태</option>
-                        <option value="active">사용중</option>
-                        <option value="inactive">미사용</option>
+                        <option value="all">Бүх төлөв</option>
+                        <option value="active">Ашиглаж буй</option>
+                        <option value="inactive">Ашиглахгүй</option>
                     </select>
                     <div className="cell-muted" style={{ fontSize: 13, fontWeight: 600 }}>
-                        전체 {spots.length}개 중 <b className="cell-strong">{filtered.length}</b>개
+                        Нийт {spots.length}-аас <b className="cell-strong">{filtered.length}</b>
                     </div>
                     <div className="spacer" />
                     <button type="button" onClick={startNew} className="btn btn-ink">
                         <Icon name="add" />
-                        관광지 추가
+                        Аялал жуулчлалын газар нэмэх
                     </button>
                 </div>
 
@@ -223,13 +223,13 @@ export const AdminTouristSpotManage: React.FC = () => {
                         <table className="tbl">
                             <thead>
                                 <tr>
-                                    <th style={{ width: 80 }}>대표</th>
-                                    <th>관광지명</th>
-                                    <th>지역</th>
-                                    <th>주소</th>
-                                    <th className="c">사진</th>
-                                    <th className="c">사용</th>
-                                    <th className="r">관리</th>
+                                    <th style={{ width: 80 }}>Үндсэн зураг</th>
+                                    <th>Газрын нэр</th>
+                                    <th>Бүс нутаг</th>
+                                    <th>Хаяг</th>
+                                    <th className="c">Зураг</th>
+                                    <th className="c">Ашиглалт</th>
+                                    <th className="r">Удирдлага</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -238,7 +238,7 @@ export const AdminTouristSpotManage: React.FC = () => {
                                         <td colSpan={7}>
                                             <div className="empty">
                                                 <Icon name="hourglass_empty" />
-                                                <p>불러오는 중...</p>
+                                                <p>Ачаалж байна...</p>
                                             </div>
                                         </td>
                                     </tr>
@@ -249,8 +249,8 @@ export const AdminTouristSpotManage: React.FC = () => {
                                                 <Icon name="location_on" />
                                                 <p>
                                                     {spots.length === 0
-                                                        ? '아직 등록된 관광지가 없습니다. 우상단 "관광지 추가" 버튼으로 시작하세요.'
-                                                        : '조건에 맞는 관광지가 없습니다.'}
+                                                        ? 'Бүртгэгдсэн аялал жуулчлалын газар алга. Баруун дээд буланд байрлах "Аялал жуулчлалын газар нэмэх" товчоор эхлүүлнэ үү.'
+                                                        : 'Нөхцөлд тохирох аялал жуулчлалын газар алга.'}
                                                 </p>
                                             </div>
                                         </td>
@@ -290,7 +290,7 @@ export const AdminTouristSpotManage: React.FC = () => {
                                                     {regionLabel(s.region) ? (
                                                         <span className="badge b-blue">{regionLabel(s.region)}</span>
                                                     ) : (
-                                                        <span className="cell-muted">미분류</span>
+                                                        <span className="cell-muted">Ангилаагүй</span>
                                                     )}
                                                 </td>
                                                 <td className="cell-muted">{s.address || '-'}</td>
@@ -302,7 +302,7 @@ export const AdminTouristSpotManage: React.FC = () => {
                                                 </td>
                                                 <td className="c">
                                                     <span className={`badge ${s.is_active ? 'b-green' : 'b-gray'}`}>
-                                                        {s.is_active ? '사용중' : '미사용'}
+                                                        {s.is_active ? 'Ашиглаж буй' : 'Ашиглахгүй'}
                                                     </span>
                                                 </td>
                                                 <td className="r" onClick={(e) => e.stopPropagation()}>
@@ -310,7 +310,7 @@ export const AdminTouristSpotManage: React.FC = () => {
                                                         <button
                                                             type="button"
                                                             className="act-btn"
-                                                            title="수정"
+                                                            title="Засах"
                                                             onClick={() => startEdit(s)}
                                                         >
                                                             <Icon name="edit" />
@@ -336,9 +336,9 @@ export const AdminTouristSpotManage: React.FC = () => {
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="card-head">
-                            <h2>{isNew ? '새 관광지 등록' : '관광지 정보 수정'}</h2>
+                            <h2>{isNew ? 'Шинэ аялал жуулчлалын газар бүртгэх' : 'Аялал жуулчлалын газрын мэдээлэл засах'}</h2>
                             <div className="spacer" />
-                            <button type="button" onClick={closeEditor} className="act-btn" title="닫기">
+                            <button type="button" onClick={closeEditor} className="act-btn" title="Хаах">
                                 <Icon name="close" />
                             </button>
                         </div>
@@ -346,9 +346,9 @@ export const AdminTouristSpotManage: React.FC = () => {
                         <div className="picker-list" style={{ padding: '20px 22px' }}>
                             {/* 지역 분류 */}
                             <div className="field">
-                                <label>지역 분류</label>
+                                <label>Бүс нутгийн ангилал</label>
                                 <div className="chip-row">
-                                    {[{ v: '' as SpotRegion, l: '미분류' }, ...SPOT_REGION_OPTIONS.map((o) => ({ v: o.value, l: o.label }))].map((opt) => (
+                                    {[{ v: '' as SpotRegion, l: 'Ангилаагүй' }, ...SPOT_REGION_OPTIONS.map((o) => ({ v: o.value, l: o.label }))].map((opt) => (
                                         <button
                                             key={opt.v || 'none'}
                                             type="button"
@@ -360,71 +360,71 @@ export const AdminTouristSpotManage: React.FC = () => {
                                     ))}
                                 </div>
                                 <p className="cell-muted" style={{ fontSize: 12, marginTop: 7 }}>
-                                    필터에서 이 분류로 빠르게 찾을 수 있습니다. (선택)
+                                    Шүүлтүүрээс энэ ангиллаар хурдан хайж болно. (Сонголт)
                                 </p>
                             </div>
 
                             {/* 대제목 */}
                             <div className="field">
-                                <label>대제목 *</label>
+                                <label>Гарчиг *</label>
                                 <input
                                     type="text"
                                     className="inp"
                                     value={editing.name_kr}
                                     onChange={(e) => setEditing({ ...editing, name_kr: e.target.value })}
-                                    placeholder="차강소브라"
+                                    placeholder="Цагаан суварга"
                                 />
                                 <p className="cell-muted" style={{ fontSize: 12, marginTop: 7 }}>
-                                    일정 카드의 큰 제목으로 표시됩니다. (예: 차강소브라)
+                                    Хөтөлбөрийн картын том гарчиг болж харагдана. (Жишээ: Цагаан суварга)
                                 </p>
                             </div>
 
                             {/* 소제목 */}
                             <div className="field">
-                                <label>소제목</label>
+                                <label>Дэд гарчиг</label>
                                 <input
                                     type="text"
                                     className="inp"
                                     value={editing.name_local || ''}
                                     onChange={(e) => setEditing({ ...editing, name_local: e.target.value })}
-                                    placeholder="몽골의 그랜드캐년, 차강소브라"
+                                    placeholder="Монголын Их Хавцал, Цагаан суварга"
                                 />
                                 <p className="cell-muted" style={{ fontSize: 12, marginTop: 7 }}>
-                                    대제목 아래 작은 한 줄 설명. (예: 몽골의 그랜드캐년, 차강소브라)
+                                    Гарчгийн доорх жижиг нэг мөр тайлбар. (Жишээ: Монголын Их Хавцал, Цагаан суварга)
                                 </p>
                             </div>
 
                             {/* 주소 */}
                             <div className="field">
-                                <label>주소</label>
+                                <label>Хаяг</label>
                                 <input
                                     type="text"
                                     className="inp"
                                     value={editing.address || ''}
                                     onChange={(e) => setEditing({ ...editing, address: e.target.value })}
-                                    placeholder="울란바토르 동북쪽 70km (선택)"
+                                    placeholder="Улаанбаатараас зүүн хойш 70км (Сонголт)"
                                 />
                             </div>
 
                             {/* 상세 설명 */}
                             <div className="field">
-                                <label>상세 설명</label>
+                                <label>Дэлгэрэнгүй тайлбар</label>
                                 <textarea
                                     className="inp"
                                     value={editing.description || ''}
                                     onChange={(e) => setEditing({ ...editing, description: e.target.value })}
                                     rows={5}
-                                    placeholder="관광지 소개, 볼거리, 추천 사항 등..."
+                                    placeholder="Аялал жуулчлалын газрын танилцуулга, үзвэр, зөвлөмж гэх мэт..."
                                     style={{ minHeight: 120 }}
                                 />
                                 <p className="cell-muted" style={{ fontSize: 12, marginTop: 7 }}>
-                                    이 내용이 일정 항목의 설명으로 자동 입력됩니다.
+                                    Энэ агуулга нь хөтөлбөрийн зүйлийн тайлбар болж автоматаар орно.
                                 </p>
                             </div>
 
                             {/* 이미지 */}
                             <div className="field">
-                                <label>이미지</label>
+                                <label>Зураг</label>
                                 <div className="grid-3" style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
                                     {(editing.images || []).map((src, i) => (
                                         <div
@@ -435,7 +435,7 @@ export const AdminTouristSpotManage: React.FC = () => {
                                             <button
                                                 type="button"
                                                 onClick={() => removeImage(i)}
-                                                title="삭제"
+                                                title="Устгах"
                                                 style={{ position: 'absolute', top: 4, right: 4, width: 26, height: 26, borderRadius: 8, border: 'none', background: 'rgba(255,79,79,0.92)', color: '#fff', cursor: 'pointer', display: 'grid', placeItems: 'center' }}
                                             >
                                                 <Icon name="close" style={{ fontSize: 16 }} />
@@ -445,7 +445,7 @@ export const AdminTouristSpotManage: React.FC = () => {
                                                     className="badge b-ink"
                                                     style={{ position: 'absolute', bottom: 4, left: 4 }}
                                                 >
-                                                    대표
+                                                    Үндсэн
                                                 </span>
                                             )}
                                         </div>
@@ -468,7 +468,7 @@ export const AdminTouristSpotManage: React.FC = () => {
                                     </label>
                                 </div>
                                 <p className="cell-muted" style={{ fontSize: 12, marginTop: 7 }}>
-                                    이 사진들이 일정 항목의 사진으로 자동 첨부됩니다.
+                                    Эдгээр зураг нь хөтөлбөрийн зүйлийн зураг болж автоматаар хавсрагдана.
                                 </p>
                             </div>
 
@@ -482,7 +482,7 @@ export const AdminTouristSpotManage: React.FC = () => {
                                     <span className="knob" />
                                 </button>
                                 <span className="cell-strong" style={{ fontSize: 13.5 }}>
-                                    {editing.is_active ? '사용 (목록에 노출)' : '미사용 (숨김)'}
+                                    {editing.is_active ? 'Ашиглах (жагсаалтад харагдана)' : 'Ашиглахгүй (нуугдсан)'}
                                 </span>
                             </div>
                         </div>
@@ -491,15 +491,15 @@ export const AdminTouristSpotManage: React.FC = () => {
                             {!isNew && (
                                 <button type="button" onClick={handleDelete} className="btn btn-danger">
                                     <Icon name="delete" />
-                                    삭제
+                                    Устгах
                                 </button>
                             )}
                             <div className="spacer" style={{ flex: 1 }} />
                             <button type="button" onClick={closeEditor} className="btn btn-ghost">
-                                닫기
+                                Хаах
                             </button>
                             <button type="button" onClick={handleSave} disabled={saving} className="btn btn-ink">
-                                {saving ? '저장 중...' : '저장'}
+                                {saving ? 'Хадгалж байна...' : 'Хадгалах'}
                             </button>
                         </div>
                     </div>

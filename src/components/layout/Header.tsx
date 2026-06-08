@@ -13,7 +13,7 @@ interface TourSubItem {
 
 // Fallback sub-items if categories haven't loaded yet or are empty.
 const FALLBACK_TOUR_SUB_ITEMS: TourSubItem[] = [
-    { path: '/products', icon: 'grid_view', label: '全ツアー一覧' },
+    { path: '/products', icon: 'grid_view', label: '전체 투어 목록' },
 ];
 
 export const Header: React.FC = () => {
@@ -31,7 +31,7 @@ export const Header: React.FC = () => {
         api.categories.list('product').then((data: any) => {
             if (!Array.isArray(data)) return;
             const items: TourSubItem[] = [
-                { path: '/products', icon: 'grid_view', label: '全ツアー一覧' },
+                { path: '/products', icon: 'grid_view', label: '전체 투어 목록' },
                 ...data
                     .filter((c: any) => c.is_active && c.id !== 'all')
                     .map((c: any) => ({
@@ -112,7 +112,7 @@ export const Header: React.FC = () => {
 
                 {/* Menu body */}
                 <nav className="flex-1 overflow-y-auto py-2">
-                    {/* ツアー商品 */}
+                    {/* 투어 상품 */}
                     <button
                         onClick={() => setIsTourExpanded(prev => !prev)}
                         className={`w-full text-left px-6 py-4 text-[16px] font-bold flex items-center justify-between transition-colors ${
@@ -172,7 +172,7 @@ export const Header: React.FC = () => {
                 {/* Footer */}
                 <div className="border-t border-slate-100 dark:border-slate-800 px-6 py-4 text-[11px] text-slate-400">
                     {unreadCount > 0 && (
-                        <p className="mb-2 text-primary font-semibold">お知らせ {unreadCount}件</p>
+                        <p className="mb-2 text-primary font-semibold">알림 {unreadCount}건</p>
                     )}
                     <p>Milkyway Japan · mongolryokou.com</p>
                 </div>

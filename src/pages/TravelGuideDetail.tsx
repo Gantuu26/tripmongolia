@@ -238,8 +238,8 @@ export const TravelGuideDetail: React.FC = () => {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
         itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'ホーム', item: 'https://mongolryokou.com/' },
-            { '@type': 'ListItem', position: 2, name: '旅行ガイド', item: 'https://mongolryokou.com/travel-guide' },
+            { '@type': 'ListItem', position: 1, name: '홈', item: 'https://mongolryokou.com/' },
+            { '@type': 'ListItem', position: 2, name: '여행 가이드', item: 'https://mongolryokou.com/travel-guide' },
             { '@type': 'ListItem', position: 3, name: magazine.title, item: absoluteUrl },
         ],
     };

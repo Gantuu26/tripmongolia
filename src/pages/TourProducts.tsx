@@ -229,15 +229,15 @@ export const TourProducts: React.FC = () => {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
         itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'ホーム', item: 'https://mongolryokou.com/' },
-            { '@type': 'ListItem', position: 2, name: 'モンゴルツアー商品', item: 'https://mongolryokou.com/products' },
+            { '@type': 'ListItem', position: 1, name: '홈', item: 'https://mongolryokou.com/' },
+            { '@type': 'ListItem', position: 2, name: '몽골투어 상품', item: 'https://mongolryokou.com/products' },
         ],
     };
 
     const itemListLd = {
         '@context': 'https://schema.org',
         '@type': 'ItemList',
-        name: 'モンゴルツアー商品一覧',
+        name: '몽골투어 상품 목록',
         itemListElement: products.slice(0, 30).map((p, i) => ({
             '@type': 'ListItem',
             position: i + 1,
@@ -249,7 +249,7 @@ export const TourProducts: React.FC = () => {
     const collectionLd = {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
-        name: 'モンゴルツアー商品一覧 | Milkyway Japan',
+        name: '몽골투어 상품 목록 | Milkyway Japan',
         description: t('products.seo_description'),
         url: 'https://mongolryokou.com/products',
         inLanguage: 'ja',
@@ -343,10 +343,10 @@ export const TourProducts: React.FC = () => {
             {/* SEO: Page H1 + Intro */}
             <section className="px-4 pt-4 pb-2">
                 <h1 className="text-xl font-bold text-[#0e1a18] dark:text-white leading-tight mb-1">
-                    モンゴルツアー商品一覧
+                    몽골투어 상품 목록
                 </h1>
                 <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
-                    モンゴル乗馬旅行、ゴビ砂漠ツアー、テレルジ国立公園、フブスグル湖など、地域・テーマ別にモンゴルツアーをお探しいただけます。
+                    몽골 승마여행, 고비사막 투어, 테렐지 국립공원, 홉스굴 호수 등 지역・테마별로 몽골투어를 찾아보실 수 있습니다.
                 </p>
             </section>
 
@@ -393,9 +393,9 @@ export const TourProducts: React.FC = () => {
                                         </p>
                                         <div className="flex items-center justify-between">
                                             <div>
-                                                <p className="text-lg font-bold text-primary">¥{typeof product.price === 'number' ? product.price.toLocaleString() : (product.price || 0)}</p>
+                                                <p className="text-lg font-bold text-primary">₩{typeof product.price === 'number' ? product.price.toLocaleString() : (product.price || 0)}</p>
                                                 {product.originalPrice && (
-                                                    <p className="text-xs text-gray-400 line-through">¥{typeof product.originalPrice === 'number' ? product.originalPrice.toLocaleString() : (product.originalPrice || 0)}</p>
+                                                    <p className="text-xs text-gray-400 line-through">₩{typeof product.originalPrice === 'number' ? product.originalPrice.toLocaleString() : (product.originalPrice || 0)}</p>
                                                 )}
                                             </div>
                                             <button className="bg-primary/10 hover:bg-primary/20 text-primary px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">
@@ -434,7 +434,7 @@ export const TourProducts: React.FC = () => {
                     ) : (
                         <div className="py-12 text-center text-gray-400 bg-gray-50 dark:bg-gray-800/50 rounded-2xl">
                             <span className="material-symbols-outlined text-4xl mb-2 block">inventory_2</span>
-                            <p className="text-sm">該当カテゴリに商品がありません</p>
+                            <p className="text-sm">해당 카테고리에 상품이 없습니다</p>
                         </div>
                     )}
                 </section>

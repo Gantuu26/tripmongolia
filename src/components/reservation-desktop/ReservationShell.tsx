@@ -18,16 +18,16 @@ const CONTENT_WIDTH = 1280;
 
 const STEP_TITLES: Record<StepIdx, { title: string; subtitle: string }> = {
     0: {
-        title: '予約日およびオプションの選択',
-        subtitle: '旅行開始日と人数、オプションを選択してください',
+        title: '예약일 및 옵션 선택',
+        subtitle: '여행 시작일과 인원, 옵션을 선택해 주세요',
     },
     1: {
-        title: '予約情報および決済確認',
-        subtitle: 'ご予約者情報と決済方法をご確認ください',
+        title: '예약 정보 및 결제 확인',
+        subtitle: '예약자 정보와 결제 방법을 확인해 주세요',
     },
     2: {
-        title: '予約申し込み完了',
-        subtitle: 'ありがとうございます。お支払い完了をもって予約確定となります',
+        title: '예약 신청 완료',
+        subtitle: '감사합니다. 결제 완료 시 예약이 확정됩니다',
     },
 };
 
@@ -88,7 +88,7 @@ export function ReservationShell({
                                 color: 'var(--fg-2)',
                             }}
                         >
-                            <MatIcon name="chevron_left" size={18} color="var(--fg-2)" /> 戻る
+                            <MatIcon name="chevron_left" size={18} color="var(--fg-2)" /> 뒤로
                         </button>
                     )}
                     <div
@@ -101,9 +101,9 @@ export function ReservationShell({
                             flexWrap: 'wrap',
                         }}
                     >
-                        <span>ホーム</span>
+                        <span>홈</span>
                         <MatIcon name="chevron_right" size={14} color="var(--fg-6)" />
-                        <span>ツアー商品</span>
+                        <span>투어 상품</span>
                         {cleanName && (
                             <>
                                 <MatIcon name="chevron_right" size={14} color="var(--fg-6)" />
@@ -111,7 +111,7 @@ export function ReservationShell({
                             </>
                         )}
                         <MatIcon name="chevron_right" size={14} color="var(--fg-6)" />
-                        <span style={{ color: 'var(--fg-2)', fontWeight: 700 }}>予約</span>
+                        <span style={{ color: 'var(--fg-2)', fontWeight: 700 }}>예약</span>
                     </div>
                 </div>
             </div>

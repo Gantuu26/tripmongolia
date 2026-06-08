@@ -74,7 +74,7 @@ export function PaymentDesktop({
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                     {/* Selected tour info */}
                     <Card>
-                        <CardHeader title="選択した旅行情報" eyebrow="Tour Info" />
+                        <CardHeader title="선택한 여행 정보" eyebrow="Tour Info" />
                         <div style={{ padding: '0 28px 24px' }}>
                             <h3
                                 style={{
@@ -96,23 +96,23 @@ export function PaymentDesktop({
                             >
                                 <InfoRow
                                     icon="calendar_month"
-                                    k="旅行期間"
+                                    k="여행 기간"
                                     v={
                                         selectedStartDate && endDate
                                             ? `${fmtFull(selectedStartDate)} - ${fmtFull(endDate)}`
-                                            : product.duration || '未選択'
+                                            : product.duration || '미선택'
                                     }
                                     sub={
-                                        nights > 0 ? `${nights}泊${days}日` : product.duration
+                                        nights > 0 ? `${nights}박 ${days}일` : product.duration
                                     }
                                 />
                                 <InfoRow
                                     icon="group"
-                                    k="予約人数"
-                                    v={`計 ${totalPeople} 名`}
+                                    k="예약 인원"
+                                    v={`총 ${totalPeople}명`}
                                     sub={
                                         baseOption
-                                            ? `お1人様 ¥${formatPrice(baseOption.pricePerPerson)}`
+                                            ? `1인 ₩${formatPrice(baseOption.pricePerPerson)}`
                                             : undefined
                                     }
                                 />
@@ -122,7 +122,7 @@ export function PaymentDesktop({
 
                     {/* Reservation form */}
                     <Card>
-                        <CardHeader title="予約者情報" eyebrow="Booking Person" />
+                        <CardHeader title="예약자 정보" eyebrow="Booking Person" />
                         <div
                             style={{
                                 padding: '0 28px 28px',
@@ -131,28 +131,28 @@ export function PaymentDesktop({
                                 gap: '20px 24px',
                             }}
                         >
-                            <Field label="お名前" required>
+                            <Field label="성함" required>
                                 <input
                                     value={customerInfo.name}
                                     onChange={(e) =>
                                         setCustomerInfo({ ...customerInfo, name: e.target.value })
                                     }
-                                    placeholder="山田 太郎"
+                                    placeholder="홍길동"
                                     style={inputStyle}
                                 />
                             </Field>
-                            <Field label="携帯電話番号" required>
+                            <Field label="휴대폰 번호" required>
                                 <input
                                     value={customerInfo.phone}
                                     onChange={(e) =>
                                         setCustomerInfo({ ...customerInfo, phone: e.target.value })
                                     }
-                                    placeholder="090-0000-0000"
+                                    placeholder="010-0000-0000"
                                     type="tel"
                                     style={inputStyle}
                                 />
                             </Field>
-                            <Field label="メールアドレス" required colSpan={2}>
+                            <Field label="이메일 주소" required colSpan={2}>
                                 <input
                                     value={customerInfo.email}
                                     onChange={(e) =>
@@ -169,14 +169,14 @@ export function PaymentDesktop({
                                         marginTop: 6,
                                     }}
                                 >
-                                    PayPal の請求書がこのメールアドレスに送信されます
+                                    PayPal 청구서가 이 이메일 주소로 발송됩니다
                                 </div>
                             </Field>
-                            <Field label="ご要望・特記事項 (任意)" colSpan={2}>
+                            <Field label="요청 사항·특이 사항 (선택)" colSpan={2}>
                                 <textarea
                                     value={memo}
                                     onChange={(e) => setMemo(e.target.value)}
-                                    placeholder="食事のアレルギー、希望のオプション等がございましたらご記入ください"
+                                    placeholder="식사 알레르기, 희망하시는 옵션 등이 있으시면 기재해 주세요"
                                     rows={4}
                                     style={{
                                         ...inputStyle,
@@ -191,7 +191,7 @@ export function PaymentDesktop({
 
                     {/* Payment amount */}
                     <Card>
-                        <CardHeader title="決済金額" eyebrow="Payment" />
+                        <CardHeader title="결제 금액" eyebrow="Payment" />
                         <div style={{ padding: '0 28px 24px' }}>
                             <div
                                 style={{
@@ -203,7 +203,7 @@ export function PaymentDesktop({
                                 }}
                             >
                                 <span style={{ fontSize: 14, color: 'var(--fg-3)' }}>
-                                    総旅行費用
+                                    총 여행 비용
                                 </span>
                                 <span
                                     style={{
@@ -212,7 +212,7 @@ export function PaymentDesktop({
                                         color: 'var(--fg-1)',
                                     }}
                                 >
-                                    ¥{formatPrice(priceBreakdown.total)}
+                                    ₩{formatPrice(priceBreakdown.total)}
                                 </span>
                             </div>
                             <div
@@ -237,7 +237,7 @@ export function PaymentDesktop({
                                         color: 'var(--primary-dark, #115e59)',
                                     }}
                                 >
-                                    今すぐ決済する予約金
+                                    지금 결제하실 예약금
                                 </span>
                                 <span
                                     style={{
@@ -247,7 +247,7 @@ export function PaymentDesktop({
                                         letterSpacing: '-0.01em',
                                     }}
                                 >
-                                    ¥{formatPrice(priceBreakdown.deposit)}
+                                    ₩{formatPrice(priceBreakdown.deposit)}
                                 </span>
                             </div>
                             {priceBreakdown.local > 0 && (
@@ -261,11 +261,11 @@ export function PaymentDesktop({
                                         color: 'var(--fg-3)',
                                     }}
                                 >
-                                    <span>現地支払い残金</span>
+                                    <span>현지 결제 잔금</span>
                                     <span
                                         style={{ fontWeight: 700, color: 'var(--fg-2)' }}
                                     >
-                                        ¥{formatPrice(priceBreakdown.local)}
+                                        ₩{formatPrice(priceBreakdown.local)}
                                     </span>
                                 </div>
                             )}
@@ -275,7 +275,7 @@ export function PaymentDesktop({
                     {/* Payment method */}
                     <Card>
                         <CardHeader
-                            title="予約金のお支払いについて"
+                            title="예약금 결제 안내"
                             eyebrow="Payment Method"
                         />
                         <div style={{ padding: '0 28px 24px' }}>
@@ -315,7 +315,7 @@ export function PaymentDesktop({
                                             letterSpacing: '-0.01em',
                                         }}
                                     >
-                                        PayPal 請求書 (Eメール)
+                                        PayPal 청구서 (이메일)
                                     </div>
                                     <div
                                         style={{
@@ -324,10 +324,10 @@ export function PaymentDesktop({
                                             lineHeight: 1.7,
                                         }}
                                     >
-                                        予約申し込み完了後、ご入力いただいたメールアドレス宛に
-                                        PayPal の請求書をお送りいたします。
+                                        예약 신청 완료 후, 입력하신 이메일 주소로
+                                        PayPal 청구서를 보내드립니다.
                                         <br />
-                                        メール内のリンクから、クレジットカード等で安全にお支払いいただけます。
+                                        메일 안의 링크를 통해 신용카드 등으로 안전하게 결제하실 수 있습니다.
                                     </div>
                                     <div
                                         style={{
@@ -338,9 +338,9 @@ export function PaymentDesktop({
                                         }}
                                     >
                                         {[
-                                            { i: 'credit_card', t: 'クレジットカード' },
-                                            { i: 'payments', t: 'デビットカード' },
-                                            { i: 'account_balance', t: 'PayPal 残高' },
+                                            { i: 'credit_card', t: '신용카드' },
+                                            { i: 'payments', t: '체크카드' },
+                                            { i: 'account_balance', t: 'PayPal 잔액' },
                                         ].map((p) => (
                                             <span
                                                 key={p.t}
@@ -387,7 +387,7 @@ export function PaymentDesktop({
                                         color: 'var(--fg-1)',
                                     }}
                                 >
-                                    <MatIcon name="info" size={16} color="var(--fg-3)" /> 入金時の注意事項
+                                    <MatIcon name="info" size={16} color="var(--fg-3)" /> 결제 시 주의사항
                                 </div>
                                 <ul
                                     style={{
@@ -398,16 +398,16 @@ export function PaymentDesktop({
                                         lineHeight: 1.85,
                                     }}
                                 >
-                                    <li>請求書メールにお支払い期限が記載されています。期限内に決済をお願いします。</li>
-                                    <li>24時間以内に入金がない場合、予約は自動的にキャンセルされます。</li>
+                                    <li>청구서 메일에 결제 기한이 기재되어 있습니다. 기한 내에 결제해 주시기 바랍니다.</li>
+                                    <li>24시간 이내에 입금이 확인되지 않을 경우 예약이 자동으로 취소됩니다.</li>
                                     <li>
-                                        お支払いに関するご質問は{' '}
+                                        결제에 관한 문의는{' '}
                                         <strong style={{ color: 'var(--fg-2)' }}>
                                             payment.japan_support@milkywayjapan.com
                                         </strong>{' '}
-                                        までご連絡ください。
+                                        으로 연락해 주세요.
                                     </li>
-                                    <li>現地残金は旅行当日にガイドへ直接お渡しください。</li>
+                                    <li>현지 잔금은 여행 당일 가이드에게 직접 전달해 주세요.</li>
                                 </ul>
                             </div>
                         </div>
@@ -415,7 +415,7 @@ export function PaymentDesktop({
 
                     {/* Cancellation */}
                     <Card>
-                        <CardHeader title="キャンセル規定" eyebrow="Cancellation Policy" />
+                        <CardHeader title="취소 규정" eyebrow="Cancellation Policy" />
                         <div style={{ padding: '0 28px 24px' }}>
                             <div
                                 style={{
@@ -425,10 +425,10 @@ export function PaymentDesktop({
                                 }}
                             >
                                 {[
-                                    { range: '出発 31 日前まで', fee: '全額返金', tone: 'ok' as const },
-                                    { range: '30 〜 15 日前', fee: '30%', tone: 'warn' as const },
-                                    { range: '14 〜 8 日前', fee: '50%', tone: 'warn' as const },
-                                    { range: '7 日前以降', fee: '100%', tone: 'bad' as const },
+                                    { range: '출발 31일 전까지', fee: '전액 환불', tone: 'ok' as const },
+                                    { range: '30 ~ 15일 전', fee: '30%', tone: 'warn' as const },
+                                    { range: '14 ~ 8일 전', fee: '50%', tone: 'warn' as const },
+                                    { range: '7일 전 이후', fee: '100%', tone: 'bad' as const },
                                 ].map((c) => (
                                     <div
                                         key={c.range}
@@ -533,7 +533,7 @@ export function PaymentDesktop({
                                 }}
                             >
                                 <strong style={{ color: 'var(--fg-1)', fontWeight: 700 }}>
-                                    注文内容を確認し、決済に同意します。
+                                    주문 내용을 확인하였으며 결제에 동의합니다.
                                 </strong>
                                 <span style={{ color: 'var(--fg-5)', marginLeft: 8 }}>
                                     <a
@@ -545,9 +545,9 @@ export function PaymentDesktop({
                                             textDecoration: 'underline',
                                         }}
                                     >
-                                        利用規約
+                                        이용약관
                                     </a>{' '}
-                                    ・
+                                    ·
                                     <a
                                         href="/privacy-policy"
                                         target="_blank"
@@ -558,9 +558,9 @@ export function PaymentDesktop({
                                             marginLeft: 6,
                                         }}
                                     >
-                                        個人情報処理方針
+                                        개인정보 처리방침
                                     </a>{' '}
-                                    に同意します。
+                                    에 동의합니다.
                                 </span>
                             </span>
                         </label>
@@ -581,15 +581,15 @@ export function PaymentDesktop({
                     local={priceBreakdown.local}
                     ctaLabel={
                         isProcessing
-                            ? '処理中...'
-                            : `¥${formatPrice(priceBreakdown.deposit)} 決済する`
+                            ? '처리 중...'
+                            : `₩${formatPrice(priceBreakdown.deposit)} 결제하기`
                     }
                     ctaIcon="receipt_long"
                     onCta={handleSubmit}
                     canProceed={canSubmit}
                     canProceedHint={
                         !canSubmit && !isProcessing
-                            ? '必須項目を入力し、規約に同意してください'
+                            ? '필수 항목을 입력하고 약관에 동의해 주세요'
                             : null
                     }
                 />

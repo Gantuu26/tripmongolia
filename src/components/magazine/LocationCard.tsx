@@ -121,7 +121,7 @@ export const LocationCard: React.FC<LocationCardProps> = ({ location }) => {
                         place
                     </span>
                     <h3 className="text-[18px] font-bold text-slate-900 dark:text-white tracking-tight">
-                        {location.name || t('magazine.location.title', { defaultValue: '位置' })}
+                        {location.name || t('magazine.location.title', { defaultValue: '위치' })}
                     </h3>
                 </div>
             </div>
@@ -149,7 +149,7 @@ export const LocationCard: React.FC<LocationCardProps> = ({ location }) => {
                     {location.address && (
                         <div className="grid grid-cols-[44px_1fr] items-start gap-2">
                             <span className="text-[12.5px] font-bold text-slate-500 dark:text-slate-400 pt-0.5">
-                                {t('magazine.location.address', { defaultValue: '住所' })}
+                                {t('magazine.location.address', { defaultValue: '주소' })}
                             </span>
                             <span className="text-[13.5px] text-slate-800 dark:text-slate-200 leading-relaxed break-words">
                                 {location.address}
@@ -159,7 +159,7 @@ export const LocationCard: React.FC<LocationCardProps> = ({ location }) => {
                     {location.phone && (
                         <div className="grid grid-cols-[44px_1fr] items-center gap-2">
                             <span className="text-[12.5px] font-bold text-slate-500 dark:text-slate-400">
-                                {t('magazine.location.phone', { defaultValue: '電話' })}
+                                {t('magazine.location.phone', { defaultValue: '전화' })}
                             </span>
                             <a
                                 href={`tel:${location.phone.replace(/\s/g, '')}`}
@@ -172,7 +172,7 @@ export const LocationCard: React.FC<LocationCardProps> = ({ location }) => {
                     {location.website && (
                         <div className="grid grid-cols-[44px_1fr] items-center gap-2">
                             <span className="text-[12.5px] font-bold text-slate-500 dark:text-slate-400">
-                                {t('magazine.location.website', { defaultValue: 'ホーム' })}
+                                {t('magazine.location.website', { defaultValue: '홈페이지' })}
                             </span>
                             <a
                                 href={location.website}
@@ -199,8 +199,8 @@ export const LocationCard: React.FC<LocationCardProps> = ({ location }) => {
                         {copied ? 'check' : 'content_copy'}
                     </span>
                     {copied
-                        ? t('magazine.location.copied', { defaultValue: 'コピー済み' })
-                        : t('magazine.location.copy_address', { defaultValue: '住所をコピー' })}
+                        ? t('magazine.location.copied', { defaultValue: '복사 완료' })
+                        : t('magazine.location.copy_address', { defaultValue: '주소 복사' })}
                 </button>
                 <a
                     href={directionsUrl}
@@ -214,7 +214,7 @@ export const LocationCard: React.FC<LocationCardProps> = ({ location }) => {
                     >
                         directions
                     </span>
-                    {t('magazine.location.directions', { defaultValue: '経路を見る' })}
+                    {t('magazine.location.directions', { defaultValue: '길찾기' })}
                 </a>
             </div>
 
@@ -228,7 +228,7 @@ export const LocationCard: React.FC<LocationCardProps> = ({ location }) => {
                         aria-expanded={hoursOpen}
                     >
                         <h4 className="text-[15px] font-bold text-slate-900 dark:text-white">
-                            {t('magazine.location.hours_title', { defaultValue: '営業時間 · 休業日' })}
+                            {t('magazine.location.hours_title', { defaultValue: '영업시간 · 휴무일' })}
                         </h4>
                         <span
                             className={`material-symbols-outlined text-[22px] text-slate-500 transition-transform duration-200 ${
@@ -243,7 +243,7 @@ export const LocationCard: React.FC<LocationCardProps> = ({ location }) => {
                     {todayRow && (
                         <div className="mt-2.5 flex items-center gap-2 text-[14px]">
                             <span className="text-primary font-bold">
-                                {t('magazine.location.today', { defaultValue: '本日' })}
+                                {t('magazine.location.today', { defaultValue: '오늘' })}
                             </span>
                             <span className="text-slate-700 dark:text-slate-300 tabular-nums font-medium">
                                 {todayRow.value}
@@ -292,7 +292,7 @@ export const LocationCard: React.FC<LocationCardProps> = ({ location }) => {
                     rel="noopener noreferrer"
                     className="mt-3 inline-flex items-center gap-1 text-[12.5px] font-semibold text-primary hover:underline"
                 >
-                    {t('magazine.location.open_in_maps', { defaultValue: 'Google マップで開く' })}
+                    {t('magazine.location.open_in_maps', { defaultValue: 'Google 지도에서 열기' })}
                     <span className="material-symbols-outlined text-[14px]">open_in_new</span>
                 </a>
             )}

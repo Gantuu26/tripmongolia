@@ -28,8 +28,8 @@ export default {
         'toss-hover': '0 4px 16px 0 rgba(0, 0, 0, 0.08)',
       },
       fontFamily: {
-        "display": ["Noto Sans JP", "FlightSans", "sans-serif"],
-        "sans": ["Noto Sans JP", "FlightSans", "sans-serif"],
+        "display": ["Noto Sans KR", "FlightSans", "sans-serif"],
+        "sans": ["Noto Sans KR", "FlightSans", "sans-serif"],
       },
       borderRadius: {
         "DEFAULT": "0.25rem",

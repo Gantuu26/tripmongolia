@@ -22,7 +22,7 @@ export const SEO: React.FC<SEOProps> = ({
     structuredData
 }) => {
     const metaTitle = title
-        ? `${title} | Milkyway Japan`
+        ? `${title} | 몽골리아 은하수`
         : SEO_CONSTANTS.TITLE;
 
     const metaDescription = description || SEO_CONSTANTS.DESCRIPTION;
@@ -37,7 +37,7 @@ export const SEO: React.FC<SEOProps> = ({
         : [];
 
     return (
-        <Helmet htmlAttributes={{ lang: 'ja' }}>
+        <Helmet htmlAttributes={{ lang: 'ko' }}>
             <title>{metaTitle}</title>
             <meta name="description" content={metaDescription} />
             <meta name="keywords" content={metaKeywords} />
@@ -47,12 +47,12 @@ export const SEO: React.FC<SEOProps> = ({
 
             {/* Open Graph / Facebook */}
             <meta property="og:type" content="website" />
-            <meta property="og:locale" content="ja_JP" />
+            <meta property="og:locale" content="ko_KR" />
             <meta property="og:url" content={metaUrl} />
             <meta property="og:title" content={metaTitle} />
             <meta property="og:description" content={metaDescription} />
             <meta property="og:image" content={metaImage} />
-            <meta property="og:site_name" content="Milkyway Japan" />
+            <meta property="og:site_name" content="몽골리아 은하수" />
 
             {/* Twitter */}
             <meta property="twitter:card" content="summary_large_image" />

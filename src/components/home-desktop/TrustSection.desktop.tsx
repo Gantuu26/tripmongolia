@@ -6,10 +6,10 @@ interface TrustSectionProps {
 }
 
 const ITEMS = [
-    { n: '01', i: 'translate', t: '日本語完全対応', d: '日本語堪能な専門ガイドが同行し、言葉の壁なく安心して楽しめます。' },
-    { n: '02', i: 'support_agent', t: '24時間サポート', d: '旅行中も日本語で24時間対応。困ったときはすぐにご連絡ください。' },
-    { n: '03', i: 'restaurant', t: '日本人向けの食事', d: '日本人の味覚に合わせたメニュー。食物アレルギーにも個別対応します。' },
-    { n: '04', i: 'directions_car', t: '安全第一の車両管理', d: '整備された車両と経験豊富なドライバーで、安全な旅をお約束します。' },
+    { n: '01', i: 'translate', t: '한국어 완벽 대응', d: '한국어가 능통한 전문 가이드가 동행하여 언어의 장벽 없이 안심하고 즐기실 수 있습니다.' },
+    { n: '02', i: 'support_agent', t: '24시간 지원', d: '여행 중에도 한국어로 24시간 대응. 어려운 일이 있으시면 바로 연락 주세요.' },
+    { n: '03', i: 'restaurant', t: '한국인 입맛에 맞춘 식사', d: '한국인의 입맛에 맞춘 메뉴. 식품 알레르기도 개별 대응해 드립니다.' },
+    { n: '04', i: 'directions_car', t: '안전 제일의 차량 관리', d: '정비된 차량과 경험이 풍부한 운전기사가 안전한 여행을 약속드립니다.' },
 ];
 
 export function TrustSectionDesktop({ contentWidth = 1280 }: TrustSectionProps) {
@@ -18,8 +18,8 @@ export function TrustSectionDesktop({ contentWidth = 1280 }: TrustSectionProps) 
             <div style={{ maxWidth: contentWidth, margin: '0 auto', padding: '0 32px' }}>
                 <SectionHeader
                     eyebrow="Why Milkyway Japan"
-                    title="Milkyway Japan が選ばれる 4 つの理由"
-                    subtitle="モンゴル現地の旅行社だからできる、確かなサポートと安心の品質。"
+                    title="몽골리아 은하수가 선택받는 4가지 이유"
+                    subtitle="몽골 현지 여행사이기에 가능한, 확실한 지원과 안심의 품질."
                 />
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
                     {ITEMS.map((it) => (

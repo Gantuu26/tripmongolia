@@ -58,59 +58,59 @@ const DOC_SETTINGS_MARKER = '\n\n__MILKYWAY_DOCUMENT_SETTINGS__=';
 
 export const defaultDocumentSettings = (): DocumentSettings => ({
     overview: {
-        subtitle: '銀河の下で、大自然と文化を体験する特別な旅へ',
-        heroTagline: '伝統衣装体験・乗馬体験・ラクダ体験・ゲル体験 すべて込み',
-        intro: 'ご予約内容に基づき、旅行概要・日程・代金をまとめた確認用のご旅行日程表です。',
+        subtitle: '은하수 아래에서 대자연과 문화를 체험하는 특별한 여행으로',
+        heroTagline: '전통의상 체험·승마 체험·낙타 체험·게르 체험 모두 포함',
+        intro: '예약 내용을 바탕으로 여행 개요·일정·요금을 정리한 확인용 여행 일정표입니다.',
         included: [
-            { icon: 'hiking', label: 'モンゴル伝統衣装体験' },
-            { icon: 'pets', label: '乗馬体験' },
-            { icon: 'local_taxi', label: '専用車・ドライバー' },
-            { icon: 'hotel', label: '宿泊' },
-            { icon: 'restaurant', label: '食事付き' },
-            { icon: 'support_agent', label: '日本語ガイド' },
+            { icon: 'hiking', label: '몽골 전통의상 체험' },
+            { icon: 'pets', label: '승마 체험' },
+            { icon: 'local_taxi', label: '전용차·기사' },
+            { icon: 'hotel', label: '숙박' },
+            { icon: 'restaurant', label: '식사 포함' },
+            { icon: 'support_agent', label: '한국어 가이드' },
         ],
-        includedText: '専用車・ドライバー\n宿泊（ホテル・ゲル）\n食事付き\n日本語ガイド\n伝統衣装・乗馬・ラクダ体験',
-        excludedText: '国際航空券\n海外旅行保険\n個人的費用\n日程表に記載のない食事',
+        includedText: '전용차·기사\n숙박(호텔·게르)\n식사 포함\n한국어 가이드\n전통의상·승마·낙타 체험',
+        excludedText: '국제 항공권\n해외여행자보험\n개인 경비\n일정표에 기재되지 않은 식사',
         pricePerPerson: '128000',
-        paymentNote: '上記料金には、日程表に記載のサービスが含まれております。',
+        paymentNote: '위 요금에는 일정표에 기재된 서비스가 포함되어 있습니다.',
     },
     contract: {
-        intro: '本旅行条件書および下記の旅行条件に基づき、募集型企画旅行契約を締結いたします。',
-        paymentMethod: '銀行振込',
-        paymentDeadline: 'ご案内メールに記載の期日まで',
-        bankInfo: '三井住友銀行 新宿支店（普通）1234567\nモンゴル銀河旅行社（カ',
-        includedText: '宿泊費、食事代、専用車、ドライバー、日本語ガイド、日程表記載の体験料金',
-        excludedText: '国際航空券、海外旅行保険、個人的費用、日程表に記載のない食事',
+        intro: '본 여행 조건서 및 아래 여행 조건에 따라 모집형 기획여행 계약을 체결합니다.',
+        paymentMethod: '은행 송금',
+        paymentDeadline: '안내 메일에 기재된 기일까지',
+        bankInfo: '은행명 지점명(보통예금) 1234567\n몽골 은하수 여행사',
+        includedText: '숙박비, 식사비, 전용차, 기사, 한국어 가이드, 일정표 기재 체험 요금',
+        excludedText: '국제 항공권, 해외여행자보험, 개인 경비, 일정표에 기재되지 않은 식사',
         cancellationRows: [
-            { period: '30日〜15日前まで', fee: '旅行代金の10%' },
-            { period: '14日〜8日前まで', fee: '旅行代金の20%' },
-            { period: '7日〜3日前まで', fee: '旅行代金の30%' },
-            { period: '2日前〜当日', fee: '旅行代金の50%' },
-            { period: '無連絡不参加', fee: '旅行代金の100%' },
+            { period: '30일~15일 전까지', fee: '여행 대금의 10%' },
+            { period: '14일~8일 전까지', fee: '여행 대금의 20%' },
+            { period: '7일~3일 전까지', fee: '여행 대금의 30%' },
+            { period: '2일 전~당일', fee: '여행 대금의 50%' },
+            { period: '연락 없이 불참', fee: '여행 대금의 100%' },
         ],
-        signatureNote: '上記内容を確認し、同意の上、本契約を締結いたします。',
+        signatureNote: '위 내용을 확인하고 동의한 후 본 계약을 체결합니다.',
     },
     detail: {
-        title: 'ご旅行日程表（詳細）',
-        note: '天候・交通状況により、スケジュールは変更となる場合がございます。',
-        footerBadges: ['追加料金なしのすべて込みプラン', '日程調整可能', '貸切専用車で安心移動', '日本語ガイドが全日程サポート'],
+        title: '여행 일정표(상세)',
+        note: '날씨·교통 상황에 따라 일정이 변경될 수 있습니다.',
+        footerBadges: ['추가 요금 없는 올인클루시브 플랜', '일정 조정 가능', '전세 전용차로 편안한 이동', '한국어 가이드가 전 일정 지원'],
     },
     guide: {
         notices: [
-            { title: '服装について', body: '朝夕は冷え込む場合があるため、羽織れる上着をご用意ください。' },
-            { title: '宿泊について', body: 'ホテルおよびゲル宿泊は、現地事情により同等クラスへ変更となる場合があります。' },
-            { title: 'お食事について', body: 'アレルギーや食事制限がある場合は事前にお知らせください。' },
-            { title: '持ち物について', body: 'パスポート、保険証券、常備薬、充電器などをご準備ください。' },
+            { title: '복장 안내', body: '아침저녁으로 쌀쌀할 수 있으므로 걸쳐 입을 수 있는 겉옷을 준비해 주세요.' },
+            { title: '숙박 안내', body: '호텔 및 게르 숙박은 현지 사정에 따라 동급으로 변경될 수 있습니다.' },
+            { title: '식사 안내', body: '알레르기나 식사 제한이 있는 경우 사전에 알려 주세요.' },
+            { title: '준비물 안내', body: '여권, 보험증권, 상비약, 충전기 등을 준비해 주세요.' },
         ],
-        conditions: '本旅行は、当社旅行条件書および旅行業約款に基づいて実施いたします。',
-        paymentInfo: 'お支払い方法：銀行振込\nお支払い期限：ご案内メールに記載の期日まで',
+        conditions: '본 여행은 당사 여행 조건서 및 여행업 약관에 따라 진행됩니다.',
+        paymentInfo: '결제 방법: 은행 송금\n결제 기한: 안내 메일에 기재된 기일까지',
         guideName: '',
         guidePhone: '',
         accommodationInfo: '',
         emergencyPhone: '+976-80-1234-5678',
         emergencyEmail: 'info@mongolryokou.com',
-        closingMessage: 'モンゴルの大自然と文化を心ゆくまでお楽しみください。',
-        qrLabel: 'お客様専用ページ',
+        closingMessage: '몽골의 대자연과 문화를 마음껏 즐기시기 바랍니다.',
+        qrLabel: '고객 전용 페이지',
     },
 });
 
@@ -138,12 +138,12 @@ export const decodeTemplateDescription = (raw = '') => {
 // 줄 단위 텍스트 → 일정 항목 배열 (전체 텍스트 편집용)
 const inferTypeForText = (text: string): ActivityType => {
     const v = (text || '').toLowerCase();
-    if (/(공항|픽업|도착|미팅|空港|到着|arrival|airport)/i.test(v)) return 'pickup';
-    if (/(이동|출발|전용차|차량|버스|移動|出発|専用車|transfer|drive)/i.test(v)) return 'transport';
-    if (/(식사|조식|중식|석식|점심|저녁|아침|食事|朝食|昼食|夕食|meal|lunch|dinner|breakfast)/i.test(v)) return 'meal';
-    if (/(숙박|호텔|게르|체크인|宿泊|ホテル|ゲル|hotel|stay|check[-\s]?in)/i.test(v)) return 'checkin';
-    if (/(체험|승마|낙타|트레킹|공연|乗馬|ラクダ|activity|experience)/i.test(v)) return 'activity';
-    if (/(자유|휴식|自由|free)/i.test(v)) return 'free';
+    if (/(공항|픽업|도착|미팅|arrival|airport)/i.test(v)) return 'pickup';
+    if (/(이동|출발|전용차|차량|버스|transfer|drive)/i.test(v)) return 'transport';
+    if (/(식사|조식|중식|석식|점심|저녁|아침|meal|lunch|dinner|breakfast)/i.test(v)) return 'meal';
+    if (/(숙박|호텔|게르|체크인|hotel|stay|check[-\s]?in)/i.test(v)) return 'checkin';
+    if (/(체험|승마|낙타|트레킹|공연|activity|experience)/i.test(v)) return 'activity';
+    if (/(자유|휴식|free)/i.test(v)) return 'free';
     return 'sightseeing';
 };
 export const parseDayActivitiesText = (text: string): Activity[] =>
@@ -157,14 +157,14 @@ const encodeTemplateDescription = (description: string, documentSettings: Docume
     `${description || ''}${DOC_SETTINGS_MARKER}${JSON.stringify(documentSettings)}`;
 
 const ACTIVITY_TYPES: { id: ActivityType; label: string; icon: string }[] = [
-    { id: 'pickup', label: '픽업', icon: 'flight_land' },
-    { id: 'transport', label: '이동', icon: 'directions_car' },
-    { id: 'meal', label: '식사', icon: 'restaurant' },
-    { id: 'sightseeing', label: '관광', icon: 'photo_camera' },
-    { id: 'activity', label: '체험', icon: 'sports_handball' },
-    { id: 'checkin', label: '체크인', icon: 'hotel' },
-    { id: 'free', label: '자유시간', icon: 'park' },
-    { id: 'other', label: '기타', icon: 'more_horiz' },
+    { id: 'pickup', label: 'Угтах', icon: 'flight_land' },
+    { id: 'transport', label: 'Шилжилт', icon: 'directions_car' },
+    { id: 'meal', label: 'Хоол', icon: 'restaurant' },
+    { id: 'sightseeing', label: 'Аялал жуулчлал', icon: 'photo_camera' },
+    { id: 'activity', label: 'Туршлага', icon: 'sports_handball' },
+    { id: 'checkin', label: 'Бүртгүүлэх', icon: 'hotel' },
+    { id: 'free', label: 'Чөлөөт цаг', icon: 'park' },
+    { id: 'other', label: 'Бусад', icon: 'more_horiz' },
 ];
 const TYPE_MAP = Object.fromEntries(ACTIVITY_TYPES.map(t => [t.id, t]));
 
@@ -210,7 +210,7 @@ type TemplatePreviewProps = {
     onIncluded: (idx: number, field: 'icon' | 'label', value: string) => void;
     onCancellation: (idx: number, field: 'period' | 'fee', value: string) => void;
     onGuideNotice: (idx: number, field: 'title' | 'body', value: string) => void;
-    // 일정(日程) 직접 편집
+    // 일정 직접 편집
     onDayChange: (dayIdx: number, field: 'title' | 'region', value: string) => void;
     onActivityChange: (dayIdx: number, actIdx: number, field: 'time' | 'title' | 'description', value: string) => void;
     onAddDay: () => void;
@@ -247,30 +247,30 @@ export const TemplatePreview: React.FC<TemplatePreviewProps> = ({ name, descript
     const sampleTotal = customer?.totalAmount ?? samplePrice * peopleCount;
     const sampleDeposit = customer?.deposit ?? Math.floor(sampleTotal * 0.1);
     const sampleLocal = customer?.localAmount ?? (sampleTotal - sampleDeposit);
-    const tripLength = customer?.tripLength || `${nights}泊${totalDays || 0}日`;
+    const tripLength = customer?.tripLength || `${nights}박 ${totalDays || 0}일`;
     const guideText = assignedGuide?.name
         ? `${assignedGuide.name}${assignedGuide.phone ? `（${assignedGuide.phone}）` : ''}`
-        : '日本語ガイドが全日程同行します';
+        : '한국어 가이드가 전 일정 동행합니다';
     const getAccommodation = (day: number) => dailyAccommodations?.find(item => item.day === day)?.accommodation;
     const accommodationSummary = dailyAccommodations?.length
         ? dailyAccommodations
             .filter(item => item.accommodation?.name)
             .sort((a, b) => a.day - b.day)
-            .map(item => `${item.day}日目：${item.accommodation.name}`)
+            .map(item => `${item.day}일차: ${item.accommodation.name}`)
             .join(' / ')
-        : '出発前までにご案内します';
+        : '출발 전까지 안내해 드립니다';
     const pages = [
-        { id: 'overview' as const, label: '日程表', icon: 'article' },
-        { id: 'contract' as const, label: '契約書', icon: 'contract' },
-        { id: 'detail' as const, label: '詳細', icon: 'route' },
-        { id: 'guide' as const, label: '案内', icon: 'info' },
+        { id: 'overview' as const, label: 'Аялалын хуваарь', icon: 'article' },
+        { id: 'contract' as const, label: 'Гэрээ', icon: 'contract' },
+        { id: 'detail' as const, label: 'Дэлгэрэнгүй', icon: 'route' },
+        { id: 'guide' as const, label: 'Заавар', icon: 'info' },
     ];
     const rows = [
-        ['ご旅行番号', customer?.tripNumber || 'QT-20240604-001'],
-        ['ご旅行期間', `${customer?.period || '2026年6月10日（火）〜 2026年6月13日（金）'} ${tripLength}`],
-        ['参加人数', customer?.headcount || '大人 2名 / 子供 0名'],
-        ['お客様名', `${customer?.name || '山田 太郎'} 様`],
-        ['旅行形態', customer?.tripType || '貸切プライベートツアー'],
+        ['여행 번호', customer?.tripNumber || 'QT-20240604-001'],
+        ['여행 기간', `${customer?.period || '2026년 6월 10일(화) ~ 2026년 6월 13일(금)'} ${tripLength}`],
+        ['참가 인원', customer?.headcount || '성인 2명 / 아동 0명'],
+        ['고객명', `${customer?.name || '홍길동'} 님`],
+        ['여행 형태', customer?.tripType || '전세 프라이빗 투어'],
     ];
     const fieldClass = 'w-full rounded-md border border-transparent bg-transparent px-1 py-0.5 outline-none transition-colors hover:border-[#8FE7DE] hover:bg-white/80 focus:border-[#39C4B7] focus:bg-white focus:ring-2 focus:ring-[#39C4B7]/15';
     // Frame은 모듈 스코프로 이동 (입력마다 리마운트되어 스크롤·포커스가 튀던 문제 수정)
@@ -280,9 +280,9 @@ export const TemplatePreview: React.FC<TemplatePreviewProps> = ({ name, descript
             <div className="border-b border-[#8FE7DE]/60 bg-white px-4 py-3 dark:border-slate-800 dark:bg-slate-900">
                 <div className="mb-3 flex items-center justify-between gap-3">
                     <p className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-wider text-slate-400">
-                        <span className="material-symbols-outlined text-[15px]">edit_note</span>PDF 화면에서 직접 편집
+                        <span className="material-symbols-outlined text-[15px]">edit_note</span>PDF дэлгэцэн дээр шууд засах
                     </p>
-                    <span className="rounded-full bg-[#39C4B7]/10 px-3 py-1 text-[11px] font-black text-[#0F8F84]">클릭해서 수정</span>
+                    <span className="rounded-full bg-[#39C4B7]/10 px-3 py-1 text-[11px] font-black text-[#0F8F84]">Дарж засах</span>
                 </div>
                 <div className="grid grid-cols-4 gap-1.5 rounded-2xl bg-[#EAF8F7] p-1">
                     {pages.map(page => (
@@ -295,49 +295,49 @@ export const TemplatePreview: React.FC<TemplatePreviewProps> = ({ name, descript
             {customer ? (
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 border-b border-teal-200 bg-teal-50 px-4 py-2 text-[11px] font-bold text-[#0F8F84] dark:border-teal-800 dark:bg-teal-900/20">
                     <span className="material-symbols-outlined text-[15px]">person</span>
-                    <span>{customer.name || '고객'}님 문서 — 고객 정보·금액이 자동 반영되었습니다</span>
+                    <span>{customer.name || 'Үйлчлүүлэгч'}-н баримт — үйлчлүүлэгчийн мэдээлэл, дүн автоматаар тусгагдсан</span>
                     <span className="inline-flex items-center gap-1 rounded-full bg-white/80 px-2 py-0.5"><span className="material-symbols-outlined text-[13px]">badge</span>{guideText}</span>
-                    <span className="inline-flex items-center gap-1 rounded-full bg-white/80 px-2 py-0.5"><span className="material-symbols-outlined text-[13px]">hotel</span>{dailyAccommodations?.length ? `${dailyAccommodations.length}일 숙소 배정` : '숙소 미배정'}</span>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-white/80 px-2 py-0.5"><span className="material-symbols-outlined text-[13px]">hotel</span>{dailyAccommodations?.length ? `${dailyAccommodations.length} өдрийн байр хуваарилагдсан` : 'Байр хуваарилагдаагүй'}</span>
                 </div>
             ) : (
                 <div className="flex items-start gap-1.5 border-b border-amber-200 bg-amber-50 px-4 py-2 text-[11px] font-bold text-amber-700 dark:border-amber-800 dark:bg-amber-900/20 dark:text-amber-300">
                     <span className="material-symbols-outlined text-[15px]">info</span>
-                    <span>샘플(예시) 표시입니다. 실제 고객 정보는 <b>통합 예약 관리 → 예약/견적 → 「문서 편집」</b>으로 열면 자동으로 채워집니다.</span>
+                    <span>Жишээ (загвар) харагдац. Бодит үйлчлүүлэгчийн мэдээллийг <b>Захиалгын нэгдсэн удирдлага → Захиалга/Үнийн санал → «Баримт засах»</b>-аар нээвэл автоматаар бөглөгдөнө.</span>
                 </div>
             )}
             <div className="flex-1 overflow-y-auto p-4">
                 {activePage === 'overview' && <Frame>
                     <div className="flex items-center justify-between px-5 py-4">
-                        <div className="flex items-center gap-2 text-[#0F8F84]"><span className="material-symbols-outlined text-[28px]">landscape</span><div><p className="text-[12px] font-black">モンゴル銀河旅行社</p><p className="text-[8px] font-bold tracking-widest">MILKYWAY JAPAN</p></div></div>
-                        <div className="text-right"><p className="text-[22px] font-black tracking-[0.12em] text-[#0F8F84]">ご旅行日程表</p><input value={settings.overview.subtitle} onChange={e => onDocSection('overview', { subtitle: e.target.value })} className={`${fieldClass} max-w-[260px] text-right text-[10px] font-semibold leading-snug text-slate-400`} /></div>
+                        <div className="flex items-center gap-2 text-[#0F8F84]"><span className="material-symbols-outlined text-[28px]">landscape</span><div><p className="text-[12px] font-black">몽골 은하수 여행사</p><p className="text-[8px] font-bold tracking-widest">MILKYWAY JAPAN</p></div></div>
+                        <div className="text-right"><p className="text-[22px] font-black tracking-[0.12em] text-[#0F8F84]">여행 일정표</p><input value={settings.overview.subtitle} onChange={e => onDocSection('overview', { subtitle: e.target.value })} className={`${fieldClass} max-w-[260px] text-right text-[10px] font-semibold leading-snug text-slate-400`} /></div>
                     </div>
-                    <div className="relative h-[220px] overflow-hidden"><img src={mongoliaHero} alt="" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-r from-[#00796F]/90 via-[#0F8F84]/45 to-transparent" /><div className="absolute bottom-5 left-5 right-5 text-white"><span className="rounded-xl bg-[#0F8F84] px-3 py-2 text-xs font-black">{tripLength}</span><input value={name} onChange={e => onNameChange(e.target.value)} placeholder="銀河・大自然パッケージ" className={`${fieldClass} mt-3 block max-w-[520px] text-[28px] font-black leading-tight text-white placeholder:text-white/70`} /><input value={description || settings.overview.heroTagline} onChange={e => onDescriptionChange(e.target.value)} className={`${fieldClass} mt-1 max-w-[560px] text-xs font-semibold text-white/90`} /></div></div>
-                    <div className="p-5"><h4 className="mb-2 flex items-center gap-1.5 text-sm font-black text-[#0F8F84]"><span className="material-symbols-outlined text-base">check_circle</span>ご旅行概要</h4><textarea value={settings.overview.intro} onChange={e => onDocSection('overview', { intro: e.target.value })} rows={3} className={`${fieldClass} mb-3 resize-none text-[11px] font-semibold leading-relaxed text-slate-500`} /><div className="overflow-hidden rounded-xl border border-[#8FE7DE] text-xs">{[...rows, ['担当ガイド', guideText], ['宿泊', accommodationSummary]].map(([label, value]) => <div key={label} className="grid grid-cols-[112px_1fr] border-b border-[#8FE7DE] last:border-b-0"><div className="bg-[#F7FAFA] px-3 py-2 font-black text-[#0F8F84]">{label}</div><div className="px-3 py-2 font-semibold text-slate-700">{value}</div></div>)}</div>
-                    <div className="mt-4 grid grid-cols-2 gap-3"><div><h4 className="mb-1 text-sm font-black text-[#0F8F84]">含まれているもの</h4><textarea value={settings.overview.includedText} onChange={e => onDocSection('overview', { includedText: e.target.value })} rows={5} className={`${fieldClass} resize-none text-[11px] font-semibold leading-relaxed text-slate-600`} placeholder="1行に1項目" /></div><div><h4 className="mb-1 text-sm font-black text-slate-500">含まれないもの</h4><textarea value={settings.overview.excludedText} onChange={e => onDocSection('overview', { excludedText: e.target.value })} rows={5} className={`${fieldClass} resize-none text-[11px] font-semibold leading-relaxed text-slate-600`} placeholder="1行に1項目" /></div></div><div className="mt-4 grid grid-cols-2 gap-2"><div className="rounded-xl border border-[#8FE7DE] bg-white p-3 text-center"><p className="text-[9px] font-black text-slate-400">参加人数</p><p className="text-base font-black text-slate-700">{peopleCount}名</p></div><div className="rounded-xl bg-gradient-to-br from-[#0F8F84] to-[#39C4B7] p-3 text-center text-white"><p className="text-[9px] font-black">ご請求金額（合計）</p><p className="text-xl font-black">{sampleTotal.toLocaleString()}円</p></div></div><div className="mt-2 grid grid-cols-2 gap-2"><div className="rounded-xl border border-[#39C4B7] bg-[#EAF8F7] p-3 text-center"><p className="text-[9px] font-black text-[#0F8F84]">ご予約金（お申込時にお支払い）</p><p className="text-lg font-black text-[#0F8F84]">{sampleDeposit.toLocaleString()}円</p></div><div className="rounded-xl border border-[#8FE7DE] bg-white p-3 text-center"><p className="text-[9px] font-black text-slate-400">現地払い残金</p><p className="text-lg font-black text-slate-700">{sampleLocal.toLocaleString()}円</p></div></div></div>
+                    <div className="relative h-[220px] overflow-hidden"><img src={mongoliaHero} alt="" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-r from-[#00796F]/90 via-[#0F8F84]/45 to-transparent" /><div className="absolute bottom-5 left-5 right-5 text-white"><span className="rounded-xl bg-[#0F8F84] px-3 py-2 text-xs font-black">{tripLength}</span><input value={name} onChange={e => onNameChange(e.target.value)} placeholder="은하수·대자연 패키지" className={`${fieldClass} mt-3 block max-w-[520px] text-[28px] font-black leading-tight text-white placeholder:text-white/70`} /><input value={description || settings.overview.heroTagline} onChange={e => onDescriptionChange(e.target.value)} className={`${fieldClass} mt-1 max-w-[560px] text-xs font-semibold text-white/90`} /></div></div>
+                    <div className="p-5"><h4 className="mb-2 flex items-center gap-1.5 text-sm font-black text-[#0F8F84]"><span className="material-symbols-outlined text-base">check_circle</span>여행 개요</h4><textarea value={settings.overview.intro} onChange={e => onDocSection('overview', { intro: e.target.value })} rows={3} className={`${fieldClass} mb-3 resize-none text-[11px] font-semibold leading-relaxed text-slate-500`} /><div className="overflow-hidden rounded-xl border border-[#8FE7DE] text-xs">{[...rows, ['담당 가이드', guideText], ['숙박', accommodationSummary]].map(([label, value]) => <div key={label} className="grid grid-cols-[112px_1fr] border-b border-[#8FE7DE] last:border-b-0"><div className="bg-[#F7FAFA] px-3 py-2 font-black text-[#0F8F84]">{label}</div><div className="px-3 py-2 font-semibold text-slate-700">{value}</div></div>)}</div>
+                    <div className="mt-4 grid grid-cols-2 gap-3"><div><h4 className="mb-1 text-sm font-black text-[#0F8F84]">포함 사항</h4><textarea value={settings.overview.includedText} onChange={e => onDocSection('overview', { includedText: e.target.value })} rows={5} className={`${fieldClass} resize-none text-[11px] font-semibold leading-relaxed text-slate-600`} placeholder="한 줄에 한 항목" /></div><div><h4 className="mb-1 text-sm font-black text-slate-500">불포함 사항</h4><textarea value={settings.overview.excludedText} onChange={e => onDocSection('overview', { excludedText: e.target.value })} rows={5} className={`${fieldClass} resize-none text-[11px] font-semibold leading-relaxed text-slate-600`} placeholder="한 줄에 한 항목" /></div></div><div className="mt-4 grid grid-cols-2 gap-2"><div className="rounded-xl border border-[#8FE7DE] bg-white p-3 text-center"><p className="text-[9px] font-black text-slate-400">참가 인원</p><p className="text-base font-black text-slate-700">{peopleCount}명</p></div><div className="rounded-xl bg-gradient-to-br from-[#0F8F84] to-[#39C4B7] p-3 text-center text-white"><p className="text-[9px] font-black">청구 금액(합계)</p><p className="text-xl font-black">{sampleTotal.toLocaleString()}원</p></div></div><div className="mt-2 grid grid-cols-2 gap-2"><div className="rounded-xl border border-[#39C4B7] bg-[#EAF8F7] p-3 text-center"><p className="text-[9px] font-black text-[#0F8F84]">예약금(신청 시 결제)</p><p className="text-lg font-black text-[#0F8F84]">{sampleDeposit.toLocaleString()}원</p></div><div className="rounded-xl border border-[#8FE7DE] bg-white p-3 text-center"><p className="text-[9px] font-black text-slate-400">현지 결제 잔금</p><p className="text-lg font-black text-slate-700">{sampleLocal.toLocaleString()}원</p></div></div></div>
                 </Frame>}
-                {activePage === 'contract' && <Frame><div className="p-5"><div className="mb-5 flex items-start justify-between"><div className="text-[#0F8F84]"><p className="text-[12px] font-black">モンゴル銀河旅行社</p><p className="text-[8px] font-bold tracking-widest">MILKYWAY JAPAN</p></div><div className="rounded-lg bg-[#39C4B7]/10 px-3 py-2 text-[9px] font-black text-[#0F8F84]">契約日：2026年6月4日</div></div><h3 className="text-center text-[30px] font-black tracking-[0.18em] text-[#0F8F84]">ご旅行契約書</h3><p className="text-center text-xs font-semibold uppercase tracking-widest text-slate-500">Travel Contract</p><textarea value={settings.contract.intro} onChange={e => onDocSection('contract', { intro: e.target.value })} rows={3} className={`${fieldClass} mx-auto mt-4 block max-w-[520px] resize-none text-center text-[11px] font-semibold leading-relaxed text-slate-500`} /><div className="mt-5 overflow-hidden rounded-xl border border-[#8FE7DE] text-xs">{[['ご旅行名', name || '銀河・大自然パッケージ'], ['ご旅行期間', tripLength], ['旅行代金', `${samplePrice.toLocaleString()}円（一人）`], ['合計金額', `${sampleTotal.toLocaleString()}円`], ['ガイド', guideText], ['宿泊', accommodationSummary]].map(([label, value]) => <div key={label} className="grid grid-cols-[112px_1fr] border-b border-[#8FE7DE] last:border-b-0"><div className="bg-[#F7FAFA] px-3 py-2 font-black text-[#0F8F84]">{label}</div><div className="px-3 py-2 font-semibold text-slate-700">{value}</div></div>)}</div><div className="mt-4 grid grid-cols-2 gap-3"><div className="rounded-xl border border-[#8FE7DE] p-3"><p className="text-xs font-black text-[#0F8F84]">キャンセル規定</p><div className="mt-2 space-y-1">{settings.contract.cancellationRows.slice(0, 5).map((row, idx) => <div key={idx} className="grid grid-cols-[1fr_90px] gap-1"><input value={row.period} onChange={e => onCancellation(idx, 'period', e.target.value)} className={`${fieldClass} text-[10px] font-semibold text-slate-500`} /><input value={row.fee} onChange={e => onCancellation(idx, 'fee', e.target.value)} className={`${fieldClass} text-[10px] font-semibold text-slate-500`} /></div>)}</div></div><div className="rounded-xl border border-[#8FE7DE] p-3"><p className="text-xs font-black text-[#0F8F84]">お支払い</p><input value={settings.contract.paymentMethod} onChange={e => onDocSection('contract', { paymentMethod: e.target.value })} className={`${fieldClass} mt-2 text-[10px] font-semibold text-slate-500`} /><input value={settings.contract.paymentDeadline} onChange={e => onDocSection('contract', { paymentDeadline: e.target.value })} className={`${fieldClass} mt-1 text-[10px] font-semibold text-slate-500`} /><textarea value={settings.contract.bankInfo} onChange={e => onDocSection('contract', { bankInfo: e.target.value })} rows={3} placeholder="振込先・お支払い案内（自由入力）" className={`${fieldClass} mt-1 resize-none text-[10px] font-semibold leading-relaxed text-slate-500`} /><div className="mt-4 border-b border-slate-300 pb-1 text-[10px] text-slate-400">旅行者署名</div></div></div></div></Frame>}
-                {activePage === 'detail' && <Frame><div className="p-5"><div className="mb-5 flex items-center justify-between"><input value={settings.detail.title} onChange={e => onDocSection('detail', { title: e.target.value })} className={`${fieldClass} text-[24px] font-black tracking-[0.12em] text-[#0F8F84]`} /><span className="rounded-full bg-[#39C4B7]/10 px-3 py-1 text-xs font-black text-[#0F8F84]">{totalDays || 0}日間</span></div>
+                {activePage === 'contract' && <Frame><div className="p-5"><div className="mb-5 flex items-start justify-between"><div className="text-[#0F8F84]"><p className="text-[12px] font-black">몽골 은하수 여행사</p><p className="text-[8px] font-bold tracking-widest">MILKYWAY JAPAN</p></div><div className="rounded-lg bg-[#39C4B7]/10 px-3 py-2 text-[9px] font-black text-[#0F8F84]">계약일: 2026년 6월 4일</div></div><h3 className="text-center text-[30px] font-black tracking-[0.18em] text-[#0F8F84]">여행 계약서</h3><p className="text-center text-xs font-semibold uppercase tracking-widest text-slate-500">Travel Contract</p><textarea value={settings.contract.intro} onChange={e => onDocSection('contract', { intro: e.target.value })} rows={3} className={`${fieldClass} mx-auto mt-4 block max-w-[520px] resize-none text-center text-[11px] font-semibold leading-relaxed text-slate-500`} /><div className="mt-5 overflow-hidden rounded-xl border border-[#8FE7DE] text-xs">{[['여행명', name || '은하수·대자연 패키지'], ['여행 기간', tripLength], ['여행 대금', `${samplePrice.toLocaleString()}원(1인)`], ['합계 금액', `${sampleTotal.toLocaleString()}원`], ['가이드', guideText], ['숙박', accommodationSummary]].map(([label, value]) => <div key={label} className="grid grid-cols-[112px_1fr] border-b border-[#8FE7DE] last:border-b-0"><div className="bg-[#F7FAFA] px-3 py-2 font-black text-[#0F8F84]">{label}</div><div className="px-3 py-2 font-semibold text-slate-700">{value}</div></div>)}</div><div className="mt-4 grid grid-cols-2 gap-3"><div className="rounded-xl border border-[#8FE7DE] p-3"><p className="text-xs font-black text-[#0F8F84]">취소 규정</p><div className="mt-2 space-y-1">{settings.contract.cancellationRows.slice(0, 5).map((row, idx) => <div key={idx} className="grid grid-cols-[1fr_90px] gap-1"><input value={row.period} onChange={e => onCancellation(idx, 'period', e.target.value)} className={`${fieldClass} text-[10px] font-semibold text-slate-500`} /><input value={row.fee} onChange={e => onCancellation(idx, 'fee', e.target.value)} className={`${fieldClass} text-[10px] font-semibold text-slate-500`} /></div>)}</div></div><div className="rounded-xl border border-[#8FE7DE] p-3"><p className="text-xs font-black text-[#0F8F84]">결제 안내</p><input value={settings.contract.paymentMethod} onChange={e => onDocSection('contract', { paymentMethod: e.target.value })} className={`${fieldClass} mt-2 text-[10px] font-semibold text-slate-500`} /><input value={settings.contract.paymentDeadline} onChange={e => onDocSection('contract', { paymentDeadline: e.target.value })} className={`${fieldClass} mt-1 text-[10px] font-semibold text-slate-500`} /><textarea value={settings.contract.bankInfo} onChange={e => onDocSection('contract', { bankInfo: e.target.value })} rows={3} placeholder="입금 계좌·결제 안내(자유 입력)" className={`${fieldClass} mt-1 resize-none text-[10px] font-semibold leading-relaxed text-slate-500`} /><div className="mt-4 border-b border-slate-300 pb-1 text-[10px] text-slate-400">여행자 서명</div></div></div></div></Frame>}
+                {activePage === 'detail' && <Frame><div className="p-5"><div className="mb-5 flex items-center justify-between"><input value={settings.detail.title} onChange={e => onDocSection('detail', { title: e.target.value })} className={`${fieldClass} text-[24px] font-black tracking-[0.12em] text-[#0F8F84]`} /><span className="rounded-full bg-[#39C4B7]/10 px-3 py-1 text-xs font-black text-[#0F8F84]">{totalDays || 0}일간</span></div>
                     <div className="space-y-3">{days.map((day, dayIdx) => { const inText = textDays.has(dayIdx); return (<div key={dayIdx} className="grid grid-cols-[64px_1fr] gap-3">
-                        <div className="flex flex-col items-center rounded-xl bg-gradient-to-b from-[#0F8F84] to-[#39C4B7] px-2 py-4 text-center text-white"><p className="text-[10px] font-black">DAY {day.day}</p><p className="mt-1 text-[11px] font-bold">{day.day}日目</p><button onClick={() => onRemoveDay(dayIdx)} className="mt-2 text-white/60 hover:text-white" title="이 일차 삭제"><span className="material-symbols-outlined text-[15px]">delete</span></button></div>
+                        <div className="flex flex-col items-center rounded-xl bg-gradient-to-b from-[#0F8F84] to-[#39C4B7] px-2 py-4 text-center text-white"><p className="text-[10px] font-black">DAY {day.day}</p><p className="mt-1 text-[11px] font-bold">{day.day}일차</p><button onClick={() => onRemoveDay(dayIdx)} className="mt-2 text-white/60 hover:text-white" title="Энэ өдрийг устгах"><span className="material-symbols-outlined text-[15px]">delete</span></button></div>
                         <div className="rounded-xl border border-[#8FE7DE] p-3">
-                            <input value={day.title} onChange={e => onDayChange(dayIdx, 'title', e.target.value)} placeholder={`${day.day}日目のタイトル`} className={`${fieldClass} text-sm font-black text-[#0F8F84]`} />
-                            <input value={day.region || ''} onChange={e => onDayChange(dayIdx, 'region', e.target.value)} placeholder="地域（例：ウランバートル）" className={`${fieldClass} mt-0.5 text-[10px] font-semibold text-slate-400`} />
-                            {getAccommodation(day.day)?.name && <div className="mt-2 inline-flex items-center gap-1 rounded-full bg-teal-50 px-2.5 py-1 text-[10px] font-black text-[#0F8F84]"><span className="material-symbols-outlined text-[13px]">hotel</span>宿泊：{getAccommodation(day.day)?.name}</div>}
-                            <div className="mt-2 flex items-center justify-between"><span className="text-[10px] font-bold text-slate-400">スケジュール</span>{onDayActivitiesText && <button onClick={() => toggleTextDay(dayIdx)} className="text-[10px] font-bold text-[#0F8F84] hover:text-[#0a7d6a]">{inText ? '↩ 칸별 편집' : '✎ 텍스트로 한번에'}</button>}</div>
+                            <input value={day.title} onChange={e => onDayChange(dayIdx, 'title', e.target.value)} placeholder={`${day.day}일차 제목`} className={`${fieldClass} text-sm font-black text-[#0F8F84]`} />
+                            <input value={day.region || ''} onChange={e => onDayChange(dayIdx, 'region', e.target.value)} placeholder="지역(예: 울란바토르)" className={`${fieldClass} mt-0.5 text-[10px] font-semibold text-slate-400`} />
+                            {getAccommodation(day.day)?.name && <div className="mt-2 inline-flex items-center gap-1 rounded-full bg-teal-50 px-2.5 py-1 text-[10px] font-black text-[#0F8F84]"><span className="material-symbols-outlined text-[13px]">hotel</span>숙박: {getAccommodation(day.day)?.name}</div>}
+                            <div className="mt-2 flex items-center justify-between"><span className="text-[10px] font-bold text-slate-400">일정</span>{onDayActivitiesText && <button onClick={() => toggleTextDay(dayIdx)} className="text-[10px] font-bold text-[#0F8F84] hover:text-[#0a7d6a]">{inText ? '↩ Нүд тус бүрээр засах' : '✎ Текстээр нэг дор'}</button>}</div>
                             {inText && onDayActivitiesText ? (
-                                <textarea value={day.activities.map(a => `${a.time ? a.time + ' ' : ''}${a.title}`).join('\n')} onChange={e => onDayActivitiesText(dayIdx, e.target.value)} rows={Math.max(4, day.activities.length + 1)} placeholder={'09:00 ウランバートル到着\n12:00 昼食\n宿泊：ホテル\n(한 줄에 한 항목, 맨 앞에 시간 선택)'} className={`${fieldClass} mt-1 resize-y text-[11px] font-semibold leading-relaxed text-slate-700`} />
+                                <textarea value={day.activities.map(a => `${a.time ? a.time + ' ' : ''}${a.title}`).join('\n')} onChange={e => onDayActivitiesText(dayIdx, e.target.value)} rows={Math.max(4, day.activities.length + 1)} placeholder={'09:00 울란바토르 도착\n12:00 점심\n숙박: 호텔\n(нэг мөрөнд нэг зүйл, эхэнд цаг)'} className={`${fieldClass} mt-1 resize-y text-[11px] font-semibold leading-relaxed text-slate-700`} />
                             ) : (
-                                <div className="relative mt-1 border-l-2 border-dashed border-[#8FE7DE] pl-4">{day.activities.map((activity, index) => <div key={index} className="relative pb-1.5 last:pb-0"><span className="absolute -left-[23px] top-2 h-3 w-3 rounded-full bg-[#0F8F84] ring-2 ring-white" /><div className="flex items-center gap-1"><input value={activity.time || ''} onChange={e => onActivityChange(dayIdx, index, 'time', e.target.value)} placeholder="--:--" className={`${fieldClass} w-[58px] font-mono text-[11px] font-bold text-slate-400`} /><input value={activity.title} onChange={e => onActivityChange(dayIdx, index, 'title', e.target.value)} placeholder="項目名（例：亀石 観光）" className={`${fieldClass} flex-1 text-[11px] font-semibold text-slate-700`} /><button onClick={() => onRemoveActivity(dayIdx, index)} className="shrink-0 text-slate-300 hover:text-red-500" title="삭제"><span className="material-symbols-outlined text-[15px]">close</span></button></div></div>)}
-                                    <button onClick={() => onAddActivity(dayIdx)} className="mt-1 inline-flex items-center gap-0.5 text-[11px] font-black text-[#0F8F84] hover:text-[#0a7d6a]"><span className="material-symbols-outlined text-[14px]">add</span>項目を追加</button>
+                                <div className="relative mt-1 border-l-2 border-dashed border-[#8FE7DE] pl-4">{day.activities.map((activity, index) => <div key={index} className="relative pb-1.5 last:pb-0"><span className="absolute -left-[23px] top-2 h-3 w-3 rounded-full bg-[#0F8F84] ring-2 ring-white" /><div className="flex items-center gap-1"><input value={activity.time || ''} onChange={e => onActivityChange(dayIdx, index, 'time', e.target.value)} placeholder="--:--" className={`${fieldClass} w-[58px] font-mono text-[11px] font-bold text-slate-400`} /><input value={activity.title} onChange={e => onActivityChange(dayIdx, index, 'title', e.target.value)} placeholder="항목명(예: 거북바위 관광)" className={`${fieldClass} flex-1 text-[11px] font-semibold text-slate-700`} /><button onClick={() => onRemoveActivity(dayIdx, index)} className="shrink-0 text-slate-300 hover:text-red-500" title="Устгах"><span className="material-symbols-outlined text-[15px]">close</span></button></div></div>)}
+                                    <button onClick={() => onAddActivity(dayIdx)} className="mt-1 inline-flex items-center gap-0.5 text-[11px] font-black text-[#0F8F84] hover:text-[#0a7d6a]"><span className="material-symbols-outlined text-[14px]">add</span>Зүйл нэмэх</button>
                                 </div>
                             )}
                         </div>
                     </div>); })}
-                        {days.length === 0 && <p className="rounded-xl border border-dashed border-[#8FE7DE] py-6 text-center text-[11px] font-bold text-slate-400">아래 「日程（DAY）を追加」로 일정을 시작하세요.</p>}
-                        <button onClick={onAddDay} className="w-full rounded-xl border-2 border-dashed border-[#8FE7DE] py-3 text-xs font-black text-[#0F8F84] transition-colors hover:bg-[#EAF8F7]"><span className="material-symbols-outlined align-middle text-[16px]">add</span> 日程（DAY）を追加</button>
+                        {days.length === 0 && <p className="rounded-xl border border-dashed border-[#8FE7DE] py-6 text-center text-[11px] font-bold text-slate-400">доорх «Өдөр (DAY) нэмэх»-ээр хуваарь үүсгэж эхлээрэй.</p>}
+                        <button onClick={onAddDay} className="w-full rounded-xl border-2 border-dashed border-[#8FE7DE] py-3 text-xs font-black text-[#0F8F84] transition-colors hover:bg-[#EAF8F7]"><span className="material-symbols-outlined align-middle text-[16px]">add</span> Өдөр (DAY) нэмэх</button>
                     </div>
                     <textarea value={settings.detail.note} onChange={e => onDocSection('detail', { note: e.target.value })} rows={2} className={`${fieldClass} mt-4 resize-none text-[11px] font-semibold leading-relaxed text-slate-500`} /></div></Frame>}
-                {activePage === 'guide' && <Frame><div className="grid gap-4 p-5 sm:grid-cols-2"><div className="rounded-xl border border-[#8FE7DE] p-4"><h3 className="text-sm font-black text-[#0F8F84]">ご案内・ご注意事項</h3>{settings.guide.notices.slice(0, 5).map((item, idx) => <div key={idx} className="mt-3 flex gap-2"><span className="material-symbols-outlined text-[20px] text-[#0F8F84]">info</span><div className="flex-1"><input value={item.title} onChange={e => onGuideNotice(idx, 'title', e.target.value)} className={`${fieldClass} text-xs font-black text-[#0F8F84]`} /><textarea value={item.body} onChange={e => onGuideNotice(idx, 'body', e.target.value)} rows={2} className={`${fieldClass} mt-1 resize-none text-[10px] font-semibold leading-relaxed text-slate-500`} /></div></div>)}</div><div className="rounded-xl border border-[#8FE7DE] p-4"><h3 className="text-sm font-black text-[#0F8F84]">旅行条件（要約）</h3><textarea value={settings.guide.conditions} onChange={e => onDocSection('guide', { conditions: e.target.value })} rows={4} className={`${fieldClass} mt-2 resize-none text-[10px] font-semibold leading-relaxed text-slate-500`} /><h3 className="mt-5 text-sm font-black text-[#0F8F84]">旅行代金のお支払い</h3><textarea value={settings.guide.paymentInfo} onChange={e => onDocSection('guide', { paymentInfo: e.target.value })} rows={3} className={`${fieldClass} mt-2 resize-none text-[10px] font-semibold leading-relaxed text-slate-500`} /><h3 className="mt-5 text-sm font-black text-[#0F8F84]">緊急連絡先</h3><input value={settings.guide.emergencyPhone} onChange={e => onDocSection('guide', { emergencyPhone: e.target.value })} className={`${fieldClass} mt-2 text-[10px] font-semibold text-slate-500`} /><input value={settings.guide.emergencyEmail} onChange={e => onDocSection('guide', { emergencyEmail: e.target.value })} className={`${fieldClass} text-[10px] font-semibold text-slate-500`} /></div></div><div className="relative h-[104px] overflow-hidden"><img src={mongoliaHero} alt="" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-r from-white via-white/75 to-transparent" /><input value={settings.guide.closingMessage} onChange={e => onDocSection('guide', { closingMessage: e.target.value })} className={`${fieldClass} absolute left-5 top-7 max-w-[360px] text-sm font-black text-[#0F8F84]`} /><div className="absolute bottom-0 left-0 right-0 flex items-center justify-between bg-[#0F8F84] px-5 py-2 text-[10px] font-bold text-white"><span>モンゴル銀河旅行社</span><span>{settings.guide.emergencyEmail}</span></div></div></Frame>}
+                {activePage === 'guide' && <Frame><div className="grid gap-4 p-5 sm:grid-cols-2"><div className="rounded-xl border border-[#8FE7DE] p-4"><h3 className="text-sm font-black text-[#0F8F84]">안내·주의 사항</h3>{settings.guide.notices.slice(0, 5).map((item, idx) =><div key={idx} className="mt-3 flex gap-2"><span className="material-symbols-outlined text-[20px] text-[#0F8F84]">info</span><div className="flex-1"><input value={item.title} onChange={e => onGuideNotice(idx, 'title', e.target.value)} className={`${fieldClass} text-xs font-black text-[#0F8F84]`} /><textarea value={item.body} onChange={e => onGuideNotice(idx, 'body', e.target.value)} rows={2} className={`${fieldClass} mt-1 resize-none text-[10px] font-semibold leading-relaxed text-slate-500`} /></div></div>)}</div><div className="rounded-xl border border-[#8FE7DE] p-4"><h3 className="text-sm font-black text-[#0F8F84]">여행 조건(요약)</h3><textarea value={settings.guide.conditions} onChange={e => onDocSection('guide', { conditions: e.target.value })} rows={4} className={`${fieldClass} mt-2 resize-none text-[10px] font-semibold leading-relaxed text-slate-500`} /><h3 className="mt-5 text-sm font-black text-[#0F8F84]">여행 대금 결제</h3><textarea value={settings.guide.paymentInfo} onChange={e => onDocSection('guide', { paymentInfo: e.target.value })} rows={3} className={`${fieldClass} mt-2 resize-none text-[10px] font-semibold leading-relaxed text-slate-500`} /><h3 className="mt-5 text-sm font-black text-[#0F8F84]">긴급 연락처</h3><input value={settings.guide.emergencyPhone} onChange={e => onDocSection('guide', { emergencyPhone: e.target.value })} className={`${fieldClass} mt-2 text-[10px] font-semibold text-slate-500`} /><input value={settings.guide.emergencyEmail} onChange={e => onDocSection('guide', { emergencyEmail: e.target.value })} className={`${fieldClass} text-[10px] font-semibold text-slate-500`} /></div></div><div className="relative h-[104px] overflow-hidden"><img src={mongoliaHero} alt="" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-r from-white via-white/75 to-transparent" /><input value={settings.guide.closingMessage} onChange={e => onDocSection('guide', { closingMessage: e.target.value })} className={`${fieldClass} absolute left-5 top-7 max-w-[360px] text-sm font-black text-[#0F8F84]`} /><div className="absolute bottom-0 left-0 right-0 flex items-center justify-between bg-[#0F8F84] px-5 py-2 text-[10px] font-bold text-white"><span>몽골 은하수 여행사</span><span>{settings.guide.emergencyEmail}</span></div></div></Frame>}
             </div>
         </div>
     );
@@ -398,8 +398,8 @@ const TemplatesTab: React.FC = () => {
     const resetForm = () => { setForm({ name: '', description: '', days: [], documentSettings: defaultDocumentSettings() }); setEditing(null); setBulkText(''); setQuickDays(4); setShowAdvancedEditor(false); setShowPasteBox(false); setAddMenuDay(null); };
 
     const DAY_LABELS_JP = [
-        '1日目', '2日目', '3日目', '4日目', '5日目',
-        '6日目', '7日目', '8日目', '9日目', '10日目',
+        '1일차', '2일차', '3일차', '4일차', '5일차',
+        '6일차', '7일차', '8일차', '9일차', '10일차',
     ];
 
     const inferActivityType = (text: string): ActivityType => {
@@ -438,23 +438,23 @@ const TemplatesTab: React.FC = () => {
 
     const loadBulkSample = () => {
         setBulkText([
-            'DAY 1｜ウランバートル到着',
-            'モンゴルの旅、はじまりの日。',
+            'DAY 1｜울란바토르 도착',
+            '몽골 여행, 시작의 날.',
             '',
-            'チンギスハーン国際空港に到着後、',
-            '「MILKYWAY」のサインボードを持った日本語ガイドがお出迎えいたします。',
+            '칭기즈칸 국제공항 도착 후,',
+            '「MILKYWAY」 사인보드를 든 한국어 가이드가 마중 나갑니다.',
             '',
-            '長時間のフライト後も安心してご移動いただけるよう、',
-            '軽食（ハンバーガー・サンドイッチ）をご用意しております。',
+            '장시간 비행 후에도 편안하게 이동하실 수 있도록,',
+            '간식(햄버거·샌드위치)을 준비해 드립니다.',
             '',
-            'スケジュール',
-            'チンギスハーン国際空港 到着',
-            '日本語ガイド・ドライバーと合流',
-            'SIMカード（USIM）購入・両替サポート可能',
-            '専用車にてホテルへ移動',
-            'ホテルチェックイン・休憩',
-            '宿泊',
-            'ウランバートル市内 4つ星ホテル（2名1室）',
+            '일정',
+            '칭기즈칸 국제공항 도착',
+            '한국어 가이드·기사와 합류',
+            'SIM카드(USIM) 구매·환전 지원 가능',
+            '전용차로 호텔 이동',
+            '호텔 체크인·휴식',
+            '숙박',
+            '울란바토르 시내 4성급 호텔(2인 1실)',
             '',
             'Day 2 테를지 국립공원',
             '09:00 호텔 출발 - 테를지 국립공원 이동',
@@ -468,7 +468,7 @@ const TemplatesTab: React.FC = () => {
     const importBulkText = () => {
         const rawLines = bulkText.split(/\r?\n/);
         if (rawLines.every(line => !line.trim())) {
-            alert('붙여넣을 일정표 내용을 입력해 주세요.');
+            alert('Буулгах хуваарийн агуулгыг оруулна уу.');
             return;
         }
 
@@ -520,19 +520,19 @@ const TemplatesTab: React.FC = () => {
                 currentDay = { day: 1, title: '', region: '', activities: [] };
             }
 
-            if (/^(スケジュール|일정|schedule)$/i.test(line)) {
+            if (/^(일정|schedule)$/i.test(line)) {
                 flushIntro();
                 section = 'schedule';
                 return;
             }
 
-            if (/^(宿泊|숙박|hotel|stay)$/i.test(line)) {
+            if (/^(숙박|hotel|stay)$/i.test(line)) {
                 flushIntro();
                 section = 'stay';
                 return;
             }
 
-            const stayMatch = line.match(/^(숙박|宿泊|hotel|stay)\s*[:：]\s*(.+)$/i);
+            const stayMatch = line.match(/^(숙박|hotel|stay)\s*[:：]\s*(.+)$/i);
             if (stayMatch) {
                 flushIntro();
                 const title = stayMatch[2].trim();
@@ -555,7 +555,7 @@ const TemplatesTab: React.FC = () => {
             }
 
             if (section === 'stay') {
-                currentDay.activities.push({ time: '', type: 'checkin', title: line, description: '宿泊' });
+                currentDay.activities.push({ time: '', type: 'checkin', title: line, description: '숙박' });
                 return;
             }
 
@@ -603,7 +603,7 @@ const TemplatesTab: React.FC = () => {
         d[dayIdx] = { ...d[dayIdx], activities: [...d[dayIdx].activities, { time: '', type, title: '', description: '' }] };
         return { ...f, days: d };
     });
-    // 식사 항목 추가 — 일본어 식사명(朝食/昼食/夕食)을 제목에 미리 넣고 뒤에 음식명 입력
+    // 식사 항목 추가 — 식사명(조식/중식/석식)을 제목에 미리 넣고 뒤에 음식명 입력
     const addMeal = (dayIdx: number, jp: string) => setForm(f => {
         const d = [...f.days];
         d[dayIdx] = { ...d[dayIdx], activities: [...d[dayIdx].activities, { time: '', type: 'meal' as ActivityType, title: `${jp} ｜ `, description: '' }] };
@@ -636,7 +636,7 @@ const TemplatesTab: React.FC = () => {
         acts[a] = {
             ...cur,
             title: keepTitle ? cur.title : hotel.name_kr,
-            description: desc || cur.description || '宿泊',
+            description: desc || cur.description || '숙박',
             type: keepTitle ? cur.type : 'checkin',
             images: (hotel.images && hotel.images.length > 0) ? [...hotel.images] : cur.images,
         };
@@ -711,7 +711,7 @@ const TemplatesTab: React.FC = () => {
     };
 
     const handleSubmit = async () => {
-        if (!form.name.trim()) { alert('템플릿 이름을 입력하세요.'); return; }
+        if (!form.name.trim()) { alert('Загварын нэрийг оруулна уу.'); return; }
         try {
             const payload = {
                 name: form.name,
@@ -721,15 +721,15 @@ const TemplatesTab: React.FC = () => {
             if (editing) { await api.itineraryTemplates.update(editing.id, payload); }
             else { await api.itineraryTemplates.create(payload); }
             await load(); setIsModalOpen(false); resetForm();
-        } catch (e: any) { alert('저장 실패: ' + e.message); }
+        } catch (e: any) { alert('Хадгалахад алдаа гарлаа: ' + e.message); }
     };
 
     const handleEdit = (t: ItineraryTemplate) => { setEditing(t); setForm({ name: t.name, description: t.description, days: t.days, documentSettings: mergeDocumentSettings(t.documentSettings) }); setShowAdvancedEditor(false); setIsModalOpen(true); };
-    const handleDelete = async (id: string) => { if (!confirm('삭제하시겠습니까?')) return; try { await api.itineraryTemplates.delete(id); await load(); } catch (e: any) { alert('삭제 실패'); } };
+    const handleDelete = async (id: string) => { if (!confirm('Устгах уу?')) return; try { await api.itineraryTemplates.delete(id); await load(); } catch (e: any) { alert('Устгахад алдаа гарлаа'); } };
     const handleDuplicate = (t: ItineraryTemplate) => {
         setEditing(null);
         setForm({
-            name: `${t.name} (복사본)`,
+            name: `${t.name} (хуулбар)`,
             description: t.description,
             documentSettings: mergeDocumentSettings(t.documentSettings),
             days: t.days.map(d => ({ ...d, activities: d.activities.map(a => ({ ...a })) })),
@@ -740,7 +740,7 @@ const TemplatesTab: React.FC = () => {
 
     const closeEditor = () => {
         if (form.name || form.days.length > 0) {
-            if (!confirm('편집 중인 내용이 사라집니다. 닫으시겠습니까?')) return;
+            if (!confirm('Засаж буй агуулга устах болно. Хаах уу?')) return;
         }
         setIsModalOpen(false); resetForm();
     };
@@ -749,19 +749,19 @@ const TemplatesTab: React.FC = () => {
         <div>
             <div className="toolbar">
                 <div style={{ minWidth: 0 }}>
-                    <div className="cell-strong" style={{ fontSize: 14 }}>고객에게 발송할 여행 문서 디자인을 만듭니다.</div>
-                    <div className="cell-muted" style={{ fontSize: 12.5, marginTop: 2 }}>일정 내용은 문서 안에 들어가고, 고객 화면은 여행 개요·계약서·상세 일정·공통 안내 패키지로 구성됩니다.</div>
+                    <div className="cell-strong" style={{ fontSize: 14 }}>Үйлчлүүлэгчид илгээх аялалын баримтын загварыг үүсгэнэ.</div>
+                    <div className="cell-muted" style={{ fontSize: 12.5, marginTop: 2 }}>Хуваарийн агуулга баримт дотор орох ба үйлчлүүлэгчийн дэлгэц нь аялалын тойм·гэрээ·дэлгэрэнгүй хуваарь·нийтлэг заавар багцаас бүрдэнэ.</div>
                 </div>
                 <div className="spacer" />
                 <button className="btn btn-ink" onClick={() => { resetForm(); setIsModalOpen(true); }}>
-                    <Icon name="add" /> 문서 템플릿 추가
+                    <Icon name="add" /> Баримтын загвар нэмэх
                 </button>
             </div>
 
             {templates.length === 0 ? (
                 <div className="empty">
                     <Icon name="event_note" />
-                    <p>등록된 템플릿이 없습니다</p>
+                    <p>Бүртгэгдсэн загвар алга</p>
                 </div>
             ) : (
                 <div className="grid-2" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
@@ -774,23 +774,23 @@ const TemplatesTab: React.FC = () => {
                                     <div className="flex items-center gap-2">
                                         <span className="material-symbols-outlined text-[24px]">landscape</span>
                                         <div>
-                                            <p className="text-[11px] font-black">モンゴル銀河旅行社</p>
+                                            <p className="text-[11px] font-black">몽골 은하수 여행사</p>
                                             <p className="text-[8px] font-bold tracking-widest text-white/70">DOCUMENT PACKAGE</p>
                                         </div>
                                     </div>
                                     <h3 className="mt-4 max-w-[420px] truncate text-xl font-black tracking-tight">{t.name}</h3>
                                     {t.description && <p className="mt-1 max-w-[420px] truncate text-xs font-semibold text-white/80">{t.description}</p>}
                                 </div>
-                                <span className="absolute right-4 top-4 rounded-xl bg-white/90 px-3 py-1 text-xs font-black text-[#0F8F84] shadow-sm">{Math.max(0, t.days.length - 1)}박{t.days.length}일</span>
+                                <span className="absolute right-4 top-4 rounded-xl bg-white/90 px-3 py-1 text-xs font-black text-[#0F8F84] shadow-sm">{Math.max(0, t.days.length - 1)} шөнө {t.days.length} өдөр</span>
                             </div>
 
                             <div className="card-pad">
                                 <div className="mb-4 grid grid-cols-4 gap-2">
                                     {[
-                                        { icon: 'article', label: '개요' },
-                                        { icon: 'contract', label: '계약서' },
-                                        { icon: 'route', label: '상세일정' },
-                                        { icon: 'qr_code_2', label: '안내/QR' },
+                                        { icon: 'article', label: 'Тойм' },
+                                        { icon: 'contract', label: 'Гэрээ' },
+                                        { icon: 'route', label: 'Дэлгэрэнгүй хуваарь' },
+                                        { icon: 'qr_code_2', label: 'Заавар/QR' },
                                     ].map(item => (
                                         <div key={item.label} className="rounded-xl border border-[#8FE7DE]/80 bg-[#F7FAFA] px-2 py-2 text-center text-[#0F8F84]">
                                             <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
@@ -800,25 +800,25 @@ const TemplatesTab: React.FC = () => {
                                 </div>
 
                                 <div className="mb-4 rounded-xl border border-slate-100 bg-slate-50 p-3">
-                                    <p className="mb-2 text-[11px] font-black uppercase tracking-wide text-slate-400">문서에 들어갈 일정 내용</p>
+                                    <p className="mb-2 text-[11px] font-black uppercase tracking-wide text-slate-400">Баримтад орох хуваарийн агуулга</p>
                                     <div className="space-y-1">
                                         {t.days.slice(0, 3).map(d => (
                                             <div key={d.day} className="flex items-center gap-2 text-xs text-slate-500">
-                                                <span className="flex h-7 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-[#39C4B7]/15 text-[11px] font-black text-[#0F8F84]">{d.day}일</span>
-                                                <span className="truncate font-semibold">{d.region ? `${d.region} · ` : ''}{d.title || '제목 없음'}</span>
+                                                <span className="flex h-7 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-[#39C4B7]/15 text-[11px] font-black text-[#0F8F84]">{d.day} өдөр</span>
+                                                <span className="truncate font-semibold">{d.region ? `${d.region} · ` : ''}{d.title || 'Гарчиггүй'}</span>
                                                 <span className="flex-shrink-0 text-slate-300">({d.activities.length})</span>
                                             </div>
                                         ))}
-                                        {t.days.length > 3 && <p className="pl-11 text-xs text-slate-400">+ {t.days.length - 3}일 더...</p>}
+                                        {t.days.length > 3 && <p className="pl-11 text-xs text-slate-400">+ бусад {t.days.length - 3} өдөр...</p>}
                                     </div>
                                 </div>
 
                                 <div className="row" style={{ gap: 8 }}>
-                                    <button onClick={() => handleEdit(t)} className="btn btn-ink" style={{ flex: 1 }}>문서 디자인 수정</button>
-                                    <button onClick={() => handleDuplicate(t)} className="act-btn" title="이 템플릿 복제">
+                                    <button onClick={() => handleEdit(t)} className="btn btn-ink" style={{ flex: 1 }}>Баримтын загвар засах</button>
+                                    <button onClick={() => handleDuplicate(t)} className="act-btn" title="Энэ загварыг хуулах">
                                         <Icon name="content_copy" />
                                     </button>
-                                    <button onClick={() => handleDelete(t.id)} className="act-btn danger" title="삭제">
+                                    <button onClick={() => handleDelete(t.id)} className="act-btn danger" title="Устгах">
                                         <Icon name="delete" />
                                     </button>
                                 </div>
@@ -835,23 +835,23 @@ const TemplatesTab: React.FC = () => {
                         {/* Sticky header */}
                         <div className="bg-white px-6 py-3 flex items-center justify-between gap-4 flex-shrink-0" style={{ borderBottom: '1px solid var(--border-default)' }}>
                             <div className="flex items-center gap-3 flex-1 min-w-0">
-                                <button onClick={closeEditor} className="act-btn" title="닫기">
+                                <button onClick={closeEditor} className="act-btn" title="Хаах">
                                     <Icon name="arrow_back" />
                                 </button>
                                 <div className="min-w-0 flex-1">
-                                    <div className="eyebrow" style={{ marginBottom: 2 }}><span className="dot" />{editing ? '템플릿 수정' : '새 템플릿'}</div>
+                                    <div className="eyebrow" style={{ marginBottom: 2 }}><span className="dot" />{editing ? 'Загвар засах' : 'Шинэ загвар'}</div>
                                     <input
                                         value={form.name}
                                         onChange={e => setForm({ ...form, name: e.target.value })}
-                                        placeholder="템플릿 이름 (예: 고비사막 4박5일 기본형)"
+                                        placeholder="Загварын нэр (жишээ: Говь цөл 4 шөнө 5 өдөр үндсэн)"
                                         className="w-full text-lg font-bold bg-transparent text-slate-900 focus:outline-none placeholder:text-slate-300"
                                     />
                                 </div>
                             </div>
                             <div className="flex items-center gap-2 flex-shrink-0">
-                                <button onClick={closeEditor} className="btn btn-ghost">취소</button>
+                                <button onClick={closeEditor} className="btn btn-ghost">Цуцлах</button>
                                 <button onClick={handleSubmit} className="btn btn-ink">
-                                    <Icon name="check" />{editing ? '저장' : '생성'}
+                                    <Icon name="check" />{editing ? 'Хадгалах' : 'Үүсгэх'}
                                 </button>
                             </div>
                         </div>
@@ -915,25 +915,25 @@ const GuidesTab: React.FC = () => {
 
     const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]; if (!file) return;
-        try { const url = await uploadImage(file, 'guides'); setForm(f => ({ ...f, image: url })); } catch { alert('이미지 업로드 실패'); }
+        try { const url = await uploadImage(file, 'guides'); setForm(f => ({ ...f, image: url })); } catch { alert('Зураг байршуулахад алдаа гарлаа'); }
     };
 
     const handleSubmit = async () => {
-        if (!form.name || !form.phone) { alert('이름과 연락처는 필수입니다.'); return; }
+        if (!form.name || !form.phone) { alert('Нэр болон холбоо барих утас заавал шаардлагатай.'); return; }
         try {
             const payload = { name: form.name, bio: form.introduction, phone: form.phone, image: form.image, experience_years: form.experienceYears, languages: form.languages, specialties: form.specialties };
             if (editing) { await api.tourGuides.update(editing.id, { ...payload, status: editing.status }); }
             else { await api.tourGuides.create({ ...payload, status: 'active' }); }
             await load(); setIsModalOpen(false); resetForm();
-        } catch (e: any) { alert('저장 실패: ' + e.message); }
+        } catch (e: any) { alert('Хадгалахад алдаа гарлаа: ' + e.message); }
     };
 
     const handleApprove = async (g: Guide) => {
         try { await api.tourGuides.update(g.id, { name: g.name, bio: g.introduction, phone: g.phone, image: g.image, experience_years: g.experienceYears, languages: g.languages, specialties: g.specialties, status: 'active' }); await load(); }
-        catch (e: any) { alert('승인 실패'); }
+        catch (e: any) { alert('Баталгаажуулахад алдаа гарлаа'); }
     };
 
-    const handleDelete = async (id: string) => { if (!confirm('삭제하시겠습니까?')) return; try { await api.tourGuides.delete(id); await load(); } catch { alert('삭제 실패'); } };
+    const handleDelete = async (id: string) => { if (!confirm('Устгах уу?')) return; try { await api.tourGuides.delete(id); await load(); } catch { alert('Устгахад алдаа гарлаа'); } };
 
     const pendingCount = guides.filter(g => g.status === 'pending').length;
 
@@ -941,12 +941,12 @@ const GuidesTab: React.FC = () => {
         <div>
             <div className="toolbar">
                 <div className="row" style={{ minWidth: 0 }}>
-                    <div className="cell-muted" style={{ fontSize: 13 }}>가이드를 등록하고 관리합니다.</div>
-                    {pendingCount > 0 && <span className="badge b-amber">승인대기 {pendingCount}</span>}
+                    <div className="cell-muted" style={{ fontSize: 13 }}>Хөтчийг бүртгэж удирдана.</div>
+                    {pendingCount > 0 && <span className="badge b-amber">Хүлээгдэж буй {pendingCount}</span>}
                 </div>
                 <div className="spacer" />
                 <button onClick={() => { resetForm(); setIsModalOpen(true); }} className="btn btn-ink">
-                    <Icon name="add" /> 가이드 등록
+                    <Icon name="add" /> Хөтөч бүртгэх
                 </button>
             </div>
 
@@ -955,56 +955,56 @@ const GuidesTab: React.FC = () => {
                     <div key={g.id} className="card card-pad grid grid-cols-[72px_1fr_auto] gap-4 items-center" style={{ padding: 14 }}>
                         <div className="avatar flex-shrink-0" style={{ width: 72, height: 72, borderRadius: 'var(--r-md)', position: 'relative' }}>
                             {g.image ? <img src={g.image} alt={g.name} className="w-full h-full object-cover" /> : <Icon name="person" style={{ fontSize: 30, color: 'var(--mrt-gray-300)' }} />}
-                            {g.status === 'pending' && <span className="badge b-amber" style={{ position: 'absolute', top: 4, left: 4, padding: '1px 6px', fontSize: 9 }}>대기</span>}
+                            {g.status === 'pending' && <span className="badge b-amber" style={{ position: 'absolute', top: 4, left: 4, padding: '1px 6px', fontSize: 9 }}>Хүлээгдэж буй</span>}
                         </div>
                         <div className="min-w-0">
                             <div className="flex items-center gap-2 mb-1 flex-wrap">
                                 <h3 className="cell-strong truncate" style={{ fontSize: 15 }}>{g.name}</h3>
-                                {g.experienceYears > 0 && <span className="cell-muted inline-flex items-center gap-0.5" style={{ fontSize: 11 }}><Icon name="workspace_premium" style={{ fontSize: 14 }} />{g.experienceYears}년</span>}
+                                {g.experienceYears > 0 && <span className="cell-muted inline-flex items-center gap-0.5" style={{ fontSize: 11 }}><Icon name="workspace_premium" style={{ fontSize: 14 }} />{g.experienceYears} жил</span>}
                                 <span className="cell-muted inline-flex items-center gap-0.5" style={{ fontSize: 11 }}><Icon name="phone" style={{ fontSize: 14 }} />{g.phone}</span>
                             </div>
-                            <p className="cell-muted line-clamp-1 mb-1.5" style={{ fontSize: 12.5 }}>{g.introduction || '소개글 없음'}</p>
+                            <p className="cell-muted line-clamp-1 mb-1.5" style={{ fontSize: 12.5 }}>{g.introduction || 'Танилцуулга алга'}</p>
                             {g.languages.length > 0 && <div className="flex flex-wrap gap-1">{g.languages.map(l => <span key={l} className="badge b-blue" style={{ padding: '2px 7px', fontSize: 10.5 }}>{l}</span>)}</div>}
                         </div>
                         <div className="row-actions items-center" style={{ alignItems: 'center' }}>
-                            {g.status === 'pending' && <button onClick={() => handleApprove(g)} className="btn btn-sm btn-blue">승인</button>}
-                            <button onClick={() => { setEditing(g); setForm({ name: g.name, image: g.image, introduction: g.introduction, phone: g.phone, experienceYears: g.experienceYears, languages: g.languages, specialties: g.specialties }); setIsModalOpen(true); }} className="act-btn" title="수정"><Icon name="edit" /></button>
-                            <button onClick={() => handleDelete(g.id)} className="act-btn danger" title="삭제"><Icon name="delete" /></button>
+                            {g.status === 'pending' && <button onClick={() => handleApprove(g)} className="btn btn-sm btn-blue">Батлах</button>}
+                            <button onClick={() => { setEditing(g); setForm({ name: g.name, image: g.image, introduction: g.introduction, phone: g.phone, experienceYears: g.experienceYears, languages: g.languages, specialties: g.specialties }); setIsModalOpen(true); }} className="act-btn" title="Засах"><Icon name="edit" /></button>
+                            <button onClick={() => handleDelete(g.id)} className="act-btn danger" title="Устгах"><Icon name="delete" /></button>
                         </div>
                     </div>
                 ))}
-                {guides.length === 0 && <div className="col-span-full empty"><Icon name="person_off" /><p>등록된 가이드가 없습니다</p></div>}
+                {guides.length === 0 && <div className="col-span-full empty"><Icon name="person_off" /><p>Бүртгэгдсэн хөтөч алга</p></div>}
             </div>
 
             {isModalOpen && (
                 <div className="picker-scrim">
                     <div className="picker" style={{ width: 520, maxHeight: '90vh' }}>
                         <div className="card-head" style={{ flexShrink: 0 }}>
-                            <h2>{editing ? '가이드 수정' : '가이드 등록'}</h2>
+                            <h2>{editing ? 'Хөтөч засах' : 'Хөтөч бүртгэх'}</h2>
                             <div className="spacer" />
-                            <button className="act-btn" onClick={() => { setIsModalOpen(false); resetForm(); }} title="닫기"><Icon name="close" /></button>
+                            <button className="act-btn" onClick={() => { setIsModalOpen(false); resetForm(); }} title="Хаах"><Icon name="close" /></button>
                         </div>
                         <div className="picker-list" style={{ padding: '20px 22px' }}>
                             <div className="field">
-                                <label>프로필 사진</label>
+                                <label>Профайл зураг</label>
                                 <div className="row" style={{ gap: 16 }}>
                                     <div className="avatar round" style={{ width: 64, height: 64 }}>
                                         {form.image ? <img src={form.image} className="w-full h-full object-cover" /> : <Icon name="person" style={{ fontSize: 28, color: 'var(--mrt-gray-300)' }} />}
                                     </div>
                                     <label className="btn btn-ghost btn-sm" style={{ cursor: 'pointer' }}>
-                                        사진 선택 <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
+                                        Зураг сонгох <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
                                     </label>
                                 </div>
                             </div>
-                            <div className="field"><label>이름 *</label><input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} className="inp" /></div>
-                            <div className="field"><label>연락처 *</label><input value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} className="inp" /></div>
-                            <div className="field"><label>경력 연수</label><div className="row"><input type="number" min={0} value={form.experienceYears} onChange={e => setForm(f => ({ ...f, experienceYears: Number(e.target.value) }))} className="inp" style={{ width: 110, textAlign: 'center' }} /><span className="cell-muted" style={{ fontSize: 13 }}>년</span></div></div>
-                            <div className="field"><label>소개글</label><textarea value={form.introduction} onChange={e => setForm(f => ({ ...f, introduction: e.target.value }))} rows={3} className="inp" /></div>
-                            <div className="field"><label>언어</label><div className="chip-row">{LANGUAGES.map(l => <button key={l} type="button" onClick={() => toggle('languages', l)} className={`chip${form.languages.includes(l) ? ' active' : ''}`}>{l}</button>)}</div></div>
-                            <div className="field"><label>전문 분야</label><div className="chip-row">{SPECIALTIES.map(s => <button key={s} type="button" onClick={() => toggle('specialties', s)} className={`chip${form.specialties.includes(s) ? ' active' : ''}`}>{s}</button>)}</div></div>
+                            <div className="field"><label>Нэр *</label><input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} className="inp" /></div>
+                            <div className="field"><label>Холбоо барих утас *</label><input value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} className="inp" /></div>
+                            <div className="field"><label>Ажилласан жил</label><div className="row"><input type="number" min={0} value={form.experienceYears} onChange={e => setForm(f => ({ ...f, experienceYears: Number(e.target.value) }))} className="inp" style={{ width: 110, textAlign: 'center' }} /><span className="cell-muted" style={{ fontSize: 13 }}>жил</span></div></div>
+                            <div className="field"><label>Танилцуулга</label><textarea value={form.introduction} onChange={e => setForm(f => ({ ...f, introduction: e.target.value }))} rows={3} className="inp" /></div>
+                            <div className="field"><label>Хэл</label><div className="chip-row">{LANGUAGES.map(l => <button key={l} type="button" onClick={() => toggle('languages', l)} className={`chip${form.languages.includes(l) ? ' active' : ''}`}>{l}</button>)}</div></div>
+                            <div className="field"><label>Мэргэшсэн чиглэл</label><div className="chip-row">{SPECIALTIES.map(s => <button key={s} type="button" onClick={() => toggle('specialties', s)} className={`chip${form.specialties.includes(s) ? ' active' : ''}`}>{s}</button>)}</div></div>
                             <div className="row" style={{ gap: 10, paddingTop: 4 }}>
-                                <button onClick={() => { setIsModalOpen(false); resetForm(); }} className="btn btn-ghost" style={{ flex: 1 }}>취소</button>
-                                <button onClick={handleSubmit} className="btn btn-ink" style={{ flex: 1 }}>{editing ? '수정' : '등록'}</button>
+                                <button onClick={() => { setIsModalOpen(false); resetForm(); }} className="btn btn-ghost" style={{ flex: 1 }}>Цуцлах</button>
+                                <button onClick={handleSubmit} className="btn btn-ink" style={{ flex: 1 }}>{editing ? 'Засах' : 'Бүртгэх'}</button>
                             </div>
                         </div>
                     </div>
@@ -1038,28 +1038,28 @@ const AccommodationsTab: React.FC = () => {
     const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files; if (!files) return;
         try { const urls = await Promise.all(Array.from(files).map(f => uploadImage(f, 'accommodations'))); setForm(f => ({ ...f, images: [...f.images, ...urls] })); }
-        catch { alert('이미지 업로드 실패'); }
+        catch { alert('Зураг байршуулахад алдаа гарлаа'); }
     };
 
     const handleSubmit = async () => {
-        if (!form.name || !form.location) { alert('숙소명과 위치는 필수입니다.'); return; }
+        if (!form.name || !form.location) { alert('Байрны нэр болон байршил заавал шаардлагатай.'); return; }
         try {
             const payload = { name: form.name, images: form.images, description: form.description, type: form.type, location: form.location };
             if (editing) { await api.accommodations.update(editing.id, payload); }
             else { await api.accommodations.create({ ...payload, id: `ACCOM-${Date.now()}` }); }
             await load(); setIsModalOpen(false); resetForm();
-        } catch (e: any) { alert('저장 실패: ' + e.message); }
+        } catch (e: any) { alert('Хадгалахад алдаа гарлаа: ' + e.message); }
     };
 
-    const handleDelete = async (id: string) => { if (!confirm('삭제하시겠습니까?')) return; try { await api.accommodations.delete(id); await load(); } catch { alert('삭제 실패'); } };
+    const handleDelete = async (id: string) => { if (!confirm('Устгах уу?')) return; try { await api.accommodations.delete(id); await load(); } catch { alert('Устгахад алдаа гарлаа'); } };
 
     return (
         <div>
             <div className="toolbar">
-                <div className="cell-muted" style={{ fontSize: 13, minWidth: 0 }}>숙소를 등록하고 예약에 배정합니다.</div>
+                <div className="cell-muted" style={{ fontSize: 13, minWidth: 0 }}>Байрыг бүртгэж захиалгад хуваарилна.</div>
                 <div className="spacer" />
                 <button onClick={() => { resetForm(); setIsModalOpen(true); }} className="btn btn-ink">
-                    <Icon name="add" /> 숙소 등록
+                    <Icon name="add" /> Байр бүртгэх
                 </button>
             </div>
 
@@ -1075,37 +1075,37 @@ const AccommodationsTab: React.FC = () => {
                                 {a.type && <span className="badge b-gray" style={{ padding: '2px 7px', fontSize: 10.5 }}>{a.type}</span>}
                             </div>
                             <div className="cell-muted mb-1 inline-flex items-center gap-0.5" style={{ fontSize: 11 }}><Icon name="location_on" style={{ fontSize: 14 }} />{a.location}</div>
-                            <p className="cell-muted line-clamp-1" style={{ fontSize: 12.5 }}>{a.description || '설명 없음'}</p>
+                            <p className="cell-muted line-clamp-1" style={{ fontSize: 12.5 }}>{a.description || 'Тайлбар алга'}</p>
                         </div>
                         <div className="row-actions items-center" style={{ alignItems: 'center' }}>
-                            <button onClick={() => { setEditing(a); setForm({ name: a.name, images: a.images, description: a.description, type: a.type, location: a.location }); setIsModalOpen(true); }} className="act-btn" title="수정"><Icon name="edit" /></button>
-                            <button onClick={() => handleDelete(a.id)} className="act-btn danger" title="삭제"><Icon name="delete" /></button>
+                            <button onClick={() => { setEditing(a); setForm({ name: a.name, images: a.images, description: a.description, type: a.type, location: a.location }); setIsModalOpen(true); }} className="act-btn" title="Засах"><Icon name="edit" /></button>
+                            <button onClick={() => handleDelete(a.id)} className="act-btn danger" title="Устгах"><Icon name="delete" /></button>
                         </div>
                     </div>
                 ))}
-                {accommodations.length === 0 && <div className="col-span-full empty"><Icon name="hotel" /><p>등록된 숙소가 없습니다</p></div>}
+                {accommodations.length === 0 && <div className="col-span-full empty"><Icon name="hotel" /><p>Бүртгэгдсэн байр алга</p></div>}
             </div>
 
             {isModalOpen && (
                 <div className="picker-scrim">
                     <div className="picker" style={{ width: 520, maxHeight: '90vh' }}>
                         <div className="card-head" style={{ flexShrink: 0 }}>
-                            <h2>{editing ? '숙소 수정' : '숙소 등록'}</h2>
+                            <h2>{editing ? 'Байр засах' : 'Байр бүртгэх'}</h2>
                             <div className="spacer" />
-                            <button className="act-btn" onClick={() => { setIsModalOpen(false); resetForm(); }} title="닫기"><Icon name="close" /></button>
+                            <button className="act-btn" onClick={() => { setIsModalOpen(false); resetForm(); }} title="Хаах"><Icon name="close" /></button>
                         </div>
                         <div className="picker-list" style={{ padding: '20px 22px' }}>
                             <div className="field">
-                                <label>이미지</label>
+                                <label>Зураг</label>
                                 {form.images.length > 0 && <div className="grid grid-cols-3 gap-2 mb-2">{form.images.map((img, i) => <div key={i} className="relative aspect-video"><img src={img} className="w-full h-full object-cover rounded-lg" /><button onClick={() => setForm(f => ({ ...f, images: f.images.filter((_, j) => j !== i) }))} className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-0.5"><span className="material-symbols-outlined text-xs">close</span></button></div>)}</div>}
                                 <label className="btn btn-ghost btn-sm" style={{ cursor: 'pointer' }}>
-                                    <Icon name="add_photo_alternate" /> 이미지 추가 <input type="file" accept="image/*" multiple onChange={handleImageUpload} className="hidden" />
+                                    <Icon name="add_photo_alternate" /> Зураг нэмэх <input type="file" accept="image/*" multiple onChange={handleImageUpload} className="hidden" />
                                 </label>
                             </div>
-                            <div className="field"><label>숙소명 *</label><input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} className="inp" /></div>
-                            <div className="field"><label>위치 *</label><input value={form.location} onChange={e => setForm(f => ({ ...f, location: e.target.value }))} className="inp" placeholder="예: 울란바토르 시내, 테를지 국립공원" /></div>
+                            <div className="field"><label>Байрны нэр *</label><input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} className="inp" /></div>
+                            <div className="field"><label>Байршил *</label><input value={form.location} onChange={e => setForm(f => ({ ...f, location: e.target.value }))} className="inp" placeholder="жишээ: Улаанбаатар хот, Тэрэлж байгалийн цогцолбор" /></div>
                             <div className="field">
-                                <label>숙소 타입</label>
+                                <label>Байрны төрөл</label>
                                 {Object.entries(ACCOM_TYPES).map(([cat, subs]) => (
                                     <div key={cat} style={{ marginBottom: 12 }}>
                                         <p className="cell-muted" style={{ fontSize: 12, fontWeight: 600, marginBottom: 8 }}>{cat}</p>
@@ -1113,10 +1113,10 @@ const AccommodationsTab: React.FC = () => {
                                     </div>
                                 ))}
                             </div>
-                            <div className="field"><label>설명</label><textarea value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} rows={3} className="inp" /></div>
+                            <div className="field"><label>Тайлбар</label><textarea value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} rows={3} className="inp" /></div>
                             <div className="row" style={{ gap: 10, paddingTop: 4 }}>
-                                <button onClick={() => { setIsModalOpen(false); resetForm(); }} className="btn btn-ghost" style={{ flex: 1 }}>취소</button>
-                                <button onClick={handleSubmit} className="btn btn-ink" style={{ flex: 1 }}>{editing ? '수정' : '등록'}</button>
+                                <button onClick={() => { setIsModalOpen(false); resetForm(); }} className="btn btn-ghost" style={{ flex: 1 }}>Цуцлах</button>
+                                <button onClick={handleSubmit} className="btn btn-ink" style={{ flex: 1 }}>{editing ? 'Засах' : 'Бүртгэх'}</button>
                             </div>
                         </div>
                     </div>
@@ -1128,16 +1128,16 @@ const AccommodationsTab: React.FC = () => {
 
 // ─── Main Page ───────────────────────────────────────────
 const TABS = [
-    { id: 'templates', label: '일정 템플릿', icon: 'event_note' },
-    { id: 'guides', label: '가이드 관리', icon: 'badge' },
-    { id: 'accommodations', label: '숙소 관리', icon: 'hotel' },
+    { id: 'templates', label: 'Аялалын загвар', icon: 'event_note' },
+    { id: 'guides', label: 'Хөтчийн удирдлага', icon: 'badge' },
+    { id: 'accommodations', label: 'Байрны удирдлага', icon: 'hotel' },
 ];
 
 export const AdminTemplateManage: React.FC = () => {
     const [activeTab, setActiveTab] = useState('templates');
 
     return (
-        <AdminLayout activePage="templates" title="템플릿 관리">
+        <AdminLayout activePage="templates" title="Загварын удирдлага">
             <div className="seg" style={{ marginBottom: 18 }}>
                 {TABS.map(tab => (
                     <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={activeTab === tab.id ? 'active' : ''}>

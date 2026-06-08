@@ -76,7 +76,7 @@ const formatDateShort = (iso?: string) => {
     if (!iso) return '';
     try {
         const d = new Date(iso);
-        const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
+        const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
         const y = d.getFullYear();
         const m = d.getMonth() + 1;
         const day = d.getDate();
@@ -89,7 +89,7 @@ const formatDateTime = (iso?: string) => {
     if (!iso) return '';
     try {
         const d = new Date(iso);
-        return d.toLocaleString('ja-JP', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+        return d.toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
     } catch { return iso; }
 };
 
@@ -106,12 +106,12 @@ const computeDays = (start?: string, end?: string) => {
 type StatusTone = 'pending' | 'partial' | 'paid' | 'cancelled' | 'neutral';
 
 const STATUS_MAP: Record<string, { label: string; tone: StatusTone }> = {
-    pending_payment: { label: 'お支払い待ち', tone: 'pending' },
-    waiting_deposit: { label: '入金待ち', tone: 'pending' },
-    paid: { label: 'お支払い完了', tone: 'partial' },
-    confirmed: { label: 'ご予約確定', tone: 'paid' },
-    completed: { label: '旅行終了', tone: 'neutral' },
-    cancelled: { label: 'キャンセル', tone: 'cancelled' },
+    pending_payment: { label: '결제 대기', tone: 'pending' },
+    waiting_deposit: { label: '입금 대기', tone: 'pending' },
+    paid: { label: '결제 완료', tone: 'partial' },
+    confirmed: { label: '예약 확정', tone: 'paid' },
+    completed: { label: '여행 종료', tone: 'neutral' },
+    cancelled: { label: '취소', tone: 'cancelled' },
 };
 
 const TONE_STYLES: Record<StatusTone, { bg: string; fg: string; dot: string }> = {
@@ -131,7 +131,7 @@ const HISTORY_ICON: Record<string, { icon: string; color: string }> = {
     created: { icon: 'add_circle', color: 'text-slate-600' },
 };
 
-const yen = (n: number) => '¥' + n.toLocaleString('ja-JP');
+const yen = (n: number) => '₩' + n.toLocaleString('ko-KR');
 
 const SectionHeader: React.FC<{ icon: string; title: string; subtitle?: string }> = ({ icon, title, subtitle }) => (
     <div className="px-5 pt-6 pb-2.5">
@@ -166,7 +166,7 @@ export const MyReservationDetail: React.FC = () => {
                 const data = await api.reservations.get(id);
                 setReservation(data);
             } catch (e: any) {
-                setError(e.message || '読み込みに失敗しました');
+                setError(e.message || '불러오기에 실패했습니다');
             } finally {
                 setLoading(false);
             }
@@ -189,10 +189,10 @@ export const MyReservationDetail: React.FC = () => {
     if (error || !reservation || !statusMeta) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 dark:bg-slate-950 p-6 gap-4">
-                <p className="text-lg font-bold text-slate-800 dark:text-white">予約が見つかりません</p>
-                <p className="text-sm text-slate-500">{error || 'URLをご確認ください。'}</p>
+                <p className="text-lg font-bold text-slate-800 dark:text-white">예약을 찾을 수 없습니다</p>
+                <p className="text-sm text-slate-500">{error || 'URL을 확인해 주세요.'}</p>
                 <button onClick={() => navigate('/mypage/reservations')} className="px-4 py-2 bg-primary text-white font-semibold rounded-xl text-sm">
-                    一覧に戻る
+                    목록으로 돌아가기
                 </button>
             </div>
         );
@@ -227,8 +227,8 @@ export const MyReservationDetail: React.FC = () => {
 
     const payCtaDisabled = depositPaid;
     const payCtaLabel = depositPaid
-        ? (balancePaid ? 'お支払い完了' : '現地支払いは現地でお支払い')
-        : 'PayPalで予約金を支払う';
+        ? (balancePaid ? '결제 완료' : '잔금은 현지에서 결제')
+        : 'PayPal로 예약금 결제하기';
 
     const handleChat = () => {
         const w = window as any;
@@ -246,13 +246,13 @@ export const MyReservationDetail: React.FC = () => {
                     <div className="grid grid-cols-[40px_1fr_auto] items-center gap-2 px-4 h-14">
                         <button
                             onClick={() => navigate('/mypage/reservations')}
-                            aria-label="戻る"
+                            aria-label="뒤로"
                             className="w-10 h-10 grid place-items-center rounded-xl text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors"
                         >
                             <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'wght' 500" }}>arrow_back_ios_new</span>
                         </button>
                         <div className="min-w-0 leading-tight">
-                            <div className="text-[15px] font-bold text-slate-900 dark:text-white tracking-tight truncate">ご予約詳細</div>
+                            <div className="text-[15px] font-bold text-slate-900 dark:text-white tracking-tight truncate">예약 상세</div>
                             <div className="text-[11px] font-medium text-slate-400 mt-0.5 tabular-nums">
                                 #{reservation.reservationNumber || reservation.id.slice(0, 8).toUpperCase()}
                             </div>
@@ -304,20 +304,20 @@ export const MyReservationDetail: React.FC = () => {
                             </div>
                             <div className="inline-flex items-center gap-1 bg-black/18 py-1 px-2.5 rounded-full text-[12px] font-bold">
                                 <span className="material-symbols-outlined text-[14px]" style={{ fontVariationSettings: "'FILL' 1" }}>group</span>
-                                {totalPeople}名
+                                {totalPeople}명
                             </div>
                         </div>
 
                         <div className="mt-3.5 pt-3.5 border-t border-white/14 grid grid-cols-[1fr_auto_1fr] gap-2 text-[11px]">
                             <div className="text-left">
-                                <div className="opacity-70 text-[10.5px] font-medium tracking-wide">期間</div>
+                                <div className="opacity-70 text-[10.5px] font-medium tracking-wide">기간</div>
                                 <div className="mt-0.5 text-[13px] font-bold tabular-nums">
-                                    {duration ? `${duration.days}日${duration.nights}泊` : '—'}
+                                    {duration ? `${duration.nights}박 ${duration.days}일` : '—'}
                                 </div>
                             </div>
                             <div className="w-px bg-white/14" />
                             <div className="text-right">
-                                <div className="opacity-70 text-[10.5px] font-medium tracking-wide">予約番号</div>
+                                <div className="opacity-70 text-[10.5px] font-medium tracking-wide">예약 번호</div>
                                 <div className="mt-0.5 text-[13px] font-bold tabular-nums">
                                     {reservation.reservationNumber || reservation.id.slice(0, 8).toUpperCase()}
                                 </div>
@@ -329,7 +329,7 @@ export const MyReservationDetail: React.FC = () => {
                 {/* Payment card */}
                 {priceBreakdown && (
                     <>
-                        <SectionHeader icon="account_balance_wallet" title="お支払い状況" />
+                        <SectionHeader icon="account_balance_wallet" title="결제 현황" />
                         <div className="px-5">
                             <Card className="p-[18px]">
                                 {/* Donut + total */}
@@ -357,13 +357,13 @@ export const MyReservationDetail: React.FC = () => {
                                         </div>
                                     </div>
                                     <div className="min-w-0 flex-1">
-                                        <div className="text-[11.5px] font-medium text-slate-500 dark:text-slate-400">お支払い済み</div>
+                                        <div className="text-[11.5px] font-medium text-slate-500 dark:text-slate-400">결제 완료 금액</div>
                                         <div className="mt-0.5 text-[22px] font-black text-slate-900 dark:text-white tabular-nums tracking-tight leading-[1.1]">
                                             {yen(paidAmount)}
                                             <span className="ml-1 text-[12px] font-medium text-slate-400"> / {yen(priceBreakdown.total)}</span>
                                         </div>
                                         <div className="mt-1.5 text-[11px] text-slate-500">
-                                            残り <span className="text-slate-700 dark:text-slate-200 font-bold tabular-nums">{yen(remaining)}</span>
+                                            잔액 <span className="text-slate-700 dark:text-slate-200 font-bold tabular-nums">{yen(remaining)}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -373,8 +373,8 @@ export const MyReservationDetail: React.FC = () => {
 
                                 {/* Breakdown rows */}
                                 <div className="flex flex-col gap-2.5">
-                                    <BreakdownRow label="予約金" sublabel="PayPalで事前にお支払い" amount={priceBreakdown.deposit} paid={depositPaid} />
-                                    <BreakdownRow label="現地支払い" sublabel="ウランバートル到着時 現金 / カード" amount={priceBreakdown.local} paid={balancePaid} />
+                                    <BreakdownRow label="예약금" sublabel="PayPal로 사전 결제" amount={priceBreakdown.deposit} paid={depositPaid} />
+                                    <BreakdownRow label="현지 결제" sublabel="울란바토르 도착 시 현금 / 카드" amount={priceBreakdown.local} paid={balancePaid} />
                                 </div>
 
                                 {/* CTA */}
@@ -401,7 +401,7 @@ export const MyReservationDetail: React.FC = () => {
                                 {!payCtaDisabled && (
                                     <div className="mt-2.5 flex items-center justify-center gap-1.5 text-[11px] text-slate-500">
                                         <span className="material-symbols-outlined text-[12px]">lock</span>
-                                        PayPal SSL で安全にお支払い
+                                        PayPal SSL로 안전하게 결제
                                     </div>
                                 )}
                             </Card>
@@ -410,26 +410,26 @@ export const MyReservationDetail: React.FC = () => {
                 )}
 
                 {/* Documents */}
-                <SectionHeader icon="folder" title="ご旅行書類" subtitle="契約書と日程表をご確認いただけます" />
+                <SectionHeader icon="folder" title="여행 서류" subtitle="계약서와 일정표를 확인하실 수 있습니다" />
                 <div className="px-5 flex flex-col gap-2.5">
                     <DocumentRow
                         icon="map"
-                        title="確定日程表"
-                        subReady="行程と宿泊先をチェック"
-                        subPending="準備中（担当者が作成すると表示されます）"
+                        title="확정 일정표"
+                        subReady="여행 일정과 숙소를 확인"
+                        subPending="준비 중 (담당자가 작성하면 표시됩니다)"
                         href={itineraryUrl}
                     />
                     <DocumentRow
                         icon="description"
-                        title="海外旅行契約書"
-                        subReady="契約内容と注意事項を確認"
-                        subPending="準備中（発行されるとメールでもお知らせします）"
+                        title="해외여행 계약서"
+                        subReady="계약 내용과 주의사항을 확인"
+                        subPending="준비 중 (발행되면 이메일로도 안내해 드립니다)"
                         href={contractUrl}
                     />
                 </div>
 
                 {/* Guide */}
-                <SectionHeader icon="badge" title="担当ガイド" subtitle={guide?.name ? undefined : '出発2週間前までに確定します'} />
+                <SectionHeader icon="badge" title="담당 가이드" subtitle={guide?.name ? undefined : '출발 2주 전까지 확정됩니다'} />
                 <div className="px-5">
                     {guide && guide.name ? (
                         <button
@@ -466,15 +466,15 @@ export const MyReservationDetail: React.FC = () => {
                                 <p className="text-xs text-slate-500 leading-relaxed mt-3 line-clamp-2">{guide.introduction || guide.bio}</p>
                             )}
                             <p className="text-[11px] text-primary font-semibold mt-2 inline-flex items-center gap-0.5">
-                                詳細を見る
+                                자세히 보기
                                 <span className="material-symbols-outlined text-sm">arrow_forward</span>
                             </p>
                         </button>
                     ) : (
                         <PendingTile
                             centerIcon="person"
-                            centerTitle="担当ガイドを調整中です"
-                            centerSub="決まり次第メールとアプリでお知らせします"
+                            centerTitle="담당 가이드를 배정 중입니다"
+                            centerSub="확정되는 대로 이메일과 앱으로 안내해 드립니다"
                         />
                     )}
                 </div>
@@ -482,8 +482,8 @@ export const MyReservationDetail: React.FC = () => {
                 {/* Accommodations */}
                 <SectionHeader
                     icon="hotel"
-                    title="宿泊先"
-                    subtitle={accommodations.length > 0 ? `${accommodations.length}泊` : '日程確定後、1日ごとに確定します'}
+                    title="숙소"
+                    subtitle={accommodations.length > 0 ? `${accommodations.length}박` : '일정 확정 후 하루 단위로 확정됩니다'}
                 />
                 <div className="px-5">
                     {accommodations.length > 0 ? (
@@ -506,7 +506,7 @@ export const MyReservationDetail: React.FC = () => {
                                             )}
                                             <div className="flex-1 min-w-0">
                                                 <div className="flex items-center gap-1.5 mb-1">
-                                                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-primary text-white">{item.day}日目</span>
+                                                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-primary text-white">{item.day}일차</span>
                                                     {acc?.type && <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">{acc.type}</span>}
                                                 </div>
                                                 <p className="font-bold text-slate-900 dark:text-white text-sm truncate">{acc?.name || '—'}</p>
@@ -514,7 +514,7 @@ export const MyReservationDetail: React.FC = () => {
                                                     onClick={() => acc && setAccModal({ accommodation: acc, day: item.day })}
                                                     className="inline-flex items-center gap-0.5 mt-1.5 text-[11px] font-semibold text-primary hover:opacity-80"
                                                 >
-                                                    詳しく見る
+                                                    자세히 보기
                                                     <span className="material-symbols-outlined text-sm">arrow_forward</span>
                                                 </button>
                                             </div>
@@ -526,8 +526,8 @@ export const MyReservationDetail: React.FC = () => {
                     ) : (
                         <PendingTile
                             centerIcon="bed"
-                            centerTitle="宿泊先を手配中です"
-                            centerSub="日程確定後、1日ごとに確定します"
+                            centerTitle="숙소를 준비 중입니다"
+                            centerSub="일정 확정 후 하루 단위로 확정됩니다"
                         />
                     )}
                 </div>
@@ -535,7 +535,7 @@ export const MyReservationDetail: React.FC = () => {
                 {/* History */}
                 {history.length > 0 && (
                     <>
-                        <SectionHeader icon="history" title="タイムライン" />
+                        <SectionHeader icon="history" title="타임라인" />
                         <div className="px-5">
                             <Card className="px-4 py-3">
                                 <ul className="flex flex-col gap-2.5">
@@ -557,7 +557,7 @@ export const MyReservationDetail: React.FC = () => {
                                         onClick={() => setShowAllHistory(!showAllHistory)}
                                         className="w-full text-center mt-2 pt-2 border-t border-slate-100 dark:border-slate-700 text-xs font-semibold text-slate-500 hover:text-primary"
                                     >
-                                        {showAllHistory ? '閉じる' : `すべて見る (${history.length}件)`}
+                                        {showAllHistory ? '접기' : `전체 보기 (${history.length}건)`}
                                     </button>
                                 )}
                             </Card>
@@ -573,13 +573,13 @@ export const MyReservationDetail: React.FC = () => {
                                 <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>support_agent</span>
                             </div>
                             <div>
-                                <div className="text-[13px] font-bold text-slate-900 dark:text-white">ご不明な点がありましたら</div>
-                                <div className="text-[11px] text-slate-500 dark:text-slate-400">日本語担当スタッフが24時間対応</div>
+                                <div className="text-[13px] font-bold text-slate-900 dark:text-white">궁금한 점이 있으시면</div>
+                                <div className="text-[11px] text-slate-500 dark:text-slate-400">한국어 담당 스태프가 24시간 대응</div>
                             </div>
                         </div>
                         <div className="grid grid-cols-2 gap-2">
-                            <ContactBtn icon="chat" label="チャット相談" onClick={handleChat} />
-                            <ContactBtn icon="mail" label="メールで問い合わせ" href="mailto:info@mongolryokou.com" />
+                            <ContactBtn icon="chat" label="채팅 상담" onClick={handleChat} />
+                            <ContactBtn icon="mail" label="이메일 문의" href="mailto:info@mongolryokou.com" />
                         </div>
                     </div>
                 </div>
@@ -612,7 +612,7 @@ const BreakdownRow: React.FC<{ label: string; sublabel: string; amount: number; 
                     }`}
                 >
                     <span className={`inline-block w-1.5 h-1.5 rounded-full ${paid ? 'bg-emerald-600' : 'bg-red-600'}`} />
-                    {paid ? '入金済' : '未入金'}
+                    {paid ? '입금 완료' : '미입금'}
                 </span>
             </div>
             <div className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">{sublabel}</div>
@@ -640,7 +640,7 @@ const DocumentRow: React.FC<{
                 <div className="flex items-center gap-1.5 flex-wrap">
                     <span className={`text-sm font-bold ${ready ? 'text-slate-900 dark:text-white' : 'text-slate-500'}`}>{title}</span>
                     {!ready && (
-                        <span className="px-1.5 py-[1px] bg-amber-100 text-amber-800 text-[9.5px] font-bold tracking-wide rounded">準備中</span>
+                        <span className="px-1.5 py-[1px] bg-amber-100 text-amber-800 text-[9.5px] font-bold tracking-wide rounded">준비 중</span>
                     )}
                 </div>
                 <div className="mt-0.5 text-[11.5px] text-slate-500 dark:text-slate-400 leading-[1.4]">

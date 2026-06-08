@@ -61,7 +61,7 @@ export function ReservationCompleteDesktop({
                             letterSpacing: '-0.02em',
                         }}
                     >
-                        予約の申し込みが完了しました
+                        예약 신청이 완료되었습니다
                     </h2>
                     <p
                         style={{
@@ -71,16 +71,16 @@ export function ReservationCompleteDesktop({
                             margin: 0,
                         }}
                     >
-                        ご入力いただいたメールアドレス{' '}
+                        입력하신 이메일 주소{' '}
                         <strong style={{ color: 'var(--fg-1)', fontWeight: 700 }}>
                             {email}
                         </strong>{' '}
-                        に
+                        로
                         <br />
-                        PayPal の請求書をお送りします。
+                        PayPal 청구서를 보내드립니다.
                         <br />
                         <strong style={{ color: '#0f766e', fontWeight: 700 }}>
-                            お支払い完了をもって予約確定となります。
+                            결제가 완료되면 예약이 확정됩니다.
                         </strong>
                     </p>
 
@@ -105,7 +105,7 @@ export function ReservationCompleteDesktop({
                                     fontWeight: 600,
                                 }}
                             >
-                                選択ツアー
+                                선택 투어
                             </div>
                             <div
                                 style={{
@@ -128,7 +128,7 @@ export function ReservationCompleteDesktop({
                                     fontWeight: 600,
                                 }}
                             >
-                                決済する予約金額
+                                결제할 예약금
                             </div>
                             <div
                                 style={{
@@ -139,7 +139,7 @@ export function ReservationCompleteDesktop({
                                     letterSpacing: '-0.02em',
                                 }}
                             >
-                                ¥{formatPrice(deposit)}
+                                ₩{formatPrice(deposit)}
                             </div>
                             <div
                                 style={{
@@ -148,7 +148,7 @@ export function ReservationCompleteDesktop({
                                     marginTop: 2,
                                 }}
                             >
-                                総旅行費用: ¥{formatPrice(total)}
+                                총 여행 비용: ₩{formatPrice(total)}
                             </div>
                         </div>
                     </div>
@@ -168,15 +168,15 @@ export function ReservationCompleteDesktop({
                         {[
                             {
                                 i: 'mark_email_read',
-                                t: 'ご登録のEメール宛に決済用の PayPal ご請求メールをお送りします。',
+                                t: '등록하신 이메일로 결제용 PayPal 청구 메일을 보내드립니다.',
                             },
                             {
                                 i: 'credit_score',
-                                t: 'メール内のリンクから、クレジットカード等で安全・簡単にお支払いいただけます。',
+                                t: '메일 안의 링크를 통해 신용카드 등으로 안전하고 간편하게 결제하실 수 있습니다.',
                             },
                             {
                                 i: 'report',
-                                t: 'お支払いが確認できない場合、自動的にキャンセルとなることがございます。',
+                                t: '결제가 확인되지 않을 경우 예약이 자동으로 취소될 수 있습니다.',
                             },
                         ].map((s) => (
                             <div
@@ -229,7 +229,7 @@ export function ReservationCompleteDesktop({
                                 fontFamily: 'inherit',
                             }}
                         >
-                            トップページへ戻る
+                            홈으로 돌아가기
                         </button>
                         <button
                             type="button"
@@ -252,7 +252,7 @@ export function ReservationCompleteDesktop({
                                 boxShadow: '0 8px 20px -6px rgba(15,118,110,0.5)',
                             }}
                         >
-                            <MatIcon name="receipt_long" size={18} color="#fff" /> 予約履歴を確認する
+                            <MatIcon name="receipt_long" size={18} color="#fff" /> 예약 내역 확인하기
                         </button>
                     </div>
                 </div>
@@ -291,7 +291,7 @@ export function ReservationCompleteDesktop({
                                 color: 'var(--fg-1)',
                             }}
                         >
-                            お支払い・予約に関するご質問
+                            결제·예약 관련 문의
                         </div>
                         <div
                             style={{
@@ -300,7 +300,7 @@ export function ReservationCompleteDesktop({
                                 marginTop: 2,
                             }}
                         >
-                            日本語スタッフが24時間以内にご返信します
+                            한국어 스태프가 24시간 이내에 답변해 드립니다
                         </div>
                     </div>
                 </div>

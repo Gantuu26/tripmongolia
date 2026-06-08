@@ -6,7 +6,7 @@ export interface Hotel {
     code?: string;           // Internal short code (e.g., HS40530)
     name_kr: string;         // 한글 명칭 (필수)
     name_local?: string;     // 현지/영문 명칭
-    country?: string;        // 国가 (e.g., 싱가포르)
+    country?: string;        // 국가 (e.g., 싱가포르)
     city?: string;           // 도시
     region?: string;         // 지역 (e.g., 아시아)
     star_rating?: number;    // 1~5

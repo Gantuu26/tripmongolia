@@ -12,7 +12,7 @@ export function ThemeTabsBarDesktop({ categories, contentWidth = 1280 }: ThemeTa
     const [active, setActive] = useState<string>('all');
 
     const tabs = [
-        { id: 'all', name: 'おすすめ', path: '/products' },
+        { id: 'all', name: '추천', path: '/products' },
         ...categories.slice(0, 7).map((c) => ({
             id: c.id,
             name: c.name,

@@ -66,7 +66,7 @@ export const AdminGuideManage: React.FC = () => {
                 setFormData({ ...formData, image: url });
             } catch (error) {
                 console.error('Guide image upload failed:', error);
-                alert('이미지 업로드 실패');
+                alert('Зураг байршуулахад алдаа гарлаа');
             }
         }
     };
@@ -87,7 +87,7 @@ export const AdminGuideManage: React.FC = () => {
 
     const handleSubmit = async () => {
         if (!formData.name || !formData.phone) {
-            alert('이름과 연락처는 필수 입력 항목입니다.');
+            alert('Нэр болон утасны дугаар заавал бөглөх шаардлагатай.');
             return;
         }
 
@@ -113,7 +113,7 @@ export const AdminGuideManage: React.FC = () => {
             resetForm();
         } catch (error: any) {
             console.error('Guide save error:', error);
-            alert('저장 실패: ' + error.message);
+            alert('Хадгалахад алдаа гарлаа: ' + error.message);
         }
     };
 
@@ -131,7 +131,7 @@ export const AdminGuideManage: React.FC = () => {
             });
             await loadGuides();
         } catch (error: any) {
-            alert('승인 실패: ' + error.message);
+            alert('Зөвшөөрөхөд алдаа гарлаа: ' + error.message);
         }
     };
 
@@ -150,12 +150,12 @@ export const AdminGuideManage: React.FC = () => {
     };
 
     const handleDelete = async (id: string) => {
-        if (confirm('정말 삭제하시겠습니까?')) {
+        if (confirm('Үнэхээр устгах уу?')) {
             try {
                 await api.tourGuides.delete(id);
                 await loadGuides();
             } catch (error: any) {
-                alert('삭제 실패: ' + error.message);
+                alert('Устгахад алдаа гарлаа: ' + error.message);
             }
         }
     };
@@ -186,8 +186,8 @@ export const AdminGuideManage: React.FC = () => {
     return (
         <AdminLayout
             activePage="guides"
-            title="가이드 관리"
-            description={pendingCount > 0 ? `승인대기 ${pendingCount}건` : undefined}
+            title="Хөтөчийн удирдлага"
+            description={pendingCount > 0 ? `Зөвшөөрөл хүлээж буй ${pendingCount}` : undefined}
             actions={
                 <button
                     className="btn btn-ink"
@@ -196,7 +196,7 @@ export const AdminGuideManage: React.FC = () => {
                         setIsModalOpen(true);
                     }}
                 >
-                    <Icon name="person_add" />가이드 등록
+                    <Icon name="person_add" />Хөтөч бүртгэх
                 </button>
             }
         >
@@ -206,7 +206,7 @@ export const AdminGuideManage: React.FC = () => {
                     <label className="tb-search">
                         <Icon name="search" />
                         <input
-                            placeholder="가이드 이름, 지역 검색"
+                            placeholder="Хөтөчийн нэр, бүс нутгаар хайх"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -216,9 +216,9 @@ export const AdminGuideManage: React.FC = () => {
                         value={statusFilter}
                         onChange={(e) => setStatusFilter(e.target.value)}
                     >
-                        <option value="all">전체 상태</option>
-                        <option value="active">활동중</option>
-                        <option value="pending">승인대기</option>
+                        <option value="all">Бүх төлөв</option>
+                        <option value="active">Идэвхтэй</option>
+                        <option value="pending">Зөвшөөрөл хүлээж буй</option>
                     </select>
                     <div className="spacer" />
                     <button
@@ -228,7 +228,7 @@ export const AdminGuideManage: React.FC = () => {
                             setIsModalOpen(true);
                         }}
                     >
-                        <Icon name="person_add" />가이드 등록
+                        <Icon name="person_add" />Хөтөч бүртгэх
                     </button>
                 </div>
 
@@ -237,9 +237,9 @@ export const AdminGuideManage: React.FC = () => {
                     <div className="guide-grid">
                         {filteredGuides.map(guide => {
                             const isActive = guide.status === 'active';
-                            const statusLabel = guide.status === 'pending' ? '승인대기' : '활동중';
+                            const statusLabel = guide.status === 'pending' ? 'Зөвшөөрөл хүлээж буй' : 'Идэвхтэй';
                             const langLabel = guide.languages.length > 0
-                                ? (guide.languages.length > 1 ? `${guide.languages[0]} 외` : guide.languages[0])
+                                ? (guide.languages.length > 1 ? `${guide.languages[0]} +` : guide.languages[0])
                                 : '–';
                             return (
                                 <div className="guide-card" key={guide.id}>
@@ -255,36 +255,36 @@ export const AdminGuideManage: React.FC = () => {
                                     )}
                                     <div className="cell-strong" style={{ fontSize: 15 }}>{guide.name}</div>
                                     <div className="cell-muted" style={{ fontSize: 12.5, marginTop: 2 }}>
-                                        {guide.phone || '연락처 미등록'}
+                                        {guide.phone || 'Утасны дугаар бүртгээгүй'}
                                     </div>
                                     <div style={{ marginTop: 10 }}>
                                         <span className={`badge ${isActive ? 'b-green' : 'b-amber'}`}>{statusLabel}</span>
                                     </div>
                                     <div className="gstat">
                                         <div>
-                                            <b>{guide.experienceYears > 0 ? `${guide.experienceYears}년` : '–'}</b>
-                                            <span>경력</span>
+                                            <b>{guide.experienceYears > 0 ? `${guide.experienceYears} жил` : '–'}</b>
+                                            <span>Туршлага</span>
                                         </div>
                                         <div>
                                             <b>{guide.specialties.length}</b>
-                                            <span>전문</span>
+                                            <span>Мэргэшил</span>
                                         </div>
                                         <div>
                                             <b>{langLabel}</b>
-                                            <span>언어</span>
+                                            <span>Хэл</span>
                                         </div>
                                     </div>
                                     <div className="row" style={{ gap: 6, marginTop: 14, justifyContent: 'center' }}>
                                         {guide.status === 'pending' && (
                                             <button className="btn btn-sm btn-blue" onClick={() => handleApprove(guide)}>
-                                                <Icon name="check" />승인
+                                                <Icon name="check" />Зөвшөөрөх
                                             </button>
                                         )}
                                         <button className="btn btn-sm btn-ghost" onClick={() => handleEdit(guide)}>
-                                            <Icon name="edit" />수정
+                                            <Icon name="edit" />Засах
                                         </button>
                                         <button className="btn btn-sm btn-danger" onClick={() => handleDelete(guide.id)}>
-                                            <Icon name="delete" />삭제
+                                            <Icon name="delete" />Устгах
                                         </button>
                                     </div>
                                 </div>
@@ -294,7 +294,7 @@ export const AdminGuideManage: React.FC = () => {
                 ) : (
                     <div className="empty">
                         <Icon name="person_off" />
-                        <p>등록된 가이드가 없습니다.</p>
+                        <p>Бүртгэгдсэн хөтөч алга.</p>
                     </div>
                 )}
             </div>
@@ -308,11 +308,11 @@ export const AdminGuideManage: React.FC = () => {
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="card-head">
-                            <h2>{editingGuide ? '가이드 수정' : '가이드 등록'}</h2>
+                            <h2>{editingGuide ? 'Хөтөч засах' : 'Хөтөч бүртгэх'}</h2>
                             <div className="spacer" />
                             <button
                                 className="act-btn"
-                                title="닫기"
+                                title="Хаах"
                                 onClick={() => { setIsModalOpen(false); resetForm(); }}
                             >
                                 <Icon name="close" />
@@ -322,7 +322,7 @@ export const AdminGuideManage: React.FC = () => {
                         <div className="card-pad" style={{ overflowY: 'auto' }}>
                             {/* Image upload */}
                             <div className="field">
-                                <label>프로필 사진</label>
+                                <label>Профайл зураг</label>
                                 <div className="row" style={{ gap: 16 }}>
                                     {formData.image ? (
                                         <img
@@ -349,17 +349,17 @@ export const AdminGuideManage: React.FC = () => {
                             {/* Name + Phone */}
                             <div className="field-row">
                                 <div className="field" style={{ marginBottom: 0 }}>
-                                    <label>이름 *</label>
+                                    <label>Нэр *</label>
                                     <input
                                         type="text"
                                         className="inp"
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                        placeholder="가이드 이름"
+                                        placeholder="Хөтөчийн нэр"
                                     />
                                 </div>
                                 <div className="field" style={{ marginBottom: 0 }}>
-                                    <label>연락처 *</label>
+                                    <label>Утасны дугаар *</label>
                                     <input
                                         type="tel"
                                         className="inp"
@@ -372,19 +372,19 @@ export const AdminGuideManage: React.FC = () => {
 
                             {/* Introduction */}
                             <div className="field" style={{ marginTop: 18 }}>
-                                <label>소개글</label>
+                                <label>Танилцуулга</label>
                                 <textarea
                                     className="inp"
                                     value={formData.introduction}
                                     onChange={(e) => setFormData({ ...formData, introduction: e.target.value })}
                                     rows={4}
-                                    placeholder="가이드 경력, 전문 분야 등을 입력하세요"
+                                    placeholder="Хөтөчийн туршлага, мэргэшсэн чиглэл зэргийг оруулна уу"
                                 />
                             </div>
 
                             {/* Experience years */}
                             <div className="field">
-                                <label>경력 연수</label>
+                                <label>Туршлагын жил</label>
                                 <div className="row" style={{ gap: 10 }}>
                                     <input
                                         type="number"
@@ -395,13 +395,13 @@ export const AdminGuideManage: React.FC = () => {
                                         value={formData.experienceYears}
                                         onChange={(e) => setFormData({ ...formData, experienceYears: Number(e.target.value) })}
                                     />
-                                    <span className="cell-muted" style={{ fontSize: 13.5 }}>년</span>
+                                    <span className="cell-muted" style={{ fontSize: 13.5 }}>жил</span>
                                 </div>
                             </div>
 
                             {/* Languages */}
                             <div className="field">
-                                <label>언어</label>
+                                <label>Хэл</label>
                                 <div className="chip-row">
                                     {availableLanguages.map(lang => (
                                         <button
@@ -418,7 +418,7 @@ export const AdminGuideManage: React.FC = () => {
 
                             {/* Specialties */}
                             <div className="field" style={{ marginBottom: 0 }}>
-                                <label>전문 분야</label>
+                                <label>Мэргэшсэн чиглэл</label>
                                 <div className="chip-row">
                                     {availableSpecialties.map(specialty => (
                                         <button
@@ -440,10 +440,10 @@ export const AdminGuideManage: React.FC = () => {
                                 className="btn btn-ghost"
                                 onClick={() => { setIsModalOpen(false); resetForm(); }}
                             >
-                                취소
+                                Цуцлах
                             </button>
                             <button className="btn btn-ink" onClick={handleSubmit}>
-                                {editingGuide ? '수정' : '등록'}
+                                {editingGuide ? 'Засах' : 'Бүртгэх'}
                             </button>
                         </div>
                     </div>

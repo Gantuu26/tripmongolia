@@ -4,9 +4,9 @@ import { MatIcon } from '../desktop-primitives/MatIcon';
 export type StepIdx = 0 | 1 | 2;
 
 const ITEMS = [
-    { n: 1, label: '予約日・オプション' },
-    { n: 2, label: 'ご予約者情報・決済' },
-    { n: 3, label: '申し込み完了' },
+    { n: 1, label: '예약일·옵션' },
+    { n: 2, label: '예약자 정보·결제' },
+    { n: 3, label: '신청 완료' },
 ];
 
 /** Horizontal stepper shown at the top of each desktop booking page. */

@@ -55,14 +55,14 @@ const ReviewDetailDesktopContainer: React.FC = () => {
     if (loading) {
         return (
             <DesktopLayout>
-                <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>読み込み中...</div>
+                <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>불러오는 중...</div>
             </DesktopLayout>
         );
     }
     if (!review) {
         return (
             <DesktopLayout>
-                <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>レビューが見つかりません</div>
+                <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>리뷰를 찾을 수 없습니다</div>
             </DesktopLayout>
         );
     }
@@ -87,7 +87,7 @@ const ReviewDetailDesktopContainer: React.FC = () => {
         const newComment = {
             id: Date.now().toString(),
             user_id: currentUser.id,
-            user_name: currentUser.name || currentUser.email || '匿名',
+            user_name: currentUser.name || currentUser.email || '익명',
             content,
             created_at: new Date().toISOString(),
         };
@@ -108,7 +108,7 @@ const ReviewDetailDesktopContainer: React.FC = () => {
 const ReviewDetailMobile: React.FC = () => {
     const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const [review, setReview] = useState<any>(null);
     const [loading, setLoading] = useState(true);
@@ -156,7 +156,7 @@ const ReviewDetailMobile: React.FC = () => {
                         id: data.id,
                         author: data.user_name,
                         userId: data.user_id,
-                        date: formatShortDate(data.created_at, i18n.language),
+                        date: formatShortDate(data.created_at),
                         rating: data.rating,
                         title: data.title,
                         productName: data.product_name,
@@ -243,14 +243,14 @@ const ReviewDetailMobile: React.FC = () => {
 
     const handleDelete = async () => {
         if (!id || !review) return;
-        const ok = window.confirm('このレビューを削除しますか？\nこの操作は取り消せません。');
+        const ok = window.confirm('이 리뷰를 삭제하시겠습니까?\n이 작업은 취소할 수 없습니다.');
         if (!ok) return;
         try {
             await api.reviews.delete(id);
             navigate('/reviews');
         } catch (error: any) {
             console.error('Failed to delete review:', error);
-            alert('削除に失敗しました: ' + (error?.message || ''));
+            alert('삭제에 실패했습니다: ' + (error?.message || ''));
         }
     };
 
@@ -326,7 +326,7 @@ const ReviewDetailMobile: React.FC = () => {
                     {canDelete && (
                         <button
                             onClick={handleDelete}
-                            aria-label="削除"
+                            aria-label="삭제"
                             className="flex size-10 items-center justify-end cursor-pointer text-gray-400 hover:text-red-500 transition-colors"
                         >
                             <span className="material-symbols-outlined">delete</span>
@@ -347,7 +347,7 @@ const ReviewDetailMobile: React.FC = () => {
                             <div className="min-w-0 flex-1">
                                 <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
                                     <p className="text-[16px] font-bold text-[#0e1a18] dark:text-white truncate">{review.author}</p>
-                                    <span className="text-[14px] font-medium text-[#0e1a18] dark:text-white">様</span>
+                                    <span className="text-[14px] font-medium text-[#0e1a18] dark:text-white">님</span>
                                 </div>
                                 <ReviewStars rating={review.rating} size={20} className="mt-0.5" />
                             </div>
@@ -396,7 +396,7 @@ const ReviewDetailMobile: React.FC = () => {
                                 <img
                                     key={idx}
                                     src={optimizeImage(img, { width: 600, height: 600 })}
-                                    alt={`レビュー写真 ${idx + 1}`}
+                                    alt={`리뷰 사진 ${idx + 1}`}
                                     className="aspect-square rounded-2xl object-cover w-full bg-gray-100 dark:bg-zinc-800"
                                     loading="lazy"
                                     decoding="async"
@@ -407,7 +407,7 @@ const ReviewDetailMobile: React.FC = () => {
                                 <div className="relative aspect-square rounded-2xl overflow-hidden">
                                     <img
                                         src={optimizeImage(review.images[2], { width: 600, height: 600 })}
-                                        alt={`レビュー写真 3`}
+                                        alt={`리뷰 사진 3`}
                                         className="absolute inset-0 w-full h-full object-cover bg-gray-100 dark:bg-zinc-800"
                                         loading="lazy"
                                         decoding="async"
@@ -457,7 +457,7 @@ const ReviewDetailMobile: React.FC = () => {
                                         <p className="text-[14px] text-[#333d4b] dark:text-gray-300">{comment.content}</p>
                                     </div>
                                     <div className="flex items-center gap-3 mt-1.5 px-1">
-                                        <span className="text-[11px] text-gray-400">{formatRelativeTime(comment.date, i18n.language)}</span>
+                                        <span className="text-[11px] text-gray-400">{formatRelativeTime(comment.date)}</span>
                                         <button
                                             onClick={() => setReplyingTo(replyingTo === comment.id ? null : comment.id)}
                                             className="text-[11px] font-bold text-gray-500 hover:text-primary transition-colors"

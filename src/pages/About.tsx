@@ -12,27 +12,27 @@ export const About: React.FC = () => {
         {
             '@context': 'https://schema.org',
             '@type': 'AboutPage',
-            name: '会社案内 | Milkyway Japan',
+            name: '회사 소개 | Milkyway Japan',
             url: 'https://mongolryokou.com/about',
-            inLanguage: 'ja',
+            inLanguage: 'ko',
             mainEntity: {
                 '@type': 'TravelAgency',
-                name: 'モンゴリア銀河系',
-                alternateName: ['Milkyway Japan', 'モンゴリア天の川'],
+                name: '몽골리아 은하수',
+                alternateName: ['Milkyway Japan', '몽골리아 은하수'],
                 url: 'https://mongolryokou.com',
                 logo: 'https://mongolryokou.com/favicon.png',
                 founder: [
-                    { '@type': 'Person', name: 'Bilguun', jobTitle: '代表' },
-                    { '@type': 'Person', name: 'Gantuu', jobTitle: '副代表' },
+                    { '@type': 'Person', name: 'Bilguun', jobTitle: '대표' },
+                    { '@type': 'Person', name: 'Gantuu', jobTitle: '부대표' },
                 ],
                 employee: [
-                    { '@type': 'Person', name: 'Bolor', jobTitle: '旅行デザイナー' },
+                    { '@type': 'Person', name: 'Bolor', jobTitle: '여행 디자이너' },
                 ],
-                areaServed: { '@type': 'Country', name: 'モンゴル' },
+                areaServed: { '@type': 'Country', name: '몽골' },
                 address: {
                     '@type': 'PostalAddress',
-                    streetAddress: 'バヤンズル区 13棟 DACOセンター 3階 306号',
-                    addressLocality: 'ウランバートル',
+                    streetAddress: '바양주르흐구 13동 DACO센터 3층 306호',
+                    addressLocality: '울란바토르',
                     addressCountry: 'MN',
                 },
             },
@@ -41,8 +41,8 @@ export const About: React.FC = () => {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'ホーム', item: 'https://mongolryokou.com/' },
-                { '@type': 'ListItem', position: 2, name: '会社案内', item: 'https://mongolryokou.com/about' },
+                { '@type': 'ListItem', position: 1, name: '홈', item: 'https://mongolryokou.com/' },
+                { '@type': 'ListItem', position: 2, name: '회사 소개', item: 'https://mongolryokou.com/about' },
             ],
         },
     ];
@@ -50,8 +50,8 @@ export const About: React.FC = () => {
     return (
         <>
             <SEO
-                title="会社案内"
-                description="モンゴル現地の旅行会社「モンゴリア銀河系（天の川）」。韓国でホテル経営学科を卒業し、モンゴルで暮らす代表と副代表が設立した家族経営のモンゴル旅行会社です。現地人ならではの視点と日本人旅行客の情緒に合わせた日程で、リーズナブルな価格でどこにもない旅をお届けします。"
+                title="회사 소개"
+                description="몽골 현지 여행사 '몽골리아 은하수'. 한국에서 호텔경영학과를 졸업하고 몽골에 거주하는 대표와 부대표가 설립한 가족 경영 몽골여행 회사입니다. 현지인만의 시각과 한국인 여행객의 정서에 맞춘 일정으로, 합리적인 가격에 어디에도 없는 여행을 선사합니다."
                 canonical="/about"
                 image={DETAIL_IMAGE}
                 structuredData={structuredData}
@@ -60,45 +60,45 @@ export const About: React.FC = () => {
             <main className="bg-background-light dark:bg-background-dark min-h-screen pb-24 break-keep">
                 {/* SEO-friendly content mirroring the image (visually hidden, accessible to crawlers & screen readers). */}
                 <div className="sr-only">
-                    <h1>モンゴル現地の旅行会社「モンゴリア銀河系（天の川）」</h1>
+                    <h1>몽골 현지 여행사 '몽골리아 은하수'</h1>
 
-                    <h2>#旅行理念は？</h2>
-                    <p>単なる観光ではなく、モンゴルの大自然と全身でコミュニケーションする特別な体験をご提供します。</p>
-                    <p>疲れた日常から抜け出し、モンゴルの自然の中で新しい自我を発見できるようにお手伝いします。</p>
+                    <h2>#여행 이념은?</h2>
+                    <p>단순한 관광이 아니라, 몽골의 대자연과 온몸으로 소통하는 특별한 경험을 선사합니다.</p>
+                    <p>지친 일상에서 벗어나 몽골의 자연 속에서 새로운 자아를 발견하실 수 있도록 도와드립니다.</p>
                     <p>
-                        現地人だけが知っている最もモンゴルらしい旅行場所と旅行パッケージと日本人旅行客の情緒に合わせた旅行日程で、どこでもない構成で旅行を提供しています。
+                        현지인만이 아는 가장 몽골다운 여행지와 여행 패키지, 그리고 한국인 여행객의 정서에 맞춘 여행 일정으로 어디에도 없는 구성의 여행을 제공하고 있습니다.
                     </p>
 
-                    <h2>#旅行の価値観は？</h2>
-                    <p>旅行者の安全と利便性を最優先に考え、旅行者の最上の満足度のために最善を尽くして努力します。</p>
+                    <h2>#여행의 가치관은?</h2>
+                    <p>여행자의 안전과 편의를 최우선으로 생각하며, 여행자의 최상의 만족을 위해 최선을 다해 노력합니다.</p>
 
-                    <h2>チーム</h2>
+                    <h2>팀</h2>
                     <ul>
-                        <li>Bilguun - 代表</li>
-                        <li>Gantuu - 副代表</li>
-                        <li>Bolor - 旅行デザイナー</li>
+                        <li>Bilguun - 대표</li>
+                        <li>Gantuu - 부대표</li>
+                        <li>Bolor - 여행 디자이너</li>
                     </ul>
 
-                    <h2>1. モンゴル旅行パッケージはモンゴル人が計画しなければなりません。</h2>
+                    <h2>1. 몽골여행 패키지는 몽골인이 계획해야 합니다.</h2>
                     <p>
-                        うちの旅行社は韓国でホテル経営学科を卒業してモンゴルに住んでいる代表と副代表で構成された家族が設立したモンゴル旅行会社です。現地人だけが知っている最もモンゴルらしい旅行場所と日本人旅行客の情緒に合わせた旅行日程で、どこにもない構成で旅行を計画します。
+                        저희 여행사는 한국에서 호텔경영학과를 졸업하고 몽골에 거주하는 대표와 부대표로 구성된 가족이 설립한 몽골여행 회사입니다. 현지인만이 아는 가장 몽골다운 여행지와 한국인 여행객의 정서에 맞춘 여행 일정으로 어디에도 없는 구성의 여행을 계획합니다.
                     </p>
 
-                    <h2>2. リーズナブルな価格が一番重要です。</h2>
+                    <h2>2. 합리적인 가격이 가장 중요합니다.</h2>
                     <p>
-                        現地の人だけが運営する旅行会社なので、大手旅行会社の中間流通過程を省略して旅行者の不必要な手数料負担を下げました。旅行は旅行であるだけで、NOショッピング、NOオプション、旅行中に追加で発生するオプション費用はありません。
+                        현지인만이 운영하는 여행사이기에 대형 여행사의 중간 유통 과정을 생략하여 여행자의 불필요한 수수료 부담을 낮췄습니다. 여행은 오롯이 여행일 뿐, NO 쇼핑, NO 옵션으로 여행 중에 추가로 발생하는 옵션 비용이 없습니다.
                     </p>
 
-                    <h2>3. モンゴル旅行について固定観念を打ち破ります。</h2>
+                    <h2>3. 몽골여행에 대한 고정관념을 깨뜨립니다.</h2>
                     <p>
-                        遊牧民と馬乗り、伝統家屋ゲル、このすべてを体験しながらホカンスまですべて可能です。伝統ゲル体験ときれいでクオリティのある宿泊施設、快適な車と、さっぱりとしておいしい店を中心に旅行することになります。
+                        유목민과 승마, 전통 가옥 게르, 이 모든 것을 체험하면서 호캉스까지 모두 가능합니다. 전통 게르 체험과 깨끗하고 퀄리티 있는 숙박 시설, 쾌적한 차량, 그리고 깔끔하고 맛있는 맛집을 중심으로 여행하게 됩니다.
                     </p>
                 </div>
 
                 {/* Visual: the full-length company intro design */}
                 <img
                     src={getOptimizedImageUrl(DETAIL_IMAGE, 'productDetailFull')}
-                    alt="モンゴル現地の旅行会社「モンゴリア銀河系（天の川）」の会社案内"
+                    alt="몽골 현지 여행사 '몽골리아 은하수'의 회사 소개"
                     fetchPriority="high"
                     decoding="async"
                     className="block w-full h-auto mx-auto max-w-2xl"
@@ -107,23 +107,23 @@ export const About: React.FC = () => {
                 {/* CTA */}
                 <section className="py-12 sm:py-16 px-6 max-w-2xl mx-auto text-center">
                     <h2 className="text-2xl sm:text-3xl font-extrabold mb-4 text-slate-900 dark:text-white">
-                        一緒にモンゴルへ行きませんか？
+                        함께 몽골로 떠나지 않으시겠어요?
                     </h2>
                     <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mb-6">
-                        お気軽にお問い合わせください。
+                        편하게 문의해 주세요.
                     </p>
                     <div className="flex flex-wrap gap-3 justify-center">
                         <a
                             href="/products"
                             className="px-6 py-3 bg-teal-500 hover:bg-teal-600 text-white font-bold rounded-full shadow transition-colors"
                         >
-                            ツアー商品を見る
+                            투어 상품 보기
                         </a>
                         <a
                             href="/custom-estimate"
                             className="px-6 py-3 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-teal-600 dark:text-teal-400 border border-teal-500 font-bold rounded-full shadow transition-colors"
                         >
-                            オーダーメイド相談
+                            맞춤 여행 상담
                         </a>
                     </div>
                 </section>

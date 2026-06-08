@@ -49,11 +49,11 @@ export const Footer: React.FC = () => {
                     {t('footer.services_heading')}
                 </p>
                 <div className="grid grid-cols-2 gap-x-3 gap-y-2 text-[13px]">
-                    <ServiceLink href="/travel-guide">モンゴル旅行ガイド</ServiceLink>
-                    <ServiceLink href="/products">モンゴルツアー比較</ServiceLink>
-                    <ServiceLink href="/category/horse-riding-tour">モンゴル乗馬旅行</ServiceLink>
-                    <ServiceLink href="/category/gobi-desert">ゴビ砂漠ツアー</ServiceLink>
-                    <ServiceLink href="/products" className="col-span-2">モンゴルツアー商品一覧</ServiceLink>
+                    <ServiceLink href="/travel-guide">몽골 여행 가이드</ServiceLink>
+                    <ServiceLink href="/products">몽골 투어 비교</ServiceLink>
+                    <ServiceLink href="/category/horse-riding-tour">몽골 승마 여행</ServiceLink>
+                    <ServiceLink href="/category/gobi-desert">고비사막 투어</ServiceLink>
+                    <ServiceLink href="/products" className="col-span-2">몽골 투어 상품 목록</ServiceLink>
                 </div>
             </div>
 
@@ -81,7 +81,7 @@ export const Footer: React.FC = () => {
 
                 {/* Legal Links */}
                 <div className="flex items-center justify-center divide-x divide-slate-300 dark:divide-slate-700 text-[12px] font-semibold">
-                    <a href="/about" className="px-3 hover:text-primary transition-colors">会社案内</a>
+                    <a href="/about" className="px-3 hover:text-primary transition-colors">회사 소개</a>
                     <a href="/terms-of-service" className="px-3 hover:text-primary transition-colors">{t('footer.terms_of_service')}</a>
                     <a href="/privacy-policy" className="px-3 hover:text-primary transition-colors">{t('footer.privacy_policy')}</a>
                 </div>

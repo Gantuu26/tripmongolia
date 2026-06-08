@@ -214,7 +214,7 @@ export const Reservation: React.FC = () => {
             <>
                 <SEO
                     title={`${product.name} - ${t('reservation.title')}`}
-                    description={`${product.name} 予約ページ`}
+                    description={`${product.name} 예약 페이지`}
                 />
                 <ReservationDesktop
                     product={product}
@@ -239,7 +239,7 @@ export const Reservation: React.FC = () => {
         <div className="bg-background-light dark:bg-background-dark min-h-screen font-display">
             <SEO 
                 title={`${product?.name || ''} - ${t('reservation.title')}`}
-                description={`${product?.name || ''} 予約ページ。日程와 人数를 선택해주세요.`}
+                description={`${product?.name || ''} 예약 페이지. 일정과 인원을 선택해주세요.`}
             />
             <div className="max-w-[430px] mx-auto bg-white dark:bg-zinc-900 min-h-screen flex flex-col relative overflow-x-hidden shadow-2xl">
                 {/* Header */}

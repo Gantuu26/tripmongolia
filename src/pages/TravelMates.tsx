@@ -106,7 +106,7 @@ const TravelMatesMobile: React.FC = () => {
                         if (durationMatch) {
                             duration = `${durationMatch[1]}${t('travel_mates.detail.nights', { defaultValue: '박' })} ${durationMatch[2]}${t('travel_mates.detail.days', { defaultValue: '일' })}`;
                         } else if (duration === '1 Day') {
-                            duration = t('travel_mates.detail.one_day', { defaultValue: '当日' });
+                            duration = t('travel_mates.detail.one_day', { defaultValue: '당일' });
                         }
 
                         return {
@@ -616,7 +616,7 @@ const EmptyState: React.FC<{
             {t('travel_mates.empty.title')}
         </p>
         <p className="text-[13px] text-gray-500 dark:text-gray-400 mt-1.5">
-            {t('travel_mates.empty.sub', { defaultValue: '新しい同行者を募集してみてください' })}
+            {t('travel_mates.empty.sub', { defaultValue: '새로운 동행자를 모집해 보세요' })}
         </p>
         {hasQuery ? (
             <button

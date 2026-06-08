@@ -68,11 +68,11 @@ function timeAgo(iso?: string): string {
     if (Number.isNaN(t)) return '';
     const diff = Date.now() - t;
     const m = Math.floor(diff / 60000);
-    if (m < 60) return `${m} 分前`;
+    if (m < 60) return `${m}분 전`;
     const h = Math.floor(m / 60);
-    if (h < 24) return `${h} 時間前`;
+    if (h < 24) return `${h}시간 전`;
     const d = Math.floor(h / 24);
-    return `${d} 日前`;
+    return `${d}일 전`;
 }
 
 export function ReviewDetailDesktop({ review, helpful = false, onHelpful, onAddComment, contentWidth = 1280 }: ReviewDetailDesktopProps) {
@@ -86,11 +86,11 @@ export function ReviewDetailDesktop({ review, helpful = false, onHelpful, onAddC
 
     if (!review) return null;
 
-    const author = review.user_name || review.userName || '匿名';
+    const author = review.user_name || review.userName || '익명';
     const avatar = review.user_image || review.userImage;
     const rating = review.rating || 5;
     const date = formatDate(review.created_at || review.createdAt);
-    const productName = review.product_name || review.productName || 'モンゴルツアー';
+    const productName = review.product_name || review.productName || '몽골 투어';
     const productId = review.product_id || review.productId;
     const images = parseJsonArray<string>(review.images);
     const comments = parseJsonArray<CommentItem>(review.comments);
@@ -118,12 +118,12 @@ export function ReviewDetailDesktop({ review, helpful = false, onHelpful, onAddC
                         color: 'var(--fg-5)',
                     }}
                 >
-                    <button type="button" onClick={() => navigate('/')} style={crumbBtn}>ホーム</button>
+                    <button type="button" onClick={() => navigate('/')} style={crumbBtn}>홈</button>
                     <MatIcon name="chevron_right" size={14} color="var(--fg-6)" />
-                    <button type="button" onClick={() => navigate('/reviews')} style={crumbBtn}>レビュー</button>
+                    <button type="button" onClick={() => navigate('/reviews')} style={crumbBtn}>리뷰</button>
                     <MatIcon name="chevron_right" size={14} color="var(--fg-6)" />
                     <span style={{ color: 'var(--fg-2)', fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 480 }}>
-                        {review.title || `${author} 様のレビュー`}
+                        {review.title || `${author} 님의 리뷰`}
                     </span>
                 </div>
             </div>
@@ -149,7 +149,7 @@ export function ReviewDetailDesktop({ review, helpful = false, onHelpful, onAddC
                         {!avatar && author.charAt(0)}
                     </div>
                     <div style={{ flex: 1 }}>
-                        <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--fg-1)', marginBottom: 4, letterSpacing: '-0.01em' }}>{author} 様</div>
+                        <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--fg-1)', marginBottom: 4, letterSpacing: '-0.01em' }}>{author} 님</div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                             <div style={{ display: 'flex', gap: 1 }}>
                                 {Array.from({ length: 5 }).map((_, i) => (
@@ -268,14 +268,14 @@ export function ReviewDetailDesktop({ review, helpful = false, onHelpful, onAddC
                         }}
                     >
                         <MatIcon name="thumb_up" size={16} filled={helpful} color={helpful ? '#0f766e' : 'var(--fg-3)'} />
-                        参考になった ({helpfulCount + (helpful ? 1 : 0)})
+                        도움이 됐어요 ({helpfulCount + (helpful ? 1 : 0)})
                     </button>
                 </div>
 
                 {/* Comments */}
                 <div style={{ marginTop: 48, paddingTop: 32, borderTop: '1px solid var(--border-subtle)' }}>
                     <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--fg-1)', margin: '0 0 18px', letterSpacing: '-0.01em' }}>
-                        コメント <span style={{ color: 'var(--fg-5)', fontWeight: 500, fontSize: 16 }}>({comments.length})</span>
+                        댓글 <span style={{ color: 'var(--fg-5)', fontWeight: 500, fontSize: 16 }}>({comments.length})</span>
                     </h2>
 
                     <div style={{ display: 'flex', gap: 14, marginBottom: 28 }}>
@@ -294,13 +294,13 @@ export function ReviewDetailDesktop({ review, helpful = false, onHelpful, onAddC
                                 flexShrink: 0,
                             }}
                         >
-                            あ
+                            나
                         </div>
                         <div style={{ flex: 1, border: '1px solid var(--border)', borderRadius: 14, padding: 14, background: '#fff' }}>
                             <textarea
                                 value={comment}
                                 onChange={(e) => setComment(e.target.value)}
-                                placeholder="コメントを入力してください..."
+                                placeholder="댓글을 입력해 주세요..."
                                 rows={3}
                                 style={{
                                     width: '100%',
@@ -331,7 +331,7 @@ export function ReviewDetailDesktop({ review, helpful = false, onHelpful, onAddC
                                         fontFamily: 'inherit',
                                     }}
                                 >
-                                    投稿
+                                    등록
                                 </button>
                             </div>
                         </div>
@@ -348,7 +348,7 @@ export function ReviewDetailDesktop({ review, helpful = false, onHelpful, onAddC
                                 fontSize: 13,
                             }}
                         >
-                            最初のコメントを残してみましょう
+                            첫 번째 댓글을 남겨 보세요
                         </div>
                     ) : (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
@@ -374,7 +374,7 @@ export function ReviewDetailDesktop({ review, helpful = false, onHelpful, onAddC
                                     <div style={{ flex: 1 }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
                                             <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--fg-1)' }}>
-                                                {c.user_name || c.userName || '匿名'}
+                                                {c.user_name || c.userName || '익명'}
                                             </span>
                                             <span style={{ fontSize: 11, color: 'var(--fg-5)' }}>{timeAgo(c.created_at || c.createdAt)}</span>
                                         </div>

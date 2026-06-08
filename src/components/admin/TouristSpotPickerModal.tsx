@@ -6,14 +6,14 @@ import { SPOT_REGION_OPTIONS } from '../../types/touristSpot';
 type RegionFilter = 'all' | SpotRegion | 'uncat';
 
 const REGION_TABS: { value: RegionFilter; label: string }[] = [
-    { value: 'all', label: '전체' },
-    { value: 'central', label: '중앙몽골' },
-    { value: 'gobi', label: '고비사막' },
-    { value: 'hovsgol', label: '홉스굴' },
-    { value: 'ulaanbaatar', label: '울란바타르' },
-    { value: 'experience', label: '체험' },
-    { value: 'food', label: '음식' },
-    { value: 'uncat', label: '미분류' },
+    { value: 'all', label: 'Бүгд' },
+    { value: 'central', label: 'Төв Монгол' },
+    { value: 'gobi', label: 'Говь цөл' },
+    { value: 'hovsgol', label: 'Хөвсгөл' },
+    { value: 'ulaanbaatar', label: 'Улаанбаатар' },
+    { value: 'experience', label: 'Тур туршлага' },
+    { value: 'food', label: 'Хоол' },
+    { value: 'uncat', label: 'Ангилаагүй' },
 ];
 
 interface TouristSpotPickerModalProps {
@@ -32,7 +32,7 @@ export const TouristSpotPickerModal: React.FC<TouristSpotPickerModalProps> = ({
     open,
     onPick,
     onClose,
-    title = '관광지 마스터에서 선택',
+    title = 'Аялал жуулчлалын газрын сангаас сонгох',
 }) => {
     const [spots, setSpots] = useState<TouristSpot[]>([]);
     const [loading, setLoading] = useState(false);
@@ -100,7 +100,7 @@ export const TouristSpotPickerModal: React.FC<TouristSpotPickerModalProps> = ({
                     <div>
                         <h2 className="text-lg font-bold text-slate-900 dark:text-white">{title}</h2>
                         <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                            검색 후 행을 클릭하면 일정의 제목·설명·사진이 자동으로 채워집니다.
+                            Хайсны дараа мөр дээр дарвал хөтөлбөрийн гарчиг, тайлбар, зураг автоматаар бөглөгдөнө.
                         </p>
                     </div>
                     <button
@@ -113,7 +113,7 @@ export const TouristSpotPickerModal: React.FC<TouristSpotPickerModalProps> = ({
                 </div>
 
                 {/* Region tabs — same filter as the master page so admin
-                    can quickly switch between 중앙몽골 / 고비사막 / 홉스굴 */}
+                    can quickly switch between Төв Монгол / Говь цөл / Хөвсгөл */}
                 <div className="px-6 pt-3 border-b border-slate-100 dark:border-slate-800 flex items-center gap-1.5 overflow-x-auto">
                     {REGION_TABS.map((tab) => {
                         const count = tab.value === 'all'
@@ -149,7 +149,7 @@ export const TouristSpotPickerModal: React.FC<TouristSpotPickerModalProps> = ({
                         type="text"
                         value={q}
                         onChange={(e) => setQ(e.target.value)}
-                        placeholder="관광지명으로 검색"
+                        placeholder="Аялал жуулчлалын газрын нэрээр хайх"
                         autoFocus
                         className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-teal-500 outline-none"
                     />
@@ -157,22 +157,22 @@ export const TouristSpotPickerModal: React.FC<TouristSpotPickerModalProps> = ({
 
                 <div className="flex-1 overflow-auto">
                     {loading ? (
-                        <div className="py-20 text-center text-slate-500">불러오는 중...</div>
+                        <div className="py-20 text-center text-slate-500">Ачаалж байна...</div>
                     ) : filtered.length === 0 ? (
                         <div className="py-20 text-center text-sm text-slate-500 dark:text-slate-400">
                             {spots.length === 0
-                                ? '아직 등록된 관광지가 없습니다. 사이드바 → "관광지 마스터" 메뉴에서 먼저 등록해주세요.'
-                                : '조건에 맞는 관광지가 없습니다.'}
+                                ? 'Одоогоор бүртгэгдсэн аялал жуулчлалын газар алга байна. Хажуугийн цэс → "Аялал жуулчлалын газрын сан" цэснээс эхлээд бүртгэнэ үү.'
+                                : 'Нөхцөлд тохирох аялал жуулчлалын газар алга байна.'}
                         </div>
                     ) : (
                         <table className="w-full text-sm">
                             <thead className="bg-slate-50 dark:bg-slate-800/50 sticky top-0">
                                 <tr className="text-xs text-slate-500 dark:text-slate-400">
-                                    <th className="text-left px-4 py-2.5 font-medium w-16">대표</th>
-                                    <th className="text-left px-4 py-2.5 font-medium">관광지명</th>
-                                    <th className="text-left px-4 py-2.5 font-medium">주소</th>
-                                    <th className="text-center px-4 py-2.5 font-medium w-16">사진</th>
-                                    <th className="text-right px-4 py-2.5 font-medium w-24">선택</th>
+                                    <th className="text-left px-4 py-2.5 font-medium w-16">Үндсэн</th>
+                                    <th className="text-left px-4 py-2.5 font-medium">Аялал жуулчлалын газрын нэр</th>
+                                    <th className="text-left px-4 py-2.5 font-medium">Хаяг</th>
+                                    <th className="text-center px-4 py-2.5 font-medium w-16">Зураг</th>
+                                    <th className="text-right px-4 py-2.5 font-medium w-24">Сонгох</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -208,11 +208,11 @@ export const TouristSpotPickerModal: React.FC<TouristSpotPickerModalProps> = ({
                                                 {s.address || '-'}
                                             </td>
                                             <td className="px-4 py-3 text-center text-xs text-slate-500">
-                                                {(s.images || []).length}장
+                                                {(s.images || []).length} ширхэг
                                             </td>
                                             <td className="px-4 py-3 text-right">
                                                 <span className="inline-block px-3 py-1 rounded bg-teal-500 text-white text-xs font-bold">
-                                                    선택
+                                                    Сонгох
                                                 </span>
                                             </td>
                                         </tr>

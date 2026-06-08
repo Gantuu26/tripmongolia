@@ -11,7 +11,7 @@ interface PriceTableModalProps {
 }
 
 /**
- * Bottom-up "人数別の単価" modal. Re-uses the admin-managed pricingOptions
+ * Bottom-up "인원별 단가" modal. Re-uses the admin-managed pricingOptions
  * exactly — no hardcoded ladder — so what the admin sets is what users see.
  */
 export function PriceTableModal({ options, current, onChange, onClose }: PriceTableModalProps) {
@@ -68,7 +68,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                             letterSpacing: '-0.01em',
                         }}
                     >
-                        人数別のお1人様単価のご案内
+                        인원별 1인 단가 안내
                     </h3>
                     <button
                         type="button"
@@ -104,7 +104,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                 >
                     <div>
                         <div style={{ fontSize: 11, color: 'var(--fg-5)', fontWeight: 600 }}>
-                            現在のご選択
+                            현재 선택
                         </div>
                         <div
                             style={{
@@ -115,15 +115,15 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                                 letterSpacing: '-0.01em',
                             }}
                         >
-                            {currentOpt.people}名 ・ ¥{formatPrice(currentOpt.pricePerPerson)}{' '}
+                            {currentOpt.people}명 · ₩{formatPrice(currentOpt.pricePerPerson)}{' '}
                             <span style={{ fontWeight: 500, color: 'var(--fg-5)', fontSize: 13 }}>
-                                / 名
+                                / 1인
                             </span>
                         </div>
                     </div>
                     <div style={{ textAlign: 'right' }}>
                         <div style={{ fontSize: 11, color: 'var(--fg-5)', fontWeight: 600 }}>
-                            合計
+                            합계
                         </div>
                         <div
                             style={{
@@ -134,7 +134,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                                 letterSpacing: '-0.02em',
                             }}
                         >
-                            ¥{formatPrice(currentOpt.pricePerPerson * currentOpt.people)}
+                            ₩{formatPrice(currentOpt.pricePerPerson * currentOpt.people)}
                         </div>
                     </div>
                 </div>
@@ -160,9 +160,9 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                             letterSpacing: '0.04em',
                         }}
                     >
-                        <div>人数</div>
-                        <div style={{ textAlign: 'right' }}>お1人様単価</div>
-                        <div style={{ textAlign: 'right' }}>合計</div>
+                        <div>인원</div>
+                        <div style={{ textAlign: 'right' }}>1인 단가</div>
+                        <div style={{ textAlign: 'right' }}>합계</div>
                     </div>
                     {options.map((r) => {
                         const on = r.people === current;
@@ -200,7 +200,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                                                 : 'var(--fg-1)',
                                         }}
                                     >
-                                        {r.people}名
+                                        {r.people}명
                                     </span>
                                     {on && (
                                         <span
@@ -213,7 +213,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                                                 borderRadius: 4,
                                             }}
                                         >
-                                            現在
+                                            현재
                                         </span>
                                     )}
                                     {isBest && (
@@ -236,7 +236,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                                                 filled
                                                 color="#fff"
                                             />{' '}
-                                            最安
+                                            최저가
                                         </span>
                                     )}
                                 </div>
@@ -248,7 +248,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                                             color: 'var(--fg-1)',
                                         }}
                                     >
-                                        ¥{formatPrice(r.pricePerPerson)}
+                                        ₩{formatPrice(r.pricePerPerson)}
                                     </div>
                                     {savings > 0 && (
                                         <div
@@ -259,7 +259,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                                                 fontWeight: 600,
                                             }}
                                         >
-                                            お1人様 ¥{formatPrice(savings)} OFF
+                                            1인 ₩{formatPrice(savings)} 할인
                                         </div>
                                     )}
                                 </div>
@@ -271,7 +271,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                                         color: on ? 'var(--primary-dark, #115e59)' : 'var(--fg-1)',
                                     }}
                                 >
-                                    ¥{formatPrice(totalForGroup)}
+                                    ₩{formatPrice(totalForGroup)}
                                 </div>
                             </button>
                         );
@@ -313,7 +313,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                     >
                         <MatIcon name="help" size={14} color="var(--fg-3)" />
                     </span>
-                    なぜ人数によって料金が違うの？
+                    인원에 따라 요금이 다른 이유는?
                     <MatIcon
                         name="expand_more"
                         size={18}
@@ -337,8 +337,8 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                             lineHeight: 1.7,
                         }}
                     >
-                        ガイド・ドライバー・車両費は人数で割られるため、グループが大きいほどお1人様あたりの単価が下がります。
-                        人数によって最適な車両を自動でアサインします。
+                        가이드·드라이버·차량 비용은 인원수로 나누어지므로, 그룹이 클수록 1인당 단가가 낮아집니다.
+                        인원에 따라 최적의 차량을 자동으로 배정합니다.
                     </div>
                 )}
 
@@ -360,7 +360,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                         boxShadow: '0 8px 20px -6px rgba(15,118,110,0.5)',
                     }}
                 >
-                    この人数で予約する
+                    이 인원으로 예약하기
                 </button>
             </div>
         </div>

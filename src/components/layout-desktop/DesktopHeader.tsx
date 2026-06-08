@@ -8,12 +8,12 @@ interface DesktopHeaderProps {
 }
 
 const NAV_ITEMS: { id: string; label: string; path: string; match?: (p: string) => boolean }[] = [
-    { id: 'home', label: 'ホーム', path: '/', match: (p) => p === '/' },
-    { id: 'tours', label: 'ツアー商品', path: '/products', match: (p) => p === '/products' || p.startsWith('/category/') || p.startsWith('/products/') },
-    { id: 'mates', label: '同行者募集', path: '/travel-mates', match: (p) => p.startsWith('/travel-mates') },
-    { id: 'reviews', label: 'レビュー', path: '/reviews', match: (p) => p.startsWith('/reviews') },
-    { id: 'magazine', label: '旅マガジン', path: '/travel-guide', match: (p) => p.startsWith('/travel-guide') },
-    { id: 'quote', label: 'お見積もり', path: '/custom-estimate', match: (p) => p.startsWith('/custom-estimate') || p.startsWith('/estimate') },
+    { id: 'home', label: '홈', path: '/', match: (p) => p === '/' },
+    { id: 'tours', label: '투어 상품', path: '/products', match: (p) => p === '/products' || p.startsWith('/category/') || p.startsWith('/products/') },
+    { id: 'mates', label: '동행찾기', path: '/travel-mates', match: (p) => p.startsWith('/travel-mates') },
+    { id: 'reviews', label: '후기', path: '/reviews', match: (p) => p.startsWith('/reviews') },
+    { id: 'magazine', label: '여행 매거진', path: '/travel-guide', match: (p) => p.startsWith('/travel-guide') },
+    { id: 'quote', label: '견적', path: '/custom-estimate', match: (p) => p.startsWith('/custom-estimate') || p.startsWith('/estimate') },
 ];
 
 export function DesktopHeader({ contentWidth = 1280 }: DesktopHeaderProps) {
@@ -68,19 +68,19 @@ export function DesktopHeader({ contentWidth = 1280 }: DesktopHeaderProps) {
                 >
                     <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
                         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: '#5eead4' }}>
-                            <MatIcon name="verified" size={14} filled color="#5eead4" /> 日本語完全対応・現地旅行社
+                            <MatIcon name="verified" size={14} filled color="#5eead4" /> 한국어 완벽 지원·현지 여행사
                         </span>
                         <span style={{ opacity: 0.4 }}>|</span>
                         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                            <MatIcon name="schedule" size={14} color="#cbd5e1" /> 平日 9:00–18:00 (JST)
+                            <MatIcon name="schedule" size={14} color="#cbd5e1" /> 평일 9:00–18:00 (JST)
                         </span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
                         <button type="button" onClick={() => navigate('/login')} style={utilLinkBtn}>
-                            ログイン
+                            로그인
                         </button>
                         <button type="button" onClick={() => navigate('/login')} style={utilLinkBtn}>
-                            新規登録
+                            회원가입
                         </button>
                     </div>
                 </div>
@@ -105,7 +105,7 @@ export function DesktopHeader({ contentWidth = 1280 }: DesktopHeaderProps) {
                     <img src={logoSquare} alt="Milkyway Japan" style={{ height: 48, width: 48, objectFit: 'contain' }} />
                     <div style={{ textAlign: 'left', lineHeight: 1.15 }}>
                         <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--fg-1)', letterSpacing: '-0.01em' }}>Milkyway Japan</div>
-                        <div style={{ fontSize: 11, color: 'var(--fg-5)', marginTop: 2 }}>モンゴル旅行・モンゴルツアー専門</div>
+                        <div style={{ fontSize: 11, color: 'var(--fg-5)', marginTop: 2 }}>몽골 여행·몽골 투어 전문</div>
                     </div>
                 </button>
 
@@ -140,7 +140,7 @@ export function DesktopHeader({ contentWidth = 1280 }: DesktopHeaderProps) {
                     <input
                         value={searchValue}
                         onChange={(e) => setSearchValue(e.target.value)}
-                        placeholder="行きたいツアー・地域・テーマで検索 (例: ゴビ砂漠、乗馬…)"
+                        placeholder="가고 싶은 투어·지역·테마로 검색 (예: 고비사막, 승마…)"
                         style={{
                             flex: 1,
                             border: 'none',
@@ -165,15 +165,15 @@ export function DesktopHeader({ contentWidth = 1280 }: DesktopHeaderProps) {
                             fontFamily: 'inherit',
                         }}
                     >
-                        検索
+                        검색
                     </button>
                 </form>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <button type="button" onClick={() => navigate('/mypage/wishlist')} style={iconBtn} title="お気に入り">
+                    <button type="button" onClick={() => navigate('/mypage/wishlist')} style={iconBtn} title="찜 목록">
                         <MatIcon name="favorite" size={20} color="var(--fg-3)" />
                     </button>
-                    <button type="button" onClick={() => navigate('/mypage/notifications')} style={iconBtn} title="通知">
+                    <button type="button" onClick={() => navigate('/mypage/notifications')} style={iconBtn} title="알림">
                         <MatIcon name="notifications" size={20} color="var(--fg-3)" />
                     </button>
                     <button
@@ -195,7 +195,7 @@ export function DesktopHeader({ contentWidth = 1280 }: DesktopHeaderProps) {
                             boxShadow: '0 6px 18px -6px rgba(15,118,110,0.45)',
                         }}
                     >
-                        <MatIcon name="chat_bubble" size={16} filled color="#fff" /> 無料相談
+                        <MatIcon name="chat_bubble" size={16} filled color="#fff" /> 무료 상담
                     </button>
                 </div>
             </div>

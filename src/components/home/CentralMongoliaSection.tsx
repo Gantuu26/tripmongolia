@@ -54,14 +54,14 @@ export const CentralMongoliaSection: React.FC = () => {
         <section className="py-8 px-5 border-t border-slate-100 dark:border-slate-800">
             <div className="flex items-end justify-between mb-5">
                 <div>
-                    <h3 className="text-xl font-extrabold text-slate-900 dark:text-white">中央モンゴル クラシック</h3>
-                    <p className="text-[13px] text-slate-500 mt-1">青い草原と歴史が共存する場所</p>
+                    <h3 className="text-xl font-extrabold text-slate-900 dark:text-white">중앙몽골 클래식</h3>
+                    <p className="text-[13px] text-slate-500 mt-1">푸른 초원과 역사가 공존하는 곳</p>
                 </div>
                 <button
                     onClick={() => navigate('/products?category=central')}
                     className="text-primary text-sm font-bold flex items-center"
                 >
-                    もっと見る <span className="material-symbols-outlined text-sm">chevron_right</span>
+                    더보기 <span className="material-symbols-outlined text-sm">chevron_right</span>
                 </button>
             </div>
 
@@ -75,7 +75,7 @@ export const CentralMongoliaSection: React.FC = () => {
                     >
                         <div className="relative aspect-square rounded-2xl overflow-hidden mb-3 bg-slate-100 dark:bg-slate-800">
                             <img
-                                alt={`${product.name}｜中央モンゴル旅行・モンゴルツアー`}
+                                alt={`${product.name}｜중앙몽골여행・몽골투어`}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                 src={getOptimizedImageUrl(product.mainImages[0], 'productThumbnail')}
                                 loading="lazy"

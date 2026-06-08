@@ -11,8 +11,8 @@ export const AdminTourFAQManage: React.FC = () => {
     return (
         <AdminLayout
             activePage="faq"
-            title="투어 공통 FAQ"
-            description="모든 상품 상세 페이지 하단에 공통으로 표시됩니다. 「FAQ 관리」→「투어 공통 FAQ」 탭에서도 동일하게 편집 가능합니다."
+            title="Аяллын нийтлэг FAQ"
+            description="Бүх бүтээгдэхүүний дэлгэрэнгүй хуудасны доод хэсэгт нийтлэг харагдана. «FAQ удирдлага» → «Аяллын нийтлэг FAQ» табаас мөн адил засварлах боломжтой."
         >
             <div className="card route-anim">
                 <div className="card-pad">

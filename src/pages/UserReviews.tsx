@@ -39,7 +39,7 @@ export const UserReviews: React.FC = () => {
 
 const UserReviewsMobile: React.FC = () => {
     const navigate = useNavigate();
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const [filter, setFilter] = React.useState<'latest' | 'rating' | 'photo'>('latest');
     const [allReviews, setAllReviews] = useState<Review[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -63,7 +63,7 @@ const UserReviewsMobile: React.FC = () => {
                         return {
                             id: r.id,
                             author: r.user_name,
-                            date: formatShortDate(r.created_at, i18n.language),
+                            date: formatShortDate(r.created_at),
                             rating: r.rating,
                             title: r.title,
                             productName: r.product_name,
@@ -142,9 +142,9 @@ const UserReviewsMobile: React.FC = () => {
     return (
         <div className="bg-background-light dark:bg-background-dark font-display text-[#0e1a18] dark:text-white min-h-screen pb-20">
             <SEO
-                title="お客様のモンゴル旅行レビュー"
-                description={`モンゴルツアーに参加されたお客様のリアルな旅行レビュー${totalReviews > 0 ? `（${totalReviews}件・平均${averageRating}点）` : ''}。実際の体験談でツアー選びの参考にしてください。`}
-                keywords="モンゴル旅行レビュー, モンゴルツアー口コミ, モンゴル旅行体験談, Milkyway Japan レビュー"
+                title="고객 몽골 여행 후기"
+                description={`몽골 투어에 참가하신 고객님들의 생생한 여행 후기${totalReviews > 0 ? `(${totalReviews}건·평균 ${averageRating}점)` : ''}. 실제 체험담으로 투어 선택에 참고해 주세요.`}
+                keywords="몽골 여행 후기, 몽골 투어 후기, 몽골 여행 체험담, Milkyway Japan 후기"
                 canonical="/reviews"
                 structuredData={reviewStructuredData}
             />
@@ -250,7 +250,7 @@ const UserReviewsMobile: React.FC = () => {
                                         <div className="min-w-0 flex-1">
                                             <div className="flex flex-wrap items-center gap-x-1 gap-y-0.5 min-w-0">
                                                 <p className="text-sm font-bold text-[#0e1a18] dark:text-white truncate max-w-[160px]">{review.author}</p>
-                                                <span className="text-sm font-medium text-[#0e1a18] dark:text-white shrink-0">様</span>
+                                                <span className="text-sm font-medium text-[#0e1a18] dark:text-white shrink-0">님</span>
                                             </div>
                                             <ReviewStars rating={review.rating} size={16} className="mt-0.5" />
                                         </div>
@@ -275,7 +275,7 @@ const UserReviewsMobile: React.FC = () => {
                                             <img
                                                 key={idx}
                                                 src={img}
-                                                alt={`${review.author}様のレビュー写真 ${idx + 1}`}
+                                                alt={`${review.author}님의 리뷰 사진 ${idx + 1}`}
                                                 className="aspect-square rounded-lg object-cover w-full bg-gray-100 dark:bg-zinc-800"
                                                 loading="lazy"
                                                 decoding="async"

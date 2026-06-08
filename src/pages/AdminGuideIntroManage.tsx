@@ -52,7 +52,7 @@ export const AdminGuideIntroManage: React.FC = () => {
             setSavedAt(new Date().toLocaleTimeString('ja-JP'));
         } catch (e) {
             console.error('Failed to save guide intro:', e);
-            alert('保存に失敗しました');
+            alert('Хадгалахад алдаа гарлаа');
         } finally {
             setSaving(false);
         }
@@ -62,9 +62,9 @@ export const AdminGuideIntroManage: React.FC = () => {
 
     if (loading) {
         return (
-            <AdminLayout activePage="guide-intro" title="가이드 소개 (공통)">
+            <AdminLayout activePage="guide-intro" title="Хөтчийн танилцуулга (нийтлэг)">
                 <div className="route-anim" style={{ maxWidth: 920 }}>
-                    <div className="cell-muted" style={{ fontSize: 14 }}>읽어들이는 중...</div>
+                    <div className="cell-muted" style={{ fontSize: 14 }}>Ачааллаж байна...</div>
                 </div>
             </AdminLayout>
         );
@@ -76,22 +76,22 @@ export const AdminGuideIntroManage: React.FC = () => {
             onClick={handleSave}
             disabled={saving || !title.trim() || !body.trim()}
         >
-            <Icon name="check" />{saving ? '저장 중...' : '저장하기'}
+            <Icon name="check" />{saving ? 'Хадгалж байна...' : 'Хадгалах'}
         </button>
     );
 
     return (
-        <AdminLayout activePage="guide-intro" title="가이드 소개 (공통)" actions={saveBtn}>
+        <AdminLayout activePage="guide-intro" title="Хөтчийн танилцуулга (нийтлэг)" actions={saveBtn}>
             <div className="route-anim" style={{ maxWidth: 920 }}>
                 <div className="card-muted-note">
                     <Icon name="info" />
-                    <span>모든 투어 상품 상세 페이지(모바일·PC)에 공통으로 표시되는 “가이드 소개” 카드입니다. 여기서 한 번만 수정하면 전체 상품에 반영됩니다.</span>
+                    <span>Бүх аяллын бүтээгдэхүүний дэлгэрэнгүй хуудсанд (мобайл, ПК) нийтлэг харагдах “Хөтчийн танилцуулга” карт юм. Энд нэг л удаа засварлахад бүх бүтээгдэхүүнд тусгагдана.</span>
                 </div>
 
                 <div className="grid-2" style={{ gridTemplateColumns: '1fr 360px', alignItems: 'start', marginTop: 18 }}>
                     <div className="card card-pad">
                         <div className="field">
-                            <label>제목 <span className="muted" style={{ fontWeight: 500 }}>(예: 日本語ガイド同行)</span></label>
+                            <label>Гарчиг <span className="muted" style={{ fontWeight: 500 }}>(жишээ: 한국어 가이드 동행)</span></label>
                             <input
                                 className="inp"
                                 value={title}
@@ -99,7 +99,7 @@ export const AdminGuideIntroManage: React.FC = () => {
                             />
                         </div>
                         <div className="field">
-                            <label>본문 <span className="muted" style={{ fontWeight: 500 }}>(2~3 문장 권장)</span></label>
+                            <label>Үндсэн текст <span className="muted" style={{ fontWeight: 500 }}>(2~3 өгүүлбэр санал болгоно)</span></label>
                             <textarea
                                 className="inp"
                                 rows={4}
@@ -108,7 +108,7 @@ export const AdminGuideIntroManage: React.FC = () => {
                             />
                         </div>
                         <div className="field" style={{ marginBottom: 0 }}>
-                            <label>칩(태그) <span className="muted" style={{ fontWeight: 500 }}>(한 줄에 하나씩, 예: N1 取得済み)</span></label>
+                            <label>Чип (таг) <span className="muted" style={{ fontWeight: 500 }}>(нэг мөрөнд нэг, жишээ: 한국어 능통)</span></label>
                             <textarea
                                 className="inp"
                                 rows={4}
@@ -120,7 +120,7 @@ export const AdminGuideIntroManage: React.FC = () => {
                         <div className="row" style={{ marginTop: 18 }}>
                             {savedAt && (
                                 <span className="row" style={{ gap: 4, color: 'var(--mrt-green)', fontSize: 13, fontWeight: 700 }}>
-                                    <Icon name="check_circle" fill style={{ fontSize: 16 }} />{savedAt} 에 저장됨
+                                    <Icon name="check_circle" fill style={{ fontSize: 16 }} />{savedAt} -д хадгалагдсан
                                 </span>
                             )}
                             <div className="spacer" style={{ flex: 1 }} />
@@ -129,22 +129,22 @@ export const AdminGuideIntroManage: React.FC = () => {
                                 onClick={handleSave}
                                 disabled={saving || !title.trim() || !body.trim()}
                             >
-                                <Icon name="check" />{saving ? '저장 중...' : '저장하기'}
+                                <Icon name="check" />{saving ? 'Хадгалж байна...' : 'Хадгалах'}
                             </button>
                         </div>
                     </div>
 
                     <div>
-                        <div className="sec-label">미리보기</div>
+                        <div className="sec-label">Урьдчилан үзэх</div>
                         <div className="gi-preview">
                             <div className="row" style={{ gap: 12, marginBottom: 12 }}>
                                 <span className="gi-ava"><Icon name="translate" /></span>
                                 <div>
                                     <div className="gi-eyebrow">Your Guide</div>
-                                    <div className="cell-strong" style={{ fontSize: 15 }}>{title || '(제목 없음)'}</div>
+                                    <div className="cell-strong" style={{ fontSize: 15 }}>{title || '(Гарчиг байхгүй)'}</div>
                                 </div>
                             </div>
-                            <p className="gi-body">{body || '(본문 없음)'}</p>
+                            <p className="gi-body">{body || '(Үндсэн текст байхгүй)'}</p>
                             <div className="chip-row" style={{ gap: 6 }}>
                                 {chipList.map((c) => <span className="gi-chip" key={c}>{c}</span>)}
                             </div>

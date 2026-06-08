@@ -30,15 +30,15 @@ type Guide = {
 };
 
 const STATUS_BADGE: Record<string, { label: string; tone: string }> = {
-    new: { label: '신규 견적', tone: 'b-purple' },
-    processing: { label: '견적 작성중', tone: 'b-amber' },
-    answered: { label: '견적 발송됨', tone: 'b-blue' },
-    reservation_requested: { label: '예약 요청됨', tone: 'b-purple' },
-    pending_payment: { label: '입금 대기', tone: 'b-amber' },
-    paid: { label: '결제 완료', tone: 'b-blue' },
-    confirmed: { label: '예약 확정', tone: 'b-green' },
-    completed: { label: '여행 완료', tone: 'b-gray' },
-    cancelled: { label: '취소됨', tone: 'b-gray' },
+    new: { label: 'Шинэ үнийн санал', tone: 'b-purple' },
+    processing: { label: 'Үнийн санал боловсруулж байна', tone: 'b-amber' },
+    answered: { label: 'Үнийн санал илгээсэн', tone: 'b-blue' },
+    reservation_requested: { label: 'Захиалга хүссэн', tone: 'b-purple' },
+    pending_payment: { label: 'Төлбөр хүлээж байна', tone: 'b-amber' },
+    paid: { label: 'Төлбөр төлсөн', tone: 'b-blue' },
+    confirmed: { label: 'Захиалга баталгаажсан', tone: 'b-green' },
+    completed: { label: 'Аялал дууссан', tone: 'b-gray' },
+    cancelled: { label: 'Цуцалсан', tone: 'b-gray' },
 };
 
 const AV_TONES = ['tint-blue', 'tint-purple', 'tint-green', 'tint-amber', 'tint-ink'];
@@ -48,7 +48,7 @@ const formatDate = (value?: string) => {
     if (!value) return '-';
     const date = new Date(value);
     if (Number.isNaN(date.getTime())) return '-';
-    return `${date.getMonth() + 1}월 ${date.getDate()}일`;
+    return `${date.getMonth() + 1} сар ${date.getDate()} өдөр`;
 };
 const formatNumber = (value: number) => new Intl.NumberFormat('ko-KR').format(value);
 
@@ -73,15 +73,15 @@ export const AdminDashboard: React.FC = () => {
                 setReservations((reservationData || []).map((item: any) => ({
                     ...item,
                     createdAt: item.createdAt || item.created_at,
-                    customerName: item.customerName || item.customer_name || '이름 없음',
-                    productName: item.productName || item.product_name || '상품 미정',
+                    customerName: item.customerName || item.customer_name || 'Нэргүй',
+                    productName: item.productName || item.product_name || 'Бүтээгдэхүүн тодорхойгүй',
                     confirmedPrice: item.confirmedPrice || item.confirmed_price || 0,
                 })));
                 setQuotes(quoteData || []);
                 setGuides(guideData || []);
             } catch (error) {
                 console.error('Failed to fetch dashboard data', error);
-                setErrorMessage('대시보드 데이터를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.');
+                setErrorMessage('Хяналтын самбарын мэдээллийг ачаалж чадсангүй. Хэсэг хугацааны дараа дахин оролдоно уу.');
             } finally {
                 setIsLoading(false);
             }
@@ -105,24 +105,24 @@ export const AdminDashboard: React.FC = () => {
     const recentQuotes = quotes.slice(0, 3);
 
     const metricCards = [
-        { ico: 'today', tint: 'tint-blue', label: '오늘 신규 예약', value: `${metrics.todayReservations}`, unit: '건' },
-        { ico: 'request_quote', tint: 'tint-purple', label: '새 견적 요청', value: `${metrics.newQuotes}`, unit: '건' },
-        { ico: 'payments', tint: 'tint-amber', label: '입금 대기', value: `${metrics.unpaidReservations}`, unit: '건' },
-        { ico: 'paid', tint: 'tint-green', label: '확정 매출', value: `₩${formatNumber(metrics.confirmedSales)}`, unit: '' },
+        { ico: 'today', tint: 'tint-blue', label: 'Өнөөдрийн шинэ захиалга', value: `${metrics.todayReservations}`, unit: 'ширхэг' },
+        { ico: 'request_quote', tint: 'tint-purple', label: 'Шинэ үнийн санал хүсэлт', value: `${metrics.newQuotes}`, unit: 'ширхэг' },
+        { ico: 'payments', tint: 'tint-amber', label: 'Төлбөр хүлээж байна', value: `${metrics.unpaidReservations}`, unit: 'ширхэг' },
+        { ico: 'paid', tint: 'tint-green', label: 'Баталгаажсан орлого', value: `₩${formatNumber(metrics.confirmedSales)}`, unit: '' },
     ];
     const quickLinks = [
-        { t: '견적 응답 대기', s: '신규·작성중 견적', v: metrics.newQuotes, ico: 'mark_email_unread', tint: 'tint-purple', go: '/admin/quotes' },
-        { t: '입금 확인 필요', s: '예약금 미입금', v: metrics.unpaidReservations, ico: 'account_balance', tint: 'tint-amber', go: '/admin/reservations' },
-        { t: '투어 캘린더', s: '확정 투어 일정', v: metrics.ongoingTours, ico: 'calendar_today', tint: 'tint-blue', go: '/admin/calendar' },
+        { t: 'Үнийн санал хариу хүлээж байна', s: 'Шинэ·боловсруулж буй санал', v: metrics.newQuotes, ico: 'mark_email_unread', tint: 'tint-purple', go: '/admin/quotes' },
+        { t: 'Төлбөр баталгаажуулах шаардлагатай', s: 'Урьдчилгаа төлбөр төлөгдөөгүй', v: metrics.unpaidReservations, ico: 'account_balance', tint: 'tint-amber', go: '/admin/reservations' },
+        { t: 'Аяллын хуанли', s: 'Баталгаажсан аяллын хуваарь', v: metrics.ongoingTours, ico: 'calendar_today', tint: 'tint-blue', go: '/admin/calendar' },
     ];
 
     return (
         <AdminLayout
             activePage="dashboard"
-            title="대시보드"
+            title="Хяналтын самбар"
             actions={
                 <button type="button" className="btn btn-ink" onClick={() => navigate('/admin/quotes')}>
-                    <Icon name="request_quote" />견적 확인
+                    <Icon name="request_quote" />Үнийн санал шалгах
                 </button>
             }
         >
@@ -160,12 +160,12 @@ export const AdminDashboard: React.FC = () => {
                 <section className="grid-2">
                     <div className="card">
                         <div className="card-head">
-                            <h2>최근 예약</h2><div className="spacer" />
-                            <button className="link-action" onClick={() => navigate('/admin/reservations')}>전체 보기<Icon name="chevron_right" /></button>
+                            <h2>Сүүлийн захиалга</h2><div className="spacer" />
+                            <button className="link-action" onClick={() => navigate('/admin/reservations')}>Бүгдийг харах<Icon name="chevron_right" /></button>
                         </div>
                         <div className="tbl-wrap">
                             <table className="tbl">
-                                <thead><tr><th>예약번호</th><th>고객</th><th>상품</th><th>상태</th><th className="r">금액</th></tr></thead>
+                                <thead><tr><th>Захиалгын дугаар</th><th>Үйлчлүүлэгч</th><th>Бүтээгдэхүүн</th><th>Төлөв</th><th className="r">Дүн</th></tr></thead>
                                 <tbody>
                                     {recentReservations.map((r) => {
                                         const s = STATUS_BADGE[r.status || ''] || { label: r.status || '-', tone: 'b-gray' };
@@ -189,48 +189,48 @@ export const AdminDashboard: React.FC = () => {
                                 </tbody>
                             </table>
                             {!isLoading && recentReservations.length === 0 && (
-                                <div className="empty"><Icon name="inbox" /><p>최근 예약이 없습니다.</p></div>
+                                <div className="empty"><Icon name="inbox" /><p>Сүүлийн захиалга алга байна.</p></div>
                             )}
                         </div>
                     </div>
 
                     <div className="stack">
                         <div className="card">
-                            <div className="card-head"><h2>새 견적 요청</h2><div className="spacer" />
-                                <button className="link-action" onClick={() => navigate('/admin/quotes')}>견적 관리<Icon name="chevron_right" /></button></div>
+                            <div className="card-head"><h2>Шинэ үнийн санал хүсэлт</h2><div className="spacer" />
+                                <button className="link-action" onClick={() => navigate('/admin/quotes')}>Үнийн саналын удирдлага<Icon name="chevron_right" /></button></div>
                             <div style={{ padding: 12 }}>
                                 {recentQuotes.map((q) => (
                                     <button key={q.id} className="qlink" style={{ marginBottom: 8, padding: '13px 14px' }} onClick={() => navigate('/admin/quotes')}>
                                         <span className="qi tint-purple" style={{ width: 40, height: 40 }}><Icon name="request_quote" fill /></span>
-                                        <span className="qtext"><span className="qt">{q.name || '이름 없음'}</span>
-                                            <span className="qs">{q.destination || '목적지 미정'} · {formatDate(q.createdAt || q.created_at)}</span></span>
+                                        <span className="qtext"><span className="qt">{q.name || 'Нэргүй'}</span>
+                                            <span className="qs">{q.destination || 'Очих газар тодорхойгүй'} · {formatDate(q.createdAt || q.created_at)}</span></span>
                                         <Icon name="chevron_right" className="arr" />
                                     </button>
                                 ))}
                                 {!isLoading && recentQuotes.length === 0 && (
-                                    <div className="empty" style={{ padding: '28px 20px' }}><Icon name="inbox" /><p>대기 중인 견적 요청이 없습니다.</p></div>
+                                    <div className="empty" style={{ padding: '28px 20px' }}><Icon name="inbox" /><p>Хүлээгдэж буй үнийн саналын хүсэлт алга байна.</p></div>
                                 )}
                             </div>
                         </div>
 
                         <div className="card">
-                            <div className="card-head"><h2>가이드 현황</h2><div className="spacer" />
-                                <button className="link-action" onClick={() => navigate('/admin/guides')}>가이드 관리<Icon name="chevron_right" /></button></div>
+                            <div className="card-head"><h2>Хөтчийн төлөв</h2><div className="spacer" />
+                                <button className="link-action" onClick={() => navigate('/admin/guides')}>Хөтчийн удирдлага<Icon name="chevron_right" /></button></div>
                             <div style={{ padding: '8px 18px 14px' }}>
                                 {guides.slice(0, 5).map((g, i) => (
                                     <div key={g.id} className="row" style={{ padding: '9px 0', borderBottom: i < Math.min(guides.length, 5) - 1 ? '1px solid var(--border-subtle)' : 'none' }}>
                                         {g.image
-                                            ? <img className="avatar round" src={g.image} alt={g.name || '가이드'} />
+                                            ? <img className="avatar round" src={g.image} alt={g.name || 'Хөтөч'} />
                                             : <span className={`avatar round ${avTone(g.name || '?')}`}>{(g.name || '?').slice(0, 2)}</span>}
                                         <div style={{ minWidth: 0 }}>
-                                            <div className="cell-strong">{g.name || '이름 없음'}</div>
+                                            <div className="cell-strong">{g.name || 'Нэргүй'}</div>
                                         </div>
                                         <div className="spacer" style={{ flex: 1 }} />
-                                        <span className={`badge ${g.status === '활동중' ? 'b-green' : 'b-gray'}`}>{g.status || '대기'}</span>
+                                        <span className={`badge ${g.status === 'active' ? 'b-green' : 'b-gray'}`}>{g.status === 'active' ? 'Идэвхтэй' : 'Хүлээгдэж буй'}</span>
                                     </div>
                                 ))}
                                 {!isLoading && guides.length === 0 && (
-                                    <div className="empty" style={{ padding: '28px 20px' }}><Icon name="person_off" /><p>등록된 가이드가 없습니다.</p></div>
+                                    <div className="empty" style={{ padding: '28px 20px' }}><Icon name="person_off" /><p>Бүртгэгдсэн хөтөч алга байна.</p></div>
                                 )}
                             </div>
                         </div>

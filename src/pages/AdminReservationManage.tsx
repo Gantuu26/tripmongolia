@@ -30,7 +30,7 @@ interface Reservation {
     contractUrl?: string; // Excel Sheet URL
     itineraryUrl?: string; // Excel Sheet URL
     itineraryTemplateId?: string; // selected itinerary template
-    documentContent?: ReservationDocContent | null; // 고객별 편집·저장된 문서 내용
+    documentContent?: ReservationDocContent | null; // Үйлчлүүлэгч бүрээр засварлаж·хадгалсан баримтын агуулга
 
     contractData?: {
         travelers?: Array<{ name?: string; passportName?: string; age?: number | string; birthdate?: string; phone?: string; gender?: string }>;
@@ -89,28 +89,28 @@ interface Reservation {
 
 const quoteWorkflowMeta: Record<string, { label: string; hint: string; icon: string }> = {
     new: {
-        label: '신규 요청',
-        hint: '요청 조건 확인 필요',
+        label: 'Шинэ хүсэлт',
+        hint: 'Хүсэлтийн нөхцөл шалгах шаардлагатай',
         icon: 'fiber_new',
     },
     processing: {
-        label: '견적 작성 중',
-        hint: '일정·금액 입력 단계',
+        label: 'Үнийн санал боловсруулж байна',
+        hint: 'Хөтөлбөр·дүн оруулах шат',
         icon: 'edit_note',
     },
     answered: {
-        label: '견적 발송 완료',
-        hint: '고객 확인 대기',
+        label: 'Үнийн санал илгээгдсэн',
+        hint: 'Үйлчлүүлэгчийн баталгаа хүлээж байна',
         icon: 'mark_email_read',
     },
     reservation_requested: {
-        label: '예약 요청',
-        hint: '예약 전환 필요',
+        label: 'Захиалгын хүсэлт',
+        hint: 'Захиалга руу шилжүүлэх шаардлагатай',
         icon: 'priority_high',
     },
     converted: {
-        label: '예약 전환 완료',
-        hint: '예약 관리에서 진행',
+        label: 'Захиалга руу шилжсэн',
+        hint: 'Захиалгын удирдлагад үргэлжлүүлнэ',
         icon: 'task_alt',
     },
 };
@@ -118,8 +118,8 @@ const quoteWorkflowMeta: Record<string, { label: string; hint: string; icon: str
 const getQuoteAction = (reservation: Reservation) => {
     if (reservation.type !== 'quote') {
         return {
-            label: '상세 확인',
-            description: reservation.status === 'pending_payment' ? '입금 상태 확인' : '예약 내용 관리',
+            label: 'Дэлгэрэнгүй харах',
+            description: reservation.status === 'pending_payment' ? 'Шилжүүлгийн төлөв шалгах' : 'Захиалгын агуулга удирдах',
             icon: 'visibility',
             nextStatus: null as Reservation['status'] | null,
             primary: false,
@@ -129,40 +129,40 @@ const getQuoteAction = (reservation: Reservation) => {
     switch (reservation.status) {
         case 'new':
             return {
-                label: '검토 시작',
-                description: '클릭하면 검토 중으로 변경',
+                label: 'Хянаж эхлэх',
+                description: 'Дарвал хянаж байгаа төлөвт шилжинэ',
                 icon: 'play_arrow',
                 nextStatus: 'processing' as Reservation['status'],
                 primary: true,
             };
         case 'processing':
             return {
-                label: '견적 작성',
-                description: '금액·메모·URL 입력',
+                label: 'Үнийн санал боловсруулах',
+                description: 'Дүн·тэмдэглэл·URL оруулах',
                 icon: 'edit_note',
                 nextStatus: null,
                 primary: true,
             };
         case 'answered':
             return {
-                label: '재확인',
-                description: '발송 내용 확인·재발송',
+                label: 'Дахин шалгах',
+                description: 'Илгээсэн агуулга шалгах·дахин илгээх',
                 icon: 'outgoing_mail',
                 nextStatus: null,
                 primary: false,
             };
         case 'reservation_requested':
             return {
-                label: '예약 전환',
-                description: '예약 생성 필요',
+                label: 'Захиалга руу шилжүүлэх',
+                description: 'Захиалга үүсгэх шаардлагатай',
                 icon: 'sync_alt',
                 nextStatus: null,
                 primary: true,
             };
         default:
             return {
-                label: '견적 관리',
-                description: '상세 내용 확인',
+                label: 'Үнийн саналын удирдлага',
+                description: 'Дэлгэрэнгүй агуулга шалгах',
                 icon: 'manage_search',
                 nextStatus: null,
                 primary: false,
@@ -173,31 +173,31 @@ const getQuoteAction = (reservation: Reservation) => {
 const getWorkflowMeta = (reservation: Reservation) => {
     if (reservation.type === 'quote') {
         return quoteWorkflowMeta[reservation.status] || {
-            label: '견적 진행',
-            hint: '상태 확인 필요',
+            label: 'Үнийн санал боловсруулж байна',
+            hint: 'Төлөв шалгах шаардлагатай',
             icon: 'request_quote',
         };
     }
 
     if (reservation.status === 'pending_payment') {
         return {
-            label: '입금 대기',
-            hint: '예약금 확인 필요',
+            label: 'Шилжүүлэг хүлээж буй',
+            hint: 'Урьдчилгаа шалгах шаардлагатай',
             icon: 'payments',
         };
     }
 
     if (reservation.status === 'confirmed' || reservation.status === 'paid') {
         return {
-            label: reservation.status === 'confirmed' ? '예약 확정' : '결제 완료',
-            hint: '일정 운영 관리',
+            label: reservation.status === 'confirmed' ? 'Захиалга баталгаажсан' : 'Төлбөр дууссан',
+            hint: 'Хөтөлбөрийн үйл ажиллагаа удирдах',
             icon: 'event_available',
         };
     }
 
     return {
-        label: '예약 관리',
-        hint: '상세 확인',
+        label: 'Захиалгын удирдлага',
+        hint: 'Дэлгэрэнгүй харах',
         icon: 'assignment',
     };
 };
@@ -217,15 +217,15 @@ const STATUS_TONE: Record<string, string> = {
 };
 
 const STATUS_LABELS: Record<string, string> = {
-    pending_payment: '입금 대기',
-    paid: '결제 완료',
-    confirmed: '예약 확정',
-    cancelled: '취소됨',
-    new: '신규 견적',
-    processing: '견적 작성중',
-    answered: '견적 발송됨',
-    reservation_requested: '예약 요청됨',
-    converted: '예약 전환됨',
+    pending_payment: 'Шилжүүлэг хүлээж буй',
+    paid: 'Төлбөр дууссан',
+    confirmed: 'Захиалга баталгаажсан',
+    cancelled: 'Цуцлагдсан',
+    new: 'Шинэ үнийн санал',
+    processing: 'Үнийн санал боловсруулж буй',
+    answered: 'Үнийн санал илгээгдсэн',
+    reservation_requested: 'Захиалгын хүсэлт ирсэн',
+    converted: 'Захиалга руу шилжсэн',
 };
 
 const StatusDropdown = ({ status, onChange }: { status: string, onChange: (s: Reservation['status']) => void }) => {
@@ -328,7 +328,8 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
 
     const getTripDays = (): number => {
         if (!reservation) return 1;
-        // Try to match from date string first (e.g., "2024.05.01-05.05 (4박 5일)")
+        // Огнооны мөрнөөс эхлээд тааруулахыг оролдоно (ж.нь "2024.05.01-05.05 (4박 5일)")
+        // Тэмдэглэл: "박" нь DB-д хадгалагдсан огнооны утгын формат тул өөрчлөхгүй.
         let days = 1;
         const match = reservation.date.match(/(\d+)박/);
         if (match) {
@@ -427,7 +428,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                 {
                     timestamp: new Date().toISOString(),
                     type: 'modification',
-                    description: '担当ガイドが決定しました。',
+                    description: '담당 가이드가 확정되었습니다.',
                     detail: `${guide.name}`
                 }
             ]
@@ -471,7 +472,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                 {
                     timestamp: new Date().toISOString(),
                     type: 'modification',
-                    description: `${selectedDay}日目の宿泊先が確定しました。`,
+                    description: `${selectedDay}일차 숙소가 확정되었습니다.`,
                     detail: `${accommodation.name}`
                 }
             ]
@@ -493,24 +494,24 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
     const itineraryReady = !!editForm.itineraryTemplateId;
     const contractTravelers = editForm.contractData?.travelers || [];
     const contractHasTravelers = contractTravelers.length > 0 && !!contractTravelers[0]?.name;
-    // 고객이 계약서에서 직접 여행자 정보를 작성하므로, 이메일만 있으면 발송 가능
+    // Үйлчлүүлэгч гэрээнд аялагчдын мэдээллийг өөрөө бөглөдөг тул зөвхөн и-мэйл байхад илгээх боломжтой
     const contractReady = !!reservation.email;
-    const itinerarySent = timelineEvents.some((e: any) => e.type === 'email' && (e.detail === itineraryUrl || String(e.description || '').includes('日程')));
-    const contractSent = timelineEvents.some((e: any) => e.type === 'email' && (e.detail === contractUrl || String(e.description || '').includes('契約')));
+    const itinerarySent = timelineEvents.some((e: any) => e.type === 'email' && (e.detail === itineraryUrl || String(e.description || '').includes('日程') || String(e.description || '').includes('일정표')));
+    const contractSent = timelineEvents.some((e: any) => e.type === 'email' && (e.detail === contractUrl || String(e.description || '').includes('契約') || String(e.description || '').includes('계약서')));
     const guideReady = !!reservation.assignedGuide || !!reservation.areAssignmentsVisibleToUser;
 
-    // ── 문서 편집기(예약/견적 자동 채움) ──
+    // ── Баримтын засварлагч (захиалга/үнийн санал автоматаар бөглөнө) ──
     const isQuoteRes = (reservation as any).type === 'quote';
     const docPeopleCount = reservation.totalPeople || (reservation.headcount ? parseInt(String(reservation.headcount).replace(/[^0-9]/g, '')) : 0) || 0;
     const _sd = (reservation as any).startDate;
     const _ed = (reservation as any).endDate;
     const _nights = (_sd && _ed) ? Math.round((new Date(_ed).getTime() - new Date(_sd).getTime()) / 86400000) : NaN;
-    const docTripLength = (!Number.isNaN(_nights) && _nights >= 0) ? `${_nights}泊${_nights + 1}日` : undefined;
+    const docTripLength = (!Number.isNaN(_nights) && _nights >= 0) ? `${_nights}박 ${_nights + 1}일` : undefined;
     const docCustomer = {
         tripNumber: reservationNumber,
         period: reservation.date || '',
         tripLength: docTripLength,
-        headcount: reservation.headcount || (docPeopleCount ? `${docPeopleCount}名` : ''),
+        headcount: reservation.headcount || (docPeopleCount ? `${docPeopleCount}명` : ''),
         name: reservation.customerName,
         tripType: reservation.productName,
         totalAmount: editForm.totalAmount || undefined,
@@ -548,8 +549,8 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
 
     const copyCustomerMessage = async (kind: 'itinerary' | 'contract' | 'final') => {
         const url = kind === 'contract' ? contractUrl : itineraryUrl;
-        const title = kind === 'contract' ? '海外旅行契約書' : kind === 'itinerary' ? '確定日程表' : 'ご出発前の最終案内';
-        const body = `${reservation.customerName || 'お客様'} 様\n\nいつもお世話になっております。Milkyway Japanです。\n${reservation.productName}の${title}をご用意しました。\n下記リンクより内容をご確認ください。\n\n${url}\n\nご不明点や修正希望がございましたら、このままご返信ください。`;
+        const title = kind === 'contract' ? '해외여행 계약서' : kind === 'itinerary' ? '확정 일정표' : '출발 전 최종 안내';
+        const body = `${reservation.customerName || '고객'} 님\n\n안녕하세요. Milkyway Japan입니다.\n${reservation.productName}의 ${title}를 준비해 드렸습니다.\n아래 링크에서 내용을 확인해 주시기 바랍니다.\n\n${url}\n\n궁금하신 점이나 수정을 원하시는 부분이 있으시면 이 메일로 회신해 주시기 바랍니다.`;
         await navigator.clipboard.writeText(body);
         setCopiedDocId(`${kind}-message`);
         setTimeout(() => setCopiedDocId(null), 1500);
@@ -557,7 +558,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
 
     const sendItineraryToCustomer = async () => {
         if (!itineraryReady || !reservation.email) {
-            alert(!reservation.email ? '고객 이메일이 없습니다.' : '일정표 템플릿을 먼저 선택해 주세요.');
+            alert(!reservation.email ? 'Үйлчлүүлэгчийн и-мэйл байхгүй байна.' : 'Эхлээд аялалын хуваарийн загвар сонгоно уу.');
             return;
         }
         setSendingItinerary(true);
@@ -572,10 +573,10 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                 travelDates: reservation.date,
                 itineraryUrl,
             });
-            onUpdate(addHistory({ type: 'email', description: '確定日程表をお客様へ送信しました。', detail: itineraryUrl }));
-            alert('일정표 안내를 고객에게 발송했습니다.');
+            onUpdate(addHistory({ type: 'email', description: '확정 일정표를 고객님께 발송하였습니다.', detail: itineraryUrl }));
+            alert('Аялалын хуваарийн мэдэгдлийг үйлчлүүлэгчид илгээлээ.');
         } catch (e: any) {
-            alert(`발송 실패: ${e.message || e}`);
+            alert(`Илгээхэд алдаа гарлаа: ${e.message || e}`);
         } finally {
             setSendingItinerary(false);
         }
@@ -583,7 +584,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
 
     const sendContractToCustomer = async () => {
         if (!reservation.email) {
-            alert('고객 이메일이 없습니다.');
+            alert('Үйлчлүүлэгчийн и-мэйл байхгүй байна.');
             return;
         }
         setSendingContract(true);
@@ -598,10 +599,10 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                 travelDates: reservation.date,
                 contractUrl,
             });
-            onUpdate(addHistory({ type: 'email', description: '海外旅行契約書をお客様へ送信しました。', detail: contractUrl }));
-            alert('계약서 안내를 고객에게 발송했습니다.');
+            onUpdate(addHistory({ type: 'email', description: '해외여행 계약서를 고객님께 발송하였습니다.', detail: contractUrl }));
+            alert('Гэрээний мэдэгдлийг үйлчлүүлэгчид илгээлээ.');
         } catch (e: any) {
-            alert(`발송 실패: ${e.message || e}`);
+            alert(`Илгээхэд алдаа гарлаа: ${e.message || e}`);
         } finally {
             setSendingContract(false);
         }
@@ -609,7 +610,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
 
     const sendReadyDocumentsToCustomer = async () => {
         if (!reservation.email) {
-            alert('고객 이메일이 없습니다.');
+            alert('Үйлчлүүлэгчийн и-мэйл байхгүй байна.');
             return;
         }
 
@@ -623,7 +624,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
         }> = [
             {
                 key: 'itinerary',
-                title: '일정표',
+                title: 'Аялалын хуваарь',
                 ready: itineraryReady,
                 sent: itinerarySent,
                 send: () => sendNotificationEmail(reservation.email!, 'ITINERARY_READY', {
@@ -636,11 +637,11 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                     travelDates: reservation.date,
                     itineraryUrl,
                 }),
-                history: { type: 'email', description: '確定日程表をお客様へ送信しました。', detail: itineraryUrl },
+                history: { type: 'email', description: '확정 일정표를 고객님께 발송하였습니다.', detail: itineraryUrl },
             },
             {
                 key: 'contract',
-                title: '계약서',
+                title: 'Гэрээ',
                 ready: contractReady,
                 sent: contractSent,
                 send: () => sendNotificationEmail(reservation.email!, 'CONTRACT_READY', {
@@ -653,13 +654,13 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                     travelDates: reservation.date,
                     contractUrl,
                 }),
-                history: { type: 'email', description: '海外旅行契約書をお客様へ送信しました。', detail: contractUrl },
+                history: { type: 'email', description: '해외여행 계약서를 고객님께 발송하였습니다.', detail: contractUrl },
             },
         ];
 
         const readyJobs = jobs.filter((job) => job.ready && !job.sent);
         if (readyJobs.length === 0) {
-            alert('새로 발송할 준비된 문서가 없습니다. 이미 발송했거나 필수 정보가 부족합니다.');
+            alert('Шинээр илгээх бэлэн баримт байхгүй байна. Аль хэдийн илгээсэн эсвэл шаардлагатай мэдээлэл дутуу байна.');
             return;
         }
 
@@ -681,9 +682,9 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                     ...sentHistories,
                 ],
             });
-            alert(`${readyJobs.map((job) => job.title).join(', ')} 안내를 고객에게 발송했습니다.`);
+            alert(`${readyJobs.map((job) => job.title).join(', ')} мэдэгдлийг үйлчлүүлэгчид илгээлээ.`);
         } catch (e: any) {
-            alert(`통합 발송 실패: ${e.message || e}`);
+            alert(`Нэгдсэн илгээлт амжилтгүй боллоо: ${e.message || e}`);
         } finally {
             setSendingAllDocs(false);
             setSendingItinerary(false);
@@ -693,43 +694,43 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
 
     const operationSteps = [
         {
-            title: '예약 접수',
-            description: '주문 내용 확인 및 고객 정보 확보',
+            title: 'Захиалга хүлээн авах',
+            description: 'Захиалгын агуулга шалгах болон үйлчлүүлэгчийн мэдээлэл бүрдүүлэх',
             icon: 'assignment_turned_in',
             done: true,
-            actionLabel: '상세 확인',
+            actionLabel: 'Дэлгэрэнгүй харах',
             onAction: undefined as (() => void) | undefined,
         },
         {
-            title: '결제 확인',
-            description: editForm.depositStatus === 'paid' ? '예약금 입금 확인 완료' : '예약금 입금 확인 필요',
+            title: 'Төлбөр шалгах',
+            description: editForm.depositStatus === 'paid' ? 'Урьдчилгааны шилжүүлэг баталгаажсан' : 'Урьдчилгааны шилжүүлгийг шалгах шаардлагатай',
             icon: 'payments',
             done: editForm.depositStatus === 'paid',
-            actionLabel: editForm.depositStatus === 'paid' ? '완료' : '입금 확인',
+            actionLabel: editForm.depositStatus === 'paid' ? 'Дууссан' : 'Шилжүүлэг шалгах',
             onAction: editForm.depositStatus === 'paid' ? () => setTab('payment') : () => { setTab('payment'); toggleDepositStatus(); },
         },
         {
-            title: '일정표',
-            description: itinerarySent ? '고객 발송 완료' : itineraryReady ? `${selectedTemplate?.name || '선택한 템플릿'} 발송 가능` : '일정표 템플릿 선택 필요',
+            title: 'Аялалын хуваарь',
+            description: itinerarySent ? 'Үйлчлүүлэгчид илгээгдсэн' : itineraryReady ? `${selectedTemplate?.name || 'Сонгосон загвар'} илгээх боломжтой` : 'Аялалын хуваарийн загвар сонгох шаардлагатай',
             icon: 'map',
             done: itinerarySent,
-            actionLabel: itineraryReady ? '문서 확인' : '템플릿 필요',
+            actionLabel: itineraryReady ? 'Баримт шалгах' : 'Загвар шаардлагатай',
             onAction: () => { setTab('docs'); setActiveDocument('itinerary'); },
         },
         {
-            title: '계약서',
-            description: contractSent ? '고객 발송 완료' : contractHasTravelers ? `${contractTravelers.length}명 입력됨 · 재발송 가능` : '발송하면 고객이 직접 작성',
+            title: 'Гэрээ',
+            description: contractSent ? 'Үйлчлүүлэгчид илгээгдсэн' : contractHasTravelers ? `${contractTravelers.length} хүн оруулсан · дахин илгээх боломжтой` : 'Илгээвэл үйлчлүүлэгч өөрөө бөглөнө',
             icon: 'description',
             done: contractSent,
-            actionLabel: contractReady ? '문서 확인' : '이메일 없음',
+            actionLabel: contractReady ? 'Баримт шалгах' : 'И-мэйл байхгүй',
             onAction: () => { setTab('docs'); setActiveDocument('contract'); },
         },
         {
-            title: '현지 안내',
-            description: guideReady ? '가이드/숙소 안내 가능' : '가이드와 숙소 배정 필요',
+            title: 'Газар дээрх анхаарал',
+            description: guideReady ? 'Хөтөч/байрны мэдээлэл бэлэн' : 'Хөтөч болон байр хуваарилах шаардлагатай',
             icon: 'support_agent',
             done: !!reservation.areAssignmentsVisibleToUser,
-            actionLabel: guideReady ? '안내문 복사' : '가이드 배정',
+            actionLabel: guideReady ? 'Мэдэгдэл хуулах' : 'Хөтөч хуваарилах',
             onAction: guideReady ? () => copyCustomerMessage('final') : () => { setTab('payment'); setShowGuideModal(true); },
         },
     ];
@@ -769,10 +770,10 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
     };
 
     const DRAWER_TABS: Array<{ id: typeof tab; label: string; icon: string }> = [
-        { id: 'overview', label: '개요', icon: 'route' },
-        { id: 'payment', label: '결제·배정', icon: 'payments' },
-        { id: 'docs', label: '문서', icon: 'description' },
-        { id: 'history', label: '메모·이력', icon: 'history' },
+        { id: 'overview', label: 'Тойм', icon: 'route' },
+        { id: 'payment', label: 'Төлбөр·хуваарилалт', icon: 'payments' },
+        { id: 'docs', label: 'Баримт', icon: 'description' },
+        { id: 'history', label: 'Тэмдэглэл·түүх', icon: 'history' },
     ];
 
     return (<>
@@ -784,10 +785,10 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                     <div style={{ minWidth: 0, flex: 1 }}>
                         <div className="row" style={{ gap: 8, marginBottom: 5, flexWrap: 'wrap' }}>
                             <span className={`tag-type ${reservation.type !== 'quote' ? 'reservation' : 'quote'}`}>
-                                {reservation.type !== 'quote' ? '일반상품' : '맞춤견적'}
+                                {reservation.type !== 'quote' ? 'Энгийн бүтээгдэхүүн' : 'Захиалгат үнийн санал'}
                             </span>
                             <span className="cell-mono" style={{ fontSize: 13 }}>#{(reservation as any).reservationNumber || reservation.id.slice(0, 8).toUpperCase()}</span>
-                            <span className="cell-muted" style={{ fontSize: 12 }}>· 접수 {reservation.bookedAt}</span>
+                            <span className="cell-muted" style={{ fontSize: 12 }}>· Хүлээн авсан {reservation.bookedAt}</span>
                         </div>
                         <div className="page-title" style={{ fontSize: 18, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{reservation.productName}</div>
                     </div>
@@ -821,10 +822,10 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                         <div className="card card-pad">
                             <div className="row" style={{ marginBottom: 12 }}>
                                 <Icon name="route" style={{ color: 'var(--mrt-blue-strong)' }} />
-                                <b style={{ fontSize: 14, fontWeight: 800 }}>예약 처리 현황</b>
+                                <b style={{ fontSize: 14, fontWeight: 800 }}>Захиалгын боловсруулалтын явц</b>
                                 <div className="spacer" style={{ flex: 1 }} />
                                 <span className={`badge ${operationSteps.filter(s => s.done).length === operationSteps.length ? 'b-green' : 'b-blue'}`}>
-                                    {operationSteps.filter(s => s.done).length}/{operationSteps.length} 단계
+                                    {operationSteps.filter(s => s.done).length}/{operationSteps.length} алхам
                                 </span>
                             </div>
                             <div className="op-steps">
@@ -847,38 +848,38 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
 
                         {/* trip hero */}
                         <div className="trip-hero">
-                            <div className="th-label">여행 기간</div>
+                            <div className="th-label">Аялалын хугацаа</div>
                             <div className="th-date">{reservation.date}</div>
                             <div className="th-meta">
-                                <span><Icon name="event_available" />접수 {reservation.bookedAt}</span>
-                                <span><Icon name="group" />{reservation.headcount || '인원 미정'}</span>
+                                <span><Icon name="event_available" />Хүлээн авсан {reservation.bookedAt}</span>
+                                <span><Icon name="group" />{reservation.headcount || 'Хүний тоо тодорхойгүй'}</span>
                             </div>
                         </div>
 
                         {/* guest */}
                         <div className="card">
-                            <div className="card-head"><Icon name="person" style={{ color: 'var(--mrt-gray-600)' }} /><h2>예약자 정보</h2></div>
+                            <div className="card-head"><Icon name="person" style={{ color: 'var(--mrt-gray-600)' }} /><h2>Захиалагчийн мэдээлэл</h2></div>
                             <div className="card-pad" style={{ paddingTop: 14 }}>
-                                <div className="kv"><span>이름</span><b>{reservation.customerName}</b></div>
+                                <div className="kv"><span>Нэр</span><b>{reservation.customerName}</b></div>
                                 <div className="kv">
-                                    <span>인원</span>
+                                    <span>Хүний тоо</span>
                                     {isEditing ? (
                                         <span className="row" style={{ gap: 4 }}>
                                             <input
                                                 type="number"
                                                 value={editForm.totalPeople || ''}
-                                                onChange={(e) => setEditForm(prev => prev ? ({ ...prev, totalPeople: parseInt(e.target.value) || 0, headcount: `${e.target.value}명` }) : null)}
+                                                onChange={(e) => setEditForm(prev => prev ? ({ ...prev, totalPeople: parseInt(e.target.value) || 0, headcount: `${e.target.value}хүн` }) : null)}
                                                 className="inp"
                                                 style={{ width: 72, height: 32 }}
                                             />
-                                            <span className="cell-muted" style={{ fontSize: 12 }}>명</span>
+                                            <span className="cell-muted" style={{ fontSize: 12 }}>хүн</span>
                                         </span>
                                     ) : (
                                         <b>{reservation.headcount}</b>
                                     )}
                                 </div>
-                                <div className="kv"><span>연락처</span><b style={{ fontVariantNumeric: 'tabular-nums' }}>{reservation.phone || '—'}</b></div>
-                                <div className="kv" style={{ borderBottom: 'none' }}><span>이메일</span><b style={{ textAlign: 'right' }}>{reservation.email || '—'}</b></div>
+                                <div className="kv"><span>Утасны дугаар</span><b style={{ fontVariantNumeric: 'tabular-nums' }}>{reservation.phone || '—'}</b></div>
+                                <div className="kv" style={{ borderBottom: 'none' }}><span>И-мэйл</span><b style={{ textAlign: 'right' }}>{reservation.email || '—'}</b></div>
                             </div>
                         </div>
                     </div>
@@ -903,7 +904,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                     </div>
                                     <div style={{ flex: 1, minWidth: 0 }}>
                                         <div className="cell-muted" style={{ fontSize: 12.5 }}>
-                                            {paidPercent >= 100 ? '완납 완료' : `잔액 ₩${(editForm.totalAmount - paidAmount).toLocaleString()}`}
+                                            {paidPercent >= 100 ? 'Бүрэн төлөгдсөн' : `Үлдэгдэл ₩${(editForm.totalAmount - paidAmount).toLocaleString()}`}
                                         </div>
                                         <div className="row" style={{ gap: 6, marginTop: 2 }}>
                                             {isEditing ? (
@@ -927,16 +928,16 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                         className={`btn btn-sm ${editForm.status === 'paid' ? 'btn-blue' : 'btn-ghost'}`}
                                     >
                                         <Icon name="done_all" />
-                                        {editForm.status === 'paid' ? '전액완납' : '완납 처리'}
+                                        {editForm.status === 'paid' ? 'Бүрэн төлөгдсөн' : 'Бүрэн төлсөн гэж тэмдэглэх'}
                                     </button>
                                 </div>
                                 {/* Deposit + Balance cells */}
                                 <div className="grid-2" style={{ gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                                     <div className={`pay-cell${editForm.depositStatus === 'paid' ? ' paid' : ''}`}>
                                         <div className="row" style={{ justifyContent: 'space-between', marginBottom: 6 }}>
-                                            <span style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--text-secondary)' }}>예약금</span>
+                                            <span style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--text-secondary)' }}>Урьдчилгаа</span>
                                             <span className={`badge ${editForm.depositStatus === 'paid' ? 'b-green' : 'b-amber'}`}>
-                                                {editForm.depositStatus === 'paid' ? '입금' : '미납'}
+                                                {editForm.depositStatus === 'paid' ? 'Шилжүүлсэн' : 'Төлөөгүй'}
                                             </span>
                                         </div>
                                         {isEditing ? (
@@ -952,20 +953,20 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                         )}
                                         {editForm.depositStatus !== 'paid' && (
                                             <button onClick={toggleDepositStatus} className="btn btn-sm btn-blue" style={{ width: '100%', marginTop: 10 }}>
-                                                <Icon name="check" />입금 확인
+                                                <Icon name="check" />Шилжүүлэг баталгаажуулах
                                             </button>
                                         )}
                                         {editForm.depositStatus === 'paid' && (
                                             <button onClick={toggleDepositStatus} className="btn btn-sm btn-ghost" style={{ width: '100%', marginTop: 10 }}>
-                                                입금 취소
+                                                Шилжүүлэг цуцлах
                                             </button>
                                         )}
                                     </div>
                                     <div className={`pay-cell${editForm.balanceStatus === 'paid' ? ' paid' : ''}`}>
                                         <div className="row" style={{ justifyContent: 'space-between', marginBottom: 6 }}>
-                                            <span style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--text-secondary)' }}>잔금</span>
+                                            <span style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--text-secondary)' }}>Үлдэгдэл</span>
                                             <span className={`badge ${editForm.balanceStatus === 'paid' ? 'b-green' : 'b-amber'}`}>
-                                                {editForm.balanceStatus === 'paid' ? '입금' : '미납'}
+                                                {editForm.balanceStatus === 'paid' ? 'Шилжүүлсэн' : 'Төлөөгүй'}
                                             </span>
                                         </div>
                                         <div className="cell-price" style={{ fontSize: 16 }}>
@@ -973,12 +974,12 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                         </div>
                                         {editForm.balanceStatus !== 'paid' && (
                                             <button onClick={toggleBalanceStatus} className="btn btn-sm btn-blue" style={{ width: '100%', marginTop: 10 }}>
-                                                <Icon name="check" />입금 확인
+                                                <Icon name="check" />Шилжүүлэг баталгаажуулах
                                             </button>
                                         )}
                                         {editForm.balanceStatus === 'paid' && (
                                             <button onClick={toggleBalanceStatus} className="btn btn-sm btn-ghost" style={{ width: '100%', marginTop: 10 }}>
-                                                입금 취소
+                                                Шилжүүлэг цуцлах
                                             </button>
                                         )}
                                     </div>
@@ -988,10 +989,10 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                             {/* Guide */}
                             <div className="card">
                                 <div className="card-head">
-                                    <Icon name="badge" style={{ color: 'var(--mrt-gray-600)' }} /><h2>담당 가이드</h2>
+                                    <Icon name="badge" style={{ color: 'var(--mrt-gray-600)' }} /><h2>Хариуцсан хөтөч</h2>
                                     <div className="spacer" style={{ flex: 1 }} />
                                     <button className="link-action" onClick={() => setShowGuideModal(true)}>
-                                        {reservation.assignedGuide ? '변경' : '배정'}<Icon name="chevron_right" />
+                                        {reservation.assignedGuide ? 'Засах' : 'Хуваарилах'}<Icon name="chevron_right" />
                                     </button>
                                 </div>
                                 <div className="card-pad" style={{ paddingTop: 12 }}>
@@ -1006,11 +1007,11 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                                 <div className="cell-strong">{reservation.assignedGuide.name}</div>
                                                 <div className="cell-muted" style={{ fontSize: 12 }}>{reservation.assignedGuide.phone}</div>
                                             </div>
-                                            <button className="act-btn" title="변경" onClick={() => setShowGuideModal(true)}><Icon name="swap_horiz" /></button>
+                                            <button className="act-btn" title="Засах" onClick={() => setShowGuideModal(true)}><Icon name="swap_horiz" /></button>
                                         </div>
                                     ) : (
                                         <div className="assign-empty" onClick={() => setShowGuideModal(true)}>
-                                            <Icon name="person_add" />가이드를 배정하세요
+                                            <Icon name="person_add" />Хөтөч хуваарилна уу
                                         </div>
                                     )}
                                 </div>
@@ -1019,13 +1020,13 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                             {/* Trip Timeline / accommodation per day */}
                             <div className="card">
                                 <div className="card-head">
-                                    <Icon name="hotel" style={{ color: 'var(--mrt-gray-600)' }} /><h2>여행 일정 & 배정</h2>
+                                    <Icon name="hotel" style={{ color: 'var(--mrt-gray-600)' }} /><h2>Аялалын хөтөлбөр & хуваарилалт</h2>
                                     <div className="spacer" style={{ flex: 1 }} />
                                     <button
                                         className="link-action"
                                         onClick={async () => {
                                             if (!reservation.assignedGuide && (!reservation.dailyAccommodations || reservation.dailyAccommodations.length === 0)) {
-                                                alert('할당된 가이드나 숙소가 없습니다.');
+                                                alert('Хуваарилсан хөтөч эсвэл байр байхгүй байна.');
                                                 return;
                                             }
                                             const updated = {
@@ -1033,7 +1034,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                                 areAssignmentsVisibleToUser: true,
                                                 history: [
                                                     ...(reservation.history || []),
-                                                    { timestamp: new Date().toISOString(), type: 'modification', description: '担当ガイド・宿泊先のご案内を送信しました。' }
+                                                    { timestamp: new Date().toISOString(), type: 'modification', description: '담당 가이드·숙소 안내를 발송하였습니다.' }
                                                 ]
                                             };
                                             onUpdate(updated);
@@ -1046,12 +1047,12 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                                 reservationId: (reservation as any).reservationNumber || reservation.id,
                                                 reservationDbId: reservation.id,
                                             });
-                                            alert('고객에게 배정 알림 이메일을 발송했습니다.');
+                                            alert('Үйлчлүүлэгчид хуваарилалтын мэдэгдэл и-мэйл илгээлээ.');
                                         }}
-                                        title="배정 정보가 변경되었을 때 고객에게 이메일+인앱 알림을 보냅니다. 고객 마이페이지에는 이미 자동으로 표시되어 있습니다."
+                                        title="Хуваарилалтын мэдээлэл өөрчлөгдөхөд үйлчлүүлэгчид и-мэйл болон апп доторх мэдэгдэл илгээнэ. Үйлчлүүлэгчийн хувийн хуудсанд аль хэдийн автоматаар харагдаж байгаа."
                                     >
                                         <Icon name={reservation.areAssignmentsVisibleToUser ? 'mark_email_read' : 'send'} />
-                                        {reservation.areAssignmentsVisibleToUser ? '알림 재발송' : '고객에게 알림 발송'}
+                                        {reservation.areAssignmentsVisibleToUser ? 'Мэдэгдэл дахин илгээх' : 'Үйлчлүүлэгчид мэдэгдэл илгээх'}
                                     </button>
                                 </div>
                                 <div className="card-pad" style={{ paddingTop: 12 }}>
@@ -1060,7 +1061,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                             const assigned = reservation.dailyAccommodations?.find(d => d.day === day);
                                             return (
                                                 <div className="accom-day" key={day}>
-                                                    <span className="th-day">{day}일차</span>
+                                                    <span className="th-day">{day} дэх өдөр</span>
                                                     {assigned ? (
                                                         <div className="assign-row" style={{ flex: 1, padding: 0 }}>
                                                             {(assigned.accommodation.images && assigned.accommodation.images[0]) ? (
@@ -1072,11 +1073,11 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                                                 <div className="cell-strong">{assigned.accommodation.name}</div>
                                                                 <div className="cell-muted" style={{ fontSize: 12 }}>{assigned.accommodation.location || '—'}</div>
                                                             </div>
-                                                            <button className="act-btn" title="변경" onClick={() => { setSelectedDay(day); setShowAccommodationModal(true); }}><Icon name="edit" /></button>
+                                                            <button className="act-btn" title="Засах" onClick={() => { setSelectedDay(day); setShowAccommodationModal(true); }}><Icon name="edit" /></button>
                                                         </div>
                                                     ) : (
                                                         <button className="accom-empty" onClick={() => { setSelectedDay(day); setShowAccommodationModal(true); }}>
-                                                            <Icon name="add" />숙소 선택
+                                                            <Icon name="add" />Байр сонгох
                                                         </button>
                                                     )}
                                                 </div>
@@ -1084,7 +1085,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                         })}
                                     </div>
                                     <button className="accom-add" onClick={() => setExtraDays(prev => prev + 1)}>
-                                        <Icon name="add_circle" />일차 추가
+                                        <Icon name="add_circle" />Өдөр нэмэх
                                     </button>
                                 </div>
                             </div>
@@ -1096,7 +1097,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                             {/* Documents header */}
                             <div className="row" style={{ gap: 8 }}>
                                 <Icon name="folder_shared" style={{ color: 'var(--mrt-gray-600)' }} />
-                                <b style={{ fontSize: 14, fontWeight: 800 }}>고객 문서 작업</b>
+                                <b style={{ fontSize: 14, fontWeight: 800 }}>Үйлчлүүлэгчийн баримтын ажил</b>
                                 <div className="spacer" style={{ flex: 1 }} />
                                 <button
                                     onClick={sendReadyDocumentsToCustomer}
@@ -1104,15 +1105,15 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                     className="btn btn-sm btn-blue"
                                 >
                                     <Icon name={sendingAllDocs ? 'hourglass_top' : 'outgoing_mail'} />
-                                    {sendingAllDocs ? '발송중' : '준비 문서 일괄 발송'}
+                                    {sendingAllDocs ? 'Илгээж байна' : 'Бэлэн баримтыг бөөнөөр илгээх'}
                                 </button>
                             </div>
 
                             {/* Document type tabs */}
                             <div className="seg" style={{ width: '100%' }}>
                                 {[
-                                    { key: 'itinerary' as const, label: '일정표', ready: itineraryReady, sent: itinerarySent, icon: 'map' },
-                                    { key: 'contract' as const, label: '계약서', ready: contractReady, sent: contractSent, icon: 'contract' },
+                                    { key: 'itinerary' as const, label: 'Аялалын хуваарь', ready: itineraryReady, sent: itinerarySent, icon: 'map' },
+                                    { key: 'contract' as const, label: 'Гэрээ', ready: contractReady, sent: contractSent, icon: 'contract' },
                                 ].map(doc => (
                                     <button
                                         key={doc.key}
@@ -1132,12 +1133,12 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                 <div className="row" style={{ marginBottom: 12 }}>
                                     <span className="doc-ico tint-blue"><Icon name="map" fill /></span>
                                     <div style={{ flex: 1, minWidth: 0 }}>
-                                        <div className="cell-strong" style={{ fontSize: 14.5 }}>고객에게 보낼 문서</div>
-                                        <div className="cell-muted" style={{ fontSize: 12 }}>템플릿 선택 후 미리보기, 링크 복사, 이메일 발송을 처리합니다.</div>
+                                        <div className="cell-strong" style={{ fontSize: 14.5 }}>Үйлчлүүлэгчид илгээх баримт</div>
+                                        <div className="cell-muted" style={{ fontSize: 12 }}>Загвар сонгосны дараа урьдчилан харах, холбоос хуулах, и-мэйл илгээхийг гүйцэтгэнэ.</div>
                                     </div>
                                 </div>
                                 <label className="field" style={{ marginBottom: 12, display: 'block' }}>
-                                    <span style={{ display: 'block', fontSize: 11, fontWeight: 800, color: 'var(--text-tertiary)', marginBottom: 6 }}>일정표 템플릿</span>
+                                    <span style={{ display: 'block', fontSize: 11, fontWeight: 800, color: 'var(--text-tertiary)', marginBottom: 6 }}>Аялалын хуваарийн загвар</span>
                                     <select
                                         className="inp"
                                         value={editForm.itineraryTemplateId || ''}
@@ -1149,7 +1150,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                             setActiveDocument('itinerary');
                                         }}
                                     >
-                                        <option value="">일정표 템플릿 선택</option>
+                                        <option value="">Аялалын хуваарийн загвар сонгох</option>
                                         {templatesList.map((t: any) => (
                                             <option key={t.id} value={t.id}>{t.name}</option>
                                         ))}
@@ -1157,12 +1158,12 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                 </label>
                                 <div className="row" style={{ gap: 8, flexWrap: 'wrap' }}>
                                     <span className={`badge ${itinerarySent ? 'b-green' : itineraryReady ? 'b-blue' : 'b-amber'}`}>
-                                        일정표 {itinerarySent ? '발송완료' : itineraryReady ? '준비됨' : '대기'}
+                                        Аялалын хуваарь {itinerarySent ? 'илгээгдсэн' : itineraryReady ? 'бэлэн' : 'хүлээгдэж буй'}
                                     </span>
                                     <span className={`badge ${contractSent ? 'b-green' : contractReady ? 'b-blue' : 'b-amber'}`}>
-                                        계약서 {contractSent ? '발송완료' : contractReady ? '준비됨' : '대기'}
+                                        Гэрээ {contractSent ? 'илгээгдсэн' : contractReady ? 'бэлэн' : 'хүлээгдэж буй'}
                                     </span>
-                                    <span className="badge b-gray">고객 페이지 자동 연결</span>
+                                    <span className="badge b-gray">Үйлчлүүлэгчийн хуудастай автоматаар холбогдоно</span>
                                 </div>
                             </div>
 
@@ -1174,10 +1175,10 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                     </span>
                                     <div style={{ flex: 1, minWidth: 0 }}>
                                         <div className="cell-strong" style={{ fontSize: 14.5 }}>
-                                            {activeDocument === 'itinerary' ? '확정 일정표' : '여행 계약서'}
+                                            {activeDocument === 'itinerary' ? 'Баталгаажсан аялалын хуваарь' : 'Аялалын гэрээ'}
                                         </div>
                                         <div className="cell-muted" style={{ fontSize: 12 }}>
-                                            이곳에서는 문서 상태만 확인합니다. 실제 수정은 전용 편집 화면에서 진행합니다.
+                                            Энд зөвхөн баримтын төлвийг шалгана. Бодит засварыг тусгай засварлах дэлгэцэнд хийнэ.
                                         </div>
                                     </div>
                                 </div>
@@ -1187,7 +1188,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                         className="btn btn-sm btn-blue"
                                     >
                                         <Icon name="edit_document" />
-                                        {reservation.documentContent ? '저장된 문서 편집' : '문서 직접 편집'}
+                                        {reservation.documentContent ? 'Хадгалсан баримт засах' : 'Баримтыг шууд засах'}
                                     </button>
                                     <button
                                         onClick={() => window.open(activeDocument === 'itinerary' ? itineraryUrl : contractUrl, '_blank')}
@@ -1195,7 +1196,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                         className="btn btn-sm btn-ghost"
                                     >
                                         <Icon name="open_in_new" />
-                                        새 창에서 열기
+                                        Шинэ цонхонд нээх
                                     </button>
                                     <button
                                         onClick={() => {
@@ -1209,7 +1210,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                         className="btn btn-sm btn-ghost"
                                     >
                                         <Icon name={copiedDocId === activeDocument ? 'check' : 'content_copy'} />
-                                        {copiedDocId === activeDocument ? '복사됨' : '링크 복사'}
+                                        {copiedDocId === activeDocument ? 'Хуулагдсан' : 'Холбоос хуулах'}
                                     </button>
                                     <button
                                         onClick={activeDocument === 'itinerary' ? sendItineraryToCustomer : sendContractToCustomer}
@@ -1218,8 +1219,8 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                     >
                                         <Icon name="send" />
                                         {activeDocument === 'itinerary'
-                                            ? (sendingItinerary ? '발송중' : '일정표 발송')
-                                            : (sendingContract ? '발송중' : '계약서 발송')}
+                                            ? (sendingItinerary ? 'Илгээж байна' : 'Аялалын хуваарь илгээх')
+                                            : (sendingContract ? 'Илгээж байна' : 'Гэрээ илгээх')}
                                     </button>
                                 </div>
                             </div>
@@ -1231,9 +1232,9 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                             {/* Admin Memo */}
                             <div className="card">
                                 <div className="card-head">
-                                    <Icon name="sticky_note_2" style={{ color: 'var(--mrt-gray-600)' }} /><h2>관리자 메모</h2>
+                                    <Icon name="sticky_note_2" style={{ color: 'var(--mrt-gray-600)' }} /><h2>Админ тэмдэглэл</h2>
                                     <div className="spacer" style={{ flex: 1 }} />
-                                    <span className="cell-muted" style={{ fontSize: 11.5 }}>고객 비공개 · 내부 전용</span>
+                                    <span className="cell-muted" style={{ fontSize: 11.5 }}>Үйлчлүүлэгчид нууц · дотоод зориулалттай</span>
                                 </div>
                                 <div className="card-pad" style={{ paddingTop: 12 }}>
                                     <div className="memo-box">
@@ -1243,17 +1244,17 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                             onFocus={() => setMemoFocused(true)}
                                             onBlur={() => setMemoFocused(false)}
                                             onKeyDown={e => { if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') addMemo(); }}
-                                            placeholder="이 예약에 대한 메모를 남기세요. (예: 고객 특이사항, 파트너 연락 결과…)"
+                                            placeholder="Энэ захиалгын талаар тэмдэглэл үлдээнэ үү. (ж.нь: үйлчлүүлэгчийн онцлог, түнштэй холбогдсон үр дүн…)"
                                             rows={memoFocused || memoDraft ? 3 : 2}
                                         />
                                         <div className="row" style={{ justifyContent: 'space-between', marginTop: 8 }}>
-                                            <span className="cell-muted" style={{ fontSize: 11.5 }}>⌘ + Enter 로 저장</span>
+                                            <span className="cell-muted" style={{ fontSize: 11.5 }}>⌘ + Enter дарж хадгална</span>
                                             <button
                                                 onClick={addMemo}
                                                 disabled={!memoDraft.trim()}
                                                 className={`btn btn-sm ${memoDraft.trim() ? 'btn-ink' : 'btn-soft'}`}
                                             >
-                                                메모 추가
+                                                Тэмдэглэл нэмэх
                                             </button>
                                         </div>
                                     </div>
@@ -1266,7 +1267,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                                         <b style={{ fontSize: 11, color: 'var(--text-secondary)' }}>Admin</b>
                                                         <span className="cell-muted" style={{ fontSize: 11 }}>· {new Date(m.timestamp).toLocaleString('ko-KR')}</span>
                                                         <div className="spacer" style={{ flex: 1 }} />
-                                                        <button className="act-btn danger" style={{ width: 26, height: 26 }} onClick={() => deleteMemo(m.timestamp)} title="메모 삭제">
+                                                        <button className="act-btn danger" style={{ width: 26, height: 26 }} onClick={() => deleteMemo(m.timestamp)} title="Тэмдэглэл устгах">
                                                             <Icon name="delete_outline" style={{ fontSize: 15 }} />
                                                         </button>
                                                     </div>
@@ -1279,7 +1280,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
 
                             {/* History Timeline */}
                             <div className="card">
-                                <div className="card-head"><Icon name="history" style={{ color: 'var(--mrt-gray-600)' }} /><h2>처리 이력</h2></div>
+                                <div className="card-head"><Icon name="history" style={{ color: 'var(--mrt-gray-600)' }} /><h2>Боловсруулалтын түүх</h2></div>
                                 {timelineEvents.length > 0 ? (
                                     <div style={{ padding: '8px 20px 16px' }}>
                                         {[...timelineEvents].reverse().map((e: any, i: number, arr: any[]) => (
@@ -1297,7 +1298,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                                         ))}
                                     </div>
                                 ) : (
-                                    <div className="empty"><Icon name="history" /><p>처리 이력이 없습니다.</p></div>
+                                    <div className="empty"><Icon name="history" /><p>Боловсруулалтын түүх байхгүй байна.</p></div>
                                 )}
                             </div>
                     </div>
@@ -1308,22 +1309,22 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
                 <div className="drawer-foot">
                     {isEditing ? (
                         <>
-                            <button onClick={handleCancel} className="btn btn-ghost">취소</button>
+                            <button onClick={handleCancel} className="btn btn-ghost">Цуцлах</button>
                             <div className="spacer" style={{ flex: 1 }} />
-                            <button onClick={handleSave} className="btn btn-ink"><Icon name="check" />저장</button>
+                            <button onClick={handleSave} className="btn btn-ink"><Icon name="check" />Хадгалах</button>
                         </>
                     ) : (
                         <>
-                            <button onClick={onClose} className="btn btn-ghost">닫기</button>
+                            <button onClick={onClose} className="btn btn-ghost">Хаах</button>
                             <div className="spacer" style={{ flex: 1 }} />
-                            <button onClick={() => copyCustomerMessage('final')} className="btn btn-ghost"><Icon name="content_copy" />안내문 복사</button>
-                            <button onClick={() => setIsEditing(true)} className="btn btn-ink"><Icon name="edit" />수정</button>
+                            <button onClick={() => copyCustomerMessage('final')} className="btn btn-ghost"><Icon name="content_copy" />Мэдэгдэл хуулах</button>
+                            <button onClick={() => setIsEditing(true)} className="btn btn-ink"><Icon name="edit" />Засах</button>
                         </>
                     )}
                 </div>
 
                 {copiedDocId === 'final-message' && (
-                    <div className="drawer-toast"><Icon name="check_circle" fill />고객 안내문이 복사되었습니다</div>
+                    <div className="drawer-toast"><Icon name="check_circle" fill />Үйлчлүүлэгчийн мэдэгдэл хуулагдлаа</div>
                 )}
             </div>
         </div>
@@ -1333,13 +1334,13 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
             <div className="picker-scrim" onClick={() => setShowGuideModal(false)}>
                 <div className="picker" onClick={e => e.stopPropagation()}>
                     <div className="card-head">
-                        <h2>가이드 선택</h2>
+                        <h2>Хөтөч сонгох</h2>
                         <div className="spacer" style={{ flex: 1 }} />
                         <button className="icon-btn" style={{ width: 34, height: 34 }} onClick={() => setShowGuideModal(false)}><Icon name="close" /></button>
                     </div>
                     <div className="picker-list">
                         {guideList.length === 0 ? (
-                            <div className="empty"><Icon name="person_off" /><p>등록된 가이드가 없습니다</p></div>
+                            <div className="empty"><Icon name="person_off" /><p>Бүртгэгдсэн хөтөч байхгүй байна</p></div>
                         ) : guideList.map((guide: any) => (
                             <button
                                 key={guide.id}
@@ -1375,13 +1376,13 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
             <div className="picker-scrim" onClick={() => setShowAccommodationModal(false)}>
                 <div className="picker" onClick={e => e.stopPropagation()}>
                     <div className="card-head">
-                        <h2>{selectedDay}일차 숙소 선택</h2>
+                        <h2>{selectedDay} дэх өдрийн байр сонгох</h2>
                         <div className="spacer" style={{ flex: 1 }} />
                         <button className="icon-btn" style={{ width: 34, height: 34 }} onClick={() => setShowAccommodationModal(false)}><Icon name="close" /></button>
                     </div>
                     <div className="picker-list">
                         {accommodationList.length === 0 ? (
-                            <div className="empty"><Icon name="hotel" /><p>등록된 숙소가 없습니다</p></div>
+                            <div className="empty"><Icon name="hotel" /><p>Бүртгэгдсэн байр байхгүй байна</p></div>
                         ) : accommodationList.map((acc: any) => (
                             <button
                                 key={acc.id}
@@ -1409,7 +1410,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
         <ReservationDocumentEditor
             open={docEditorOpen}
             onClose={() => setDocEditorOpen(false)}
-            title={`${reservation.customerName || '고객'} · ${isQuoteRes ? '見積提案書' : '確定日程表'}`}
+            title={`${reservation.customerName || 'Үйлчлүүлэгч'} · ${isQuoteRes ? 'Үнийн саналын санал' : 'Баталгаажсан аялалын хуваарь'}`}
             customer={docCustomer}
             initialContent={docInitialContent}
             onSave={saveDocContent}
@@ -1427,9 +1428,9 @@ export const AdminReservationManage: React.FC = () => {
 
     // Filter States
     const [searchTerm, setSearchTerm] = useState('');
-    const [filterStatus, setFilterStatus] = useState('전체 상태');
-    const [filterPayment, setFilterPayment] = useState('전체 결제');
-    const [filterType, setFilterType] = useState('전체 유형');
+    const [filterStatus, setFilterStatus] = useState('Бүх төлөв');
+    const [filterPayment, setFilterPayment] = useState('Бүх төлбөр');
+    const [filterType, setFilterType] = useState('Бүх төрөл');
     const [filterDeparture, setFilterDeparture] = useState('');
     const [convertTarget, setConvertTarget] = useState<QuoteRequest | null>(null);
 
@@ -1483,7 +1484,7 @@ export const AdminReservationManage: React.FC = () => {
                     departureMs: toTime(startDate),
                     date: startDate
                         ? `${new Date(startDate).toLocaleDateString('ko-KR')} ~ ${endDate ? new Date(endDate).toLocaleDateString('ko-KR') : ''}`
-                        : r.duration || '날짜 미정',
+                        : r.duration || 'Огноо тодорхойгүй',
                     bookedAt: createdAt ? new Date(createdAt).toLocaleDateString('ko-KR') : '',
                     status: r.status,
                     bookedAtMs: toTime(createdAt),
@@ -1511,7 +1512,7 @@ export const AdminReservationManage: React.FC = () => {
                     dailyAccommodations: r.dailyAccommodations || r.daily_accommodations,
                     history: r.history || [],
                     areAssignmentsVisibleToUser: r.areAssignmentsVisibleToUser || r.are_assignments_visible_to_user || false,
-                    headcount: travelers ? `${travelers}名` : '미정',
+                    headcount: travelers ? `${travelers}хүн` : 'Тодорхойгүй',
                     totalPeople: travelers,
                     phone: r.phone || r.customerPhone || r.customer_phone || r.customer_info?.phone || '',
                     email: r.email || r.customerEmail || r.customer_email || r.customer_info?.email || '',
@@ -1538,7 +1539,7 @@ export const AdminReservationManage: React.FC = () => {
                         type: 'quote',
                         productName: `${q.destination || 'モンゴル'} 맞춤 견적`,
                         customerName: q.name,
-                        date: q.period || '일정 미정',
+                        date: q.period || 'Хөтөлбөр тодорхойгүй',
                         bookedAt: createdAt ? new Date(createdAt).toLocaleDateString('ko-KR') : '',
                         bookedAtMs: toTime(createdAt),
                         status: q.status,
@@ -1581,7 +1582,7 @@ export const AdminReservationManage: React.FC = () => {
 
         } catch (error) {
             console.error('Error fetching data:', error);
-            alert('데이터를 불러오는 데 실패했습니다.');
+            alert('Өгөгдөл татахад алдаа гарлаа.');
         }
     };
     // End of fetchReservations
@@ -1608,7 +1609,7 @@ export const AdminReservationManage: React.FC = () => {
                 history.push({
                     timestamp: new Date().toISOString(),
                     type: 'status_change',
-                    description: `ご予約ステータスが変更されました: ${statusLabels[updated.status] || updated.status}`,
+                    description: `예약 상태가 변경되었습니다: ${statusLabels[updated.status] || updated.status}`,
                     detail: `${oldReservation.status} -> ${updated.status}`
                 });
             }
@@ -1618,7 +1619,7 @@ export const AdminReservationManage: React.FC = () => {
                 history.push({
                     timestamp: new Date().toISOString(),
                     type: 'document_added',
-                    description: '確定日程表がアップロードされました',
+                    description: '확정 일정표가 업로드되었습니다',
                     detail: updated.itineraryUrl
                 });
             }
@@ -1628,7 +1629,7 @@ export const AdminReservationManage: React.FC = () => {
                 history.push({
                     timestamp: new Date().toISOString(),
                     type: 'document_added',
-                    description: '海外旅行契約書がアップロードされました',
+                    description: '해외여행 계약서가 업로드되었습니다',
                     detail: updated.contractUrl
                 });
             }
@@ -1690,15 +1691,15 @@ export const AdminReservationManage: React.FC = () => {
             // Notification Logic
             if (oldReservation.status !== updated.status && updated.userId) {
                 const statusMessages: Record<string, string> = {
-                    confirmed: 'ご予約が確定しました！',
-                    paid: 'お支払いが完了しました。まもなく確定となります。',
-                    cancelled: 'ご予約がキャンセルされました。'
+                    confirmed: '예약이 확정되었습니다!',
+                    paid: '결제가 완료되었습니다. 곧 확정될 예정입니다.',
+                    cancelled: '예약이 취소되었습니다.'
                 };
                 if (statusMessages[updated.status]) {
                     await sendNotification({
                         userId: updated.userId,
                         type: 'reservation',
-                        title: 'ご予約状況の更新',
+                        title: '예약 상태 업데이트',
                         message: `${updated.productName} — ${statusMessages[updated.status]}`,
                         link: `/mypage/reservations`
                     });
@@ -1709,18 +1710,18 @@ export const AdminReservationManage: React.FC = () => {
                 await sendNotification({
                     userId: updated.userId,
                     type: 'reservation',
-                    title: '担当ガイド・宿泊先のご案内',
-                    message: `${updated.productName} の担当ガイドと宿泊先が確定しました。ご確認ください。`,
+                    title: '담당 가이드·숙소 안내',
+                    message: `${updated.productName}의 담당 가이드와 숙소가 확정되었습니다. 확인해 주시기 바랍니다.`,
                     link: `/mypage/reservations`
                 });
             }
 
-            alert('예약 정보가 업데이트되었습니다.');
+            alert('Захиалгын мэдээлэл шинэчлэгдлээ.');
             // Only fetch if strictly necessary, otherwise optimistic is fine.
             // fetchReservations(); 
         } catch (error) {
             console.error('Error updating reservation:', error);
-            alert('예약 정보 수정에 실패했습니다.');
+            alert('Захиалгын мэдээлэл засахад алдаа гарлаа.');
         }
     };
 
@@ -1736,16 +1737,16 @@ export const AdminReservationManage: React.FC = () => {
             const targetItem = reservations.find(r => r.id === id);
             if (targetItem && targetItem.userId) {
                 const statusMessages: Record<string, string> = {
-                    confirmed: 'ご予約が確定しました！',
-                    paid: 'お支払いが完了しました。',
-                    cancelled: 'ご予約がキャンセルされました。',
-                    answered: 'お見積りが到着しました。',
+                    confirmed: '예약이 확정되었습니다!',
+                    paid: '결제가 완료되었습니다.',
+                    cancelled: '예약이 취소되었습니다.',
+                    answered: '견적이 도착했습니다.',
                 };
                 if (statusMessages[newStatus]) {
                     await sendNotification({
                         userId: targetItem.userId,
                         type: 'reservation',
-                        title: type === 'quote' ? 'お見積り状況の更新' : 'ご予約状況の更新',
+                        title: type === 'quote' ? '견적 상태 업데이트' : '예약 상태 업데이트',
                         message: `${targetItem.productName} — ${statusMessages[newStatus]}`,
                         link: type === 'quote' ? '/mypage/estimates' : '/mypage/reservations'
                     });
@@ -1770,12 +1771,12 @@ export const AdminReservationManage: React.FC = () => {
 
         } catch (error) {
             console.error('Failed to update status:', error);
-            alert('상태 업데이트에 실패했습니다.');
+            alert('Төлөв шинэчлэхэд алдаа гарлаа.');
         }
     };
 
     const handleDelete = async (id: string, type: string) => {
-        if (!window.confirm('정말 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.')) return;
+        if (!window.confirm('Үнэхээр устгах уу? Энэ үйлдлийг буцаах боломжгүй.')) return;
 
         try {
             if (type === 'quote') {
@@ -1784,13 +1785,13 @@ export const AdminReservationManage: React.FC = () => {
                 await api.reservations.delete(id);
             }
 
-            alert('삭제되었습니다.');
+            alert('Устгагдлаа.');
             setReservations(prev => prev.filter(r => r.id !== id));
             if (selectedReservation?.id === id) setSelectedReservation(null);
 
         } catch (error: any) {
             console.error('Error deleting item:', error);
-            alert(`삭제 중 오류가 발생했습니다: ${error.message}`);
+            alert(`Устгах үед алдаа гарлаа: ${error.message}`);
         }
     };
 
@@ -1814,23 +1815,23 @@ export const AdminReservationManage: React.FC = () => {
             ].filter(Boolean).join(' ').toLowerCase();
 
             const matchesSearch = !normalizedSearch || haystack.includes(normalizedSearch);
-            const matchesStatus = filterStatus === '전체 상태' ||
-                (filterStatus === '입금 대기' && res.status === 'pending_payment') ||
-                (filterStatus === '결제 완료' && res.status === 'paid') ||
-                (filterStatus === '예약 확정' && res.status === 'confirmed') ||
-                (filterStatus === '취소됨' && res.status === 'cancelled') ||
-                (filterStatus === '신규 견적' && res.status === 'new') ||
-                (filterStatus === '견적 작성 중' && res.status === 'processing') ||
-                (filterStatus === '견적 발송 완료' && res.status === 'answered') ||
-                (filterStatus === '예약 요청' && res.status === 'reservation_requested');
-            const matchesType = filterType === '전체 유형' ||
-                (filterType === '맞춤 견적' && res.type === 'quote') ||
-                (filterType === '일반 상품' && res.type !== 'quote');
-            const matchesPayment = filterPayment === '전체 결제' ||
-                (filterPayment === '예약금 미입금' && res.depositStatus !== 'paid') ||
-                (filterPayment === '예약금 입금' && res.depositStatus === 'paid') ||
-                (filterPayment === '잔금 미입금' && res.balanceStatus !== 'paid') ||
-                (filterPayment === '잔금 입금' && res.balanceStatus === 'paid');
+            const matchesStatus = filterStatus === 'Бүх төлөв' ||
+                (filterStatus === 'Шилжүүлэг хүлээж буй' && res.status === 'pending_payment') ||
+                (filterStatus === 'Төлбөр дууссан' && res.status === 'paid') ||
+                (filterStatus === 'Захиалга баталгаажсан' && res.status === 'confirmed') ||
+                (filterStatus === 'Цуцлагдсан' && res.status === 'cancelled') ||
+                (filterStatus === 'Шинэ үнийн санал' && res.status === 'new') ||
+                (filterStatus === 'Үнийн санал боловсруулж буй' && res.status === 'processing') ||
+                (filterStatus === 'Үнийн санал илгээгдсэн' && res.status === 'answered') ||
+                (filterStatus === 'Захиалгын хүсэлт' && res.status === 'reservation_requested');
+            const matchesType = filterType === 'Бүх төрөл' ||
+                (filterType === 'Захиалгат үнийн санал' && res.type === 'quote') ||
+                (filterType === 'Энгийн бүтээгдэхүүн' && res.type !== 'quote');
+            const matchesPayment = filterPayment === 'Бүх төлбөр' ||
+                (filterPayment === 'Урьдчилгаа төлөөгүй' && res.depositStatus !== 'paid') ||
+                (filterPayment === 'Урьдчилгаа төлсөн' && res.depositStatus === 'paid') ||
+                (filterPayment === 'Үлдэгдэл төлөөгүй' && res.balanceStatus !== 'paid') ||
+                (filterPayment === 'Үлдэгдэл төлсөн' && res.balanceStatus === 'paid');
             const matchesDeparture = !filterDeparture || res.startDate === filterDeparture;
 
             return matchesSearch && matchesStatus && matchesType && matchesPayment && matchesDeparture;
@@ -1872,8 +1873,8 @@ export const AdminReservationManage: React.FC = () => {
         <>
             <AdminLayout
                 activePage="reservations"
-                title="통합 예약 관리"
-                description="상품 예약, 맞춤 견적 전환, 결제 상태를 한 화면에서 관리합니다."
+                title="Нэгдсэн захиалгын удирдлага"
+                description="Бүтээгдэхүүний захиалга, захиалгат үнийн саналын шилжүүлэг, төлбөрийн төлвийг нэг дэлгэцээс удирдана."
                 isDarkMode={isDarkMode}
                 toggleTheme={toggleTheme}
                 actions={
@@ -1883,7 +1884,7 @@ export const AdminReservationManage: React.FC = () => {
                         className="btn btn-ghost"
                     >
                         <Icon name="refresh" />
-                        새로고침
+                        Шинэчлэх
                     </button>
                 }
             >
@@ -1891,19 +1892,19 @@ export const AdminReservationManage: React.FC = () => {
                     {/* Summary Cards */}
                     <div className="metric-grid" style={{ gridTemplateColumns: 'repeat(6, 1fr)' }}>
                         {[
-                            { label: '전체 예약 건수', value: stats.total, icon: 'folder_managed', tint: 'tint-blue' },
-                            { label: '입금 대기', value: stats.pending, icon: 'payments', tint: 'tint-amber' },
-                            { label: '예약 확정', value: stats.confirmed, icon: 'verified', tint: 'tint-green' },
-                            { label: '맞춤 견적 진행중', value: stats.quoteTodo, icon: 'request_quote', tint: 'tint-blue' },
-                            { label: '계약서 발송 완료', value: stats.contractSent, icon: 'contract', tint: 'tint-purple' },
-                            { label: '여행 출발 예정', value: stats.departingSoon, icon: 'flight_takeoff', tint: 'tint-red' },
+                            { label: 'Нийт захиалгын тоо', value: stats.total, icon: 'folder_managed', tint: 'tint-blue' },
+                            { label: 'Шилжүүлэг хүлээж буй', value: stats.pending, icon: 'payments', tint: 'tint-amber' },
+                            { label: 'Захиалга баталгаажсан', value: stats.confirmed, icon: 'verified', tint: 'tint-green' },
+                            { label: 'Захиалгат үнийн санал боловсруулж буй', value: stats.quoteTodo, icon: 'request_quote', tint: 'tint-blue' },
+                            { label: 'Гэрээ илгээгдсэн', value: stats.contractSent, icon: 'contract', tint: 'tint-purple' },
+                            { label: 'Удахгүй хөдлөх аялал', value: stats.departingSoon, icon: 'flight_takeoff', tint: 'tint-red' },
                         ].map(card => (
                             <div key={card.label} className="metric">
                                 <div className="metric-top">
                                     <span className={`metric-ico ${card.tint}`}><Icon name={card.icon} fill /></span>
                                 </div>
                                 <div className="metric-label">{card.label}</div>
-                                <div className="metric-value">{card.value}<small>건</small></div>
+                                <div className="metric-value">{card.value}<small>ширхэг</small></div>
                             </div>
                         ))}
                     </div>
@@ -1912,16 +1913,16 @@ export const AdminReservationManage: React.FC = () => {
                     <div className="card card-pad">
                         <div className="row" style={{ marginBottom: 16 }}>
                             <div style={{ minWidth: 0 }}>
-                                <h2 style={{ fontSize: 16, fontWeight: 800, margin: 0, color: 'var(--text-strong)' }}>검색 및 필터</h2>
-                                <p className="cell-muted" style={{ fontSize: 12, marginTop: 4 }}>고객명, 이메일, 전화번호, 예약번호, 여행상품으로 검색할 수 있습니다.</p>
+                                <h2 style={{ fontSize: 16, fontWeight: 800, margin: 0, color: 'var(--text-strong)' }}>Хайлт ба шүүлтүүр</h2>
+                                <p className="cell-muted" style={{ fontSize: 12, marginTop: 4 }}>Үйлчлүүлэгчийн нэр, и-мэйл, утасны дугаар, захиалгын дугаар, аялалын бүтээгдэхүүнээр хайх боломжтой.</p>
                             </div>
                             <div className="spacer" style={{ flex: 1 }} />
                             <button
-                                onClick={() => { setSearchTerm(''); setFilterStatus('전체 상태'); setFilterPayment('전체 결제'); setFilterType('전체 유형'); setFilterDeparture(''); setCurrentPage(1); }}
+                                onClick={() => { setSearchTerm(''); setFilterStatus('Бүх төлөв'); setFilterPayment('Бүх төлбөр'); setFilterType('Бүх төрөл'); setFilterDeparture(''); setCurrentPage(1); }}
                                 className="btn btn-soft btn-sm"
                             >
                                 <Icon name="restart_alt" />
-                                초기화
+                                Анхдагш болгох
                             </button>
                         </div>
                         <div className="toolbar" style={{ marginBottom: 0 }}>
@@ -1929,33 +1930,33 @@ export const AdminReservationManage: React.FC = () => {
                                 <Icon name="search" />
                                 <input
                                     type="text"
-                                    placeholder="고객명 / 이메일 / 전화번호 / 예약번호 / 상품명"
+                                    placeholder="Үйлчлүүлэгчийн нэр / И-мэйл / Утасны дугаар / Захиалгын дугаар / Бүтээгдэхүүний нэр"
                                     value={searchTerm}
                                     onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
                                 />
                             </label>
                             <select value={filterStatus} onChange={(e) => { setFilterStatus(e.target.value); setCurrentPage(1); }} className="select">
-                                <option>전체 상태</option>
-                                <option value="입금 대기">입금 대기</option>
-                                <option value="결제 완료">결제 완료</option>
-                                <option value="예약 확정">예약 확정</option>
-                                <option value="신규 견적">신규 견적</option>
-                                <option value="견적 작성 중">견적 작성 중</option>
-                                <option value="견적 발송 완료">견적 발송 완료</option>
-                                <option value="예약 요청">예약 요청</option>
-                                <option value="취소됨">취소됨</option>
+                                <option>Бүх төлөв</option>
+                                <option value="Шилжүүлэг хүлээж буй">Шилжүүлэг хүлээж буй</option>
+                                <option value="Төлбөр дууссан">Төлбөр дууссан</option>
+                                <option value="Захиалга баталгаажсан">Захиалга баталгаажсан</option>
+                                <option value="Шинэ үнийн санал">Шинэ үнийн санал</option>
+                                <option value="Үнийн санал боловсруулж буй">Үнийн санал боловсруулж буй</option>
+                                <option value="Үнийн санал илгээгдсэн">Үнийн санал илгээгдсэн</option>
+                                <option value="Захиалгын хүсэлт">Захиалгын хүсэлт</option>
+                                <option value="Цуцлагдсан">Цуцлагдсан</option>
                             </select>
                             <select value={filterPayment} onChange={(e) => { setFilterPayment(e.target.value); setCurrentPage(1); }} className="select">
-                                <option>전체 결제</option>
-                                <option>예약금 미입금</option>
-                                <option>예약금 입금</option>
-                                <option>잔금 미입금</option>
-                                <option>잔금 입금</option>
+                                <option>Бүх төлбөр</option>
+                                <option>Урьдчилгаа төлөөгүй</option>
+                                <option>Урьдчилгаа төлсөн</option>
+                                <option>Үлдэгдэл төлөөгүй</option>
+                                <option>Үлдэгдэл төлсөн</option>
                             </select>
                             <input type="date" value={filterDeparture} onChange={(e) => { setFilterDeparture(e.target.value); setCurrentPage(1); }} className="select" style={{ paddingRight: 13 }} />
                         </div>
                         <div className="chip-row" style={{ marginTop: 14 }}>
-                            {['전체 유형', '일반 상품', '맞춤 견적'].map(type => (
+                            {['Бүх төрөл', 'Энгийн бүтээгдэхүүн', 'Захиалгат үнийн санал'].map(type => (
                                 <button key={type} onClick={() => { setFilterType(type); setCurrentPage(1); }} className={`chip${filterType === type ? ' active' : ''}`}>
                                     {type}
                                 </button>
@@ -1966,27 +1967,27 @@ export const AdminReservationManage: React.FC = () => {
                     {/* Reservation List */}
                     <div className="card">
                         <div className="card-head">
-                            <h2>예약 · 견적 목록</h2>
-                            <span className="cell-muted" style={{ fontSize: 13 }}>{filteredReservations.length}건</span>
+                            <h2>Захиалга · үнийн саналын жагсаалт</h2>
+                            <span className="cell-muted" style={{ fontSize: 13 }}>{filteredReservations.length} ширхэг</span>
                             <div className="spacer" />
                             <div className="seg">
-                                <button className={filterType === '전체 유형' ? 'active' : ''} onClick={() => { setFilterType('전체 유형'); setCurrentPage(1); }}>전체</button>
-                                <button className={filterType === '일반 상품' ? 'active' : ''} onClick={() => { setFilterType('일반 상품'); setCurrentPage(1); }}>예약</button>
-                                <button className={filterType === '맞춤 견적' ? 'active' : ''} onClick={() => { setFilterType('맞춤 견적'); setCurrentPage(1); }}>견적</button>
+                                <button className={filterType === 'Бүх төрөл' ? 'active' : ''} onClick={() => { setFilterType('Бүх төрөл'); setCurrentPage(1); }}>Бүгд</button>
+                                <button className={filterType === 'Энгийн бүтээгдэхүүн' ? 'active' : ''} onClick={() => { setFilterType('Энгийн бүтээгдэхүүн'); setCurrentPage(1); }}>Захиалга</button>
+                                <button className={filterType === 'Захиалгат үнийн санал' ? 'active' : ''} onClick={() => { setFilterType('Захиалгат үнийн санал'); setCurrentPage(1); }}>Үнийн санал</button>
                             </div>
                         </div>
                         <div className="tbl-wrap">
                             <table className="tbl">
                                 <thead>
                                     <tr>
-                                        <th>예약번호</th>
-                                        <th>고객 / 연락처</th>
-                                        <th>상품</th>
-                                        <th className="c">인원</th>
-                                        <th>투어일</th>
-                                        <th>상태</th>
-                                        <th className="r">금액</th>
-                                        <th className="r">관리</th>
+                                        <th>Захиалгын дугаар</th>
+                                        <th>Үйлчлүүлэгч / Холбоо барих</th>
+                                        <th>Бүтээгдэхүүн</th>
+                                        <th className="c">Хүний тоо</th>
+                                        <th>Аялалын өдөр</th>
+                                        <th>Төлөв</th>
+                                        <th className="r">Дүн</th>
+                                        <th className="r">Удирдлага</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -2001,20 +2002,20 @@ export const AdminReservationManage: React.FC = () => {
                                                     <div className="cell-mono">#{reservationNo}</div>
                                                     <div style={{ marginTop: 3 }}>
                                                         <span className={`tag-type ${res.type === 'quote' ? 'quote' : 'reservation'}`}>
-                                                            {res.type === 'quote' ? '맞춤견적' : '일반상품'}
+                                                            {res.type === 'quote' ? 'Захиалгат үнийн санал' : 'Энгийн бүтээгдэхүүн'}
                                                         </span>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div>
                                                         <div className="cell-strong">{res.customerName}</div>
-                                                        <div className="cell-muted" style={{ fontSize: 12 }}>{res.email || res.phone || '연락처 미입력'}</div>
+                                                        <div className="cell-muted" style={{ fontSize: 12 }}>{res.email || res.phone || 'Холбоо барих мэдээлэл оруулаагүй'}</div>
                                                     </div>
                                                 </td>
                                                 <td className="cell-muted" style={{ maxWidth: 240 }}>
                                                     <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={res.productName}>{res.productName}</div>
                                                 </td>
-                                                <td className="c cell-mono">{res.headcount || '미정'}</td>
+                                                <td className="c cell-mono">{res.headcount || 'Тодорхойгүй'}</td>
                                                 <td className="cell-muted">{res.date}</td>
                                                 <td>
                                                     <span className={`badge ${statusTone}`}>
@@ -2040,10 +2041,10 @@ export const AdminReservationManage: React.FC = () => {
                                                             <Icon name={nextAction.icon} />
                                                             {nextAction.label}
                                                         </button>
-                                                        <button className="act-btn" title="상세" onClick={() => setSelectedReservation(res)}>
+                                                        <button className="act-btn" title="Дэлгэрэнгүй" onClick={() => setSelectedReservation(res)}>
                                                             <Icon name="visibility" />
                                                         </button>
-                                                        <button className="act-btn danger" title="삭제" onClick={() => handleDelete(res.id, res.type)}>
+                                                        <button className="act-btn danger" title="Устгах" onClick={() => handleDelete(res.id, res.type)}>
                                                             <Icon name="delete" />
                                                         </button>
                                                     </div>
@@ -2054,14 +2055,14 @@ export const AdminReservationManage: React.FC = () => {
                                 </tbody>
                             </table>
                             {displayedReservations.length === 0 && (
-                                <div className="empty"><Icon name="manage_search" /><p>검색 결과가 없습니다.</p></div>
+                                <div className="empty"><Icon name="manage_search" /><p>Хайлтын үр дүн байхгүй байна.</p></div>
                             )}
                         </div>
 
                         {/* Pagination */}
                         <div className="row" style={{ padding: '14px 20px', borderTop: '1px solid var(--border-subtle)' }}>
                             <span className="cell-muted" style={{ fontSize: 12 }}>
-                                총 {filteredReservations.length}건 중 {filteredReservations.length === 0 ? 0 : ((currentPage - 1) * itemsPerPage) + 1}-{Math.min(currentPage * itemsPerPage, filteredReservations.length)} 표시
+                                Нийт {filteredReservations.length} ширхэгээс {filteredReservations.length === 0 ? 0 : ((currentPage - 1) * itemsPerPage) + 1}-{Math.min(currentPage * itemsPerPage, filteredReservations.length)} харуулж байна
                             </span>
                             <div className="spacer" style={{ flex: 1 }} />
                             <div className="row" style={{ gap: 8 }}>
@@ -2109,7 +2110,7 @@ export const AdminReservationManage: React.FC = () => {
                             fetchReservations();
                         } catch (e) {
                             console.error(e);
-                            alert('견적 수정 실패');
+                            alert('Үнийн санал засахад алдаа гарлаа');
                         }
                     }}
                     onSendEstimate={async (url, note, priceDetail, confirmedStartDate, confirmedEndDate, itineraryTemplateId) => {
@@ -2146,13 +2147,13 @@ export const AdminReservationManage: React.FC = () => {
 
                                 if (!emailResult.success) {
                                     console.error('Email Send Error:', emailResult.error);
-                                    alert('견적 정보는 저장되었으나, 이메일 발송에 실패했습니다.');
+                                    alert('Үнийн саналын мэдээлэл хадгалагдсан боловч и-мэйл илгээхэд алдаа гарлаа.');
                                 } else {
-                                    alert(`견적서가 발송되었습니다. (이메일 알림 포함)\n확정 금액: ${priceDetail.totalAmount ? priceDetail.totalAmount.toLocaleString() + '원' : '미입력'}`);
+                                    alert(`Үнийн санал илгээгдлээ. (и-мэйл мэдэгдэл орсон)\nБаталгаажсан дүн: ${priceDetail.totalAmount ? priceDetail.totalAmount.toLocaleString() + '원' : 'Оруулаагүй'}`);
                                 }
                             } catch (emailError) {
                                 console.error('Email Unexpected Error:', emailError);
-                                alert('견적 정보는 저장되었으나, 이메일 발송 중 오류가 발생했습니다.');
+                                alert('Үнийн саналын мэдээлэл хадгалагдсан боловч и-мэйл илгээх үед алдаа гарлаа.');
                             }
 
                             fetchReservations();
@@ -2160,7 +2161,7 @@ export const AdminReservationManage: React.FC = () => {
 
                         } catch (e: any) {
                             console.error(e);
-                            alert(`견적서 발송 실패: ${e.message}`);
+                            alert(`Үнийн санал илгээхэд алдаа гарлаа: ${e.message}`);
                         }
                     }}
                     onOpenConvert={() => {
@@ -2208,7 +2209,7 @@ export const AdminReservationManage: React.FC = () => {
                                 updated_at: new Date().toISOString()
                             });
 
-                            alert('예약이 성공적으로 생성되었습니다.');
+                            alert('Захиалга амжилттай үүслээ.');
 
                             // Optionally send email here too?
                             // await sendNotificationEmail(...)
@@ -2219,7 +2220,7 @@ export const AdminReservationManage: React.FC = () => {
 
                         } catch (e: any) {
                             console.error(e);
-                            alert(`예약 생성 실패: ${e.message}`);
+                            alert(`Захиалга үүсгэхэд алдаа гарлаа: ${e.message}`);
                         }
                     }}
                 />

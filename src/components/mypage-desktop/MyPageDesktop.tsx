@@ -42,14 +42,14 @@ interface Quote {
 }
 
 const MENU_ITEMS = [
-    { id: 'overview', label: '概要', icon: 'dashboard', path: '/mypage' },
-    { id: 'reservations', label: 'ご予約', icon: 'event_available', path: '/mypage/reservations' },
-    { id: 'estimates', label: '見積もり履歴', icon: 'description', path: '/mypage/estimates' },
-    { id: 'travel-mates', label: '同行者投稿', icon: 'group', path: '/mypage/travel-mates' },
-    { id: 'wishlist', label: 'ウィッシュリスト', icon: 'favorite', path: '/mypage/wishlist' },
-    { id: 'recently-viewed', label: '最近見た商品', icon: 'history', path: '/mypage/recently-viewed' },
-    { id: 'reviews', label: 'マイレビュー', icon: 'reviews', path: '/mypage/reviews' },
-    { id: 'notifications', label: 'お知らせ', icon: 'notifications', path: '/mypage/notifications' },
+    { id: 'overview', label: '개요', icon: 'dashboard', path: '/mypage' },
+    { id: 'reservations', label: '예약', icon: 'event_available', path: '/mypage/reservations' },
+    { id: 'estimates', label: '견적 내역', icon: 'description', path: '/mypage/estimates' },
+    { id: 'travel-mates', label: '동행자 게시글', icon: 'group', path: '/mypage/travel-mates' },
+    { id: 'wishlist', label: '위시리스트', icon: 'favorite', path: '/mypage/wishlist' },
+    { id: 'recently-viewed', label: '최근 본 상품', icon: 'history', path: '/mypage/recently-viewed' },
+    { id: 'reviews', label: '내 리뷰', icon: 'reviews', path: '/mypage/reviews' },
+    { id: 'notifications', label: '알림', icon: 'notifications', path: '/mypage/notifications' },
 ];
 
 export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }) {
@@ -142,9 +142,9 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                     >
                         <MatIcon name="person" size={36} color="#0f766e" />
                     </div>
-                    <h2 style={{ fontSize: 22, fontWeight: 700, color: 'var(--fg-1)', margin: 0, letterSpacing: '-0.01em' }}>ログインが必要です</h2>
+                    <h2 style={{ fontSize: 22, fontWeight: 700, color: 'var(--fg-1)', margin: 0, letterSpacing: '-0.01em' }}>로그인이 필요합니다</h2>
                     <p style={{ fontSize: 14, color: 'var(--fg-4)', marginTop: 10, lineHeight: 1.7 }}>
-                        マイページをご利用いただくにはログインしてください。
+                        마이페이지를 이용하시려면 로그인해 주세요.
                     </p>
                     <button
                         type="button"
@@ -163,7 +163,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                             boxShadow: '0 8px 20px -6px rgba(15,118,110,0.5)',
                         }}
                     >
-                        ログイン
+                        로그인
                     </button>
                 </div>
             </div>
@@ -172,7 +172,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
 
     if (!authChecked) {
         return (
-            <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>読み込み中...</div>
+            <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>불러오는 중...</div>
         );
     }
 
@@ -180,11 +180,11 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
         <div style={{ background: '#fff' }}>
             <PageHero
                 eyebrow="My Page"
-                title="マイページ"
-                subtitle="ご予約状況、お見積もり、ウィッシュリストなどを一括管理できます。"
+                title="마이페이지"
+                subtitle="예약 현황, 견적, 위시리스트 등을 한 번에 관리하실 수 있습니다."
                 breadcrumbs={[
-                    { label: 'ホーム', path: '/' },
-                    { label: 'マイページ' },
+                    { label: '홈', path: '/' },
+                    { label: '마이페이지' },
                 ]}
                 contentWidth={contentWidth}
             />
@@ -225,7 +225,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                 {!me?.image && !me?.avatarUrl && (me?.name || me?.email || '?').charAt(0).toUpperCase()}
                             </div>
                             <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--fg-1)', letterSpacing: '-0.01em' }}>
-                                {me?.name || me?.email || 'ゲスト'} 様
+                                {me?.name || me?.email || '게스트'} 님
                             </div>
                             {me?.email && (
                                 <div
@@ -258,7 +258,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                     fontFamily: 'inherit',
                                 }}
                             >
-                                ログアウト
+                                로그아웃
                             </button>
                         </div>
 
@@ -306,10 +306,10 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
                         {/* Stat cards */}
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14 }}>
-                            <StatCard label="ご予約" value={String(reservations.length)} icon="event_available" onClick={() => navigate('/mypage/reservations')} />
-                            <StatCard label="進行中" value={String(activeRes.length)} icon="local_fire_department" onClick={() => navigate('/mypage/reservations')} />
-                            <StatCard label="見積もり" value={String(quotes.length)} icon="description" onClick={() => navigate('/mypage/estimates')} />
-                            <StatCard label="ウィッシュ" value="—" icon="favorite" onClick={() => navigate('/mypage/wishlist')} />
+                            <StatCard label="예약" value={String(reservations.length)} icon="event_available" onClick={() => navigate('/mypage/reservations')} />
+                            <StatCard label="진행 중" value={String(activeRes.length)} icon="local_fire_department" onClick={() => navigate('/mypage/reservations')} />
+                            <StatCard label="견적" value={String(quotes.length)} icon="description" onClick={() => navigate('/mypage/estimates')} />
+                            <StatCard label="위시리스트" value="—" icon="favorite" onClick={() => navigate('/mypage/wishlist')} />
                         </div>
 
                         {/* Upcoming reservation */}
@@ -337,7 +337,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                         Upcoming Trip
                                     </div>
                                     <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--fg-1)', margin: 0, letterSpacing: '-0.01em' }}>
-                                        次のご予約
+                                        다음 예약
                                     </h2>
                                 </div>
                                 <button
@@ -345,7 +345,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                     onClick={() => navigate('/mypage/reservations')}
                                     style={smallActionBtn}
                                 >
-                                    すべて見る <MatIcon name="arrow_forward" size={14} color="var(--fg-2)" />
+                                    전체 보기 <MatIcon name="arrow_forward" size={14} color="var(--fg-2)" />
                                 </button>
                             </div>
 
@@ -360,7 +360,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                         fontSize: 13,
                                     }}
                                 >
-                                    予定中のご予約はありません。
+                                    예정된 예약이 없습니다.
                                     <div style={{ marginTop: 12 }}>
                                         <button
                                             type="button"
@@ -377,7 +377,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                                 fontFamily: 'inherit',
                                             }}
                                         >
-                                            ツアーを探す
+                                            투어 찾기
                                         </button>
                                     </div>
                                 </div>
@@ -393,21 +393,21 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                         {/* Quick actions grid */}
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 14 }}>
                             <QuickAction
-                                title="お見積もり依頼"
-                                desc="1分でリクエスト"
+                                title="견적 요청"
+                                desc="1분 만에 요청"
                                 icon="edit_note"
                                 onClick={() => navigate('/custom-estimate')}
                                 primary
                             />
                             <QuickAction
-                                title="同行者を募集"
-                                desc="旅費を分担"
+                                title="동행자 모집"
+                                desc="여행 경비 분담"
                                 icon="group_add"
                                 onClick={() => navigate('/travel-mates/write')}
                             />
                             <QuickAction
-                                title="レビューを書く"
-                                desc="体験をシェア"
+                                title="리뷰 작성"
+                                desc="경험을 공유"
                                 icon="reviews"
                                 onClick={() => navigate('/reviews/write')}
                             />
@@ -426,10 +426,10 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                             >
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 18 }}>
                                     <h2 style={{ fontSize: 18, fontWeight: 700, color: 'var(--fg-1)', margin: 0, letterSpacing: '-0.01em' }}>
-                                        最近の見積もりリクエスト
+                                        최근 견적 요청
                                     </h2>
                                     <button type="button" onClick={() => navigate('/mypage/estimates')} style={smallActionBtn}>
-                                        すべて見る <MatIcon name="arrow_forward" size={14} color="var(--fg-2)" />
+                                        전체 보기 <MatIcon name="arrow_forward" size={14} color="var(--fg-2)" />
                                     </button>
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -451,7 +451,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                         >
                                             <div>
                                                 <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--fg-1)' }}>
-                                                    {q.destination || 'モンゴル旅行'}
+                                                    {q.destination || '몽골여행'}
                                                 </div>
                                                 {q.period && (
                                                     <div style={{ fontSize: 12, color: 'var(--fg-5)', marginTop: 3 }}>{q.period}</div>
@@ -478,7 +478,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                                     border: '1px solid ' + (q.status === 'answered' ? 'rgba(15,118,110,0.3)' : 'var(--border-subtle)'),
                                                 }}
                                             >
-                                                {q.status === 'answered' ? '回答済み' : q.status === 'completed' ? '完了' : '対応中'}
+                                                {q.status === 'answered' ? '답변 완료' : q.status === 'completed' ? '완료' : '처리 중'}
                                             </span>
                                         </div>
                                     ))}
@@ -513,10 +513,10 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                     Customer Support
                                 </div>
                                 <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--fg-1)', letterSpacing: '-0.01em' }}>
-                                    お困りのことはありませんか？
+                                    도움이 필요하신가요?
                                 </div>
                                 <div style={{ fontSize: 13, color: 'var(--fg-4)', marginTop: 6, lineHeight: 1.6 }}>
-                                    日本語スタッフが24時間以内にご返信。FAQも合わせてご確認ください。
+                                    한국어 스태프가 24시간 이내에 답변드립니다. FAQ도 함께 확인해 주세요.
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: 10 }}>
@@ -535,7 +535,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                         fontFamily: 'inherit',
                                     }}
                                 >
-                                    FAQを見る
+                                    FAQ 보기
                                 </button>
                                 <button
                                     type="button"
@@ -557,7 +557,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                         gap: 6,
                                     }}
                                 >
-                                    <MatIcon name="chat" size={16} color="#fff" /> 問い合わせ
+                                    <MatIcon name="chat" size={16} color="#fff" /> 문의하기
                                 </button>
                             </div>
                         </div>
@@ -618,7 +618,7 @@ function StatCard({ label, value, icon, onClick }: { label: string; value: strin
 }
 
 function ReservationRow({ r, onClick }: { r: Reservation; onClick: () => void }) {
-    const productName = r.productName || r.product_name || 'モンゴルツアー';
+    const productName = r.productName || r.product_name || '몽골투어';
     const startDate = r.startDate || r.start_date;
     const endDate = r.endDate || r.end_date;
     const dateLabel = startDate
@@ -635,12 +635,12 @@ function ReservationRow({ r, onClick }: { r: Reservation; onClick: () => void })
                     ? '#f59e0b'
                     : 'var(--fg-5)';
     const statusLabel =
-        r.status === 'confirmed' ? '確定' :
-        r.status === 'paid' ? '支払い済み' :
-        r.status === 'pending' ? '入金待ち' :
-        r.status === 'in_progress' ? '進行中' :
-        r.status === 'completed' ? '完了' :
-        '準備中';
+        r.status === 'confirmed' ? '확정' :
+        r.status === 'paid' ? '결제 완료' :
+        r.status === 'pending' ? '입금 대기' :
+        r.status === 'in_progress' ? '진행 중' :
+        r.status === 'completed' ? '완료' :
+        '준비 중';
 
     return (
         <div

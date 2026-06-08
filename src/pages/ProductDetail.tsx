@@ -27,12 +27,12 @@ const hideBrokenImage = (e: React.SyntheticEvent<HTMLImageElement>) => {
 // Mirrors PC ProductDetailDesktop DEFAULT_PRODUCT_FAQS so mobile + PC stay
 // consistent.
 const DEFAULT_MOBILE_FAQ_ITEMS: { q: string; a: string }[] = [
-    { q: '出発前に何を準備したらいいですか？', a: '国際線航空券・パスポート (有効期限6ヶ月以上)・モンゴルビザが必要です。ビザ申請は弊社でもサポートいたします。気温差が大きいため、季節を問わず羽織りものは必須です。' },
-    { q: 'キャンセル規定を教えてください。', a: '出発日の31日前まで: 全額返金。30〜15日前: ツアー代金の30%。14〜8日前: 50%。7日前以降: 100%。詳しくは利用規約をご確認ください。' },
-    { q: 'ゲル宿泊は寝具がありますか？', a: '全てのゲルキャンプにベッド・マットレス・毛布・タオルを完備しています。冬季には電気毛布もご用意します。' },
-    { q: '1人旅でも参加できますか？', a: 'もちろん可能です。一人参加追加料金 ¥18,000 を頂戴しております (個室追加料金分)。同行者募集の掲示板もご利用ください。' },
-    { q: '食事のアレルギー対応はありますか？', a: '事前にお知らせいただければ、食物アレルギーや宗教上の食事制限に個別対応いたします。ベジタリアン・ヴィーガン対応も可能です。' },
-    { q: '現地での通信手段は？', a: 'ウランバートル市内は4G完備。ゴビ・テレルジでは電波が弱い場所もあります。ガイドが衛星電話を所持しているため緊急連絡は可能です。' },
+    { q: '출발 전에 무엇을 준비해야 하나요?', a: '국제선 항공권, 여권(유효기간 6개월 이상), 몽골 비자가 필요합니다. 비자 신청은 저희 회사에서도 지원해 드립니다. 일교차가 크기 때문에 계절과 관계없이 겉옷은 필수입니다.' },
+    { q: '취소 규정을 알려주세요.', a: '출발일 31일 전까지: 전액 환불. 30~15일 전: 투어 요금의 30%. 14~8일 전: 50%. 7일 전 이후: 100%. 자세한 내용은 이용약관을 확인해 주시기 바랍니다.' },
+    { q: '게르 숙박 시 침구가 제공되나요?', a: '모든 게르 캠프에 침대, 매트리스, 담요, 수건을 완비하고 있습니다. 겨울철에는 전기담요도 준비해 드립니다.' },
+    { q: '혼자 여행해도 참가할 수 있나요?', a: '물론 가능합니다. 1인 참가 추가 요금 ₩18,000을 받고 있습니다(개인실 추가 요금분). 동행자 모집 게시판도 이용해 주시기 바랍니다.' },
+    { q: '식사 알레르기 대응이 가능한가요?', a: '사전에 알려주시면 식품 알레르기나 종교상의 식사 제한에 개별 대응해 드립니다. 채식주의자, 비건 대응도 가능합니다.' },
+    { q: '현지에서의 통신 수단은 무엇인가요?', a: '울란바토르 시내는 4G가 완비되어 있습니다. 고비, 테렐지에서는 전파가 약한 곳도 있습니다. 가이드가 위성전화를 소지하고 있어 긴급 연락은 가능합니다.' },
 ];
 
 const MobileFAQ: React.FC<{ product?: TourProduct | null }> = ({ product }) => {
@@ -66,7 +66,7 @@ const MobileFAQ: React.FC<{ product?: TourProduct | null }> = ({ product }) => {
     return (
         <div className="p-6 bg-white dark:bg-background-dark mt-2">
             <div className="text-[11px] font-bold tracking-widest text-primary uppercase mb-2">FAQ & Notice</div>
-            <h3 className="text-lg font-bold mb-4">ご注意・よくある質問</h3>
+            <h3 className="text-lg font-bold mb-4">유의사항・자주 묻는 질문</h3>
             <div className="flex flex-col gap-2">
                 {items.map((item, i) => {
                     const on = openIdx === i;
@@ -133,7 +133,7 @@ const MobileDestinationsMap: React.FC<{ product: TourProduct }> = ({ product }) 
     return (
         <div className="mt-6">
             <div className="text-[11px] font-bold tracking-widest text-primary uppercase mb-2">Destinations</div>
-            <h3 className="text-base font-bold mb-3">目的地</h3>
+            <h3 className="text-base font-bold mb-3">여행지</h3>
             <DestinationsMap places={places} height={220} borderRadius={16} />
             <div className="flex flex-col gap-2 mt-3">
                 {places.map((p, i) => (
@@ -466,7 +466,7 @@ export const ProductDetail: React.FC = () => {
         product.duration ? `（${product.duration}）` : '',
         product.category ? `【${product.category}】` : '',
         product.description || product.highlights?.[0]?.description || '',
-        product.price ? `¥${product.price.toLocaleString()}〜` : ''
+        product.price ? `₩${product.price.toLocaleString()}~` : ''
     ].filter(Boolean).join(' ').substring(0, 160);
 
     // ── Aggregate rating + sample reviews from approved user reviews ──
@@ -485,7 +485,7 @@ export const ProductDetail: React.FC = () => {
     // Up to 5 most recent reviews embedded as Review nodes
     const reviewLd = approvedReviews.slice(0, 5).map((r: any) => ({
         "@type": "Review",
-        "author": { "@type": "Person", "name": r.user_name || r.author_name || '匿名' },
+        "author": { "@type": "Person", "name": r.user_name || r.author_name || '익명' },
         "datePublished": r.created_at ? String(r.created_at).split(' ')[0] : undefined,
         "reviewRating": { "@type": "Rating", "ratingValue": Number(r.rating) || 5, "bestRating": 5, "worstRating": 1 },
         "reviewBody": r.content || r.title || '',
@@ -569,13 +569,13 @@ export const ProductDetail: React.FC = () => {
         "name": product.name,
         "image": validImages.length > 0 ? validImages : undefined,
         "description": (product.included && product.included.length > 0)
-            ? `${product.description || ''}。ツアーに含まれるもの: ${product.included.join('、')}`
+            ? `${product.description || ''}. 투어에 포함된 것: ${product.included.join(', ')}`
             : (product.description || product.highlights?.[0]?.description || t('product_detail.header_title')),
         "brand": { "@type": "Brand", "name": "Milkyway Japan" },
-        "category": product.category || "モンゴルツアー",
-        "touristType": product.category || "モンゴルツアー",
+        "category": product.category || "몽골투어",
+        "touristType": product.category || "몽골투어",
         ...(product.duration ? { "additionalProperty": [
-            { "@type": "PropertyValue", "name": "所要時間", "value": product.duration }
+            { "@type": "PropertyValue", "name": "소요시간", "value": product.duration }
         ]} : {}),
         "offers": offersLd,
         ...(aggregateRating ? { "aggregateRating": aggregateRating } : {}),
@@ -587,8 +587,8 @@ export const ProductDetail: React.FC = () => {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://mongolryokou.com/" },
-            { "@type": "ListItem", "position": 2, "name": "モンゴルツアー商品", "item": "https://mongolryokou.com/products" },
+            { "@type": "ListItem", "position": 1, "name": "홈", "item": "https://mongolryokou.com/" },
+            { "@type": "ListItem", "position": 2, "name": "몽골투어 상품", "item": "https://mongolryokou.com/products" },
             { "@type": "ListItem", "position": 3, "name": product.name, "item": `https://mongolryokou.com/products/${id}` }
         ]
     };
@@ -601,7 +601,7 @@ export const ProductDetail: React.FC = () => {
                     title={product.name}
                     description={productMetaDescription}
                     image={product.mainImages?.find(img => !img.startsWith('data:'))}
-                    keywords={`${product.category}, ${product.tags.join(', ')}, モンゴルツアー, モンゴル旅行`}
+                    keywords={`${product.category}, ${product.tags.join(', ')}, 몽골투어, 몽골여행`}
                     canonical={`/products/${id}`}
                     structuredData={[productStructuredData, breadcrumbData]}
                 />
@@ -622,7 +622,7 @@ export const ProductDetail: React.FC = () => {
                 title={product.name}
                 description={productMetaDescription}
                 image={product.mainImages?.find(img => !img.startsWith('data:'))}
-                keywords={`${product.category}, ${product.tags.join(', ')}, モンゴルツアー, モンゴル旅行`}
+                keywords={`${product.category}, ${product.tags.join(', ')}, 몽골투어, 몽골여행`}
                 canonical={`/products/${id}`}
                 structuredData={[productStructuredData, breadcrumbData]}
             />
@@ -686,7 +686,7 @@ export const ProductDetail: React.FC = () => {
                             >
                                 <img
                                     {...getResponsiveImageProps(img, 'banner')}
-                                    alt={`${product.name} ${index + 1}｜モンゴル旅行・モンゴルツアー`}
+                                    alt={`${product.name} ${index + 1}｜몽골여행・몽골투어`}
                                     className="w-full h-full object-cover"
                                     loading={index === 0 ? 'eager' : 'lazy'}
                                     fetchPriority={index === 0 ? 'high' : 'auto'}
@@ -748,9 +748,9 @@ export const ProductDetail: React.FC = () => {
                 </div>
                 <h1 className="text-[28px] font-bold leading-tight pt-2">{product.name}</h1>
                 <div className="flex items-baseline gap-2 pt-2">
-                    <p className="text-2xl font-bold text-primary">¥{product.price.toLocaleString()}</p>
+                    <p className="text-2xl font-bold text-primary">₩{product.price.toLocaleString()}</p>
                     {product.originalPrice && (
-                        <p className="text-sm text-gray-500 line-through">¥{product.originalPrice.toLocaleString()}</p>
+                        <p className="text-sm text-gray-500 line-through">₩{product.originalPrice.toLocaleString()}</p>
                     )}
                 </div>
             </div>
@@ -799,14 +799,14 @@ export const ProductDetail: React.FC = () => {
                 compatibility but no longer rendered anywhere. */}
             {hasIntroContent && (
             <div className="bg-white dark:bg-background-dark mt-2" id="intro">
-                {/* Overview — mirrors PC '概要' section. Renders product.description
+                {/* Overview — mirrors PC '개요' section. Renders product.description
                     + tag chips. Shown above the detail blocks. */}
                 {product.description && (
                     <div className="px-6 pt-6 pb-2">
                         <div className="text-[11px] font-bold tracking-widest text-primary uppercase mb-2">
                             About this tour
                         </div>
-                        <h3 className="text-lg font-bold mb-4">概要</h3>
+                        <h3 className="text-lg font-bold mb-4">개요</h3>
                         <div
                             className="text-[14px] leading-[1.85] text-gray-700 dark:text-gray-200 whitespace-pre-wrap break-words"
                             dangerouslySetInnerHTML={{ __html: product.description }}
@@ -835,7 +835,7 @@ export const ProductDetail: React.FC = () => {
                                     <img
                                         key={block.id}
                                         src={getOptimizedImageUrl(block.content as string, 'productDetail')}
-                                        alt={`${product.name} 詳細情報｜モンゴル旅行・モンゴルツアー`}
+                                        alt={`${product.name} 상세정보｜몽골여행・몽골투어`}
                                         className="w-full h-auto"
                                         loading="lazy"
                                         decoding="async"
@@ -857,7 +857,7 @@ export const ProductDetail: React.FC = () => {
                                                 >
                                                     <img
                                                         src={getOptimizedImageUrl(img, 'productThumbnail')}
-                                                        alt={`${slide.title || product.name} ${imgIdx + 1}｜モンゴル旅行・モンゴルツアー`}
+                                                        alt={`${slide.title || product.name} ${imgIdx + 1}｜몽골여행・몽골투어`}
                                                         className="w-full h-auto rounded-xl shadow-sm"
                                                         loading="lazy"
                                                         decoding="async"
@@ -905,7 +905,7 @@ export const ProductDetail: React.FC = () => {
                                     <img
                                         key={index}
                                         src={getOptimizedImageUrl(img, 'productItinerary')}
-                                        alt={`${product.name} 詳細${index + 1}｜モンゴル旅行・モンゴルツアー`}
+                                        alt={`${product.name} 상세${index + 1}｜몽골여행・몽골투어`}
                                         className="w-full h-auto"
                                         loading="lazy"
                                         decoding="async"
@@ -931,7 +931,7 @@ export const ProductDetail: React.FC = () => {
                                                 >
                                                     <img
                                                         src={getOptimizedImageUrl(img, 'productThumbnail')}
-                                                        alt={`${slide.title || product.name} ${imgIdx + 1}｜モンゴル旅行・モンゴルツアー`}
+                                                        alt={`${slide.title || product.name} ${imgIdx + 1}｜몽골여행・몽골투어`}
                                                         className="w-full h-auto rounded-xl shadow-sm"
                                                         loading="lazy"
                                                         decoding="async"
@@ -995,7 +995,7 @@ export const ProductDetail: React.FC = () => {
                                 }
                                 return [];
                             })();
-                            const displayName = review.user_name || review.author_name || '匿名';
+                            const displayName = review.user_name || review.author_name || '익명';
                             const initial = displayName.charAt(0);
                             return (
                                 <div key={review.id} className="pb-5 border-b border-gray-100 dark:border-gray-800 last:border-b-0 last:pb-0">
@@ -1003,7 +1003,7 @@ export const ProductDetail: React.FC = () => {
                                         <div className="w-8 h-8 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center text-xs font-bold text-primary shrink-0">
                                             {initial}
                                         </div>
-                                        <span className="text-sm font-semibold truncate min-w-0">{displayName} 様</span>
+                                        <span className="text-sm font-semibold truncate min-w-0">{displayName} 님</span>
                                         <span className="text-yellow-500 text-xs shrink-0" aria-label={t('product_detail.rating_aria', { rating: review.rating || 5 })}>
                                             {'★'.repeat(Math.max(0, Math.min(5, Number(review.rating) || 5)))}
                                         </span>
@@ -1017,7 +1017,7 @@ export const ProductDetail: React.FC = () => {
                                                 <img
                                                     key={i}
                                                     src={getOptimizedImageUrl(img, 'thumbnailSmall')}
-                                                    alt={`${displayName}様のレビュー写真 ${i + 1}`}
+                                                    alt={`${displayName}님의 리뷰 사진 ${i + 1}`}
                                                     className="w-20 h-20 rounded-lg object-cover flex-shrink-0"
                                                     loading="lazy"
                                                     decoding="async"
@@ -1116,7 +1116,7 @@ export const ProductDetail: React.FC = () => {
                                     {item.image ? (
                                         <img
                                             src={getOptimizedImageUrl(item.image, 'thumbnailSmall')}
-                                            alt={`${item.title}｜モンゴル旅行・モンゴルツアー`}
+                                            alt={`${item.title}｜몽골여행・몽골투어`}
                                             loading="lazy"
                                             decoding="async"
                                             className="w-full h-full object-cover"
@@ -1133,7 +1133,7 @@ export const ProductDetail: React.FC = () => {
                                 </p>
                                 {item.price && (
                                     <p className="text-xs font-bold text-primary mt-1">
-                                        ¥{typeof item.price === 'number' ? item.price.toLocaleString() : item.price}〜
+                                        ₩{typeof item.price === 'number' ? item.price.toLocaleString() : item.price}~
                                     </p>
                                 )}
                             </div>

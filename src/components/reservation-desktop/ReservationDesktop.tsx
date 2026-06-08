@@ -89,7 +89,7 @@ export function ReservationDesktop({
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                     {/* Selected tour card */}
                     <Card>
-                        <CardHeader title="選択したツアー" />
+                        <CardHeader title="선택한 투어" />
                         <div
                             style={{
                                 display: 'grid',
@@ -163,7 +163,7 @@ export function ReservationDesktop({
                                             size={14}
                                             color="var(--fg-5)"
                                         />{' '}
-                                        日本語ガイド
+                                        한국어 가이드
                                     </span>
                                 </div>
                             </div>
@@ -173,11 +173,11 @@ export function ReservationDesktop({
                     {/* Date picker */}
                     <Card>
                         <CardHeader
-                            title="旅行開始日を選択"
+                            title="여행 시작일 선택"
                             subtitle={
                                 parsedDuration.nights > 0
-                                    ? `${parsedDuration.nights}泊${parsedDuration.days}日の旅行開始日を選択してください`
-                                    : '出発日を選択してください'
+                                    ? `${parsedDuration.nights}박 ${parsedDuration.days}일 여행의 시작일을 선택해 주세요`
+                                    : '출발일을 선택해 주세요'
                             }
                         />
                         <div style={{ padding: '0 28px 28px' }}>
@@ -213,7 +213,7 @@ export function ReservationDesktop({
                                                 fontWeight: 600,
                                             }}
                                         >
-                                            選択された旅行期間
+                                            선택하신 여행 기간
                                         </div>
                                         <div
                                             style={{
@@ -231,8 +231,8 @@ export function ReservationDesktop({
                                                     marginLeft: 4,
                                                 }}
                                             >
-                                                ({parsedDuration.nights}泊
-                                                {parsedDuration.days}日)
+                                                ({parsedDuration.nights}박
+                                                {parsedDuration.days}일)
                                             </span>
                                         </div>
                                     </div>
@@ -243,7 +243,7 @@ export function ReservationDesktop({
 
                     {/* People */}
                     <Card>
-                        <CardHeader title="人数の選択" />
+                        <CardHeader title="인원 선택" />
                         <div style={{ padding: '0 28px 24px' }}>
                             <div
                                 style={{
@@ -261,7 +261,7 @@ export function ReservationDesktop({
                                             color: 'var(--fg-1)',
                                         }}
                                     >
-                                        合計人数
+                                        총 인원
                                     </div>
                                     <div
                                         style={{
@@ -271,8 +271,8 @@ export function ReservationDesktop({
                                         }}
                                     >
                                         {sortedPricing.length > 0
-                                            ? `${minPeople} 名 〜 ${maxPeople} 名`
-                                            : '人数を選択してください'}
+                                            ? `${minPeople}명 ~ ${maxPeople}명`
+                                            : '인원을 선택해 주세요'}
                                     </div>
                                 </div>
                                 <div
@@ -327,7 +327,7 @@ export function ReservationDesktop({
                                             textAlign: 'center',
                                         }}
                                     >
-                                        {totalPeople} 名
+                                        {totalPeople}명
                                     </span>
                                     <button
                                         type="button"
@@ -381,11 +381,11 @@ export function ReservationDesktop({
                                 >
                                     <MatIcon name="info" size={18} color="var(--fg-4)" />
                                     <span style={{ fontSize: 13, color: 'var(--fg-3)' }}>
-                                        現在の人数の基準 お1人様{' '}
+                                        현재 인원 기준 1인{' '}
                                         <strong
                                             style={{ color: '#0f766e', fontWeight: 700 }}
                                         >
-                                            ¥{formatPrice(baseOption?.pricePerPerson ?? 0)}
+                                            ₩{formatPrice(baseOption?.pricePerPerson ?? 0)}
                                         </strong>
                                     </span>
                                 </div>
@@ -408,7 +408,7 @@ export function ReservationDesktop({
                                             color: 'var(--fg-2)',
                                         }}
                                     >
-                                        人数別価格を見る{' '}
+                                        인원별 가격 보기{' '}
                                         <MatIcon
                                             name="expand_more"
                                             size={16}
@@ -422,10 +422,10 @@ export function ReservationDesktop({
 
                     {/* Accommodation options */}
                     <Card>
-                        <CardHeader title="宿泊オプション" />
+                        <CardHeader title="숙소 옵션" />
                         <div style={{ padding: '0 28px 24px' }}>
                             {accommodations.length === 0 ? (
-                                <EmptyHint label="選択可能な宿泊オプションがありません。(基本含む)" />
+                                <EmptyHint label="선택 가능한 숙소 옵션이 없습니다. (기본 포함)" />
                             ) : (
                                 <div
                                     style={{
@@ -455,12 +455,12 @@ export function ReservationDesktop({
                     {/* Vehicle options */}
                     <Card>
                         <CardHeader
-                            title="車両オプション"
-                            subtitle="参加人数によって、最適な車両を自動で手配します"
+                            title="차량 옵션"
+                            subtitle="참가 인원에 따라 최적의 차량을 자동으로 배정합니다"
                         />
                         <div style={{ padding: '0 28px 24px' }}>
                             {vehicles.length === 0 ? (
-                                <EmptyHint label="選択可能な車両オプションがありません。(基本含む)" />
+                                <EmptyHint label="선택 가능한 차량 옵션이 없습니다. (기본 포함)" />
                             ) : (
                                 <div
                                     style={{
@@ -503,10 +503,10 @@ export function ReservationDesktop({
                     accommodationSub={accomSub(selectedAccom)}
                     vehicleLabel={selectedVehicle?.name}
                     vehicleSub={vehicleSub(selectedVehicle)}
-                    ctaLabel="次のステップへ"
+                    ctaLabel="다음 단계로"
                     onCta={onNext}
                     canProceed={!!selectedStartDate}
-                    canProceedHint={!selectedStartDate ? '旅行開始日を選択してください' : null}
+                    canProceedHint={!selectedStartDate ? '여행 시작일을 선택해 주세요' : null}
                 />
             </div>
 
@@ -531,18 +531,18 @@ export function ReservationDesktop({
 
 function accomSub(o: AccommodationOption | undefined): string | undefined {
     if (!o) return undefined;
-    if (o.priceModifier === 0) return o.isDefault ? '基本含む' : '追加料金なし';
+    if (o.priceModifier === 0) return o.isDefault ? '기본 포함' : '추가 요금 없음';
     return o.priceModifier > 0
-        ? `+ ¥${formatPrice(o.priceModifier)}`
-        : `${formatPrice(o.priceModifier)} 円`;
+        ? `+ ₩${formatPrice(o.priceModifier)}`
+        : `${formatPrice(o.priceModifier)}원`;
 }
 
 function vehicleSub(o: VehicleOption | undefined): string | undefined {
     if (!o) return undefined;
-    if (o.priceModifier === 0) return o.isDefault ? '基本含む' : '追加料金なし';
+    if (o.priceModifier === 0) return o.isDefault ? '기본 포함' : '추가 요금 없음';
     return o.priceModifier > 0
-        ? `+ ¥${formatPrice(o.priceModifier)}`
-        : `${formatPrice(o.priceModifier)} 円`;
+        ? `+ ₩${formatPrice(o.priceModifier)}`
+        : `${formatPrice(o.priceModifier)}원`;
 }
 
 /**
@@ -653,7 +653,7 @@ function OptionCard({
                         letterSpacing: '0.06em',
                     }}
                 >
-                    おすすめ
+                    추천
                 </span>
             )}
             <div
@@ -715,10 +715,10 @@ function OptionCard({
                 }}
             >
                 {priceModifier === 0
-                    ? '追加料金なし'
+                    ? '추가 요금 없음'
                     : priceModifier > 0
-                        ? `+ ¥${formatPrice(priceModifier)}`
-                        : `${formatPrice(priceModifier)} 円`}
+                        ? `+ ₩${formatPrice(priceModifier)}`
+                        : `${formatPrice(priceModifier)}원`}
             </div>
         </button>
     );

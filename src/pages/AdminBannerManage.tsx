@@ -48,14 +48,14 @@ interface CategoryTab {
 
 // Predefined Links for easy selection
 const PREDEFINED_LINKS = [
-    { label: '직접 입력', value: '' },
-    { label: '홈 화면', value: '/' },
-    { label: '여행상품 목록', value: '/products' },
-    { label: '맞춤견적', value: '/custom-estimate' },
-    { label: '동행찾기', value: '/travel-mates' },
-    { label: '마이페이지', value: '/profile' },
+    { label: 'Гараар оруулах', value: '' },
+    { label: 'Нүүр хуудас', value: '/' },
+    { label: 'Аяллын бүтээгдэхүүний жагсаалт', value: '/products' },
+    { label: 'Захиалгат үнийн санал', value: '/custom-estimate' },
+    { label: 'Хамтрагч хайх', value: '/travel-mates' },
+    { label: 'Миний хуудас', value: '/profile' },
 
-    { label: '여행가이드', value: '/travel-guide' },
+    { label: 'Аяллын заавар', value: '/travel-guide' },
 ];
 
 const DEFAULT_BANNERS: Banner[] = [
@@ -194,7 +194,7 @@ export const AdminBannerManage: React.FC = () => {
     };
 
     const deleteBanner = (id: string) => {
-        if (confirm('정말 삭제하시겠습니까?')) {
+        if (confirm('Үнэхээр устгах уу?')) {
             setBanners(banners.filter(b => b.id !== id));
             markUnsaved();
         }
@@ -213,7 +213,7 @@ export const AdminBannerManage: React.FC = () => {
     };
 
     const deleteLink = (id: string) => {
-        if (confirm('정말 삭제하시겠습니까?')) {
+        if (confirm('Үнэхээр устгах уу?')) {
             setLinks(links.filter(l => l.id !== id));
             markUnsaved();
         }
@@ -246,7 +246,7 @@ export const AdminBannerManage: React.FC = () => {
         markUnsaved();
     };
     const deleteEventBanner = (id: string) => {
-        if (confirm('정말 삭제하시겠습니까?')) {
+        if (confirm('Үнэхээр устгах уу?')) {
             setEventBanners(eventBanners.filter(e => e.id !== id));
             markUnsaved();
         }
@@ -295,7 +295,7 @@ export const AdminBannerManage: React.FC = () => {
                 markUnsaved();
             } catch (error) {
                 console.error('Image upload failed:', error);
-                alert('이미지 업로드 중 오류가 발생했습니다.');
+                alert('Зураг байршуулах үед алдаа гарлаа.');
             }
         }
     };
@@ -314,7 +314,7 @@ export const AdminBannerManage: React.FC = () => {
             setTimeout(() => setShowToast(false), 3000);
         } catch (error: any) {
             console.error('Save failed:', error);
-            alert('저장 중 오류가 발생했습니다:\n\n' + (error.message || '알 수 없는 오류'));
+            alert('Хадгалах үед алдаа гарлаа:\n\n' + (error.message || 'Тодорхойгүй алдаа'));
         }
     };
 
@@ -324,14 +324,14 @@ export const AdminBannerManage: React.FC = () => {
     return (
         <AdminLayout
             activePage="banners"
-            title="홈 화면 관리"
+            title="Нүүр хуудас удирдах"
             actions={
                 <button
                     className="btn btn-ink"
                     onClick={saveAll}
                     disabled={!hasUnsavedChanges}
                 >
-                    <Icon name="save" />변경사항 저장
+                    <Icon name="save" />Өөрчлөлтийг хадгалах
                     {hasUnsavedChanges && <span className="badge b-amber" style={{ padding: '0 6px', marginLeft: 2 }}>•</span>}
                 </button>
             }
@@ -341,12 +341,12 @@ export const AdminBannerManage: React.FC = () => {
                 {/* ============ Main Banners ============ */}
                 <div className="sec-head">
                     <div>
-                        <h3>메인 배너</h3>
-                        <div className="cell-muted" style={{ fontSize: 13 }}>홈 상단 슬라이드 배너 · 모바일/PC 이미지 및 문구 설정</div>
+                        <h3>Үндсэн баннер</h3>
+                        <div className="cell-muted" style={{ fontSize: 13 }}>Нүүр дээд талын слайд баннер · Гар утас/PC зураг болон бичвэр тохиргоо</div>
                     </div>
                     <div className="spacer" />
                     <button className="btn btn-ink" onClick={addBanner}>
-                        <Icon name="add" />배너 추가
+                        <Icon name="add" />Баннер нэмэх
                     </button>
                 </div>
 
@@ -362,17 +362,17 @@ export const AdminBannerManage: React.FC = () => {
                                     className={`banner-prev ${banner.image ? '' : bannerTone(index)}`}
                                     style={{ cursor: 'pointer', position: 'relative', backgroundImage: banner.image ? `url('${banner.image}')` : undefined, backgroundSize: 'cover', backgroundPosition: 'center' }}
                                     onClick={() => { setSelectedId(banner.id); bannerFileInputRef.current?.click(); }}
-                                    title="모바일 이미지 변경"
+                                    title="Гар утасны зураг солих"
                                 >
                                     {!banner.image && (
                                         <>
-                                            <div className="bt">{banner.title || `배너 #${index + 1}`}</div>
-                                            <div className="bs">{banner.subtitle || '클릭하여 이미지 업로드'}</div>
+                                            <div className="bt">{banner.title || `Баннер #${index + 1}`}</div>
+                                            <div className="bs">{banner.subtitle || 'Зураг байршуулахын тулд дарна уу'}</div>
                                         </>
                                     )}
                                 </div>
                                 <div className="cell-muted row" style={{ fontSize: 11, gap: 4, justifyContent: 'center' }}>
-                                    <Icon name="smartphone" style={{ fontSize: 14 }} />모바일 (16:10)
+                                    <Icon name="smartphone" style={{ fontSize: 14 }} />Гар утас (16:10)
                                 </div>
 
                                 {/* PC wide image preview */}
@@ -380,10 +380,10 @@ export const AdminBannerManage: React.FC = () => {
                                     className="banner-prev"
                                     style={{ width: 150, height: 64, cursor: 'pointer', position: 'relative', border: '1.5px dashed var(--border-strong)', background: banner.pcImage ? `url('${banner.pcImage}') center/cover` : 'var(--mrt-gray-50)', color: 'var(--text-tertiary)' }}
                                     onClick={() => { setSelectedId(banner.id); pcBannerFileInputRef.current?.click(); }}
-                                    title="PC 와이드 이미지 변경"
+                                    title="PC өргөн зураг солих"
                                 >
                                     {!banner.pcImage && (
-                                        <div className="bs" style={{ color: 'var(--text-tertiary)', textAlign: 'center', opacity: 1 }}>PC 와이드<br />(선택)</div>
+                                        <div className="bs" style={{ color: 'var(--text-tertiary)', textAlign: 'center', opacity: 1 }}>PC өргөн<br />(сонголт)</div>
                                     )}
                                 </div>
                                 <div className="cell-muted row" style={{ fontSize: 11, gap: 4, justifyContent: 'center' }}>
@@ -391,7 +391,7 @@ export const AdminBannerManage: React.FC = () => {
                                 </div>
                                 {banner.pcImage && (
                                     <button type="button" className="btn btn-ghost btn-sm" onClick={() => clearPcImage(banner.id)}>
-                                        PC 이미지 제거
+                                        PC зураг устгах
                                     </button>
                                 )}
                             </div>
@@ -400,18 +400,18 @@ export const AdminBannerManage: React.FC = () => {
                             <div style={{ minWidth: 0, flex: 1 }}>
                                 <div className="row" style={{ gap: 8, marginBottom: 12 }}>
                                     <span className="badge b-gray">#{index + 1}</span>
-                                    <span className="cell-strong" style={{ fontSize: 15 }}>{banner.title?.split('\n')[0] || '제목 없음'}</span>
+                                    <span className="cell-strong" style={{ fontSize: 15 }}>{banner.title?.split('\n')[0] || 'Гарчиг байхгүй'}</span>
                                 </div>
 
                                 {/* Mobile (default) text */}
                                 <div className="edit-sec" style={{ marginBottom: 12 }}>
                                     <div className="edit-sec-head">
                                         <Icon name="smartphone" />
-                                        <h4>모바일 텍스트 (기본값 — PC에도 자동 적용)</h4>
+                                        <h4>Гар утасны бичвэр (үндсэн утга — PC-д ч автоматаар хэрэглэгдэнэ)</h4>
                                     </div>
                                     <div className="field-row">
                                         <div className="field" style={{ marginBottom: 0 }}>
-                                            <label>태그 (Tag)</label>
+                                            <label>Таг (Tag)</label>
                                             <input
                                                 type="text"
                                                 className="inp"
@@ -420,7 +420,7 @@ export const AdminBannerManage: React.FC = () => {
                                             />
                                         </div>
                                         <div className="field" style={{ marginBottom: 0 }}>
-                                            <label>링크 (Link)</label>
+                                            <label>Холбоос (Link)</label>
                                             <input
                                                 type="text"
                                                 className="inp"
@@ -431,7 +431,7 @@ export const AdminBannerManage: React.FC = () => {
                                         </div>
                                     </div>
                                     <div className="field" style={{ marginTop: 14, marginBottom: 0 }}>
-                                        <label>제목 (Title)</label>
+                                        <label>Гарчиг (Title)</label>
                                         <textarea
                                             className="inp"
                                             style={{ height: 60 }}
@@ -440,7 +440,7 @@ export const AdminBannerManage: React.FC = () => {
                                         />
                                     </div>
                                     <div className="field" style={{ marginTop: 14, marginBottom: 0 }}>
-                                        <label>부제목 (Subtitle)</label>
+                                        <label>Дэд гарчиг (Subtitle)</label>
                                         <input
                                             type="text"
                                             className="inp"
@@ -454,38 +454,38 @@ export const AdminBannerManage: React.FC = () => {
                                 <div className="edit-sec">
                                     <div className="edit-sec-head">
                                         <Icon name="desktop_windows" />
-                                        <h4>PC 전용 텍스트 (선택)</h4>
-                                        <span className="muted cell-muted">비워두면 모바일 텍스트 사용</span>
+                                        <h4>PC-д зориулсан бичвэр (сонголт)</h4>
+                                        <span className="muted cell-muted">Хоосон орхивол гар утасны бичвэрийг ашиглана</span>
                                     </div>
                                     <div className="field-row">
                                         <div className="field" style={{ marginBottom: 0 }}>
-                                            <label>PC 태그</label>
+                                            <label>PC таг</label>
                                             <input
                                                 type="text"
                                                 className="inp"
                                                 value={banner.pcTag || ''}
-                                                placeholder={banner.tag || '(모바일 값 사용)'}
+                                                placeholder={banner.tag || '(Гар утасны утга ашиглана)'}
                                                 onChange={(e) => handleBannerChange(banner.id, 'pcTag', e.target.value)}
                                             />
                                         </div>
                                     </div>
                                     <div className="field" style={{ marginTop: 14, marginBottom: 0 }}>
-                                        <label>PC 제목 (줄바꿈은 Enter로)</label>
+                                        <label>PC гарчиг (мөр таслахдаа Enter дарна)</label>
                                         <textarea
                                             className="inp"
                                             style={{ height: 60 }}
                                             value={banner.pcTitle || ''}
-                                            placeholder={banner.title || '(모바일 값 사용)'}
+                                            placeholder={banner.title || '(Гар утасны утга ашиглана)'}
                                             onChange={(e) => handleBannerChange(banner.id, 'pcTitle', e.target.value)}
                                         />
                                     </div>
                                     <div className="field" style={{ marginTop: 14, marginBottom: 0 }}>
-                                        <label>PC 부제목</label>
+                                        <label>PC дэд гарчиг</label>
                                         <input
                                             type="text"
                                             className="inp"
                                             value={banner.pcSubtitle || ''}
-                                            placeholder={banner.subtitle || '(모바일 값 사용)'}
+                                            placeholder={banner.subtitle || '(Гар утасны утга ашиглана)'}
                                             onChange={(e) => handleBannerChange(banner.id, 'pcSubtitle', e.target.value)}
                                         />
                                     </div>
@@ -493,7 +493,7 @@ export const AdminBannerManage: React.FC = () => {
                             </div>
 
                             <span className="row-actions" style={{ flex: 'none' }}>
-                                <button className="act-btn danger" title="삭제" onClick={() => deleteBanner(banner.id)}>
+                                <button className="act-btn danger" title="Устгах" onClick={() => deleteBanner(banner.id)}>
                                     <Icon name="delete" />
                                 </button>
                             </span>
@@ -503,7 +503,7 @@ export const AdminBannerManage: React.FC = () => {
                     {banners.length === 0 && (
                         <div className="empty">
                             <Icon name="ad_units" />
-                            <p>등록된 배너가 없습니다.</p>
+                            <p>Бүртгэгдсэн баннер байхгүй байна.</p>
                         </div>
                     )}
                 </div>
@@ -511,12 +511,12 @@ export const AdminBannerManage: React.FC = () => {
                 {/* ============ Quick Icons ============ */}
                 <div className="sec-head" style={{ marginTop: 32 }}>
                     <div>
-                        <h3>바로가기 아이콘</h3>
-                        <div className="cell-muted" style={{ fontSize: 13 }}>홈 화면 숏컷 행 · 이미지 또는 아이콘으로 구성</div>
+                        <h3>Шууд холбоос дүрс</h3>
+                        <div className="cell-muted" style={{ fontSize: 13 }}>Нүүр хуудасны товч холбоосын мөр · Зураг эсвэл дүрсээр бүрдэнэ</div>
                     </div>
                     <div className="spacer" />
                     <button className="btn btn-ink" onClick={addLink}>
-                        <Icon name="add" />아이콘 추가
+                        <Icon name="add" />Дүрс нэмэх
                     </button>
                 </div>
 
@@ -530,7 +530,7 @@ export const AdminBannerManage: React.FC = () => {
                                     className="metric-ico tint-ink"
                                     style={{ width: 56, height: 56, borderRadius: 14, cursor: 'pointer', overflow: 'hidden', flex: 'none' }}
                                     onClick={() => { setSelectedId(link.id); iconFileInputRef.current?.click(); }}
-                                    title="이미지 변경"
+                                    title="Зураг солих"
                                 >
                                     {link.image
                                         ? <img src={link.image} alt="icon" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -538,36 +538,36 @@ export const AdminBannerManage: React.FC = () => {
                                 </div>
                                 <div style={{ flex: 1, minWidth: 0 }}>
                                     <div className="field" style={{ marginBottom: 10 }}>
-                                        <label>라벨</label>
+                                        <label>Шошго</label>
                                         <input
                                             type="text"
                                             className="inp"
                                             value={link.label}
-                                            placeholder="라벨"
+                                            placeholder="Шошго"
                                             onChange={(e) => handleLinkChange(link.id, 'label', e.target.value)}
                                         />
                                     </div>
                                     <div className="field" style={{ marginBottom: 0 }}>
-                                        <label>링크</label>
+                                        <label>Холбоос</label>
                                         <input
                                             type="text"
                                             className="inp"
                                             value={link.path}
-                                            placeholder="링크"
+                                            placeholder="Холбоос"
                                             onChange={(e) => handleLinkChange(link.id, 'path', e.target.value)}
                                         />
                                     </div>
                                 </div>
                             </div>
                             <div className="row" style={{ marginTop: 14 }}>
-                                <button className="act-btn" title="앞으로" onClick={() => moveLink(index, 'left')} disabled={index === 0}>
+                                <button className="act-btn" title="Урагш" onClick={() => moveLink(index, 'left')} disabled={index === 0}>
                                     <Icon name="chevron_left" />
                                 </button>
-                                <button className="act-btn" title="뒤로" onClick={() => moveLink(index, 'right')} disabled={index === links.length - 1}>
+                                <button className="act-btn" title="Хойш" onClick={() => moveLink(index, 'right')} disabled={index === links.length - 1}>
                                     <Icon name="chevron_right" />
                                 </button>
                                 <div className="spacer" style={{ flex: 1 }} />
-                                <button className="act-btn danger" title="삭제" onClick={() => deleteLink(link.id)}>
+                                <button className="act-btn danger" title="Устгах" onClick={() => deleteLink(link.id)}>
                                     <Icon name="delete" />
                                 </button>
                             </div>
@@ -577,7 +577,7 @@ export const AdminBannerManage: React.FC = () => {
                     {links.length === 0 && (
                         <div className="empty" style={{ gridColumn: '1 / -1' }}>
                             <Icon name="grid_view" />
-                            <p>등록된 아이콘이 없습니다.</p>
+                            <p>Бүртгэгдсэн дүрс байхгүй байна.</p>
                         </div>
                     )}
                 </div>
@@ -585,12 +585,12 @@ export const AdminBannerManage: React.FC = () => {
                 {/* ============ Event Banners ============ */}
                 <div className="sec-head" style={{ marginTop: 32 }}>
                     <div>
-                        <h3>이벤트 배너</h3>
-                        <div className="cell-muted" style={{ fontSize: 13 }}>가로 스크롤 이벤트 배너 · 노출 위치 설정 가능</div>
+                        <h3>Эвентийн баннер</h3>
+                        <div className="cell-muted" style={{ fontSize: 13 }}>Хэвтээ гүйлгэдэг эвентийн баннер · Харагдах байршлыг тохируулах боломжтой</div>
                     </div>
                     <div className="spacer" />
                     <button className="btn btn-ink" onClick={addEventBanner}>
-                        <Icon name="add" />이벤트 추가
+                        <Icon name="add" />Эвент нэмэх
                     </button>
                 </div>
 
@@ -609,7 +609,7 @@ export const AdminBannerManage: React.FC = () => {
                                         background: banner.image ? `url('${banner.image}') center/cover` : banner.backgroundColor
                                     }}
                                     onClick={() => { setSelectedId(banner.id); eventFileInputRef.current?.click(); }}
-                                    title="이미지 변경"
+                                    title="Зураг солих"
                                 >
                                     {!banner.image && (
                                         <>
@@ -622,10 +622,10 @@ export const AdminBannerManage: React.FC = () => {
                                     )}
                                 </div>
                                 <div className="row" style={{ gap: 4, justifyContent: 'center' }}>
-                                    <button className="act-btn" title="위로" onClick={() => moveEventBanner(index, 'left')} disabled={index === 0}>
+                                    <button className="act-btn" title="Дээш" onClick={() => moveEventBanner(index, 'left')} disabled={index === 0}>
                                         <Icon name="arrow_upward" />
                                     </button>
-                                    <button className="act-btn" title="아래로" onClick={() => moveEventBanner(index, 'right')} disabled={index === eventBanners.length - 1}>
+                                    <button className="act-btn" title="Доош" onClick={() => moveEventBanner(index, 'right')} disabled={index === eventBanners.length - 1}>
                                         <Icon name="arrow_downward" />
                                     </button>
                                 </div>
@@ -635,32 +635,32 @@ export const AdminBannerManage: React.FC = () => {
                             <div style={{ minWidth: 0, flex: 1 }}>
                                 <div className="field-row" style={{ marginBottom: 14 }}>
                                     <div className="field" style={{ marginBottom: 0 }}>
-                                        <label>배경색 (이미지 없을 때)</label>
+                                        <label>Дэвсгэр өнгө (зураг байхгүй үед)</label>
                                         <div className="row" style={{ gap: 8 }}>
                                             <input type="color" value={banner.backgroundColor} onChange={(e) => handleEventChange(banner.id, 'backgroundColor', e.target.value)} style={{ width: 44, height: 44, borderRadius: 'var(--r-md)', cursor: 'pointer', border: '1px solid var(--border-default)', padding: 2, flex: 'none' }} />
                                             <input type="text" className="inp" value={banner.backgroundColor} onChange={(e) => handleEventChange(banner.id, 'backgroundColor', e.target.value)} />
                                         </div>
                                     </div>
                                     <div className="field" style={{ marginBottom: 0 }}>
-                                        <label>표시 위치</label>
+                                        <label>Харагдах байршил</label>
                                         <select
                                             className="inp"
                                             value={banner.location || 'all'}
                                             onChange={(e) => handleEventChange(banner.id, 'location', e.target.value)}
                                         >
-                                            <option value="all">전체 (홈 + 여행상품)</option>
-                                            <option value="home">홈 화면만</option>
-                                            <option value="products">여행상품 페이지만</option>
+                                            <option value="all">Бүгд (Нүүр + Аяллын бүтээгдэхүүн)</option>
+                                            <option value="home">Зөвхөн нүүр хуудас</option>
+                                            <option value="products">Зөвхөн аяллын бүтээгдэхүүний хуудас</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div className="field-row" style={{ marginBottom: 14 }}>
                                     <div className="field" style={{ marginBottom: 0 }}>
-                                        <label>태그</label>
+                                        <label>Таг</label>
                                         <input type="text" className="inp" value={banner.tag} onChange={(e) => handleEventChange(banner.id, 'tag', e.target.value)} />
                                     </div>
                                     <div className="field" style={{ marginBottom: 0 }}>
-                                        <label>링크</label>
+                                        <label>Холбоос</label>
                                         <div className="row" style={{ gap: 8 }}>
                                             <select
                                                 className="inp"
@@ -686,13 +686,13 @@ export const AdminBannerManage: React.FC = () => {
                                     </div>
                                 </div>
                                 <div className="field" style={{ marginBottom: 0 }}>
-                                    <label>제목 (줄바꿈 가능)</label>
+                                    <label>Гарчиг (мөр таслах боломжтой)</label>
                                     <textarea className="inp" style={{ height: 52 }} value={banner.title} onChange={(e) => handleEventChange(banner.id, 'title', e.target.value)} />
                                 </div>
                             </div>
 
                             <span className="row-actions" style={{ flex: 'none' }}>
-                                <button className="act-btn danger" title="삭제" onClick={() => deleteEventBanner(banner.id)}>
+                                <button className="act-btn danger" title="Устгах" onClick={() => deleteEventBanner(banner.id)}>
                                     <Icon name="delete" />
                                 </button>
                             </span>
@@ -702,7 +702,7 @@ export const AdminBannerManage: React.FC = () => {
                     {eventBanners.length === 0 && (
                         <div className="empty">
                             <Icon name="campaign" />
-                            <p>등록된 이벤트 배너가 없습니다.</p>
+                            <p>Бүртгэгдсэн эвентийн баннер байхгүй байна.</p>
                         </div>
                     )}
                 </div>
@@ -710,8 +710,8 @@ export const AdminBannerManage: React.FC = () => {
                 {/* ============ Category Tabs ============ */}
                 <div className="sec-head" style={{ marginTop: 32 }}>
                     <div>
-                        <h3>여행지 테마 배너</h3>
-                        <div className="cell-muted" style={{ fontSize: 13 }}>홈 화면 탭별 대표 이미지와 문구</div>
+                        <h3>Аяллын чиглэлийн сэдэвчилсэн баннер</h3>
+                        <div className="cell-muted" style={{ fontSize: 13 }}>Нүүр хуудасны таб бүрийн төлөөлөх зураг ба бичвэр</div>
                     </div>
                 </div>
 
@@ -724,7 +724,7 @@ export const AdminBannerManage: React.FC = () => {
                             <div
                                 style={{ width: '100%', aspectRatio: '4 / 3', background: `url('${tab.bannerImage}') center/cover, var(--mrt-gray-100)`, position: 'relative', cursor: 'pointer' }}
                                 onClick={() => { setSelectedId(tab.id); categoryFileInputRef.current?.click(); }}
-                                title="이미지 변경"
+                                title="Зураг солих"
                             >
                                 <span className="badge b-ink" style={{ position: 'absolute', top: 12, left: 12 }}>{tab.name}</span>
                             </div>
@@ -732,7 +732,7 @@ export const AdminBannerManage: React.FC = () => {
                             {/* Edit fields */}
                             <div className="card-pad" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                                 <div className="field" style={{ marginBottom: 14 }}>
-                                    <label>제목</label>
+                                    <label>Гарчиг</label>
                                     <input
                                         type="text"
                                         className="inp"
@@ -741,7 +741,7 @@ export const AdminBannerManage: React.FC = () => {
                                     />
                                 </div>
                                 <div className="field" style={{ marginBottom: 0, flex: 1 }}>
-                                    <label>부제목</label>
+                                    <label>Дэд гарчиг</label>
                                     <textarea
                                         className="inp"
                                         style={{ height: 72 }}
@@ -756,7 +756,7 @@ export const AdminBannerManage: React.FC = () => {
                     {categoryTabs.length === 0 && (
                         <div className="empty" style={{ gridColumn: '1 / -1' }}>
                             <Icon name="category" />
-                            <p>등록된 테마 배너가 없습니다.</p>
+                            <p>Бүртгэгдсэн сэдэвчилсэн баннер байхгүй байна.</p>
                         </div>
                     )}
                 </div>
@@ -767,7 +767,7 @@ export const AdminBannerManage: React.FC = () => {
             {showToast && (
                 <div className="page-toast">
                     <Icon name="check_circle" />
-                    <span>저장되었습니다!</span>
+                    <span>Хадгалагдлаа!</span>
                 </div>
             )}
         </AdminLayout>

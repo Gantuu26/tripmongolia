@@ -51,8 +51,8 @@ export function CategoryLandingDesktop({
                 title={content.heroTitle}
                 subtitle={content.heroSubtitle}
                 breadcrumbs={[
-                    { label: 'ホーム', path: '/' },
-                    { label: 'ツアー商品', path: '/products' },
+                    { label: '홈', path: '/' },
+                    { label: '투어 상품', path: '/products' },
                     { label: content.heroTitle },
                 ]}
                 contentWidth={contentWidth}
@@ -85,7 +85,7 @@ export function CategoryLandingDesktop({
                             boxShadow: `0 8px 20px -6px ${accent}66`,
                         }}
                     >
-                        {t('category_landing.view_products', { defaultValue: 'ツアー商品を見る' })}
+                        {t('category_landing.view_products', { defaultValue: '투어 상품 보기' })}
                         <MatIcon name="arrow_forward" size={18} color="#fff" />
                     </button>
                     <button
@@ -103,7 +103,7 @@ export function CategoryLandingDesktop({
                             fontFamily: 'inherit',
                         }}
                     >
-                        {t('category_landing.inquiry', { defaultValue: 'お問い合わせ' })}
+                        {t('category_landing.inquiry', { defaultValue: '문의하기' })}
                     </button>
                 </div>
             </section>
@@ -137,10 +137,10 @@ export function CategoryLandingDesktop({
                             Tour Lineup
                         </div>
                         <h2 style={{ fontSize: 28, fontWeight: 700, color: 'var(--fg-1)', margin: 0, letterSpacing: '-0.01em' }}>
-                            {content.productGridTitle || `${content.heroTitle}のツアー`}
+                            {content.productGridTitle || `${content.heroTitle} 투어`}
                         </h2>
                         <div style={{ fontSize: 13, color: 'var(--fg-5)', marginTop: 6 }}>
-                            <span style={{ color: 'var(--fg-2)', fontWeight: 700 }}>{products.length} 件</span> のツアー
+                            <span style={{ color: 'var(--fg-2)', fontWeight: 700 }}>{products.length} 개</span> 의 투어
                         </div>
                     </div>
                     <button
@@ -161,12 +161,12 @@ export function CategoryLandingDesktop({
                             gap: 6,
                         }}
                     >
-                        全てのツアー <MatIcon name="arrow_forward" size={16} />
+                        모든 투어 <MatIcon name="arrow_forward" size={16} />
                     </button>
                 </div>
 
                 {isLoadingProducts ? (
-                    <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>読み込み中...</div>
+                    <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>불러오는 중...</div>
                 ) : products.length === 0 ? (
                     <EmptyProductsState />
                 ) : (
@@ -225,10 +225,10 @@ export function CategoryLandingDesktop({
                             Custom Tour
                         </div>
                         <div style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.25, letterSpacing: '-0.02em' }}>
-                            {content.heroTitle}を、あなただけのプランで
+                            {content.heroTitle}을(를) 당신만을 위한 플랜으로
                         </div>
                         <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', marginTop: 10, lineHeight: 1.6 }}>
-                            人数・期間・予算をお伝えください。日本語スタッフが24時間以内にお見積もりします。
+                            인원・기간・예산을 알려주세요. 한국어 스태프가 24시간 이내에 견적을 보내드립니다.
                         </div>
                     </div>
                     <button
@@ -250,7 +250,7 @@ export function CategoryLandingDesktop({
                             position: 'relative',
                         }}
                     >
-                        1分でリクエスト <MatIcon name="arrow_forward" size={18} color="var(--primary-dark)" />
+                        1분 만에 요청하기 <MatIcon name="arrow_forward" size={18} color="var(--primary-dark)" />
                     </button>
                 </div>
             </section>
@@ -471,7 +471,7 @@ function HighlightCardDesktop({ card, onClick }: { card: HighlightCard; onClick?
         >
             <img
                 src={getOptimizedImageUrl(card.image, 'productDetail')}
-                alt={`${card.title}｜モンゴル旅行ハイライト`}
+                alt={`${card.title}｜몽골여행 하이라이트`}
                 loading="lazy"
                 decoding="async"
                 style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
@@ -571,9 +571,9 @@ function EmptyProductsState() {
             >
                 <MatIcon name="explore_off" size={32} color="var(--fg-5)" />
             </div>
-            <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--fg-1)' }}>関連するツアーがまだありません</div>
+            <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--fg-1)' }}>관련된 투어가 아직 없습니다</div>
             <div style={{ fontSize: 13, color: 'var(--fg-4)' }}>
-                オーダーメイドプランをご相談ください。
+                맞춤형 플랜을 상담해 주시기 바랍니다.
             </div>
         </div>
     );

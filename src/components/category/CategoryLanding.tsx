@@ -24,7 +24,7 @@ export interface HighlightSection {
 export interface CategoryLandingContent {
     heroImage: string;                  // first/primary image (kept for backward compat)
     heroImages?: string[];              // slide images; falls back to [heroImage] when empty
-    heroTagline?: string;   // small overline, e.g. "今がチャンス！"
+    heroTagline?: string;   // small overline, e.g. "지금이 기회!"
     heroTitle: string;      // big title
     heroSubtitle?: string;
     accentColor?: string;   // hex — used on section badges. default teal.
@@ -102,7 +102,7 @@ const Hero: React.FC<{ content: CategoryLandingContent }> = ({ content }) => {
                     <div key={i} className="relative h-full" style={{ width: `${100 / slides.length}%` }}>
                         <img
                             src={getOptimizedImageUrl(src, 'heroBanner')}
-                            alt={`${content.heroTitle}｜モンゴルツアー写真 ${i + 1}`}
+                            alt={`${content.heroTitle}｜몽골투어 사진 ${i + 1}`}
                             fetchPriority={i === 0 ? 'high' : 'low'}
                             loading={i === 0 ? 'eager' : 'lazy'}
                             decoding="async"
@@ -142,7 +142,7 @@ const Hero: React.FC<{ content: CategoryLandingContent }> = ({ content }) => {
                         onClick={scrollToProducts}
                         className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-white text-[12.5px] font-bold shadow-lg shadow-primary/40 hover:bg-primary-dark active:scale-[0.97] transition-all"
                     >
-                        {t('category_landing.view_products', { defaultValue: 'ツアー商品を見る' })}
+                        {t('category_landing.view_products', { defaultValue: '투어 상품 보기' })}
                         <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
                     </button>
                     <button
@@ -150,7 +150,7 @@ const Hero: React.FC<{ content: CategoryLandingContent }> = ({ content }) => {
                         onClick={() => navigate('/custom-estimate')}
                         className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/40 text-white text-[12.5px] font-bold hover:bg-white/20 active:scale-[0.97] transition-all"
                     >
-                        {t('category_landing.inquiry', { defaultValue: 'お問い合わせ' })}
+                        {t('category_landing.inquiry', { defaultValue: '문의하기' })}
                     </button>
                 </div>
             </div>
@@ -181,7 +181,7 @@ const HighlightCardView: React.FC<{ card: HighlightCard; onClick?: () => void }>
     >
         <img
             src={getOptimizedImageUrl(card.image, 'productDetail')}
-            alt={`${card.title}｜モンゴル旅行ハイライト`}
+            alt={`${card.title}｜몽골여행 하이라이트`}
             loading="lazy"
             decoding="async"
             className="absolute inset-0 w-full h-full object-cover"
@@ -291,7 +291,7 @@ export const CategoryLanding: React.FC<Props> = ({
                 <section id="category-products" className="px-5 pt-2 pb-8 scroll-mt-20">
                     <h2 className="text-lg font-bold mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
                         <span className="material-symbols-outlined text-base" style={{ color: accent }}>explore</span>
-                        {content.productGridTitle || 'ツアー商品'}
+                        {content.productGridTitle || '투어 상품'}
                     </h2>
                     <div className="grid grid-cols-2 gap-3">
                         {isLoadingProducts ? (
@@ -300,7 +300,7 @@ export const CategoryLanding: React.FC<Props> = ({
                             products.map((product) => <ProductCard key={product.id} product={product} />)
                         ) : (
                             <div className="col-span-2 py-8 text-center text-gray-500 text-sm">
-                                現在、関連するツアー商品がありません。
+                                현재 관련된 투어 상품이 없습니다.
                             </div>
                         )}
                     </div>

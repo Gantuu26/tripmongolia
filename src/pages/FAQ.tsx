@@ -7,7 +7,7 @@ import { BottomNav } from '../components/layout/BottomNav';
 export const FAQPage: React.FC = () => {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState('すべて');
+    const [selectedCategory, setSelectedCategory] = useState('전체');
     const [expandedId, setExpandedId] = useState<string | null>(null);
     const [categories, setCategories] = useState<any[]>([]);
     const [faqs, setFaqs] = useState<any[]>([]);
@@ -29,12 +29,12 @@ export const FAQPage: React.FC = () => {
         fetchData();
     }, []);
 
-    // All categories including "すべて"
-    const allCategories = ['すべて', ...categories.map(c => c.name)];
+    // All categories including "전체"
+    const allCategories = ['전체', ...categories.map(c => c.name)];
 
     // Filter FAQs
     const filteredFaqs = faqs.filter(faq => {
-        const matchesCategory = selectedCategory === 'すべて' || faq.category === selectedCategory;
+        const matchesCategory = selectedCategory === '전체' || faq.category === selectedCategory;
         const matchesSearch = faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
             faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
         return matchesCategory && matchesSearch;
@@ -72,9 +72,9 @@ export const FAQPage: React.FC = () => {
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 font-sans">
             <SEO
-                title="よくある質問（FAQ）"
-                description="モンゴル旅行に関するよくある質問と回答。予約方法、ツアー内容、持ち物、ビザ、決済・キャンセルなど、モンゴルツアーの疑問を解決します。"
-                keywords="モンゴル旅行FAQ, モンゴルツアー質問, モンゴル旅行準備, モンゴルビザ, 旅行社よくある質問"
+                title="자주 묻는 질문（FAQ）"
+                description="몽골여행에 관한 자주 묻는 질문과 답변. 예약 방법, 투어 내용, 준비물, 비자, 결제・취소 등 몽골투어의 궁금증을 해결해 드립니다."
+                keywords="몽골여행FAQ, 몽골투어 질문, 몽골여행 준비, 몽골비자, 여행사 자주 묻는 질문"
                 canonical="/faq"
                 structuredData={faqStructuredData}
             />
@@ -85,16 +85,16 @@ export const FAQPage: React.FC = () => {
                         <button onClick={() => navigate(-1)} className="p-2 -ml-2">
                             <span className="material-symbols-outlined text-gray-600 dark:text-gray-400">arrow_back</span>
                         </button>
-                        <span className="text-lg font-bold text-gray-900 dark:text-white">よくある質問</span>
+                        <span className="text-lg font-bold text-gray-900 dark:text-white">자주 묻는 질문</span>
                         <div className="w-10"></div>
                     </div>
                 </header>
 
                 {/* SEO: H1 + Intro */}
                 <section className="px-4 pt-4 pb-1">
-                    <h1 className="text-xl font-bold text-gray-900 dark:text-white mb-1">モンゴル旅行のよくある質問</h1>
+                    <h1 className="text-xl font-bold text-gray-900 dark:text-white mb-1">몽골여행 자주 묻는 질문</h1>
                     <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
-                        モンゴルツアーの予約・決済・キャンセル・持ち物・ビザなど、お客様からよくいただくご質問と回答をまとめました。
+                        몽골투어의 예약・결제・취소・준비물・비자 등 고객님께서 자주 문의하시는 질문과 답변을 모았습니다.
                     </p>
                 </section>
 
@@ -104,7 +104,7 @@ export const FAQPage: React.FC = () => {
                         <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">search</span>
                         <input
                             type="text"
-                            placeholder="気になる内容を検索してみてください"
+                            placeholder="궁금한 내용을 검색해 보세요"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className="w-full pl-12 pr-4 py-3 bg-gray-100 dark:bg-gray-800 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 outline-none focus:ring-2 focus:ring-teal-500"
@@ -135,7 +135,7 @@ export const FAQPage: React.FC = () => {
                     {filteredFaqs.length === 0 ? (
                         <div className="text-center py-12">
                             <span className="material-symbols-outlined text-5xl text-gray-300 dark:text-gray-600">help_outline</span>
-                            <p className="mt-4 text-gray-500 dark:text-gray-400">登録されたFAQはありません。</p>
+                            <p className="mt-4 text-gray-500 dark:text-gray-400">등록된 FAQ가 없습니다.</p>
                         </div>
                     ) : (
                         <div className="space-y-2">

@@ -11,7 +11,7 @@ interface CalendarBigProps {
     nights: number;
 }
 
-const DOWS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+const DOWS = ['일', '월', '화', '수', '목', '금', '토'];
 
 /**
  * Monthly calendar grid with range hover. Mirrors the PC handoff CalendarBig.
@@ -38,7 +38,7 @@ export function CalendarBig({ value, onChange, nights }: CalendarBigProps) {
     for (let d = 1; d <= daysInMonth; d++) cells.push(new Date(year, month, d));
     while (cells.length % 7 !== 0) cells.push(null);
 
-    const monthLabel = `${year}年 ${month + 1}月`;
+    const monthLabel = `${year}년 ${month + 1}월`;
 
     const prev = () => {
         if (month === 0) {
@@ -170,7 +170,7 @@ export function CalendarBig({ value, onChange, nights }: CalendarBigProps) {
                                         letterSpacing: '0.04em',
                                     }}
                                 >
-                                    出発
+                                    출발
                                 </span>
                             )}
                         </button>
@@ -194,7 +194,7 @@ export function CalendarBig({ value, onChange, nights }: CalendarBigProps) {
                     <span
                         style={{ width: 12, height: 12, borderRadius: 999, background: '#0f766e' }}
                     />{' '}
-                    出発日
+                    출발일
                 </span>
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                     <span
@@ -205,7 +205,7 @@ export function CalendarBig({ value, onChange, nights }: CalendarBigProps) {
                             background: 'var(--primary-soft, rgba(15,118,110,0.18))',
                         }}
                     />{' '}
-                    旅行期間
+                    여행 기간
                 </span>
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                     <span
@@ -217,7 +217,7 @@ export function CalendarBig({ value, onChange, nights }: CalendarBigProps) {
                             border: '1px solid var(--fg-6)',
                         }}
                     />{' '}
-                    予約不可
+                    예약 불가
                 </span>
             </div>
         </div>

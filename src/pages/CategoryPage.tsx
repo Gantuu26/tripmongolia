@@ -72,8 +72,8 @@ export const CategoryPage: React.FC = () => {
     if (!category) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 p-6 gap-3">
-                <p className="text-lg font-bold text-slate-800">カテゴリが見つかりません</p>
-                <p className="text-sm text-slate-500">URLをご確認ください。</p>
+                <p className="text-lg font-bold text-slate-800">카테고리를 찾을 수 없습니다</p>
+                <p className="text-sm text-slate-500">URL을 확인해 주시기 바랍니다.</p>
             </div>
         );
     }
@@ -94,11 +94,11 @@ export const CategoryPage: React.FC = () => {
         heroSubtitle: category.landing_hero_subtitle || category.description || undefined,
         accentColor: category.landing_accent_color || '#0f766e',
         highlights: Array.isArray(category.landing_highlights) ? category.landing_highlights : [],
-        productGridTitle: category.landing_product_grid_title || `${category.name}のツアー`,
+        productGridTitle: category.landing_product_grid_title || `${category.name} 투어`,
     };
 
     // ─── Structured Data (JSON-LD) for SEO ──────────────────────────
-    const seoDescription = category.landing_hero_subtitle || category.description || `${category.name}のモンゴルツアーをご案内します。`;
+    const seoDescription = category.landing_hero_subtitle || category.description || `${category.name} 몽골투어를 안내해 드립니다.`;
     const seoUrl = `https://mongolryokou.com/category/${slug}`;
     const heroOgImage = heroImages[0]?.startsWith('http') ? heroImages[0] : undefined;
 
@@ -106,8 +106,8 @@ export const CategoryPage: React.FC = () => {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
         itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'ホーム', item: 'https://mongolryokou.com/' },
-            { '@type': 'ListItem', position: 2, name: 'ツアー商品', item: 'https://mongolryokou.com/products' },
+            { '@type': 'ListItem', position: 1, name: '홈', item: 'https://mongolryokou.com/' },
+            { '@type': 'ListItem', position: 2, name: '투어 상품', item: 'https://mongolryokou.com/products' },
             { '@type': 'ListItem', position: 3, name: category.name, item: seoUrl },
         ],
     };
@@ -115,7 +115,7 @@ export const CategoryPage: React.FC = () => {
     const itemListLd = {
         '@context': 'https://schema.org',
         '@type': 'ItemList',
-        name: `${category.name}のツアー商品`,
+        name: `${category.name} 투어 상품`,
         itemListElement: products.slice(0, 20).map((p: any, i: number) => ({
             '@type': 'ListItem',
             position: i + 1,

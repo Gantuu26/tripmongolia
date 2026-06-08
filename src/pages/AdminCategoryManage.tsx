@@ -87,22 +87,22 @@ export const AdminCategoryManage: React.FC = () => {
             await api.categories.update(id, { is_active: !currentStatus });
             fetchCategories();
         } catch (error) {
-            alert('업데이트 실패: ' + error);
+            alert('Шинэчлэх амжилтгүй: ' + error);
         }
     };
 
     // Delete category
     const deleteCategory = async (id: string) => {
         if (id === 'all') {
-            alert('"전체" 카테고리는 삭제할 수 없습니다.');
+            alert('"전체" ангиллыг устгах боломжгүй.');
             return;
         }
-        if (confirm('정말 이 카테고리를 삭제하시겠습니까?')) {
+        if (confirm('Энэ ангиллыг үнэхээр устгах уу?')) {
             try {
                 await api.categories.delete(id);
                 fetchCategories();
             } catch (error) {
-                alert('삭제 실패: ' + error);
+                alert('Устгах амжилтгүй: ' + error);
             }
         }
     };
@@ -147,10 +147,10 @@ export const AdminCategoryManage: React.FC = () => {
                 if (selectedCategory.id !== category.id) {
                     const newId = (category.id || '').trim();
                     if (!newId || !/^[a-z0-9][a-z0-9-]*$/.test(newId)) {
-                        alert('URL 슬러그는 영문 소문자/숫자/하이픈으로, 문자나 숫자로 시작해야 합니다.');
+                        alert('URL слаг нь латин жижиг үсэг/тоо/зураасаар бичигдэж, үсэг эсвэл тоогоор эхлэх ёстой.');
                         return;
                     }
-                    if (!confirm(`URL 슬러그를 "${selectedCategory.id}" → "${newId}" 로 변경하시겠습니까?\n기존 /category/${selectedCategory.id} 링크는 더이상 열리지 않습니다.`)) {
+                    if (!confirm(`URL слагийг "${selectedCategory.id}" → "${newId}" болгож өөрчлөх үү?\nОдоо байгаа /category/${selectedCategory.id} холбоос цаашид нээгдэхгүй болно.`)) {
                         return;
                     }
                     await api.categories.rename(selectedCategory.id, newId);
@@ -184,14 +184,14 @@ export const AdminCategoryManage: React.FC = () => {
             fetchCategories();
         } catch (error: any) {
             console.error(error);
-            alert('저장 중 오류가 발생했습니다.');
+            alert('Хадгалах үед алдаа гарлаа.');
         }
     };
 
     return (
         <AdminLayout
             activePage="categories"
-            title="카테고리 관리"
+            title="Ангилал удирдах"
             actions={
                 <button
                     onClick={() => {
@@ -201,14 +201,14 @@ export const AdminCategoryManage: React.FC = () => {
                     className="btn btn-ink"
                 >
                     <Icon name="add" />
-                    카테고리 추가
+                    Ангилал нэмэх
                 </button>
             }
         >
             <div className="route-anim">
                 <div className="toolbar">
                     <div className="cell-muted" style={{ fontSize: 13.5, fontWeight: 600 }}>
-                        순서 버튼으로 노출 순서를 변경할 수 있습니다.
+                        Эрэмбийн товчоор харагдах дарааллыг өөрчилж болно.
                     </div>
                     <div className="spacer" />
                     <button
@@ -219,7 +219,7 @@ export const AdminCategoryManage: React.FC = () => {
                         className="btn btn-ink"
                     >
                         <Icon name="add" />
-                        카테고리 추가
+                        Ангилал нэмэх
                     </button>
                 </div>
 
@@ -228,12 +228,12 @@ export const AdminCategoryManage: React.FC = () => {
                         <table className="tbl">
                             <thead>
                                 <tr>
-                                    <th style={{ width: 60 }}>순서</th>
-                                    <th style={{ width: 80 }}>아이콘</th>
-                                    <th>이름</th>
-                                    <th>설명</th>
-                                    <th className="c">노출</th>
-                                    <th className="r">관리</th>
+                                    <th style={{ width: 60 }}>Эрэмбэ</th>
+                                    <th style={{ width: 80 }}>Дүрс</th>
+                                    <th>Нэр</th>
+                                    <th>Тайлбар</th>
+                                    <th className="c">Харуулах</th>
+                                    <th className="r">Удирдах</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -242,7 +242,7 @@ export const AdminCategoryManage: React.FC = () => {
                                         <td colSpan={6}>
                                             <div className="empty">
                                                 <Icon name="category" />
-                                                <p>등록된 카테고리가 없습니다.</p>
+                                                <p>Бүртгэгдсэн ангилал байхгүй байна.</p>
                                             </div>
                                         </td>
                                     </tr>
@@ -299,7 +299,7 @@ export const AdminCategoryManage: React.FC = () => {
                                                     <button
                                                         type="button"
                                                         className="act-btn"
-                                                        title="수정"
+                                                        title="Засах"
                                                         onClick={() => {
                                                             setSelectedCategory(category);
                                                             setIsModalOpen(true);
@@ -311,7 +311,7 @@ export const AdminCategoryManage: React.FC = () => {
                                                         <button
                                                             type="button"
                                                             className="act-btn danger"
-                                                            title="삭제"
+                                                            title="Устгах"
                                                             onClick={() => deleteCategory(category.id)}
                                                         >
                                                             <Icon name="delete" />
@@ -367,7 +367,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ category, type, onClose, 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (!formData.name || !formData.icon) {
-            alert('필수 항목을 입력해주세요.');
+            alert('Заавал бөглөх талбарыг бөглөнө үү.');
             return;
         }
         // Ensure type matches the current tab if creating new
@@ -389,14 +389,14 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ category, type, onClose, 
                     {/* Header */}
                     <div className="card-head">
                         <h2>
-                            {category ? '카테고리 수정' : `${type === 'product' ? '상품' : '매거진'} 카테고리 추가`}
+                            {category ? 'Ангилал засах' : `${type === 'product' ? 'Бүтээгдэхүүн' : 'Сэтгүүл'} ангилал нэмэх`}
                         </h2>
                         <div className="spacer" />
                         <button
                             type="button"
                             onClick={onClose}
                             className="act-btn"
-                            title="닫기"
+                            title="Хаах"
                         >
                             <Icon name="close" />
                         </button>
@@ -406,20 +406,20 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ category, type, onClose, 
                     <div style={{ overflowY: 'auto', padding: '20px 22px' }}>
                         {/* Name */}
                         <div className="field">
-                            <label>카테고리 이름 *</label>
+                            <label>Ангиллын нэр *</label>
                             <input
                                 type="text"
                                 className="inp"
                                 value={formData.name || ''}
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                placeholder={type === 'product' ? "예: 서부몽골" : "예: 몽골 기본 정보"}
+                                placeholder={type === 'product' ? "жишээ нь: Баруун Монгол" : "жишээ нь: Монголын үндсэн мэдээлэл"}
                             />
                         </div>
 
                         {/* URL Slug (editable only in edit mode, and not for the "all" category) */}
                         {category && category.id !== 'all' && (
                             <div className="field">
-                                <label>URL 슬러그 (ID)</label>
+                                <label>URL слаг (ID)</label>
                                 <div className="row" style={{ gap: 8 }}>
                                     <span className="cell-muted" style={{ fontSize: 12, whiteSpace: 'nowrap' }}>/category/</span>
                                     <input
@@ -428,30 +428,30 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ category, type, onClose, 
                                         style={{ flex: 1, fontFamily: 'var(--font-mono)' }}
                                         value={formData.id || ''}
                                         onChange={(e) => setFormData({ ...formData, id: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '') })}
-                                        placeholder="예: gobi"
+                                        placeholder="жишээ нь: gobi"
                                     />
                                 </div>
                                 <p className="cell-muted" style={{ fontSize: 12, marginTop: 6 }}>
-                                    영문 소문자/숫자/하이픈만 허용. 변경 시 기존 URL이 더이상 열리지 않으니 주의하세요.
+                                    Зөвхөн латин жижиг үсэг/тоо/зураас зөвшөөрнө. Өөрчилбөл одоо байгаа URL цаашид нээгдэхгүй тул болгоомжтой байна уу.
                                 </p>
                             </div>
                         )}
 
                         {/* Description */}
                         <div className="field">
-                            <label>설명</label>
+                            <label>Тайлбар</label>
                             <input
                                 type="text"
                                 className="inp"
                                 value={formData.description || ''}
                                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                                placeholder={type === 'product' ? "예: 알타이 산맥 트레킹" : "예: 환전, 유심, 날씨 등"}
+                                placeholder={type === 'product' ? "жишээ нь: Алтайн нурууны треккинг" : "жишээ нь: Мөнгө солих, сим, цаг агаар гэх мэт"}
                             />
                         </div>
 
                         {/* Icon */}
                         <div className="field">
-                            <label>아이콘 이미지 *</label>
+                            <label>Дүрс зураг *</label>
 
                             {/* Image Preview */}
                             {formData.icon && (formData.icon.startsWith('data:') || formData.icon.startsWith('http') || formData.icon.startsWith('/')) && (
@@ -479,13 +479,13 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ category, type, onClose, 
                                             setFormData({ ...formData, icon: url });
                                         } catch (error) {
                                             console.error('Category image upload failed:', error);
-                                            alert('이미지 업로드 실패');
+                                            alert('Зураг байршуулахад алдаа гарлаа');
                                         }
                                     }
                                 }}
                             />
                             <p className="cell-muted" style={{ fontSize: 12, marginTop: 8 }}>
-                                권장: 1:1 비율의 이미지 (사용자 화면에서 원형으로 표시됩니다)
+                                Зөвлөмж: 1:1 харьцаатай зураг (хэрэглэгчийн дэлгэцэд дугуй хэлбэрээр харагдана)
                             </p>
                         </div>
 
@@ -498,7 +498,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ category, type, onClose, 
                             >
                                 <span className="knob" />
                             </button>
-                            <span className="cell-strong" style={{ fontSize: 13.5 }}>활성화</span>
+                            <span className="cell-strong" style={{ fontSize: 13.5 }}>Идэвхжүүлэх</span>
                         </div>
 
                         {/* Landing page editor — only for product categories */}
@@ -518,13 +518,13 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ category, type, onClose, 
                             onClick={onClose}
                             className="btn btn-ghost"
                         >
-                            취소
+                            Цуцлах
                         </button>
                         <button
                             type="submit"
                             className="btn btn-ink"
                         >
-                            {category ? '수정 완료' : '추가 완료'}
+                            {category ? 'Засаж дуусгах' : 'Нэмж дуусгах'}
                         </button>
                     </div>
                 </form>
@@ -546,7 +546,7 @@ const LandingPageEditor: React.FC<LandingEditorProps> = ({ formData, setFormData
     const updateHighlights = (next: any[]) => setFormData({ ...formData, landing_highlights: next });
 
     const addSection = () => {
-        updateHighlights([...highlights, { label: `ハイライト ${highlights.length + 1}`, title: '', subtitle: '', cards: [] }]);
+        updateHighlights([...highlights, { label: `하이라이트 ${highlights.length + 1}`, title: '', subtitle: '', cards: [] }]);
     };
     const updateSection = (idx: number, patch: any) => {
         const next = [...highlights];
@@ -578,7 +578,7 @@ const LandingPageEditor: React.FC<LandingEditorProps> = ({ formData, setFormData
         try {
             const url = await uploadImage(file, 'categories');
             cb(url);
-        } catch (e) { alert('이미지 업로드 실패'); }
+        } catch (e) { alert('Зураг байршуулахад алдаа гарлаа'); }
     };
 
     return (
@@ -590,7 +590,7 @@ const LandingPageEditor: React.FC<LandingEditorProps> = ({ formData, setFormData
                 style={{ width: '100%', padding: '14px 16px', margin: 0, border: 'none', background: 'none', cursor: 'pointer' }}
             >
                 <Icon name="web" />
-                <h4 style={{ fontSize: 13.5 }}>랜딩 페이지 편집 (/category/{formData.id || '...'})</h4>
+                <h4 style={{ fontSize: 13.5 }}>Лэндинг хуудас засах (/category/{formData.id || '...'})</h4>
                 <span className="spacer" style={{ flex: 1 }} />
                 <Icon name="expand_more" className={expanded ? 'rotate' : ''} style={expanded ? { transform: 'rotate(180deg)' } : undefined} />
             </button>
@@ -599,7 +599,7 @@ const LandingPageEditor: React.FC<LandingEditorProps> = ({ formData, setFormData
                 <div style={{ padding: 16, borderTop: '1px solid var(--border-default)' }}>
                     {/* Hero */}
                     <div style={{ paddingBottom: 16, marginBottom: 16, borderBottom: '1px solid var(--border-subtle)' }}>
-                        <p className="sec-label">히어로 배너</p>
+                        <p className="sec-label">Үндсэн баннер (Hero)</p>
 
                         <HeroImagesEditor
                             images={(() => {
@@ -618,17 +618,17 @@ const LandingPageEditor: React.FC<LandingEditorProps> = ({ formData, setFormData
 
                         <div className="field-row" style={{ marginTop: 12 }}>
                             <div className="field" style={{ marginBottom: 0 }}>
-                                <label>소제목 (tagline)</label>
+                                <label>Дэд гарчиг (tagline)</label>
                                 <input
                                     type="text"
                                     className="inp"
                                     value={formData.landing_hero_tagline || ''}
                                     onChange={(e) => setFormData({ ...formData, landing_hero_tagline: e.target.value })}
-                                    placeholder="例: 満天の星空が待っている"
+                                    placeholder="жишээ нь: Тэнгэр дүүрэн одод таныг хүлээж байна"
                                 />
                             </div>
                             <div className="field" style={{ marginBottom: 0 }}>
-                                <label>강조 색상 (accent)</label>
+                                <label>Онцлох өнгө (accent)</label>
                                 <input
                                     type="color"
                                     className="inp"
@@ -640,35 +640,35 @@ const LandingPageEditor: React.FC<LandingEditorProps> = ({ formData, setFormData
                         </div>
 
                         <div className="field" style={{ marginTop: 12, marginBottom: 0 }}>
-                            <label>메인 제목</label>
+                            <label>Үндсэн гарчиг</label>
                             <input
                                 type="text"
                                 className="inp"
                                 value={formData.landing_hero_title || ''}
                                 onChange={(e) => setFormData({ ...formData, landing_hero_title: e.target.value })}
-                                placeholder="例: ゴビ砂漠ツアー"
+                                placeholder="жишээ нь: Говь цөлийн аялал"
                             />
                         </div>
 
                         <div className="field" style={{ marginTop: 12, marginBottom: 0 }}>
-                            <label>서브 제목 (설명)</label>
+                            <label>Дэд гарчиг (тайлбар)</label>
                             <textarea
                                 className="inp"
                                 value={formData.landing_hero_subtitle || ''}
                                 onChange={(e) => setFormData({ ...formData, landing_hero_subtitle: e.target.value })}
                                 rows={2}
-                                placeholder="例: 天の川がはっきり見える空、夕陽に染まる砂丘..."
+                                placeholder="жишээ нь: Сүүн зам тод харагдах тэнгэр, нар жаргах үеийн манхан..."
                             />
                         </div>
 
                         <div className="field" style={{ marginTop: 12, marginBottom: 0 }}>
-                            <label>상품 섹션 제목</label>
+                            <label>Бүтээгдэхүүний хэсгийн гарчиг</label>
                             <input
                                 type="text"
                                 className="inp"
                                 value={formData.landing_product_grid_title || ''}
                                 onChange={(e) => setFormData({ ...formData, landing_product_grid_title: e.target.value })}
-                                placeholder="例: ゴビ砂漠の人気ツアー"
+                                placeholder="жишээ нь: Говь цөлийн алдартай аялал"
                             />
                         </div>
                     </div>
@@ -676,10 +676,10 @@ const LandingPageEditor: React.FC<LandingEditorProps> = ({ formData, setFormData
                     {/* Highlights */}
                     <div>
                         <div className="row" style={{ marginBottom: 12 }}>
-                            <p className="sec-label" style={{ margin: 0 }}>하이라이트 섹션 ({highlights.length})</p>
+                            <p className="sec-label" style={{ margin: 0 }}>Онцлох хэсэг ({highlights.length})</p>
                             <span className="spacer" style={{ flex: 1 }} />
                             <button type="button" onClick={addSection} className="btn btn-ghost btn-sm">
-                                <Icon name="add" />섹션 추가
+                                <Icon name="add" />Хэсэг нэмэх
                             </button>
                         </div>
 
@@ -687,9 +687,9 @@ const LandingPageEditor: React.FC<LandingEditorProps> = ({ formData, setFormData
                             {highlights.map((section: any, sIdx: number) => (
                                 <div key={sIdx} className="edit-sec">
                                     <div className="row" style={{ marginBottom: 8 }}>
-                                        <span className="cell-mono" style={{ fontSize: 11 }}>섹션 {sIdx + 1}</span>
+                                        <span className="cell-mono" style={{ fontSize: 11 }}>Хэсэг {sIdx + 1}</span>
                                         <span className="spacer" style={{ flex: 1 }} />
-                                        <button type="button" onClick={() => removeSection(sIdx)} className="act-btn danger" title="삭제">
+                                        <button type="button" onClick={() => removeSection(sIdx)} className="act-btn danger" title="Устгах">
                                             <Icon name="delete" />
                                         </button>
                                     </div>
@@ -699,14 +699,14 @@ const LandingPageEditor: React.FC<LandingEditorProps> = ({ formData, setFormData
                                             className="inp"
                                             value={section.label || ''}
                                             onChange={(e) => updateSection(sIdx, { label: e.target.value })}
-                                            placeholder="뱃지 라벨 (例: ハイライト 1)"
+                                            placeholder="Тэмдэглэгээний шошго (жишээ нь: Онцлох 1)"
                                         />
                                         <input
                                             type="text"
                                             className="inp"
                                             value={section.title || ''}
                                             onChange={(e) => updateSection(sIdx, { title: e.target.value })}
-                                            placeholder="섹션 제목"
+                                            placeholder="Хэсгийн гарчиг"
                                         />
                                     </div>
                                     <input
@@ -715,7 +715,7 @@ const LandingPageEditor: React.FC<LandingEditorProps> = ({ formData, setFormData
                                         style={{ marginTop: 8 }}
                                         value={section.subtitle || ''}
                                         onChange={(e) => updateSection(sIdx, { subtitle: e.target.value })}
-                                        placeholder="섹션 서브타이틀"
+                                        placeholder="Хэсгийн дэд гарчиг"
                                     />
 
                                     {/* Cards */}
@@ -747,9 +747,9 @@ const LandingPageEditor: React.FC<LandingEditorProps> = ({ formData, setFormData
                                                                 style={{ flex: 1, height: 34, fontSize: 12 }}
                                                                 value={(card.tags || []).join(', ')}
                                                                 onChange={(e) => updateCard(sIdx, cIdx, { tags: e.target.value.split(',').map(s => s.trim()).filter(Boolean) })}
-                                                                placeholder="태그 (콤마 구분)"
+                                                                placeholder="Таг (таслалаар тусгаарлана)"
                                                             />
-                                                            <button type="button" onClick={() => removeCard(sIdx, cIdx)} className="act-btn danger" title="삭제">
+                                                            <button type="button" onClick={() => removeCard(sIdx, cIdx)} className="act-btn danger" title="Устгах">
                                                                 <Icon name="close" />
                                                             </button>
                                                         </div>
@@ -759,7 +759,7 @@ const LandingPageEditor: React.FC<LandingEditorProps> = ({ formData, setFormData
                                                             style={{ marginTop: 6, height: 34, fontSize: 12 }}
                                                             value={card.title || ''}
                                                             onChange={(e) => updateCard(sIdx, cIdx, { title: e.target.value })}
-                                                            placeholder="카드 제목"
+                                                            placeholder="Картын гарчиг"
                                                         />
                                                         <input
                                                             type="text"
@@ -767,21 +767,21 @@ const LandingPageEditor: React.FC<LandingEditorProps> = ({ formData, setFormData
                                                             style={{ marginTop: 6, height: 34, fontSize: 12 }}
                                                             value={card.description || ''}
                                                             onChange={(e) => updateCard(sIdx, cIdx, { description: e.target.value })}
-                                                            placeholder="카드 설명"
+                                                            placeholder="Картын тайлбар"
                                                         />
                                                     </div>
                                                 </div>
                                             </div>
                                         ))}
                                         <button type="button" onClick={() => addCard(sIdx)} className="add-line">
-                                            <Icon name="add" /> 카드 추가
+                                            <Icon name="add" /> Карт нэмэх
                                         </button>
                                     </div>
                                 </div>
                             ))}
                             {highlights.length === 0 && (
                                 <div className="empty" style={{ padding: '32px 20px' }}>
-                                    <p>위 "섹션 추가" 버튼으로 하이라이트를 만드세요</p>
+                                    <p>Дээрх "Хэсэг нэмэх" товчоор онцлох хэсэг үүсгэнэ үү</p>
                                 </div>
                             )}
                         </div>
@@ -826,10 +826,10 @@ const HeroImagesEditor: React.FC<HeroImagesEditorProps> = ({ images, onChange, u
         <div>
             <div className="row" style={{ marginBottom: 6 }}>
                 <label className="cell-strong" style={{ fontSize: 12 }}>
-                    배경 이미지 슬라이드 ({images.length})
+                    Дэвсгэр зургийн слайд ({images.length})
                 </label>
                 <span className="spacer" style={{ flex: 1 }} />
-                <span className="cell-muted" style={{ fontSize: 11 }}>첫 번째 이미지가 대표 이미지로 사용됩니다</span>
+                <span className="cell-muted" style={{ fontSize: 11 }}>Эхний зураг нь төлөөлөх зураг болж ашиглагдана</span>
             </div>
 
             {images.length > 0 && (
@@ -875,7 +875,7 @@ const HeroImagesEditor: React.FC<HeroImagesEditorProps> = ({ images, onChange, u
 
             <label className="add-line" style={{ cursor: 'pointer' }}>
                 <Icon name="add_photo_alternate" />
-                이미지 추가
+                Зураг нэмэх
                 <input
                     type="file"
                     accept="image/*"

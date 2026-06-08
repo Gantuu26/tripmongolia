@@ -8,7 +8,7 @@ interface SectionHeaderProps {
     allLabel?: string;
 }
 
-export function SectionHeader({ eyebrow, title, subtitle, onAll, allLabel = 'すべて見る' }: SectionHeaderProps) {
+export function SectionHeader({ eyebrow, title, subtitle, onAll, allLabel = '전체 보기' }: SectionHeaderProps) {
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 28, gap: 24 }}>
             <div>

@@ -24,7 +24,7 @@ export const ReviewAvatar: React.FC<ReviewAvatarProps> = ({ src, name, size = 40
             {showImage ? (
                 <img
                     src={src}
-                    alt={name ? `${name}様のアバター` : ''}
+                    alt={name ? `${name}님의 아바타` : ''}
                     className="w-full h-full object-cover"
                     loading="lazy"
                     decoding="async"

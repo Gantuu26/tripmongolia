@@ -10,203 +10,203 @@ export const PrivacyPolicy = () => {
         return (
             <>
                 <SEO
-                    title="プライバシーポリシー"
-                    description="モンゴリア銀河系のプライバシーポリシー（個人情報保護方針）です。"
+                    title="개인정보처리방침"
+                    description="몽골리아 은하수의 개인정보처리방침입니다."
                 />
                 <div className="container mx-auto px-4 py-8 max-w-4xl font-display">
-                    <h1 className="text-3xl font-bold mb-6">プライバシーポリシー（個人情報保護方針）</h1>
+                    <h1 className="text-3xl font-bold mb-6">개인정보처리방침</h1>
 
                     <div className="prose prose-slate max-w-none">
                         <p className="mb-6">
-                            モンゴリア銀河系（以下「会社」）は、個人情報保護法等の関連法令に基づき、利用者の個人情報を保護し、これに関連する苦情を迅速かつ円滑に処理するため、以下の通りプライバシーポリシーを策定・公開します。
+                            몽골리아 은하수(이하 "회사")는 개인정보 보호법 등 관련 법령에 따라 이용자의 개인정보를 보호하고, 이와 관련한 고충을 신속하고 원활하게 처리하기 위하여 다음과 같이 개인정보처리방침을 수립·공개합니다.
                         </p>
 
                         <section className="mb-8">
-                            <h2 className="text-xl font-semibold mb-4">第1条 (個人情報の利用目的)</h2>
+                            <h2 className="text-xl font-semibold mb-4">제1조 (개인정보의 처리 목적)</h2>
                             <p className="mb-4">
-                                会社は以下の目的のために個人情報を取り扱います。取り扱っている個人情報は、以下の目的以外の用途には利用されず、利用目的が変更される場合には別途同意を得る等、必要な措置を講じる予定です。
+                                회사는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.
                             </p>
                             <ul className="list-disc pl-6 mb-4 space-y-2">
                                 <li>
-                                    <strong>1. 会員登録および管理</strong>
+                                    <strong>1. 회원 가입 및 관리</strong>
                                     <ul className="list-circle pl-6 mt-1 space-y-1 text-sm text-gray-700">
-                                        <li>- 会員登録の意思確認、会員制サービス提供に伴う本人識別・認証</li>
-                                        <li>- 会員資格の維持・管理、サービスの不正利用防止</li>
+                                        <li>- 회원 가입 의사 확인, 회원제 서비스 제공에 따른 본인 식별·인증</li>
+                                        <li>- 회원 자격 유지·관리, 서비스 부정 이용 방지</li>
                                     </ul>
                                 </li>
                                 <li className="mt-4">
-                                    <strong>2. サービスの提供</strong>
+                                    <strong>2. 서비스의 제공</strong>
                                     <ul className="list-circle pl-6 mt-1 space-y-1 text-sm text-gray-700">
-                                        <li>- 旅行情報の提供、予約仲介サービスの提供</li>
-                                        <li>- カスタマイズされたサービスの提供、本人認証</li>
+                                        <li>- 여행 정보 제공, 예약 중개 서비스 제공</li>
+                                        <li>- 맞춤형 서비스 제공, 본인 인증</li>
                                     </ul>
                                 </li>
                                 <li className="mt-4">
-                                    <strong>3. 苦情処理</strong>
+                                    <strong>3. 고충 처리</strong>
                                     <ul className="list-circle pl-6 mt-1 space-y-1 text-sm text-gray-700">
-                                        <li>- 申立人の本人確認、苦情事項の確認、事実調査のための連絡・通知</li>
-                                        <li>- 処理結果の通知</li>
+                                        <li>- 민원인의 본인 확인, 민원 사항 확인, 사실 조사를 위한 연락·통지</li>
+                                        <li>- 처리 결과 통보</li>
                                     </ul>
                                 </li>
                             </ul>
                         </section>
 
                         <section className="mb-8">
-                            <h2 className="text-xl font-semibold mb-4">第2条 (取り扱う個人情報の項目)</h2>
-                            <p className="mb-4">会社は以下の個人情報項目を取り扱っています。</p>
+                            <h2 className="text-xl font-semibold mb-4">제2조 (처리하는 개인정보의 항목)</h2>
+                            <p className="mb-4">회사는 다음의 개인정보 항목을 처리하고 있습니다.</p>
                             <ul className="list-disc pl-6 mb-4 space-y-2">
                                 <li>
-                                    <strong>1. 必須項目</strong><br />
-                                    - Googleアカウント情報：名前、メールアドレス、プロフィール写真
+                                    <strong>1. 필수 항목</strong><br />
+                                    - Google 계정 정보: 이름, 이메일 주소, 프로필 사진
                                 </li>
                                 <li>
-                                    <strong>2. 自動収集項目</strong><br />
-                                    - サービス利用履歴、アクセスログ、クッキー、アクセスIP情報
+                                    <strong>2. 자동 수집 항목</strong><br />
+                                    - 서비스 이용 기록, 접속 로그, 쿠키, 접속 IP 정보
                                 </li>
                             </ul>
                         </section>
 
                         <section className="mb-8">
-                            <h2 className="text-xl font-semibold mb-4">第3条 (個人情報の取り扱いおよび保有期間)</h2>
+                            <h2 className="text-xl font-semibold mb-4">제3조 (개인정보의 처리 및 보유 기간)</h2>
                             <p className="mb-4">
-                                1. 会社は、法令に基づく個人情報の保有・利用期間、または情報主体から個人情報を収集する際に同意を得た個人情報の保有・利用期間内で個人情報を取り扱い、保有します。
+                                1. 회사는 법령에 따른 개인정보 보유·이용 기간 또는 정보주체로부터 개인정보를 수집할 때에 동의받은 개인정보 보유·이용 기간 내에서 개인정보를 처리·보유합니다.
                             </p>
                             <p className="mb-4">
-                                2. それぞれの個人情報の取り扱いおよび保有期間は以下の通りです：
+                                2. 각각의 개인정보 처리 및 보유 기간은 다음과 같습니다:
                             </p>
                             <ul className="list-disc pl-6 mb-4 space-y-2">
-                                <li>会員登録および管理：会員退会時まで</li>
-                                <li>ただし、関連法令の違反に伴う捜査・調査等が進行中の場合は、当該捜査・調査の終了時まで</li>
+                                <li>회원 가입 및 관리: 회원 탈퇴 시까지</li>
+                                <li>다만, 관련 법령 위반에 따른 수사·조사 등이 진행 중인 경우에는 해당 수사·조사 종료 시까지</li>
                             </ul>
-                            <p className="mt-4 mb-2">3. 関連法令に基づく保存：</p>
+                            <p className="mt-4 mb-2">3. 관련 법령에 따른 보존:</p>
                             <ul className="list-disc pl-6 mb-4 space-y-2">
-                                <li>契約または申込撤回等に関する記録：5年（電子商取引法）</li>
-                                <li>代金決済および財貨等の供給に関する記録：5年（電子商取引法）</li>
-                                <li>消費者の不満または紛争処理に関する記録：3年（電子商取引法）</li>
+                                <li>계약 또는 청약 철회 등에 관한 기록: 5년 (전자상거래법)</li>
+                                <li>대금 결제 및 재화 등의 공급에 관한 기록: 5년 (전자상거래법)</li>
+                                <li>소비자의 불만 또는 분쟁 처리에 관한 기록: 3년 (전자상거래법)</li>
                             </ul>
                         </section>
 
                         <section className="mb-8">
-                            <h2 className="text-xl font-semibold mb-4">第4条 (個人情報の第三者への提供)</h2>
+                            <h2 className="text-xl font-semibold mb-4">제4조 (개인정보의 제3자 제공)</h2>
                             <p className="mb-4">
-                                会社は原則として、利用者の個人情報を第1条（個人情報の利用目的）で明示した範囲内でのみ取り扱い、利用者の事前の同意なしに本来の範囲を超えて取り扱ったり、第三者に提供したりすることはありません。
+                                회사는 원칙적으로 이용자의 개인정보를 제1조(개인정보의 처리 목적)에서 명시한 범위 내에서만 처리하며, 이용자의 사전 동의 없이는 본래의 범위를 초과하여 처리하거나 제3자에게 제공하지 않습니다.
                             </p>
-                            <p className="mb-2">ただし、以下の場合を除きます：</p>
+                            <p className="mb-2">다만, 다음의 경우는 예외로 합니다:</p>
                             <ol className="list-decimal pl-6 mb-4 space-y-2">
-                                <li>利用者が事前に同意した場合</li>
-                                <li>法令の規定に基づく場合、または捜査の目的で法令に定められた手続きと方法に従い捜査機関の要求がある場合</li>
+                                <li>이용자가 사전에 동의한 경우</li>
+                                <li>법령의 규정에 따르거나, 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우</li>
                             </ol>
                         </section>
 
                         <section className="mb-8">
-                            <h2 className="text-xl font-semibold mb-4">第5条 (個人情報処理の委託)</h2>
-                            <p className="mb-4">会社は、円滑な個人情報業務処理のために、以下のように個人情報処理業務を委託しています：</p>
+                            <h2 className="text-xl font-semibold mb-4">제5조 (개인정보 처리의 위탁)</h2>
+                            <p className="mb-4">회사는 원활한 개인정보 업무 처리를 위하여 다음과 같이 개인정보 처리 업무를 위탁하고 있습니다:</p>
                             <ul className="list-disc pl-6 mb-4 space-y-2">
                                 <li>
-                                    <strong>1. クラウドサービスの提供</strong>
+                                    <strong>1. 클라우드 서비스 제공</strong>
                                     <ul className="list-none pl-4 mt-1 space-y-1 text-sm text-gray-700">
-                                        <li>- 受託業者：Cloudflare, Inc.</li>
-                                        <li>- 委託業務の内容：サーバーホスティングおよびデータ保存</li>
-                                        <li>- 保有および利用期間：会員退会時、または委託契約の終了時まで</li>
+                                        <li>- 수탁 업체: Cloudflare, Inc.</li>
+                                        <li>- 위탁 업무 내용: 서버 호스팅 및 데이터 저장</li>
+                                        <li>- 보유 및 이용 기간: 회원 탈퇴 시 또는 위탁 계약 종료 시까지</li>
                                     </ul>
                                 </li>
                             </ul>
                         </section>
 
                         <section className="mb-8">
-                            <h2 className="text-xl font-semibold mb-4">第6条 (情報主体の権利・義務および行使方法)</h2>
-                            <p className="mb-4">1. 情報主体は会社に対し、いつでも以下の各号の個人情報保護に関する権利を行使することができます：</p>
+                            <h2 className="text-xl font-semibold mb-4">제6조 (정보주체의 권리·의무 및 행사 방법)</h2>
+                            <p className="mb-4">1. 정보주체는 회사에 대해 언제든지 다음 각 호의 개인정보 보호에 관한 권리를 행사할 수 있습니다:</p>
                             <ul className="list-disc pl-6 mb-4 space-y-1">
-                                <li>個人情報の閲覧要求</li>
-                                <li>誤り等がある場合の訂正要求</li>
-                                <li>削除要求</li>
-                                <li>取り扱い停止要求</li>
+                                <li>개인정보 열람 요구</li>
+                                <li>오류 등이 있을 경우 정정 요구</li>
+                                <li>삭제 요구</li>
+                                <li>처리 정지 요구</li>
                             </ul>
-                            <p className="mt-4 mb-2">2. 権利の行使は会社に対し、書面、電話、電子メール等を通じて行うことができ、会社はこれに対して遅滞なく措置を講じます。</p>
-                            <p className="mb-2">3. 情報主体が個人情報の誤り等に対する訂正または削除を要求した場合、会社は訂正または削除を完了するまで当該個人情報を利用または提供しません。</p>
+                            <p className="mt-4 mb-2">2. 권리 행사는 회사에 대해 서면, 전화, 전자우편 등을 통하여 하실 수 있으며, 회사는 이에 대해 지체 없이 조치하겠습니다.</p>
+                            <p className="mb-2">3. 정보주체가 개인정보의 오류 등에 대한 정정 또는 삭제를 요구한 경우, 회사는 정정 또는 삭제를 완료할 때까지 해당 개인정보를 이용하거나 제공하지 않습니다.</p>
                         </section>
 
                         <section className="mb-8">
-                            <h2 className="text-xl font-semibold mb-4">第7条 (個人情報の破棄)</h2>
-                            <p className="mb-4">1. 会社は、個人情報の保有期間の経過、利用目的の達成等により個人情報が不要となった場合には、遅滞なく当該個人情報を破棄します。</p>
-                            <p className="mb-2">2. 破棄の手順および方法：</p>
+                            <h2 className="text-xl font-semibold mb-4">제7조 (개인정보의 파기)</h2>
+                            <p className="mb-4">1. 회사는 개인정보 보유 기간의 경과, 이용 목적의 달성 등으로 개인정보가 불필요하게 되었을 때에는 지체 없이 해당 개인정보를 파기합니다.</p>
+                            <p className="mb-2">2. 파기 절차 및 방법:</p>
                             <ul className="list-disc pl-6 mb-4 space-y-2">
-                                <li>破棄の手順：不要となった個人情報は別途のDBに移され、内部方針および関連法令に従い一定期間保存された後、破棄されます。</li>
-                                <li>破棄の方法：電子ファイル形態の情報は、記録を再生できない技術的方法を使用します。</li>
+                                <li>파기 절차: 불필요하게 된 개인정보는 별도의 DB로 옮겨져 내부 방침 및 관련 법령에 따라 일정 기간 저장된 후 파기됩니다.</li>
+                                <li>파기 방법: 전자적 파일 형태의 정보는 기록을 재생할 수 없는 기술적 방법을 사용합니다.</li>
                             </ul>
                         </section>
 
                         <section className="mb-8">
-                            <h2 className="text-xl font-semibold mb-4">第8条 (個人情報の安全性確保措置)</h2>
-                            <p className="mb-4">会社は、個人情報の安全性を確保するために以下のような措置を講じています：</p>
+                            <h2 className="text-xl font-semibold mb-4">제8조 (개인정보의 안전성 확보 조치)</h2>
+                            <p className="mb-4">회사는 개인정보의 안전성을 확보하기 위하여 다음과 같은 조치를 취하고 있습니다:</p>
                             <ol className="list-decimal pl-6 mb-4 space-y-2">
-                                <li><strong>管理的措置：</strong>内部管理計画の策定・実施、定期的な従業員教育</li>
-                                <li><strong>技術的措置：</strong>個人情報処理システム等のアクセス権限の管理、アクセス制御システムの導入、固有識別情報等の暗号化、セキュリティプログラムのインストール</li>
-                                <li><strong>物理的措置：</strong>電算室、資料保管室等のアクセス制御</li>
+                                <li><strong>관리적 조치:</strong> 내부 관리 계획 수립·시행, 정기적인 직원 교육</li>
+                                <li><strong>기술적 조치:</strong> 개인정보 처리 시스템 등의 접근 권한 관리, 접근 통제 시스템 도입, 고유 식별 정보 등의 암호화, 보안 프로그램 설치</li>
+                                <li><strong>물리적 조치:</strong> 전산실, 자료 보관실 등의 접근 통제</li>
                             </ol>
                         </section>
 
                         <section className="mb-8">
-                            <h2 className="text-xl font-semibold mb-4">第9条 (個人情報自動収集装置の設置・運用および拒否に関する事項)</h2>
-                            <p className="mb-4">1. 会社は、利用者に個別カスタマイズされたサービスを提供するために、利用情報を保存し、随時呼び出す「クッキー（cookie）」を使用します。</p>
-                            <p className="mb-4">2. クッキーは、ウェブサイトを運営するために利用されるサーバーが利用者のコンピュータブラウザに送信する少量の情報であり、利用者のPCのハードディスクに保存されることもあります。</p>
-                            <p className="mb-2">3. クッキーの設置・運用および拒否：</p>
+                            <h2 className="text-xl font-semibold mb-4">제9조 (개인정보 자동 수집 장치의 설치·운영 및 거부에 관한 사항)</h2>
+                            <p className="mb-4">1. 회사는 이용자에게 개별 맞춤형 서비스를 제공하기 위하여 이용 정보를 저장하고 수시로 불러오는 '쿠키(cookie)'를 사용합니다.</p>
+                            <p className="mb-4">2. 쿠키는 웹사이트를 운영하는 데 이용되는 서버가 이용자의 컴퓨터 브라우저에 보내는 소량의 정보이며, 이용자의 PC 하드디스크에 저장되기도 합니다.</p>
+                            <p className="mb-2">3. 쿠키의 설치·운영 및 거부:</p>
                             <ul className="list-disc pl-6 mb-4 space-y-2">
-                                <li>ウェブブラウザ上部のツール ＞ インターネットオプション ＞ プライバシーメニューのオプション設定を通じてクッキーの保存を拒否することができます。</li>
-                                <li>クッキーの保存を拒否した場合、カスタマイズされたサービスの利用に困難が生じる可能性があります。</li>
+                                <li>웹 브라우저 상단의 도구 ＞ 인터넷 옵션 ＞ 개인정보 메뉴의 옵션 설정을 통해 쿠키 저장을 거부할 수 있습니다.</li>
+                                <li>쿠키 저장을 거부할 경우 맞춤형 서비스 이용에 어려움이 발생할 수 있습니다.</li>
                             </ul>
                         </section>
 
                         <section className="mb-8">
-                            <h2 className="text-xl font-semibold mb-4">第10条 (個人情報保護責任者)</h2>
+                            <h2 className="text-xl font-semibold mb-4">제10조 (개인정보 보호책임자)</h2>
                             <p className="mb-4">
-                                会社は、個人情報の取り扱いに関する業務を総括して責任を負い、個人情報の取り扱いに関連する情報主体の苦情処理および被害救済等のために、以下の通り個人情報保護責任者を指定しています。
+                                회사는 개인정보 처리에 관한 업무를 총괄하여 책임지고, 개인정보 처리와 관련한 정보주체의 고충 처리 및 피해 구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.
                             </p>
                             <div className="bg-gray-50 p-4 rounded-lg">
-                                <p className="font-bold mb-2">▶ 個人情報保護責任者</p>
+                                <p className="font-bold mb-2">▶ 개인정보 보호책임자</p>
                                 <ul className="space-y-1 text-sm">
-                                    <li>- 姓名：チュ・スジョン</li>
-                                    <li>- 役職：旅行プランナー</li>
-                                    <li>- 連絡先：<a href="mailto:bolor1@hanmail.net" className="text-blue-600 hover:underline">bolor1@hanmail.net</a></li>
+                                    <li>- 성명: 주수정</li>
+                                    <li>- 직책: 여행 플래너</li>
+                                    <li>- 연락처: <a href="mailto:bolor1@hanmail.net" className="text-blue-600 hover:underline">bolor1@hanmail.net</a></li>
                                 </ul>
-                                <p className="mt-2 text-xs text-gray-500">※ 個人情報保護担当部署につながります。</p>
+                                <p className="mt-2 text-xs text-gray-500">※ 개인정보 보호 담당 부서로 연결됩니다.</p>
                             </div>
                         </section>
 
                         <section className="mb-8">
-                            <h2 className="text-xl font-semibold mb-4">第11条 (プライバシーポリシーの変更)</h2>
+                            <h2 className="text-xl font-semibold mb-4">제11조 (개인정보처리방침의 변경)</h2>
                             <p className="mb-4">
-                                このプライバシーポリシーは2026年1月23日から適用され、法令および方針に基づく変更内容の追加、削除、訂正がある場合には、変更事項の施行7日前からお知らせを通じて告知します。
+                                이 개인정보처리방침은 2026년 1월 23일부터 적용되며, 법령 및 방침에 따른 변경 내용의 추가, 삭제, 정정이 있는 경우에는 변경 사항의 시행 7일 전부터 공지사항을 통해 고지합니다.
                             </p>
                         </section>
 
                         <section className="mb-8">
-                            <h2 className="text-xl font-semibold mb-4">第12条 (権利侵害の救済方法)</h2>
-                            <p className="mb-4">情報主体は、以下の機関に対して個人情報侵害に対する被害救済、相談等を問い合わせることができます。（※韓国の機関となります）</p>
+                            <h2 className="text-xl font-semibold mb-4">제12조 (권익 침해 구제 방법)</h2>
+                            <p className="mb-4">정보주체는 아래의 기관에 대해 개인정보 침해에 대한 피해 구제, 상담 등을 문의하실 수 있습니다. (※ 한국의 기관입니다)</p>
 
                             <div className="grid md:grid-cols-2 gap-4">
                                 <div className="bg-gray-50 p-4 rounded-lg">
-                                    <p className="font-bold mb-2">▶ 個人情報侵害申告センター（韓国インターネット振興院 運営）</p>
+                                    <p className="font-bold mb-2">▶ 개인정보 침해신고센터 (한국인터넷진흥원 운영)</p>
                                     <ul className="space-y-1 text-sm text-gray-600">
-                                        <li>- 所管業務：個人情報侵害の事実申告、相談申請</li>
-                                        <li>- ホームページ：<a href="https://privacy.kisa.or.kr" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">privacy.kisa.or.kr</a></li>
-                                        <li>- 電話：（局番なし）118</li>
+                                        <li>- 소관 업무: 개인정보 침해 사실 신고, 상담 신청</li>
+                                        <li>- 홈페이지: <a href="https://privacy.kisa.or.kr" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">privacy.kisa.or.kr</a></li>
+                                        <li>- 전화: (국번 없이) 118</li>
                                     </ul>
                                 </div>
                                 <div className="bg-gray-50 p-4 rounded-lg">
-                                    <p className="font-bold mb-2">▶ 個人情報紛争調整委員会</p>
+                                    <p className="font-bold mb-2">▶ 개인정보 분쟁조정위원회</p>
                                     <ul className="space-y-1 text-sm text-gray-600">
-                                        <li>- 所管業務：個人情報紛争調整の申請、集団紛争調整（民事的解決）</li>
-                                        <li>- ホームページ：<a href="https://www.kopico.go.kr" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">www.kopico.go.kr</a></li>
-                                        <li>- 電話：（局番なし）1833-6972</li>
+                                        <li>- 소관 업무: 개인정보 분쟁 조정 신청, 집단 분쟁 조정 (민사적 해결)</li>
+                                        <li>- 홈페이지: <a href="https://www.kopico.go.kr" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">www.kopico.go.kr</a></li>
+                                        <li>- 전화: (국번 없이) 1833-6972</li>
                                     </ul>
                                 </div>
                             </div>
                         </section>
 
                         <div className="mt-8 p-4 bg-gray-50 rounded-lg text-sm text-gray-600">
-                            <p className="font-bold mb-2">附則</p>
-                            <p>本方針は2026年1月23日から施行されます。</p>
+                            <p className="font-bold mb-2">부칙</p>
+                            <p>본 방침은 2026년 1월 23일부터 시행됩니다.</p>
                         </div>
                     </div>
                 </div>

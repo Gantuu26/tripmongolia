@@ -286,16 +286,16 @@ export function sameDate(a: Date | null, b: Date | null): boolean {
     );
 }
 
-const JP_DOWS = ['日', '月', '火', '水', '木', '金', '土'];
+const KR_DOWS = ['일', '월', '화', '수', '목', '금', '토'];
 
 export function fmtMD(d: Date | null): string {
     if (!d) return '';
-    return `${d.getMonth() + 1}月${d.getDate()}日`;
+    return `${d.getMonth() + 1}월 ${d.getDate()}일`;
 }
 
 export function fmtFull(d: Date | null): string {
     if (!d) return '';
-    return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日(${JP_DOWS[d.getDay()]})`;
+    return `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일(${KR_DOWS[d.getDay()]})`;
 }
 
 export const formatPrice = (price: number): string => (price ? price.toLocaleString() : '0');

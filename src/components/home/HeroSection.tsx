@@ -88,7 +88,7 @@ export const HeroSection: React.FC = () => {
                 >
                     <img
                         {...getResponsiveImageProps(banner.image, 'banner')}
-                        alt={`モンゴル旅行・モンゴルツアー｜${banner.title}`}
+                        alt={`몽골여행・몽골투어｜${banner.title}`}
                         fetchPriority={index === 0 ? "high" : "low"}
                         loading={index === 0 ? "eager" : "lazy"}
                         decoding="async"

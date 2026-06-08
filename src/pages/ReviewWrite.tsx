@@ -65,7 +65,7 @@ const buildVisitMonthOptions = (): { value: string; label: string }[] => {
     for (let i = 0; i < 24; i++) {
         const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
         const value = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
-        const label = `${d.getFullYear()}年 ${d.getMonth() + 1}月`;
+        const label = `${d.getFullYear()}년 ${d.getMonth() + 1}월`;
         out.push({ value, label });
     }
     return out;
@@ -192,7 +192,7 @@ export const ReviewWrite: React.FC = () => {
             const uploadedUrls = await Promise.all(uploadPromises);
             setImages(prev => [...prev, ...uploadedUrls]);
         } catch (error) {
-            alert('画像のアップロードに失敗しました。');
+            alert('이미지 업로드에 실패했습니다.');
         }
 
         event.target.value = '';
@@ -209,11 +209,11 @@ export const ReviewWrite: React.FC = () => {
         const sanitized = DOMPurify.sanitize(content, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] }).trim();
 
         if (sanitized.length < REVIEW_MIN_LENGTH) {
-            alert(`レビューは${REVIEW_MIN_LENGTH}文字以上でお書きください。`);
+            alert(`리뷰는 ${REVIEW_MIN_LENGTH}자 이상 작성해 주세요.`);
             return;
         }
         if (sanitized.length > REVIEW_MAX_LENGTH) {
-            alert(`レビューは${REVIEW_MAX_LENGTH}文字以内でお書きください。`);
+            alert(`리뷰는 ${REVIEW_MAX_LENGTH}자 이내로 작성해 주세요.`);
             return;
         }
 
@@ -225,11 +225,11 @@ export const ReviewWrite: React.FC = () => {
         if (mode === 'reservation' && selectedReservation) {
             productId = selectedReservation.productId || '';
             productName = selectedReservation.productName;
-            visitDateLabel = selectedReservation.startDate.slice(0, 7) + ' 訪問';
+            visitDateLabel = selectedReservation.startDate.slice(0, 7) + ' 방문';
         } else if (mode === 'free' && selectedProduct) {
             productId = selectedProduct.id;
             productName = selectedProduct.name;
-            visitDateLabel = visitMonth + ' 訪問';
+            visitDateLabel = visitMonth + ' 방문';
         } else {
             return;
         }
@@ -249,7 +249,7 @@ export const ReviewWrite: React.FC = () => {
                 product_id: productId,
                 product_name: productName,
                 rating,
-                title: `${productName} レビュー`,
+                title: `${productName} 리뷰`,
                 content: sanitized,
                 images,
                 visit_date: visitDateLabel,
@@ -261,7 +261,7 @@ export const ReviewWrite: React.FC = () => {
             setIsSuccessModalOpen(true);
         } catch (error: any) {
             console.error('Failed to save review:', error);
-            alert('レビューの保存に失敗しました: ' + (error.message || 'Unknown error'));
+            alert('리뷰 저장에 실패했습니다: ' + (error.message || 'Unknown error'));
         } finally {
             setSubmitting(false);
         }
@@ -280,14 +280,14 @@ export const ReviewWrite: React.FC = () => {
                     >
                         <span className="material-symbols-outlined">arrow_back_ios</span>
                     </button>
-                    <h2 className="text-[#0e1a18] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-10">レビュー作成</h2>
+                    <h2 className="text-[#0e1a18] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-10">리뷰 작성</h2>
                 </div>
 
                 <div className="flex-1 pb-32">
                     {/* Mode toggle: pick how to identify the tour the review is about */}
                     <div className="px-4 pt-6">
                         <h3 className="text-[#0e1a18] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em] mb-4">
-                            参加されたツアー
+                            참가하신 투어
                         </h3>
                         <div className="grid grid-cols-2 gap-2 mb-4 bg-gray-100 dark:bg-zinc-800 p-1 rounded-xl">
                             <button
@@ -299,7 +299,7 @@ export const ReviewWrite: React.FC = () => {
                                     : 'text-gray-500 disabled:opacity-50'
                                     }`}
                             >
-                                ご予約から選ぶ{hasReservations ? `（${completedReservations.length}件）` : ''}
+                                예약 내역에서 선택{hasReservations ? `（${completedReservations.length}건）` : ''}
                             </button>
                             <button
                                 type="button"
@@ -309,7 +309,7 @@ export const ReviewWrite: React.FC = () => {
                                     : 'text-gray-500'
                                     }`}
                             >
-                                直接ツアーを選ぶ
+                                투어 직접 선택
                             </button>
                         </div>
 
@@ -349,8 +349,8 @@ export const ReviewWrite: React.FC = () => {
                                     ))
                                 ) : (
                                     <div className="text-center py-8 text-gray-400">
-                                        <p>完了したご予約はありません。</p>
-                                        <p className="text-xs pt-2">「直接ツアーを選ぶ」からもご投稿いただけます。</p>
+                                        <p>완료된 예약이 없습니다.</p>
+                                        <p className="text-xs pt-2">'투어 직접 선택'에서도 작성하실 수 있습니다.</p>
                                     </div>
                                 )}
                             </div>
@@ -361,14 +361,14 @@ export const ReviewWrite: React.FC = () => {
                             <div className="flex flex-col gap-4">
                                 <div>
                                     <label className="block text-sm font-bold text-[#0e1a18] dark:text-white mb-2">
-                                        ツアーを選択
+                                        투어 선택
                                     </label>
                                     <select
                                         value={selectedProductId}
                                         onChange={(e) => setSelectedProductId(e.target.value)}
                                         className="w-full p-3 rounded-xl bg-white dark:bg-[#1a2e2a] border border-gray-200 dark:border-zinc-700 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-base text-[#0e1a18] dark:text-white"
                                     >
-                                        <option value="">— ツアーを選択してください —</option>
+                                        <option value="">— 투어를 선택해 주세요 —</option>
                                         {allProducts.map((p) => (
                                             <option key={p.id} value={p.id}>{p.name}</option>
                                         ))}
@@ -376,14 +376,14 @@ export const ReviewWrite: React.FC = () => {
                                 </div>
                                 <div>
                                     <label className="block text-sm font-bold text-[#0e1a18] dark:text-white mb-2">
-                                        ご旅行の時期
+                                        여행 시기
                                     </label>
                                     <select
                                         value={visitMonth}
                                         onChange={(e) => setVisitMonth(e.target.value)}
                                         className="w-full p-3 rounded-xl bg-white dark:bg-[#1a2e2a] border border-gray-200 dark:border-zinc-700 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-base text-[#0e1a18] dark:text-white"
                                     >
-                                        <option value="">— 旅行された月をお選びください —</option>
+                                        <option value="">— 여행하신 월을 선택해 주세요 —</option>
                                         {visitMonthOptions.map((opt) => (
                                             <option key={opt.value} value={opt.value}>{opt.label}</option>
                                         ))}
@@ -395,8 +395,8 @@ export const ReviewWrite: React.FC = () => {
 
                     {/* Section: Rating */}
                     <div className="px-4 pt-8">
-                        <h3 className="text-[#0e1a18] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em] mb-2">今回の旅行はいかがでしたか？</h3>
-                        <p className="text-gray-500 text-sm mb-6">星の数を選択してください。</p>
+                        <h3 className="text-[#0e1a18] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em] mb-2">이번 여행은 어떠셨나요?</h3>
+                        <p className="text-gray-500 text-sm mb-6">별점을 선택해 주세요.</p>
                         <div className="flex justify-center gap-2 py-4">
                             {[1, 2, 3, 4, 5].map((star) => {
                                 const on = star <= rating;
@@ -421,7 +421,7 @@ export const ReviewWrite: React.FC = () => {
                     {/* Section: Photo Upload */}
                     <div className="px-4 pt-8">
                         <div className="flex justify-between items-end mb-4">
-                            <h3 className="text-[#0e1a18] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">写真アップロード</h3>
+                            <h3 className="text-[#0e1a18] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">사진 업로드</h3>
                             <p className="text-gray-500 text-sm"><span className="text-primary font-bold">{images.length}</span>/10</p>
                         </div>
                         <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
@@ -436,7 +436,7 @@ export const ReviewWrite: React.FC = () => {
                                     disabled={images.length >= 10}
                                 />
                                 <span className="material-symbols-outlined text-gray-400">add_a_photo</span>
-                                <span className="text-[10px] text-gray-400 mt-1 font-bold">追加</span>
+                                <span className="text-[10px] text-gray-400 mt-1 font-bold">추가</span>
                             </label>
 
                             {/* Uploaded Images */}
@@ -460,7 +460,7 @@ export const ReviewWrite: React.FC = () => {
                     {/* Section: Detailed Review */}
                     <div className="px-4 pt-8 pb-10">
                         <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-[#0e1a18] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">詳細レビュー</h3>
+                            <h3 className="text-[#0e1a18] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">상세 리뷰</h3>
                             <span className={`text-xs font-medium ${content.length > REVIEW_MAX_LENGTH ? 'text-red-500' : content.length >= REVIEW_MIN_LENGTH ? 'text-primary' : 'text-gray-400'}`}>
                                 {content.length} / {REVIEW_MAX_LENGTH}
                             </span>
@@ -470,9 +470,9 @@ export const ReviewWrite: React.FC = () => {
                             onChange={(e) => setContent(e.target.value.slice(0, REVIEW_MAX_LENGTH))}
                             maxLength={REVIEW_MAX_LENGTH}
                             className="w-full min-h-[200px] p-4 rounded-xl bg-white dark:bg-[#1a2e2a] border border-gray-100 dark:border-zinc-800 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-base resize-none transition-all placeholder:text-gray-400 text-[#0e1a18] dark:text-white"
-                            placeholder="モンゴルでの大切な思い出を共有してください（天気、ガイド、宿泊施設など自由なご意見）"
+                            placeholder="몽골에서의 소중한 추억을 공유해 주세요 (날씨, 가이드, 숙소 등 자유로운 의견)"
                         ></textarea>
-                        <p className="text-xs text-gray-400 mt-1.5">{REVIEW_MIN_LENGTH}文字以上、{REVIEW_MAX_LENGTH}文字以内でお書きください。</p>
+                        <p className="text-xs text-gray-400 mt-1.5">{REVIEW_MIN_LENGTH}자 이상, {REVIEW_MAX_LENGTH}자 이내로 작성해 주세요.</p>
                     </div>
                 </div>
 
@@ -484,7 +484,7 @@ export const ReviewWrite: React.FC = () => {
                             disabled={!canSubmit}
                             className="w-full bg-primary hover:bg-[#19a186] disabled:bg-gray-300 disabled:cursor-not-allowed text-white text-lg font-bold py-4 rounded-xl shadow-lg transition-colors active:scale-[0.98]"
                         >
-                            {submitting ? '送信中...' : '作成完了'}
+                            {submitting ? '전송 중...' : '작성 완료'}
                         </button>
                     </div>
                     <div className="h-4"></div> {/* iOS Home Indicator Area */}
@@ -504,10 +504,10 @@ export const ReviewWrite: React.FC = () => {
                                     </span>
                                 </div>
                                 <h3 className="text-[#0e1a18] dark:text-white tracking-tight text-xl font-bold leading-tight text-center px-2">
-                                    レビューが<br />掲載されました
+                                    리뷰가<br />등록되었습니다
                                 </h3>
                                 <p className="text-zinc-500 dark:text-zinc-400 text-sm font-normal leading-relaxed pt-3 px-4 text-center">
-                                    ご投稿ありがとうございます。<br />実際の旅行者の声は他のお客様の大きな助けになります。
+                                    작성해 주셔서 감사합니다.<br />실제 여행자의 후기는 다른 고객님께 큰 도움이 됩니다.
                                 </p>
                             </div>
                             <div className="flex pt-2">
@@ -515,7 +515,7 @@ export const ReviewWrite: React.FC = () => {
                                     onClick={() => navigate('/reviews')}
                                     className="flex h-14 w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl bg-primary text-white text-base font-bold leading-normal tracking-wide active:scale-[0.98] transition-transform hover:bg-[#19a186]"
                                 >
-                                    <span className="truncate">確認</span>
+                                    <span className="truncate">확인</span>
                                 </button>
                             </div>
                         </div>

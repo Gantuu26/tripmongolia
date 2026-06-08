@@ -69,7 +69,7 @@ export const AdminFAQManage: React.FC = () => {
     // Add/Edit FAQ
     const handleSaveFAQ = async () => {
         if (!faqForm.question || !faqForm.answer || !faqForm.category) {
-            alert('모든 필드를 입력해주세요.');
+            alert('Бүх талбарыг бөглөнө үү.');
             return;
         }
 
@@ -85,7 +85,7 @@ export const AdminFAQManage: React.FC = () => {
             }) as any;
 
             if (result?.error) {
-                alert('FAQ 수정 실패: ' + (result.error.message || result.error));
+                alert('FAQ засах амжилтгүй боллоо: ' + (result.error.message || result.error));
                 return;
             }
 
@@ -106,7 +106,7 @@ export const AdminFAQManage: React.FC = () => {
             const result = await api.faqs.create(newFaq) as any;
 
             if (result?.error) {
-                alert('FAQ 저장 실패: ' + (result.error.message || result.error));
+                alert('FAQ хадгалах амжилтгүй боллоо: ' + (result.error.message || result.error));
                 return;
             }
 
@@ -120,7 +120,7 @@ export const AdminFAQManage: React.FC = () => {
 
     // Delete FAQ
     const handleDeleteFAQ = async (id: string) => {
-        if (confirm('이 FAQ를 삭제하시겠습니까?')) {
+        if (confirm('Энэ FAQ-г устгах уу?')) {
             await api.faqs.delete(id);
             setFaqs(faqs.filter(f => f.id !== id));
         }
@@ -153,7 +153,7 @@ export const AdminFAQManage: React.FC = () => {
     // Add/Edit Category
     const handleSaveCategory = async () => {
         if (!categoryForm.name) {
-            alert('카테고리명을 입력해주세요.');
+            alert('Ангиллын нэрийг оруулна уу.');
             return;
         }
 
@@ -165,7 +165,7 @@ export const AdminFAQManage: React.FC = () => {
             }) as any;
 
             if (result?.error) {
-                alert('카테고리 수정 실패: ' + (result.error.message || result.error));
+                alert('Ангилал засах амжилтгүй боллоо: ' + (result.error.message || result.error));
                 return;
             }
 
@@ -191,7 +191,7 @@ export const AdminFAQManage: React.FC = () => {
             const result = await api.faqCategories.create(newCat) as any;
 
             if (result?.error) {
-                alert('카테고리 추가 실패: ' + (result.error.message || result.error));
+                alert('Ангилал нэмэх амжилтгүй боллоо: ' + (result.error.message || result.error));
                 return;
             }
 
@@ -207,10 +207,10 @@ export const AdminFAQManage: React.FC = () => {
     const handleDeleteCategory = async (id: string) => {
         const faqsInCategory = faqs.filter(f => f.category === categories.find(c => c.id === id)?.name);
         if (faqsInCategory.length > 0) {
-            alert('이 카테고리에 FAQ가 있어 삭제할 수 없습니다.');
+            alert('Энэ ангилалд FAQ байгаа тул устгах боломжгүй.');
             return;
         }
-        if (confirm('이 카테고리를 삭제하시겠습니까?')) {
+        if (confirm('Энэ ангиллыг устгах уу?')) {
             await api.faqCategories.delete(id);
             setCategories(categories.filter(c => c.id !== id));
         }
@@ -246,7 +246,7 @@ export const AdminFAQManage: React.FC = () => {
                     }}
                 >
                     <Icon name="add" />
-                    카테고리 추가
+                    Ангилал нэмэх
                 </button>
             )}
             {activeTab === 'faq' && (
@@ -259,14 +259,14 @@ export const AdminFAQManage: React.FC = () => {
                     }}
                 >
                     <Icon name="add" />
-                    FAQ 추가
+                    FAQ нэмэх
                 </button>
             )}
         </>
     );
 
     return (
-        <AdminLayout activePage="faq" title="FAQ 관리" actions={headerActions}>
+        <AdminLayout activePage="faq" title="FAQ удирдлага" actions={headerActions}>
             <div className="route-anim">
                 {/* Tabs */}
                 <div className="toolbar">
@@ -274,23 +274,23 @@ export const AdminFAQManage: React.FC = () => {
                         <button
                             className={activeTab === 'faq' ? 'active' : ''}
                             onClick={() => setActiveTab('faq')}
-                            title="고객센터 페이지(/faq)의 FAQ"
+                            title="Хэрэглэгчийн төвийн хуудасны (/faq) FAQ"
                         >
-                            FAQ 목록
+                            FAQ жагсаалт
                         </button>
                         <button
                             className={activeTab === 'category' ? 'active' : ''}
                             onClick={() => setActiveTab('category')}
-                            title="고객센터 FAQ 의 카테고리"
+                            title="Хэрэглэгчийн төвийн FAQ-н ангилал"
                         >
-                            카테고리 관리
+                            Ангилал удирдлага
                         </button>
                         <button
                             className={activeTab === 'tour-common' ? 'active' : ''}
                             onClick={() => setActiveTab('tour-common')}
-                            title="모든 상품 상세 페이지 하단에 공통으로 표시되는 FAQ"
+                            title="Бүх бүтээгдэхүүний дэлгэрэнгүй хуудасны доод хэсэгт нийтлэг харагдах FAQ"
                         >
-                            투어 공통 FAQ
+                            Аяллын нийтлэг FAQ
                         </button>
                     </div>
                 </div>
@@ -305,7 +305,7 @@ export const AdminFAQManage: React.FC = () => {
                                 <Icon name="search" />
                                 <input
                                     type="text"
-                                    placeholder="질문 검색..."
+                                    placeholder="Асуулт хайх..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                 />
@@ -315,7 +315,7 @@ export const AdminFAQManage: React.FC = () => {
                                 value={filterCategory}
                                 onChange={(e) => setFilterCategory(e.target.value)}
                             >
-                                <option value="all">전체 카테고리</option>
+                                <option value="all">Бүх ангилал</option>
                                 {categories.map(cat => (
                                     <option key={cat.id} value={cat.name}>{cat.name}</option>
                                 ))}
@@ -328,12 +328,12 @@ export const AdminFAQManage: React.FC = () => {
                                 <table className="tbl">
                                     <thead>
                                         <tr>
-                                            <th style={{ width: 90 }}>순서</th>
-                                            <th>카테고리</th>
-                                            <th>질문</th>
-                                            <th className="c">조회</th>
-                                            <th className="c">노출</th>
-                                            <th className="r">관리</th>
+                                            <th style={{ width: 90 }}>Дараалал</th>
+                                            <th>Ангилал</th>
+                                            <th>Асуулт</th>
+                                            <th className="c">Үзсэн</th>
+                                            <th className="c">Харуулах</th>
+                                            <th className="r">Удирдлага</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -343,10 +343,10 @@ export const AdminFAQManage: React.FC = () => {
                                                     <span className="row" style={{ gap: 6 }}>
                                                         <Icon name="drag_indicator" className="drag-handle" />
                                                         <span className="edit-move">
-                                                            <button onClick={() => moveFAQOrder(faq, 'up')} disabled={index === 0} title="위로">
+                                                            <button onClick={() => moveFAQOrder(faq, 'up')} disabled={index === 0} title="Дээш">
                                                                 <Icon name="arrow_upward" />
                                                             </button>
-                                                            <button onClick={() => moveFAQOrder(faq, 'down')} disabled={index === filteredFaqs.length - 1} title="아래로">
+                                                            <button onClick={() => moveFAQOrder(faq, 'down')} disabled={index === filteredFaqs.length - 1} title="Доош">
                                                                 <Icon name="arrow_downward" />
                                                             </button>
                                                         </span>
@@ -363,7 +363,7 @@ export const AdminFAQManage: React.FC = () => {
                                                     <button
                                                         className={`switch${faq.isActive ? ' on' : ''}`}
                                                         onClick={() => toggleFAQActive(faq)}
-                                                        title={faq.isActive ? '활성' : '비활성'}
+                                                        title={faq.isActive ? 'Идэвхтэй' : 'Идэвхгүй'}
                                                     >
                                                         <span className="knob" />
                                                     </button>
@@ -372,7 +372,7 @@ export const AdminFAQManage: React.FC = () => {
                                                     <span className="row-actions">
                                                         <button
                                                             className="act-btn"
-                                                            title="수정"
+                                                            title="Засах"
                                                             onClick={() => {
                                                                 setSelectedFAQ(faq);
                                                                 setFaqForm({ category: faq.category, question: faq.question, answer: faq.answer, isActive: faq.isActive });
@@ -381,7 +381,7 @@ export const AdminFAQManage: React.FC = () => {
                                                         >
                                                             <Icon name="edit" />
                                                         </button>
-                                                        <button className="act-btn danger" title="삭제" onClick={() => handleDeleteFAQ(faq.id)}>
+                                                        <button className="act-btn danger" title="Устгах" onClick={() => handleDeleteFAQ(faq.id)}>
                                                             <Icon name="delete" />
                                                         </button>
                                                     </span>
@@ -394,7 +394,7 @@ export const AdminFAQManage: React.FC = () => {
                             {filteredFaqs.length === 0 && (
                                 <div className="empty">
                                     <Icon name="inbox" />
-                                    <p>등록된 FAQ가 없습니다.</p>
+                                    <p>Бүртгэгдсэн FAQ алга байна.</p>
                                 </div>
                             )}
                         </div>
@@ -406,11 +406,11 @@ export const AdminFAQManage: React.FC = () => {
                             <table className="tbl">
                                 <thead>
                                     <tr>
-                                        <th style={{ width: 90 }}>순서</th>
-                                        <th>카테고리명</th>
-                                        <th className="c">FAQ 수</th>
-                                        <th className="c">노출</th>
-                                        <th className="r">관리</th>
+                                        <th style={{ width: 90 }}>Дараалал</th>
+                                        <th>Ангиллын нэр</th>
+                                        <th className="c">FAQ тоо</th>
+                                        <th className="c">Харуулах</th>
+                                        <th className="r">Удирдлага</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -420,21 +420,21 @@ export const AdminFAQManage: React.FC = () => {
                                                 <span className="row" style={{ gap: 6 }}>
                                                     <Icon name="drag_indicator" className="drag-handle" />
                                                     <span className="edit-move">
-                                                        <button onClick={() => moveCategoryOrder(cat, 'up')} disabled={index === 0} title="위로">
+                                                        <button onClick={() => moveCategoryOrder(cat, 'up')} disabled={index === 0} title="Дээш">
                                                             <Icon name="arrow_upward" />
                                                         </button>
-                                                        <button onClick={() => moveCategoryOrder(cat, 'down')} disabled={index === categories.length - 1} title="아래로">
+                                                        <button onClick={() => moveCategoryOrder(cat, 'down')} disabled={index === categories.length - 1} title="Доош">
                                                             <Icon name="arrow_downward" />
                                                         </button>
                                                     </span>
                                                 </span>
                                             </td>
                                             <td className="cell-strong">{cat.name}</td>
-                                            <td className="c cell-mono">{faqs.filter(f => f.category === cat.name).length}개</td>
+                                            <td className="c cell-mono">{faqs.filter(f => f.category === cat.name).length}ш</td>
                                             <td className="c">
                                                 <button
                                                     className={`switch${cat.isActive ? ' on' : ''}`}
-                                                    title={cat.isActive ? '활성' : '비활성'}
+                                                    title={cat.isActive ? 'Идэвхтэй' : 'Идэвхгүй'}
                                                     onClick={async () => {
                                                         await api.faqCategories.update(cat.id, { is_active: !cat.isActive });
                                                         setCategories(categories.map(c => c.id === cat.id ? { ...c, isActive: !c.isActive } : c));
@@ -447,7 +447,7 @@ export const AdminFAQManage: React.FC = () => {
                                                 <span className="row-actions">
                                                     <button
                                                         className="act-btn"
-                                                        title="수정"
+                                                        title="Засах"
                                                         onClick={() => {
                                                             setSelectedCategoryEdit(cat);
                                                             setCategoryForm({ name: cat.name, isActive: cat.isActive });
@@ -456,7 +456,7 @@ export const AdminFAQManage: React.FC = () => {
                                                     >
                                                         <Icon name="edit" />
                                                     </button>
-                                                    <button className="act-btn danger" title="삭제" onClick={() => handleDeleteCategory(cat.id)}>
+                                                    <button className="act-btn danger" title="Устгах" onClick={() => handleDeleteCategory(cat.id)}>
                                                         <Icon name="delete" />
                                                     </button>
                                                 </span>
@@ -469,7 +469,7 @@ export const AdminFAQManage: React.FC = () => {
                         {categories.length === 0 && (
                             <div className="empty">
                                 <Icon name="inbox" />
-                                <p>등록된 카테고리가 없습니다.</p>
+                                <p>Бүртгэгдсэн ангилал алга байна.</p>
                             </div>
                         )}
                     </div>
@@ -481,48 +481,48 @@ export const AdminFAQManage: React.FC = () => {
                 <div className="picker-scrim" onClick={() => setIsModalOpen(false)}>
                     <div className="picker" style={{ width: 560 }} onClick={(e) => e.stopPropagation()}>
                         <div className="card-head">
-                            <h2>{selectedFAQ ? 'FAQ 수정' : 'FAQ 추가'}</h2>
+                            <h2>{selectedFAQ ? 'FAQ засах' : 'FAQ нэмэх'}</h2>
                             <div className="spacer" />
-                            <button className="act-btn" title="닫기" onClick={() => setIsModalOpen(false)}>
+                            <button className="act-btn" title="Хаах" onClick={() => setIsModalOpen(false)}>
                                 <Icon name="close" />
                             </button>
                         </div>
                         <div style={{ padding: '20px 22px', overflowY: 'auto' }}>
                             <div className="field">
-                                <label>카테고리</label>
+                                <label>Ангилал</label>
                                 <select
                                     className="inp"
                                     value={faqForm.category}
                                     onChange={(e) => setFaqForm({ ...faqForm, category: e.target.value })}
                                 >
-                                    <option value="">선택하세요</option>
+                                    <option value="">Сонгоно уу</option>
                                     {categories.map(cat => (
                                         <option key={cat.id} value={cat.name}>{cat.name}</option>
                                     ))}
                                 </select>
                             </div>
                             <div className="field">
-                                <label>질문</label>
+                                <label>Асуулт</label>
                                 <input
                                     className="inp"
                                     type="text"
                                     value={faqForm.question}
                                     onChange={(e) => setFaqForm({ ...faqForm, question: e.target.value })}
-                                    placeholder="질문을 입력하세요"
+                                    placeholder="Асуултаа оруулна уу"
                                 />
                             </div>
                             <div className="field">
-                                <label>답변</label>
+                                <label>Хариулт</label>
                                 <textarea
                                     className="inp"
                                     value={faqForm.answer}
                                     onChange={(e) => setFaqForm({ ...faqForm, answer: e.target.value })}
-                                    placeholder="답변을 입력하세요"
+                                    placeholder="Хариултаа оруулна уу"
                                     rows={5}
                                 />
                             </div>
                             <div className="field" style={{ marginBottom: 0 }}>
-                                <label>노출 상태</label>
+                                <label>Харагдах төлөв</label>
                                 <div className="row" style={{ gap: 10 }}>
                                     <button
                                         type="button"
@@ -531,14 +531,14 @@ export const AdminFAQManage: React.FC = () => {
                                     >
                                         <span className="knob" />
                                     </button>
-                                    <span className="cell-muted">{faqForm.isActive ? '활성화' : '비활성화'}</span>
+                                    <span className="cell-muted">{faqForm.isActive ? 'Идэвхжүүлсэн' : 'Идэвхгүй болгосон'}</span>
                                 </div>
                             </div>
                         </div>
                         <div className="drawer-foot">
                             <div className="spacer" style={{ flex: 1 }} />
-                            <button className="btn btn-ghost" onClick={() => setIsModalOpen(false)}>취소</button>
-                            <button className="btn btn-ink" onClick={handleSaveFAQ}>저장</button>
+                            <button className="btn btn-ghost" onClick={() => setIsModalOpen(false)}>Цуцлах</button>
+                            <button className="btn btn-ink" onClick={handleSaveFAQ}>Хадгалах</button>
                         </div>
                     </div>
                 </div>
@@ -549,25 +549,25 @@ export const AdminFAQManage: React.FC = () => {
                 <div className="picker-scrim" onClick={() => setIsCategoryModalOpen(false)}>
                     <div className="picker" onClick={(e) => e.stopPropagation()}>
                         <div className="card-head">
-                            <h2>{selectedCategory ? '카테고리 수정' : '카테고리 추가'}</h2>
+                            <h2>{selectedCategory ? 'Ангилал засах' : 'Ангилал нэмэх'}</h2>
                             <div className="spacer" />
-                            <button className="act-btn" title="닫기" onClick={() => setIsCategoryModalOpen(false)}>
+                            <button className="act-btn" title="Хаах" onClick={() => setIsCategoryModalOpen(false)}>
                                 <Icon name="close" />
                             </button>
                         </div>
                         <div style={{ padding: '20px 22px', overflowY: 'auto' }}>
                             <div className="field">
-                                <label>카테고리명</label>
+                                <label>Ангиллын нэр</label>
                                 <input
                                     className="inp"
                                     type="text"
                                     value={categoryForm.name}
                                     onChange={(e) => setCategoryForm({ ...categoryForm, name: e.target.value })}
-                                    placeholder="예: 여행 준비"
+                                    placeholder="Жишээ нь: Аяллын бэлтгэл"
                                 />
                             </div>
                             <div className="field" style={{ marginBottom: 0 }}>
-                                <label>노출 상태</label>
+                                <label>Харагдах төлөв</label>
                                 <div className="row" style={{ gap: 10 }}>
                                     <button
                                         type="button"
@@ -576,14 +576,14 @@ export const AdminFAQManage: React.FC = () => {
                                     >
                                         <span className="knob" />
                                     </button>
-                                    <span className="cell-muted">{categoryForm.isActive ? '활성화' : '비활성화'}</span>
+                                    <span className="cell-muted">{categoryForm.isActive ? 'Идэвхжүүлсэн' : 'Идэвхгүй болгосон'}</span>
                                 </div>
                             </div>
                         </div>
                         <div className="drawer-foot">
                             <div className="spacer" style={{ flex: 1 }} />
-                            <button className="btn btn-ghost" onClick={() => setIsCategoryModalOpen(false)}>취소</button>
-                            <button className="btn btn-ink" onClick={handleSaveCategory}>저장</button>
+                            <button className="btn btn-ghost" onClick={() => setIsCategoryModalOpen(false)}>Цуцлах</button>
+                            <button className="btn btn-ink" onClick={handleSaveCategory}>Хадгалах</button>
                         </div>
                     </div>
                 </div>

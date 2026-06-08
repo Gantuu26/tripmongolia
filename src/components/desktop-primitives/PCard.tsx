@@ -164,11 +164,11 @@ export function PCard({ p, onClick, layout = 'flex' }: PCardProps) {
                     <div>
                         {hasOriginal && (
                             <div style={{ fontSize: 11, color: 'var(--fg-5)', textDecoration: 'line-through' }}>
-                                ¥{p.originalPrice!.toLocaleString()}
+                                ₩{p.originalPrice!.toLocaleString()}
                             </div>
                         )}
                         <div style={{ fontSize: 18, fontWeight: 700, color: '#0f766e' }}>
-                            ¥{p.price.toLocaleString()}<span style={{ fontSize: 13 }}>〜</span>
+                            ₩{p.price.toLocaleString()}<span style={{ fontSize: 13 }}>〜</span>
                         </div>
                     </div>
                     {(p.rating || p.reviewCount) && (

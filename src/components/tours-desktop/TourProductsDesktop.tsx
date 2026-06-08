@@ -68,12 +68,12 @@ interface ToursFilters {
 const PRICE_MAX = 250000;
 
 const THEME_OPTIONS = [
-    { v: 'stars', l: '🌌 星空・天体', match: ['星空', '天体', 'star', 'astronomy', '銀河'] },
-    { v: 'horse', l: '🐎 乗馬', match: ['乗馬', 'horse', 'riding'] },
-    { v: 'culture', l: '🏛️ 文化・遺跡', match: ['文化', '伝統', 'culture', '遺跡', '遊牧'] },
-    { v: 'gourmet', l: '🍽️ グルメ', match: ['グルメ', 'gourmet', '料理', 'food'] },
-    { v: 'photo', l: '📸 撮影スポット', match: ['撮影', 'photo', 'フォト'] },
-    { v: 'heal', l: '🧘 ヒーリング', match: ['ヒーリング', 'heal', '癒し'] },
+    { v: 'stars', l: '🌌 별빛·천체', match: ['星空', '天体', 'star', 'astronomy', '銀河'] },
+    { v: 'horse', l: '🐎 승마', match: ['乗馬', 'horse', 'riding'] },
+    { v: 'culture', l: '🏛️ 문화·유적', match: ['文化', '伝統', 'culture', '遺跡', '遊牧'] },
+    { v: 'gourmet', l: '🍽️ 미식', match: ['グルメ', 'gourmet', '料理', 'food'] },
+    { v: 'photo', l: '📸 촬영 명소', match: ['撮影', 'photo', 'フォト'] },
+    { v: 'heal', l: '🧘 힐링', match: ['ヒーリング', 'heal', '癒し'] },
 ] as const;
 
 const DEFAULT_FILTERS: ToursFilters = {
@@ -231,7 +231,7 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
     // Category banners (up to 3 + "all")
     const tourCats = useMemo(() => {
         const items: { id: string; label: string; img?: string; sub: string; count: number; bg?: string }[] = [
-            { id: 'all', label: '全体', sub: 'すべてのモンゴル旅行', count: products.length },
+            { id: 'all', label: '전체', sub: '모든 몽골여행', count: products.length },
             ...categories.slice(0, 3).map((c) => {
                 const count = products.filter((p) => p.category === c.id || p.category === c.name).length;
                 // pick a banner from one of the products in this category
@@ -259,9 +259,9 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
             >
                 <div style={{ maxWidth: contentWidth, margin: '0 auto', padding: '32px 32px 40px' }}>
                     <div style={{ fontSize: 12, color: 'var(--fg-5)', marginBottom: 18, display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <button type="button" onClick={() => navigate('/')} style={crumbBtn}>ホーム</button>
+                        <button type="button" onClick={() => navigate('/')} style={crumbBtn}>홈</button>
                         <MatIcon name="chevron_right" size={14} color="var(--fg-6)" />
-                        <span style={{ color: 'var(--fg-2)', fontWeight: 600 }}>ツアー商品</span>
+                        <span style={{ color: 'var(--fg-2)', fontWeight: 600 }}>투어 상품</span>
                     </div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 48, alignItems: 'end' }}>
                         <div>
@@ -287,18 +287,18 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
                                     letterSpacing: '-0.02em',
                                 }}
                             >
-                                モンゴルツアー商品一覧
+                                몽골투어 상품 목록
                             </h1>
                             <p style={{ fontSize: 15, color: 'var(--fg-3)', marginTop: 14, lineHeight: 1.75, maxWidth: 640 }}>
-                                モンゴル乗馬旅行、ゴビ砂漠ツアー、テレルジ国立公園、フブスグル湖など、地域・テーマ別にモンゴルツアーをお探しいただけます。
-                                日本語ガイドが同行し、現地旅行社ならではの最適なプランをご提案します。
+                                몽골 승마여행, 고비사막 투어, 테렐지 국립공원, 홉스굴 호수 등 지역·테마별로 몽골투어를 찾아보실 수 있습니다.
+                                한국어 가이드가 동행하여 현지 여행사만의 최적의 플랜을 제안해 드립니다.
                             </p>
                         </div>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
                             {[
-                                { n: String(products.length), t: '厳選ツアー', sub: '全プラン' },
-                                { n: '★4.9', t: '平均評価', sub: '累計1,240件' },
-                                { n: '150+', t: 'オリジナル実績', sub: 'カスタム旅' },
+                                { n: String(products.length), t: '엄선 투어', sub: '전체 플랜' },
+                                { n: '★4.9', t: '평균 평점', sub: '누적 1,240건' },
+                                { n: '150+', t: '오리지널 실적', sub: '맞춤 여행' },
                             ].map((s) => (
                                 <div
                                     key={s.t}
@@ -447,7 +447,7 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
                                                 backdropFilter: !allCat ? 'blur(8px)' : 'none',
                                             }}
                                         >
-                                            {c.count} プラン
+                                            {c.count}개 플랜
                                         </div>
                                     </div>
                                 </div>
@@ -460,7 +460,7 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
             {/* ===== Popular row ===== */}
             {popular.length > 0 && (
                 <section style={{ maxWidth: contentWidth, margin: '0 auto', padding: '56px 32px 0' }}>
-                    <SectionHeader eyebrow="Most Booked" title="人気ツアー商品" subtitle="今月最も予約されているプラン Top 4" />
+                    <SectionHeader eyebrow="Most Booked" title="인기 투어 상품" subtitle="이번 달 가장 많이 예약된 플랜 Top 4" />
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
                         {popular.map((p) => (
                             <PCard key={p.id} p={p} layout="block" onClick={() => navigate(`/products/${p.id}`)} />
@@ -489,10 +489,10 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
                         >
                             <div>
                                 <h2 style={{ fontSize: 22, fontWeight: 700, color: 'var(--fg-1)', margin: 0, letterSpacing: '-0.01em' }}>
-                                    全商品を見る
+                                    전체 상품 보기
                                 </h2>
                                 <div style={{ fontSize: 13, color: 'var(--fg-5)', marginTop: 6 }}>
-                                    <span style={{ color: 'var(--fg-2)', fontWeight: 700 }}>{filtered.length} 件</span> のツアーが見つかりました
+                                    <span style={{ color: 'var(--fg-2)', fontWeight: 700 }}>{filtered.length}건</span>의 투어를 찾았습니다
                                 </div>
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -512,11 +512,11 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
                                         fontFamily: 'inherit',
                                     }}
                                 >
-                                    <option value="popular">人気順</option>
-                                    <option value="reviews">予約数順</option>
-                                    <option value="rating">評価順</option>
-                                    <option value="price_asc">価格安い順</option>
-                                    <option value="price_desc">価格高い順</option>
+                                    <option value="popular">인기순</option>
+                                    <option value="reviews">예약수순</option>
+                                    <option value="rating">평점순</option>
+                                    <option value="price_asc">낮은 가격순</option>
+                                    <option value="price_desc">높은 가격순</option>
                                 </select>
                                 <div style={{ display: 'flex', border: '1px solid var(--border)', borderRadius: 12, overflow: 'hidden', padding: 3, gap: 2 }}>
                                     <button
@@ -567,7 +567,7 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
                         />
 
                         {isLoading ? (
-                            <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>読み込み中...</div>
+                            <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>불러오는 중...</div>
                         ) : filtered.length === 0 ? (
                             <EmptyState onReset={resetAll} />
                         ) : view === 'grid' ? (
@@ -624,11 +624,11 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
                             Custom Tour
                         </div>
                         <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', marginBottom: 8 }}>
-                            あなただけの特別なプランをご提案します
+                            당신만을 위한 특별한 플랜을 제안해 드립니다
                         </div>
-                        <div style={{ fontSize: 32, fontWeight: 700, lineHeight: 1.25, letterSpacing: '-0.02em' }}>オーダーメイド見積もり</div>
+                        <div style={{ fontSize: 32, fontWeight: 700, lineHeight: 1.25, letterSpacing: '-0.02em' }}>맞춤형 견적</div>
                         <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', marginTop: 12, lineHeight: 1.6 }}>
-                            人数・期間・予算・行きたい場所をお伝えください。日本語スタッフが24時間以内にお見積もりします。
+                            인원·기간·예산·가고 싶은 장소를 알려주세요. 한국어 스태프가 24시간 이내에 견적을 보내드립니다.
                         </div>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 10, position: 'relative' }}>
@@ -651,7 +651,7 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
                                 justifyContent: 'center',
                             }}
                         >
-                            1分でリクエスト <MatIcon name="arrow_forward" size={18} color="var(--primary-dark)" />
+                            1분 만에 요청하기 <MatIcon name="arrow_forward" size={18} color="var(--primary-dark)" />
                         </button>
                         <button
                             type="button"
@@ -677,7 +677,7 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
                             }}
                         >
                             <MatIcon name="chat" size={16} color="#fff" />
-                            LINE で相談
+                            LINE로 상담
                         </button>
                     </div>
                 </div>
@@ -715,7 +715,7 @@ function FilterSidebar({ filters, onChange }: { filters: ToursFilters; onChange:
             >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <MatIcon name="tune" size={18} color="var(--fg-2)" />
-                    <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--fg-1)' }}>絞り込み</span>
+                    <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--fg-1)' }}>필터</span>
                 </div>
                 <button
                     type="button"
@@ -729,15 +729,15 @@ function FilterSidebar({ filters, onChange }: { filters: ToursFilters; onChange:
                         fontFamily: 'inherit',
                     }}
                 >
-                    リセット
+                    초기화
                 </button>
             </div>
 
-            <FilterGroup label="期間">
+            <FilterGroup label="기간">
                 {[
-                    { v: 'short', l: '1〜2 泊' },
-                    { v: 'mid', l: '3〜4 泊' },
-                    { v: 'long', l: '5 泊以上' },
+                    { v: 'short', l: '1~2박' },
+                    { v: 'mid', l: '3~4박' },
+                    { v: 'long', l: '5박 이상' },
                 ].map((o) => (
                     <Checkbox
                         key={o.v}
@@ -748,34 +748,34 @@ function FilterSidebar({ filters, onChange }: { filters: ToursFilters; onChange:
                 ))}
             </FilterGroup>
 
-            <FilterGroup label="価格帯">
+            <FilterGroup label="가격대">
                 <PriceSlider value={filters.price} onChange={(p) => onChange({ ...filters, price: p })} />
             </FilterGroup>
 
-            <FilterGroup label="テーマ">
+            <FilterGroup label="테마">
                 {THEME_OPTIONS.map((o) => (
                     <Checkbox key={o.v} label={o.l} checked={filters.themes.includes(o.v)} onChange={() => toggle('themes', o.v)} />
                 ))}
             </FilterGroup>
 
-            <FilterGroup label="出発時期">
+            <FilterGroup label="출발 시기">
                 {[
-                    { v: 'this_month', l: '今月中' },
-                    { v: 'next_month', l: '来月' },
-                    { v: 'summer', l: '夏 (6〜8月)' },
-                    { v: 'autumn', l: '秋 (9〜10月)' },
+                    { v: 'this_month', l: '이번 달' },
+                    { v: 'next_month', l: '다음 달' },
+                    { v: 'summer', l: '여름 (6~8월)' },
+                    { v: 'autumn', l: '가을 (9~10월)' },
                 ].map((o) => (
                     <Checkbox key={o.v} label={o.l} checked={filters.dep.includes(o.v)} onChange={() => toggle('dep', o.v)} />
                 ))}
             </FilterGroup>
 
-            <FilterGroup label="含まれるもの" last>
+            <FilterGroup label="포함 사항" last>
                 {[
-                    { v: 'ja_guide', l: '日本語ガイド' },
-                    { v: 'meals', l: '全食事' },
-                    { v: 'airport', l: '空港送迎' },
-                    { v: 'hotel', l: '宿泊費' },
-                    { v: 'intl_flight', l: '国際線航空券' },
+                    { v: 'ja_guide', l: '한국어 가이드' },
+                    { v: 'meals', l: '전 식사' },
+                    { v: 'airport', l: '공항 픽업·샌딩' },
+                    { v: 'hotel', l: '숙박비' },
+                    { v: 'intl_flight', l: '국제선 항공권' },
                 ].map((o) => (
                     <Checkbox
                         key={o.v}
@@ -849,9 +849,9 @@ function PriceSlider({ value, onChange }: { value: [number, number]; onChange: (
     return (
         <div style={{ padding: '4px 2px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12, fontSize: 13 }}>
-                <span style={{ fontWeight: 700, color: 'var(--fg-1)' }}>¥{value[0].toLocaleString()}</span>
-                <span style={{ color: 'var(--fg-5)' }}>〜</span>
-                <span style={{ fontWeight: 700, color: 'var(--fg-1)' }}>¥{value[1].toLocaleString()}</span>
+                <span style={{ fontWeight: 700, color: 'var(--fg-1)' }}>₩{value[0].toLocaleString()}</span>
+                <span style={{ color: 'var(--fg-5)' }}>~</span>
+                <span style={{ fontWeight: 700, color: 'var(--fg-1)' }}>₩{value[1].toLocaleString()}</span>
             </div>
             <input
                 type="range"
@@ -863,8 +863,8 @@ function PriceSlider({ value, onChange }: { value: [number, number]; onChange: (
                 style={{ width: '100%', accentColor: '#0f766e' }}
             />
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: 'var(--fg-5)', marginTop: 6 }}>
-                <span>¥0</span>
-                <span>¥{PRICE_MAX.toLocaleString()}+</span>
+                <span>₩0</span>
+                <span>₩{PRICE_MAX.toLocaleString()}+</span>
             </div>
         </div>
     );
@@ -890,7 +890,7 @@ function ActiveFilterChips({
     if (cat !== 'all' && catLabel) {
         chips.push({ k: 'cat', label: catLabel, onX: onClearCat });
     }
-    const durMap: Record<string, string> = { short: '1〜2泊', mid: '3〜4泊', long: '5泊以上' };
+    const durMap: Record<string, string> = { short: '1~2박', mid: '3~4박', long: '5박 이상' };
     filters.duration.forEach((v) => chips.push({ k: 'duration:' + v, label: durMap[v], onX: () => onRemove('duration', v) }));
     filters.themes.forEach((v) => {
         const opt = THEME_OPTIONS.find((o) => o.v === v);
@@ -951,7 +951,7 @@ function ActiveFilterChips({
                     marginLeft: 4,
                 }}
             >
-                すべて解除
+                전체 해제
             </button>
         </div>
     );
@@ -985,8 +985,8 @@ function EmptyState({ onReset }: { onReset: () => void }) {
             >
                 <MatIcon name="search_off" size={32} color="var(--fg-5)" />
             </div>
-            <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--fg-1)' }}>条件に合うツアーが見つかりません</div>
-            <div style={{ fontSize: 13, color: 'var(--fg-4)' }}>絞り込み条件を少し変えてみてください。</div>
+            <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--fg-1)' }}>조건에 맞는 투어를 찾을 수 없습니다</div>
+            <div style={{ fontSize: 13, color: 'var(--fg-4)' }}>필터 조건을 조금 변경해 보세요.</div>
             <button
                 type="button"
                 onClick={onReset}
@@ -1003,7 +1003,7 @@ function EmptyState({ onReset }: { onReset: () => void }) {
                     fontFamily: 'inherit',
                 }}
             >
-                条件をリセット
+                조건 초기화
             </button>
         </div>
     );
@@ -1094,7 +1094,7 @@ function ListCard({ p, onClick }: { p: ProductRow; onClick: () => void }) {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginTop: 12 }}>
                     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12, color: 'var(--fg-5)' }}>
-                        <MatIcon name="verified" size={14} filled color="#0f766e" /> 日本語ガイド同行
+                        <MatIcon name="verified" size={14} filled color="#0f766e" /> 한국어 가이드 동행
                     </span>
                     {firstTag && (
                         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12, color: 'var(--fg-5)' }}>
@@ -1107,12 +1107,12 @@ function ListCard({ p, onClick }: { p: ProductRow; onClick: () => void }) {
                 <div style={{ textAlign: 'right' }}>
                     {hasOriginal && (
                         <div style={{ fontSize: 12, color: 'var(--fg-5)', textDecoration: 'line-through' }}>
-                            ¥{p.originalPrice!.toLocaleString()}
+                            ₩{p.originalPrice!.toLocaleString()}
                         </div>
                     )}
-                    <div style={{ fontSize: 11, color: 'var(--fg-5)' }}>お一人様</div>
+                    <div style={{ fontSize: 11, color: 'var(--fg-5)' }}>1인 기준</div>
                     <div style={{ fontSize: 24, fontWeight: 700, color: '#0f766e', letterSpacing: '-0.01em' }}>
-                        ¥{p.price.toLocaleString()}<span style={{ fontSize: 14 }}>〜</span>
+                        ₩{p.price.toLocaleString()}<span style={{ fontSize: 14 }}>~</span>
                     </div>
                 </div>
                 <button
@@ -1136,7 +1136,7 @@ function ListCard({ p, onClick }: { p: ProductRow; onClick: () => void }) {
                         gap: 6,
                     }}
                 >
-                    詳細を見る <MatIcon name="arrow_forward" size={16} color="#fff" />
+                    자세히 보기 <MatIcon name="arrow_forward" size={16} color="#fff" />
                 </button>
             </div>
         </div>

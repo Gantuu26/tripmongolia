@@ -64,7 +64,7 @@ export const AdminQuoteManage: React.FC = () => {
 
         } catch (error) {
             console.error("Failed to update status:", error);
-            alert("상태 변경 중 오류가 발생했습니다.");
+            alert("Төлөв өөрчлөх үед алдаа гарлаа.");
         }
     };
 
@@ -174,13 +174,13 @@ export const AdminQuoteManage: React.FC = () => {
             setIsConvertModalOpen(false);
             setSelectedRequest(null);
 
-            if (confirm(`예약 ${reservationNumber} 생성 완료!\n고객에게 확인 이메일을 발송했습니다.\n[예약 관리] 페이지로 이동하시겠습니까?`)) {
+            if (confirm(`Захиалга ${reservationNumber} үүсгэгдлээ!\nХэрэглэгчид баталгаажуулах и-мэйл илгээгдсэн.\n[Захиалгын удирдлага] хуудас руу шилжих үү?`)) {
                 navigate('/admin/reservations');
             }
 
         } catch (error: any) {
             console.error('예약 변환 오류:', error);
-            alert(`예약 변환 중 오류가 발생했습니다: ${error.message || error}`);
+            alert(`Захиалга руу хөрвүүлэх үед алдаа гарлаа: ${error.message || error}`);
         }
     };
 
@@ -222,7 +222,7 @@ export const AdminQuoteManage: React.FC = () => {
                 console.error('Failed to send notification email:', emailError);
             }
 
-            alert(`견적 발송 완료!\n확정 금액: ${priceDetail.totalAmount ? priceDetail.totalAmount.toLocaleString() + '엔' : '미입력'}${url ? `\n견적서 링크: ${url}` : ''}\n고객에게 시스템 견적 페이지와 알림 메일이 발송되었습니다.`);
+            alert(`Үнийн санал илгээгдлээ!\nБаталгаажсан дүн: ${priceDetail.totalAmount ? '₩' + priceDetail.totalAmount.toLocaleString() : 'Оруулаагүй'}${url ? `\nҮнийн саналын холбоос: ${url}` : ''}\nХэрэглэгчид системийн үнийн саналын хуудас болон мэдэгдлийн и-мэйл илгээгдсэн.`);
 
             // Reflect in local state
             setRequests(prev => prev.map(req =>
@@ -241,7 +241,7 @@ export const AdminQuoteManage: React.FC = () => {
             setSelectedRequest(null);
         } catch (error) {
             console.error("Failed to send estimate:", error);
-            alert("견적서 발송 처리 중 오류가 발생했습니다.");
+            alert("Үнийн санал илгээх үед алдаа гарлаа.");
         }
     };
 
@@ -266,18 +266,18 @@ export const AdminQuoteManage: React.FC = () => {
 
         } catch (error) {
             console.error("Failed to update quote:", error);
-            alert("정보 수정 중 오류가 발생했습니다.");
+            alert("Мэдээлэл засах үед алдаа гарлаа.");
         }
     };
 
     // Map a quote status to a badge tone + label
     const STATUS_META: Record<string, { tone: string; label: string }> = {
-        new: { tone: 'b-purple', label: '신규' },
-        reservation_requested: { tone: 'b-purple', label: '예약 요청' },
-        processing: { tone: 'b-amber', label: '작성중' },
-        answered: { tone: 'b-blue', label: '발송됨' },
-        converted: { tone: 'b-gray', label: '전환됨' },
-        completed: { tone: 'b-gray', label: '답변완료' },
+        new: { tone: 'b-purple', label: 'Шинэ' },
+        reservation_requested: { tone: 'b-purple', label: 'Захиалгын хүсэлт' },
+        processing: { tone: 'b-amber', label: 'Боловсруулж буй' },
+        answered: { tone: 'b-blue', label: 'Илгээсэн' },
+        converted: { tone: 'b-gray', label: 'Хөрвүүлсэн' },
+        completed: { tone: 'b-gray', label: 'Хариу өгсөн' },
     };
     const statusMeta = (status: string) => STATUS_META[status] || { tone: 'b-gray', label: status };
 
@@ -298,12 +298,12 @@ export const AdminQuoteManage: React.FC = () => {
 
         // status options shown in the dropdown menu (preserves original keys)
         const OPTIONS: Array<{ key: string; tone: string; label: string }> = [
-            { key: 'pending_payment', tone: 'b-amber', label: '입금 대기' },
-            { key: 'paid', tone: 'b-blue', label: '결제 완료' },
-            { key: 'confirmed', tone: 'b-green', label: '예약 확정' },
-            { key: 'cancelled', tone: 'b-red', label: '취소됨' },
-            { key: 'converted', tone: 'b-gray', label: '예약 전환' },
-            { key: 'reservation_requested', tone: 'b-purple', label: '예약 요청' },
+            { key: 'pending_payment', tone: 'b-amber', label: 'Төлбөр хүлээж буй' },
+            { key: 'paid', tone: 'b-blue', label: 'Төлбөр төлсөн' },
+            { key: 'confirmed', tone: 'b-green', label: 'Захиалга баталгаажсан' },
+            { key: 'cancelled', tone: 'b-red', label: 'Цуцлагдсан' },
+            { key: 'converted', tone: 'b-gray', label: 'Захиалга руу хөрвүүлсэн' },
+            { key: 'reservation_requested', tone: 'b-purple', label: 'Захиалгын хүсэлт' },
         ];
 
         const current = OPTIONS.find(o => o.key === status) || statusMeta(status);
@@ -347,12 +347,12 @@ export const AdminQuoteManage: React.FC = () => {
 
     // Status filter chips (mirrors original select options + counts)
     const filters = useMemo(() => ([
-        { id: '전체 상태', label: '전체', count: requests.length },
-        { id: '답변 대기', label: '답변 대기', count: requests.filter(r => r.status === 'new').length },
-        { id: '상담 중', label: '상담 중', count: requests.filter(r => r.status === 'processing').length },
-        { id: '답변 완료', label: '답변 완료', count: requests.filter(r => r.status === 'answered').length },
-        { id: '예약 요청', label: '예약 요청', count: requests.filter(r => r.status === 'reservation_requested').length },
-        { id: '예약 전환', label: '예약 전환', count: requests.filter(r => r.status === 'converted').length },
+        { id: '전체 상태', label: 'Бүгд', count: requests.length },
+        { id: '답변 대기', label: 'Хариу хүлээж буй', count: requests.filter(r => r.status === 'new').length },
+        { id: '상담 중', label: 'Зөвлөгөө явагдаж буй', count: requests.filter(r => r.status === 'processing').length },
+        { id: '답변 완료', label: 'Хариу өгсөн', count: requests.filter(r => r.status === 'answered').length },
+        { id: '예약 요청', label: 'Захиалгын хүсэлт', count: requests.filter(r => r.status === 'reservation_requested').length },
+        { id: '예약 전환', label: 'Захиалга руу хөрвүүлсэн', count: requests.filter(r => r.status === 'converted').length },
     ]), [requests]);
 
     // Pagination helper to generate page numbers
@@ -374,34 +374,34 @@ export const AdminQuoteManage: React.FC = () => {
 
     const headerActions = (
         <button type="button" className="btn btn-ghost" onClick={fetchQuotes}>
-            <Icon name="refresh" />새로고침
+            <Icon name="refresh" />Шинэчлэх
         </button>
     );
 
     return (
-        <AdminLayout activePage="reservations" title="맞춤견적 관리" actions={headerActions}>
+        <AdminLayout activePage="reservations" title="Захиалгат үнийн саналын удирдлага" actions={headerActions}>
             {/* Summary metrics */}
             <section className="metric-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', marginBottom: 18 }}>
                 <div className="metric">
                     <div className="metric-top">
                         <span className="metric-ico tint-purple"><Icon name="list_alt" fill /></span>
                     </div>
-                    <div className="metric-label">전체 요청</div>
-                    <div className="metric-value">{stats.total}<small>건</small></div>
+                    <div className="metric-label">Нийт хүсэлт</div>
+                    <div className="metric-value">{stats.total}<small>ш</small></div>
                 </div>
                 <div className="metric">
                     <div className="metric-top">
                         <span className="metric-ico tint-amber"><Icon name="pending_actions" fill /></span>
                     </div>
-                    <div className="metric-label">답변 대기</div>
-                    <div className="metric-value">{stats.new}<small>건</small></div>
+                    <div className="metric-label">Хариу хүлээж буй</div>
+                    <div className="metric-value">{stats.new}<small>ш</small></div>
                 </div>
                 <div className="metric">
                     <div className="metric-top">
                         <span className="metric-ico tint-green"><Icon name="check_circle" fill /></span>
                     </div>
-                    <div className="metric-label">완료된 견적</div>
-                    <div className="metric-value">{stats.completed}<small>건</small></div>
+                    <div className="metric-label">Дууссан үнийн санал</div>
+                    <div className="metric-value">{stats.completed}<small>ш</small></div>
                 </div>
             </section>
 
@@ -411,7 +411,7 @@ export const AdminQuoteManage: React.FC = () => {
                     <Icon name="search" />
                     <input
                         type="text"
-                        placeholder="고객 이름 또는 여행지 검색"
+                        placeholder="Хэрэглэгчийн нэр эсвэл аялах газраар хайх"
                         value={searchTerm}
                         onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
                     />
@@ -422,7 +422,7 @@ export const AdminQuoteManage: React.FC = () => {
                     className="btn btn-ghost"
                     onClick={() => { setSearchTerm(''); setFilterStatus('전체 상태'); setCurrentPage(1); }}
                 >
-                    <Icon name="refresh" />초기화
+                    <Icon name="refresh" />Цэвэрлэх
                 </button>
             </div>
 
@@ -443,22 +443,22 @@ export const AdminQuoteManage: React.FC = () => {
             {/* Quote list card */}
             <div className="card">
                 <div className="card-head">
-                    <h2>견적 목록</h2>
-                    <span className="cell-muted" style={{ fontSize: 13 }}>{filteredRequests.length}건</span>
+                    <h2>Үнийн саналын жагсаалт</h2>
+                    <span className="cell-muted" style={{ fontSize: 13 }}>{filteredRequests.length}ш</span>
                     <div className="spacer" />
                 </div>
                 <div className="tbl-wrap">
                     <table className="tbl">
                         <thead>
                             <tr>
-                                <th>번호</th>
-                                <th>고객 / 연락처</th>
-                                <th>요청 내용</th>
-                                <th className="c">인원</th>
-                                <th>희망일</th>
-                                <th>상태</th>
-                                <th className="r">금액</th>
-                                <th className="r">관리</th>
+                                <th>Дугаар</th>
+                                <th>Хэрэглэгч / Холбоо барих</th>
+                                <th>Хүсэлтийн агуулга</th>
+                                <th className="c">Хүний тоо</th>
+                                <th>Хүссэн огноо</th>
+                                <th>Төлөв</th>
+                                <th className="r">Дүн</th>
+                                <th className="r">Удирдлага</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -469,7 +469,7 @@ export const AdminQuoteManage: React.FC = () => {
                                         <td>
                                             <div className="cell-mono">#{String(request.id).slice(0, 6)}</div>
                                             <div style={{ fontSize: 11, marginTop: 3 }}>
-                                                <span className="tag-type quote">맞춤견적</span>
+                                                <span className="tag-type quote">Захиалгат үнийн санал</span>
                                             </div>
                                         </td>
                                         <td>
@@ -495,7 +495,7 @@ export const AdminQuoteManage: React.FC = () => {
                                                 <button
                                                     type="button"
                                                     className="act-btn"
-                                                    title="상세"
+                                                    title="Дэлгэрэнгүй"
                                                     onClick={() => setSelectedRequest(request)}
                                                 >
                                                     <Icon name="visibility" />
@@ -510,7 +510,7 @@ export const AdminQuoteManage: React.FC = () => {
                     {displayedRequests.length === 0 && (
                         <div className="empty">
                             <Icon name="request_quote" />
-                            <p>{loading ? '견적을 불러오는 중입니다…' : '해당 조건의 견적이 없습니다.'}</p>
+                            <p>{loading ? 'Үнийн саналыг ачаалж байна…' : 'Тохирох нөхцөлд тохирох үнийн санал алга.'}</p>
                         </div>
                     )}
                 </div>
@@ -519,7 +519,7 @@ export const AdminQuoteManage: React.FC = () => {
                 {filteredRequests.length > 0 && (
                     <div className="card-head" style={{ borderBottom: 'none', borderTop: '1px solid var(--border-subtle)', justifyContent: 'space-between' }}>
                         <span className="cell-muted" style={{ fontSize: 12 }}>
-                            {((currentPage - 1) * itemsPerPage) + 1}-{Math.min(currentPage * itemsPerPage, filteredRequests.length)} / {filteredRequests.length}건
+                            {((currentPage - 1) * itemsPerPage) + 1}-{Math.min(currentPage * itemsPerPage, filteredRequests.length)} / {filteredRequests.length}ш
                         </span>
                         <div className="spacer" />
                         <div className="row" style={{ gap: 6 }}>

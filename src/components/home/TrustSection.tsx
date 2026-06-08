@@ -7,23 +7,23 @@ export const TrustSection: React.FC = () => {
     const trustItems = [
         {
             icon: 'g_translate',
-            title: t('home.magazine.trust.item1_title', { defaultValue: '1. 日本語完全対応' }),
-            desc: t('home.magazine.trust.item1_desc', { defaultValue: '日本語堪能な専門ガイドが同行し、言葉의 벽 없이 안심하고 여행할 수 있습니다.' })
+            title: t('home.magazine.trust.item1_title', { defaultValue: '1. 한국어 완벽 대응' }),
+            desc: t('home.magazine.trust.item1_desc', { defaultValue: '한국어가 능통한 전문 가이드가 동행하여 언어의 장벽 없이 안심하고 여행하실 수 있습니다.' })
         },
         {
             icon: 'support_agent',
-            title: t('home.magazine.trust.item2_title', { defaultValue: '2. 24時間サポート' }),
-            desc: t('home.magazine.trust.item2_desc', { defaultValue: '旅行中の緊急時も、日本語チャットで24時間迅速に対応いたします' })
+            title: t('home.magazine.trust.item2_title', { defaultValue: '2. 24시간 지원' }),
+            desc: t('home.magazine.trust.item2_desc', { defaultValue: '여행 중 긴급 상황에도 한국어 채팅으로 24시간 신속하게 대응해 드립니다' })
         },
         {
             icon: 'restaurant',
-            title: t('home.magazine.trust.item3_title', { defaultValue: '3. 日本人向けの食事対応' }),
-            desc: t('home.magazine.trust.item3_desc', { defaultValue: '衛生管理を徹底し、日本人の口に合う美味しいモンゴル料理をご提案します。' })
+            title: t('home.magazine.trust.item3_title', { defaultValue: '3. 한국인 입맛에 맞춘 식사' }),
+            desc: t('home.magazine.trust.item3_desc', { defaultValue: '위생 관리를 철저히 하며, 한국인의 입맛에 맞는 맛있는 몽골 요리를 제안해 드립니다.' })
         },
         {
             icon: 'verified_user',
-            title: t('home.magazine.trust.item4_title', { defaultValue: '4. 安全第一の車両管理' }),
-            desc: t('home.magazine.trust.item4_desc', { defaultValue: '定期点検をパスした安全な車両のみを使用し、快適な移動を保証します。' })
+            title: t('home.magazine.trust.item4_title', { defaultValue: '4. 안전 제일의 차량 관리' }),
+            desc: t('home.magazine.trust.item4_desc', { defaultValue: '정기 점검을 통과한 안전한 차량만을 사용하여 쾌적한 이동을 보장합니다.' })
         }
     ];
 
@@ -32,7 +32,7 @@ export const TrustSection: React.FC = () => {
             <div className="max-w-7xl mx-auto px-5">
                 <div className="text-center mb-12">
                     <h2 className="text-2xl md:text-3xl font-black text-slate-800 dark:text-white mb-4">
-                        {t('home.magazine.trust.title', { defaultValue: 'Milkyway Japanが選ばれる理由' })}
+                        {t('home.magazine.trust.title', { defaultValue: '몽골리아 은하수가 선택받는 이유' })}
                     </h2>
                     <div className="w-12 h-1 bg-primary mx-auto rounded-full"></div>
                 </div>

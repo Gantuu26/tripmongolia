@@ -79,11 +79,11 @@ function timeAgo(iso?: string): string {
     if (Number.isNaN(t)) return '';
     const diff = Date.now() - t;
     const m = Math.floor(diff / 60000);
-    if (m < 60) return `${m} 分前`;
+    if (m < 60) return `${m}분 전`;
     const h = Math.floor(m / 60);
-    if (h < 24) return `${h} 時間前`;
+    if (h < 24) return `${h}시간 전`;
     const d = Math.floor(h / 24);
-    return `${d} 日前`;
+    return `${d}일 전`;
 }
 
 export function TravelMateDetailDesktop({
@@ -126,13 +126,13 @@ export function TravelMateDetailDesktop({
             ? `${startDate.replace(/-/g, '.')} 〜 ${endDate.replace(/-/g, '.')}`
             : startDate.replace(/-/g, '.')
         : '';
-    const authorName = post.authorName || post.author_name || '匿名';
+    const authorName = post.authorName || post.author_name || '익명';
     const authorInitial = authorName.charAt(0);
     const views = post.viewCount ?? post.view_count ?? 0;
     const statusInfo = {
-        open: { label: '募集中', bg: '#0f766e' },
-        almost: { label: '残り席わずか', bg: '#dc2626' },
-        full: { label: 'マッチ済み', bg: 'var(--fg-4)' },
+        open: { label: '모집 중', bg: '#0f766e' },
+        almost: { label: '잔여석 얼마 안 남음', bg: '#dc2626' },
+        full: { label: '매칭 완료', bg: 'var(--fg-4)' },
     }[status];
     const pct = capacity > 0 ? (joined / capacity) * 100 : 0;
 
@@ -158,9 +158,9 @@ export function TravelMateDetailDesktop({
                         color: 'var(--fg-5)',
                     }}
                 >
-                    <button type="button" onClick={() => navigate('/')} style={crumbBtn}>ホーム</button>
+                    <button type="button" onClick={() => navigate('/')} style={crumbBtn}>홈</button>
                     <MatIcon name="chevron_right" size={14} color="var(--fg-6)" />
-                    <button type="button" onClick={() => navigate('/travel-mates')} style={crumbBtn}>同行者募集</button>
+                    <button type="button" onClick={() => navigate('/travel-mates')} style={crumbBtn}>동행자 모집</button>
                     <MatIcon name="chevron_right" size={14} color="var(--fg-6)" />
                     <span
                         style={{
@@ -205,22 +205,22 @@ export function TravelMateDetailDesktop({
                             <span style={{ fontSize: 12, color: 'var(--fg-5)' }}>{timeAgo(post.createdAt || post.created_at)}</span>
                             <span style={{ width: 3, height: 3, borderRadius: 999, background: 'var(--border-strong)' }} />
                             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12, color: 'var(--fg-5)' }}>
-                                <MatIcon name="visibility" size={14} color="var(--fg-5)" /> {views} 閲覧
+                                <MatIcon name="visibility" size={14} color="var(--fg-5)" /> 조회 {views}
                             </span>
                             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12, color: 'var(--fg-5)' }}>
-                                <MatIcon name="forum" size={14} color="var(--fg-5)" /> {comments.length} コメント
+                                <MatIcon name="forum" size={14} color="var(--fg-5)" /> 댓글 {comments.length}
                             </span>
 
                             {isOwner && (
                                 <div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
                                     {onEdit && (
                                         <button type="button" onClick={onEdit} style={ownerBtn}>
-                                            <MatIcon name="edit" size={14} color="var(--fg-2)" /> 編集
+                                            <MatIcon name="edit" size={14} color="var(--fg-2)" /> 수정
                                         </button>
                                     )}
                                     {onDelete && (
                                         <button type="button" onClick={onDelete} style={{ ...ownerBtn, color: '#dc2626', borderColor: '#fecaca' }}>
-                                            <MatIcon name="delete" size={14} color="#dc2626" /> 削除
+                                            <MatIcon name="delete" size={14} color="#dc2626" /> 삭제
                                         </button>
                                     )}
                                 </div>
@@ -260,10 +260,10 @@ export function TravelMateDetailDesktop({
                             }}
                         >
                             {[
-                                { i: 'calendar_month', k: '旅行期間', v: dateRange || '相談', sub: post.duration },
-                                { i: 'group', k: '募集人数', v: capacity > 0 ? `${capacity} 名` : '相談', sub: capacity > 0 ? `現在 ${joined} 名参加中` : undefined },
-                                { i: 'wc', k: '性別', v: post.gender || '問わず' },
-                                { i: 'cake', k: '希望年齢', v: ageGroups.length > 0 ? ageGroups.join('・') : '指定なし' },
+                                { i: 'calendar_month', k: '여행 기간', v: dateRange || '협의', sub: post.duration },
+                                { i: 'group', k: '모집 인원', v: capacity > 0 ? `${capacity}명` : '협의', sub: capacity > 0 ? `현재 ${joined}명 참가 중` : undefined },
+                                { i: 'wc', k: '성별', v: post.gender || '무관' },
+                                { i: 'cake', k: '희망 연령', v: ageGroups.length > 0 ? ageGroups.join('·') : '지정 없음' },
                             ].map((s) => (
                                 <div key={s.k} style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
                                     <div
@@ -302,7 +302,7 @@ export function TravelMateDetailDesktop({
                         {/* Style chips */}
                         {styles.length > 0 && (
                             <div style={{ marginTop: 28 }}>
-                                <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fg-1)', marginBottom: 10 }}>旅行スタイル</div>
+                                <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fg-1)', marginBottom: 10 }}>여행 스타일</div>
                                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                                     {styles.map((s) => (
                                         <span
@@ -326,7 +326,7 @@ export function TravelMateDetailDesktop({
                         {/* Body content */}
                         <div style={{ marginTop: 32, paddingTop: 32, borderTop: '1px solid var(--border-subtle)' }}>
                             <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--fg-1)', margin: '0 0 16px', letterSpacing: '-0.01em' }}>
-                                詳細内容
+                                상세 내용
                             </h2>
                             {post.description ? (
                                 <div
@@ -334,7 +334,7 @@ export function TravelMateDetailDesktop({
                                     dangerouslySetInnerHTML={{ __html: post.description }}
                                 />
                             ) : (
-                                <p style={{ fontSize: 15, color: 'var(--fg-4)', lineHeight: 1.85 }}>説明はまだ追加されていません。</p>
+                                <p style={{ fontSize: 15, color: 'var(--fg-4)', lineHeight: 1.85 }}>아직 설명이 추가되지 않았습니다.</p>
                             )}
 
                             <div
@@ -353,7 +353,7 @@ export function TravelMateDetailDesktop({
                             >
                                 <MatIcon name="info" size={20} filled color="var(--primary-dark)" style={{ flexShrink: 0, marginTop: 1 }} />
                                 <span>
-                                    <strong>本サービスは個人同士のマッチング</strong>です。実際にお会いする前にメッセージで十分にお話しいただき、ご自身で安全をご確認ください。
+                                    <strong>본 서비스는 개인 간 매칭</strong>입니다. 실제로 만나기 전에 메시지로 충분히 대화를 나누시고, 본인이 직접 안전을 확인해 주세요.
                                 </span>
                             </div>
                         </div>
@@ -361,7 +361,7 @@ export function TravelMateDetailDesktop({
                         {/* Comments */}
                         <div style={{ marginTop: 40, paddingTop: 32, borderTop: '1px solid var(--border-subtle)' }}>
                             <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--fg-1)', margin: '0 0 18px', letterSpacing: '-0.01em' }}>
-                                コメント <span style={{ color: 'var(--fg-5)', fontWeight: 500, fontSize: 16 }}>({comments.length})</span>
+                                댓글 <span style={{ color: 'var(--fg-5)', fontWeight: 500, fontSize: 16 }}>({comments.length})</span>
                             </h2>
 
                             {/* Comment input */}
@@ -381,13 +381,13 @@ export function TravelMateDetailDesktop({
                                         flexShrink: 0,
                                     }}
                                 >
-                                    あ
+                                    나
                                 </div>
                                 <div style={{ flex: 1, border: '1px solid var(--border)', borderRadius: 14, padding: 14, background: '#fff' }}>
                                     <textarea
                                         value={comment}
                                         onChange={(e) => setComment(e.target.value)}
-                                        placeholder="コメントを入力してください..."
+                                        placeholder="댓글을 입력해 주세요..."
                                         rows={3}
                                         style={{
                                             width: '100%',
@@ -418,7 +418,7 @@ export function TravelMateDetailDesktop({
                                                 fontFamily: 'inherit',
                                             }}
                                         >
-                                            投稿
+                                            등록
                                         </button>
                                     </div>
                                 </div>
@@ -435,7 +435,7 @@ export function TravelMateDetailDesktop({
                                         fontSize: 13,
                                     }}
                                 >
-                                    最初のコメントを残してみましょう
+                                    첫 번째 댓글을 남겨보세요
                                 </div>
                             ) : (
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
@@ -461,7 +461,7 @@ export function TravelMateDetailDesktop({
                                             <div style={{ flex: 1 }}>
                                                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
                                                     <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--fg-1)' }}>
-                                                        {c.user_name || c.userName || '匿名'}
+                                                        {c.user_name || c.userName || '익명'}
                                                     </span>
                                                     {c.isAuthor && (
                                                         <span
@@ -523,7 +523,7 @@ export function TravelMateDetailDesktop({
                                             <span style={{ fontSize: 30, fontWeight: 700, color: 'var(--fg-1)', letterSpacing: '-0.02em' }}>
                                                 {joined}
                                             </span>
-                                            <span style={{ fontSize: 16, color: 'var(--fg-5)', marginLeft: 6 }}>/ {capacity} 名 参加中</span>
+                                            <span style={{ fontSize: 16, color: 'var(--fg-5)', marginLeft: 6 }}>/ {capacity}명 참가 중</span>
                                         </div>
                                         <span
                                             style={{
@@ -532,7 +532,7 @@ export function TravelMateDetailDesktop({
                                                 color: status === 'full' ? 'var(--fg-5)' : '#0f766e',
                                             }}
                                         >
-                                            {status === 'full' ? '募集終了' : `残り ${capacity - joined} 席`}
+                                            {status === 'full' ? '모집 종료' : `잔여 ${capacity - joined}석`}
                                         </span>
                                     </div>
                                     <div style={{ height: 10, background: 'var(--bg-muted)', borderRadius: 999, overflow: 'hidden' }}>
@@ -572,14 +572,14 @@ export function TravelMateDetailDesktop({
                                 }}
                             >
                                 {status === 'full' ? (
-                                    '募集終了しました'
+                                    '모집이 종료되었습니다'
                                 ) : requested ? (
                                     <>
                                         <MatIcon name="check_circle" size={18} filled color="#fff" />
-                                        参加リクエスト送信済み
+                                        참가 신청 완료
                                     </>
                                 ) : (
-                                    '参加リクエストを送る'
+                                    '참가 신청하기'
                                 )}
                             </button>
                             <button
@@ -606,7 +606,7 @@ export function TravelMateDetailDesktop({
                                 }}
                             >
                                 <MatIcon name="chat_bubble" size={16} color="var(--fg-2)" />
-                                ホストにメッセージ
+                                호스트에게 메시지
                             </button>
 
                             <div
@@ -624,7 +624,7 @@ export function TravelMateDetailDesktop({
                                 }}
                             >
                                 <MatIcon name="shield_person" size={16} filled color="var(--primary-dark)" />
-                                <span>本人確認済みのメンバーのみ参加リクエスト可能。匿名でメッセージ可。</span>
+                                <span>본인 인증을 마친 회원만 참가 신청이 가능합니다. 익명으로 메시지를 보낼 수 있습니다.</span>
                             </div>
                         </div>
 
@@ -694,18 +694,18 @@ export function TravelMateDetailDesktop({
                                     fontFamily: 'inherit',
                                 }}
                             >
-                                同行者の一覧を見る
+                                동행자 목록 보기
                             </button>
                         </div>
 
                         {/* Share */}
                         <div style={{ background: 'var(--bg-muted)', borderRadius: 16, padding: 18 }}>
-                            <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fg-1)', marginBottom: 10 }}>シェア</div>
+                            <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fg-1)', marginBottom: 10 }}>공유</div>
                             <div style={{ display: 'flex', gap: 8 }}>
                                 {[
                                     { i: 'chat', l: 'LINE' },
                                     { i: 'link', l: 'URL' },
-                                    { i: 'share', l: 'その他' },
+                                    { i: 'share', l: '기타' },
                                 ].map((s) => (
                                     <button
                                         key={s.l}

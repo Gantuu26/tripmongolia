@@ -26,8 +26,8 @@ const EMPTY_HOTEL: Hotel = {
 
 /**
  * Admin page for the hotel master library.
- * Toolbar + master table (대표 / 호텔명 / 주소 / 사진 / 사용 / 관리).
- * The editor (add/edit) opens in a modal. The "가져오기" button in the
+ * Toolbar + master table (Төлөөлөл / Зочид буудлын нэр / Хаяг / Зураг / Ашиглах / Удирдлага).
+ * The editor (add/edit) opens in a modal. The "Импортлох" button in the
  * itinerary editor opens a similar list as a modal elsewhere.
  */
 export const AdminHotelManage: React.FC = () => {
@@ -86,7 +86,7 @@ export const AdminHotelManage: React.FC = () => {
     const handleSave = async () => {
         if (!editing) return;
         if (!editing.name_kr.trim()) {
-            alert('대제목은 필수입니다.');
+            alert('Үндсэн гарчиг заавал шаардлагатай.');
             return;
         }
         setSaving(true);
@@ -100,7 +100,7 @@ export const AdminHotelManage: React.FC = () => {
             setEditing(null);
             setIsNew(false);
         } catch (e: any) {
-            alert('저장 실패: ' + (e?.message || '알 수 없는 오류'));
+            alert('Хадгалах амжилтгүй боллоо: ' + (e?.message || 'Тодорхойгүй алдаа'));
         } finally {
             setSaving(false);
         }
@@ -108,34 +108,34 @@ export const AdminHotelManage: React.FC = () => {
 
     const handleDelete = async () => {
         if (!editing || isNew) return;
-        if (!confirm(`"${editing.name_kr}" 호텔을 삭제하시겠습니까?\n\n이 호텔을 사용 중인 상품의 일정에는 영향이 없습니다(스냅샷으로 저장되어 있음).`)) return;
+        if (!confirm(`"${editing.name_kr}" зочид буудлыг устгах уу?\n\nЭнэ зочид буудлыг ашиглаж буй бүтээгдэхүүний хуваарьт нөлөөлөхгүй (агшин зураг хэлбэрээр хадгалагдсан).`)) return;
         try {
             await api.hotels.delete(editing.id);
             await load();
             setEditing(null);
         } catch (e: any) {
-            alert('삭제 실패: ' + (e?.message || '알 수 없는 오류'));
+            alert('Устгах амжилтгүй боллоо: ' + (e?.message || 'Тодорхойгүй алдаа'));
         }
     };
 
     // Delete directly from the table row.
     const deleteRow = async (h: Hotel) => {
-        if (!confirm(`"${h.name_kr}" 호텔을 삭제하시겠습니까?\n\n이 호텔을 사용 중인 상품의 일정에는 영향이 없습니다(스냅샷으로 저장되어 있음).`)) return;
+        if (!confirm(`"${h.name_kr}" зочид буудлыг устгах уу?\n\nЭнэ зочид буудлыг ашиглаж буй бүтээгдэхүүний хуваарьт нөлөөлөхгүй (агшин зураг хэлбэрээр хадгалагдсан).`)) return;
         try {
             await api.hotels.delete(h.id);
             await load();
         } catch (e: any) {
-            alert('삭제 실패: ' + (e?.message || '알 수 없는 오류'));
+            alert('Устгах амжилтгүй боллоо: ' + (e?.message || 'Тодорхойгүй алдаа'));
         }
     };
 
-    // Inline toggle of the 사용 (active) flag from the table.
+    // Inline toggle of the Ашиглах (active) flag from the table.
     const toggleActive = async (h: Hotel) => {
         try {
             await api.hotels.update(h.id, { ...h, is_active: !h.is_active });
             await load();
         } catch (e: any) {
-            alert('업데이트 실패: ' + (e?.message || '알 수 없는 오류'));
+            alert('Шинэчлэх амжилтгүй боллоо: ' + (e?.message || 'Тодорхойгүй алдаа'));
         }
     };
 
@@ -150,7 +150,7 @@ export const AdminHotelManage: React.FC = () => {
             setEditing({ ...editing, images: [...(editing.images || []), ...urls] });
         } catch (e) {
             console.error(e);
-            alert('이미지 업로드 실패');
+            alert('Зураг байршуулах амжилтгүй боллоо');
         }
     };
 
@@ -163,11 +163,11 @@ export const AdminHotelManage: React.FC = () => {
     return (
         <AdminLayout
             activePage="hotels"
-            title="호텔 마스터"
+            title="Зочид буудлын сан"
             actions={
                 <button type="button" onClick={startNew} className="btn btn-ink">
                     <Icon name="add" />
-                    호텔 추가
+                    Зочид буудал нэмэх
                 </button>
             }
         >
@@ -176,7 +176,7 @@ export const AdminHotelManage: React.FC = () => {
                     <label className="tb-search">
                         <Icon name="search" />
                         <input
-                            placeholder="호텔명, 주소 검색"
+                            placeholder="Зочид буудлын нэр, хаягаар хайх"
                             value={q}
                             onChange={(e) => setQ(e.target.value)}
                         />
@@ -186,17 +186,17 @@ export const AdminHotelManage: React.FC = () => {
                         value={filterActive}
                         onChange={(e) => setFilterActive(e.target.value as 'all' | 'active' | 'inactive')}
                     >
-                        <option value="all">전체 사용여부</option>
-                        <option value="active">사용중</option>
-                        <option value="inactive">미사용</option>
+                        <option value="all">Бүх төлөв</option>
+                        <option value="active">Ашиглаж байгаа</option>
+                        <option value="inactive">Ашиглахгүй</option>
                     </select>
                     <div className="spacer" />
                     <span className="cell-muted" style={{ fontSize: 13 }}>
-                        전체 {hotels.length}개 중 <b style={{ color: 'var(--text-strong)' }}>{filtered.length}</b>개 표시
+                        Нийт {hotels.length}-аас <b style={{ color: 'var(--text-strong)' }}>{filtered.length}</b> харуулж байна
                     </span>
                     <button type="button" onClick={startNew} className="btn btn-ink">
                         <Icon name="add" />
-                        호텔 추가
+                        Зочид буудал нэмэх
                     </button>
                 </div>
 
@@ -205,12 +205,12 @@ export const AdminHotelManage: React.FC = () => {
                         <table className="tbl">
                             <thead>
                                 <tr>
-                                    <th style={{ width: 80 }}>대표</th>
-                                    <th>호텔명</th>
-                                    <th>주소</th>
-                                    <th className="c">사진</th>
-                                    <th className="c">사용</th>
-                                    <th className="r">관리</th>
+                                    <th style={{ width: 80 }}>Төлөөлөл</th>
+                                    <th>Зочид буудлын нэр</th>
+                                    <th>Хаяг</th>
+                                    <th className="c">Зураг</th>
+                                    <th className="c">Ашиглах</th>
+                                    <th className="r">Удирдлага</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -219,7 +219,7 @@ export const AdminHotelManage: React.FC = () => {
                                         <td colSpan={6}>
                                             <div className="empty">
                                                 <Icon name="hotel" />
-                                                <p>불러오는 중...</p>
+                                                <p>Ачаалж байна...</p>
                                             </div>
                                         </td>
                                     </tr>
@@ -230,8 +230,8 @@ export const AdminHotelManage: React.FC = () => {
                                                 <Icon name="hotel" />
                                                 <p>
                                                     {hotels.length === 0
-                                                        ? '아직 등록된 호텔이 없습니다. 우상단 "호텔 추가" 버튼으로 시작하세요.'
-                                                        : '조건에 맞는 호텔이 없습니다.'}
+                                                        ? 'Одоогоор бүртгэгдсэн зочид буудал алга байна. Баруун дээд талын "Зочид буудал нэмэх" товчоор эхлүүлнэ үү.'
+                                                        : 'Нөхцөлд тохирох зочид буудал алга байна.'}
                                                 </p>
                                             </div>
                                         </td>
@@ -285,7 +285,7 @@ export const AdminHotelManage: React.FC = () => {
                                                         <button
                                                             type="button"
                                                             className="act-btn"
-                                                            title="수정"
+                                                            title="Засах"
                                                             onClick={(e) => {
                                                                 e.stopPropagation();
                                                                 startEdit(h);
@@ -296,7 +296,7 @@ export const AdminHotelManage: React.FC = () => {
                                                         <button
                                                             type="button"
                                                             className="act-btn danger"
-                                                            title="삭제"
+                                                            title="Устгах"
                                                             onClick={(e) => {
                                                                 e.stopPropagation();
                                                                 deleteRow(h);
@@ -331,7 +331,7 @@ export const AdminHotelManage: React.FC = () => {
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="card-head">
-                            <h2>{isNew ? '새 호텔 등록' : '호텔 정보 수정'}</h2>
+                            <h2>{isNew ? 'Шинэ зочид буудал бүртгэх' : 'Зочид буудлын мэдээлэл засах'}</h2>
                             <div className="spacer" />
                             <button
                                 type="button"
@@ -340,34 +340,34 @@ export const AdminHotelManage: React.FC = () => {
                                     setIsNew(false);
                                 }}
                                 className="act-btn"
-                                title="닫기"
+                                title="Хаах"
                             >
                                 <Icon name="close" />
                             </button>
                         </div>
 
                         <div style={{ overflowY: 'auto', padding: '20px 22px' }}>
-                            <Field label="대제목" required hint="일정 카드의 큰 제목으로 표시됩니다. (예: 마리나베이샌즈호텔)">
+                            <Field label="Үндсэн гарчиг" required hint="Хуваарийн картын том гарчиг болж харагдана. (Жишээ нь: Марина Бэй Сэндс зочид буудал)">
                                 <input
                                     type="text"
                                     className="inp"
                                     value={editing.name_kr}
                                     onChange={(e) => setEditing({ ...editing, name_kr: e.target.value })}
-                                    placeholder="마리나베이샌즈호텔"
+                                    placeholder="Марина Бэй Сэндс зочид буудал"
                                 />
                             </Field>
 
-                            <Field label="소제목" hint="대제목 아래 작은 한 줄 설명. (예: 5성급, 시내 중심·뷰 추천)">
+                            <Field label="Дэд гарчиг" hint="Үндсэн гарчгийн доорх жижиг нэг мөрийн тайлбар. (Жишээ нь: 5 одтой, хотын төв·үзэмж санал болгоно)">
                                 <input
                                     type="text"
                                     className="inp"
                                     value={editing.name_local || ''}
                                     onChange={(e) => setEditing({ ...editing, name_local: e.target.value })}
-                                    placeholder="5성급, 시내 중심·뷰 추천"
+                                    placeholder="5 одтой, хотын төв·үзэмж санал болгоно"
                                 />
                             </Field>
 
-                            <Field label="주소">
+                            <Field label="Хаяг">
                                 <input
                                     type="text"
                                     className="inp"
@@ -377,18 +377,18 @@ export const AdminHotelManage: React.FC = () => {
                                 />
                             </Field>
 
-                            <Field label="상세 설명">
+                            <Field label="Дэлгэрэнгүй тайлбар">
                                 <textarea
                                     className="inp"
                                     value={editing.description || ''}
                                     onChange={(e) => setEditing({ ...editing, description: e.target.value })}
                                     rows={4}
-                                    placeholder="호텔 소개, 특징, 위치적 장점 등..."
+                                    placeholder="Зочид буудлын танилцуулга, онцлог, байршлын давуу тал гэх мэт..."
                                     style={{ minHeight: 100 }}
                                 />
                             </Field>
 
-                            <Field label="편의시설 (쉼표로 구분)">
+                            <Field label="Тохижилт (таслалаар тусгаарлана)">
                                 <input
                                     type="text"
                                     className="inp"
@@ -402,11 +402,11 @@ export const AdminHotelManage: React.FC = () => {
                                                 .filter(Boolean),
                                         })
                                     }
-                                    placeholder="수영장, 사우나, 무료 Wi-Fi, 조식 포함"
+                                    placeholder="Усан сан, сауна, үнэгүй Wi-Fi, өглөөний цай багтсан"
                                 />
                             </Field>
 
-                            <Field label="이미지" hint="첫 번째 이미지가 일정 화면에 표시되는 대표 이미지입니다.">
+                            <Field label="Зураг" hint="Эхний зураг нь хуваарийн дэлгэцэнд харагдах төлөөлөл зураг болно.">
                                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
                                     {(editing.images || []).map((src, i) => (
                                         <div
@@ -423,7 +423,7 @@ export const AdminHotelManage: React.FC = () => {
                                             <button
                                                 type="button"
                                                 onClick={() => removeImage(i)}
-                                                title="삭제"
+                                                title="Устгах"
                                                 style={{
                                                     position: 'absolute',
                                                     top: 4,
@@ -455,7 +455,7 @@ export const AdminHotelManage: React.FC = () => {
                                                         fontWeight: 800,
                                                     }}
                                                 >
-                                                    대표
+                                                    Төлөөлөл
                                                 </div>
                                             )}
                                         </div>
@@ -486,7 +486,7 @@ export const AdminHotelManage: React.FC = () => {
                                 </div>
                             </Field>
 
-                            <Field label="사용 여부">
+                            <Field label="Ашиглах эсэх">
                                 <div className="toggle-row">
                                     <button
                                         type="button"
@@ -496,7 +496,7 @@ export const AdminHotelManage: React.FC = () => {
                                         <span className="knob" />
                                     </button>
                                     <span className="cell-strong" style={{ fontSize: 13.5 }}>
-                                        {editing.is_active ? '사용 (목록에 노출)' : '미사용 (숨김)'}
+                                        {editing.is_active ? 'Ашиглах (жагсаалтад харагдана)' : 'Ашиглахгүй (нуугдсан)'}
                                     </span>
                                 </div>
                             </Field>
@@ -506,7 +506,7 @@ export const AdminHotelManage: React.FC = () => {
                             {!isNew && (
                                 <button type="button" onClick={handleDelete} className="btn btn-danger">
                                     <Icon name="delete" />
-                                    삭제
+                                    Устгах
                                 </button>
                             )}
                             <div className="spacer" style={{ flex: 1 }} />
@@ -518,10 +518,10 @@ export const AdminHotelManage: React.FC = () => {
                                 }}
                                 className="btn btn-ghost"
                             >
-                                닫기
+                                Хаах
                             </button>
                             <button type="button" onClick={handleSave} disabled={saving} className="btn btn-ink">
-                                {saving ? '저장 중...' : '저장'}
+                                {saving ? 'Хадгалж байна...' : 'Хадгалах'}
                             </button>
                         </div>
                     </div>

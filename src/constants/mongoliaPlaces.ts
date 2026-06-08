@@ -3,7 +3,7 @@
  *
  * Used by the Destinations Map (mobile + desktop product detail) to plot pins
  * without requiring admins to enter coordinates. We match a tour's itinerary
- * block titles (e.g. "DAY 2: テレルジ国立公園") against these keywords.
+ * block titles (e.g. "DAY 2: 테렐지 국립공원") against these keywords.
  *
  * Keys are normalized lowercase strings; values include the canonical display
  * name and coordinates. Add aliases liberally — matching is substring-based.
@@ -24,63 +24,63 @@ export interface MongoliaPlace {
 const PLACE_ENTRIES: { keywords: string[]; place: MongoliaPlace }[] = [
     {
         keywords: ['ウランバートル', 'ulaanbaatar', 'ulan bator', 'ub', '울란바토르'],
-        place: { name: 'ウランバートル', short: 'UB', lat: 47.9184, lng: 106.9177 },
+        place: { name: '울란바토르', short: 'UB', lat: 47.9184, lng: 106.9177 },
     },
     {
         keywords: ['テレルジ', 'terelj', '테렐지'],
-        place: { name: 'テレルジ国立公園', short: 'Terelj', lat: 47.9833, lng: 107.4667 },
+        place: { name: '테렐지 국립공원', short: 'Terelj', lat: 47.9833, lng: 107.4667 },
     },
     {
         keywords: ['ハラホリン', 'kharkhorin', 'karakorum', '하라호린'],
-        place: { name: 'ハラホリン', short: 'Kharkhorin', lat: 47.1972, lng: 102.8430 },
+        place: { name: '하르호린', short: 'Kharkhorin', lat: 47.1972, lng: 102.8430 },
     },
     {
         keywords: ['ホスタイ', 'hustai', 'khustai'],
-        place: { name: 'ホスタイ国立公園', short: 'Hustai', lat: 47.7611, lng: 105.9333 },
+        place: { name: '호스타이 국립공원', short: 'Hustai', lat: 47.7611, lng: 105.9333 },
     },
     {
         keywords: ['ゴビ砂漠', 'gobi'],
-        place: { name: 'ゴビ砂漠', short: 'Gobi', lat: 43.5, lng: 103.4 },
+        place: { name: '고비사막', short: 'Gobi', lat: 43.5, lng: 103.4 },
     },
     {
         keywords: ['ヨル渓谷', 'yolyn am', 'yol', 'yoliin'],
-        place: { name: 'ヨル渓谷', short: 'Yol', lat: 43.4955, lng: 104.0653 },
+        place: { name: '욜링암 계곡', short: 'Yol', lat: 43.4955, lng: 104.0653 },
     },
     {
         keywords: ['ホンゴル砂丘', 'khongor', 'khongoryn', 'hongoriin'],
-        place: { name: 'ホンゴル砂丘', short: 'Khongor', lat: 43.7833, lng: 102.3333 },
+        place: { name: '홍고린 사구', short: 'Khongor', lat: 43.7833, lng: 102.3333 },
     },
     {
         keywords: ['バヤンザグ', 'bayanzag', 'バヤンザク', 'flaming cliffs'],
-        place: { name: 'バヤンザグ', short: 'Bayanzag', lat: 44.1500, lng: 103.7167 },
+        place: { name: '바양작', short: 'Bayanzag', lat: 44.1500, lng: 103.7167 },
     },
     {
         keywords: ['ダランザドガド', 'dalanzadgad'],
-        place: { name: 'ダランザドガド', short: 'Dalanzadgad', lat: 43.5708, lng: 104.4250 },
+        place: { name: '달란자드가드', short: 'Dalanzadgad', lat: 43.5708, lng: 104.4250 },
     },
     {
         keywords: ['フブスグル', 'khövsgöl', 'khovsgol', 'hovsgol', '후브스굴', '훕스굴'],
-        place: { name: 'フブスグル湖', short: 'Khövsgöl', lat: 50.7250, lng: 100.1500 },
+        place: { name: '홉스굴 호수', short: 'Khövsgöl', lat: 50.7250, lng: 100.1500 },
     },
     {
         keywords: ['ムルン', 'mörön', 'moron', 'murun'],
-        place: { name: 'ムルン', short: 'Mörön', lat: 49.6342, lng: 100.1611 },
+        place: { name: '무릉', short: 'Mörön', lat: 49.6342, lng: 100.1611 },
     },
     {
         keywords: ['ツェツェルレグ', 'tsetserleg'],
-        place: { name: 'ツェツェルレグ', short: 'Tsetserleg', lat: 47.4767, lng: 101.4536 },
+        place: { name: '체체를렉', short: 'Tsetserleg', lat: 47.4767, lng: 101.4536 },
     },
     {
         keywords: ['アルタイ', 'altai', 'altay'],
-        place: { name: 'アルタイ山脈', short: 'Altai', lat: 46.3725, lng: 96.2581 },
+        place: { name: '알타이 산맥', short: 'Altai', lat: 46.3725, lng: 96.2581 },
     },
     {
         keywords: ['オラーン', 'olgii', 'olgiy'],
-        place: { name: 'オラーンバヤン', short: 'Ölgii', lat: 48.9645, lng: 89.9622 },
+        place: { name: '울기', short: 'Ölgii', lat: 48.9645, lng: 89.9622 },
     },
     {
         keywords: ['草原', 'steppe', '대초원'],
-        place: { name: '大草原', short: 'Steppe', lat: 47.5, lng: 105.5 },
+        place: { name: '대초원', short: 'Steppe', lat: 47.5, lng: 105.5 },
     },
 ];
 

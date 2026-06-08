@@ -72,7 +72,7 @@ export const AdminAccommodationManage: React.FC = () => {
             return true;
         } catch (e) {
             console.error('Failed to save accommodations', e);
-            alert('저장에 실패했습니다.');
+            alert('Хадгалахад алдаа гарлаа.');
             return false;
         }
     };
@@ -86,7 +86,7 @@ export const AdminAccommodationManage: React.FC = () => {
                 setFormData({ ...formData, images: [...formData.images, ...urls] });
             } catch (error) {
                 console.error('Accommodation image upload failed:', error);
-                alert('이미지 업로드 실패');
+                alert('Зураг байршуулахад алдаа гарлаа');
             }
         }
     };
@@ -107,7 +107,7 @@ export const AdminAccommodationManage: React.FC = () => {
 
     const handleSubmit = async () => {
         if (!formData.name || !formData.location) {
-            alert('숙소명과 위치는 필수 입력 항목입니다.');
+            alert('Байрны нэр болон байршил заавал бөглөх шаардлагатай.');
             return;
         }
 
@@ -148,7 +148,7 @@ export const AdminAccommodationManage: React.FC = () => {
     };
 
     const handleDelete = (id: string) => {
-        if (confirm('정말 삭제하시겠습니까?')) {
+        if (confirm('Үнэхээр устгах уу?')) {
             saveAccommodations(accommodations.filter(a => a.id !== id));
         }
     };
@@ -180,7 +180,7 @@ export const AdminAccommodationManage: React.FC = () => {
     return (
         <AdminLayout
             activePage="hotels"
-            title="숙소 관리"
+            title="Байрны удирдлага"
             actions={
                 <button
                     className="btn btn-ink"
@@ -189,7 +189,7 @@ export const AdminAccommodationManage: React.FC = () => {
                         setIsModalOpen(true);
                     }}
                 >
-                    <Icon name="add" />숙소 추가
+                    <Icon name="add" />Байр нэмэх
                 </button>
             }
         >
@@ -199,7 +199,7 @@ export const AdminAccommodationManage: React.FC = () => {
                     <label className="tb-search">
                         <Icon name="search" />
                         <input
-                            placeholder="숙소명 검색"
+                            placeholder="Байрны нэрээр хайх"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -212,7 +212,7 @@ export const AdminAccommodationManage: React.FC = () => {
                             setIsModalOpen(true);
                         }}
                     >
-                        <Icon name="add" />숙소 추가
+                        <Icon name="add" />Байр нэмэх
                     </button>
                 </div>
 
@@ -222,12 +222,12 @@ export const AdminAccommodationManage: React.FC = () => {
                         <table className="tbl">
                             <thead>
                                 <tr>
-                                    <th style={{ width: 80 }}>대표</th>
-                                    <th>숙소명</th>
-                                    <th>타입</th>
-                                    <th>위치</th>
-                                    <th className="c">사진</th>
-                                    <th className="r">관리</th>
+                                    <th style={{ width: 80 }}>Зураг</th>
+                                    <th>Байрны нэр</th>
+                                    <th>Төрөл</th>
+                                    <th>Байршил</th>
+                                    <th className="c">Зураг</th>
+                                    <th className="r">Үйлдэл</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -261,14 +261,14 @@ export const AdminAccommodationManage: React.FC = () => {
                                             <span className="row-actions">
                                                 <button
                                                     className="act-btn"
-                                                    title="수정"
+                                                    title="Засах"
                                                     onClick={() => handleEdit(accommodation)}
                                                 >
                                                     <Icon name="edit" />
                                                 </button>
                                                 <button
                                                     className="act-btn danger"
-                                                    title="삭제"
+                                                    title="Устгах"
                                                     onClick={() => handleDelete(accommodation.id)}
                                                 >
                                                     <Icon name="delete" />
@@ -284,7 +284,7 @@ export const AdminAccommodationManage: React.FC = () => {
                     {filteredAccommodations.length === 0 && (
                         <div className="empty">
                             <Icon name="hotel" />
-                            <p>등록된 숙소가 없습니다.</p>
+                            <p>Бүртгэгдсэн байр алга байна.</p>
                         </div>
                     )}
                 </div>
@@ -299,11 +299,11 @@ export const AdminAccommodationManage: React.FC = () => {
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="card-head">
-                            <h2>{editingAccommodation ? '숙소 수정' : '숙소 등록'}</h2>
+                            <h2>{editingAccommodation ? 'Байр засах' : 'Байр бүртгэх'}</h2>
                             <div className="spacer" />
                             <button
                                 className="act-btn"
-                                title="닫기"
+                                title="Хаах"
                                 onClick={() => { setIsModalOpen(false); resetForm(); }}
                             >
                                 <Icon name="close" />
@@ -313,7 +313,7 @@ export const AdminAccommodationManage: React.FC = () => {
                         <div className="card-pad" style={{ overflowY: 'auto' }}>
                             {/* Images Upload */}
                             <div className="field">
-                                <label>숙소 이미지</label>
+                                <label>Байрны зураг</label>
                                 {formData.images.length > 0 && (
                                     <div className="grid-3" style={{ marginBottom: 12 }}>
                                         {formData.images.map((img, idx) => (
@@ -327,7 +327,7 @@ export const AdminAccommodationManage: React.FC = () => {
                                                     type="button"
                                                     onClick={() => removeImage(idx)}
                                                     className="act-btn danger"
-                                                    title="삭제"
+                                                    title="Устгах"
                                                     style={{ position: 'absolute', top: 6, right: 6, width: 28, height: 28, background: '#fff' }}
                                                 >
                                                     <Icon name="close" />
@@ -348,30 +348,30 @@ export const AdminAccommodationManage: React.FC = () => {
                             {/* Name + Location */}
                             <div className="field-row">
                                 <div className="field" style={{ marginBottom: 0 }}>
-                                    <label>숙소명 *</label>
+                                    <label>Байрны нэр *</label>
                                     <input
                                         type="text"
                                         className="inp"
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                        placeholder="숙소 이름"
+                                        placeholder="Байрны нэр"
                                     />
                                 </div>
                                 <div className="field" style={{ marginBottom: 0 }}>
-                                    <label>위치 *</label>
+                                    <label>Байршил *</label>
                                     <input
                                         type="text"
                                         className="inp"
                                         value={formData.location}
                                         onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                                        placeholder="예: 울란바토르 시내, 테를지 국립공원"
+                                        placeholder="Жишээ: Улаанбаатар хот, Тэрэлж байгалийн цогцолбор"
                                     />
                                 </div>
                             </div>
 
                             {/* Type */}
                             <div className="field" style={{ marginTop: 18 }}>
-                                <label>숙소 타입</label>
+                                <label>Байрны төрөл</label>
                                 <div className="stack" style={{ gap: 12 }}>
                                     {Object.entries(accommodationTypes).map(([category, subtypes]) => (
                                         <div key={category}>
@@ -395,7 +395,7 @@ export const AdminAccommodationManage: React.FC = () => {
 
                             {/* Facilities */}
                             <div className="field">
-                                <label>편의시설</label>
+                                <label>Тохижилт</label>
                                 <div className="chip-row">
                                     {availableFacilities.map(facility => (
                                         <button
@@ -412,13 +412,13 @@ export const AdminAccommodationManage: React.FC = () => {
 
                             {/* Description */}
                             <div className="field" style={{ marginBottom: 0 }}>
-                                <label>숙소 설명</label>
+                                <label>Байрны тайлбар</label>
                                 <textarea
                                     className="inp"
                                     value={formData.description}
                                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                     rows={4}
-                                    placeholder="숙소에 대한 설명을 입력하세요"
+                                    placeholder="Байрны тухай тайлбар оруулна уу"
                                 />
                             </div>
                         </div>
@@ -429,10 +429,10 @@ export const AdminAccommodationManage: React.FC = () => {
                                 className="btn btn-ghost"
                                 onClick={() => { setIsModalOpen(false); resetForm(); }}
                             >
-                                취소
+                                Цуцлах
                             </button>
                             <button className="btn btn-ink" onClick={handleSubmit}>
-                                {editingAccommodation ? '수정' : '등록'}
+                                {editingAccommodation ? 'Засах' : 'Бүртгэх'}
                             </button>
                         </div>
                     </div>

@@ -6,36 +6,36 @@ import { MatIcon } from '../desktop-primitives/MatIcon';
 import { PageHero } from '../desktop-primitives/PageHero';
 
 const DESTINATIONS = [
-    { v: '中央モンゴル', emoji: '🏞️' },
-    { v: 'ゴビ砂漠', emoji: '🏜️' },
-    { v: 'フブスグル湖', emoji: '🏔️' },
-    { v: 'テレルジ国立公園', emoji: '🐎' },
-    { v: 'トレッキング', emoji: '🥾' },
-    { v: 'ゴルフ', emoji: '⛳' },
+    { v: '중앙몽골', emoji: '🏞️' },
+    { v: '고비사막', emoji: '🏜️' },
+    { v: '홉스굴 호수', emoji: '🏔️' },
+    { v: '테렐지 국립공원', emoji: '🐎' },
+    { v: '트레킹', emoji: '🥾' },
+    { v: '골프', emoji: '⛳' },
 ];
 
 const TRAVEL_TYPES = [
-    { v: 'ヒーリング', emoji: '🧘' },
-    { v: 'アクティビティ', emoji: '🏃' },
-    { v: 'グルメ', emoji: '🍽️' },
-    { v: 'ホカンス', emoji: '🏨' },
-    { v: '映え', emoji: '📸' },
-    { v: '星空・天体', emoji: '🌌' },
+    { v: '힐링', emoji: '🧘' },
+    { v: '액티비티', emoji: '🏃' },
+    { v: '미식', emoji: '🍽️' },
+    { v: '호캉스', emoji: '🏨' },
+    { v: '인생샷', emoji: '📸' },
+    { v: '별빛・천체', emoji: '🌌' },
 ];
 
 const ACCOMMODATIONS = [
-    { v: '5つ星ホテル', icon: 'hotel' },
-    { v: '4つ星ホテル', icon: 'hotel' },
-    { v: '3つ星ホテル', icon: 'hotel' },
-    { v: 'デラックスゲル', icon: 'cottage' },
-    { v: 'スタンダードゲル', icon: 'cottage' },
+    { v: '5성급 호텔', icon: 'hotel' },
+    { v: '4성급 호텔', icon: 'hotel' },
+    { v: '3성급 호텔', icon: 'hotel' },
+    { v: '디럭스 게르', icon: 'cottage' },
+    { v: '스탠다드 게르', icon: 'cottage' },
 ];
 
 const VEHICLES = [
-    { v: 'スタレックス (4-7名)', sub: '快適 ・ 一般的' },
-    { v: 'プルゴン (4名)', sub: 'モンゴル伝統車' },
-    { v: 'ハイエース (8-12名)', sub: '大人数対応' },
-    { v: '大型バス (15名以上)', sub: 'グループ向け' },
+    { v: '스타렉스 (4-7명)', sub: '편안함 · 일반적' },
+    { v: '푸르공 (4명)', sub: '몽골 전통 차량' },
+    { v: '하이에이스 (8-12명)', sub: '다인원 대응' },
+    { v: '대형 버스 (15명 이상)', sub: '단체 여행용' },
 ];
 
 export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: number }) {
@@ -87,8 +87,8 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                 email,
                 destination: destinations.join(', '),
                 period: `${startDate} ~ ${endDate}`,
-                headcount: `大人 ${adultCount}名${childCount > 0 ? `, 子供 ${childCount}名` : ''}`,
-                budget: `${priceRange}万円`,
+                headcount: `성인 ${adultCount}명${childCount > 0 ? `, 아동 ${childCount}명` : ''}`,
+                budget: `${priceRange}만원`,
                 travel_types: themes,
                 accommodations,
                 vehicle,
@@ -100,7 +100,7 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
             try {
                 await sendNotificationEmail(email, 'QUOTE_RECEIVED', {
                     customerName: name,
-                    productName: `モンゴルオーダーメイド旅行 (${newEstimate.period})`,
+                    productName: `몽골 맞춤 여행 (${newEstimate.period})`,
                 });
             } catch {
                 // email is non-fatal
@@ -108,7 +108,7 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
             navigate('/estimate-complete', { state: { id: data?.id || '', ...newEstimate } });
         } catch (e) {
             console.error(e);
-            alert('見積もりリクエストの保存中にエラーが発生しました');
+            alert('견적 요청을 저장하는 중 오류가 발생했습니다');
         } finally {
             setSubmitting(false);
         }
@@ -118,11 +118,11 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
         <div style={{ background: '#fff' }}>
             <PageHero
                 eyebrow="Custom Tour Request"
-                title="オーダーメイド見積もり"
-                subtitle="人数・期間・予算・行きたい場所をお伝えください。日本語スタッフが24時間以内に最適なプランをお見積もりします。"
+                title="맞춤 견적"
+                subtitle="인원·기간·예산·가고 싶은 장소를 알려주세요. 한국어 담당자가 24시간 이내에 최적의 플랜을 견적해 드립니다."
                 breadcrumbs={[
-                    { label: 'ホーム', path: '/' },
-                    { label: 'お見積もり' },
+                    { label: '홈', path: '/' },
+                    { label: '견적' },
                 ]}
                 contentWidth={contentWidth}
             />
@@ -131,7 +131,7 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: 48, alignItems: 'start' }}>
                     {/* Form */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
-                        <FormSection number="01" title="行きたい場所" hint="複数選択可">
+                        <FormSection number="01" title="가고 싶은 장소" hint="복수 선택 가능">
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
                                 {DESTINATIONS.map((d) => {
                                     const on = destinations.includes(d.v);
@@ -155,21 +155,21 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                             </div>
                         </FormSection>
 
-                        <FormSection number="02" title="旅行期間" hint="出発日と帰国日を選択">
+                        <FormSection number="02" title="여행 기간" hint="출발일과 귀국일을 선택">
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
-                                <DateField label="出発日" value={startDate} onChange={setStartDate} />
-                                <DateField label="帰国日" value={endDate} onChange={setEndDate} />
+                                <DateField label="출발일" value={startDate} onChange={setStartDate} />
+                                <DateField label="귀국일" value={endDate} onChange={setEndDate} />
                             </div>
                         </FormSection>
 
-                        <FormSection number="03" title="参加人数">
+                        <FormSection number="03" title="참가 인원">
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
-                                <Counter label="大人" value={adultCount} onChange={setAdultCount} min={1} />
-                                <Counter label="子供" value={childCount} onChange={setChildCount} min={0} />
+                                <Counter label="성인" value={adultCount} onChange={setAdultCount} min={1} />
+                                <Counter label="아동" value={childCount} onChange={setChildCount} min={0} />
                             </div>
                         </FormSection>
 
-                        <FormSection number="04" title="旅行スタイル" hint="複数選択可">
+                        <FormSection number="04" title="여행 스타일" hint="복수 선택 가능">
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
                                 {TRAVEL_TYPES.map((t) => {
                                     const on = themes.includes(t.v);
@@ -188,7 +188,7 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                             </div>
                         </FormSection>
 
-                        <FormSection number="05" title="宿泊タイプ" hint="複数選択可">
+                        <FormSection number="05" title="숙박 타입" hint="복수 선택 가능">
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
                                 {ACCOMMODATIONS.map((a) => {
                                     const on = accommodations.includes(a.v);
@@ -212,7 +212,7 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                             </div>
                         </FormSection>
 
-                        <FormSection number="06" title="車両タイプ">
+                        <FormSection number="06" title="차량 타입">
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                                 {VEHICLES.map((v) => {
                                     const on = vehicle === v.v;
@@ -245,13 +245,13 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                             </div>
                         </FormSection>
 
-                        <FormSection number="07" title="ご予算" hint="お一人様あたり (万円)">
+                        <FormSection number="07" title="예산" hint="1인당 (만원)">
                             <div style={{ padding: '4px 2px' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 14, fontSize: 14 }}>
                                     <span style={{ fontSize: 22, fontWeight: 700, color: '#0f766e', letterSpacing: '-0.01em' }}>
-                                        {priceRange} 万円
+                                        {priceRange} 만원
                                     </span>
-                                    <span style={{ color: 'var(--fg-5)' }}>目安</span>
+                                    <span style={{ color: 'var(--fg-5)' }}>예상</span>
                                 </div>
                                 <input
                                     type="range"
@@ -263,18 +263,18 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                                     style={{ width: '100%', accentColor: '#0f766e' }}
                                 />
                                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: 'var(--fg-5)', marginTop: 6 }}>
-                                    <span>10 万円</span>
-                                    <span>500 万円+</span>
+                                    <span>10 만원</span>
+                                    <span>500 만원+</span>
                                 </div>
                             </div>
                         </FormSection>
 
-                        <FormSection number="08" title="ご要望" hint="希望日程・含めたい体験など (任意)">
+                        <FormSection number="08" title="요청 사항" hint="희망 일정·포함하고 싶은 체험 등 (선택)">
                             <textarea
                                 value={additionalRequest}
                                 onChange={(e) => setAdditionalRequest(e.target.value)}
                                 rows={5}
-                                placeholder="例: 8月の連休に行きたい / 子供連れでゲル宿泊メイン / 撮影スポットを多めに..."
+                                placeholder="예: 8월 연휴에 가고 싶어요 / 아이와 함께 게르 숙박 위주 / 촬영 명소를 많이..."
                                 style={{
                                     width: '100%',
                                     padding: '14px 18px',
@@ -290,13 +290,13 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                             />
                         </FormSection>
 
-                        <FormSection number="09" title="ご連絡先" hint="お見積もりの送付先">
+                        <FormSection number="09" title="연락처" hint="견적서를 받으실 곳">
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
-                                <TextField label="お名前" value={name} onChange={setName} placeholder="山田 太郎" required />
-                                <TextField label="お電話番号" value={phone} onChange={setPhone} placeholder="090-1234-5678" />
+                                <TextField label="이름" value={name} onChange={setName} placeholder="홍길동" required />
+                                <TextField label="전화번호" value={phone} onChange={setPhone} placeholder="010-1234-5678" />
                             </div>
                             <div style={{ marginTop: 14 }}>
-                                <TextField label="メールアドレス" value={email} onChange={setEmail} placeholder="info@example.com" type="email" />
+                                <TextField label="이메일 주소" value={email} onChange={setEmail} placeholder="info@example.com" type="email" />
                             </div>
                         </FormSection>
                     </div>
@@ -324,11 +324,11 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                             >
                                 Your Request
                             </div>
-                            <SummaryRow label="行き先" value={destinations.length > 0 ? destinations.join(', ') : '未選択'} />
-                            <SummaryRow label="期間" value={startDate && endDate ? `${startDate} 〜 ${endDate}` : '未選択'} />
-                            <SummaryRow label="人数" value={`大人 ${adultCount}名${childCount > 0 ? `, 子供 ${childCount}名` : ''}`} />
-                            <SummaryRow label="予算" value={`${priceRange} 万円`} />
-                            {themes.length > 0 && <SummaryRow label="スタイル" value={themes.join(', ')} />}
+                            <SummaryRow label="목적지" value={destinations.length > 0 ? destinations.join(', ') : '미선택'} />
+                            <SummaryRow label="기간" value={startDate && endDate ? `${startDate} 〜 ${endDate}` : '미선택'} />
+                            <SummaryRow label="인원" value={`성인 ${adultCount}명${childCount > 0 ? `, 아동 ${childCount}명` : ''}`} />
+                            <SummaryRow label="예산" value={`${priceRange} 만원`} />
+                            {themes.length > 0 && <SummaryRow label="스타일" value={themes.join(', ')} />}
 
                             <button
                                 type="button"
@@ -349,7 +349,7 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                                     boxShadow: canSubmit ? '0 8px 20px -6px rgba(15,118,110,0.5)' : 'none',
                                 }}
                             >
-                                {submitting ? '送信中...' : '見積もりを依頼する'}
+                                {submitting ? '전송 중...' : '견적 요청하기'}
                             </button>
 
                             <div
@@ -368,20 +368,20 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                             >
                                 <MatIcon name="verified" size={16} filled color="var(--primary-dark)" />
                                 <span>
-                                    <strong>無料・拘束なし</strong> — 24時間以内に日本語スタッフからご返信します。
+                                    <strong>무료 · 부담 없음</strong> — 24시간 이내에 한국어 담당자가 답변 드립니다.
                                 </span>
                             </div>
                         </div>
 
                         <div style={{ background: 'var(--bg-muted)', borderRadius: 16, padding: 18, fontSize: 12, color: 'var(--fg-4)', lineHeight: 1.7 }}>
-                            <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fg-1)', marginBottom: 8 }}>お電話でもOK</div>
+                            <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fg-1)', marginBottom: 8 }}>전화 문의도 가능합니다</div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                                 <MatIcon name="phone" size={16} color="#0f766e" />
                                 <a href="tel:+97695945838" style={{ color: 'var(--fg-2)', textDecoration: 'none', fontWeight: 700 }}>
                                     +976 9594 5838
                                 </a>
                             </div>
-                            <div style={{ marginTop: 4 }}>平日 9:00-18:00 (JST)</div>
+                            <div style={{ marginTop: 4 }}>평일 9:00-18:00 (JST)</div>
                         </div>
                     </aside>
                 </div>
@@ -491,7 +491,7 @@ function Counter({ label, value, onChange, min = 0 }: { label: string; value: nu
                     background: '#fff',
                 }}
             >
-                <span style={{ fontSize: 16, color: 'var(--fg-1)', fontWeight: 700 }}>{value} 名</span>
+                <span style={{ fontSize: 16, color: 'var(--fg-1)', fontWeight: 700 }}>{value} 명</span>
                 <div style={{ display: 'flex', gap: 4 }}>
                     <button
                         type="button"

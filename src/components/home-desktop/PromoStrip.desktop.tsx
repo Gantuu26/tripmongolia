@@ -70,12 +70,12 @@ export function PromoStripDesktop({ contentWidth = 1280 }: PromoStripProps) {
                         Custom Tour Request
                     </div>
                     <h2 style={{ fontSize: 38, fontWeight: 700, lineHeight: 1.25, margin: 0, letterSpacing: '-0.02em' }}>
-                        あなただけの
+                        당신만을 위한
                         <br />
-                        特別なプランをご提案します
+                        특별한 플랜을 제안해 드립니다
                     </h2>
                     <p style={{ fontSize: 15, lineHeight: 1.7, marginTop: 18, color: 'rgba(255,255,255,0.85)', maxWidth: 480 }}>
-                        人数・期間・予算・行きたい場所をお伝えください。日本語スタッフが24時間以内に最適なプランをお見積もりします。
+                        인원·기간·예산·가고 싶은 장소를 알려 주세요. 한국어 스태프가 24시간 이내에 최적의 플랜을 견적해 드립니다.
                     </p>
                     <div style={{ display: 'flex', gap: 12, marginTop: 28 }}>
                         <button
@@ -96,7 +96,7 @@ export function PromoStripDesktop({ contentWidth = 1280 }: PromoStripProps) {
                                 gap: 10,
                             }}
                         >
-                            1分でリクエスト <MatIcon name="arrow_forward" size={18} color="var(--primary-dark)" />
+                            1분 만에 요청하기 <MatIcon name="arrow_forward" size={18} color="var(--primary-dark)" />
                         </button>
                         <button
                             type="button"
@@ -118,17 +118,17 @@ export function PromoStripDesktop({ contentWidth = 1280 }: PromoStripProps) {
                             }}
                         >
                             <MatIcon name="chat" size={18} color="#fff" />
-                            相談する
+                            상담하기
                         </button>
                     </div>
                 </div>
 
                 <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                     {[
-                        { n: '24h', t: '以内に返信' },
-                        { n: '0¥', t: 'お見積もり無料' },
-                        { n: '150+', t: 'オリジナルプラン実績' },
-                        { n: '★4.9', t: '平均レビュー評価' },
+                        { n: '24h', t: '이내 답변' },
+                        { n: '0₩', t: '견적 무료' },
+                        { n: '150+', t: '맞춤 플랜 실적' },
+                        { n: '★4.9', t: '평균 후기 평점' },
                     ].map((s) => (
                         <div
                             key={s.t}

@@ -12,10 +12,10 @@ export const AdminReviewManage: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
         author: '',
-        writtenDate: '', // 작성일 (원래 후기가 작성된 날짜)
+        writtenDate: '', // Бичсэн огноо (сэтгэгдлийг анх бичсэн огноо)
         visitDate: '',
         productName: '',
-        title: '', // 제목
+        title: '', // Гарчиг
         rating: 5,
         content: '',
         images: [] as string[]
@@ -33,7 +33,7 @@ export const AdminReviewManage: React.FC = () => {
                     } catch { parsedImages = []; }
                     return {
                         id: r.id,
-                        author: r.author_name || r.user_name || '(이름 없음)',
+                        author: r.author_name || r.user_name || '(нэргүй)',
                         date: r.created_at ? r.created_at.substring(0, 10) : '',
                         visitDate: r.visit_date || '',
                         rating: r.rating || 0,
@@ -53,13 +53,13 @@ export const AdminReviewManage: React.FC = () => {
     }, []);
 
     const handleDelete = async (id: string) => {
-        if (window.confirm('정말 이 후기를 삭제하시겠습니까?')) {
+        if (window.confirm('Энэ сэтгэгдлийг үнэхээр устгах уу?')) {
             try {
                 await api.reviews.delete(id);
                 setReviews(reviews.filter(r => r.id !== id));
             } catch (error) {
                 console.error('Failed to delete review:', error);
-                alert('삭제에 실패했습니다.');
+                alert('Устгахад алдаа гарлаа.');
             }
         }
     };
@@ -78,7 +78,7 @@ export const AdminReviewManage: React.FC = () => {
             setFormData(prev => ({ ...prev, images: [...prev.images, ...urls] }));
         } catch (error) {
             console.error('Review image upload failed:', error);
-            alert('이미지 업로드 실패');
+            alert('Зураг байршуулахад алдаа гарлаа');
         }
         event.target.value = '';
     };
@@ -92,7 +92,7 @@ export const AdminReviewManage: React.FC = () => {
 
     const handleSubmit = async () => {
         if (!formData.author || !formData.content) {
-            alert('작성자와 내용은 필수입니다.');
+            alert('Зохиогч болон агуулга заавал шаардлагатай.');
             return;
         }
 
@@ -110,7 +110,7 @@ export const AdminReviewManage: React.FC = () => {
 
             if (error) throw error;
 
-            alert('리뷰가 등록되었습니다.');
+            alert('Сэтгэгдэл амжилттай бүртгэгдлээ.');
             setIsModalOpen(false);
             setFormData({
                 author: '',
@@ -125,7 +125,7 @@ export const AdminReviewManage: React.FC = () => {
             fetchReviews(); // Refresh list
         } catch (error: any) {
             console.error('Error adding review:', error);
-            alert('등록 실패: ' + error.message);
+            alert('Бүртгэхэд алдаа гарлаа: ' + error.message);
         }
     };
 
@@ -146,10 +146,10 @@ export const AdminReviewManage: React.FC = () => {
     return (
         <AdminLayout
             activePage="reviews"
-            title="후기 관리"
+            title="Сэтгэгдлийн удирдлага"
             actions={
                 <button className="btn btn-ink" onClick={() => setIsModalOpen(true)}>
-                    <Icon name="add" />새 후기 등록
+                    <Icon name="add" />Шинэ сэтгэгдэл нэмэх
                 </button>
             }
         >
@@ -159,7 +159,7 @@ export const AdminReviewManage: React.FC = () => {
                     <div className="row" style={{ gap: 12 }}>
                         <span className="metric-ico tint-blue" style={{ width: 40, height: 40 }}><Icon name="rate_review" fill /></span>
                         <div>
-                            <div className="metric-label">전체 후기</div>
+                            <div className="metric-label">Нийт сэтгэгдэл</div>
                             <div className="metric-value" style={{ fontSize: 22 }}>{totalReviews}</div>
                         </div>
                     </div>
@@ -168,7 +168,7 @@ export const AdminReviewManage: React.FC = () => {
                     <div className="row" style={{ gap: 12 }}>
                         <span className="metric-ico tint-amber" style={{ width: 40, height: 40 }}><Icon name="star" fill /></span>
                         <div>
-                            <div className="metric-label">평균 평점</div>
+                            <div className="metric-label">Дундаж үнэлгээ</div>
                             <div className="metric-value" style={{ fontSize: 22 }}>{avgRating.toFixed(1)}</div>
                         </div>
                     </div>
@@ -177,7 +177,7 @@ export const AdminReviewManage: React.FC = () => {
                     <div className="row" style={{ gap: 12 }}>
                         <span className="metric-ico tint-purple" style={{ width: 40, height: 40 }}><Icon name="photo_library" fill /></span>
                         <div>
-                            <div className="metric-label">포토 후기</div>
+                            <div className="metric-label">Зурагтай сэтгэгдэл</div>
                             <div className="metric-value" style={{ fontSize: 22 }}>{photoReviews}</div>
                         </div>
                     </div>
@@ -186,7 +186,7 @@ export const AdminReviewManage: React.FC = () => {
                     <div className="row" style={{ gap: 12 }}>
                         <span className="metric-ico tint-green" style={{ width: 40, height: 40 }}><Icon name="grade" fill /></span>
                         <div>
-                            <div className="metric-label">5점 후기</div>
+                            <div className="metric-label">5 одтой сэтгэгдэл</div>
                             <div className="metric-value" style={{ fontSize: 22 }}>{fiveStarReviews}</div>
                         </div>
                     </div>
@@ -198,7 +198,7 @@ export const AdminReviewManage: React.FC = () => {
                 <label className="tb-search">
                     <Icon name="search" />
                     <input
-                        placeholder="작성자, 내용, 상품명 검색"
+                        placeholder="Зохиогч, агуулга, бүтээгдэхүүний нэрээр хайх"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -211,14 +211,14 @@ export const AdminReviewManage: React.FC = () => {
                     <table className="tbl">
                         <thead>
                             <tr>
-                                <th>작성자</th>
-                                <th>상품</th>
-                                <th>평점</th>
-                                <th>내용</th>
-                                <th className="c">사진</th>
-                                <th>작성일</th>
-                                <th>방문시기</th>
-                                <th className="r">관리</th>
+                                <th>Зохиогч</th>
+                                <th>Бүтээгдэхүүн</th>
+                                <th>Үнэлгээ</th>
+                                <th>Агуулга</th>
+                                <th className="c">Зураг</th>
+                                <th>Бичсэн огноо</th>
+                                <th>Зочилсон үе</th>
+                                <th className="r">Үйлдэл</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -255,7 +255,7 @@ export const AdminReviewManage: React.FC = () => {
                                     <td className="cell-muted">{review.visitDate || '–'}</td>
                                     <td className="r">
                                         <span className="row-actions">
-                                            <button className="act-btn danger" title="삭제" onClick={() => handleDelete(review.id)}>
+                                            <button className="act-btn danger" title="Устгах" onClick={() => handleDelete(review.id)}>
                                                 <Icon name="delete" />
                                             </button>
                                         </span>
@@ -268,7 +268,7 @@ export const AdminReviewManage: React.FC = () => {
                 {filteredReviews?.length === 0 && (
                     <div className="empty">
                         <Icon name="inbox" />
-                        <p>검색 결과가 없습니다.</p>
+                        <p>Хайлтын илэрц алга байна.</p>
                     </div>
                 )}
             </div>
@@ -282,9 +282,9 @@ export const AdminReviewManage: React.FC = () => {
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="card-head">
-                            <h2>수동 리뷰 등록</h2>
+                            <h2>Сэтгэгдэл гараар нэмэх</h2>
                             <div className="spacer" />
-                            <button className="act-btn" title="닫기" onClick={() => setIsModalOpen(false)}>
+                            <button className="act-btn" title="Хаах" onClick={() => setIsModalOpen(false)}>
                                 <Icon name="close" />
                             </button>
                         </div>
@@ -292,18 +292,18 @@ export const AdminReviewManage: React.FC = () => {
                         <div className="card-pad" style={{ overflowY: 'auto' }}>
                             <div className="stack" style={{ gap: 16 }}>
                                 <div>
-                                    <label className="metric-label" style={{ display: 'block', marginBottom: 6 }}>작성자 명</label>
+                                    <label className="metric-label" style={{ display: 'block', marginBottom: 6 }}>Зохиогчийн нэр</label>
                                     <input
                                         type="text"
                                         className="tb-search"
                                         style={{ width: '100%' }}
-                                        placeholder="예: 김철수"
+                                        placeholder="Жишээ: Бат"
                                         value={formData.author}
                                         onChange={e => setFormData({ ...formData, author: e.target.value })}
                                     />
                                 </div>
                                 <div>
-                                    <label className="metric-label" style={{ display: 'block', marginBottom: 6 }}>작성일 (원래 후기가 작성된 날짜)</label>
+                                    <label className="metric-label" style={{ display: 'block', marginBottom: 6 }}>Бичсэн огноо (сэтгэгдлийг анх бичсэн огноо)</label>
                                     <input
                                         type="date"
                                         className="tb-search"
@@ -313,40 +313,40 @@ export const AdminReviewManage: React.FC = () => {
                                     />
                                 </div>
                                 <div>
-                                    <label className="metric-label" style={{ display: 'block', marginBottom: 6 }}>방문 시기</label>
+                                    <label className="metric-label" style={{ display: 'block', marginBottom: 6 }}>Зочилсон үе</label>
                                     <input
                                         type="text"
                                         className="tb-search"
                                         style={{ width: '100%' }}
-                                        placeholder="예: 2024년 1월"
+                                        placeholder="Жишээ: 2024 оны 1 сар"
                                         value={formData.visitDate}
                                         onChange={e => setFormData({ ...formData, visitDate: e.target.value })}
                                     />
                                 </div>
                                 <div>
-                                    <label className="metric-label" style={{ display: 'block', marginBottom: 6 }}>상품명</label>
+                                    <label className="metric-label" style={{ display: 'block', marginBottom: 6 }}>Бүтээгдэхүүний нэр</label>
                                     <input
                                         type="text"
                                         className="tb-search"
                                         style={{ width: '100%' }}
-                                        placeholder="예: 고비사막 투어"
+                                        placeholder="Жишээ: Говь цөлийн аялал"
                                         value={formData.productName}
                                         onChange={e => setFormData({ ...formData, productName: e.target.value })}
                                     />
                                 </div>
                                 <div>
-                                    <label className="metric-label" style={{ display: 'block', marginBottom: 6 }}>제목</label>
+                                    <label className="metric-label" style={{ display: 'block', marginBottom: 6 }}>Гарчиг</label>
                                     <input
                                         type="text"
                                         className="tb-search"
                                         style={{ width: '100%' }}
-                                        placeholder="예: 잊을 수 없는 최고의 여행!"
+                                        placeholder="Жишээ: Мартагдашгүй гайхалтай аялал!"
                                         value={formData.title}
                                         onChange={e => setFormData({ ...formData, title: e.target.value })}
                                     />
                                 </div>
                                 <div>
-                                    <label className="metric-label" style={{ display: 'block', marginBottom: 6 }}>평점: {formData.rating}점</label>
+                                    <label className="metric-label" style={{ display: 'block', marginBottom: 6 }}>Үнэлгээ: {formData.rating} од</label>
                                     <div className="row" style={{ gap: 4 }}>
                                         {[1, 2, 3, 4, 5].map(star => (
                                             <Icon
@@ -360,18 +360,18 @@ export const AdminReviewManage: React.FC = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="metric-label" style={{ display: 'block', marginBottom: 6 }}>내용</label>
+                                    <label className="metric-label" style={{ display: 'block', marginBottom: 6 }}>Агуулга</label>
                                     <div className="memo-box">
                                         <textarea
                                             style={{ height: 120 }}
-                                            placeholder="내용을 입력하세요..."
+                                            placeholder="Агуулга оруулна уу..."
                                             value={formData.content}
                                             onChange={e => setFormData({ ...formData, content: e.target.value })}
                                         />
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="metric-label" style={{ display: 'block', marginBottom: 6 }}>사진 (최대 5장)</label>
+                                    <label className="metric-label" style={{ display: 'block', marginBottom: 6 }}>Зураг (хамгийн ихдээ 5)</label>
                                     <input
                                         type="file"
                                         accept="image/*"
@@ -385,7 +385,7 @@ export const AdminReviewManage: React.FC = () => {
                                                 <img src={img} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 8 }} alt="upload" />
                                                 <button
                                                     onClick={() => removeImage(idx)}
-                                                    title="삭제"
+                                                    title="Устгах"
                                                     style={{ position: 'absolute', top: -6, right: -6, width: 20, height: 20, borderRadius: '50%', border: 'none', background: 'var(--mrt-red)', color: '#fff', display: 'grid', placeItems: 'center', cursor: 'pointer', boxShadow: 'var(--shadow-xs)' }}
                                                 >
                                                     <Icon name="close" style={{ fontSize: 13 }} />
@@ -399,8 +399,8 @@ export const AdminReviewManage: React.FC = () => {
 
                         <div className="drawer-foot">
                             <div className="spacer" style={{ flex: 1 }} />
-                            <button className="btn btn-ghost" onClick={() => setIsModalOpen(false)}>취소</button>
-                            <button className="btn btn-ink" onClick={handleSubmit}>등록하기</button>
+                            <button className="btn btn-ghost" onClick={() => setIsModalOpen(false)}>Цуцлах</button>
+                            <button className="btn btn-ink" onClick={handleSubmit}>Бүртгэх</button>
                         </div>
                     </div>
                 </div>

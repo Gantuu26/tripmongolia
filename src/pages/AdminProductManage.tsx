@@ -155,7 +155,7 @@ export const AdminProductManage: React.FC = () => {
             return true;
         } catch (error: any) {
             console.error('Failed to save product:', error);
-            alert('상품 저장 중 오류가 발생했습니다: ' + (error.message || JSON.stringify(error)));
+            alert('Бүтээгдэхүүн хадгалах үед алдаа гарлаа: ' + (error.message || JSON.stringify(error)));
             return false;
         }
     };
@@ -224,18 +224,18 @@ export const AdminProductManage: React.FC = () => {
     };
 
     const deleteProduct = async (id: string) => {
-        if (confirm('정말 이 상품을 삭제하시겠습니까?')) {
+        if (confirm('Та энэ бүтээгдэхүүнийг устгахдаа итгэлтэй байна уу?')) {
             try {
                 await api.products.delete(id);
                 setProducts(prev => prev.filter(p => p.id !== id));
             } catch (error: any) {
-                alert('삭제 실패: ' + error.message);
+                alert('Устгахад алдаа гарлаа: ' + error.message);
             }
         }
     };
 
     const duplicateProduct = async (product: TourProduct) => {
-        if (confirm(`'${product.name}' 상품을 복제하시겠습니까?`)) {
+        if (confirm(`'${product.name}' бүтээгдэхүүнийг хуулбарлах уу?`)) {
             const duplicatedProduct: TourProduct = {
                 ...product,
                 id: `prod-${Date.now()}`,
@@ -303,7 +303,7 @@ export const AdminProductManage: React.FC = () => {
             // Optionally show a toast for successful save
         } catch (error) {
             console.error('Failed to save product order:', error);
-            alert('순서 저장에 실패했습니다.');
+            alert('Эрэмбэ хадгалахад алдаа гарлаа.');
         }
     };
 
@@ -314,9 +314,9 @@ export const AdminProductManage: React.FC = () => {
             soldout: 'b-red'
         };
         const labels = {
-            active: '판매중',
-            inactive: '비활성',
-            soldout: '품절'
+            active: 'Зарагдаж байгаа',
+            inactive: 'Идэвхгүй',
+            soldout: 'Дууссан'
         };
         return (
             <span className={`badge ${tones[status as keyof typeof tones]}`}>
@@ -326,17 +326,17 @@ export const AdminProductManage: React.FC = () => {
     };
 
     const STAT_CARDS = [
-        { key: 'total', label: '전체 상품', value: stats.total, ico: 'inventory_2', tint: 'tint-blue' },
-        { key: 'active', label: '판매중', value: stats.active, ico: 'check_circle', tint: 'tint-green' },
-        { key: 'inactive', label: '비활성', value: stats.inactive, ico: 'cancel', tint: 'tint-ink' },
-        { key: 'soldout', label: '품절', value: stats.soldout, ico: 'remove_shopping_cart', tint: 'tint-red' },
-        { key: 'featured', label: '추천 상품', value: stats.featured, ico: 'star', tint: 'tint-amber' },
+        { key: 'total', label: 'Нийт бүтээгдэхүүн', value: stats.total, ico: 'inventory_2', tint: 'tint-blue' },
+        { key: 'active', label: 'Зарагдаж байгаа', value: stats.active, ico: 'check_circle', tint: 'tint-green' },
+        { key: 'inactive', label: 'Идэвхгүй', value: stats.inactive, ico: 'cancel', tint: 'tint-ink' },
+        { key: 'soldout', label: 'Дууссан', value: stats.soldout, ico: 'remove_shopping_cart', tint: 'tint-red' },
+        { key: 'featured', label: 'Онцолсон бүтээгдэхүүн', value: stats.featured, ico: 'star', tint: 'tint-amber' },
     ];
 
     return (
         <AdminLayout
             activePage="products"
-            title="상품 관리"
+            title="Бүтээгдэхүүний удирдлага"
             actions={
                 <button
                     className="btn btn-ink"
@@ -345,7 +345,7 @@ export const AdminProductManage: React.FC = () => {
                         setIsModalOpen(true);
                     }}
                 >
-                    <Icon name="add" />상품 추가
+                    <Icon name="add" />Бүтээгдэхүүн нэмэх
                 </button>
             }
         >
@@ -373,7 +373,7 @@ export const AdminProductManage: React.FC = () => {
                         <Icon name="search" />
                         <input
                             type="text"
-                            placeholder="상품명 검색"
+                            placeholder="Бүтээгдэхүүний нэрээр хайх"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
@@ -383,7 +383,7 @@ export const AdminProductManage: React.FC = () => {
                         value={categoryFilter}
                         onChange={(e) => setCategoryFilter(e.target.value)}
                     >
-                        <option value="all">전체 카테고리</option>
+                        <option value="all">Бүх ангилал</option>
                         {categories.map((cat) => (
                             <option key={cat.id} value={cat.name}>{cat.name}</option>
                         ))}
@@ -393,19 +393,19 @@ export const AdminProductManage: React.FC = () => {
                         value={statusFilter}
                         onChange={(e) => setStatusFilter(e.target.value)}
                     >
-                        <option value="all">전체 상태</option>
-                        <option value="active">판매중</option>
-                        <option value="inactive">비활성</option>
-                        <option value="soldout">품절</option>
+                        <option value="all">Бүх төлөв</option>
+                        <option value="active">Зарагдаж байгаа</option>
+                        <option value="inactive">Идэвхгүй</option>
+                        <option value="soldout">Дууссан</option>
                     </select>
                     <select
                         className="select"
                         value={featuredFilter}
                         onChange={(e) => setFeaturedFilter(e.target.value)}
                     >
-                        <option value="all">추천 전체</option>
-                        <option value="featured">추천 상품</option>
-                        <option value="normal">일반 상품</option>
+                        <option value="all">Онцлох бүгд</option>
+                        <option value="featured">Онцолсон бүтээгдэхүүн</option>
+                        <option value="normal">Энгийн бүтээгдэхүүн</option>
                     </select>
                 </div>
 
@@ -415,15 +415,15 @@ export const AdminProductManage: React.FC = () => {
                         <table className="tbl">
                             <thead>
                                 <tr>
-                                    <th>상품</th>
-                                    <th>카테고리</th>
-                                    <th>기간</th>
-                                    <th className="r">가격</th>
-                                    <th>상태</th>
-                                    <th className="c">추천</th>
-                                    <th className="c">인기</th>
-                                    <th className="c">조회/예약</th>
-                                    <th className="r">액션</th>
+                                    <th>Бүтээгдэхүүн</th>
+                                    <th>Ангилал</th>
+                                    <th>Хугацаа</th>
+                                    <th className="r">Үнэ</th>
+                                    <th>Төлөв</th>
+                                    <th className="c">Онцлох</th>
+                                    <th className="c">Эрэлттэй</th>
+                                    <th className="c">Үзсэн/Захиалга</th>
+                                    <th className="r">Үйлдэл</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -470,7 +470,7 @@ export const AdminProductManage: React.FC = () => {
                                             </button>
                                         </td>
                                         <td className="c">
-                                            <button onClick={() => toggleFeatured(product.id)} className="star-btn" title="추천">
+                                            <button onClick={() => toggleFeatured(product.id)} className="star-btn" title="Онцлох">
                                                 <Icon
                                                     name={product.isFeatured ? 'star' : 'star_border'}
                                                     fill={product.isFeatured}
@@ -479,7 +479,7 @@ export const AdminProductManage: React.FC = () => {
                                             </button>
                                         </td>
                                         <td className="c">
-                                            <button onClick={() => togglePopular(product.id)} className="star-btn" title="인기">
+                                            <button onClick={() => togglePopular(product.id)} className="star-btn" title="Эрэлттэй">
                                                 <Icon
                                                     name={product.isPopular ? 'favorite' : 'favorite_border'}
                                                     fill={product.isPopular}
@@ -489,11 +489,11 @@ export const AdminProductManage: React.FC = () => {
                                         </td>
                                         <td className="c">
                                             <div className="cell-mono" style={{ fontSize: 12.5 }}>{typeof product.viewCount === 'number' ? product.viewCount.toLocaleString() : (product.viewCount || 0)}</div>
-                                            <div style={{ fontSize: 12.5, fontWeight: 800, color: 'var(--mrt-blue-strong)' }}>예약 {product.bookingCount || 0}</div>
+                                            <div style={{ fontSize: 12.5, fontWeight: 800, color: 'var(--mrt-blue-strong)' }}>Захиалга {product.bookingCount || 0}</div>
                                         </td>
                                         <td className="r">
                                             <div className="row-actions">
-                                                <button onClick={() => duplicateProduct(product)} className="act-btn" title="복제">
+                                                <button onClick={() => duplicateProduct(product)} className="act-btn" title="Хуулбарлах">
                                                     <Icon name="content_copy" />
                                                 </button>
                                                 <button
@@ -502,11 +502,11 @@ export const AdminProductManage: React.FC = () => {
                                                         setIsModalOpen(true);
                                                     }}
                                                     className="act-btn"
-                                                    title="수정"
+                                                    title="Засах"
                                                 >
                                                     <Icon name="edit" />
                                                 </button>
-                                                <button onClick={() => deleteProduct(product.id)} className="act-btn danger" title="삭제">
+                                                <button onClick={() => deleteProduct(product.id)} className="act-btn danger" title="Устгах">
                                                     <Icon name="delete" />
                                                 </button>
                                             </div>
@@ -518,7 +518,7 @@ export const AdminProductManage: React.FC = () => {
                         {paginatedProducts.length === 0 && (
                             <div className="empty">
                                 <Icon name="inventory_2" />
-                                <p>조건에 맞는 상품이 없습니다.</p>
+                                <p>Нөхцөлд тохирох бүтээгдэхүүн алга.</p>
                             </div>
                         )}
                     </div>
@@ -527,7 +527,7 @@ export const AdminProductManage: React.FC = () => {
                     {totalPages > 1 && (
                         <div className="card-pad" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--border-subtle)' }}>
                             <p className="cell-muted" style={{ fontSize: 13 }}>
-                                총 {filteredProducts.length}개 상품 중 {((currentPage - 1) * itemsPerPage) + 1}-{Math.min(currentPage * itemsPerPage, filteredProducts.length)}개 표시
+                                Нийт {filteredProducts.length} бүтээгдэхүүнээс {((currentPage - 1) * itemsPerPage) + 1}-{Math.min(currentPage * itemsPerPage, filteredProducts.length)} харуулж байна
                             </p>
                             <div className="row" style={{ gap: 6 }}>
                                 <button
@@ -535,7 +535,7 @@ export const AdminProductManage: React.FC = () => {
                                     disabled={currentPage === 1}
                                     className="btn btn-ghost btn-sm"
                                 >
-                                    이전
+                                    Өмнөх
                                 </button>
                                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                                     <button
@@ -551,7 +551,7 @@ export const AdminProductManage: React.FC = () => {
                                     disabled={currentPage === totalPages}
                                     className="btn btn-ghost btn-sm"
                                 >
-                                    다음
+                                    Дараах
                                 </button>
                             </div>
                         </div>
@@ -646,15 +646,15 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
 
         // Validate required fields
         if (!formData.name || !formData.name.trim()) {
-            alert('상품명을 입력해주세요.');
+            alert('Бүтээгдэхүүний нэрийг оруулна уу.');
             return;
         }
         if (!formData.duration || !formData.duration.trim()) {
-            alert('기간을 입력해주세요.');
+            alert('Хугацааг оруулна уу.');
             return;
         }
         if (!formData.price || formData.price <= 0) {
-            alert('판매가를 입력해주세요.');
+            alert('Зарах үнийг оруулна уу.');
             return;
         }
 
@@ -874,7 +874,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
             updateBlockContent(index, url);
         } catch (error) {
             console.error('Block image upload failed:', error);
-            alert('이미지 업로드 실패');
+            alert('Зураг байршуулахад алдаа гарлаа');
         }
     };
 
@@ -899,7 +899,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
             }
         } catch (error) {
             console.error('Slide images upload failed:', error);
-            alert('이미지 업로드 실패');
+            alert('Зураг байршуулахад алдаа гарлаа');
         }
     };
 
@@ -914,7 +914,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
     };
 
 
-    // ─── Hotel picker — works for both dayInfo (숙소) and timeline (일정 항목) ─
+    // ─── Hotel picker — works for both dayInfo (accommodation) and timeline (itinerary item) ─
     // Target type lets the picker know which block to update on selection.
     const [hotelPickerTarget, setHotelPickerTarget] = useState<
         { kind: 'dayInfoAccommodation' | 'timeline'; index: number } | null
@@ -943,7 +943,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
             });
         } else if (kind === 'timeline' && block.type === 'timeline') {
             // For a TIMELINE block: push hotel data into title + description + images.
-            // This is the "hotel as a timeline event" flow (e.g., 호텔 체크인).
+            // This is the "hotel as a timeline event" flow (e.g., hotel check-in).
             const current = block.content as TimelineContent;
             const hotelDesc = [hotel.description, hotel.address].filter(Boolean).join('\n\n');
             updateItineraryBlockContent(index, {
@@ -982,7 +982,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
 
     // ─── Bulk image upload (drag&drop multi-file) ─────────────────────
     // Uploads all files in parallel and appends one image block per file.
-    // Lets the admin drop 20 photos at once instead of clicking "이미지 추가"
+    // Lets the admin drop 20 photos at once instead of clicking "Зураг нэмэх"
     // → empty box → file picker for each one.
     const [itineraryBulkUploading, setItineraryBulkUploading] = useState(false);
     const [itineraryBulkProgress, setItineraryBulkProgress] = useState<{ done: number; total: number } | null>(null);
@@ -992,7 +992,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
         setItineraryBulkProgress({ done: 0, total: files.length });
         try {
             // Upload all files. Track progress as each resolves so admin sees
-            // "5/20 업로드 중..." instead of just spinning indefinitely.
+            // "5/20 байршуулж байна..." instead of just spinning indefinitely.
             let done = 0;
             const urls = await Promise.all(
                 files.map((f) =>
@@ -1015,7 +1015,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
             }));
         } catch (e) {
             console.error('Bulk itinerary image upload failed:', e);
-            alert('이미지 업로드 중 일부가 실패했습니다.');
+            alert('Зураг байршуулах явцад зарим нь амжилтгүй боллоо.');
         } finally {
             setItineraryBulkUploading(false);
             setItineraryBulkProgress(null);
@@ -1200,7 +1200,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
             updateItineraryBlockContent(index, url);
         } catch (error) {
             console.error('Itinerary block image upload failed:', error);
-            alert('이미지 업로드 실패');
+            alert('Зураг байршуулахад алдаа гарлаа');
         }
     };
 
@@ -1224,7 +1224,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
             }
         } catch (error) {
             console.error('Itinerary slide images upload failed:', error);
-            alert('이미지 업로드 실패');
+            alert('Зураг байршуулахад алдаа гарлаа');
         }
     };
 
@@ -1275,7 +1275,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
             }
         } catch (error) {
             console.error('Timeline images upload failed:', error);
-            alert('이미지 업로드 실패');
+            alert('Зураг байршуулахад алдаа гарлаа');
         }
     };
     
@@ -1305,7 +1305,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
             }));
         } catch (error) {
             console.error('Detail image upload failed:', error);
-            alert('이미지 업로드 실패');
+            alert('Зураг байршуулахад алдаа гарлаа');
         }
     };
 
@@ -1355,7 +1355,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
             }));
         } catch (error) {
             console.error('Main image upload failed:', error);
-            alert('이미지 업로드 실패');
+            alert('Зураг байршуулахад алдаа гарлаа');
         }
     };
 
@@ -1412,10 +1412,10 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                 {/* Header */}
                 <div className="card-head">
                     <h2 style={{ fontSize: 18, fontWeight: 800, color: 'var(--text-strong)', margin: 0 }}>
-                        {product ? '상품 수정' : '상품 추가'}
+                        {product ? 'Бүтээгдэхүүн засах' : 'Бүтээгдэхүүн нэмэх'}
                     </h2>
                     <div className="spacer" />
-                    <button onClick={onClose} className="act-btn" title="닫기" type="button">
+                    <button onClick={onClose} className="act-btn" title="Хаах" type="button">
                         <Icon name="close" />
                     </button>
                 </div>
@@ -1424,11 +1424,11 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                 <div className="card-pad" style={{ paddingTop: 10, paddingBottom: 0 }}>
                     <div className="tabs" style={{ marginBottom: 0 }}>
                         {[
-                            { id: 'basic', label: '기본 정보', icon: 'info' },
-                            { id: 'details', label: '상세 정보', icon: 'description' },
-                            { id: 'itinerary', label: '일정', icon: 'calendar_month' },
-                            { id: 'options', label: '가격/옵션', icon: 'attach_money' },
-                            { id: 'includes', label: '포함/불포함', icon: 'checklist' }
+                            { id: 'basic', label: 'Үндсэн мэдээлэл', icon: 'info' },
+                            { id: 'details', label: 'Дэлгэрэнгүй мэдээлэл', icon: 'description' },
+                            { id: 'itinerary', label: 'Хөтөлбөр', icon: 'calendar_month' },
+                            { id: 'options', label: 'Үнэ/Сонголт', icon: 'attach_money' },
+                            { id: 'includes', label: 'Багтсан/Багтаагүй', icon: 'checklist' }
                         ].map(tab => (
                             <button
                                 key={tab.id}
@@ -1448,7 +1448,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                         {currentTab === 'basic' && (
                             <div style={{ maxWidth: 760 }}>
                                 <div className="field">
-                                    <label>상품명 *</label>
+                                    <label>Бүтээгдэхүүний нэр *</label>
                                     <input
                                         type="text"
                                         className="inp"
@@ -1460,7 +1460,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
 
                                 <div className="field">
                                     <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                        <span>상품 설명 / 概要 <span className="muted" style={{ fontWeight: 500 }}>(PC 상세페이지 「概要」 + 검색 결과·공유 미리보기)</span></span>
+                                        <span>Бүтээгдэхүүний тайлбар / 概要 <span className="muted" style={{ fontWeight: 500 }}>(PC дэлгэрэнгүй хуудасны 「概要」 + хайлтын үр дүн·хуваалцах урьдчилан харах)</span></span>
                                         <span className="muted" style={{ color: (formData.description?.length || 0) > 160 ? 'var(--mrt-red)' : undefined }}>
                                             {formData.description?.length || 0} / 160
                                         </span>
@@ -1470,16 +1470,16 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                         value={formData.description || ''}
                                         onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                         rows={3}
-                                        placeholder="例: 満天の星空と夕陽に染まる大草原、遊牧民文化を体験する中央モンゴル3泊4日ツアー。日本語ガイド同行、全日程食事・宿泊込み。"
+                                        placeholder="예: 쏟아지는 별빛과 노을로 물드는 대초원, 유목민 문화를 체험하는 중앙몽골 3박 4일 투어입니다. 가이드 동행, 전 일정 식사·숙박 포함입니다."
                                     />
                                     <p className="muted" style={{ fontSize: 12, marginTop: 6 }}>
-                                        Google検索・LINE/カカオ共有時に表示される短い紹介文です。100〜160字が最適です。
+                                        Google хайлт болон LINE/Kakao-оор хуваалцах үед харагдах богино танилцуулга текст. 100~160 тэмдэгт хамгийн тохиромжтой.
                                     </p>
                                 </div>
 
                                 <div className="field-row">
                                     <div className="field">
-                                        <label>카테고리 *</label>
+                                        <label>Ангилал *</label>
                                         <select
                                             className="inp"
                                             style={{ appearance: 'none' }}
@@ -1487,7 +1487,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                             onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                                             required
                                         >
-                                            <option value="" disabled>카테고리 선택</option>
+                                            <option value="" disabled>Ангилал сонгох</option>
                                             {categories.map(cat => (
                                                 <option key={cat.id} value={cat.name}>{cat.name}</option>
                                             ))}
@@ -1495,13 +1495,13 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                     </div>
 
                                     <div className="field">
-                                        <label>기간 *</label>
+                                        <label>Хугацаа *</label>
                                         <input
                                             type="text"
                                             className="inp"
                                             value={formData.duration}
                                             onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-                                            placeholder="예: 4박 5일"
+                                            placeholder="жишээ: 4 хоног 5 өдөр"
                                             required
                                         />
                                     </div>
@@ -1509,7 +1509,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
 
                                 <div className="field-row">
                                     <div className="field">
-                                        <label>판매가 *</label>
+                                        <label>Зарах үнэ *</label>
                                         <input
                                             type="number"
                                             className="inp"
@@ -1520,7 +1520,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                     </div>
 
                                     <div className="field">
-                                        <label>정가 (선택)</label>
+                                        <label>Үндсэн үнэ (сонголтоор)</label>
                                         <input
                                             type="number"
                                             className="inp"
@@ -1532,7 +1532,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
 
                                 {/* Main Images Upload */}
                                 <div className="field">
-                                    <label>메인 이미지 업로드 *</label>
+                                    <label>Үндсэн зураг байршуулах *</label>
                                     <input
                                         type="file"
                                         accept="image/*"
@@ -1541,7 +1541,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                         className="inp"
                                         style={{ paddingTop: 10, height: 'auto' }}
                                     />
-                                    <p className="muted" style={{ fontSize: 12, marginTop: 6 }}>여러 메인 이미지를 업로드하세요 (슬라이드로 표시됩니다)</p>
+                                    <p className="muted" style={{ fontSize: 12, marginTop: 6 }}>Хэд хэдэн үндсэн зураг байршуулна уу (слайдаар харагдана)</p>
 
                                     {/* Main Images Grid */}
                                     {formData.mainImages && formData.mainImages.length > 0 && (
@@ -1561,7 +1561,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                                 type="button"
                                                                 onClick={() => moveMainImage(imgIndex, 'up')}
                                                                 className="act-btn"
-                                                                title="위로 이동"
+                                                                title="Дээш зөөх"
                                                             >
                                                                 <Icon name="arrow_upward" />
                                                             </button>
@@ -1571,7 +1571,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                                 type="button"
                                                                 onClick={() => moveMainImage(imgIndex, 'down')}
                                                                 className="act-btn"
-                                                                title="아래로 이동"
+                                                                title="Доош зөөх"
                                                             >
                                                                 <Icon name="arrow_downward" />
                                                             </button>
@@ -1580,7 +1580,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                             type="button"
                                                             onClick={() => removeMainImage(imgIndex)}
                                                             className="act-btn danger"
-                                                            title="삭제"
+                                                            title="Устгах"
                                                         >
                                                             <Icon name="delete" />
                                                         </button>
@@ -1598,26 +1598,26 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
 
                                 <div className="field-row">
                                     <div className="field">
-                                        <label>상태</label>
+                                        <label>Төлөв</label>
                                         <select
                                             className="inp"
                                             style={{ appearance: 'none' }}
                                             value={formData.status}
                                             onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
                                         >
-                                            <option value="active">판매중</option>
-                                            <option value="inactive">비활성</option>
-                                            <option value="soldout">품절</option>
+                                            <option value="active">Зарагдаж байгаа</option>
+                                            <option value="inactive">Идэвхгүй</option>
+                                            <option value="soldout">Дууссан</option>
                                         </select>
                                     </div>
 
                                     <div className="field">
-                                        <label>노출 설정</label>
+                                        <label>Харагдах тохиргоо</label>
                                         <div className="stack" style={{ gap: 10 }}>
                                             <div className="toggle-row">
                                                 <div>
-                                                    <div className="cell-strong">추천 상품</div>
-                                                    <div className="cell-muted" style={{ fontSize: 12 }}>홈 추천 영역에 노출</div>
+                                                    <div className="cell-strong">Онцолсон бүтээгдэхүүн</div>
+                                                    <div className="cell-muted" style={{ fontSize: 12 }}>Нүүр хуудасны онцлох хэсэгт харуулах</div>
                                                 </div>
                                                 <div className="spacer" style={{ flex: 1 }} />
                                                 <button
@@ -1630,8 +1630,8 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                             </div>
                                             <div className="toggle-row">
                                                 <div>
-                                                    <div className="cell-strong">인기 상품</div>
-                                                    <div className="cell-muted" style={{ fontSize: 12 }}>인기 뱃지 표시</div>
+                                                    <div className="cell-strong">Эрэлттэй бүтээгдэхүүн</div>
+                                                    <div className="cell-muted" style={{ fontSize: 12 }}>Эрэлттэй тэмдэг харуулах</div>
                                                 </div>
                                                 <div className="spacer" style={{ flex: 1 }} />
                                                 <button
@@ -1653,7 +1653,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                             <div className="stack" style={{ maxWidth: 860 }}>
                                 {/* Tags */}
                                 <div className="field" style={{ marginBottom: 0 }}>
-                                    <label>태그</label>
+                                    <label>Шошго</label>
                                     {formData.tags && formData.tags.length > 0 && (
                                         <div className="chip-row" style={{ marginBottom: 8 }}>
                                             {formData.tags?.map(tag => (
@@ -1669,7 +1669,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                     <input
                                         type="text"
                                         className="inp"
-                                        placeholder="태그 입력 후 Enter"
+                                        placeholder="Шошго бичээд Enter дарна уу"
                                         onKeyPress={(e) => {
                                             if (e.key === 'Enter') {
                                                 e.preventDefault();
@@ -1690,8 +1690,8 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                 <section className="edit-sec">
                                     <div className="edit-sec-head">
                                         <Icon name="help" />
-                                        <h4>FAQ (자주 묻는 질문)</h4>
-                                        <span className="muted">비워두면 공통 FAQ가 표시됩니다</span>
+                                        <h4>FAQ (Түгээмэл асуулт)</h4>
+                                        <span className="muted">Хоосон орхивол нийтлэг FAQ харагдана</span>
                                     </div>
                                     <div className="stack" style={{ gap: 10 }}>
                                         {formData.faqs?.map((faq, index) => (
@@ -1705,7 +1705,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                             style={{ flex: 1 }}
                                                             value={faq.q}
                                                             onChange={(e) => updateFAQ(index, 'q', e.target.value)}
-                                                            placeholder="질문"
+                                                            placeholder="Асуулт"
                                                         />
                                                     </div>
                                                     <textarea
@@ -1713,11 +1713,11 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                         style={{ marginTop: 8 }}
                                                         value={faq.a}
                                                         onChange={(e) => updateFAQ(index, 'a', e.target.value)}
-                                                        placeholder="답변"
+                                                        placeholder="Хариулт"
                                                         rows={3}
                                                     />
                                                 </div>
-                                                <button type="button" className="act-btn danger" onClick={() => removeFAQ(index)} title="삭제">
+                                                <button type="button" className="act-btn danger" onClick={() => removeFAQ(index)} title="Устгах">
                                                     <Icon name="delete" />
                                                 </button>
                                             </div>
@@ -1725,10 +1725,10 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                         {(!formData.faqs || formData.faqs.length === 0) && (
                                             <div className="card-muted-note">
                                                 <Icon name="info" />
-                                                <span>Q&A를 추가하지 않으면 사이트 공통 FAQ가 사용됩니다.</span>
+                                                <span>Q&A нэмэхгүй бол сайтын нийтлэг FAQ ашиглагдана.</span>
                                             </div>
                                         )}
-                                        <button type="button" className="add-line" onClick={addFAQ}><Icon name="add" />Q&A 추가</button>
+                                        <button type="button" className="add-line" onClick={addFAQ}><Icon name="add" />Q&A нэмэх</button>
                                     </div>
                                 </section>
 
@@ -1737,15 +1737,15 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                     {/* Detail Block Content Section */}
                                     <div>
                                         <div className="block-add-bar">
-                                            <span className="block-add-label"><Icon name="add" />블록 추가</span>
+                                            <span className="block-add-label"><Icon name="add" />Блок нэмэх</span>
                                             <button type="button" className="chip" onClick={() => addDetailBlock('image')}>
-                                                <Icon name="image" style={{ fontSize: 16 }} />이미지
+                                                <Icon name="image" style={{ fontSize: 16 }} />Зураг
                                             </button>
                                             <button type="button" className="chip" onClick={() => addDetailBlock('slide')}>
-                                                <Icon name="view_carousel" style={{ fontSize: 16 }} />슬라이드
+                                                <Icon name="view_carousel" style={{ fontSize: 16 }} />Слайд
                                             </button>
                                             <button type="button" className="chip" onClick={() => addDetailBlock('timeline')}>
-                                                <Icon name="schedule" style={{ fontSize: 16 }} />타임라인
+                                                <Icon name="schedule" style={{ fontSize: 16 }} />Цагийн хуваарь
                                             </button>
                                             <select
                                                 onChange={(e) => { if (e.target.value) { addDetailBlock('dayInfo', e.target.value); e.target.value = ''; } }}
@@ -1753,7 +1753,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                 className="select"
                                                 style={{ height: 36, fontSize: 13 }}
                                             >
-                                                <option value="" disabled>📅 일차 추가</option>
+                                                <option value="" disabled>📅 Өдөр нэмэх</option>
                                                 <option value="1日目（いちにちめ）">1日目（いちにちめ）</option>
                                                 <option value="2日目（ふつかめ）">2日目（ふつかめ）</option>
                                                 <option value="3日目（みっかめ）">3日目（みっかめ）</option>
@@ -1766,12 +1766,12 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                 <option value="10日目（とおかめ）">10日目（とおかめ）</option>
                                             </select>
                                             <button type="button" className="chip" onClick={() => addDetailBlock('divider')}>
-                                                <Icon name="horizontal_rule" style={{ fontSize: 16 }} />구분선/여백
+                                                <Icon name="horizontal_rule" style={{ fontSize: 16 }} />Зураас/Зай
                                             </button>
                                         </div>
                                         <div className="card-muted-note" style={{ marginBottom: 14 }}>
                                             <Icon name="info" />
-                                            <span>이미지와 슬라이드를 자유롭게 배치하여 상세 페이지를 구성하세요. 순서를 변경하거나 삭제할 수 있습니다.</span>
+                                            <span>Зураг болон слайдыг чөлөөтэй байрлуулж дэлгэрэнгүй хуудсыг бүрдүүлнэ үү. Эрэмбийг өөрчлөх буюу устгах боломжтой.</span>
                                         </div>
 
                                         <div className="stack" style={{ gap: 12 }}>
@@ -1787,7 +1787,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                             <span className="badge b-gray">
                                                                 {block.type === 'image' ? 'SINGLE' : (block.type === 'slide' ? 'SLIDE' : (block.type === 'timeline' ? 'TIMELINE' : (block.type === 'dayInfo' ? 'DAY INFO' : 'DIVIDER')))}
                                                             </span>
-                                                            <span className="cell-muted" style={{ fontSize: 12 }}>{index + 1}번째 블록</span>
+                                                            <span className="cell-muted" style={{ fontSize: 12 }}>{index + 1}-р блок</span>
                                                         </div>
 
                                                         {/* Block Content */}
@@ -1806,13 +1806,13 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                                             className="btn btn-ink btn-sm"
                                                                             style={{ position: 'absolute', top: 8, right: 8 }}
                                                                         >
-                                                                            변경
+                                                                            Солих
                                                                         </button>
                                                                     </div>
                                                                 ) : (
                                                                     <label className="block-img-empty" style={{ cursor: 'pointer' }}>
                                                                         <Icon name="add_photo_alternate" />
-                                                                        이미지 업로드
+                                                                        Зураг байршуулах
                                                                         <input
                                                                             type="file"
                                                                             accept="image/*"
@@ -1832,10 +1832,10 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                                     className="inp"
                                                                     value={(block.content as DetailSlide).title || ''}
                                                                     onChange={(e) => updateSlideInBlock(index, 'title', e.target.value)}
-                                                                    placeholder="슬라이드 제목 (예: 1일차 숙소)"
+                                                                    placeholder="Слайдын гарчиг (жишээ: 1-р өдрийн байр)"
                                                                 />
                                                                 <div>
-                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>이미지 목록 (다중 업로드 가능)</label>
+                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Зургийн жагсаалт (олон зураг байршуулах боломжтой)</label>
                                                                     <input
                                                                         type="file"
                                                                         accept="image/*"
@@ -1866,12 +1866,12 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                             // TIMELINE BLOCK
                                                             <div className="stack" style={{ gap: 8 }}>
                                                                 <div className="row" style={{ gap: 8 }}>
-                                                                    <input type="text" className="inp" style={{ width: 140 }} value={(block.content as TimelineContent).time || ''} onChange={(e) => updateTimelineInBlock('detail', index, 'time', e.target.value)} placeholder="시간 (예: 10:00)" />
-                                                                    <input type="text" className="inp" style={{ flex: 1, fontWeight: 700 }} value={(block.content as TimelineContent).title || ''} onChange={(e) => updateTimelineInBlock('detail', index, 'title', e.target.value)} placeholder="제목 (예: 자이승 전망대)" />
+                                                                    <input type="text" className="inp" style={{ width: 140 }} value={(block.content as TimelineContent).time || ''} onChange={(e) => updateTimelineInBlock('detail', index, 'time', e.target.value)} placeholder="Цаг (жишээ: 10:00)" />
+                                                                    <input type="text" className="inp" style={{ flex: 1, fontWeight: 700 }} value={(block.content as TimelineContent).title || ''} onChange={(e) => updateTimelineInBlock('detail', index, 'title', e.target.value)} placeholder="Гарчиг (жишээ: Зайсан толгой)" />
                                                                 </div>
-                                                                <textarea className="inp" value={(block.content as TimelineContent).description || ''} onChange={(e) => updateTimelineInBlock('detail', index, 'description', e.target.value)} placeholder="설명" rows={3} />
+                                                                <textarea className="inp" value={(block.content as TimelineContent).description || ''} onChange={(e) => updateTimelineInBlock('detail', index, 'description', e.target.value)} placeholder="Тайлбар" rows={3} />
                                                                 <div>
-                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>이미지 목록 (다중 업로드 기능)</label>
+                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Зургийн жагсаалт (олон зураг байршуулах боломжтой)</label>
                                                                     <input type="file" accept="image/*" multiple onChange={(e) => handleTimelineBlockImages('detail', index, e.target.files)} className="inp" style={{ height: 'auto', paddingTop: 8, paddingBottom: 8, fontSize: 13 }} />
                                                                 </div>
                                                                 {(block.content as TimelineContent).images?.length > 0 && (
@@ -1890,40 +1890,40 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                             <div className="stack" style={{ gap: 8 }}>
                                                                 <div className="field-row">
                                                                     <div>
-                                                                        <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>일차</label>
-                                                                        <div className="badge b-amber" style={{ height: 44, borderRadius: 'var(--r-md)', width: '100%', justifyContent: 'flex-start', padding: '0 14px', fontSize: 14 }}>{(block.content as DayInfoContent).dayLabel || '미지정'}</div>
+                                                                        <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Өдөр</label>
+                                                                        <div className="badge b-amber" style={{ height: 44, borderRadius: 'var(--r-md)', width: '100%', justifyContent: 'flex-start', padding: '0 14px', fontSize: 14 }}>{(block.content as DayInfoContent).dayLabel || 'Тодорхойгүй'}</div>
                                                                     </div>
                                                                     <div>
-                                                                        <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>날짜 (예: 05/26(화))</label>
-                                                                        <input type="text" className="inp" value={(block.content as DayInfoContent).dayDate || ''} onChange={(e) => updateBlockContent(index, { ...(block.content as DayInfoContent), dayDate: e.target.value })} placeholder="05/26(화)" />
+                                                                        <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Огноо (жишээ: 05/26(Мяг))</label>
+                                                                        <input type="text" className="inp" value={(block.content as DayInfoContent).dayDate || ''} onChange={(e) => updateBlockContent(index, { ...(block.content as DayInfoContent), dayDate: e.target.value })} placeholder="05/26(Мяг)" />
                                                                     </div>
                                                                 </div>
                                                                 <div>
-                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>일정 제목</label>
-                                                                    <input type="text" className="inp" value={(block.content as DayInfoContent).title || ''} onChange={(e) => updateBlockContent(index, { ...(block.content as DayInfoContent), title: e.target.value })} placeholder="인천, 울란바토르, 고르히-테렐지" />
+                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Хөтөлбөрийн гарчиг</label>
+                                                                    <input type="text" className="inp" value={(block.content as DayInfoContent).title || ''} onChange={(e) => updateBlockContent(index, { ...(block.content as DayInfoContent), title: e.target.value })} placeholder="Инчон, Улаанбаатар, Горхи-Тэрэлж" />
                                                                 </div>
                                                                 <div>
-                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>주요 일정 요약</label>
-                                                                    <input type="text" className="inp" value={(block.content as DayInfoContent).description || ''} onChange={(e) => updateBlockContent(index, { ...(block.content as DayInfoContent), description: e.target.value })} placeholder="대형마트, 테렐지 국립공원, 거북 바위..." />
+                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Гол хөтөлбөрийн товч</label>
+                                                                    <input type="text" className="inp" value={(block.content as DayInfoContent).description || ''} onChange={(e) => updateBlockContent(index, { ...(block.content as DayInfoContent), description: e.target.value })} placeholder="Их дэлгүүр, Тэрэлж байгалийн цогцолбор, Мэлхий хад..." />
                                                                 </div>
                                                                 <div>
-                                                                    <label className="cell-strong" style={{ fontSize: 12.5, display: 'block', marginBottom: 6 }}>🍽 식사 정보</label>
+                                                                    <label className="cell-strong" style={{ fontSize: 12.5, display: 'block', marginBottom: 6 }}>🍽 Хоолны мэдээлэл</label>
                                                                     <div className="meal-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
-                                                                        <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>조식</span><input value={(block.content as DayInfoContent).meals?.breakfast || ''} onChange={(e) => updateBlockContent(index, { ...(block.content as DayInfoContent), meals: { ...(block.content as DayInfoContent).meals, breakfast: e.target.value } })} placeholder="캠프식" /></div>
-                                                                        <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>중식</span><input value={(block.content as DayInfoContent).meals?.lunch || ''} onChange={(e) => updateBlockContent(index, { ...(block.content as DayInfoContent), meals: { ...(block.content as DayInfoContent).meals, lunch: e.target.value } })} placeholder="현지식" /></div>
-                                                                        <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>석식</span><input value={(block.content as DayInfoContent).meals?.dinner || ''} onChange={(e) => updateBlockContent(index, { ...(block.content as DayInfoContent), meals: { ...(block.content as DayInfoContent).meals, dinner: e.target.value } })} placeholder="캠프식" /></div>
+                                                                        <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>Өглөө</span><input value={(block.content as DayInfoContent).meals?.breakfast || ''} onChange={(e) => updateBlockContent(index, { ...(block.content as DayInfoContent), meals: { ...(block.content as DayInfoContent).meals, breakfast: e.target.value } })} placeholder="Кэмпийн хоол" /></div>
+                                                                        <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>Өдөр</span><input value={(block.content as DayInfoContent).meals?.lunch || ''} onChange={(e) => updateBlockContent(index, { ...(block.content as DayInfoContent), meals: { ...(block.content as DayInfoContent).meals, lunch: e.target.value } })} placeholder="Орон нутгийн хоол" /></div>
+                                                                        <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>Орой</span><input value={(block.content as DayInfoContent).meals?.dinner || ''} onChange={(e) => updateBlockContent(index, { ...(block.content as DayInfoContent), meals: { ...(block.content as DayInfoContent).meals, dinner: e.target.value } })} placeholder="Кэмпийн хоол" /></div>
                                                                     </div>
                                                                 </div>
                                                                 <div>
-                                                                    <label className="cell-strong" style={{ fontSize: 12.5, display: 'block', marginBottom: 6 }}>🏠 숙소 정보</label>
-                                                                    <div className="inp-mini"><span className="pre"><Icon name="hotel" style={{ fontSize: 14 }} /></span><input value={(block.content as DayInfoContent).accommodation || ''} onChange={(e) => updateBlockContent(index, { ...(block.content as DayInfoContent), accommodation: e.target.value })} placeholder="개별화장실과 샤워실이 구비된 디럭스게르" /></div>
+                                                                    <label className="cell-strong" style={{ fontSize: 12.5, display: 'block', marginBottom: 6 }}>🏠 Байрны мэдээлэл</label>
+                                                                    <div className="inp-mini"><span className="pre"><Icon name="hotel" style={{ fontSize: 14 }} /></span><input value={(block.content as DayInfoContent).accommodation || ''} onChange={(e) => updateBlockContent(index, { ...(block.content as DayInfoContent), accommodation: e.target.value })} placeholder="Тусдаа ариун цэврийн өрөө, шүршүүртэй тансаг гэр" /></div>
                                                                 </div>
                                                             </div>
                                                         ) : (
                                                             // DIVIDER BLOCK
                                                             <div className="row" style={{ gap: 16, alignItems: 'flex-end' }}>
                                                                 <div style={{ flex: 1 }}>
-                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>스타일</label>
+                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Загвар</label>
                                                                     <div className="row" style={{ gap: 8 }}>
                                                                         <button
                                                                             type="button"
@@ -1931,7 +1931,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                                             className={`btn btn-sm ${(block.content as DividerContent).style === 'line' ? 'btn-ink' : 'btn-ghost'}`}
                                                                             style={{ flex: 1 }}
                                                                         >
-                                                                            가로선
+                                                                            Хэвтээ зураас
                                                                         </button>
                                                                         <button
                                                                             type="button"
@@ -1939,12 +1939,12 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                                             className={`btn btn-sm ${(block.content as DividerContent).style === 'space' ? 'btn-ink' : 'btn-ghost'}`}
                                                                             style={{ flex: 1 }}
                                                                         >
-                                                                            여백
+                                                                            Зай
                                                                         </button>
                                                                     </div>
                                                                 </div>
                                                                 <div style={{ width: 140 }}>
-                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>높이 ({(block.content as DividerContent).height}px)</label>
+                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Өндөр ({(block.content as DividerContent).height}px)</label>
                                                                     <input
                                                                         type="range"
                                                                         min="10"
@@ -1958,7 +1958,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                             </div>
                                                         )}
                                                     </div>
-                                                    <button type="button" className="act-btn danger" onClick={() => removeDetailBlock(index)} title="삭제"><Icon name="delete" /></button>
+                                                    <button type="button" className="act-btn danger" onClick={() => removeDetailBlock(index)} title="Устгах"><Icon name="delete" /></button>
                                                 </div>
                                             ))}
                                         </div>
@@ -1981,47 +1981,47 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                 {/* Itinerary Block Content Section */}
                                 <div>
                                     <div className="block-add-bar">
-                                        <span className="block-add-label"><Icon name="add" />블록 추가</span>
+                                        <span className="block-add-label"><Icon name="add" />Блок нэмэх</span>
                                         <button
                                             type="button"
                                             onClick={() => addItineraryBlock('timeline')}
                                             className="chip"
-                                            title="시간·제목·설명·이미지가 들어가는 일정 항목 (예: '10:00 자이승 전망대 + 사진 3장')"
+                                            title="Цаг·гарчиг·тайлбар·зураг агуулсан хөтөлбөрийн зүйл (жишээ: '10:00 Зайсан толгой + 3 зураг')"
                                         >
-                                            <Icon name="add_location" style={{ fontSize: 16 }} />일정 항목 추가
+                                            <Icon name="add_location" style={{ fontSize: 16 }} />Хөтөлбөрийн зүйл нэмэх
                                         </button>
                                         <button
                                             type="button"
                                             onClick={() => addItineraryBlock('image')}
                                             className="chip"
-                                            title="단일 이미지 하나만 (긴 한 장 이미지에 적합)"
+                                            title="Ганц зураг (урт нэг зурагт тохиромжтой)"
                                         >
-                                            <Icon name="image" style={{ fontSize: 16 }} />사진 1장
+                                            <Icon name="image" style={{ fontSize: 16 }} />1 зураг
                                         </button>
                                         <button
                                             type="button"
                                             onClick={() => addItineraryBlock('slide')}
                                             className="chip"
-                                            title="사진 여러 장을 가로 갤러리로 묶음 (제목 부여 가능)"
+                                            title="Хэд хэдэн зургийг хэвтээ галерейд багцлах (гарчиг өгөх боломжтой)"
                                         >
-                                            <Icon name="view_carousel" style={{ fontSize: 16 }} />갤러리
+                                            <Icon name="view_carousel" style={{ fontSize: 16 }} />Галерей
                                         </button>
                                         <button
                                             type="button"
                                             onClick={() => addItineraryBlock('divider')}
                                             className="chip"
-                                            title="블록 사이 간격 또는 가로선"
+                                            title="Блок хоорондын зай эсвэл хэвтээ зураас"
                                         >
-                                            <Icon name="horizontal_rule" style={{ fontSize: 16 }} />구분선
+                                            <Icon name="horizontal_rule" style={{ fontSize: 16 }} />Зураас
                                         </button>
                                     </div>
                                     <div className="card-muted-note" style={{ marginBottom: 14, display: 'block' }}>
-                                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontWeight: 700 }}><Icon name="lightbulb" />사용 방법</div>
+                                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontWeight: 700 }}><Icon name="lightbulb" />Ашиглах заавар</div>
                                         <ul style={{ margin: '8px 0 0', paddingLeft: 20, listStyle: 'disc', lineHeight: 1.7 }}>
-                                            <li><strong>1日目, 2日目 헤더</strong>는 위쪽 <strong>「N일 일정 골격 만들기」</strong> 버튼으로 한 번에 생성하세요. 헤더 안에 도시명·식사·숙소를 입력하시면 됩니다.</li>
-                                            <li><strong>각 일자 안의 이벤트</strong>(예: 자이승 전망대 방문 + 사진 5장)는 <strong>「일정 항목 추가」</strong> 버튼으로 추가. 시간·제목·설명·사진 여러 장 입력 가능.</li>
-                                            <li>해당 일자의 식사·숙소는 그 일자의 <strong>DAY INFO</strong> 블록 안에 입력 — PC 화면에서 자동으로 그 일자 맨 아래에 표시됩니다.</li>
-                                            <li>이미지만 길게 한 장씩 올리는 상품은 위쪽 <strong>드래그&드롭 박스</strong>로 한꺼번에.</li>
+                                            <li><strong>1日目, 2日目 толгой</strong>-г дээд талын <strong>「N өдрийн хөтөлбөрийн араг яс үүсгэх」</strong> товчоор нэг дор үүсгэнэ үү. Толгой дотор хотын нэр·хоол·байрыг оруулна уу.</li>
+                                            <li><strong>Тухайн өдрийн доторх үйл явдал</strong>(жишээ: Зайсан толгой үзэх + 5 зураг)-ыг <strong>「Хөтөлбөрийн зүйл нэмэх」</strong> товчоор нэмнэ. Цаг·гарчиг·тайлбар·хэд хэдэн зураг оруулах боломжтой.</li>
+                                            <li>Тухайн өдрийн хоол·байрыг тэр өдрийн <strong>DAY INFO</strong> блок дотор оруулна — PC дэлгэц дээр автоматаар тэр өдрийн хамгийн доор харагдана.</li>
+                                            <li>Зөвхөн зургийг урт нэг нэгээр нь оруулдаг бүтээгдэхүүнийг дээд талын <strong>чирч буулгах хайрцаг</strong>аар нэг дор оруулна.</li>
                                         </ul>
                                     </div>
 
@@ -2038,7 +2038,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                         <span className="badge b-gray">
                                                             {block.type === 'image' ? 'SINGLE' : (block.type === 'slide' ? 'SLIDE' : (block.type === 'timeline' ? 'TIMELINE' : (block.type === 'dayInfo' ? 'DAY INFO' : 'DIVIDER')))}
                                                         </span>
-                                                        <span className="cell-muted" style={{ fontSize: 12 }}>{index + 1}번째 블록</span>
+                                                        <span className="cell-muted" style={{ fontSize: 12 }}>{index + 1}-р блок</span>
                                                     </div>
 
                                                     {/* Block Content */}
@@ -2057,13 +2057,13 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                                         className="btn btn-ink btn-sm"
                                                                         style={{ position: 'absolute', top: 8, right: 8 }}
                                                                     >
-                                                                        변경
+                                                                        Солих
                                                                     </button>
                                                                 </div>
                                                             ) : (
                                                                 <label className="block-img-empty" style={{ cursor: 'pointer' }}>
                                                                     <Icon name="add_photo_alternate" />
-                                                                    이미지 업로드
+                                                                    Зураг байршуулах
                                                                     <input
                                                                         type="file"
                                                                         accept="image/*"
@@ -2083,10 +2083,10 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                                 className="inp"
                                                                 value={(block.content as DetailSlide).title || ''}
                                                                 onChange={(e) => updateItinerarySlideInBlock(index, 'title', e.target.value)}
-                                                                placeholder="슬라이드 제목 (예: 1일차 숙소)"
+                                                                placeholder="Слайдын гарчиг (жишээ: 1-р өдрийн байр)"
                                                             />
                                                             <div>
-                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>이미지 목록 (다중 업로드 가능)</label>
+                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Зургийн жагсаалт (олон зураг байршуулах боломжтой)</label>
                                                                 <input
                                                                     type="file"
                                                                     accept="image/*"
@@ -2122,34 +2122,34 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                                     type="button"
                                                                     onClick={() => setSpotPickerForIndex(index)}
                                                                     className="btn btn-blue btn-sm"
-                                                                    title="관광지 마스터에서 정보를 가져와 제목/설명/사진을 자동으로 채웁니다"
+                                                                    title="Аялал жуулчлалын газрын мастераас мэдээлэл татаж гарчиг/тайлбар/зургийг автоматаар бөглөнө"
                                                                 >
-                                                                    <Icon name="location_on" />관광지에서 선택
+                                                                    <Icon name="location_on" />Аялалын газраас сонгох
                                                                 </button>
                                                                 <button
                                                                     type="button"
                                                                     onClick={() => setHotelPickerTarget({ kind: 'timeline', index })}
                                                                     className="btn btn-ghost btn-sm"
-                                                                    title="호텔 마스터에서 정보를 가져와 제목/설명/사진을 자동으로 채웁니다"
+                                                                    title="Зочид буудлын мастераас мэдээлэл татаж гарчиг/тайлбар/зургийг автоматаар бөглөнө"
                                                                 >
-                                                                    <Icon name="hotel" />호텔에서 선택
+                                                                    <Icon name="hotel" />Зочид буудлаас сонгох
                                                                 </button>
                                                             </div>
                                                             <div className="card-muted-note" style={{ display: 'block' }}>
-                                                                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontWeight: 700 }}><Icon name="lightbulb" />3가지 방법 중 선택</div>
+                                                                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontWeight: 700 }}><Icon name="lightbulb" />3 аргын аль нэгийг сонгох</div>
                                                                 <ol style={{ margin: '6px 0 0', paddingLeft: 20, listStyle: 'decimal', lineHeight: 1.7 }}>
-                                                                    <li><strong>관광지/호텔에서 선택</strong> — 마스터 데이터 자동 채움</li>
-                                                                    <li>아래에 <strong>제목·설명을 직접 입력</strong> + 이미지 업로드 → 흰 카드로 표시</li>
-                                                                    <li>아래에 <strong>제목·설명만 입력</strong> (이미지 없음) → 큰 핀+텍스트로 표시 (지역 안내·이동 정보용)</li>
+                                                                    <li><strong>Аялалын газар/Зочид буудлаас сонгох</strong> — мастер дата автоматаар бөглөгдөнө</li>
+                                                                    <li>Доор <strong>гарчиг·тайлбарыг шууд оруулах</strong> + зураг байршуулах → цагаан картаар харагдана</li>
+                                                                    <li>Доор <strong>зөвхөн гарчиг·тайлбар оруулах</strong> (зураггүй) → том пин+текстээр харагдана (бүс нутгийн заавар·зам мэдээлэлд зориулсан)</li>
                                                                 </ol>
                                                             </div>
                                                             <div className="row" style={{ gap: 8 }}>
-                                                                <input type="text" className="inp" style={{ width: 140 }} value={(block.content as TimelineContent).time || ''} onChange={(e) => updateTimelineInBlock('itinerary', index, 'time', e.target.value)} placeholder="시간 (예: 10:00)" />
-                                                                <input type="text" className="inp" style={{ flex: 1, fontWeight: 700 }} value={(block.content as TimelineContent).title || ''} onChange={(e) => updateTimelineInBlock('itinerary', index, 'title', e.target.value)} placeholder="제목 (예: 자이승 전망대)" />
+                                                                <input type="text" className="inp" style={{ width: 140 }} value={(block.content as TimelineContent).time || ''} onChange={(e) => updateTimelineInBlock('itinerary', index, 'time', e.target.value)} placeholder="Цаг (жишээ: 10:00)" />
+                                                                <input type="text" className="inp" style={{ flex: 1, fontWeight: 700 }} value={(block.content as TimelineContent).title || ''} onChange={(e) => updateTimelineInBlock('itinerary', index, 'title', e.target.value)} placeholder="Гарчиг (жишээ: Зайсан толгой)" />
                                                             </div>
-                                                            <textarea className="inp" value={(block.content as TimelineContent).description || ''} onChange={(e) => updateTimelineInBlock('itinerary', index, 'description', e.target.value)} placeholder="설명" rows={3} />
+                                                            <textarea className="inp" value={(block.content as TimelineContent).description || ''} onChange={(e) => updateTimelineInBlock('itinerary', index, 'description', e.target.value)} placeholder="Тайлбар" rows={3} />
                                                             <div>
-                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>이미지 목록 (다중 업로드 기능)</label>
+                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Зургийн жагсаалт (олон зураг байршуулах боломжтой)</label>
                                                                 <input type="file" accept="image/*" multiple onChange={(e) => handleTimelineBlockImages('itinerary', index, e.target.files)} className="inp" style={{ height: 'auto', paddingTop: 8, paddingBottom: 8, fontSize: 13 }} />
                                                             </div>
                                                             {(block.content as TimelineContent).images?.length > 0 && (
@@ -2168,53 +2168,53 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                         <div className="stack" style={{ gap: 8 }}>
                                                             <div className="field-row">
                                                                 <div>
-                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>일차</label>
-                                                                    <div className="badge b-amber" style={{ height: 44, borderRadius: 'var(--r-md)', width: '100%', justifyContent: 'flex-start', padding: '0 14px', fontSize: 14 }}>{(block.content as DayInfoContent).dayLabel || '미지정'}</div>
+                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Өдөр</label>
+                                                                    <div className="badge b-amber" style={{ height: 44, borderRadius: 'var(--r-md)', width: '100%', justifyContent: 'flex-start', padding: '0 14px', fontSize: 14 }}>{(block.content as DayInfoContent).dayLabel || 'Тодорхойгүй'}</div>
                                                                 </div>
                                                                 <div>
-                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>날짜 (예: 05/26(화))</label>
-                                                                    <input type="text" className="inp" value={(block.content as DayInfoContent).dayDate || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), dayDate: e.target.value })} placeholder="05/26(화)" />
+                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Огноо (жишээ: 05/26(Мяг))</label>
+                                                                    <input type="text" className="inp" value={(block.content as DayInfoContent).dayDate || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), dayDate: e.target.value })} placeholder="05/26(Мяг)" />
                                                                 </div>
                                                             </div>
                                                             <div>
-                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>일정 제목</label>
-                                                                <input type="text" className="inp" value={(block.content as DayInfoContent).title || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), title: e.target.value })} placeholder="인천, 울란바토르, 고르히-테렐지" />
+                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Хөтөлбөрийн гарчиг</label>
+                                                                <input type="text" className="inp" value={(block.content as DayInfoContent).title || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), title: e.target.value })} placeholder="Инчон, Улаанбаатар, Горхи-Тэрэлж" />
                                                             </div>
                                                             <div>
-                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>주요 일정 요약</label>
-                                                                <input type="text" className="inp" value={(block.content as DayInfoContent).description || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), description: e.target.value })} placeholder="대형마트, 테렐지 국립공원, 거북 바위..." />
+                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Гол хөтөлбөрийн товч</label>
+                                                                <input type="text" className="inp" value={(block.content as DayInfoContent).description || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), description: e.target.value })} placeholder="Их дэлгүүр, Тэрэлж байгалийн цогцолбор, Мэлхий хад..." />
                                                             </div>
                                                             <div>
-                                                                <label className="cell-strong" style={{ fontSize: 12.5, display: 'block', marginBottom: 6 }}>🍽 식사 정보</label>
+                                                                <label className="cell-strong" style={{ fontSize: 12.5, display: 'block', marginBottom: 6 }}>🍽 Хоолны мэдээлэл</label>
                                                                 <div className="meal-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
-                                                                    <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>조식</span><input value={(block.content as DayInfoContent).meals?.breakfast || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), meals: { ...(block.content as DayInfoContent).meals, breakfast: e.target.value } })} placeholder="캠프식" /></div>
-                                                                    <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>중식</span><input value={(block.content as DayInfoContent).meals?.lunch || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), meals: { ...(block.content as DayInfoContent).meals, lunch: e.target.value } })} placeholder="현지식" /></div>
-                                                                    <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>석식</span><input value={(block.content as DayInfoContent).meals?.dinner || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), meals: { ...(block.content as DayInfoContent).meals, dinner: e.target.value } })} placeholder="캠프식" /></div>
+                                                                    <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>Өглөө</span><input value={(block.content as DayInfoContent).meals?.breakfast || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), meals: { ...(block.content as DayInfoContent).meals, breakfast: e.target.value } })} placeholder="Кэмпийн хоол" /></div>
+                                                                    <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>Өдөр</span><input value={(block.content as DayInfoContent).meals?.lunch || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), meals: { ...(block.content as DayInfoContent).meals, lunch: e.target.value } })} placeholder="Орон нутгийн хоол" /></div>
+                                                                    <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>Орой</span><input value={(block.content as DayInfoContent).meals?.dinner || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), meals: { ...(block.content as DayInfoContent).meals, dinner: e.target.value } })} placeholder="Кэмпийн хоол" /></div>
                                                                 </div>
                                                             </div>
                                                             <div>
                                                                 <div className="row" style={{ marginBottom: 6 }}>
-                                                                    <label className="cell-strong" style={{ fontSize: 12.5 }}>🏠 숙소 정보</label>
+                                                                    <label className="cell-strong" style={{ fontSize: 12.5 }}>🏠 Байрны мэдээлэл</label>
                                                                     <div className="spacer" style={{ flex: 1 }} />
                                                                     <button
                                                                         type="button"
                                                                         onClick={() => setHotelPickerForIndex(index)}
                                                                         className="btn btn-ghost btn-sm"
                                                                     >
-                                                                        <Icon name="hotel" />호텔 마스터에서 선택
+                                                                        <Icon name="hotel" />Зочид буудлын мастераас сонгох
                                                                     </button>
                                                                 </div>
                                                                 <div className="inp-mini"><span className="pre"><Icon name="hotel" style={{ fontSize: 14 }} /></span>
                                                                     <input
                                                                         value={(block.content as DayInfoContent).accommodation || ''}
                                                                         onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), accommodation: e.target.value, accommodationHotelId: undefined })}
-                                                                        placeholder="개별화장실과 샤워실이 구비된 디럭스게르 (또는 위 버튼으로 마스터 선택)"
+                                                                        placeholder="Тусдаа ариун цэврийн өрөө, шүршүүртэй тансаг гэр (эсвэл дээрх товчоор мастераас сонгох)"
                                                                     />
                                                                 </div>
                                                                 {(block.content as DayInfoContent).accommodationHotelId && (
                                                                     <div className="row" style={{ gap: 4, marginTop: 6, fontSize: 11, color: 'var(--mrt-blue-strong)' }}>
                                                                         <Icon name="link" style={{ fontSize: 14 }} />
-                                                                        호텔 마스터에서 선택됨. 직접 입력하면 연결이 해제됩니다.
+                                                                        Зочид буудлын мастераас сонгосон. Шууд оруулбал холбоос сална.
                                                                     </div>
                                                                 )}
                                                             </div>
@@ -2228,11 +2228,11 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                                     onClick={() => addTimelineAfterDay(index)}
                                                                     className="add-line"
                                                                 >
-                                                                    <Icon name="add_circle" />이 일자에 일정 항목 추가
+                                                                    <Icon name="add_circle" />Энэ өдөрт хөтөлбөрийн зүйл нэмэх
                                                                 </button>
                                                                 <p className="muted" style={{ marginTop: 8, fontSize: 11, textAlign: 'center' }}>
-                                                                    이 버튼을 누르면 <strong style={{ color: 'var(--mrt-blue-strong)' }}>{(block.content as DayInfoContent).dayLabel || '이 일자'}</strong>의 마지막 일정으로 새 항목이 추가됩니다.
-                                                                    관광지 마스터에서 한 번에 채울 수 있어요.
+                                                                    Энэ товчийг дарвал <strong style={{ color: 'var(--mrt-blue-strong)' }}>{(block.content as DayInfoContent).dayLabel || 'энэ өдөр'}</strong>-ийн сүүлчийн хөтөлбөр болгож шинэ зүйл нэмэгдэнэ.
+                                                                    Аялалын газрын мастераас нэг дор бөглөж болно.
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -2240,7 +2240,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                         // DIVIDER BLOCK
                                                         <div className="row" style={{ gap: 16, alignItems: 'flex-end' }}>
                                                             <div style={{ flex: 1 }}>
-                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>스타일</label>
+                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Загвар</label>
                                                                 <div className="row" style={{ gap: 8 }}>
                                                                     <button
                                                                         type="button"
@@ -2248,7 +2248,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                                         className={`btn btn-sm ${(block.content as DividerContent).style === 'line' ? 'btn-ink' : 'btn-ghost'}`}
                                                                         style={{ flex: 1 }}
                                                                     >
-                                                                        가로선
+                                                                        Хэвтээ зураас
                                                                     </button>
                                                                     <button
                                                                         type="button"
@@ -2256,12 +2256,12 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                                         className={`btn btn-sm ${(block.content as DividerContent).style === 'space' ? 'btn-ink' : 'btn-ghost'}`}
                                                                         style={{ flex: 1 }}
                                                                     >
-                                                                        여백
+                                                                        Зай
                                                                     </button>
                                                                 </div>
                                                             </div>
                                                             <div style={{ width: 140 }}>
-                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>높이 ({(block.content as DividerContent).height}px)</label>
+                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Өндөр ({(block.content as DividerContent).height}px)</label>
                                                                 <input
                                                                     type="range"
                                                                     min="10"
@@ -2275,7 +2275,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                         </div>
                                                     )}
                                                 </div>
-                                                <button type="button" className="act-btn danger" onClick={() => removeItineraryBlock(index)} title="삭제"><Icon name="delete" /></button>
+                                                <button type="button" className="act-btn danger" onClick={() => removeItineraryBlock(index)} title="Устгах"><Icon name="delete" /></button>
                                             </div>
                                         ))}
                                     </div>
@@ -2290,28 +2290,28 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                 <section className="edit-sec">
                                     <div className="edit-sec-head">
                                         <Icon name="groups" />
-                                        <h4>인원별 가격 옵션</h4>
-                                        <span className="muted">1인 가격 · 예약금 · 현지결제</span>
+                                        <h4>Хүний тооны үнийн сонголт</h4>
+                                        <span className="muted">1 хүний үнэ · Урьдчилгаа · Газар дээрх төлбөр</span>
                                     </div>
-                                    <div className="opt-grid-head"><span>인원</span><span>1인 총가격</span><span>예약금</span><span>현지 결제</span><span></span></div>
+                                    <div className="opt-grid-head"><span>Хүний тоо</span><span>1 хүний нийт үнэ</span><span>Урьдчилгаа</span><span>Газар дээрх төлбөр</span><span></span></div>
                                     <div className="stack" style={{ gap: 10 }}>
                                         {formData.pricingOptions?.map((option, index) => (
                                             <div className="edit-row" key={index}>
                                                 <div style={{ flex: 1, minWidth: 0 }}>
                                                     <div className="opt-grid">
-                                                        <div className="inp-mini"><input type="number" value={option.people} onChange={(e) => updatePricingOption(index, 'people', Number(e.target.value))} /><span>명</span></div>
+                                                        <div className="inp-mini"><input type="number" value={option.people} onChange={(e) => updatePricingOption(index, 'people', Number(e.target.value))} /><span>хүн</span></div>
                                                         <div className="inp-mini"><span className="pre">₩</span><input type="number" value={option.pricePerPerson} onChange={(e) => updatePricingOption(index, 'pricePerPerson', Number(e.target.value))} /></div>
                                                         <div className="inp-mini"><span className="pre">₩</span><input type="number" value={option.depositPerPerson || 0} onChange={(e) => updatePricingOption(index, 'depositPerPerson', Number(e.target.value))} /></div>
                                                         <div className="inp-mini"><span className="pre">₩</span><input type="number" value={option.localPaymentPerPerson || 0} onChange={(e) => updatePricingOption(index, 'localPaymentPerPerson', Number(e.target.value))} /></div>
                                                     </div>
                                                 </div>
-                                                <button type="button" className="act-btn danger" onClick={() => removePricingOption(index)} title="삭제"><Icon name="delete" /></button>
+                                                <button type="button" className="act-btn danger" onClick={() => removePricingOption(index)} title="Устгах"><Icon name="delete" /></button>
                                             </div>
                                         ))}
                                         {(!formData.pricingOptions || formData.pricingOptions.length === 0) && (
-                                            <p className="muted" style={{ textAlign: 'center', padding: '8px 0', fontSize: 13 }}>등록된 가격 옵션이 없습니다.</p>
+                                            <p className="muted" style={{ textAlign: 'center', padding: '8px 0', fontSize: 13 }}>Бүртгэсэн үнийн сонголт байхгүй.</p>
                                         )}
-                                        <button type="button" className="add-line" onClick={addPricingOption}><Icon name="add" />인원 옵션 추가</button>
+                                        <button type="button" className="add-line" onClick={addPricingOption}><Icon name="add" />Хүний тооны сонголт нэмэх</button>
                                     </div>
                                 </section>
 
@@ -2319,8 +2319,8 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                 <section className="edit-sec">
                                     <div className="edit-sec-head">
                                         <Icon name="hotel" />
-                                        <h4>숙소 옵션</h4>
-                                        <span className="muted">기본 1개 선택</span>
+                                        <h4>Байрны сонголт</h4>
+                                        <span className="muted">Үндсэн 1-ийг сонгох</span>
                                     </div>
                                     <div className="stack" style={{ gap: 10 }}>
                                         {formData.accommodationOptions?.map((option, index) => (
@@ -2331,7 +2331,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                             type="button"
                                                             className={`radio${option.isDefault ? ' on' : ''}`}
                                                             onClick={() => updateAccommodationOption(index, 'isDefault', true)}
-                                                            title="기본 옵션"
+                                                            title="Үндсэн сонголт"
                                                         />
                                                         <input
                                                             type="text"
@@ -2339,7 +2339,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                             style={{ flex: 1 }}
                                                             value={option.name}
                                                             onChange={(e) => updateAccommodationOption(index, 'name', e.target.value)}
-                                                            placeholder="옵션명 (예: 게르)"
+                                                            placeholder="Сонголтын нэр (жишээ: Гэр)"
                                                         />
                                                         <div className="inp-mini" style={{ width: 130 }}><span className="pre">+₩</span><input type="number" value={option.priceModifier} onChange={(e) => updateAccommodationOption(index, 'priceModifier', Number(e.target.value))} placeholder="0" /></div>
                                                     </div>
@@ -2349,13 +2349,13 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                         style={{ marginTop: 8 }}
                                                         value={option.description}
                                                         onChange={(e) => updateAccommodationOption(index, 'description', e.target.value)}
-                                                        placeholder="옵션 설명"
+                                                        placeholder="Сонголтын тайлбар"
                                                     />
                                                 </div>
-                                                <button type="button" className="act-btn danger" onClick={() => removeAccommodationOption(index)} title="삭제"><Icon name="delete" /></button>
+                                                <button type="button" className="act-btn danger" onClick={() => removeAccommodationOption(index)} title="Устгах"><Icon name="delete" /></button>
                                             </div>
                                         ))}
-                                        <button type="button" className="add-line" onClick={addAccommodationOption}><Icon name="add" />숙소 옵션 추가</button>
+                                        <button type="button" className="add-line" onClick={addAccommodationOption}><Icon name="add" />Байрны сонголт нэмэх</button>
                                     </div>
                                 </section>
 
@@ -2363,8 +2363,8 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                 <section className="edit-sec">
                                     <div className="edit-sec-head">
                                         <Icon name="directions_car" />
-                                        <h4>차량 옵션</h4>
-                                        <span className="muted">기본 1개 선택</span>
+                                        <h4>Тээврийн хэрэгслийн сонголт</h4>
+                                        <span className="muted">Үндсэн 1-ийг сонгох</span>
                                     </div>
                                     <div className="stack" style={{ gap: 10 }}>
                                         {formData.vehicleOptions?.map((option, index) => (
@@ -2375,7 +2375,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                             type="button"
                                                             className={`radio${option.isDefault ? ' on' : ''}`}
                                                             onClick={() => updateVehicleOption(index, 'isDefault', true)}
-                                                            title="기본 옵션"
+                                                            title="Үндсэн сонголт"
                                                         />
                                                         <input
                                                             type="text"
@@ -2383,7 +2383,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                             style={{ flex: 1 }}
                                                             value={option.name}
                                                             onChange={(e) => updateVehicleOption(index, 'name', e.target.value)}
-                                                            placeholder="옵션명 (예: 스타렉스)"
+                                                            placeholder="Сонголтын нэр (жишээ: Старекс)"
                                                         />
                                                         <div className="inp-mini" style={{ width: 130 }}><span className="pre">+₩</span><input type="number" value={option.priceModifier} onChange={(e) => updateVehicleOption(index, 'priceModifier', Number(e.target.value))} placeholder="0" /></div>
                                                     </div>
@@ -2393,13 +2393,13 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                         style={{ marginTop: 8 }}
                                                         value={option.description}
                                                         onChange={(e) => updateVehicleOption(index, 'description', e.target.value)}
-                                                        placeholder="옵션 설명"
+                                                        placeholder="Сонголтын тайлбар"
                                                     />
                                                 </div>
-                                                <button type="button" className="act-btn danger" onClick={() => removeVehicleOption(index)} title="삭제"><Icon name="delete" /></button>
+                                                <button type="button" className="act-btn danger" onClick={() => removeVehicleOption(index)} title="Устгах"><Icon name="delete" /></button>
                                             </div>
                                         ))}
-                                        <button type="button" className="add-line" onClick={addVehicleOption}><Icon name="add" />차량 옵션 추가</button>
+                                        <button type="button" className="add-line" onClick={addVehicleOption}><Icon name="add" />Тээврийн хэрэгслийн сонголт нэмэх</button>
                                     </div>
                                 </section>
                             </div>
@@ -2412,20 +2412,20 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                 <section className="edit-sec">
                                     <div className="edit-sec-head">
                                         <Icon name="check_circle" style={{ color: 'var(--mrt-green)' }} />
-                                        <h4>포함 사항</h4>
+                                        <h4>Багтсан зүйл</h4>
                                     </div>
                                     <div className="stack" style={{ gap: 8 }}>
                                         {formData.included?.map((item, index) => (
                                             <div className="row" style={{ gap: 8 }} key={index}>
                                                 <Icon name="check_circle" style={{ color: 'var(--mrt-green)', fontSize: 18, flex: 'none' }} />
                                                 <span style={{ flex: 1, fontSize: 13.5, color: 'var(--text-body)' }}>{item}</span>
-                                                <button type="button" className="act-btn danger" onClick={() => removeIncluded(index)} title="삭제"><Icon name="close" /></button>
+                                                <button type="button" className="act-btn danger" onClick={() => removeIncluded(index)} title="Устгах"><Icon name="close" /></button>
                                             </div>
                                         ))}
                                         <input
                                             type="text"
                                             className="inp"
-                                            placeholder="포함 항목 입력 후 Enter"
+                                            placeholder="Багтсан зүйлийг бичээд Enter дарна уу"
                                             onKeyPress={(e) => {
                                                 if (e.key === 'Enter') {
                                                     e.preventDefault();
@@ -2441,20 +2441,20 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                 <section className="edit-sec">
                                     <div className="edit-sec-head">
                                         <Icon name="cancel" style={{ color: 'var(--mrt-red)' }} />
-                                        <h4>불포함 사항</h4>
+                                        <h4>Багтаагүй зүйл</h4>
                                     </div>
                                     <div className="stack" style={{ gap: 8 }}>
                                         {formData.excluded?.map((item, index) => (
                                             <div className="row" style={{ gap: 8 }} key={index}>
                                                 <Icon name="cancel" style={{ color: 'var(--mrt-red)', fontSize: 18, flex: 'none' }} />
                                                 <span style={{ flex: 1, fontSize: 13.5, color: 'var(--text-body)' }}>{item}</span>
-                                                <button type="button" className="act-btn danger" onClick={() => removeExcluded(index)} title="삭제"><Icon name="close" /></button>
+                                                <button type="button" className="act-btn danger" onClick={() => removeExcluded(index)} title="Устгах"><Icon name="close" /></button>
                                             </div>
                                         ))}
                                         <input
                                             type="text"
                                             className="inp"
-                                            placeholder="불포함 항목 입력 후 Enter"
+                                            placeholder="Багтаагүй зүйлийг бичээд Enter дарна уу"
                                             onKeyPress={(e) => {
                                                 if (e.key === 'Enter') {
                                                     e.preventDefault();
@@ -2472,10 +2472,10 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                     {/* Footer */}
                     <div className="card-pad row" style={{ justifyContent: 'flex-end', gap: 10, borderTop: '1px solid var(--border-subtle)' }}>
                         <button type="button" onClick={onClose} className="btn btn-ghost">
-                            취소
+                            Цуцлах
                         </button>
                         <button type="submit" className="btn btn-ink">
-                            <Icon name="check" />{product ? '수정 완료' : '추가 완료'}
+                            <Icon name="check" />{product ? 'Засаж дуусгах' : 'Нэмж дуусгах'}
                         </button>
                     </div>
                 </form>
@@ -2498,7 +2498,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
 
 // ============================================================================
 // Itinerary Quick Actions — bulk image upload zone + N-day skeleton macro.
-// Lives at the top of the "일정" tab so adding many photos or stamping out a
+// Lives at the top of the "Itinerary" tab so adding many photos or stamping out a
 // multi-day skeleton is one click away instead of a clicking marathon.
 // ============================================================================
 interface ItineraryQuickActionsProps {
@@ -2583,11 +2583,11 @@ const ItineraryQuickActions: React.FC<ItineraryQuickActionsProps> = ({
                     <div style={{ flex: 1, minWidth: 0 }}>
                         <div className="cell-strong" style={{ marginBottom: 2 }}>
                             {uploading
-                                ? `업로드 중... ${progress ? `${progress.done} / ${progress.total}` : ''}`
-                                : '이미지 한 번에 업로드'}
+                                ? `Байршуулж байна... ${progress ? `${progress.done} / ${progress.total}` : ''}`
+                                : 'Зургийг нэг дор байршуулах'}
                         </div>
                         <div className="cell-muted" style={{ fontSize: 12, lineHeight: 1.5 }}>
-                            여러 장의 사진을 이 박스에 드래그하거나 클릭해서 선택하세요. 각 사진이 자동으로 일정 끝에 추가됩니다.
+                            Хэд хэдэн зургийг энэ хайрцагт чирэх эсвэл дарж сонгоно уу. Зураг бүр автоматаар хөтөлбөрийн төгсгөлд нэмэгдэнэ.
                         </div>
                     </div>
                     {!uploading && (
@@ -2602,13 +2602,13 @@ const ItineraryQuickActions: React.FC<ItineraryQuickActionsProps> = ({
                     <Icon name="calendar_view_day" />
                 </span>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                    <div className="cell-strong" style={{ color: '#8a5a12' }}>N일 일정 골격 만들기</div>
+                    <div className="cell-strong" style={{ color: '#8a5a12' }}>N өдрийн хөтөлбөрийн араг яс үүсгэх</div>
                     <div style={{ fontSize: 12, color: '#9a6a22', marginTop: 2 }}>
-                        1日目 ~ N日目 헤더와 구분선을 한 번에 생성합니다. 각 날짜는 펼쳐서 내용 채우세요.
+                        1日目 ~ N日目 толгой ба зураасыг нэг дор үүсгэнэ. Өдөр бүрийг дэлгэж агуулгыг бөглөнө үү.
                     </div>
                 </div>
                 <div className="row" style={{ gap: 8, flex: 'none' }}>
-                    <label style={{ fontSize: 12, fontWeight: 600, color: '#8a5a12' }}>일수</label>
+                    <label style={{ fontSize: 12, fontWeight: 600, color: '#8a5a12' }}>Өдрийн тоо</label>
                     <select
                         value={skeletonDays}
                         onChange={(e) => setSkeletonDays(Number(e.target.value))}
@@ -2617,7 +2617,7 @@ const ItineraryQuickActions: React.FC<ItineraryQuickActionsProps> = ({
                     >
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
                             <option key={n} value={n}>
-                                {n}일
+                                {n} өдөр
                             </option>
                         ))}
                     </select>
@@ -2626,7 +2626,7 @@ const ItineraryQuickActions: React.FC<ItineraryQuickActionsProps> = ({
                         onClick={() => onSkeleton(skeletonDays)}
                         className="btn btn-ink btn-sm"
                     >
-                        <Icon name="add" />생성
+                        <Icon name="add" />Үүсгэх
                     </button>
                 </div>
             </div>

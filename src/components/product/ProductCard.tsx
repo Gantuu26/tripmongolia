@@ -20,7 +20,7 @@ export const ProductCard = memo(({ product, className = '', imageHeight = 'aspec
             <div className={`relative w-full ${imageHeight} bg-gray-100 dark:bg-gray-800 overflow-hidden`}>
                 <img
                     src={optimizeImage(product.mainImages[0], { width: 400 })} // Only width to maintain aspect ratio
-                    alt={`${product.name}｜モンゴル旅行・モンゴルツアー`}
+                    alt={`${product.name}｜몽골여행・몽골투어`}
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
@@ -39,7 +39,7 @@ export const ProductCard = memo(({ product, className = '', imageHeight = 'aspec
                     {product.name}
                 </p>
                 <p className="text-sm font-bold text-primary">
-                    ¥{typeof product.price === 'number' ? product.price.toLocaleString() : (product.price || 0)}~
+                    ₩{typeof product.price === 'number' ? product.price.toLocaleString() : (product.price || 0)}~
                 </p>
             </div>
         </div>

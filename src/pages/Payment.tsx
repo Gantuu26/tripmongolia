@@ -301,7 +301,7 @@ export const Payment: React.FC = () => {
             <>
                 <SEO
                     title={`${product?.name || ''} - ${t('payment.title')}`}
-                    description="お支払いおよび予約確認ページ。"
+                    description="결제 및 예약 확인 페이지."
                 />
                 <PaymentDesktop
                     product={product}
@@ -330,7 +330,7 @@ export const Payment: React.FC = () => {
         <div className="bg-background-light dark:bg-background-dark min-h-screen font-display">
             <SEO 
                 title={`${product?.name || ''} - ${t('payment.title')}`}
-                description="お支払いおよび予約確認ページ。詳細を確認して予約を確定させてください。"
+                description="결제 및 예약 확인 페이지입니다. 상세 내용을 확인하시고 예약을 확정해주세요."
             />
             <div className="max-w-[430px] mx-auto bg-white dark:bg-zinc-900 min-h-screen flex flex-col relative overflow-x-hidden shadow-2xl">
 
@@ -467,18 +467,18 @@ export const Payment: React.FC = () => {
                     <div className="h-2 bg-gray-50 dark:bg-zinc-800/30"></div>
 
                     <div className="px-5 py-8">
-                        <h3 className="text-[#0e1a18] dark:text-white text-lg font-bold mb-6">{t('payment.paypal_invoice_title', { defaultValue: '予約金のお支払いについて' })}</h3>
+                        <h3 className="text-[#0e1a18] dark:text-white text-lg font-bold mb-6">{t('payment.paypal_invoice_title', { defaultValue: '예약금 결제 안내' })}</h3>
                         <div className="border border-blue-100 dark:border-blue-900/50 rounded-2xl bg-blue-50/50 dark:bg-blue-900/10 overflow-hidden shadow-sm">
                             <div className="flex items-center gap-4 p-5">
                                 <div className="size-12 bg-white dark:bg-zinc-800 rounded-full flex items-center justify-center shadow-sm shrink-0">
                                     <span className="material-symbols-outlined text-[#003087] text-2xl">mail</span>
                                 </div>
                                 <div className="flex-1">
-                                    <p className="text-[#0e1a18] dark:text-white font-bold text-[15px] mb-1">{t('payment.paypal_invoice_method', { defaultValue: 'PayPal 請求書 (Eメール)' })}</p>
+                                    <p className="text-[#0e1a18] dark:text-white font-bold text-[15px] mb-1">{t('payment.paypal_invoice_method', { defaultValue: 'PayPal 청구서 (이메일)' })}</p>
                                     <p className="text-[13px] text-gray-600 dark:text-gray-400 leading-relaxed">
-                                        {t('payment.paypal_invoice_desc1', { defaultValue: '予約申し込み完了後、ご入力いただいたメールアドレス宛にPayPalの請求書をお送りいたします。' })}
+                                        {t('payment.paypal_invoice_desc1', { defaultValue: '예약 신청 완료 후, 입력해주신 이메일 주소로 PayPal 청구서를 보내드립니다.' })}
                                         <br />
-                                        {t('payment.paypal_invoice_desc2', { defaultValue: 'メール内のリンクから、クレジットカード等で安全にお支払いいただけます。' })}
+                                        {t('payment.paypal_invoice_desc2', { defaultValue: '이메일 내 링크를 통해 신용카드 등으로 안전하게 결제하실 수 있습니다.' })}
                                     </p>
                                 </div>
                             </div>
@@ -489,7 +489,7 @@ export const Payment: React.FC = () => {
                                 {t('payment.deposit_notices.title')}
                             </p>
                             <ul className="text-xs text-gray-500 dark:text-gray-400 space-y-2 list-disc pl-4">
-                                <li>{t('payment.paypal_notices.check_email', { defaultValue: '請求書メールにお支払い期限が記載されています。期限内に決済をお願いします。' })}</li>
+                                <li>{t('payment.paypal_notices.check_email', { defaultValue: '청구서 이메일에 결제 기한이 기재되어 있습니다. 기한 내에 결제 부탁드립니다.' })}</li>
                                 <li>{t('payment.deposit_notices.auto_cancel')}</li>
                                 <li>{t('payment.japan_support')}</li>
                                 <li>{t('payment.deposit_notices.local_payment')}</li>

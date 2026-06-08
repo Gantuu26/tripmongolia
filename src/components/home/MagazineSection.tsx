@@ -28,17 +28,17 @@ export const MagazineSection: React.FC<MagazineSectionProps> = ({ magazines }) =
             <div className="px-5 mb-5 flex flex-col gap-1.5">
                 <div className="flex items-start justify-between gap-4">
                     <h3 className="text-[17px] sm:text-[19px] font-black text-[#0e1a18] dark:text-white leading-snug break-keep flex-1">
-                        {t('home.magazine.title', { defaultValue: '今出発する良い旅行コースおすすめ！' })}
+                        {t('home.magazine.title', { defaultValue: '지금 떠나기 좋은 여행 코스 추천!' })}
                     </h3>
                     <button
                         onClick={() => navigate('/travel-guide')}
                         className="text-[13px] sm:text-[15px] font-bold text-[#0D7A66] dark:text-[#18c9a6] flex items-center shrink-0 mt-0.5 active:scale-95 transition-transform"
                     >
-                        {t('home.magazine.view_all', { defaultValue: '全て見る' })} <span className="material-symbols-outlined text-base sm:text-lg ml-0.5">chevron_right</span>
+                        {t('home.magazine.view_all', { defaultValue: '전체보기' })} <span className="material-symbols-outlined text-base sm:text-lg ml-0.5">chevron_right</span>
                     </button>
                 </div>
                 <p className="text-[12px] sm:text-[13px] text-gray-500">
-                    {t('home.magazine.subtitle', { defaultValue: 'モンゴリアの天の川が厳選した最高の目的地' })}
+                    {t('home.magazine.subtitle', { defaultValue: '몽골리아 은하수가 엄선한 최고의 여행지' })}
                 </p>
             </div>
 
@@ -55,7 +55,7 @@ export const MagazineSection: React.FC<MagazineSectionProps> = ({ magazines }) =
                             {item.image ? (
                                 <img
                                     src={getOptimizedImageUrl(item.image, 'productThumbnail')}
-                                    alt={`${item.title}｜モンゴル旅行ガイド・旅マガジン`}
+                                    alt={`${item.title}｜몽골여행 가이드·여행 매거진`}
                                     width={280}
                                     height={400}
                                     loading="lazy"
@@ -83,7 +83,7 @@ export const MagazineSection: React.FC<MagazineSectionProps> = ({ magazines }) =
                         <div className="absolute bottom-0 left-0 w-full p-4 sm:p-5 text-left z-10 flex flex-col gap-2">
                             {/* Category Tag */}
                             <span className="inline-block self-start px-2 py-0.5 bg-white text-primary rounded-md text-[10px] sm:text-[11px] font-bold tracking-wide shadow-sm">
-                                {item.category || t('home.magazine.default_category', { defaultValue: '準備' })}
+                                {item.category || t('home.magazine.default_category', { defaultValue: '준비' })}
                             </span>
 
                             {/* Title */}

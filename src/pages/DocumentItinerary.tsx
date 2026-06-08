@@ -84,37 +84,37 @@ const ACTIVITY_ICON: Record<string, string> = {
 };
 
 const ACTIVITY_LABEL: Record<string, string> = {
-    pickup: '送迎',
-    transport: '移動',
-    meal: '食事',
-    sightseeing: '観光',
-    activity: '体験',
-    checkin: '宿泊',
-    free: '自由時間',
-    other: 'ご案内',
+    pickup: '픽업/샌딩',
+    transport: '이동',
+    meal: '식사',
+    sightseeing: '관광',
+    activity: '체험',
+    checkin: '숙박',
+    free: '자유 시간',
+    other: '안내',
 };
 
 const fallbackIncluded = [
-    { icon: 'hiking', label: 'モンゴル伝統衣装体験' },
-    { icon: 'pets', label: '乗馬体験' },
-    { icon: 'local_taxi', label: '専用車・ドライバー' },
-    { icon: 'hotel', label: '宿泊' },
-    { icon: 'restaurant', label: '食事付き' },
-    { icon: 'support_agent', label: '日本語ガイド' },
+    { icon: 'hiking', label: '몽골 전통 의상 체험' },
+    { icon: 'pets', label: '승마 체험' },
+    { icon: 'local_taxi', label: '전용차・기사' },
+    { icon: 'hotel', label: '숙박' },
+    { icon: 'restaurant', label: '식사 포함' },
+    { icon: 'support_agent', label: '한국어 가이드' },
 ];
 
 const formatDate = (iso?: string) => {
     if (!iso) return '-';
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return iso;
-    return d.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' });
+    return d.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' });
 };
 
 const formatShortDate = (iso?: string) => {
     if (!iso) return '-';
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return iso;
-    return d.toLocaleDateString('ja-JP', { month: 'numeric', day: 'numeric', weekday: 'short' });
+    return d.toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric', weekday: 'short' });
 };
 
 const computeDuration = (start?: string, end?: string) => {
@@ -175,7 +175,7 @@ export const DocumentItinerary: React.FC = () => {
                 const res = await api.documents.itinerary.get(reservationId);
                 setData(res);
             } catch (e: any) {
-                setError(e.message || '日程表を読み込めませんでした。');
+                setError(e.message || '일정표를 불러오지 못했습니다.');
             } finally {
                 setLoading(false);
             }
@@ -183,7 +183,7 @@ export const DocumentItinerary: React.FC = () => {
     }, [reservationId]);
 
     const issuedDate = useMemo(() => {
-        return new Date().toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+        return new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' });
     }, []);
 
     if (loading) {
@@ -199,8 +199,8 @@ export const DocumentItinerary: React.FC = () => {
             <div className="min-h-screen flex items-center justify-center bg-slate-100 p-6">
                 <div className="max-w-sm rounded-2xl bg-white p-6 text-center shadow-sm border border-[#8FE7DE]/70">
                     <span className="material-symbols-outlined text-4xl text-slate-300">event_busy</span>
-                    <p className="mt-3 text-lg font-bold text-slate-800">日程表を表示できません</p>
-                    <p className="mt-1 text-sm text-slate-500">{error || 'URLをご確認ください。'}</p>
+                    <p className="mt-3 text-lg font-bold text-slate-800">일정표를 표시할 수 없습니다</p>
+                    <p className="mt-1 text-sm text-slate-500">{error || 'URL을 확인해 주세요.'}</p>
                 </div>
             </div>
         );
@@ -241,13 +241,13 @@ export const DocumentItinerary: React.FC = () => {
                             <div className="flex items-center gap-3 text-[#0F8F84]">
                                 <span className="material-symbols-outlined text-[34px]">landscape</span>
                                 <div>
-                                    <p className="text-base font-black">モンゴル銀河旅行社</p>
+                                    <p className="text-base font-black">몽골 은하수 여행사</p>
                                     <p className="text-[10px] font-bold tracking-[0.2em]">MILKYWAY JAPAN</p>
                                 </div>
                             </div>
                             <div className="text-left sm:text-right">
-                                <h1 className="text-2xl font-black tracking-[0.14em] text-[#0F8F84] sm:text-3xl">ご旅行日程表</h1>
-                                <p className="mt-1 text-sm font-semibold text-slate-500">{overview.subtitle || '銀河の下で、大自然と文化を体験する特別な旅へ'}</p>
+                                <h1 className="text-2xl font-black tracking-[0.14em] text-[#0F8F84] sm:text-3xl">여행 일정표</h1>
+                                <p className="mt-1 text-sm font-semibold text-slate-500">{overview.subtitle || '은하수 아래에서 대자연과 문화를 체험하는 특별한 여행으로'}</p>
                             </div>
                         </div>
                     </section>
@@ -257,7 +257,7 @@ export const DocumentItinerary: React.FC = () => {
                         <div className="absolute inset-0 bg-gradient-to-r from-[#00796F]/95 via-[#0F8F84]/60 to-transparent" />
                         <div className="absolute bottom-7 left-5 right-5 text-white sm:left-8">
                             <span className="inline-flex rounded-xl bg-[#0F8F84] px-4 py-2 text-sm font-black">
-                                {duration ? `${duration.nights}泊${duration.days}日` : `${days.length}日間`}
+                                {duration ? `${duration.nights}박 ${duration.days}일` : `${days.length}일간`}
                             </span>
                             <h2 className="mt-4 max-w-2xl text-3xl font-black leading-tight sm:text-4xl">{template?.name || reservation.productName}</h2>
                             <p className="mt-2 max-w-2xl whitespace-pre-wrap text-sm font-semibold leading-relaxed text-white/90">
@@ -269,24 +269,24 @@ export const DocumentItinerary: React.FC = () => {
                     <section className="grid gap-5 border-b border-[#8FE7DE]/70 px-5 py-6 sm:grid-cols-[1.1fr_0.9fr] sm:px-8">
                         <div>
                             <h3 className="mb-3 flex items-center gap-2 text-base font-black text-[#0F8F84]">
-                                <span className="material-symbols-outlined text-[20px]">check_circle</span>ご旅行概要
+                                <span className="material-symbols-outlined text-[20px]">check_circle</span>여행 개요
                             </h3>
                             <div className="overflow-hidden rounded-xl border border-[#8FE7DE]/70">
-                                <InfoRow label="ご旅行番号" value={documentNumber} />
-                                <InfoRow label="ご旅行期間" value={`${formatDate(reservation.startDate)} 〜 ${formatDate(reservation.endDate)}`} />
-                                <InfoRow label="参加人数" value={`${reservation.travelers || '-'}名`} />
-                                <InfoRow label="お客様名" value={`${reservation.customerName || '-'} 様`} />
-                                <InfoRow label="旅行商品" value={reservation.productName} />
-                                <InfoRow label="発行日" value={issuedDate} />
+                                <InfoRow label="여행 번호" value={documentNumber} />
+                                <InfoRow label="여행 기간" value={`${formatDate(reservation.startDate)} ~ ${formatDate(reservation.endDate)}`} />
+                                <InfoRow label="참가 인원" value={`${reservation.travelers || '-'}명`} />
+                                <InfoRow label="고객명" value={`${reservation.customerName || '-'} 님`} />
+                                <InfoRow label="여행 상품" value={reservation.productName} />
+                                <InfoRow label="발행일" value={issuedDate} />
                             </div>
                         </div>
                         <div>
                             <h3 className="mb-3 flex items-center gap-2 text-base font-black text-[#0F8F84]">
-                                <span className="material-symbols-outlined text-[20px]">info</span>ご案内
+                                <span className="material-symbols-outlined text-[20px]">info</span>안내
                             </h3>
                             <div className="rounded-xl border border-[#8FE7DE]/70 bg-[#39C4B7]/10 p-4">
                                 <p className="whitespace-pre-wrap text-sm font-semibold leading-relaxed text-[#064E48]">
-                                    {overview.intro || 'ご予約内容に基づき、旅行概要・日程・代金をまとめた確認用のご旅行日程表です。'}
+                                    {overview.intro || '예약 내용을 바탕으로 여행 개요・일정・대금을 정리한 확인용 여행 일정표입니다.'}
                                 </p>
                                 {overview.paymentNote && <p className="mt-3 text-xs font-bold leading-relaxed text-slate-500">{overview.paymentNote}</p>}
                             </div>
@@ -296,7 +296,7 @@ export const DocumentItinerary: React.FC = () => {
                     <section className="border-b border-[#8FE7DE]/70 px-5 py-6 sm:px-8">
                         <div className="grid gap-5 sm:grid-cols-2">
                             <div>
-                                <h3 className="mb-3 text-base font-black text-[#0F8F84]">含まれているもの</h3>
+                                <h3 className="mb-3 text-base font-black text-[#0F8F84]">포함 사항</h3>
                                 <ul className="space-y-1.5">
                                     {includedDisplay.map((t, i) => (
                                         <li key={i} className="flex items-start gap-2 text-sm font-semibold text-slate-700">
@@ -307,7 +307,7 @@ export const DocumentItinerary: React.FC = () => {
                             </div>
                             {excludedList.length > 0 && (
                                 <div>
-                                    <h3 className="mb-3 text-base font-black text-slate-500">含まれないもの</h3>
+                                    <h3 className="mb-3 text-base font-black text-slate-500">불포함 사항</h3>
                                     <ul className="space-y-1.5">
                                         {excludedList.map((t, i) => (
                                             <li key={i} className="flex items-start gap-2 text-sm font-semibold text-slate-500">
@@ -321,16 +321,16 @@ export const DocumentItinerary: React.FC = () => {
                         {pricePerPerson > 0 && (
                             <div className="mt-5 grid gap-3 sm:grid-cols-3">
                                 <div className="rounded-xl border border-amber-200 bg-white p-4 text-center">
-                                    <p className="text-xs font-black text-[#0F8F84]">旅行代金（一人あたり）</p>
-                                    <p className="mt-1 text-2xl font-black text-[#0F8F84]">{pricePerPerson.toLocaleString('ja-JP')}円</p>
+                                    <p className="text-xs font-black text-[#0F8F84]">여행 대금(1인당)</p>
+                                    <p className="mt-1 text-2xl font-black text-[#0F8F84]">{pricePerPerson.toLocaleString('ko-KR')}원</p>
                                 </div>
                                 <div className="rounded-xl border border-[#8FE7DE]/70 bg-white p-4 text-center">
-                                    <p className="text-xs font-black text-slate-400">参加人数</p>
-                                    <p className="mt-2 text-lg font-black text-slate-700">{reservation.travelers || '-'}名</p>
+                                    <p className="text-xs font-black text-slate-400">참가 인원</p>
+                                    <p className="mt-2 text-lg font-black text-slate-700">{reservation.travelers || '-'}명</p>
                                 </div>
                                 <div className="rounded-xl bg-gradient-to-br from-[#0F8F84] to-[#39C4B7] p-4 text-center text-white">
-                                    <p className="text-xs font-black">参考合計</p>
-                                    <p className="mt-1 text-2xl font-black">{(pricePerPerson * (reservation.travelers || 1)).toLocaleString('ja-JP')}円</p>
+                                    <p className="text-xs font-black">참고 합계</p>
+                                    <p className="mt-1 text-2xl font-black">{(pricePerPerson * (reservation.travelers || 1)).toLocaleString('ko-KR')}원</p>
                                 </div>
                             </div>
                         )}
@@ -340,15 +340,15 @@ export const DocumentItinerary: React.FC = () => {
                         <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
                             <div>
                                 <p className="text-[12px] font-black uppercase tracking-widest text-teal-700">Detailed Itinerary</p>
-                                <h2 className="mt-1 text-2xl font-black text-slate-950">{detail.title || 'ご旅行日程表（詳細）'}</h2>
+                                <h2 className="mt-1 text-2xl font-black text-slate-950">{detail.title || '여행 일정표(상세)'}</h2>
                             </div>
-                            <p className="rounded-full bg-[#39C4B7]/10 px-3 py-1 text-sm font-black text-[#0F8F84]">{days.length}日間</p>
+                            <p className="rounded-full bg-[#39C4B7]/10 px-3 py-1 text-sm font-black text-[#0F8F84]">{days.length}일간</p>
                         </div>
 
                         {days.length === 0 ? (
                             <div className="rounded-xl border border-dashed border-[#8FE7DE] bg-slate-50 p-8 text-center">
                                 <span className="material-symbols-outlined text-4xl text-slate-300">edit_calendar</span>
-                                <p className="mt-2 text-sm font-bold text-slate-500">日程は現在準備中です。</p>
+                                <p className="mt-2 text-sm font-bold text-slate-500">일정은 현재 준비 중입니다.</p>
                             </div>
                         ) : (
                             <div className="space-y-4">
@@ -366,9 +366,9 @@ export const DocumentItinerary: React.FC = () => {
                                                 <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                                                     <div>
                                                         {day.region && <p className="text-[11px] font-black uppercase tracking-widest text-teal-700">{day.region}</p>}
-                                                        <h3 className="text-lg font-black text-[#0F8F84]">{day.title || `${day.day}日目`}</h3>
+                                                        <h3 className="text-lg font-black text-[#0F8F84]">{day.title || `${day.day}일차`}</h3>
                                                     </div>
-                                                    {accommodation && <Chip>宿泊：{accommodation.name}</Chip>}
+                                                    {accommodation && <Chip>숙박：{accommodation.name}</Chip>}
                                                 </div>
 
                                                 <div className="relative ml-2 space-y-0 border-l-2 border-dashed border-[#8FE7DE] pl-5">
@@ -384,7 +384,7 @@ export const DocumentItinerary: React.FC = () => {
                                                                     <p className="font-mono text-sm font-black text-slate-400">{activity.time || '--:--'}</p>
                                                                     <div>
                                                                         <div className="flex flex-wrap items-center gap-2">
-                                                                            <p className="font-black text-slate-900">{activity.title || 'ご案内'}</p>
+                                                                            <p className="font-black text-slate-900">{activity.title || '안내'}</p>
                                                                             <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-500">{ACTIVITY_LABEL[type] || ACTIVITY_LABEL.other}</span>
                                                                         </div>
                                                                         {activity.description && <p className="mt-1 whitespace-pre-wrap text-sm leading-relaxed text-slate-500">{activity.description}</p>}
@@ -400,7 +400,7 @@ export const DocumentItinerary: React.FC = () => {
                                                             </div>
                                                         );
                                                     }) : (
-                                                        <p className="rounded-lg bg-slate-50 p-3 text-sm text-slate-500">この日の詳細は現在準備中です。</p>
+                                                        <p className="rounded-lg bg-slate-50 p-3 text-sm text-slate-500">이 날의 상세 일정은 현재 준비 중입니다.</p>
                                                     )}
                                                 </div>
 
@@ -428,11 +428,11 @@ export const DocumentItinerary: React.FC = () => {
                     <section className="border-t border-[#8FE7DE]/70 bg-[#F7FAFA] px-5 py-6 sm:px-8">
                         <div className="grid gap-4 sm:grid-cols-[1fr_280px]">
                             <div className="rounded-xl border border-[#8FE7DE]/70 bg-white p-4">
-                                <p className="font-black text-[#0F8F84]">ご案内・ご注意事項</p>
+                                <p className="font-black text-[#0F8F84]">안내・유의사항</p>
                                 <div className="mt-3 grid gap-3 sm:grid-cols-2">
                                     {(guideSettings.notices?.length ? guideSettings.notices : [
-                                        { title: '服装について', body: '朝夕は冷え込む場合があるため、羽織れる上着をご用意ください。' },
-                                        { title: '宿泊について', body: '現地事情により同等クラスへ変更となる場合があります。' },
+                                        { title: '복장에 관하여', body: '아침저녁으로 기온이 내려갈 수 있으니 걸칠 수 있는 겉옷을 준비해 주세요.' },
+                                        { title: '숙박에 관하여', body: '현지 사정에 따라 동급 등급으로 변경될 수 있습니다.' },
                                     ]).map((notice, index) => (
                                         <div key={`${notice.title}-${index}`} className="flex gap-2">
                                             <span className="material-symbols-outlined text-[20px] text-[#0F8F84]">info</span>
@@ -469,7 +469,7 @@ export const DocumentItinerary: React.FC = () => {
                             className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-teal-700 px-5 text-sm font-bold text-white transition-colors hover:bg-teal-800"
                         >
                             <span className="material-symbols-outlined text-base">print</span>
-                            印刷 / PDF保存
+                            인쇄 / PDF 저장
                         </button>
                     </div>
                 </main>

@@ -147,33 +147,33 @@ export function BookingSummary({
                 <div style={{ padding: '20px 22px 0' }}>
                     <SummaryRow
                         icon="calendar_month"
-                        k="旅行期間"
+                        k="여행 기간"
                         v={
                             selectedStartDate && endDate
                                 ? `${fmtMD(selectedStartDate)} 〜 ${fmtMD(endDate)}`
-                                : '未選択'
+                                : '미선택'
                         }
-                        sub={`${nights}泊${days}日`}
+                        sub={`${nights}박${days}일`}
                     />
                     <SummaryRow
                         icon="group"
-                        k="人数"
-                        v={`${people} 名`}
-                        sub={`お1人様 ¥${formatPrice(perPax)}`}
+                        k="인원"
+                        v={`${people} 명`}
+                        sub={`1인당 ₩${formatPrice(perPax)}`}
                     />
                     {accommodationLabel && (
                         <SummaryRow
                             icon="bed"
-                            k="宿泊"
+                            k="숙박"
                             v={accommodationLabel}
                             sub={accommodationSub}
                         />
                     )}
                     <SummaryRow
                         icon="directions_car"
-                        k="車両"
-                        v={vehicleLabel ?? '基本車両 (自動手配)'}
-                        sub={vehicleSub ?? '追加料金なし'}
+                        k="차량"
+                        v={vehicleLabel ?? '기본 차량 (자동 배차)'}
+                        sub={vehicleSub ?? '추가 요금 없음'}
                         last
                     />
                 </div>
@@ -195,8 +195,8 @@ export function BookingSummary({
                             color: 'var(--fg-4)',
                         }}
                     >
-                        <span>お一人様 × {people} 名</span>
-                        <span>¥{formatPrice(perPax * people)}</span>
+                        <span>1인당 × {people} 명</span>
+                        <span>₩{formatPrice(perPax * people)}</span>
                     </div>
                 </div>
 
@@ -218,7 +218,7 @@ export function BookingSummary({
                     >
                         <div>
                             <div style={{ fontSize: 11, color: 'var(--fg-5)', fontWeight: 600 }}>
-                                リアルタイム予想合計
+                                실시간 예상 합계
                             </div>
                             <div
                                 style={{
@@ -229,7 +229,7 @@ export function BookingSummary({
                                     marginTop: 2,
                                 }}
                             >
-                                ¥{formatPrice(total)}
+                                ₩{formatPrice(total)}
                             </div>
                         </div>
                         <div
@@ -287,7 +287,7 @@ export function BookingSummary({
                         }}
                     >
                         <div>
-                            <div style={{ color: 'var(--fg-5)' }}>予約金</div>
+                            <div style={{ color: 'var(--fg-5)' }}>예약금</div>
                             <div
                                 style={{
                                     fontWeight: 700,
@@ -295,13 +295,13 @@ export function BookingSummary({
                                     marginTop: 2,
                                 }}
                             >
-                                ¥{formatPrice(deposit)}
+                                ₩{formatPrice(deposit)}
                             </div>
                         </div>
                         <div>
-                            <div style={{ color: 'var(--fg-5)' }}>現地支払い</div>
+                            <div style={{ color: 'var(--fg-5)' }}>현지 결제</div>
                             <div style={{ fontWeight: 700, color: 'var(--fg-2)', marginTop: 2 }}>
-                                ¥{formatPrice(local)}
+                                ₩{formatPrice(local)}
                             </div>
                         </div>
                     </div>
@@ -375,7 +375,7 @@ export function BookingSummary({
                             color="var(--primary-dark, #115e59)"
                         />
                         <span>
-                            <strong>無料キャンセル</strong> — 出発30日前まで全額返金
+                            <strong>무료 취소</strong> — 출발 30일 전까지 전액 환불
                         </span>
                     </div>
                 </div>

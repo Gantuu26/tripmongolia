@@ -12,10 +12,10 @@ export const EstimateDetail: React.FC = () => {
 
     const handleReservationRequest = async () => {
         const confirmed = await showConfirm({
-            title: '予約相談の申し込み',
-            message: '予約相談を申し込みますか？\nお申し込み後、担当者が確認してご案内いたします。',
-            confirmText: '申し込む',
-            cancelText: 'キャンセル',
+            title: '예약 상담 신청',
+            message: '예약 상담을 신청하시겠습니까?\n신청 후 담당자가 확인하여 안내해 드립니다.',
+            confirmText: '신청하기',
+            cancelText: '취소',
             type: 'info'
         });
 
@@ -25,21 +25,21 @@ export const EstimateDetail: React.FC = () => {
             const { error } = await (api.quotes as any).update(id, { status: 'reservation_requested' });
             if (error) throw error;
 
-            setEstimate((prev: any) => ({ ...prev, adminStatus: 'reservation_requested', statusLabel: '予約リクエスト済' }));
-            showToast('success', '予約相談のお申し込みを受け付けました。担当者が確認後、すぐにご連絡いたします。');
+            setEstimate((prev: any) => ({ ...prev, adminStatus: 'reservation_requested', statusLabel: '예약 요청 완료' }));
+            showToast('success', '예약 상담 신청을 접수했습니다. 담당자가 확인 후 곧 연락드리겠습니다.');
         } catch (error) {
             console.error("Failed to update status:", error);
-            showToast('error', 'エラーが発生しました。もう一度お試しください。');
+            showToast('error', '오류가 발생했습니다. 다시 시도해 주세요.');
         }
     };
 
     const handleConfirmReservation = async () => {
         // 1. Confirm Dialog
         const confirmed = await showConfirm({
-            title: '予約リクエスト',
-            message: 'この見積内容で予約を進めますか？',
-            confirmText: '予約リクエスト',
-            cancelText: 'キャンセル',
+            title: '예약 요청',
+            message: '이 견적 내용으로 예약을 진행하시겠습니까?',
+            confirmText: '예약 요청',
+            cancelText: '취소',
             type: 'info'
         });
 
@@ -48,7 +48,7 @@ export const EstimateDetail: React.FC = () => {
         try {
             const me = await api.auth.me();
             if (!me) {
-                showToast('error', 'ログインが必要です。');
+                showToast('error', '로그인이 필요합니다.');
                 navigate('/login');
                 return;
             }
@@ -78,7 +78,7 @@ export const EstimateDetail: React.FC = () => {
                     quoteId: id,
                     product: {
                         id: id,
-                        name: estimate.title || `${estimate.destinations?.[0] || 'オーダーメイド'} 旅行`,
+                        name: estimate.title || `${estimate.destinations?.[0] || '맞춤'} 여행`,
                         duration: estimate.date || '',
                         price: confirmedTotalPrice,
                     },
@@ -98,7 +98,7 @@ export const EstimateDetail: React.FC = () => {
 
         } catch (error) {
             console.error("Failed to proceed:", error);
-            showToast('error', 'エラーが発生しました。');
+            showToast('error', '오류가 발생했습니다.');
         }
     };
 
@@ -118,7 +118,7 @@ export const EstimateDetail: React.FC = () => {
                         return [trimmed];
                     }
                 }
-                // Comma-separated fallback (e.g. "中央モンゴル, ゴビ砂漠")
+                // Comma-separated fallback (e.g. "중앙몽골, 고비사막")
                 return trimmed.split(/,\s*/).filter(Boolean);
             }
             return [];
@@ -132,21 +132,21 @@ export const EstimateDetail: React.FC = () => {
                 const createdAtRaw = data.created_at || data.createdAt;
                 const createdAtDate = createdAtRaw ? new Date(createdAtRaw) : null;
                 const createdAtStr = createdAtDate && !isNaN(createdAtDate.getTime())
-                    ? createdAtDate.toLocaleDateString('ko-KR') + ' リクエスト'
-                    : 'リクエスト';
+                    ? createdAtDate.toLocaleDateString('ko-KR') + ' 요청'
+                    : '요청';
 
                 setEstimate({
                     id: data.id,
                     status: data.status,
                     statusLabel:
-                        data.status === 'converted' ? '予約確定済' :
-                            data.status === 'reservation_requested' ? '予約リクエスト済' :
-                                data.status === 'answered' ? 'お見積り到着' :
-                                    data.status === 'processing' ? 'お見積り作成中' : '受付完了',
+                        data.status === 'converted' ? '예약 확정 완료' :
+                            data.status === 'reservation_requested' ? '예약 요청 완료' :
+                                data.status === 'answered' ? '견적 도착' :
+                                    data.status === 'processing' ? '견적 작성 중' : '접수 완료',
                     adminStatus: data.status,
-                    title: data.title || `${data.destination || 'オーダーメイド'} 旅行見積もり`,
+                    title: data.title || `${data.destination || '맞춤'} 여행 견적`,
                     date: data.travel_dates || data.period,
-                    type: data.trip_type || 'オーダーメイド',
+                    type: data.trip_type || '맞춤',
                     people: data.travelers || data.headcount,
                     requestDate: createdAtStr,
                     destinations: asArray(data.destination),
@@ -175,8 +175,8 @@ export const EstimateDetail: React.FC = () => {
         return (
             <div className="bg-background-light dark:bg-background-dark font-display antialiased min-h-screen flex justify-center w-full">
                 <div className="relative flex h-full min-h-screen w-full max-w-[480px] flex-col bg-gray-50 dark:bg-zinc-900 shadow-xl overflow-x-hidden items-center justify-center">
-                    <p className="text-gray-500">お見積り情報が見つかりません。</p>
-                    <button onClick={() => navigate(-1)} className="mt-4 text-primary font-bold">戻る</button>
+                    <p className="text-gray-500">견적 정보를 찾을 수 없습니다.</p>
+                    <button onClick={() => navigate(-1)} className="mt-4 text-primary font-bold">뒤로</button>
                 </div>
             </div>
         );
@@ -193,7 +193,7 @@ export const EstimateDetail: React.FC = () => {
                     >
                         <span className="material-symbols-outlined text-2xl">arrow_back</span>
                     </button>
-                    <h1 className="text-lg font-bold text-text-main dark:text-white flex-1 text-center pr-8">見積り詳細</h1>
+                    <h1 className="text-lg font-bold text-text-main dark:text-white flex-1 text-center pr-8">견적 상세</h1>
                 </div>
 
                 <div className="px-5 pt-6 flex flex-col gap-6">
@@ -217,7 +217,7 @@ export const EstimateDetail: React.FC = () => {
                                     }`}>
                                     <span className="material-symbols-outlined text-white text-[12px] font-bold">check</span>
                                 </div>
-                                <span className={`text-[11px] font-bold ${true ? 'text-primary' : 'text-gray-400'}`}>お見積り受付</span>
+                                <span className={`text-[11px] font-bold ${true ? 'text-primary' : 'text-gray-400'}`}>견적 접수</span>
                             </div>
 
                             {/* Step 2: 작성 */}
@@ -237,7 +237,7 @@ export const EstimateDetail: React.FC = () => {
                                 <span className={`text-[11px] font-bold ${estimate.adminStatus === 'processing' || estimate.adminStatus === 'answered' || estimate.adminStatus === 'converted' || estimate.status === 'answered' || estimate.adminStatus === 'reservation_requested'
                                     ? 'text-primary'
                                     : 'text-gray-400'
-                                    }`}>お見積り作成</span>
+                                    }`}>견적 작성</span>
                             </div>
 
                             {/* Step 3: 발송 */}
@@ -255,7 +255,7 @@ export const EstimateDetail: React.FC = () => {
                                 <span className={`text-[11px] font-bold ${estimate.adminStatus === 'answered' || estimate.adminStatus === 'converted' || estimate.status === 'answered' || estimate.adminStatus === 'reservation_requested'
                                     ? 'text-primary'
                                     : 'text-gray-400'
-                                    }`}>送信完了</span>
+                                    }`}>전송 완료</span>
                             </div>
                         </div>
                     </div>
@@ -274,19 +274,19 @@ export const EstimateDetail: React.FC = () => {
                                             <span className="material-symbols-outlined text-2xl text-white">verified</span>
                                         </div>
                                         <div className="flex-1">
-                                            <h3 className="font-bold text-lg text-white mb-0.5">ご予約を承りました！</h3>
-                                            <p className="text-white/70 text-sm">ご予約金のご入金後に最終確定となります</p>
+                                            <h3 className="font-bold text-lg text-white mb-0.5">예약을 접수했습니다!</h3>
+                                            <p className="text-white/70 text-sm">예약금 입금 후 최종 확정됩니다</p>
                                         </div>
                                     </div>
 
                                     <div className="bg-white/15 backdrop-blur-sm rounded-xl p-4 mb-4 border border-white/10">
                                         <div className="flex items-center gap-2 mb-2">
                                             <span className="material-symbols-outlined text-white/80 text-sm">info</span>
-                                            <span className="text-white/90 text-xs font-semibold tracking-wide">次のステップ</span>
+                                            <span className="text-white/90 text-xs font-semibold tracking-wide">다음 단계</span>
                                         </div>
                                         <p className="text-white text-sm leading-relaxed">
-                                            マイ予約ページから <span className="font-semibold bg-white/20 px-1.5 py-0.5 rounded">振込先口座</span> と
-                                            <span className="font-semibold bg-white/20 px-1.5 py-0.5 rounded ml-1">予約詳細</span> をご確認ください。
+                                            내 예약 페이지에서 <span className="font-semibold bg-white/20 px-1.5 py-0.5 rounded">입금 계좌</span> 와
+                                            <span className="font-semibold bg-white/20 px-1.5 py-0.5 rounded ml-1">예약 상세</span> 를 확인해 주세요.
                                         </p>
                                     </div>
 
@@ -295,7 +295,7 @@ export const EstimateDetail: React.FC = () => {
                                         className="w-full py-3.5 bg-white text-primary font-bold rounded-xl hover:bg-white/95 transition-all active:scale-[0.98] flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
                                     >
                                         <span className="material-symbols-outlined text-xl">arrow_forward</span>
-                                        マイ予約で確認する
+                                        내 예약에서 확인하기
                                     </button>
                                 </div>
                             </div>
@@ -325,7 +325,7 @@ export const EstimateDetail: React.FC = () => {
                                             className="flex items-center justify-center gap-2 py-3 bg-primary hover:bg-primary-dark text-white rounded-xl font-bold transition-all active:scale-[0.98] shadow-md shadow-primary/20"
                                         >
                                             <span className="material-symbols-outlined">description</span>
-                                            見積書を確認
+                                            견적서 확인
                                         </a>
                                     )}
 
@@ -336,12 +336,12 @@ export const EstimateDetail: React.FC = () => {
                                                 className={`flex items-center justify-center gap-2 py-3 bg-slate-800 hover:bg-slate-900 text-white rounded-xl font-bold transition-all active:scale-[0.98] shadow-md shadow-slate-200 dark:shadow-none ${!estimate.estimateUrl ? 'col-span-2' : ''}`}
                                             >
                                                 <span className="material-symbols-outlined">event_available</span>
-                                                予約をリクエストする
+                                                예약 요청하기
                                             </button>
                                         ) : (
                                             <div className="col-span-2 bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800/30 p-4 rounded-xl text-center">
-                                                <p className="text-sm text-amber-600 dark:text-amber-400 font-bold mb-1">ご相談の上、金額が確定次第ご予約可能となります。</p>
-                                                <p className="text-xs text-amber-500/70">管理者が金額を入力すると、予約ボタンが有効になります。</p>
+                                                <p className="text-sm text-amber-600 dark:text-amber-400 font-bold mb-1">상담 후 금액이 확정되는 대로 예약이 가능합니다.</p>
+                                                <p className="text-xs text-amber-500/70">담당자가 금액을 입력하면 예약 버튼이 활성화됩니다.</p>
                                             </div>
                                         )
                                     ) : (
@@ -354,7 +354,7 @@ export const EstimateDetail: React.FC = () => {
                                                 }`}
                                         >
                                             <span className="material-symbols-outlined">event_available</span>
-                                            {estimate.adminStatus === 'reservation_requested' ? 'お申し込み完了' : '予約相談の申し込み'}
+                                            {estimate.adminStatus === 'reservation_requested' ? '신청 완료' : '예약 상담 신청'}
                                         </button>
                                     )}
                                 </div>
@@ -362,23 +362,23 @@ export const EstimateDetail: React.FC = () => {
                                 {(estimate.confirmedPrice && estimate.confirmedPrice > 0) && (
                                     <div className="bg-gray-50 dark:bg-zinc-700/30 border border-gray-100 dark:border-zinc-700 p-4 rounded-xl space-y-3">
                                         <div className="flex justify-between items-center text-sm">
-                                            <span className="text-gray-500 dark:text-gray-400">確定金額合計</span>
-                                            <span className="font-bold text-gray-900 dark:text-white">{estimate.confirmedPrice.toLocaleString()}円</span>
+                                            <span className="text-gray-500 dark:text-gray-400">확정 금액 합계</span>
+                                            <span className="font-bold text-gray-900 dark:text-white">{estimate.confirmedPrice.toLocaleString()}원</span>
                                         </div>
                                         <div className="flex justify-between items-center text-sm">
-                                            <span className="text-primary dark:text-primary-light font-bold">今すぐお支払いいただくご予約金</span>
-                                            <span className="font-bold text-primary dark:text-primary-light">{(estimate.deposit || 0).toLocaleString()}円</span>
+                                            <span className="text-primary dark:text-primary-light font-bold">지금 결제하실 예약금</span>
+                                            <span className="font-bold text-primary dark:text-primary-light">{(estimate.deposit || 0).toLocaleString()}원</span>
                                         </div>
                                         <div className="flex justify-between items-center text-xs pt-2 border-t border-gray-200 dark:border-zinc-700">
-                                            <span className="text-gray-400">現地決済残金</span>
-                                            <span className="font-medium text-gray-600 dark:text-gray-300">{(estimate.confirmedPrice - (estimate.deposit || 0)).toLocaleString()}円</span>
+                                            <span className="text-gray-400">현지 결제 잔금</span>
+                                            <span className="font-medium text-gray-600 dark:text-gray-300">{(estimate.confirmedPrice - (estimate.deposit || 0)).toLocaleString()}원</span>
                                         </div>
                                     </div>
                                 )}
 
                                 {estimate.adminNote && (
                                     <div className="bg-gray-50 dark:bg-zinc-700/50 p-4 rounded-xl text-sm text-gray-600 dark:text-gray-300">
-                                        <p className="font-bold mb-1 text-gray-800 dark:text-gray-200">管理者メッセージ</p>
+                                        <p className="font-bold mb-1 text-gray-800 dark:text-gray-200">담당자 메시지</p>
                                         <div className="whitespace-pre-wrap">{estimate.adminNote}</div>
                                     </div>
                                 )}
@@ -391,8 +391,8 @@ export const EstimateDetail: React.FC = () => {
                         <div className="bg-white dark:bg-zinc-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-zinc-700">
                             <div className="mb-4 flex items-center gap-2">
                                 <span className="material-symbols-outlined text-primary">map</span>
-                                <h3 className="text-base font-bold text-slate-900 dark:text-white">旅行日程</h3>
-                                <span className="ml-auto text-xs font-bold text-slate-400">全{estimate.itinerary.days.length}日間</span>
+                                <h3 className="text-base font-bold text-slate-900 dark:text-white">여행 일정</h3>
+                                <span className="ml-auto text-xs font-bold text-slate-400">총 {estimate.itinerary.days.length}일간</span>
                             </div>
                             <div className="space-y-5">
                                 {estimate.itinerary.days.map((day: any, di: number) => (
@@ -423,7 +423,7 @@ export const EstimateDetail: React.FC = () => {
                                                     </div>
                                                 );
                                             })}
-                                            {(day.activities || []).length === 0 && <p className="text-xs text-slate-400">調整中</p>}
+                                            {(day.activities || []).length === 0 && <p className="text-xs text-slate-400">조율 중</p>}
                                         </div>
                                     </div>
                                 ))}
@@ -438,7 +438,7 @@ export const EstimateDetail: React.FC = () => {
                                 <span className="material-symbols-outlined text-lg">calendar_today</span>
                             </div>
                             <div>
-                                <h3 className="text-xs font-bold text-slate-400 mb-0.5">旅行日程</h3>
+                                <h3 className="text-xs font-bold text-slate-400 mb-0.5">여행 일정</h3>
                                 <p className="text-sm font-medium text-slate-900 dark:text-white">{estimate.date}</p>
                             </div>
                         </div>
@@ -447,7 +447,7 @@ export const EstimateDetail: React.FC = () => {
                                 <span className="material-symbols-outlined text-lg">diversity_3</span>
                             </div>
                             <div>
-                                <h3 className="text-xs font-bold text-slate-400 mb-0.5">旅行人数＆タイプ</h3>
+                                <h3 className="text-xs font-bold text-slate-400 mb-0.5">여행 인원＆타입</h3>
                                 <p className="text-sm font-medium text-slate-900 dark:text-white">{estimate.type} · {estimate.people}</p>
                             </div>
                         </div>
@@ -456,7 +456,7 @@ export const EstimateDetail: React.FC = () => {
                                 <span className="material-symbols-outlined text-lg">attach_money</span>
                             </div>
                             <div>
-                                <h3 className="text-xs font-bold text-slate-400 mb-0.5">希望予算負担 (1人あたり)</h3>
+                                <h3 className="text-xs font-bold text-slate-400 mb-0.5">희망 예산 (1인당)</h3>
                                 <p className="text-sm font-medium text-slate-900 dark:text-white">{estimate.priceRange} ~</p>
                             </div>
                         </div>
@@ -464,57 +464,57 @@ export const EstimateDetail: React.FC = () => {
 
                     {/* Options */}
                     <div className="bg-white dark:bg-zinc-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-zinc-700">
-                        <h3 className="text-base font-bold text-slate-900 dark:text-white mb-4">選択オプション</h3>
+                        <h3 className="text-base font-bold text-slate-900 dark:text-white mb-4">선택 옵션</h3>
                         <div className="space-y-4">
                             <div>
-                                <span className="text-xs font-bold text-slate-400 block mb-1.5">希望目的地</span>
+                                <span className="text-xs font-bold text-slate-400 block mb-1.5">희망 목적지</span>
                                 <div className="flex flex-wrap gap-1.5">
                                     {estimate.destinations?.map((item: string, idx: number) => (
                                         <span key={idx} className="px-2.5 py-1 bg-gray-50 dark:bg-zinc-700 rounded-md text-xs font-medium text-slate-600 dark:text-slate-300">{item}</span>
-                                    )) || <span className="text-sm text-slate-400">選択なし</span>}
+                                    )) || <span className="text-sm text-slate-400">선택 없음</span>}
                                 </div>
                             </div>
                             <div>
-                                <span className="text-xs font-bold text-slate-400 block mb-1.5">旅行テーマ</span>
+                                <span className="text-xs font-bold text-slate-400 block mb-1.5">여행 테마</span>
                                 <div className="flex flex-wrap gap-1.5">
                                     {estimate.themes?.map((item: string, idx: number) => (
                                         <span key={idx} className="px-2.5 py-1 bg-gray-50 dark:bg-zinc-700 rounded-md text-xs font-medium text-slate-600 dark:text-slate-300">{item}</span>
-                                    )) || <span className="text-sm text-slate-400">選択なし</span>}
+                                    )) || <span className="text-sm text-slate-400">선택 없음</span>}
                                 </div>
                             </div>
                             <div>
-                                <span className="text-xs font-bold text-slate-400 block mb-1.5">希望宿泊施設</span>
+                                <span className="text-xs font-bold text-slate-400 block mb-1.5">희망 숙박시설</span>
                                 <div className="flex flex-wrap gap-1.5">
                                     {estimate.accommodations?.map((item: string, idx: number) => (
                                         <span key={idx} className="px-2.5 py-1 bg-gray-50 dark:bg-zinc-700 rounded-md text-xs font-medium text-slate-600 dark:text-slate-300">{item}</span>
-                                    )) || <span className="text-sm text-slate-400">選択なし</span>}
+                                    )) || <span className="text-sm text-slate-400">선택 없음</span>}
                                 </div>
                             </div>
                             <div>
-                                <span className="text-xs font-bold text-slate-400 block mb-1.5">希望車両</span>
-                                <span className="px-2.5 py-1 bg-gray-50 dark:bg-zinc-700 rounded-md text-xs font-medium text-slate-600 dark:text-slate-300">{estimate.vehicle || '選択なし'}</span>
+                                <span className="text-xs font-bold text-slate-400 block mb-1.5">희망 차량</span>
+                                <span className="px-2.5 py-1 bg-gray-50 dark:bg-zinc-700 rounded-md text-xs font-medium text-slate-600 dark:text-slate-300">{estimate.vehicle || '선택 없음'}</span>
                             </div>
                         </div>
                     </div>
 
                     {/* Additional Request */}
                     <div className="bg-white dark:bg-zinc-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-zinc-700">
-                        <h3 className="text-base font-bold text-slate-900 dark:text-white mb-3">その他ご要望</h3>
+                        <h3 className="text-base font-bold text-slate-900 dark:text-white mb-3">기타 요청 사항</h3>
                         <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-wrap">
-                            {estimate.additionalRequest || 'なし'}
+                            {estimate.additionalRequest || '없음'}
                         </p>
                     </div>
 
                     {/* Contact Info */}
                     <div className="bg-white dark:bg-zinc-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-zinc-700 mb-6">
-                        <h3 className="text-base font-bold text-slate-900 dark:text-white mb-3">申込者情報</h3>
+                        <h3 className="text-base font-bold text-slate-900 dark:text-white mb-3">신청자 정보</h3>
                         <div className="space-y-2 text-sm">
                             <div className="flex justify-between">
-                                <span className="text-slate-400">名前</span>
+                                <span className="text-slate-400">이름</span>
                                 <span className="font-medium text-slate-900 dark:text-white">{estimate.contact?.name}</span>
                             </div>
                             <div className="flex justify-between">
-                                <span className="text-slate-400">電話番号</span>
+                                <span className="text-slate-400">전화번호</span>
                                 <span className="font-medium text-slate-900 dark:text-white">{estimate.contact?.phone}</span>
                             </div>
                             <div className="flex justify-between">

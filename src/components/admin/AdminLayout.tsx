@@ -19,18 +19,18 @@ interface AdminLayoutProps {
 }
 
 const EYEBROW: Record<string, string> = {
-    dashboard: '관리자 콘솔',
-    reservations: '운영', calendar: '운영', guides: '운영',
-    products: '카탈로그',
-    magazines: '콘텐츠', templates: '콘텐츠', reviews: '콘텐츠', faq: '콘텐츠',
-    banners: '사이트 설정', categories: '사이트 설정', hotels: '사이트 설정',
-    'tourist-spots': '사이트 설정', accommodations: '사이트 설정', 'guide-intro': '사이트 설정',
+    dashboard: 'Админ консол',
+    reservations: 'Үйл ажиллагаа', calendar: 'Үйл ажиллагаа', guides: 'Үйл ажиллагаа',
+    products: 'Каталог',
+    magazines: 'Контент', templates: 'Контент', reviews: 'Контент', faq: 'Контент',
+    banners: 'Сайтын тохиргоо', categories: 'Сайтын тохиргоо', hotels: 'Сайтын тохиргоо',
+    'tourist-spots': 'Сайтын тохиргоо', accommodations: 'Сайтын тохиргоо', 'guide-intro': 'Сайтын тохиргоо',
 };
 
 export const AdminLayout: React.FC<AdminLayoutProps> = ({
     activePage, title, description, eyebrow, showSearch = true, actions, children,
 }) => {
-    const eb = eyebrow || EYEBROW[activePage] || '관리자 콘솔';
+    const eb = eyebrow || EYEBROW[activePage] || 'Админ консол';
     return (
         <div className="app">
             <AdminSidebar activePage={activePage} />
@@ -49,10 +49,10 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
                             {showSearch && (
                                 <label className="search-pill">
                                     <Icon name="search" />
-                                    <input placeholder="예약번호, 고객명, 상품 검색" />
+                                    <input placeholder="Захиалгын дугаар, харилцагчийн нэр, бүтээгдэхүүн хайх" />
                                 </label>
                             )}
-                            <button className="icon-btn" title="알림" type="button">
+                            <button className="icon-btn" title="Мэдэгдэл" type="button">
                                 <Icon name="notifications" /><span className="badge-dot" />
                             </button>
                             {actions}

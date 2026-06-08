@@ -69,7 +69,7 @@ export const GuideSelectionModal: React.FC<GuideSelectionModalProps> = ({ isOpen
             <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-3xl w-full max-h-[80vh] overflow-hidden flex flex-col">
                 <div className="p-6 border-b border-slate-200 dark:border-slate-700">
                     <div className="flex items-center justify-between mb-4">
-                        <h2 className="text-xl font-bold text-slate-800 dark:text-white">가이드 선택</h2>
+                        <h2 className="text-xl font-bold text-slate-800 dark:text-white">Хөтөч сонгох</h2>
                         <button
                             onClick={onClose}
                             className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
@@ -81,7 +81,7 @@ export const GuideSelectionModal: React.FC<GuideSelectionModalProps> = ({ isOpen
                         type="text"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        placeholder="가이드 이름 검색..."
+                        placeholder="Хөтчийн нэрээр хайх..."
                         className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                     />
                 </div>
@@ -90,7 +90,7 @@ export const GuideSelectionModal: React.FC<GuideSelectionModalProps> = ({ isOpen
                     {filteredGuides.length === 0 ? (
                         <div className="text-center py-12">
                             <span className="material-symbols-outlined text-6xl text-slate-300 dark:text-slate-600 mb-4">person_off</span>
-                            <p className="text-slate-500 dark:text-slate-400">등록된 가이드가 없습니다</p>
+                            <p className="text-slate-500 dark:text-slate-400">Бүртгэгдсэн хөтөч байхгүй байна</p>
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -193,7 +193,7 @@ export const AccommodationSelectionModal: React.FC<AccommodationSelectionModalPr
             <div className="bg-white dark:bg-slate-800 rounded-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden flex flex-col">
                 <div className="p-6 border-b border-slate-200 dark:border-slate-700">
                     <div className="flex items-center justify-between mb-4">
-                        <h2 className="text-xl font-bold text-slate-800 dark:text-white">{day}일차 숙소 선택</h2>
+                        <h2 className="text-xl font-bold text-slate-800 dark:text-white">{day} дэх өдрийн байр сонгох</h2>
                         <button
                             onClick={onClose}
                             className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
@@ -205,7 +205,7 @@ export const AccommodationSelectionModal: React.FC<AccommodationSelectionModalPr
                         type="text"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        placeholder="숙소 이름 검색..."
+                        placeholder="Байрны нэрээр хайх..."
                         className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                     />
                 </div>
@@ -214,7 +214,7 @@ export const AccommodationSelectionModal: React.FC<AccommodationSelectionModalPr
                     {filteredAccommodations.length === 0 ? (
                         <div className="text-center py-12">
                             <span className="material-symbols-outlined text-6xl text-slate-300 dark:text-slate-600 mb-4">hotel</span>
-                            <p className="text-slate-500 dark:text-slate-400">등록된 숙소가 없습니다</p>
+                            <p className="text-slate-500 dark:text-slate-400">Бүртгэгдсэн байр байхгүй байна</p>
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

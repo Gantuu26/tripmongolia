@@ -83,7 +83,7 @@ class SliderBlot extends BlockEmbed {
         labelIcon.style.fontSize = '1.25rem';
         labelIcon.textContent = 'photo_library';
         const labelText = document.createElement('span');
-        labelText.textContent = `이미지 슬라이더 (${images.length}장)`;
+        labelText.textContent = `Зургийн слайдер (${images.length} ширхэг)`;
         label.appendChild(labelIcon);
         label.appendChild(labelText);
 
@@ -156,7 +156,7 @@ class LocationBlot extends BlockEmbed {
         pin.textContent = 'place';
         const titleEl = document.createElement('div');
         titleEl.style.cssText = 'font-weight: bold; color: #0f766e; font-size: 14px;';
-        titleEl.textContent = parsed.name || '(이름 없음)';
+        titleEl.textContent = parsed.name || '(Нэр байхгүй)';
         header.appendChild(pin);
         header.appendChild(titleEl);
 
@@ -174,9 +174,9 @@ class LocationBlot extends BlockEmbed {
             body.appendChild(phoneLine);
         }
         const extras: string[] = [];
-        if (parsed.mapEmbedUrl) extras.push('🗺️ 지도');
-        if (parsed.hours) extras.push('🕐 운영시간');
-        if (parsed.website) extras.push('🌐 홈페이지');
+        if (parsed.mapEmbedUrl) extras.push('🗺️ Газрын зураг');
+        if (parsed.hours) extras.push('🕐 Ажиллах цаг');
+        if (parsed.website) extras.push('🌐 Вэб хуудас');
         if (extras.length > 0) {
             const extraLine = document.createElement('div');
             extraLine.style.cssText = 'margin-top: 4px; color: #64748b; font-size: 11px;';
@@ -289,7 +289,7 @@ export const AdminMagazineManage: React.FC = () => {
                     }
                 } catch (error) {
                     console.error('Image upload failed:', error);
-                    alert('이미지 업로드 실패');
+                    alert('Зураг байршуулахад алдаа гарлаа');
                 }
             }
         };
@@ -332,7 +332,7 @@ export const AdminMagazineManage: React.FC = () => {
 
                     if (range) {
                         if (uploadedUrls.length === 0) {
-                            alert('이미지 업로드에 실패했습니다.');
+                            alert('Зураг байршуулахад алдаа гарлаа.');
                             return;
                         }
 
@@ -352,7 +352,7 @@ export const AdminMagazineManage: React.FC = () => {
                 }
             } catch (error) {
                 console.error('Slider images upload failed:', error);
-                alert('슬라이더 이미지 업로드 실패');
+                alert('Слайдерын зураг байршуулахад алдаа гарлаа');
             }
         }
         // Reset input
@@ -379,7 +379,7 @@ export const AdminMagazineManage: React.FC = () => {
 
     const insertLocationBlot = () => {
         if (!locationModalForm.name && !locationModalForm.address && !locationModalForm.mapEmbedUrl) {
-            alert('장소 이름 / 주소 / 지도 임베드 중 하나는 입력해주세요.');
+            alert('Газрын нэр / Хаяг / Газрын зургийн embed-аас дор хаяж нэгийг оруулна уу.');
             return;
         }
         const quill = quillRef.current?.getEditor();
@@ -510,7 +510,7 @@ export const AdminMagazineManage: React.FC = () => {
                 setFormData(prev => ({ ...prev, image: url }));
             } catch (error) {
                 console.error('Magazine image upload failed:', error);
-                alert('이미지 업로드 실패');
+                alert('Зураг байршуулахад алдаа гарлаа');
             }
         }
     };
@@ -545,13 +545,13 @@ export const AdminMagazineManage: React.FC = () => {
     };
 
     const handleDelete = async (id: string) => {
-        if (window.confirm('정말 삭제하시겠습니까?')) {
+        if (window.confirm('Үнэхээр устгах уу?')) {
             try {
                 await api.magazines.delete(id);
                 fetchMagazines();
             } catch (error) {
                 console.error('Error deleting magazine:', error);
-                alert('삭제 중 오류가 발생했습니다.');
+                alert('Устгах үед алдаа гарлаа.');
             }
         }
     };
@@ -561,7 +561,7 @@ export const AdminMagazineManage: React.FC = () => {
             const content = editorContent || formData.content || '';
 
             if (!formData.title?.trim()) {
-                alert('제목을 입력해주세요.');
+                alert('Гарчиг оруулна уу.');
                 return;
             }
 
@@ -590,12 +590,12 @@ export const AdminMagazineManage: React.FC = () => {
                 });
             }
 
-            alert('저장되었습니다!');
+            alert('Хадгалагдлаа!');
             fetchMagazines();
             resetForm();
         } catch (error: any) {
             console.error('Error saving magazine:', error);
-            alert(`저장 실패: ${error.message || '저장 중 오류가 발생했습니다.'}`);
+            alert(`Хадгалахад алдаа гарлаа: ${error.message || 'Хадгалах үед алдаа гарлаа.'}`);
         }
     };
 
@@ -609,7 +609,7 @@ export const AdminMagazineManage: React.FC = () => {
     // Category CRUD logic
     const handleSaveCategory = async () => {
         if (!categoryForm.name) {
-            alert('카테고리명을 입력해주세요.');
+            alert('Ангиллын нэрийг оруулна уу.');
             return;
         }
         if (editingCategory) {
@@ -638,10 +638,10 @@ export const AdminMagazineManage: React.FC = () => {
     const handleDeleteCategory = async (cat: MagazineCategory) => {
         const count = magazines?.filter(m => m.category === cat.name).length || 0;
         if (count > 0) {
-            alert('이 카테고리에 매거진이 있어 삭제할 수 없습니다.');
+            alert('Энэ ангилалд сэтгүүл байгаа тул устгах боломжгүй.');
             return;
         }
-        if (confirm('이 카테고리를 삭제하시겠습니까?')) {
+        if (confirm('Энэ ангиллыг устгах уу?')) {
             await api.categories.delete(cat.id);
             fetchCategories();
         }
@@ -669,20 +669,20 @@ export const AdminMagazineManage: React.FC = () => {
     const headerActions = viewMode === 'edit' ? (
         <>
             <button className="btn btn-ghost btn-sm" onClick={resetForm}>
-                <Icon name="arrow_back" />목록
+                <Icon name="arrow_back" />Жагсаалт
             </button>
             <button className="btn btn-ink" onClick={handleSubmit}>
-                <Icon name="check" />{editingMagazine ? '수정 완료' : '발행하기'}
+                <Icon name="check" />{editingMagazine ? 'Засаж дуусгах' : 'Нийтлэх'}
             </button>
         </>
     ) : (
         <button className="btn btn-ink" onClick={handleCreateNew}>
-            <Icon name="edit_document" />매거진 작성
+            <Icon name="edit_document" />Сэтгүүл бичих
         </button>
     );
 
     return (
-        <AdminLayout activePage="magazines" title="매거진 관리" actions={headerActions}>
+        <AdminLayout activePage="magazines" title="Сэтгүүл удирдах" actions={headerActions}>
             {/* Custom Quill Styles for Sticky Toolbar */}
             <style>{`
                 .quill { display: flex; flex-direction: column; overflow: hidden; }
@@ -693,14 +693,14 @@ export const AdminMagazineManage: React.FC = () => {
 
             {/* Tabs */}
             <div className="seg" style={{ marginBottom: 22 }}>
-                <button className={activeTab === 'magazines' ? 'active' : ''} onClick={() => setActiveTab('magazines')}>매거진 목록</button>
-                <button className={activeTab === 'categories' ? 'active' : ''} onClick={() => setActiveTab('categories')}>카테고리 관리</button>
+                <button className={activeTab === 'magazines' ? 'active' : ''} onClick={() => setActiveTab('magazines')}>Сэтгүүлийн жагсаалт</button>
+                <button className={activeTab === 'categories' ? 'active' : ''} onClick={() => setActiveTab('categories')}>Ангилал удирдах</button>
             </div>
 
             {activeTab === 'categories' && (
                 <div className="card">
                     <div className="card-head">
-                        <h2>매거진 카테고리</h2>
+                        <h2>Сэтгүүлийн ангилал</h2>
                         <div className="spacer" />
                         <button
                             className="btn btn-ink btn-sm"
@@ -710,18 +710,18 @@ export const AdminMagazineManage: React.FC = () => {
                                 setIsCategoryModalOpen(true);
                             }}
                         >
-                            <Icon name="add" />카테고리 추가
+                            <Icon name="add" />Ангилал нэмэх
                         </button>
                     </div>
                     <div className="tbl-wrap">
                         <table className="tbl">
                             <thead>
                                 <tr>
-                                    <th>순서</th>
-                                    <th>카테고리명</th>
-                                    <th className="c">매거진 수</th>
-                                    <th className="c">상태</th>
-                                    <th className="c">액션</th>
+                                    <th>Эрэмбэ</th>
+                                    <th>Ангиллын нэр</th>
+                                    <th className="c">Сэтгүүлийн тоо</th>
+                                    <th className="c">Төлөв</th>
+                                    <th className="c">Үйлдэл</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -738,14 +738,14 @@ export const AdminMagazineManage: React.FC = () => {
                                             </div>
                                         </td>
                                         <td className="cell-strong">{cat.name}</td>
-                                        <td className="c cell-muted">{magazines?.filter(m => m.category === cat.name).length || 0}개</td>
+                                        <td className="c cell-muted">{magazines?.filter(m => m.category === cat.name).length || 0} ширхэг</td>
                                         <td className="c">
                                             <button
                                                 onClick={() => handleToggleCategoryActive(cat)}
                                                 style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 0 }}
                                             >
                                                 <span className={`badge ${cat.isActive ? 'b-green' : 'b-gray'}`}>
-                                                    {cat.isActive ? '활성' : '비활성'}
+                                                    {cat.isActive ? 'Идэвхтэй' : 'Идэвхгүй'}
                                                 </span>
                                             </button>
                                         </td>
@@ -782,7 +782,7 @@ export const AdminMagazineManage: React.FC = () => {
                                         type="text"
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
-                                        placeholder="매거진 제목 검색"
+                                        placeholder="Сэтгүүлийн гарчгаар хайх"
                                     />
                                 </label>
                                 <select
@@ -790,21 +790,21 @@ export const AdminMagazineManage: React.FC = () => {
                                     value={filterCategory}
                                     onChange={(e) => setFilterCategory(e.target.value)}
                                 >
-                                    <option value="all">전체 카테고리</option>
+                                    <option value="all">Бүх ангилал</option>
                                     {categories.map(cat => (
                                         <option key={cat} value={cat}>{cat}</option>
                                     ))}
                                 </select>
                                 <div className="spacer" />
                                 <button className="btn btn-ink" onClick={handleCreateNew}>
-                                    <Icon name="add" />매거진 작성
+                                    <Icon name="add" />Сэтгүүл бичих
                                 </button>
                             </div>
 
                             {filteredMagazines?.length === 0 ? (
                                 <div className="empty">
                                     <Icon name="menu_book" />
-                                    <p>검색 결과가 없습니다.</p>
+                                    <p>Хайлтын үр дүн олдсонгүй.</p>
                                 </div>
                             ) : (
                                 <div className="mag-grid">
@@ -815,7 +815,7 @@ export const AdminMagazineManage: React.FC = () => {
                                                     <img src={magazine.image} alt={magazine.title} loading="lazy" />
                                                 )}
                                                 <span className={`badge ${magazine.isActive ? 'b-green' : 'b-amber'}`}>
-                                                    {magazine.isActive ? '게시중' : '임시저장'}
+                                                    {magazine.isActive ? 'Нийтлэгдсэн' : 'Түр хадгалсан'}
                                                 </span>
                                             </div>
                                             <div className="mag-body">
@@ -825,7 +825,7 @@ export const AdminMagazineManage: React.FC = () => {
                                                     {magazine.isFeatured && (
                                                         <>
                                                             <span>·</span>
-                                                            <span className="badge b-amber">인기</span>
+                                                            <span className="badge b-amber">Алдартай</span>
                                                         </>
                                                     )}
                                                 </div>
@@ -872,10 +872,10 @@ export const AdminMagazineManage: React.FC = () => {
                         <div className="grid-2" style={{ gridTemplateColumns: '340px 1fr', alignItems: 'start' }}>
                             <div className="stack" style={{ gap: 16 }}>
                                 <div className="card card-pad">
-                                    <h3 className="sec-head" style={{ marginBottom: 16 }}>기본 설정</h3>
+                                    <h3 className="sec-head" style={{ marginBottom: 16 }}>Үндсэн тохиргоо</h3>
 
                                     <div className="field">
-                                        <label>카테고리</label>
+                                        <label>Ангилал</label>
                                         <select
                                             className="inp"
                                             value={formData.category}
@@ -888,7 +888,7 @@ export const AdminMagazineManage: React.FC = () => {
                                     </div>
 
                                     <div className="field">
-                                        <label>대표 이미지</label>
+                                        <label>Үндсэн зураг</label>
                                         <div
                                             className="block-img"
                                             style={{ position: 'relative', borderRadius: 'var(--r-md)', overflow: 'hidden', cursor: 'pointer' }}
@@ -909,7 +909,7 @@ export const AdminMagazineManage: React.FC = () => {
                                             ) : (
                                                 <div className="block-img-empty">
                                                     <Icon name="add_photo_alternate" />
-                                                    클릭하여 업로드
+                                                    Байршуулахын тулд дарна уу
                                                 </div>
                                             )}
                                             <input type="file" accept="image/*" onChange={handleImageUpload} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0, cursor: 'pointer' }} />
@@ -917,7 +917,7 @@ export const AdminMagazineManage: React.FC = () => {
                                     </div>
 
                                     <div className="field">
-                                        <label>요약 설명</label>
+                                        <label>Товч тайлбар</label>
                                         <textarea
                                             className="inp"
                                             value={formData.description}
@@ -927,7 +927,7 @@ export const AdminMagazineManage: React.FC = () => {
                                     </div>
 
                                     <div className="field">
-                                        <label>태그</label>
+                                        <label>Таг</label>
                                         <input
                                             className="inp"
                                             type="text"
@@ -938,19 +938,19 @@ export const AdminMagazineManage: React.FC = () => {
 
                                     <div className="stack" style={{ gap: 10 }}>
                                         <label className="toggle-row" style={{ justifyContent: 'space-between', cursor: 'pointer' }}>
-                                            <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-secondary)' }}>발행 상태</span>
+                                            <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-secondary)' }}>Нийтлэх төлөв</span>
                                             <input type="checkbox" checked={formData.isActive} onChange={(e) => setFormData(prev => ({ ...prev, isActive: e.target.checked }))} style={{ width: 16, height: 16 }} />
                                         </label>
                                         <label className="toggle-row" style={{ justifyContent: 'space-between', cursor: 'pointer' }}>
-                                            <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-secondary)' }}>인기 게시물</span>
+                                            <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-secondary)' }}>Алдартай нийтлэл</span>
                                             <input type="checkbox" checked={formData.isFeatured} onChange={(e) => setFormData(prev => ({ ...prev, isFeatured: e.target.checked }))} style={{ width: 16, height: 16 }} />
                                         </label>
                                     </div>
                                 </div>
 
                                 <div className="row" style={{ gap: 10 }}>
-                                    <button className="btn btn-ghost" style={{ flex: 1 }} onClick={resetForm}>작성 취소</button>
-                                    <button className="btn btn-ink" style={{ flex: 1 }} onClick={handleSubmit}>{editingMagazine ? '수정 완료' : '발행하기'}</button>
+                                    <button className="btn btn-ghost" style={{ flex: 1 }} onClick={resetForm}>Бичихийг цуцлах</button>
+                                    <button className="btn btn-ink" style={{ flex: 1 }} onClick={handleSubmit}>{editingMagazine ? 'Засаж дуусгах' : 'Нийтлэх'}</button>
                                 </div>
                             </div>
 
@@ -961,7 +961,7 @@ export const AdminMagazineManage: React.FC = () => {
                                         value={formData.title}
                                         onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
                                         style={{ width: '100%', fontSize: 26, fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text-strong)', border: 'none', outline: 'none', background: 'transparent' }}
-                                        placeholder="제목을 입력하세요"
+                                        placeholder="Гарчиг оруулна уу"
                                     />
                                 </div>
                                 <div style={{ padding: 16 }}>
@@ -987,7 +987,7 @@ export const AdminMagazineManage: React.FC = () => {
                     <div className="picker" style={{ width: 520 }} onClick={(e) => e.stopPropagation()}>
                         <div className="card-head">
                             <Icon name="add_location" style={{ color: 'var(--mrt-blue)' }} />
-                            <h2>위치 카드 삽입</h2>
+                            <h2>Байршлын карт оруулах</h2>
                             <div className="spacer" />
                             <button className="act-btn" onClick={() => setIsLocationModalOpen(false)}>
                                 <Icon name="close" />
@@ -995,17 +995,17 @@ export const AdminMagazineManage: React.FC = () => {
                         </div>
                         <div style={{ padding: '18px 22px', overflowY: 'auto' }}>
                             <div className="field">
-                                <label>장소 이름</label>
+                                <label>Газрын нэр</label>
                                 <input
                                     className="inp"
                                     type="text"
                                     value={locationModalForm.name}
                                     onChange={(e) => setLocationModalForm(prev => ({ ...prev, name: e.target.value }))}
-                                    placeholder="예: チンギスハーン博物館"
+                                    placeholder="жишээ нь: Чингис хааны музей"
                                 />
                             </div>
                             <div className="field">
-                                <label>주소</label>
+                                <label>Хаяг</label>
                                 <textarea
                                     className="inp"
                                     value={locationModalForm.address}
@@ -1016,7 +1016,7 @@ export const AdminMagazineManage: React.FC = () => {
                             </div>
                             <div className="field-row">
                                 <div className="field">
-                                    <label>전화</label>
+                                    <label>Утас</label>
                                     <input
                                         className="inp"
                                         type="tel"
@@ -1026,7 +1026,7 @@ export const AdminMagazineManage: React.FC = () => {
                                     />
                                 </div>
                                 <div className="field">
-                                    <label>홈페이지</label>
+                                    <label>Вэб хуудас</label>
                                     <input
                                         className="inp"
                                         type="url"
@@ -1037,17 +1037,17 @@ export const AdminMagazineManage: React.FC = () => {
                                 </div>
                             </div>
                             <div className="field">
-                                <label>Google 지도 임베드 <span className="muted" style={{ fontWeight: 600, fontSize: 11 }}>— iframe 코드 또는 src URL</span></label>
+                                <label>Google газрын зураг embed <span className="muted" style={{ fontWeight: 600, fontSize: 11 }}>— iframe код эсвэл src URL</span></label>
                                 <textarea
                                     className="inp"
                                     value={locationModalForm.mapEmbedUrl}
                                     onChange={(e) => setLocationModalForm(prev => ({ ...prev, mapEmbedUrl: e.target.value }))}
-                                    placeholder='Google 지도 → "공유" → "지도 임베드" → HTML 복사'
+                                    placeholder='Google газрын зураг → "Хуваалцах" → "Газрын зураг embed" → HTML хуулах'
                                     style={{ height: 64, fontFamily: 'var(--font-mono)', fontSize: 12 }}
                                 />
                             </div>
                             <div className="field">
-                                <label>길찾기 검색어 <span className="muted" style={{ fontWeight: 600, fontSize: 11 }}>— 좌표 또는 주소</span></label>
+                                <label>Зам заах хайлтын үг <span className="muted" style={{ fontWeight: 600, fontSize: 11 }}>— координат эсвэл хаяг</span></label>
                                 <input
                                     className="inp"
                                     type="text"
@@ -1057,19 +1057,19 @@ export const AdminMagazineManage: React.FC = () => {
                                 />
                             </div>
                             <div className="field" style={{ marginBottom: 0 }}>
-                                <label>운영시간 <span className="muted" style={{ fontWeight: 600, fontSize: 11 }}>— 요일별 1줄씩</span></label>
+                                <label>Ажиллах цаг <span className="muted" style={{ fontWeight: 600, fontSize: 11 }}>— өдөр тутамд 1 мөр</span></label>
                                 <textarea
                                     className="inp"
                                     value={locationModalForm.hours}
                                     onChange={(e) => setLocationModalForm(prev => ({ ...prev, hours: e.target.value }))}
-                                    placeholder={'月: 09:00 - 17:00\n火: 09:00 - 17:00\n日: 休業'}
+                                    placeholder={'Даваа: 09:00 - 17:00\nМягмар: 09:00 - 17:00\nНям: Амарна'}
                                     style={{ height: 112, fontFamily: 'var(--font-mono)', fontSize: 12 }}
                                 />
                             </div>
                         </div>
                         <div className="drawer-foot">
-                            <button className="btn btn-ghost" style={{ flex: 1 }} onClick={() => setIsLocationModalOpen(false)}>취소</button>
-                            <button className="btn btn-ink" style={{ flex: 1 }} onClick={insertLocationBlot}>본문에 삽입</button>
+                            <button className="btn btn-ghost" style={{ flex: 1 }} onClick={() => setIsLocationModalOpen(false)}>Цуцлах</button>
+                            <button className="btn btn-ink" style={{ flex: 1 }} onClick={insertLocationBlot}>Агуулгад оруулах</button>
                         </div>
                     </div>
                 </div>
@@ -1079,7 +1079,7 @@ export const AdminMagazineManage: React.FC = () => {
                 <div className="picker-scrim" onClick={() => setIsCategoryModalOpen(false)}>
                     <div className="picker" onClick={(e) => e.stopPropagation()}>
                         <div className="card-head">
-                            <h2>{editingCategory ? '카테고리 수정' : '카테고리 추가'}</h2>
+                            <h2>{editingCategory ? 'Ангилал засах' : 'Ангилал нэмэх'}</h2>
                             <div className="spacer" />
                             <button className="act-btn" onClick={() => setIsCategoryModalOpen(false)}>
                                 <Icon name="close" />
@@ -1087,13 +1087,13 @@ export const AdminMagazineManage: React.FC = () => {
                         </div>
                         <div style={{ padding: '18px 22px' }}>
                             <div className="field">
-                                <label>카테고리명</label>
+                                <label>Ангиллын нэр</label>
                                 <input
                                     className="inp"
                                     type="text"
                                     value={categoryForm.name}
                                     onChange={(e) => setCategoryForm({ ...categoryForm, name: e.target.value })}
-                                    placeholder="예: 여행 팁"
+                                    placeholder="жишээ нь: Аяллын зөвлөгөө"
                                 />
                             </div>
                             <label className="toggle-row" style={{ cursor: 'pointer' }}>
@@ -1104,12 +1104,12 @@ export const AdminMagazineManage: React.FC = () => {
                                     onChange={(e) => setCategoryForm({ ...categoryForm, isActive: e.target.checked })}
                                     style={{ width: 16, height: 16 }}
                                 />
-                                <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-secondary)' }}>활성화</span>
+                                <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-secondary)' }}>Идэвхжүүлэх</span>
                             </label>
                         </div>
                         <div className="drawer-foot" style={{ justifyContent: 'flex-end' }}>
-                            <button className="btn btn-ghost" onClick={() => setIsCategoryModalOpen(false)}>취소</button>
-                            <button className="btn btn-ink" onClick={handleSaveCategory}>저장</button>
+                            <button className="btn btn-ghost" onClick={() => setIsCategoryModalOpen(false)}>Цуцлах</button>
+                            <button className="btn btn-ink" onClick={handleSaveCategory}>Хадгалах</button>
                         </div>
                     </div>
                 </div>

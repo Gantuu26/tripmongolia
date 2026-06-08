@@ -83,7 +83,7 @@ export const GuideDetailModal: React.FC<GuideDetailModalProps> = ({ guide, open,
         <ModalShell open={open} onClose={onClose}>
             {/* Header */}
             <div className="px-5 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between flex-shrink-0">
-                <p className="text-xs font-bold tracking-widest uppercase text-slate-400">担当ガイド</p>
+                <p className="text-xs font-bold tracking-widest uppercase text-slate-400">담당 가이드</p>
                 <button onClick={onClose} className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500" aria-label="close">
                     <span className="material-symbols-outlined">close</span>
                 </button>
@@ -104,7 +104,7 @@ export const GuideDetailModal: React.FC<GuideDetailModalProps> = ({ guide, open,
                     {guide.experienceYears != null && guide.experienceYears > 0 && (
                         <p className="text-xs text-slate-500 mt-1 inline-flex items-center gap-1">
                             <span className="material-symbols-outlined text-sm text-amber-500">workspace_premium</span>
-                            ガイド経験 {guide.experienceYears}年
+                            가이드 경력 {guide.experienceYears}년
                         </p>
                     )}
                 </div>
@@ -122,7 +122,7 @@ export const GuideDetailModal: React.FC<GuideDetailModalProps> = ({ guide, open,
 
                 {intro && (
                     <div className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-4 mb-5">
-                        <p className="text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-2">ご紹介</p>
+                        <p className="text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-2">소개</p>
                         <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed whitespace-pre-wrap">{intro}</p>
                     </div>
                 )}
@@ -134,7 +134,7 @@ export const GuideDetailModal: React.FC<GuideDetailModalProps> = ({ guide, open,
                     {guide.phone && (
                         <a href={`tel:${guide.phone}`} className="flex-1 inline-flex items-center justify-center gap-1.5 py-3 bg-teal-500 hover:bg-teal-600 text-white rounded-xl text-sm font-bold transition-colors">
                             <span className="material-symbols-outlined text-base">call</span>
-                            電話する
+                            전화하기
                         </a>
                     )}
                     {guide.kakaoId && (
@@ -190,7 +190,7 @@ export const AccommodationDetailModal: React.FC<AccommodationDetailModalProps> =
             {/* Header */}
             <div className="px-5 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between flex-shrink-0">
                 <p className="text-xs font-bold tracking-widest uppercase text-slate-400">
-                    {day ? `${day}日目の宿泊` : '宿泊先'}
+                    {day ? `${day}일차 숙소` : '숙소'}
                 </p>
                 <button onClick={onClose} className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500" aria-label="close">
                     <span className="material-symbols-outlined">close</span>
@@ -267,7 +267,7 @@ export const AccommodationDetailModal: React.FC<AccommodationDetailModalProps> =
                     {/* Facilities */}
                     {facilities.length > 0 && (
                         <div className="mb-4">
-                            <p className="text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-2">設備</p>
+                            <p className="text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-2">편의시설</p>
                             <div className="flex flex-wrap gap-1.5">
                                 {facilities.map((f, i) => (
                                     <span key={i} className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
@@ -282,7 +282,7 @@ export const AccommodationDetailModal: React.FC<AccommodationDetailModalProps> =
                     {/* Description */}
                     {accommodation.description && (
                         <div>
-                            <p className="text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-2">ご案内</p>
+                            <p className="text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-2">안내</p>
                             <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed whitespace-pre-wrap">{accommodation.description}</p>
                         </div>
                     )}

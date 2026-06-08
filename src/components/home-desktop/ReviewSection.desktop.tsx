@@ -40,7 +40,7 @@ export function ReviewSectionDesktop({ contentWidth = 1280 }: ReviewSectionProps
                         author: r.user_name || '',
                         rating: r.rating || 5,
                         content: r.content || '',
-                        productName: r.product_name || 'モンゴルツアー',
+                        productName: r.product_name || '몽골투어',
                         visitDate: r.visit_date,
                     }));
                 }
@@ -58,8 +58,8 @@ export function ReviewSectionDesktop({ contentWidth = 1280 }: ReviewSectionProps
         <section style={{ maxWidth: contentWidth, margin: '0 auto', padding: '72px 32px 0' }}>
             <SectionHeader
                 eyebrow="Real Reviews"
-                title="実際の旅行者のレビュー"
-                subtitle="日本語ガイド同行で安心のモンゴルツアー、お客様の声"
+                title="실제 여행자 후기"
+                subtitle="한국어 가이드가 동행하는 안심 몽골투어, 고객의 목소리"
                 onAll={() => navigate('/reviews')}
             />
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
@@ -103,7 +103,7 @@ export function ReviewSectionDesktop({ contentWidth = 1280 }: ReviewSectionProps
                                 </div>
                                 <div>
                                     <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--fg-1)', marginBottom: 3 }}>
-                                        {r.author} 様
+                                        {r.author} 님
                                     </div>
                                     <div style={{ display: 'flex', gap: 1 }}>
                                         {Array.from({ length: 5 }).map((_, i) => (

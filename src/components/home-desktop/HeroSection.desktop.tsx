@@ -29,9 +29,9 @@ const FALLBACK_SLIDES: HeroSlide[] = [
         tag: 'PREMIUM TRIP',
         tone: 'premium',
         eyebrow: '2026 SEASON',
-        title: '地平線の果てで出会う',
-        title2: '太古の大自然、モンゴル',
-        body: '日本語ガイド同行の現地旅行社が、ウランバートルから草原・砂漠まで、あなただけの旅をご提案します。',
+        title: '지평선 끝에서 만나는',
+        title2: '태고의 대자연, 몽골',
+        body: '한국어 가이드가 동행하는 현지 여행사가 울란바토르부터 초원·사막까지, 당신만을 위한 여행을 제안해 드립니다.',
         cta: '/products',
     },
 ];
@@ -144,12 +144,12 @@ export function HeroSectionDesktop({ contentWidth = 1280 }: HeroSectionDesktopPr
             ))}
             {/* SEO: backgroundImage alone provides no alt text for crawlers and
                 image search. Emit a hidden but on-page <img> for the active slide
-                so Google Image / accessibility tools can read a Japanese-keyword
+                so Google Image / accessibility tools can read a Korean-keyword
                 alt. Hidden via clip-path (still indexable; display:none would skip). */}
             {hasUsableImage(cur.img) && (
                 <img
                     src={cur.img}
-                    alt={`${cur.title}${cur.title2 ? ' ' + cur.title2 : ''}｜モンゴル旅行・モンゴルツアー専門 Milkyway Japan`}
+                    alt={`${cur.title}${cur.title2 ? ' ' + cur.title2 : ''}｜몽골여행·몽골투어 전문 몽골리아 은하수`}
                     width={1280}
                     height={640}
                     loading="eager"
@@ -207,9 +207,9 @@ export function HeroSectionDesktop({ contentWidth = 1280 }: HeroSectionDesktopPr
                     </div>
                     <h1
                         style={{
-                            // Auto-shrink font for long Japanese headlines so each
+                            // Auto-shrink font for long Korean headlines so each
                             // admin-entered line actually fits on ONE visual line in
-                            // the 780px text column. Japanese full-width chars are
+                            // the 780px text column. Korean full-width chars are
                             // ~0.92em wide, so:
                             //   60px × 0.92 = 55px/char → 780/55 ≈ 14 chars max
                             //   54px × 0.92 = 50px/char → 780/50 ≈ 15 chars max
@@ -227,8 +227,8 @@ export function HeroSectionDesktop({ contentWidth = 1280 }: HeroSectionDesktopPr
                             margin: 0,
                             letterSpacing: '-0.02em',
                             textShadow: '0 2px 24px rgba(0,0,0,0.3)',
-                            // Japanese has no spaces; prevent mid-word wraps that
-                            // looked like 「果てしない大草原を駆 / ける乗馬ツアー」.
+                            // Korean wraps cleanly on word boundaries; keep-all
+                            // prevents awkward mid-word breaks in long headlines.
                             wordBreak: 'keep-all',
                             overflowWrap: 'break-word',
                         }}
@@ -275,7 +275,7 @@ export function HeroSectionDesktop({ contentWidth = 1280 }: HeroSectionDesktopPr
                                 gap: 10,
                             }}
                         >
-                            詳細を見る <MatIcon name="arrow_forward" size={18} />
+                            자세히 보기 <MatIcon name="arrow_forward" size={18} />
                         </button>
                         <button
                             type="button"
@@ -293,7 +293,7 @@ export function HeroSectionDesktop({ contentWidth = 1280 }: HeroSectionDesktopPr
                                 fontFamily: 'inherit',
                             }}
                         >
-                            1分でリクエスト
+                            1분 만에 요청하기
                         </button>
                     </div>
                 </div>
@@ -328,9 +328,9 @@ export function HeroSectionDesktop({ contentWidth = 1280 }: HeroSectionDesktopPr
                 {/* Trust badges floating bottom right */}
                 <div style={{ position: 'absolute', bottom: 36, right: 32, display: 'flex', gap: 14, alignItems: 'center' }}>
                     {[
-                        { i: 'verified', t: '日本語完全対応' },
-                        { i: 'support_agent', t: '24時間サポート' },
-                        { i: 'shield_person', t: '現地旅行社' },
+                        { i: 'verified', t: '한국어 완벽 대응' },
+                        { i: 'support_agent', t: '24시간 지원' },
+                        { i: 'shield_person', t: '현지 여행사' },
                     ].map((b) => (
                         <div
                             key={b.t}

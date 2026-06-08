@@ -25,34 +25,34 @@ export function DesktopFooter({ contentWidth = 1280 }: DesktopFooterProps) {
 
     const cols: { h: string; items: FooterLink[] }[] = [
         {
-            h: 'サービス',
+            h: '서비스',
             items: [
-                { label: 'モンゴル旅行ガイド', path: '/travel-guide' },
-                { label: 'モンゴルツアー商品一覧', path: '/products' },
-                { label: 'モンゴル乗馬旅行', path: '/category/horse-riding-tour' },
-                { label: 'ゴビ砂漠ツアー', path: '/category/gobi-desert' },
-                { label: '同行者を探す', path: '/travel-mates' },
-                { label: 'お見積もりリクエスト', path: '/custom-estimate' },
+                { label: '몽골여행 가이드', path: '/travel-guide' },
+                { label: '몽골투어 상품 목록', path: '/products' },
+                { label: '몽골 승마여행', path: '/category/horse-riding-tour' },
+                { label: '고비사막 투어', path: '/category/gobi-desert' },
+                { label: '동행자 찾기', path: '/travel-mates' },
+                { label: '견적 요청', path: '/custom-estimate' },
             ],
         },
         {
-            h: 'ご利用案内',
+            h: '이용 안내',
             items: [
-                { label: 'ご予約の流れ', path: '/about' },
-                { label: 'よくある質問 (FAQ)', path: '/faq' },
-                { label: '利用規約', path: '/terms-of-service' },
-                { label: 'プライバシーポリシー', path: '/privacy-policy' },
-                { label: 'ご予約状況の確認', path: '/reservation-status' },
+                { label: '예약 절차', path: '/about' },
+                { label: '자주 묻는 질문 (FAQ)', path: '/faq' },
+                { label: '이용약관', path: '/terms-of-service' },
+                { label: '개인정보 처리방침', path: '/privacy-policy' },
+                { label: '예약 현황 확인', path: '/reservation-status' },
             ],
         },
         {
-            h: '会社情報',
+            h: '회사 정보',
             items: [
-                { label: '会社案内', path: '/about' },
-                { label: 'ガイド募集', path: '/guide-apply' },
-                { label: 'お客様のレビュー', path: '/reviews' },
-                { label: 'マイページ', path: '/mypage' },
-                { label: 'お問い合わせ', onClick: onConsult },
+                { label: '회사 소개', path: '/about' },
+                { label: '가이드 모집', path: '/guide-apply' },
+                { label: '고객 리뷰', path: '/reviews' },
+                { label: '마이페이지', path: '/mypage' },
+                { label: '문의하기', onClick: onConsult },
             ],
         },
     ];
@@ -87,10 +87,10 @@ export function DesktopFooter({ contentWidth = 1280 }: DesktopFooterProps) {
                             Custom Tour
                         </div>
                         <div style={{ fontSize: 26, fontWeight: 700, color: '#fff', lineHeight: 1.3 }}>
-                            あなただけの特別なプランを、1分でリクエスト
+                            당신만을 위한 특별한 플랜을 1분 만에 요청하세요
                         </div>
                         <div style={{ fontSize: 13, color: '#94a3b8', marginTop: 8 }}>
-                            日本語スタッフが24時間以内にご返信。お見積もりは無料です。
+                            한국어 스태프가 24시간 이내에 답변드립니다. 견적은 무료입니다.
                         </div>
                     </div>
                     <div style={{ display: 'flex', gap: 10 }}>
@@ -112,7 +112,7 @@ export function DesktopFooter({ contentWidth = 1280 }: DesktopFooterProps) {
                                 gap: 8,
                             }}
                         >
-                            <MatIcon name="edit_note" size={18} color="#fff" /> お見積もり
+                            <MatIcon name="edit_note" size={18} color="#fff" /> 견적 요청
                         </button>
                         <button
                             type="button"
@@ -132,7 +132,7 @@ export function DesktopFooter({ contentWidth = 1280 }: DesktopFooterProps) {
                                 gap: 8,
                             }}
                         >
-                            <MatIcon name="chat" size={18} color="#fff" /> 相談
+                            <MatIcon name="chat" size={18} color="#fff" /> 상담
                         </button>
                     </div>
                 </div>
@@ -157,7 +157,7 @@ export function DesktopFooter({ contentWidth = 1280 }: DesktopFooterProps) {
                         </div>
                     </div>
                     <div style={{ fontSize: 12, color: 'var(--fg-4)', lineHeight: 1.75 }}>
-                        モンゴル旅行・モンゴルツアー専門の現地旅行社です。日本語堪能な専門ガイドが同行し、安心・安全なご旅行をご提案します。
+                        몽골여행·몽골투어 전문 현지 여행사입니다. 한국어가 능통한 전문 가이드가 동행하여 안심하고 안전한 여행을 제안해 드립니다.
                     </div>
                     <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
                         {[
@@ -211,18 +211,18 @@ export function DesktopFooter({ contentWidth = 1280 }: DesktopFooterProps) {
                 <div style={{ borderTop: '1px solid var(--border)', paddingTop: 24, fontSize: 11, color: 'var(--fg-5)', lineHeight: 1.8 }}>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, marginBottom: 16 }}>
                         <div>
-                            <div style={{ fontWeight: 700, color: 'var(--fg-3)', marginBottom: 6 }}>[モンゴル本社]</div>
-                            <div>商号: Mongolia Milky Way (SUUN ZAM) | 代表者: Davaasuren Bilguun</div>
-                            <div>事業者登録番号: 9011640064 | 観光事業登録番号: 6124313</div>
-                            <div>電話: +976 9594 5838 | Tel: +976-8010-7766</div>
-                            <div>所在地: ウランバートル バヤンズルフ区 13棟 DACOセンター 3階 306</div>
+                            <div style={{ fontWeight: 700, color: 'var(--fg-3)', marginBottom: 6 }}>[몽골 본사]</div>
+                            <div>상호: Mongolia Milky Way (SUUN ZAM) | 대표자: Davaasuren Bilguun</div>
+                            <div>사업자등록번호: 9011640064 | 관광사업등록번호: 6124313</div>
+                            <div>전화: +976 9594 5838 | Tel: +976-8010-7766</div>
+                            <div>소재지: 울란바토르 바양주르흐구 13동 DACO센터 3층 306</div>
                         </div>
                         <div>
-                            <div style={{ fontWeight: 700, color: 'var(--fg-3)', marginBottom: 6 }}>[韓国代理店]</div>
-                            <div>商号: Hello Bolor | 代表者: Davaasuren Bolor</div>
-                            <div>事業者登録番号: 730-54-00614 | 通信販売業番号: 第2022-ソウル中浪-1776号</div>
-                            <div>メール: bolor1@hanmail.net</div>
-                            <div>お問い合わせ: 公式LINE またはチャットでお問い合わせください。</div>
+                            <div style={{ fontWeight: 700, color: 'var(--fg-3)', marginBottom: 6 }}>[한국 대리점]</div>
+                            <div>상호: Hello Bolor | 대표자: Davaasuren Bolor</div>
+                            <div>사업자등록번호: 730-54-00614 | 통신판매업번호: 제2022-서울중랑-1776호</div>
+                            <div>이메일: bolor1@hanmail.net</div>
+                            <div>문의: 공식 LINE 또는 채팅으로 문의해 주세요.</div>
                         </div>
                     </div>
                     <div
@@ -236,13 +236,13 @@ export function DesktopFooter({ contentWidth = 1280 }: DesktopFooterProps) {
                         <div>© 2026 Mongolia Milky Way. All rights reserved.</div>
                         <div style={{ display: 'flex', gap: 18 }}>
                             <button type="button" onClick={() => navigate('/about')} style={legalLinkBtn}>
-                                会社案内
+                                회사 소개
                             </button>
                             <button type="button" onClick={() => navigate('/terms-of-service')} style={legalLinkBtn}>
-                                利用規約
+                                이용약관
                             </button>
                             <button type="button" onClick={() => navigate('/privacy-policy')} style={legalLinkBtn}>
-                                個人情報処理方針
+                                개인정보 처리방침
                             </button>
                         </div>
                     </div>

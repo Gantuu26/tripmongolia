@@ -16,12 +16,12 @@ interface FAQRow {
 }
 
 const STARTER_ROWS: FAQRow[] = [
-    { question: '出発前に何を準備したらいいですか？', answer: '国際線航空券・パスポート (有効期限6ヶ月以上)・モンゴルビザが必要です。ビザ申請は弊社でもサポートいたします。気温差が大きいため、季節を問わず羽織りものは必須です。' },
-    { question: 'キャンセル規定を教えてください。', answer: '出発日の31日前まで: 全額返金。30〜15日前: ツアー代金の30%。14〜8日前: 50%。7日前以降: 100%。詳しくは利用規約をご確認ください。' },
-    { question: 'ゲル宿泊は寝具がありますか？', answer: '全てのゲルキャンプにベッド・マットレス・毛布・タオルを完備しています。冬季には電気毛布もご用意します。' },
-    { question: '1人旅でも参加できますか？', answer: 'もちろん可能です。一人参加追加料金 ¥18,000 を頂戴しております (個室追加料金分)。同行者募集の掲示板もご利用ください。' },
-    { question: '食事のアレルギー対応はありますか？', answer: '事前にお知らせいただければ、食物アレルギーや宗教上の食事制限に個別対応いたします。ベジタリアン・ヴィーガン対応も可能です。' },
-    { question: '現地での通信手段は？', answer: 'ウランバートル市内は4G完備。ゴビ・テレルジでは電波が弱い場所もあります。ガイドが衛星電話を所持しているため緊急連絡は可能です。' },
+    { question: '출발 전에 무엇을 준비하면 되나요?', answer: '국제선 항공권, 여권(유효기간 6개월 이상), 몽골 비자가 필요합니다. 비자 신청은 저희 회사에서도 지원해 드립니다. 일교차가 크기 때문에 계절과 관계없이 겉옷은 필수입니다.' },
+    { question: '취소 규정을 알려 주세요.', answer: '출발일 31일 전까지: 전액 환불. 30~15일 전: 투어 요금의 30%. 14~8일 전: 50%. 7일 전 이후: 100%. 자세한 내용은 이용약관을 확인해 주시기 바랍니다.' },
+    { question: '게르 숙박 시 침구가 제공되나요?', answer: '모든 게르 캠프에 침대, 매트리스, 담요, 타월을 완비하고 있습니다. 겨울철에는 전기담요도 준비해 드립니다.' },
+    { question: '혼자 여행해도 참가할 수 있나요?', answer: '물론 가능합니다. 1인 참가 추가 요금 ₩180,000을 받고 있습니다(개인실 추가 요금분). 동행자 모집 게시판도 이용해 주시기 바랍니다.' },
+    { question: '식사 알레르기 대응이 가능한가요?', answer: '사전에 알려 주시면 음식 알레르기나 종교상의 식사 제한에 개별적으로 대응해 드립니다. 채식주의자, 비건 대응도 가능합니다.' },
+    { question: '현지에서의 통신 수단은 무엇인가요?', answer: '울란바토르 시내는 4G를 완비하고 있습니다. 고비, 테렐지에서는 전파가 약한 곳도 있습니다. 가이드가 위성전화를 소지하고 있어 긴급 연락은 가능합니다.' },
 ];
 
 export const TourFAQEditor: React.FC = () => {
@@ -61,7 +61,7 @@ export const TourFAQEditor: React.FC = () => {
         });
     };
     const removeRow = (idx: number) => {
-        if (!confirm('이 질문을 삭제하시겠습니까?')) return;
+        if (!confirm('Энэ асуултыг устгах уу?')) return;
         setRows((rs) => rs.filter((_, i) => i !== idx));
     };
     const addRow = () => {
@@ -73,7 +73,7 @@ export const TourFAQEditor: React.FC = () => {
             .map((r) => ({ id: r.id, question: r.question.trim(), answer: r.answer.trim() }))
             .filter((r) => r.question || r.answer);
         if (clean.length === 0) {
-            if (!confirm('등록된 FAQ가 없습니다. 빈 상태로 저장하시면 상품 상세 페이지에 기본 FAQ가 표시됩니다. 계속하시겠습니까?')) return;
+            if (!confirm('Бүртгэгдсэн FAQ алга байна. Хоосон хадгалбал бараа бүтээгдэхүүний дэлгэрэнгүй хуудсанд үндсэн FAQ харагдана. Үргэлжлүүлэх үү?')) return;
         }
         setSaving(true);
         try {
@@ -84,14 +84,14 @@ export const TourFAQEditor: React.FC = () => {
                 setRows(refreshed.map((d) => ({ id: d.id, question: d.question, answer: d.answer })));
             }
         } catch (e: any) {
-            alert('저장 실패: ' + (e?.message || '알 수 없는 오류'));
+            alert('Хадгалахад алдаа гарлаа: ' + (e?.message || 'Тодорхойгүй алдаа'));
         } finally {
             setSaving(false);
         }
     };
 
     if (loading) {
-        return <div className="py-20 text-center text-slate-500">불러오는 중...</div>;
+        return <div className="py-20 text-center text-slate-500">Ачаалж байна...</div>;
     }
 
     return (
@@ -100,18 +100,18 @@ export const TourFAQEditor: React.FC = () => {
                 <div className="flex gap-3 items-start text-sm text-blue-800 dark:text-blue-200">
                     <span className="material-symbols-outlined text-base mt-0.5">info</span>
                     <div>
-                        <div className="font-semibold mb-1">상품 페이지 하단 FAQ — 한 번 작성하면 모든 상품에 적용</div>
+                        <div className="font-semibold mb-1">Бараа бүтээгдэхүүний хуудасны доод хэсгийн FAQ — нэг удаа бичвэл бүх бараанд хэрэглэгдэнэ</div>
                         <ul className="space-y-1 text-xs leading-relaxed">
-                            <li>• 여기에 등록한 FAQ 가 <strong>모든 상품 상세 페이지</strong>의 「ご注意・よくある質問」섹션에 자동으로 표시됩니다.</li>
-                            <li>• 특정 상품에만 다른 FAQ 를 보여주려면 해당 상품 편집 페이지에서 별도로 입력 (그 상품에서는 우선 적용).</li>
-                            <li>• 「FAQ 목록」/「카테고리 관리」 탭은 <strong>고객센터 페이지(/faq)</strong> 콘텐츠를 다룹니다. 서로 다릅니다.</li>
+                            <li>• Энд бүртгэсэн FAQ нь <strong>бүх бараа бүтээгдэхүүний дэлгэрэнгүй хуудасны</strong> 「ご注意・よくある質問」хэсэгт автоматаар харагдана.</li>
+                            <li>• Зөвхөн тодорхой бараанд өөр FAQ харуулахыг хүсвэл тухайн барааны засварлах хуудаснаас тусад нь оруулна (тэр бараан дээр давуу хэрэглэгдэнэ).</li>
+                            <li>• 「FAQ жагсаалт」/「Ангилал удирдах」 таб нь <strong>үйлчлүүлэгчийн төв хуудас (/faq)</strong>-ны агуулгыг хариуцдаг. Эдгээр нь өөр өөр зүйл.</li>
                         </ul>
                     </div>
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">
                     {savedAt && (
                         <span className="text-xs text-teal-600 dark:text-teal-400">
-                            저장됨 ({savedAt})
+                            Хадгалагдсан ({savedAt})
                         </span>
                     )}
                     <button
@@ -120,7 +120,7 @@ export const TourFAQEditor: React.FC = () => {
                         disabled={saving}
                         className="px-4 py-2 text-sm font-bold bg-teal-500 hover:bg-teal-600 disabled:opacity-50 text-white rounded-lg transition-colors"
                     >
-                        {saving ? '저장 중...' : '전체 저장'}
+                        {saving ? 'Хадгалж байна...' : 'Бүгдийг хадгалах'}
                     </button>
                 </div>
             </div>
@@ -141,7 +141,7 @@ export const TourFAQEditor: React.FC = () => {
                                     onClick={() => move(i, -1)}
                                     disabled={i === 0}
                                     className="w-8 h-8 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center"
-                                    title="위로"
+                                    title="Дээш"
                                 >
                                     <span className="material-symbols-outlined text-base">arrow_upward</span>
                                 </button>
@@ -150,7 +150,7 @@ export const TourFAQEditor: React.FC = () => {
                                     onClick={() => move(i, 1)}
                                     disabled={i === rows.length - 1}
                                     className="w-8 h-8 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center"
-                                    title="아래로"
+                                    title="Доош"
                                 >
                                     <span className="material-symbols-outlined text-base">arrow_downward</span>
                                 </button>
@@ -158,7 +158,7 @@ export const TourFAQEditor: React.FC = () => {
                                     type="button"
                                     onClick={() => removeRow(i)}
                                     className="w-8 h-8 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/30 text-red-500 flex items-center justify-center"
-                                    title="삭제"
+                                    title="Устгах"
                                 >
                                     <span className="material-symbols-outlined text-base">delete</span>
                                 </button>
@@ -166,24 +166,24 @@ export const TourFAQEditor: React.FC = () => {
                         </div>
 
                         <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5">
-                            질문 (일본어)
+                            Асуулт (Япон хэл)
                         </label>
                         <input
                             type="text"
                             value={row.question}
                             onChange={(e) => update(i, { question: e.target.value })}
-                            placeholder="例) 出発前に何を準備したらいいですか？"
+                            placeholder="예) 출발 전에 무엇을 준비하면 되나요?"
                             className="w-full px-3 py-2 mb-3 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-teal-500 outline-none"
                         />
 
                         <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5">
-                            답변 (일본어)
+                            Хариулт (Япон хэл)
                         </label>
                         <textarea
                             value={row.answer}
                             onChange={(e) => update(i, { answer: e.target.value })}
                             rows={3}
-                            placeholder="例) 国際線航空券・パスポート (有効期限6ヶ月以上)・モンゴルビザが必要です..."
+                            placeholder="예) 국제선 항공권, 여권(유효기간 6개월 이상), 몽골 비자가 필요합니다..."
                             className="w-full px-3 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-teal-500 outline-none resize-y min-h-[80px]"
                         />
                     </div>
@@ -191,7 +191,7 @@ export const TourFAQEditor: React.FC = () => {
 
                 {rows.length === 0 && (
                     <div className="text-center py-12 text-slate-400 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-dashed border-slate-300 dark:border-slate-700">
-                        등록된 FAQ 가 없습니다. 아래 "질문 추가" 버튼으로 시작하세요.
+                        Бүртгэгдсэн FAQ алга байна. Доорх "Асуулт нэмэх" товчоор эхлүүлнэ үү.
                     </div>
                 )}
 
@@ -201,7 +201,7 @@ export const TourFAQEditor: React.FC = () => {
                     className="w-full py-4 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl text-sm font-medium text-slate-500 hover:border-teal-400 hover:text-teal-600 hover:bg-teal-50/40 dark:hover:bg-teal-900/20 transition-colors flex items-center justify-center gap-2"
                 >
                     <span className="material-symbols-outlined text-base">add</span>
-                    질문 추가
+                    Асуулт нэмэх
                 </button>
             </div>
         </div>

@@ -43,7 +43,7 @@ export const CategoryRowSection: React.FC<CategoryRowSectionProps> = ({ category
                     onClick={() => navigate(`/products?category=${category.name}`)}
                     className="text-sm text-primary font-bold flex items-center hover:opacity-80 transition-opacity"
                 >
-                    {t('home.theme.more_items', 'もっと見る')}
+                    {t('home.theme.more_items', '더보기')}
                     <span className="material-symbols-outlined text-[16px] ml-0.5">chevron_right</span>
                 </button>
             </div>
@@ -61,7 +61,7 @@ export const CategoryRowSection: React.FC<CategoryRowSectionProps> = ({ category
                             {product.mainImages?.[0] ? (
                                 <img
                                     src={getOptimizedImageUrl(product.mainImages[0], 'productThumbnail')}
-                                    alt={`${product.name}｜モンゴル旅行・モンゴルツアー`}
+                                    alt={`${product.name}｜몽골여행・몽골투어`}
                                     loading="lazy"
                                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
                                     onError={(e) => {

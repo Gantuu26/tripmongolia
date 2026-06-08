@@ -82,7 +82,7 @@ export function DestinationsMap({ places, height = 340, borderRadius = 20 }: Des
             });
             const marker = L.marker([p.lat, p.lng], { icon }).addTo(map);
             marker.bindPopup(
-                `<div style="font-family: 'Noto Sans JP', sans-serif; font-size: 13px;">
+                `<div style="font-family: 'Noto Sans KR', sans-serif; font-size: 13px;">
                     <div style="font-weight: 700; color: #0e1a18;">${escapeHtml(p.name)}</div>
                     ${p.short ? `<div style="font-size: 11px; color: #64748b; margin-top: 2px;">${escapeHtml(p.short)}</div>` : ''}
                 </div>`

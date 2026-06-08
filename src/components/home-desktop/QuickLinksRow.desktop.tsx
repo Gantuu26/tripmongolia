@@ -23,12 +23,12 @@ interface QuickItem {
 }
 
 const ITEMS: QuickItem[] = [
-    { id: 'tour', label: 'ツアー商品', sub: '全プラン一覧', img: productsIcon, path: '/products' },
-    { id: 'mates', label: '同行者募集', sub: '仲間を探す', img: companionIcon, path: '/travel-mates' },
-    { id: 'review', label: '旅行レビュー', sub: '実際の声', img: reviewsIcon, path: '/reviews' },
-    { id: 'quote', label: 'お見積もり', sub: '1分でリクエスト', img: estimateIcon, path: '/custom-estimate' },
-    { id: 'wishlist', label: 'ウィッシュリスト', sub: '保存したツアー', img: wishlistIcon, path: '/mypage/wishlist' },
-    { id: 'support', label: 'サポート', sub: '24時間対応', img: supportIcon, path: '/faq' },
+    { id: 'tour', label: '투어 상품', sub: '전체 플랜 목록', img: productsIcon, path: '/products' },
+    { id: 'mates', label: '동행자 모집', sub: '동행 찾기', img: companionIcon, path: '/travel-mates' },
+    { id: 'review', label: '여행 리뷰', sub: '실제 후기', img: reviewsIcon, path: '/reviews' },
+    { id: 'quote', label: '견적 문의', sub: '1분 만에 요청', img: estimateIcon, path: '/custom-estimate' },
+    { id: 'wishlist', label: '위시리스트', sub: '저장한 투어', img: wishlistIcon, path: '/mypage/wishlist' },
+    { id: 'support', label: '고객지원', sub: '24시간 대응', img: supportIcon, path: '/faq' },
 ];
 
 export function QuickLinksRowDesktop({ contentWidth = 1280 }: QuickLinksRowProps) {

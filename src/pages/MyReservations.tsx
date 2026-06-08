@@ -299,12 +299,12 @@ export const MyReservations: React.FC = () => {
                             ) : (
                                 reservations.map((reservation) => {
                                     const statusInfo = {
-                                        pending_payment: { label: 'お支払い待ち', color: 'bg-amber-100 text-amber-700' },
-                                        waiting_deposit: { label: '入金待ち', color: 'bg-amber-100 text-amber-700' },
-                                        paid: { label: 'お支払い完了', color: 'bg-blue-100 text-blue-700' },
-                                        confirmed: { label: 'ご予約確定', color: 'bg-teal-100 text-teal-700' },
-                                        completed: { label: '旅行終了', color: 'bg-slate-100 text-slate-600' },
-                                        cancelled: { label: 'キャンセル', color: 'bg-red-100 text-red-700' },
+                                        pending_payment: { label: '결제 대기', color: 'bg-amber-100 text-amber-700' },
+                                        waiting_deposit: { label: '입금 대기', color: 'bg-amber-100 text-amber-700' },
+                                        paid: { label: '결제 완료', color: 'bg-blue-100 text-blue-700' },
+                                        confirmed: { label: '예약 확정', color: 'bg-teal-100 text-teal-700' },
+                                        completed: { label: '여행 종료', color: 'bg-slate-100 text-slate-600' },
+                                        cancelled: { label: '취소', color: 'bg-red-100 text-red-700' },
                                     }[reservation.status] || { label: reservation.status, color: 'bg-slate-100 text-slate-600' };
                                     const pb = reservation.priceBreakdown;
                                     const daysUntil = reservation.startDate ? Math.ceil((new Date(reservation.startDate).getTime() - Date.now()) / 86400000) : null;
@@ -312,7 +312,7 @@ export const MyReservations: React.FC = () => {
                                     const balancePaid = reservation.status === "completed";
                                     const paidAmount = (depositPaid && pb ? pb.deposit : 0) + (balancePaid && pb ? pb.local : 0);
                                     const paidPercent = pb && pb.total > 0 ? Math.round((paidAmount / pb.total) * 100) : 0;
-                                    const fmt = (iso?: string) => iso ? new Date(iso).toLocaleDateString("ja-JP", { month: "numeric", day: "numeric", weekday: "short" }) : "";
+                                    const fmt = (iso?: string) => iso ? new Date(iso).toLocaleDateString("ko-KR", { month: "numeric", day: "numeric", weekday: "short" }) : "";
                                     return (
                                         <button
                                             key={reservation.id}
@@ -322,7 +322,7 @@ export const MyReservations: React.FC = () => {
                                             <div className="flex items-center justify-between mb-2">
                                                 <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${statusInfo.color}`}>{statusInfo.label}</span>
                                                 {daysUntil != null && daysUntil >= 0 && daysUntil <= 60 && (
-                                                    <span className="text-[11px] font-bold text-teal-600">ご旅行まであと{daysUntil}日</span>
+                                                    <span className="text-[11px] font-bold text-teal-600">여행까지 {daysUntil}일 남음</span>
                                                 )}
                                             </div>
                                             <h3 className="font-bold text-slate-900 dark:text-white text-base leading-tight mb-2">{reservation.productName}</h3>
@@ -334,14 +334,14 @@ export const MyReservations: React.FC = () => {
                                                 <span className="opacity-40">·</span>
                                                 <span className="inline-flex items-center gap-0.5">
                                                     <span className="material-symbols-outlined text-sm">group</span>
-                                                    {reservation.totalPeople}名
+                                                    {reservation.totalPeople}명
                                                 </span>
                                             </div>
                                             {pb && (
                                                 <div className="mt-3 pt-3 border-t border-slate-100 dark:border-zinc-700">
                                                     <div className="flex items-center justify-between text-[11px] text-slate-500 mb-1.5">
-                                                        <span>お支払い {paidPercent}%</span>
-                                                        <span className="font-mono">¥{pb.total.toLocaleString()}</span>
+                                                        <span>결제 {paidPercent}%</span>
+                                                        <span className="font-mono">₩{pb.total.toLocaleString()}</span>
                                                     </div>
                                                     <div className="h-1.5 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
                                                         <div className="h-full bg-teal-500 rounded-full transition-all" style={{ width: paidPercent + "%" }} />
@@ -349,7 +349,7 @@ export const MyReservations: React.FC = () => {
                                                 </div>
                                             )}
                                             <div className="mt-3 inline-flex items-center gap-0.5 text-xs font-semibold text-teal-600">
-                                                詳細を見る <span className="material-symbols-outlined text-sm">chevron_right</span>
+                                                상세 보기 <span className="material-symbols-outlined text-sm">chevron_right</span>
                                             </div>
                                         </button>
                                     );

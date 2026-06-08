@@ -32,12 +32,12 @@ interface ProductDetailDesktopProps {
 type SectionId = 'overview' | 'details' | 'itinerary' | 'included' | 'reviews' | 'faq';
 
 const ALL_SECTIONS: { id: SectionId; label: string }[] = [
-    { id: 'overview', label: '概要' },
-    { id: 'details', label: '詳細情報' },
-    { id: 'itinerary', label: '詳細日程' },
-    { id: 'included', label: '含まれるもの' },
-    { id: 'reviews', label: 'レビュー' },
-    { id: 'faq', label: 'ご注意・FAQ' },
+    { id: 'overview', label: '개요' },
+    { id: 'details', label: '상세정보' },
+    { id: 'itinerary', label: '상세일정' },
+    { id: 'included', label: '포함사항' },
+    { id: 'reviews', label: '리뷰' },
+    { id: 'faq', label: '유의사항・FAQ' },
 ];
 
 function tagTone(tag?: string): TagTone {
@@ -206,11 +206,11 @@ export function ProductDetailDesktop({
                     }}
                 >
                     <button type="button" onClick={() => navigate('/')} style={crumbBtn}>
-                        ホーム
+                        홈
                     </button>
                     <MatIcon name="chevron_right" size={14} color="var(--fg-6)" />
                     <button type="button" onClick={() => navigate('/products')} style={crumbBtn}>
-                        ツアー商品
+                        투어 상품
                     </button>
                     <MatIcon name="chevron_right" size={14} color="var(--fg-6)" />
                     <span
@@ -247,7 +247,7 @@ export function ProductDetailDesktop({
                                     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12, color: 'var(--fg-3)' }}>
                                         <MatIcon name="star" size={14} filled color="#facc15" />
                                         <span style={{ fontWeight: 700 }}>{ratingValue.toFixed(1)}</span>
-                                        <span style={{ color: 'var(--fg-5)' }}>({reviewCount} 件のレビュー)</span>
+                                        <span style={{ color: 'var(--fg-5)' }}>(리뷰 {reviewCount}건)</span>
                                     </span>
                                 </>
                             )}
@@ -256,8 +256,8 @@ export function ProductDetailDesktop({
                                     <span style={{ width: 4, height: 4, borderRadius: 999, background: 'var(--border-strong)' }} />
                                     <span style={{ fontSize: 12, color: 'var(--fg-3)', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                                         <MatIcon name="local_fire_department" size={14} filled color="#f97316" />
-                                        <span style={{ fontWeight: 700 }}>累計 {product.bookingCount} 名</span>
-                                        <span style={{ color: 'var(--fg-5)' }}>が予約</span>
+                                        <span style={{ fontWeight: 700 }}>누적 {product.bookingCount}명</span>
+                                        <span style={{ color: 'var(--fg-5)' }}>예약</span>
                                     </span>
                                 </>
                             )}
@@ -278,7 +278,7 @@ export function ProductDetailDesktop({
                     <div style={{ display: 'flex', gap: 10 }}>
                         <button type="button" onClick={() => setFav(!fav)} style={iconActionBtn}>
                             <MatIcon name="favorite" size={20} filled={fav} color={fav ? '#ef4444' : 'var(--fg-3)'} />
-                            <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--fg-2)' }}>保存</span>
+                            <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--fg-2)' }}>저장</span>
                         </button>
                         <button
                             type="button"
@@ -294,7 +294,7 @@ export function ProductDetailDesktop({
                             style={iconActionBtn}
                         >
                             <MatIcon name="share" size={20} color="var(--fg-3)" />
-                            <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--fg-2)' }}>共有</span>
+                            <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--fg-2)' }}>공유</span>
                         </button>
                     </div>
                 </div>
@@ -316,10 +316,10 @@ export function ProductDetailDesktop({
                     }}
                 >
                     {[
-                        { i: 'calendar_month', k: '期間', v: product.duration || '日程相談' },
-                        { i: 'translate', k: '言語', v: '日本語専属' },
-                        { i: 'group', k: '最少催行', v: '2 名様〜' },
-                        { i: 'verified', k: '含むもの', v: '食事 + 宿泊' },
+                        { i: 'calendar_month', k: '기간', v: product.duration || '일정 협의' },
+                        { i: 'translate', k: '언어', v: '한국어 전담' },
+                        { i: 'group', k: '최소 출발 인원', v: '2명~' },
+                        { i: 'verified', k: '포함 사항', v: '식사 + 숙박' },
                     ].map((s) => (
                         <div key={s.k} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                             <div
@@ -399,7 +399,7 @@ export function ProductDetailDesktop({
                 {/* Two-column body */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 56, alignItems: 'flex-start', paddingTop: 40 }}>
                     <div>
-                        <Section id="overview" title="概要" eyebrow="About this tour">
+                        <Section id="overview" title="개요" eyebrow="About this tour">
                             {product.description ? (
                                 <div
                                     style={{ fontSize: 16, lineHeight: 1.9, color: 'var(--fg-2)', fontWeight: 400 }}
@@ -407,8 +407,8 @@ export function ProductDetailDesktop({
                                 />
                             ) : (
                                 <p style={{ fontSize: 16, lineHeight: 1.9, color: 'var(--fg-2)', marginTop: 0 }}>
-                                    モンゴルの大自然を堪能する{product.duration ? product.duration + 'の' : ''}ツアー。
-                                    日本人スタッフ・日本語ガイドが同行し、現地旅行社ならではの細やかなご案内で安心してお楽しみいただけます。
+                                    몽골의 대자연을 만끽하는 {product.duration ? product.duration + ' ' : ''}투어입니다.
+                                    한국인 스태프와 한국어 가이드가 동행하여, 현지 여행사만의 세심한 안내로 안심하고 즐기실 수 있습니다.
                                 </p>
                             )}
                             {product.tags && product.tags.length > 0 && (
@@ -434,13 +434,13 @@ export function ProductDetailDesktop({
                         </Section>
 
                         {hasDetailContent && (
-                            <Section id="details" title="詳細情報" eyebrow="Tour Details">
+                            <Section id="details" title="상세정보" eyebrow="Tour Details">
                                 <DetailBlocksRenderer product={product} />
                             </Section>
                         )}
 
                         {hasItineraryContent && (
-                            <Section id="itinerary" title="詳細日程" eyebrow="Day-by-Day Itinerary">
+                            <Section id="itinerary" title="상세일정" eyebrow="Day-by-Day Itinerary">
                                 <Timeline product={product} />
                             </Section>
                         )}
@@ -451,15 +451,15 @@ export function ProductDetailDesktop({
                             sidebar uses pricingOptions, so removing only the
                             display sections is safe. */}
 
-                        <Section id="included" title="含まれるもの・含まれないもの" eyebrow="What's Included">
+                        <Section id="included" title="포함사항・불포함사항" eyebrow="What's Included">
                             <IncludedBlock product={product} />
                         </Section>
 
-                        <Section id="reviews" title="レビュー" eyebrow="Real Reviews">
+                        <Section id="reviews" title="리뷰" eyebrow="Real Reviews">
                             <ReviewsBlockV2 reviews={reviews} rating={ratingValue} count={reviewCount} />
                         </Section>
 
-                        <Section id="faq" title="ご注意・よくある質問" eyebrow="FAQ & Notice">
+                        <Section id="faq" title="유의사항・자주 묻는 질문" eyebrow="FAQ & Notice">
                             <FAQBlock product={product} />
                         </Section>
                     </div>
@@ -476,18 +476,18 @@ export function ProductDetailDesktop({
                             }}
                         >
                             <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 4 }}>
-                                <span style={{ fontSize: 12, color: 'var(--fg-5)' }}>お一人様</span>
+                                <span style={{ fontSize: 12, color: 'var(--fg-5)' }}>1인 기준</span>
                                 {hasOriginal && (
                                     <span style={{ fontSize: 12, color: 'var(--fg-5)', textDecoration: 'line-through' }}>
-                                        ¥{product.originalPrice!.toLocaleString()}
+                                        ₩{product.originalPrice!.toLocaleString()}
                                     </span>
                                 )}
                             </div>
                             <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginBottom: 18 }}>
                                 <span style={{ fontSize: 32, fontWeight: 700, color: '#0f766e', letterSpacing: '-0.02em' }}>
-                                    ¥{pricePerPerson.toLocaleString()}
+                                    ₩{pricePerPerson.toLocaleString()}
                                 </span>
-                                <span style={{ fontSize: 16, color: '#0f766e', fontWeight: 700 }}>〜</span>
+                                <span style={{ fontSize: 16, color: '#0f766e', fontWeight: 700 }}>~</span>
                             </div>
 
                             {sortedPricingOptions.length > 0 ? (
@@ -500,7 +500,7 @@ export function ProductDetailDesktop({
 
                             <div style={{ marginTop: 14 }}>
                                 <label style={{ fontSize: 12, color: 'var(--fg-5)', marginBottom: 8, display: 'block', fontWeight: 600 }}>
-                                    人数
+                                    인원
                                 </label>
                                 <div
                                     style={{
@@ -512,7 +512,7 @@ export function ProductDetailDesktop({
                                         borderRadius: 10,
                                     }}
                                 >
-                                    <span style={{ fontSize: 14, color: 'var(--fg-1)' }}>大人 {people} 名</span>
+                                    <span style={{ fontSize: 14, color: 'var(--fg-1)' }}>성인 {people}명</span>
                                     <div style={{ display: 'flex', gap: 4 }}>
                                         <button
                                             type="button"
@@ -544,12 +544,12 @@ export function ProductDetailDesktop({
 
                             <div style={{ marginTop: 18, padding: '14px 0', borderTop: '1px solid var(--border-subtle)' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8, fontSize: 13, color: 'var(--fg-4)' }}>
-                                    <span>¥{pricePerPerson.toLocaleString()} × {people}名</span>
-                                    <span>¥{total.toLocaleString()}</span>
+                                    <span>₩{pricePerPerson.toLocaleString()} × {people}명</span>
+                                    <span>₩{total.toLocaleString()}</span>
                                 </div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8, fontSize: 13, color: 'var(--fg-4)' }}>
-                                    <span>サービス料</span>
-                                    <span style={{ color: '#16a34a' }}>無料</span>
+                                    <span>서비스 요금</span>
+                                    <span style={{ color: '#16a34a' }}>무료</span>
                                 </div>
                                 <div
                                     style={{
@@ -560,9 +560,9 @@ export function ProductDetailDesktop({
                                         borderTop: '1px solid var(--border-subtle)',
                                     }}
                                 >
-                                    <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--fg-1)' }}>合計</span>
+                                    <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--fg-1)' }}>합계</span>
                                     <span style={{ fontSize: 22, fontWeight: 700, color: 'var(--fg-1)', letterSpacing: '-0.01em' }}>
-                                        ¥{total.toLocaleString()}
+                                        ₩{total.toLocaleString()}
                                     </span>
                                 </div>
                             </div>
@@ -585,7 +585,7 @@ export function ProductDetailDesktop({
                                     boxShadow: '0 8px 20px -6px rgba(15,118,110,0.5)',
                                 }}
                             >
-                                予約に進む
+                                예약하기
                             </button>
                             <button
                                 type="button"
@@ -609,7 +609,7 @@ export function ProductDetailDesktop({
                                 }}
                             >
                                 <MatIcon name="chat_bubble" size={16} color="var(--fg-2)" />
-                                まずは無料相談
+                                먼저 무료 상담
                             </button>
 
                             <div
@@ -628,18 +628,18 @@ export function ProductDetailDesktop({
                             >
                                 <MatIcon name="verified" size={16} filled color="var(--primary-dark)" />
                                 <span>
-                                    <strong>無料キャンセル</strong> — 出発30日前まで全額返金。日本語スタッフが24時間サポート。
+                                    <strong>무료 취소</strong> — 출발 30일 전까지 전액 환불. 한국어 스태프가 24시간 지원해 드립니다.
                                 </span>
                             </div>
                         </div>
 
                         <div style={{ marginTop: 14, padding: 20, background: 'var(--bg-muted)', borderRadius: 16 }}>
-                            <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fg-1)', marginBottom: 12 }}>お問い合わせ</div>
+                            <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fg-1)', marginBottom: 12 }}>문의하기</div>
                             <div style={{ display: 'grid', gap: 10 }}>
                                 {[
-                                    { i: 'phone', t: '+976 9594 5838', sub: '平日 9:00-18:00 (JST)', href: 'tel:+97695945838' },
+                                    { i: 'phone', t: '+976 9594 5838', sub: '평일 9:00-18:00 (JST)', href: 'tel:+97695945838' },
                                     { i: 'mail', t: 'info@mongolryokou.com', href: 'mailto:info@mongolryokou.com' },
-                                    { i: 'chat', t: 'LINEで相談', sub: '24時間対応', onClick: handleConsult },
+                                    { i: 'chat', t: '채팅 상담', sub: '24시간 대응', onClick: handleConsult },
                                 ].map((c) => {
                                     const inner = (
                                         <>
@@ -732,13 +732,13 @@ export function ProductDetailDesktop({
                                 {product.name}
                             </div>
                             <div style={{ fontSize: 11, color: 'var(--fg-5)', marginTop: 2 }}>
-                                大人 {people} 名 ・ お一人様 ¥{pricePerPerson.toLocaleString()}
+                                성인 {people}명 ・ 1인 기준 ₩{pricePerPerson.toLocaleString()}
                             </div>
                         </div>
                         <div style={{ textAlign: 'right' }}>
-                            <div style={{ fontSize: 11, color: 'var(--fg-5)' }}>合計</div>
+                            <div style={{ fontSize: 11, color: 'var(--fg-5)' }}>합계</div>
                             <div style={{ fontSize: 20, fontWeight: 700, color: '#0f766e', letterSpacing: '-0.01em' }}>
-                                ¥{total.toLocaleString()}
+                                ₩{total.toLocaleString()}
                             </div>
                         </div>
                         <button
@@ -760,7 +760,7 @@ export function ProductDetailDesktop({
                             }}
                         >
                             <MatIcon name="chat_bubble" size={16} color="var(--fg-2)" />
-                            相談
+                            상담
                         </button>
                         <button
                             type="button"
@@ -778,7 +778,7 @@ export function ProductDetailDesktop({
                                 boxShadow: '0 8px 20px -6px rgba(15,118,110,0.5)',
                             }}
                         >
-                            予約に進む
+                            예약하기
                         </button>
                     </div>
                 </div>
@@ -874,7 +874,7 @@ function GallerySection({ gallery, onOpen }: { gallery: string[]; onOpen: () => 
                     opacity: 0.85,
                 }}
             >
-                写真は準備中です
+                사진을 준비 중입니다
             </div>
         );
     }
@@ -958,7 +958,7 @@ function GallerySection({ gallery, onOpen }: { gallery: string[]; onOpen: () => 
                         }}
                     >
                         <MatIcon name="photo_library" size={20} color="#fff" />
-                        全ての写真 ({n})
+                        전체 사진 ({n})
                     </div>
                 </button>
             ) : (
@@ -986,7 +986,7 @@ function DetailBlocksRenderer({ product }: { product: TourProduct }) {
                             <img
                                 key={b.id || i}
                                 src={url}
-                                alt={`${product.name} 詳細${i + 1}｜モンゴル旅行・モンゴルツアー`}
+                                alt={`${product.name} 상세${i + 1}｜몽골여행・몽골투어`}
                                 loading="lazy"
                                 decoding="async"
                                 style={{ width: '100%', height: 'auto', borderRadius: 16 }}
@@ -1021,7 +1021,7 @@ function DetailBlocksRenderer({ product }: { product: TourProduct }) {
                 <img
                     key={i}
                     src={img}
-                    alt={`${product.name} 詳細${i + 1}｜モンゴル旅行・モンゴルツアー`}
+                    alt={`${product.name} 상세${i + 1}｜몽골여행・몽골투어`}
                     loading="lazy"
                     decoding="async"
                     style={{ width: '100%', height: 'auto', borderRadius: 16 }}
@@ -1241,24 +1241,24 @@ function OptionsBlock({ product }: { product: TourProduct }) {
             {pricing.length > 0 && (
                 <div>
                     <h3 style={subSectionHeading}>
-                        <MatIcon name="payments" size={20} color="#0f766e" /> 人数別料金
+                        <MatIcon name="payments" size={20} color="#0f766e" /> 인원별 요금
                     </h3>
                     <div style={{ display: 'grid', gridTemplateColumns: `repeat(${Math.min(pricing.length, 4)}, 1fr)`, gap: 12 }}>
                         {pricing.map((p, i) => (
                             <div key={i} style={pricingCardStyle}>
-                                <div style={{ fontSize: 12, color: 'var(--fg-5)', marginBottom: 4 }}>{p.people} 名様</div>
+                                <div style={{ fontSize: 12, color: 'var(--fg-5)', marginBottom: 4 }}>{p.people}명</div>
                                 <div style={{ fontSize: 22, fontWeight: 700, color: '#0f766e', letterSpacing: '-0.01em' }}>
-                                    ¥{p.pricePerPerson.toLocaleString()}
-                                    <span style={{ fontSize: 12, color: 'var(--fg-5)', fontWeight: 500, marginLeft: 4 }}>/ 名</span>
+                                    ₩{p.pricePerPerson.toLocaleString()}
+                                    <span style={{ fontSize: 12, color: 'var(--fg-5)', fontWeight: 500, marginLeft: 4 }}>/ 인</span>
                                 </div>
                                 {p.depositPerPerson > 0 && (
                                     <div style={{ fontSize: 11, color: 'var(--fg-5)', marginTop: 8, paddingTop: 8, borderTop: '1px dashed var(--border-subtle)' }}>
-                                        予約金 ¥{p.depositPerPerson.toLocaleString()}
+                                        예약금 ₩{p.depositPerPerson.toLocaleString()}
                                     </div>
                                 )}
                                 {p.localPaymentPerPerson > 0 && (
                                     <div style={{ fontSize: 11, color: 'var(--fg-5)', marginTop: 2 }}>
-                                        現地払 ¥{p.localPaymentPerPerson.toLocaleString()}
+                                        현지 결제 ₩{p.localPaymentPerPerson.toLocaleString()}
                                     </div>
                                 )}
                             </div>
@@ -1270,7 +1270,7 @@ function OptionsBlock({ product }: { product: TourProduct }) {
             {accommodations.length > 0 && (
                 <div>
                     <h3 style={subSectionHeading}>
-                        <MatIcon name="hotel" size={20} color="#0f766e" /> 宿泊オプション
+                        <MatIcon name="hotel" size={20} color="#0f766e" /> 숙박 옵션
                     </h3>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
                         {accommodations.map((a) => (
@@ -1291,14 +1291,14 @@ function OptionsBlock({ product }: { product: TourProduct }) {
                                 <div style={{ flex: 1, minWidth: 0 }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
                                         <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--fg-1)' }}>{a.name}</span>
-                                        {a.isDefault && <span style={defaultBadgeStyle}>標準</span>}
+                                        {a.isDefault && <span style={defaultBadgeStyle}>기본</span>}
                                     </div>
                                     {a.description && (
                                         <div style={{ fontSize: 13, color: 'var(--fg-4)', lineHeight: 1.6 }}>{a.description}</div>
                                     )}
                                     {a.priceModifier !== 0 && (
                                         <div style={priceModifierStyle(a.priceModifier)}>
-                                            {a.priceModifier > 0 ? '+' : ''}¥{a.priceModifier.toLocaleString()}
+                                            {a.priceModifier > 0 ? '+' : ''}₩{a.priceModifier.toLocaleString()}
                                         </div>
                                     )}
                                 </div>
@@ -1311,7 +1311,7 @@ function OptionsBlock({ product }: { product: TourProduct }) {
             {vehicles.length > 0 && (
                 <div>
                     <h3 style={subSectionHeading}>
-                        <MatIcon name="directions_car" size={20} color="#0f766e" /> 車両オプション
+                        <MatIcon name="directions_car" size={20} color="#0f766e" /> 차량 옵션
                     </h3>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
                         {vehicles.map((v) => (
@@ -1319,14 +1319,14 @@ function OptionsBlock({ product }: { product: TourProduct }) {
                                 <div style={{ flex: 1 }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
                                         <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--fg-1)' }}>{v.name}</span>
-                                        {v.isDefault && <span style={defaultBadgeStyle}>標準</span>}
+                                        {v.isDefault && <span style={defaultBadgeStyle}>기본</span>}
                                     </div>
                                     {v.description && (
                                         <div style={{ fontSize: 13, color: 'var(--fg-4)', lineHeight: 1.6 }}>{v.description}</div>
                                     )}
                                     {v.priceModifier !== 0 && (
                                         <div style={priceModifierStyle(v.priceModifier)}>
-                                            {v.priceModifier > 0 ? '+' : ''}¥{v.priceModifier.toLocaleString()}
+                                            {v.priceModifier > 0 ? '+' : ''}₩{v.priceModifier.toLocaleString()}
                                         </div>
                                     )}
                                 </div>
@@ -1437,7 +1437,7 @@ function Timeline({ product }: { product: TourProduct }) {
                     textAlign: 'center',
                 }}
             >
-                行程詳細は近日公開予定です。お見積もり時にスタッフが詳細をご案内します。
+                여행 일정 상세 정보는 곧 공개될 예정입니다. 견적 시 스태프가 자세히 안내해 드립니다.
             </div>
         );
     }
@@ -1450,7 +1450,7 @@ function Timeline({ product }: { product: TourProduct }) {
                     <img
                         key={i}
                         src={src}
-                        alt={`${product.name} 行程${i + 1}｜モンゴル旅行・モンゴルツアー`}
+                        alt={`${product.name} 일정${i + 1}｜몽골여행・몽골투어`}
                         loading="lazy"
                         decoding="async"
                         style={{ width: '100%', height: 'auto', borderRadius: 16 }}
@@ -1552,7 +1552,7 @@ function DayTabs({ days }: { days: DayGroup[] }) {
         >
             {days.map((d, i) => {
                 const c = d.dayInfo.content as DayInfoContent;
-                const label = (c?.dayLabel || `${i + 1}日目`).replace(/（.*?）/, '');
+                const label = (c?.dayLabel || `${i + 1}일차`).replace(/（.*?）/, '');
                 return (
                     <button
                         key={d.dayInfo.id || i}
@@ -1614,9 +1614,9 @@ function DaySection({
     const headerRight = dayDate || c?.title?.trim() || c?.dayLabel || '';
 
     const meals: Array<{ k: string; v: string }> = [];
-    if (c?.meals?.breakfast) meals.push({ k: '朝食', v: c.meals.breakfast });
-    if (c?.meals?.lunch) meals.push({ k: '昼食', v: c.meals.lunch });
-    if (c?.meals?.dinner) meals.push({ k: '夕食', v: c.meals.dinner });
+    if (c?.meals?.breakfast) meals.push({ k: '조식', v: c.meals.breakfast });
+    if (c?.meals?.lunch) meals.push({ k: '중식', v: c.meals.lunch });
+    if (c?.meals?.dinner) meals.push({ k: '석식', v: c.meals.dinner });
 
     // Live-fetch hotel master fallback. Older itineraries saved only the hotel
     // name + id (before the snapshot fields existed); fetching by id lets us
@@ -1677,7 +1677,7 @@ function DaySection({
                         letterSpacing: '-0.01em',
                     }}
                 >
-                    {(c?.dayLabel || `${dayIndex + 1}日目`).replace(/（.*?）/, '')}
+                    {(c?.dayLabel || `${dayIndex + 1}일차`).replace(/（.*?）/, '')}
                 </span>
                 <span
                     style={{
@@ -1767,14 +1767,14 @@ function DaySection({
                                             fontWeight: 700,
                                         }}
                                     >
-                                        予定
+                                        예정
                                     </span>
                                     <span style={{ fontSize: 16, fontWeight: 700, color: 'var(--fg-1)' }}>
                                         {c.accommodation}
                                     </span>
                                 </div>
                                 <div style={{ fontSize: 11, color: 'var(--fg-5)', marginTop: 6 }}>
-                                    * 宿泊先は出発1日前までにご案内します。
+                                    * 숙박처는 출발 1일 전까지 안내해 드립니다.
                                 </div>
                             </SpineRow>
                         );
@@ -1805,7 +1805,7 @@ function DaySection({
                                             fontWeight: 700,
                                         }}
                                     >
-                                        宿泊
+                                        숙박
                                     </span>
                                     <h4
                                         style={{
@@ -1861,11 +1861,11 @@ function DaySection({
                                                         display: 'block',
                                                         width: '100%',
                                                     }}
-                                                    aria-label={`${c.accommodation || 'hotel'} ${i + 1}枚目を拡大`}
+                                                    aria-label={`${c.accommodation || 'hotel'} ${i + 1}번째 사진 확대`}
                                                 >
                                                     <img
                                                         src={src}
-                                                        alt={`${c.accommodation || 'hotel'} ${i + 1}｜モンゴル旅行・宿泊`}
+                                                        alt={`${c.accommodation || 'hotel'} ${i + 1}｜몽골여행・숙박`}
                                                         loading="lazy"
                                                         decoding="async"
                                                         style={{
@@ -1882,7 +1882,7 @@ function DaySection({
                                                             <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: '50%', background: 'linear-gradient(to top, rgba(0,0,0,0.55), transparent)', pointerEvents: 'none', borderRadius: 8 }} />
                                                             <div style={{ position: 'absolute', right: 10, bottom: 10, background: 'rgba(0,0,0,0.65)', color: '#fff', padding: '6px 12px', borderRadius: 999, fontSize: 12, fontWeight: 700, backdropFilter: 'blur(6px)', display: 'inline-flex', alignItems: 'center', gap: 6, pointerEvents: 'none', border: '1px solid rgba(255,255,255,0.18)' }}>
                                                                 <span className="material-symbols-outlined" style={{ fontSize: 15 }}>add_photo_alternate</span>
-                                                                +{remaining} もっと見る
+                                                                +{remaining} 더보기
                                                             </div>
                                                         </>
                                                     )}
@@ -1921,7 +1921,7 @@ function DaySection({
                                     </div>
                                 )}
                                 <div style={{ fontSize: 11, color: 'var(--fg-5)', marginTop: 10 }}>
-                                    * 宿泊先は出発1日前までにご案内します。
+                                    * 숙박처는 출발 1일 전까지 안내해 드립니다.
                                 </div>
                             </div>
                         </SpineRow>
@@ -2146,7 +2146,7 @@ function SpineEventRow({
             <SpineRow icon="image">
                 <img
                     src={url}
-                    alt={`${productName} 行程${index + 1}｜モンゴル旅行・モンゴルツアー`}
+                    alt={`${productName} 일정${index + 1}｜몽골여행・몽골투어`}
                     loading="lazy"
                     decoding="async"
                     style={{ width: '100%', height: 'auto', borderRadius: 14, display: 'block' }}
@@ -2229,7 +2229,7 @@ function SpineEventRow({
                                 whiteSpace: 'nowrap',
                             }}
                         >
-                            詳細を見る
+                            상세 보기
                             <MatIcon
                                 name="arrow_forward"
                                 size={14}
@@ -2291,11 +2291,11 @@ function SpineEventRow({
                                                 display: 'block',
                                                 width: '100%',
                                             }}
-                                            aria-label={`${c.title || '画像'} ${i + 1}枚目を拡大`}
+                                            aria-label={`${c.title || '이미지'} ${i + 1}번째 사진 확대`}
                                         >
                                             <img
                                                 src={src}
-                                                alt={`${c.title || productName} ${i + 1}｜モンゴル旅行・モンゴルツアー`}
+                                                alt={`${c.title || productName} ${i + 1}｜몽골여행・몽골투어`}
                                                 loading="lazy"
                                                 decoding="async"
                                                 style={{
@@ -2344,7 +2344,7 @@ function SpineEventRow({
                                                         }}
                                                     >
                                                         <span className="material-symbols-outlined" style={{ fontSize: 15 }}>add_photo_alternate</span>
-                                                        +{remaining} もっと見る
+                                                        +{remaining} 더보기
                                                     </div>
                                                 </>
                                             )}
@@ -2396,7 +2396,7 @@ function FlatBlockRenderer({
         return (
             <img
                 src={url}
-                alt={`${productName} ${index + 1}｜モンゴル旅行・モンゴルツアー`}
+                alt={`${productName} ${index + 1}｜몽골여행・몽골투어`}
                 loading="lazy"
                 decoding="async"
                 style={{ width: '100%', height: 'auto', borderRadius: 16 }}
@@ -2431,7 +2431,7 @@ function FlatBlockRenderer({
                     <img
                         key={i}
                         src={src}
-                        alt={`${productName} ${index + 1}-${i + 1}｜モンゴル旅行・モンゴルツアー`}
+                        alt={`${productName} ${index + 1}-${i + 1}｜몽골여행・몽골투어`}
                         loading="lazy"
                         decoding="async"
                         style={{ width: '100%', height: 'auto', borderRadius: 16 }}
@@ -2530,7 +2530,7 @@ function LocationBlock({ product }: { product: TourProduct }) {
                     fontSize: 14,
                 }}
             >
-                目的地情報は近日公開予定です。
+                여행지 정보는 곧 공개될 예정입니다.
             </div>
         );
     }
@@ -2585,10 +2585,10 @@ function LocationBlock({ product }: { product: TourProduct }) {
 function IncludedBlock({ product }: { product: TourProduct }) {
     const inc = (product.included && product.included.length > 0)
         ? product.included
-        : ['全日程宿泊', '全日程食事付き', '専用車両 (送迎・移動)', '日本語ガイド同行', '観光地入場料', '燃料費'];
+        : ['전 일정 숙박', '전 일정 식사 포함', '전용 차량 (픽업・이동)', '한국어 가이드 동행', '관광지 입장료', '연료비'];
     const exc = (product.excluded && product.excluded.length > 0)
         ? product.excluded
-        : ['海外旅行保険', '国際線航空券', '個人的費用'];
+        : ['해외여행자보험', '국제선 항공권', '개인 경비'];
 
     return (
         <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: 24 }}>
@@ -2604,7 +2604,7 @@ function IncludedBlock({ product }: { product: TourProduct }) {
                         gap: 8,
                     }}
                 >
-                    <MatIcon name="check_circle" size={20} filled color="#0f766e" /> 含まれるもの
+                    <MatIcon name="check_circle" size={20} filled color="#0f766e" /> 포함사항
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px 24px' }}>
                     {inc.map((x, i) => (
@@ -2637,7 +2637,7 @@ function IncludedBlock({ product }: { product: TourProduct }) {
                         gap: 8,
                     }}
                 >
-                    <MatIcon name="do_not_disturb_on" size={20} filled color="var(--fg-5)" /> 含まれないもの
+                    <MatIcon name="do_not_disturb_on" size={20} filled color="var(--fg-5)" /> 불포함사항
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                     {exc.map((x, i) => (
@@ -2662,7 +2662,7 @@ function IncludedBlock({ product }: { product: TourProduct }) {
                     }}
                 >
                     <MatIcon name="lightbulb" size={16} filled color="#f59e0b" style={{ flexShrink: 0 }} />
-                    <span>国際線航空券・ビザのお手配もサポート可能です。お気軽にご相談ください。</span>
+                    <span>국제선 항공권・비자 수배도 지원해 드립니다. 편하게 상담해 주시기 바랍니다.</span>
                 </div>
             </div>
         </div>
@@ -2722,7 +2722,7 @@ function ReviewsBlockV2({ reviews, rating, count }: { reviews: ReviewLike[]; rat
                             />
                         ))}
                     </div>
-                    <div style={{ fontSize: 13, color: 'var(--fg-4)', marginTop: 10 }}>{count > 0 ? `${count} 件のレビュー` : 'レビュー募集中'}</div>
+                    <div style={{ fontSize: 13, color: 'var(--fg-4)', marginTop: 10 }}>{count > 0 ? `리뷰 ${count}건` : '리뷰 모집 중'}</div>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6, justifyContent: 'center' }}>
                     {dist.map((d) => (
@@ -2757,9 +2757,9 @@ function ReviewsBlockV2({ reviews, rating, count }: { reviews: ReviewLike[]; rat
             <div style={{ display: 'flex', gap: 8, marginBottom: 18, flexWrap: 'wrap' }}>
                 {(
                     [
-                        { v: 'all' as const, l: 'すべて' },
-                        { v: '5' as const, l: '★ 5 のみ' },
-                        { v: 'photo' as const, l: '写真付き' },
+                        { v: 'all' as const, l: '전체' },
+                        { v: '5' as const, l: '★ 5점만' },
+                        { v: 'photo' as const, l: '사진 포함' },
                     ]
                 ).map((f) => {
                     const on = filter === f.v;
@@ -2796,7 +2796,7 @@ function ReviewsBlockV2({ reviews, rating, count }: { reviews: ReviewLike[]; rat
                         textAlign: 'center',
                     }}
                 >
-                    まだレビューがありません。最初のレビュアーになりましょう！
+                    아직 리뷰가 없습니다. 첫 번째 리뷰를 남겨 주세요!
                 </div>
             ) : (
                 // Horizontal scroll carousel — matches mobile + home design and
@@ -2841,7 +2841,7 @@ function ReviewsBlockV2({ reviews, rating, count }: { reviews: ReviewLike[]; rat
                         gap: 8,
                     }}
                 >
-                    全 {count} 件のレビューを見る <MatIcon name="arrow_forward" size={16} color="var(--fg-1)" />
+                    리뷰 전체 {count}건 보기 <MatIcon name="arrow_forward" size={16} color="var(--fg-1)" />
                 </button>
             )}
         </div>
@@ -2856,7 +2856,7 @@ function ReviewsBlockV2({ reviews, rating, count }: { reviews: ReviewLike[]; rat
 function ReviewCardLink({ review: r }: { review: ReviewLike }) {
     const navigate = useNavigate();
     const stars = Math.max(0, Math.min(5, Number(r.rating) || 0));
-    const author = r.user_name || r.author || '匿名';
+    const author = r.user_name || r.author || '익명';
     const visitDate = r.visit_date || r.visitDate;
     const handleClick = () => {
         if (!r.id) return;
@@ -2925,7 +2925,7 @@ function ReviewCardLink({ review: r }: { review: ReviewLike }) {
                             textOverflow: 'ellipsis',
                         }}
                     >
-                        {author} 様
+                        {author} 님
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 3 }}>
                         <div style={{ display: 'flex', gap: 1 }}>
@@ -2970,7 +2970,7 @@ function ReviewCardLink({ review: r }: { review: ReviewLike }) {
                         gap: 4,
                     }}
                 >
-                    全文を読む <MatIcon name="arrow_forward" size={14} color="#0f766e" />
+                    전문 보기 <MatIcon name="arrow_forward" size={14} color="#0f766e" />
                 </div>
             )}
         </article>
@@ -2978,12 +2978,12 @@ function ReviewCardLink({ review: r }: { review: ReviewLike }) {
 }
 
 const DEFAULT_PRODUCT_FAQS: ProductFAQ[] = [
-    { q: '出発前に何を準備したらいいですか？', a: '国際線航空券・パスポート (有効期限6ヶ月以上)・モンゴルビザが必要です。ビザ申請は弊社でもサポートいたします。気温差が大きいため、季節を問わず羽織りものは必須です。' },
-    { q: 'キャンセル規定を教えてください。', a: '出発日の31日前まで: 全額返金。30〜15日前: ツアー代金の30%。14〜8日前: 50%。7日前以降: 100%。詳しくは利用規約をご確認ください。' },
-    { q: 'ゲル宿泊は寝具がありますか？', a: '全てのゲルキャンプにベッド・マットレス・毛布・タオルを完備しています。冬季には電気毛布もご用意します。' },
-    { q: '1人旅でも参加できますか？', a: 'もちろん可能です。一人参加追加料金 ¥18,000 を頂戴しております (個室追加料金分)。同行者募集の掲示板もご利用ください。' },
-    { q: '食事のアレルギー対応はありますか？', a: '事前にお知らせいただければ、食物アレルギーや宗教上の食事制限に個別対応いたします。ベジタリアン・ヴィーガン対応も可能です。' },
-    { q: '現地での通信手段は？', a: 'ウランバートル市内は4G完備。ゴビ・テレルジでは電波が弱い場所もあります。ガイドが衛星電話を所持しているため緊急連絡は可能です。' },
+    { q: '출발 전에 무엇을 준비해야 하나요?', a: '국제선 항공권, 여권(유효기간 6개월 이상), 몽골 비자가 필요합니다. 비자 신청은 저희 회사에서도 지원해 드립니다. 일교차가 크기 때문에 계절과 관계없이 겉옷은 필수입니다.' },
+    { q: '취소 규정을 알려주세요.', a: '출발일 31일 전까지: 전액 환불. 30~15일 전: 투어 요금의 30%. 14~8일 전: 50%. 7일 전 이후: 100%. 자세한 내용은 이용약관을 확인해 주시기 바랍니다.' },
+    { q: '게르 숙박 시 침구가 제공되나요?', a: '모든 게르 캠프에 침대, 매트리스, 담요, 수건을 완비하고 있습니다. 겨울철에는 전기담요도 준비해 드립니다.' },
+    { q: '혼자 여행해도 참가할 수 있나요?', a: '물론 가능합니다. 1인 참가 추가 요금 ₩18,000을 받고 있습니다(개인실 추가 요금분). 동행자 모집 게시판도 이용해 주시기 바랍니다.' },
+    { q: '식사 알레르기 대응이 가능한가요?', a: '사전에 알려주시면 식품 알레르기나 종교상의 식사 제한에 개별 대응해 드립니다. 채식주의자, 비건 대응도 가능합니다.' },
+    { q: '현지에서의 통신 수단은 무엇인가요?', a: '울란바토르 시내는 4G가 완비되어 있습니다. 고비, 테렐지에서는 전파가 약한 곳도 있습니다. 가이드가 위성전화를 소지하고 있어 긴급 연락은 가능합니다.' },
 ];
 
 function FAQBlock({ product }: { product: TourProduct }) {
@@ -3083,7 +3083,7 @@ function PricingTierSelector({
     return (
         <div>
             <label style={{ fontSize: 12, color: 'var(--fg-5)', marginBottom: 10, display: 'block', fontWeight: 600 }}>
-                人数別プラン
+                인원별 플랜
             </label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                 {options.map((opt) => {
@@ -3120,10 +3120,10 @@ function PricingTierSelector({
                                         letterSpacing: '0.04em',
                                     }}
                                 >
-                                    お得
+                                    할인
                                 </span>
                             )}
-                            <div style={{ fontSize: 12, color: 'var(--fg-2)', fontWeight: 600 }}>{opt.people}名</div>
+                            <div style={{ fontSize: 12, color: 'var(--fg-2)', fontWeight: 600 }}>{opt.people}명</div>
                             <div
                                 style={{
                                     fontSize: 13,
@@ -3132,7 +3132,7 @@ function PricingTierSelector({
                                     marginTop: 3,
                                 }}
                             >
-                                ¥{opt.pricePerPerson.toLocaleString()}〜/人
+                                ₩{opt.pricePerPerson.toLocaleString()}~/인
                             </div>
                         </button>
                     );
@@ -3214,7 +3214,7 @@ function RelatedTours({ productId, category }: { productId: string; category: st
                         You May Also Like
                     </div>
                     <h2 style={{ fontSize: 24, fontWeight: 700, color: 'var(--fg-1)', margin: 0, letterSpacing: '-0.01em' }}>
-                        似たツアーを探す
+                        비슷한 투어 찾기
                     </h2>
                 </div>
                 <button
@@ -3235,7 +3235,7 @@ function RelatedTours({ productId, category }: { productId: string; category: st
                         gap: 6,
                     }}
                 >
-                    全てのツアーを見る <MatIcon name="arrow_forward" size={16} />
+                    전체 투어 보기 <MatIcon name="arrow_forward" size={16} />
                 </button>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>

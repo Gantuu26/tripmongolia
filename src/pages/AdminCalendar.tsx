@@ -29,15 +29,15 @@ interface CalendarItem {
 }
 
 const STATUS_LABEL: Record<string, string> = {
-    new: '신규 견적',
-    processing: '견적 작성 중',
-    answered: '견적 발송 완료',
-    reservation_requested: '예약 요청',
-    converted: '예약 전환 완료',
-    pending_payment: '입금 대기',
-    paid: '결제 완료',
-    confirmed: '예약 확정',
-    cancelled: '취소',
+    new: 'Шинэ үнийн санал',
+    processing: 'Үнийн санал боловсруулж байна',
+    answered: 'Үнийн санал илгээгдсэн',
+    reservation_requested: 'Захиалгын хүсэлт',
+    converted: 'Захиалга болгон хөрвүүлсэн',
+    pending_payment: 'Төлбөр хүлээгдэж байна',
+    paid: 'Төлбөр төлөгдсөн',
+    confirmed: 'Захиалга баталгаажсан',
+    cancelled: 'Цуцлагдсан',
 };
 
 const normalizeDate = (value: unknown): string => {
@@ -104,27 +104,27 @@ const getEventTone = (item: CalendarItem): 'blue' | 'green' | 'amber' => {
 
 const getNextAction = (item: CalendarItem): { label: string; tone: string; icon: string } => {
     if (item.itemType === 'quote') {
-        if (item.status === 'new') return { label: '요청 검토', tone: 'b-red', icon: 'fiber_new' };
-        if (item.status === 'processing') return { label: '견적 작성', tone: 'b-amber', icon: 'edit_note' };
-        if (item.status === 'answered') return { label: '고객 확인 대기', tone: 'b-blue', icon: 'mark_email_read' };
-        if (item.status === 'reservation_requested') return { label: '예약 전환', tone: 'b-purple', icon: 'sync_alt' };
-        return { label: '견적 관리', tone: 'b-gray', icon: 'request_quote' };
+        if (item.status === 'new') return { label: 'Хүсэлт хянах', tone: 'b-red', icon: 'fiber_new' };
+        if (item.status === 'processing') return { label: 'Үнийн санал боловсруулах', tone: 'b-amber', icon: 'edit_note' };
+        if (item.status === 'answered') return { label: 'Хэрэглэгчийн баталгаа хүлээж байна', tone: 'b-blue', icon: 'mark_email_read' };
+        if (item.status === 'reservation_requested') return { label: 'Захиалга болгох', tone: 'b-purple', icon: 'sync_alt' };
+        return { label: 'Үнийн санал удирдах', tone: 'b-gray', icon: 'request_quote' };
     }
 
     if (item.status === 'pending_payment' || item.depositStatus !== 'paid') {
-        return { label: '입금 확인', tone: 'b-amber', icon: 'payments' };
+        return { label: 'Төлбөр шалгах', tone: 'b-amber', icon: 'payments' };
     }
     if (!item.assignedGuide) {
-        return { label: '가이드 배정', tone: 'b-amber', icon: 'person_add' };
+        return { label: 'Хөтөч хуваарилах', tone: 'b-amber', icon: 'person_add' };
     }
     if (!item.dailyAccommodations || item.dailyAccommodations.length === 0) {
-        return { label: '숙소 확인', tone: 'b-blue', icon: 'hotel' };
+        return { label: 'Байр шалгах', tone: 'b-blue', icon: 'hotel' };
     }
-    return { label: '운영 체크', tone: 'b-green', icon: 'task_alt' };
+    return { label: 'Үйл ажиллагаа шалгах', tone: 'b-green', icon: 'task_alt' };
 };
 
 const formatRange = (item: CalendarItem) => {
-    if (!item.startDate) return '일정 미정';
+    if (!item.startDate) return 'Хуваарь тодорхойгүй';
     return item.endDate && item.endDate !== item.startDate ? `${item.startDate} ~ ${item.endDate}` : item.startDate;
 };
 
@@ -143,7 +143,7 @@ const CalendarDetailModal = ({ item, onClose }: { item: CalendarItem | null; onC
                     <div style={{ minWidth: 0 }}>
                         <div className="row" style={{ gap: 6, marginBottom: 6 }}>
                             <span className={`tag-type ${item.itemType === 'quote' ? 'quote' : 'reservation'}`}>
-                                {item.itemType === 'quote' ? '맞춤 견적' : '예약'}
+                                {item.itemType === 'quote' ? 'Захиалгат үнийн санал' : 'Захиалга'}
                             </span>
                             <span className={`badge ${action.tone}`}>{STATUS_LABEL[item.status] || item.status}</span>
                         </div>
@@ -151,7 +151,7 @@ const CalendarDetailModal = ({ item, onClose }: { item: CalendarItem | null; onC
                         <div className="sub">No. {item.reservationNumber || item.id.slice(0, 8).toUpperCase()}</div>
                     </div>
                     <div className="spacer" />
-                    <button className="icon-btn" onClick={onClose} title="닫기" type="button">
+                    <button className="icon-btn" onClick={onClose} title="Хаах" type="button">
                         <Icon name="close" />
                     </button>
                 </div>
@@ -161,26 +161,26 @@ const CalendarDetailModal = ({ item, onClose }: { item: CalendarItem | null; onC
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
                             <div>
                                 <div className="kv" style={{ borderBottom: 'none', padding: 0, display: 'block' }}>
-                                    <span style={{ display: 'block', marginBottom: 3 }}>고객</span>
-                                    <b>{item.customerName || '미입력'}</b>
+                                    <span style={{ display: 'block', marginBottom: 3 }}>Үйлчлүүлэгч</span>
+                                    <b>{item.customerName || 'Оруулаагүй'}</b>
                                 </div>
                             </div>
                             <div>
                                 <div className="kv" style={{ borderBottom: 'none', padding: 0, display: 'block' }}>
-                                    <span style={{ display: 'block', marginBottom: 3 }}>연락처</span>
-                                    <b>{item.phone || item.email || '미입력'}</b>
+                                    <span style={{ display: 'block', marginBottom: 3 }}>Холбоо барих</span>
+                                    <b>{item.phone || item.email || 'Оруулаагүй'}</b>
                                 </div>
                             </div>
                             <div>
                                 <div className="kv" style={{ borderBottom: 'none', padding: 0, display: 'block' }}>
-                                    <span style={{ display: 'block', marginBottom: 3 }}>일정</span>
+                                    <span style={{ display: 'block', marginBottom: 3 }}>Хуваарь</span>
                                     <b>{formatRange(item)}</b>
                                 </div>
                             </div>
                             <div>
                                 <div className="kv" style={{ borderBottom: 'none', padding: 0, display: 'block' }}>
-                                    <span style={{ display: 'block', marginBottom: 3 }}>인원</span>
-                                    <b>{item.headcount || '미정'}</b>
+                                    <span style={{ display: 'block', marginBottom: 3 }}>Хүний тоо</span>
+                                    <b>{item.headcount || 'Тодорхойгүй'}</b>
                                 </div>
                             </div>
                         </div>
@@ -188,11 +188,11 @@ const CalendarDetailModal = ({ item, onClose }: { item: CalendarItem | null; onC
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                         <div className="card card-pad">
-                            <div className="cell-muted" style={{ fontSize: 12.5, marginBottom: 6 }}>금액</div>
-                            <div className="cell-price" style={{ fontSize: 18 }}>{(item.totalAmount || 0).toLocaleString()} 엔</div>
+                            <div className="cell-muted" style={{ fontSize: 12.5, marginBottom: 6 }}>Үнийн дүн</div>
+                            <div className="cell-price" style={{ fontSize: 18 }}>{(item.totalAmount || 0).toLocaleString()} 원</div>
                         </div>
                         <div className="card card-pad">
-                            <div className="cell-muted" style={{ fontSize: 12.5, marginBottom: 6 }}>다음 처리</div>
+                            <div className="cell-muted" style={{ fontSize: 12.5, marginBottom: 6 }}>Дараагийн алхам</div>
                             <div className="row" style={{ gap: 6 }}>
                                 <Icon name={action.icon} style={{ fontSize: 18 }} />
                                 <span className="cell-strong">{action.label}</span>
@@ -202,19 +202,19 @@ const CalendarDetailModal = ({ item, onClose }: { item: CalendarItem | null; onC
 
                     {item.itemType === 'quote' && (
                         <div className="card card-pad" style={{ marginTop: 14, background: 'var(--mrt-purple-soft)', borderColor: 'transparent' }}>
-                            <div className="cell-strong" style={{ color: 'var(--mrt-purple-2)' }}>견적 처리 포인트</div>
+                            <div className="cell-strong" style={{ color: 'var(--mrt-purple-2)' }}>Үнийн санал боловсруулах санамж</div>
                             <p style={{ margin: '6px 0 0', fontSize: 12.5, lineHeight: 1.6, color: 'var(--mrt-purple-2)' }}>
-                                이 일정은 아직 확정 예약이 아닙니다. 캘린더에서 다른 확정 일정과 겹치는지 확인한 뒤 견적 금액, 안내문, 견적서 링크를 입력하면 됩니다.
+                                Энэ хуваарь нь хараахан баталгаажсан захиалга биш байна. Хуанлиас бусад баталгаажсан хуваарьтай давхцаж байгаа эсэхийг шалгасны дараа үнийн дүн, тайлбар, үнийн саналын холбоосыг оруулна уу.
                             </p>
                         </div>
                     )}
                 </div>
 
                 <div className="drawer-foot">
-                    <button className="btn btn-ghost" onClick={onClose} type="button">닫기</button>
+                    <button className="btn btn-ghost" onClick={onClose} type="button">Хаах</button>
                     <div className="spacer" style={{ flex: 1 }} />
                     <a className="btn btn-ink" href="/admin/reservations">
-                        <Icon name="open_in_new" />통합 관리로 이동
+                        <Icon name="open_in_new" />Нэгдсэн удирдлага руу очих
                     </a>
                 </div>
             </div>
@@ -254,8 +254,8 @@ export const AdminCalendar: React.FC = () => {
                         id: reservation.id,
                         itemType: 'reservation',
                         reservationNumber: reservation.reservationNumber || reservation.reservation_number,
-                        productName: reservation.productName || reservation.product_name || '상품명 없음',
-                        customerName: reservation.customerName || reservation.customer_name || reservation.customer_info?.name || '고객명 없음',
+                        productName: reservation.productName || reservation.product_name || 'Бүтээгдэхүүний нэр байхгүй',
+                        customerName: reservation.customerName || reservation.customer_name || reservation.customer_info?.name || 'Үйлчлүүлэгчийн нэр байхгүй',
                         startDate: normalizeDate(reservation.startDate || reservation.start_date || reservation.date),
                         endDate: normalizeDate(reservation.endDate || reservation.end_date),
                         status: reservation.status || 'pending_payment',
@@ -264,7 +264,7 @@ export const AdminCalendar: React.FC = () => {
                         depositStatus: reservation.depositStatus || reservation.deposit_status || (reservation.status === 'pending_payment' ? 'unpaid' : 'paid'),
                         balance: reservation.balance || reservation.balanceAmount || reservation.balance_amount || Math.max(totalAmount - deposit, 0),
                         balanceStatus: reservation.balanceStatus || reservation.balance_status || 'unpaid',
-                        headcount: reservation.headcount || (reservation.totalPeople || reservation.total_people ? `${reservation.totalPeople || reservation.total_people}명` : '인원 미정'),
+                        headcount: reservation.headcount || (reservation.totalPeople || reservation.total_people ? `${reservation.totalPeople || reservation.total_people} хүн` : 'Хүний тоо тодорхойгүй'),
                         phone: reservation.phone || reservation.customerPhone || reservation.customer_phone || reservation.customer_info?.phone || '',
                         email: reservation.email || reservation.customerEmail || reservation.customer_email || reservation.customer_info?.email || '',
                         assignedGuide,
@@ -286,8 +286,8 @@ export const AdminCalendar: React.FC = () => {
                     return {
                         id: quote.id,
                         itemType: 'quote',
-                        productName: `${quote.destination || '맞춤 여행'} 맞춤 견적`,
-                        customerName: quote.name || '고객명 없음',
+                        productName: `${quote.destination || 'Захиалгат аялал'} захиалгат үнийн санал`,
+                        customerName: quote.name || 'Үйлчлүүлэгчийн нэр байхгүй',
                         startDate,
                         endDate,
                         status: quote.status || 'new',
@@ -296,7 +296,7 @@ export const AdminCalendar: React.FC = () => {
                         depositStatus: quote.deposit_status || quote.depositStatus || 'unpaid',
                         balance: Math.max(confirmedPrice - deposit, 0),
                         balanceStatus: quote.balance_status || quote.balanceStatus || 'unpaid',
-                        headcount: quote.headcount || '인원 미정',
+                        headcount: quote.headcount || 'Хүний тоо тодорхойгүй',
                         phone: quote.phone || '',
                         email: quote.email || '',
                         dateSource: confirmedStart ? 'confirmed' : 'requested',
@@ -364,8 +364,8 @@ export const AdminCalendar: React.FC = () => {
         return cells;
     }, [currentMonth, items]);
 
-    const dow = ['일', '월', '화', '수', '목', '금', '토'];
-    const monthTitle = `${currentMonth.getFullYear()}년 ${currentMonth.getMonth() + 1}월`;
+    const dow = ['Ня', 'Да', 'Мя', 'Лх', 'Пү', 'Ба', 'Бя'];
+    const monthTitle = `${currentMonth.getFullYear()} оны ${currentMonth.getMonth() + 1} сар`;
 
     const goToMonth = (delta: number) => {
         setCurrentMonth(prev => new Date(prev.getFullYear(), prev.getMonth() + delta, 1));
@@ -379,38 +379,38 @@ export const AdminCalendar: React.FC = () => {
     return (
         <AdminLayout
             activePage="calendar"
-            title="투어 캘린더"
-            description="확정 예약과 맞춤 견적 요청을 날짜 기준으로 함께 확인합니다."
+            title="Аяллын хуанли"
+            description="Баталгаажсан захиалга болон захиалгат үнийн саналын хүсэлтийг огноогоор нь хамтад нь харна."
             actions={(
                 <button className="btn btn-ghost btn-sm" onClick={fetchCalendarItems} type="button">
-                    <Icon name="refresh" className={isLoading ? 'spin' : ''} />새로고침
+                    <Icon name="refresh" className={isLoading ? 'spin' : ''} />Шинэчлэх
                 </button>
             )}
         >
             <div className="toolbar">
                 <div className="row" style={{ gap: 8 }}>
-                    <button className="icon-btn" onClick={() => goToMonth(-1)} title="이전 달" type="button">
+                    <button className="icon-btn" onClick={() => goToMonth(-1)} title="Өмнөх сар" type="button">
                         <Icon name="chevron_left" />
                     </button>
                     <div className="page-title" style={{ fontSize: 19 }}>{monthTitle}</div>
-                    <button className="icon-btn" onClick={() => goToMonth(1)} title="다음 달" type="button">
+                    <button className="icon-btn" onClick={() => goToMonth(1)} title="Дараагийн сар" type="button">
                         <Icon name="chevron_right" />
                     </button>
-                    <button className="btn btn-ghost btn-sm" style={{ marginLeft: 6 }} onClick={goToToday} type="button">오늘</button>
+                    <button className="btn btn-ghost btn-sm" style={{ marginLeft: 6 }} onClick={goToToday} type="button">Өнөөдөр</button>
                 </div>
                 <div className="spacer" />
                 <div className="row" style={{ gap: 14, marginRight: 8 }}>
                     <span className="row" style={{ gap: 6 }}>
                         <span style={{ width: 10, height: 10, borderRadius: 3, background: 'var(--mrt-blue)' }} />
-                        <span className="cell-muted" style={{ fontSize: 12.5 }}>배정 완료</span>
+                        <span className="cell-muted" style={{ fontSize: 12.5 }}>Хуваарилсан</span>
                     </span>
                     <span className="row" style={{ gap: 6 }}>
                         <span style={{ width: 10, height: 10, borderRadius: 3, background: '#F5B544' }} />
-                        <span className="cell-muted" style={{ fontSize: 12.5 }}>처리 필요</span>
+                        <span className="cell-muted" style={{ fontSize: 12.5 }}>Шийдвэрлэх шаардлагатай</span>
                     </span>
                 </div>
                 <a className="btn btn-ink" href="/admin/reservations">
-                    <Icon name="add" />투어 일정 추가
+                    <Icon name="add" />Аяллын хуваарь нэмэх
                 </a>
             </div>
 
@@ -419,8 +419,8 @@ export const AdminCalendar: React.FC = () => {
                     <div className="row" style={{ gap: 12 }}>
                         <span className="metric-ico tint-blue" style={{ width: 40, height: 40 }}><Icon name="event" fill /></span>
                         <div>
-                            <div className="metric-label">이번 달 투어</div>
-                            <div className="metric-value" style={{ fontSize: 22 }}>{monthStats.total}건</div>
+                            <div className="metric-label">Энэ сарын аялал</div>
+                            <div className="metric-value" style={{ fontSize: 22 }}>{monthStats.total} ш</div>
                         </div>
                     </div>
                 </div>
@@ -428,8 +428,8 @@ export const AdminCalendar: React.FC = () => {
                     <div className="row" style={{ gap: 12 }}>
                         <span className="metric-ico tint-amber" style={{ width: 40, height: 40 }}><Icon name="priority_high" fill /></span>
                         <div>
-                            <div className="metric-label">처리 필요</div>
-                            <div className="metric-value" style={{ fontSize: 22 }}>{monthStats.needsAction}건</div>
+                            <div className="metric-label">Шийдвэрлэх шаардлагатай</div>
+                            <div className="metric-value" style={{ fontSize: 22 }}>{monthStats.needsAction} ш</div>
                         </div>
                     </div>
                 </div>
@@ -437,8 +437,8 @@ export const AdminCalendar: React.FC = () => {
                     <div className="row" style={{ gap: 12 }}>
                         <span className="metric-ico tint-green" style={{ width: 40, height: 40 }}><Icon name="groups" fill /></span>
                         <div>
-                            <div className="metric-label">예약 인원</div>
-                            <div className="metric-value" style={{ fontSize: 22 }}>{monthStats.people}명</div>
+                            <div className="metric-label">Захиалгын хүний тоо</div>
+                            <div className="metric-value" style={{ fontSize: 22 }}>{monthStats.people} хүн</div>
                         </div>
                     </div>
                 </div>
@@ -475,9 +475,9 @@ export const AdminCalendar: React.FC = () => {
                                         setSelectedEvent(e);
                                     }}
                                 >
-                                    <b>{e.itemType === 'quote' ? '견적' : '예약'} · {e.customerName}</b>
+                                    <b>{e.itemType === 'quote' ? 'Үнийн санал' : 'Захиалга'} · {e.customerName}</b>
                                     <div style={{ opacity: 0.85, fontWeight: 600 }}>
-                                        {e.headcount} · {e.assignedGuide?.name || '미배정'}
+                                        {e.headcount} · {e.assignedGuide?.name || 'Хуваарилаагүй'}
                                     </div>
                                 </div>
                             ))}
@@ -491,7 +491,7 @@ export const AdminCalendar: React.FC = () => {
                     <div className="card-head">
                         <Icon name="calendar_month" style={{ color: 'var(--mrt-blue-strong)' }} />
                         <div>
-                            <h2>선택한 날짜</h2>
+                            <h2>Сонгосон огноо</h2>
                             <div className="sub">{selectedDate}</div>
                         </div>
                     </div>
@@ -520,7 +520,7 @@ export const AdminCalendar: React.FC = () => {
                         ) : (
                             <div className="empty">
                                 <Icon name="event_busy" />
-                                <p>이 날짜에는 일정이 없습니다.</p>
+                                <p>Энэ огноонд хуваарь алга байна.</p>
                             </div>
                         )}
                     </div>
@@ -530,8 +530,8 @@ export const AdminCalendar: React.FC = () => {
                     <div className="card-head">
                         <Icon name="notification_important" style={{ color: '#B7791F' }} />
                         <div>
-                            <h2>이번 달 처리 목록</h2>
-                            <div className="sub">우선 확인이 필요한 일정</div>
+                            <h2>Энэ сард шийдвэрлэх жагсаалт</h2>
+                            <div className="sub">Эхэнд шалгах шаардлагатай хуваарь</div>
                         </div>
                     </div>
                     <div className="card-pad" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -559,7 +559,7 @@ export const AdminCalendar: React.FC = () => {
                         ) : (
                             <div className="empty">
                                 <Icon name="task_alt" />
-                                <p>현재 처리할 항목이 없습니다.</p>
+                                <p>Одоогоор шийдвэрлэх зүйл алга байна.</p>
                             </div>
                         )}
                     </div>

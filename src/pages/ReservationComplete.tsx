@@ -25,7 +25,7 @@ export const ReservationComplete: React.FC = () => {
                 setReservation(data);
             } catch (error) {
                 console.error('Error fetching reservation:', error);
-                alert('予約情報の読み込みに失敗しました。');
+                alert('예약 정보를 불러오지 못했습니다.');
                 navigate('/', { replace: true });
             } finally {
                 setLoading(false);
@@ -73,7 +73,7 @@ export const ReservationComplete: React.FC = () => {
                     >
                         <span className="material-symbols-outlined">close</span>
                     </button>
-                    <h2 className="text-[#0e1a18] dark:text-white text-lg font-bold leading-tight tracking-tight flex-1 text-center">予約申し込み完了</h2>
+                    <h2 className="text-[#0e1a18] dark:text-white text-lg font-bold leading-tight tracking-tight flex-1 text-center">예약 신청 완료</h2>
                     <div className="size-10"></div>
                 </div>
 
@@ -82,31 +82,31 @@ export const ReservationComplete: React.FC = () => {
                         <div className="size-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
                             <span className="material-symbols-outlined text-primary text-5xl font-bold">check</span>
                         </div>
-                        <h3 className="text-[#0e1a18] dark:text-white text-2xl font-bold mb-3">予約の申し込みが完了しました！</h3>
+                        <h3 className="text-[#0e1a18] dark:text-white text-2xl font-bold mb-3">예약 신청이 완료되었습니다!</h3>
                         <p className="text-gray-500 dark:text-gray-400 font-medium text-sm leading-relaxed">
-                            ご入力いただいたメールアドレスに<br />PayPalの請求書をお送りします。<br />
-                            <strong className="text-primary font-bold">お支払い完了をもって予約確定となります。</strong>
+                            입력하신 이메일 주소로<br />PayPal 청구서를 보내드립니다.<br />
+                            <strong className="text-primary font-bold">결제가 완료되면 예약이 확정됩니다.</strong>
                         </p>
                     </div>
 
                     <div className="bg-gray-50 dark:bg-zinc-800/50 rounded-3xl p-6 border border-gray-100 dark:border-zinc-800 shadow-sm">
                         <div className="mb-6">
-                            <p className="text-[13px] font-bold text-gray-400 mb-1 uppercase tracking-wider">決済する予約金額</p>
-                            <p className="text-3xl font-bold text-[#0e1a18] dark:text-white">{formatPrice(price_breakdown?.deposit)}円</p>
+                            <p className="text-[13px] font-bold text-gray-400 mb-1 uppercase tracking-wider">결제할 예약금</p>
+                            <p className="text-3xl font-bold text-[#0e1a18] dark:text-white">{formatPrice(price_breakdown?.deposit)}원</p>
                         </div>
                         <div className="h-px bg-gray-200 dark:bg-zinc-700 w-full mb-6"></div>
                         <div className="flex flex-col gap-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
                             <div className="flex items-start gap-2">
                                 <span className="material-symbols-outlined text-green-500 text-lg shrink-0 mt-0.5">mark_email_read</span>
-                                <p>ご登録のEメール宛に決済用のPayPalご請求メールをお送りします。</p>
+                                <p>등록하신 이메일로 결제용 PayPal 청구 메일을 보내드립니다.</p>
                             </div>
                             <div className="flex items-start gap-2">
                                 <span className="material-symbols-outlined text-green-500 text-lg shrink-0 mt-0.5">credit_score</span>
-                                <p>メール内のリンクから、クレジットカード等で安全・簡単にお支払いいただけます。</p>
+                                <p>메일 안의 링크를 통해 신용카드 등으로 안전하고 간편하게 결제하실 수 있습니다.</p>
                             </div>
                             <div className="flex items-start gap-2">
                                 <span className="material-symbols-outlined text-orange-500 text-lg shrink-0 mt-0.5">warning</span>
-                                <p>お支払いが確認できない場合、自動的にキャンセルとなることがございます。</p>
+                                <p>결제가 확인되지 않을 경우 예약이 자동으로 취소될 수 있습니다.</p>
                             </div>
                         </div>
                     </div>
@@ -114,7 +114,7 @@ export const ReservationComplete: React.FC = () => {
                     <div className="mt-8 flex items-start gap-3 px-2">
                         <span className="material-symbols-outlined text-gray-400 text-xl">info</span>
                         <p className="text-xs text-gray-400 leading-relaxed">
-                            決済が完了するとすぐに予約が確定し、ご案内メールが送信されます。ご不明な点がございましたらお問い合わせください。
+                            결제가 완료되면 즉시 예약이 확정되고 안내 메일이 발송됩니다. 궁금한 점이 있으시면 문의해 주세요.
                         </p>
                     </div>
                 </div>
@@ -125,13 +125,13 @@ export const ReservationComplete: React.FC = () => {
                         className="w-full bg-primary text-white font-bold py-4 rounded-2xl shadow-lg shadow-primary/20 active:scale-[0.98] transition-all mb-4 flex items-center justify-center gap-2"
                     >
                         <span className="material-symbols-outlined">receipt_long</span>
-                        予約履歴を確認する
+                        예약 내역 확인하기
                     </button>
                     <button
                         onClick={() => navigate('/products')}
                         className="text-sm font-medium text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
                     >
-                        トップページへ戻る
+                        홈으로 돌아가기
                     </button>
                 </div>
             </div>

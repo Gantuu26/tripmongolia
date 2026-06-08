@@ -109,7 +109,7 @@ export const ConvertSelectionModal: React.FC<{
                 <div className="p-5 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between bg-slate-50 dark:bg-slate-800/50">
                     <h3 className="text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2">
                         <span className="material-symbols-outlined text-primary">sync_alt</span>
-                        예약 확정 및 전환
+                        Захиалга баталгаажуулах ба шилжүүлэх
                     </h3>
                     <button onClick={onClose} className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700">
                         <span className="material-symbols-outlined text-slate-500">close</span>
@@ -118,13 +118,13 @@ export const ConvertSelectionModal: React.FC<{
 
                 <div className="p-6 space-y-4">
                     <div className="p-3 bg-teal-50 dark:bg-teal-900/20 text-teal-800 dark:text-teal-200 text-sm rounded-lg mb-4">
-                        <b>{request.name}</b>님의 견적 요청을 정식 예약으로 전환합니다.<br />
-                        확정된 일정과 금액을 입력해주세요.
+                        <b>{request.name}</b>-н үнийн саналын хүсэлтийг албан ёсны захиалга болгон шилжүүлнэ.<br />
+                        Баталгаажсан хөтөлбөр болон үнийн дүнг оруулна уу.
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label className="block text-xs font-bold text-slate-500 mb-1">여행 시작일</label>
+                            <label className="block text-xs font-bold text-slate-500 mb-1">Аяллын эхлэх өдөр</label>
                             <input
                                 type="date"
                                 value={startDate}
@@ -133,7 +133,7 @@ export const ConvertSelectionModal: React.FC<{
                             />
                         </div>
                         <div>
-                            <label className="block text-xs font-bold text-slate-500 mb-1">여행 종료일</label>
+                            <label className="block text-xs font-bold text-slate-500 mb-1">Аяллын дуусах өдөр</label>
                             <input
                                 type="date"
                                 value={endDate}
@@ -145,7 +145,7 @@ export const ConvertSelectionModal: React.FC<{
 
                     <div className="space-y-4">
                         <div className="space-y-2">
-                            <label className="block text-xs font-bold text-slate-500 mb-1 ml-1">총 확정 금액 (원)</label>
+                            <label className="block text-xs font-bold text-slate-500 mb-1 ml-1">Нийт баталгаажсан үнэ (원)</label>
                             <div className="relative">
                                 <input
                                     type="text"
@@ -168,7 +168,7 @@ export const ConvertSelectionModal: React.FC<{
                         </div>
 
                         <div className="space-y-2">
-                            <label className="block text-xs font-bold text-slate-500 mb-1 ml-1">예약금 (원)</label>
+                            <label className="block text-xs font-bold text-slate-500 mb-1 ml-1">Урьдчилгаа (원)</label>
                             <div className="relative">
                                 <input
                                     type="text"
@@ -190,9 +190,9 @@ export const ConvertSelectionModal: React.FC<{
                     {/* Balance Preview */}
                     <div className={`p-4 rounded-xl border flex items-center justify-between transition-all ${totalAmount - deposit < 0 ? 'bg-red-50 border-red-100' : 'bg-primary/5 border-primary/10'}`}>
                         <div className="flex flex-col">
-                            <span className={`text-[10px] font-bold uppercase tracking-wider ${totalAmount - deposit < 0 ? 'text-red-600' : 'text-primary'}`}>예상 현지 지불 잔금</span>
+                            <span className={`text-[10px] font-bold uppercase tracking-wider ${totalAmount - deposit < 0 ? 'text-red-600' : 'text-primary'}`}>Тооцоолсон газар дээр төлөх үлдэгдэл</span>
                             {totalAmount - deposit < 0 && (
-                                <span className="text-[9px] text-red-500 font-bold mt-0.5 animate-pulse">! 예약금이 총액을 초과했습니다</span>
+                                <span className="text-[9px] text-red-500 font-bold mt-0.5 animate-pulse">! Урьдчилгаа нийт дүнгээс хэтэрсэн байна</span>
                             )}
                         </div>
                         <span className={`text-base font-extrabold ${totalAmount - deposit < 0 ? 'text-red-600' : 'text-primary'}`}>
@@ -206,19 +206,19 @@ export const ConvertSelectionModal: React.FC<{
                         onClick={onClose}
                         className="px-4 py-2 text-slate-600 font-bold hover:bg-slate-200 rounded-lg text-sm"
                     >
-                        취소
+                        Цуцлах
                     </button>
                     <button
                         onClick={() => {
                             if (!startDate || !endDate || totalAmount <= 0) {
-                                alert('날짜와 금액을 모두 입력해주세요.');
+                                alert('Огноо болон үнийн дүнг бүгдийг оруулна уу.');
                                 return;
                             }
                             onConvert({ startDate, endDate, totalAmount, deposit });
                         }}
                         className="px-4 py-2 bg-primary-dark hover:bg-primary-dark text-white font-bold rounded-lg text-sm shadow-lg shadow-primary/20"
                     >
-                        예약 생성 및 확정
+                        Захиалга үүсгэх ба баталгаажуулах
                     </button>
                 </div>
             </div>
@@ -332,7 +332,7 @@ export const QuoteDetailModal: React.FC<{
 
     const handleSendGuideInfo = async () => {
         if (!assignedGuide || !request) return;
-        if (!confirm('가이드 배정 정보를 고객에게 이메일로 발송하시겠습니까?')) return;
+        if (!confirm('Хөтчийн хуваарилалтын мэдээллийг үйлчлүүлэгчид имэйлээр илгээх үү?')) return;
         try {
             await sendNotificationEmail(
                 request.email,
@@ -344,10 +344,10 @@ export const QuoteDetailModal: React.FC<{
                     guidePhone: assignedGuide.phone
                 }
             );
-            alert('가이드 배정 정보가 발송되었습니다.');
+            alert('Хөтчийн хуваарилалтын мэдээлэл илгээгдлээ.');
         } catch (e) {
             console.error(e);
-            alert('발송 실패');
+            alert('Илгээж чадсангүй');
         }
     };
 
@@ -370,7 +370,7 @@ export const QuoteDetailModal: React.FC<{
         const ms = e.getTime() - s.getTime();
         if (isNaN(ms) || ms < 0) return '';
         const nights = Math.round(ms / 86400000);
-        return `${nights}泊${nights + 1}日`;
+        return `${nights}박${nights + 1}일`;
     })();
     const docCustomer = {
         tripNumber: request.id.slice(0, 8).toUpperCase(),
@@ -404,41 +404,41 @@ export const QuoteDetailModal: React.FC<{
     };
 
     const quoteStatusMeta: Record<string, { label: string; tone: string }> = {
-        new: { label: '신규 요청', tone: 'bg-rose-50 text-rose-700 border-rose-200' },
-        processing: { label: '견적 작성 중', tone: 'bg-orange-50 text-orange-700 border-orange-200' },
-        answered: { label: '견적 발송 완료', tone: 'bg-blue-50 text-blue-700 border-blue-200' },
-        reservation_requested: { label: '예약 요청', tone: 'bg-purple-50 text-purple-700 border-purple-200' },
-        converted: { label: '예약 전환 완료', tone: 'bg-slate-100 text-slate-600 border-slate-200' },
-        completed: { label: '완료', tone: 'bg-teal-50 text-teal-700 border-teal-200' },
+        new: { label: 'Шинэ хүсэлт', tone: 'bg-rose-50 text-rose-700 border-rose-200' },
+        processing: { label: 'Үнийн санал боловсруулж байна', tone: 'bg-orange-50 text-orange-700 border-orange-200' },
+        answered: { label: 'Үнийн санал илгээгдсэн', tone: 'bg-blue-50 text-blue-700 border-blue-200' },
+        reservation_requested: { label: 'Захиалгын хүсэлт', tone: 'bg-purple-50 text-purple-700 border-purple-200' },
+        converted: { label: 'Захиалга болгон шилжүүлсэн', tone: 'bg-slate-100 text-slate-600 border-slate-200' },
+        completed: { label: 'Дууссан', tone: 'bg-teal-50 text-teal-700 border-teal-200' },
     };
 
     const workflowSteps = [
-        { key: 'new', label: '요청 확인', icon: 'fact_check' },
-        { key: 'processing', label: '견적 작성', icon: 'edit_note' },
-        { key: 'answered', label: '고객 발송', icon: 'outgoing_mail' },
-        { key: 'reservation_requested', label: '예약 요청', icon: 'event_available' },
-        { key: 'converted', label: '예약 전환', icon: 'task_alt' },
+        { key: 'new', label: 'Хүсэлт шалгах', icon: 'fact_check' },
+        { key: 'processing', label: 'Үнийн санал бэлтгэх', icon: 'edit_note' },
+        { key: 'answered', label: 'Үйлчлүүлэгчид илгээх', icon: 'outgoing_mail' },
+        { key: 'reservation_requested', label: 'Захиалгын хүсэлт', icon: 'event_available' },
+        { key: 'converted', label: 'Захиалга болгох', icon: 'task_alt' },
     ];
 
     const currentStepIndex = Math.max(0, workflowSteps.findIndex((step) => step.key === request.status));
     const statusMeta = quoteStatusMeta[request.status] || quoteStatusMeta.new;
     const checklistItems = [
-        { label: '여행 조건 확인', done: Boolean(request.destination && request.headcount && request.period) },
-        { label: '확정 일정 입력', done: Boolean(confirmedStartDate && confirmedEndDate) },
-        { label: '금액/예약금 입력', done: priceDetail.totalAmount > 0 && priceDetail.deposit >= 0 },
-        { label: '견적서 링크', done: Boolean(estimateUrl), optional: true },
-        { label: '고객 안내문', done: Boolean(adminNote.trim()), optional: true },
+        { label: 'Аяллын нөхцөл шалгах', done: Boolean(request.destination && request.headcount && request.period) },
+        { label: 'Баталгаажсан хөтөлбөр оруулах', done: Boolean(confirmedStartDate && confirmedEndDate) },
+        { label: 'Үнэ/урьдчилгаа оруулах', done: priceDetail.totalAmount > 0 && priceDetail.deposit >= 0 },
+        { label: 'Үнийн саналын хуудасны холбоос', done: Boolean(estimateUrl), optional: true },
+        { label: 'Үйлчлүүлэгчид зориулсан тэмдэглэл', done: Boolean(adminNote.trim()), optional: true },
     ];
     // 발송 필수 = 일정·금액·예약금만. 견적서 링크/안내문은 선택(고객은 시스템 견적 페이지로 받음).
     const canSendEstimate = checklistItems.filter((item) => !item.optional).every((item) => item.done) && priceDetail.totalAmount >= priceDetail.deposit;
     const quickNotes = [
         {
-            label: '기본 안내',
-            text: 'お見積りをご確認ください。日程・料金に問題がなければ、予約相談へお進みください。',
+            label: 'Үндсэн заавар',
+            text: '견적 내용을 확인해 주세요. 일정과 요금에 문제가 없으시면 예약 상담으로 진행해 주시기 바랍니다.',
         },
         {
-            label: '상담 유도',
-            text: 'ご希望条件に合わせて日程と料金を調整しました。ご不明点や変更希望があればお気軽にご相談ください。',
+            label: 'Зөвлөгөө өгөх',
+            text: '요청하신 조건에 맞추어 일정과 요금을 조정하였습니다. 궁금하신 점이나 변경을 원하시는 부분이 있으시면 언제든 편하게 문의해 주시기 바랍니다.',
         },
     ];
 
@@ -454,7 +454,7 @@ export const QuoteDetailModal: React.FC<{
                     <div className="flex items-center gap-3">
                         <div className="w-1 h-8 rounded-full bg-primary"></div>
                         <div>
-                            <h2 className="text-xl font-bold text-slate-800 dark:text-white">맞춤 견적 관리</h2>
+                            <h2 className="text-xl font-bold text-slate-800 dark:text-white">Захиалгат үнийн саналын удирдлага</h2>
                             <p className="text-[10px] font-bold text-slate-400 tracking-widest uppercase">No. {request.id.slice(0, 8).toUpperCase()}</p>
                         </div>
                         <span className={`ml-2 rounded-lg border px-2.5 py-1 text-[10px] font-bold ${statusMeta.tone}`}>
@@ -503,35 +503,35 @@ export const QuoteDetailModal: React.FC<{
                             <div className="mb-4 flex items-center justify-between">
                                 <h3 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
                                     <span className="material-symbols-outlined text-base text-primary">summarize</span>
-                                    요청 요약
+                                    Хүсэлтийн товч
                                 </h3>
                                 <button
                                     onClick={() => setIsEditing(true)}
                                     className="rounded-lg bg-slate-100 px-3 py-1.5 text-[10px] font-bold text-slate-500 transition-colors hover:bg-slate-200 dark:bg-slate-900 dark:text-slate-300"
                                 >
-                                    정보 수정
+                                    Мэдээлэл засах
                                 </button>
                             </div>
                             <div className="grid gap-3 sm:grid-cols-2">
                                 <div className="rounded-xl bg-slate-50 p-4 dark:bg-slate-900/60">
-                                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">고객</p>
+                                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Үйлчлүүлэгч</p>
                                     <p className="mt-1 text-sm font-black text-slate-900 dark:text-white">{request.name}</p>
                                     <p className="mt-1 truncate text-xs text-slate-500">{request.phone || request.email}</p>
                                 </div>
                                 <div className="rounded-xl bg-slate-50 p-4 dark:bg-slate-900/60">
-                                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">여행 조건</p>
-                                    <p className="mt-1 text-sm font-black text-slate-900 dark:text-white">{request.destination || '목적지 미정'}</p>
-                                    <p className="mt-1 text-xs text-slate-500">{request.headcount || '인원 미정'} · {request.period || '일정 미정'}</p>
+                                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Аяллын нөхцөл</p>
+                                    <p className="mt-1 text-sm font-black text-slate-900 dark:text-white">{request.destination || 'Очих газар тодорхойгүй'}</p>
+                                    <p className="mt-1 text-xs text-slate-500">{request.headcount || 'Хүний тоо тодорхойгүй'} · {request.period || 'Хөтөлбөр тодорхойгүй'}</p>
                                 </div>
                                 <div className="rounded-xl bg-slate-50 p-4 dark:bg-slate-900/60">
-                                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">예산/차량</p>
-                                    <p className="mt-1 text-sm font-black text-slate-900 dark:text-white">{request.budget || '예산 미정'}</p>
-                                    <p className="mt-1 text-xs text-slate-500">{request.vehicle || '차량/가이드 미정'}</p>
+                                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Төсөв/тээврийн хэрэгсэл</p>
+                                    <p className="mt-1 text-sm font-black text-slate-900 dark:text-white">{request.budget || 'Төсөв тодорхойгүй'}</p>
+                                    <p className="mt-1 text-xs text-slate-500">{request.vehicle || 'Тээврийн хэрэгсэл/хөтөч тодорхойгүй'}</p>
                                 </div>
                                 <div className="rounded-xl bg-slate-50 p-4 dark:bg-slate-900/60">
-                                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">견적 금액</p>
-                                    <p className="mt-1 text-sm font-black text-slate-900 dark:text-white">{priceDetail.totalAmount ? `${priceDetail.totalAmount.toLocaleString()}엔` : '미입력'}</p>
-                                    <p className="mt-1 text-xs text-slate-500">예약금 {priceDetail.deposit ? `${priceDetail.deposit.toLocaleString()}엔` : '0엔'}</p>
+                                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Үнийн санал</p>
+                                    <p className="mt-1 text-sm font-black text-slate-900 dark:text-white">{priceDetail.totalAmount ? `${priceDetail.totalAmount.toLocaleString()}엔` : 'Оруулаагүй'}</p>
+                                    <p className="mt-1 text-xs text-slate-500">Урьдчилгаа {priceDetail.deposit ? `${priceDetail.deposit.toLocaleString()}엔` : '0엔'}</p>
                                 </div>
                             </div>
                         </div>
@@ -539,14 +539,14 @@ export const QuoteDetailModal: React.FC<{
                         <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-800">
                             <h3 className="mb-4 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
                                 <span className="material-symbols-outlined text-base text-primary">checklist</span>
-                                발송 전 체크
+                                Илгээхийн өмнөх шалгалт
                             </h3>
                             <div className="space-y-2">
                                 {checklistItems.map((item) => (
                                     <div key={item.label} className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-900/60">
                                         <span className="text-xs font-bold text-slate-600 dark:text-slate-300">
                                             {item.label}
-                                            {item.optional && <span className="ml-1.5 text-[10px] font-bold text-slate-400">선택</span>}
+                                            {item.optional && <span className="ml-1.5 text-[10px] font-bold text-slate-400">сонголт</span>}
                                         </span>
                                         <span className={`material-symbols-outlined text-[18px] ${item.done ? 'text-teal-500' : item.optional ? 'text-slate-200' : 'text-slate-300'}`}>
                                             {item.done ? 'check_circle' : 'radio_button_unchecked'}
@@ -563,10 +563,10 @@ export const QuoteDetailModal: React.FC<{
                             <div>
                                 <h3 className="flex items-center gap-2 text-base font-black text-slate-900 dark:text-white">
                                     <span className="material-symbols-outlined text-[22px] text-primary">contract_edit</span>
-                                    견적 작성 워크스페이스
+                                    Үнийн санал боловсруулах ажлын талбар
                                 </h3>
                                 <p className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">
-                                    확정 일정과 금액·예약금만 입력하면 발송할 수 있습니다. 외부 견적서 없이 시스템 견적 페이지로 전달됩니다.
+                                    Баталгаажсан хөтөлбөр, үнэ болон урьдчилгааг оруулахад л илгээх боломжтой. Гадны үнийн саналын хуудасгүйгээр системийн үнийн саналын хуудсаар дамжуулна.
                                 </p>
                             </div>
                             {request.status === 'reservation_requested' && (
@@ -575,7 +575,7 @@ export const QuoteDetailModal: React.FC<{
                                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-purple-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-purple-600/20 transition-colors hover:bg-purple-700"
                                 >
                                     <span className="material-symbols-outlined text-[20px]">sync_alt</span>
-                                    예약으로 전환
+                                    Захиалга болгон шилжүүлэх
                                 </button>
                             )}
                         </div>
@@ -585,11 +585,11 @@ export const QuoteDetailModal: React.FC<{
                                 <div>
                                     <h4 className="mb-3 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
                                         <span className="material-symbols-outlined text-base text-primary">event</span>
-                                        1. 확정 일정
+                                        1. Баталгаажсан хөтөлбөр
                                     </h4>
                                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                                         <label className="block">
-                                            <span className="mb-1.5 block text-[10px] font-bold text-slate-400">시작일</span>
+                                            <span className="mb-1.5 block text-[10px] font-bold text-slate-400">Эхлэх өдөр</span>
                                             <input
                                                 type="date"
                                                 value={confirmedStartDate}
@@ -598,7 +598,7 @@ export const QuoteDetailModal: React.FC<{
                                             />
                                         </label>
                                         <label className="block">
-                                            <span className="mb-1.5 block text-[10px] font-bold text-slate-400">종료일</span>
+                                            <span className="mb-1.5 block text-[10px] font-bold text-slate-400">Дуусах өдөр</span>
                                             <input
                                                 type="date"
                                                 value={confirmedEndDate}
@@ -612,11 +612,11 @@ export const QuoteDetailModal: React.FC<{
                                 <div>
                                     <h4 className="mb-3 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
                                         <span className="material-symbols-outlined text-base text-primary">payments</span>
-                                        2. 금액 입력
+                                        2. Үнэ оруулах
                                     </h4>
                                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                                         <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900/70">
-                                            <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">총 결제금액</p>
+                                            <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">Нийт төлбөр</p>
                                             <div className="flex items-center gap-2">
                                                 <input
                                                     type="text"
@@ -637,7 +637,7 @@ export const QuoteDetailModal: React.FC<{
                                             </div>
                                         </div>
                                         <div className="rounded-xl border border-teal-200 bg-teal-50 p-4 dark:border-teal-500/30 dark:bg-teal-500/10">
-                                            <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-teal-700 dark:text-teal-300">예약금</p>
+                                            <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-teal-700 dark:text-teal-300">Урьдчилгаа</p>
                                             <div className="flex items-center gap-2">
                                                 <input
                                                     type="text"
@@ -651,7 +651,7 @@ export const QuoteDetailModal: React.FC<{
                                         </div>
                                     </div>
                                     <div className={`mt-3 flex items-center justify-between rounded-xl border px-4 py-3 ${priceDetail.totalAmount - priceDetail.deposit < 0 ? 'border-red-200 bg-red-50 text-red-700' : 'border-slate-200 bg-white text-slate-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200'}`}>
-                                        <span className="text-xs font-bold">예상 잔금</span>
+                                        <span className="text-xs font-bold">Тооцоолсон үлдэгдэл</span>
                                         <span className="text-base font-black">
                                             {typeof priceDetail.totalAmount === 'number' && typeof priceDetail.deposit === 'number' && !isNaN(priceDetail.totalAmount) && !isNaN(priceDetail.deposit) ? (priceDetail.totalAmount - priceDetail.deposit).toLocaleString() : 0}엔
                                         </span>
@@ -663,18 +663,18 @@ export const QuoteDetailModal: React.FC<{
                                 <div>
                                     <h4 className="mb-3 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
                                         <span className="material-symbols-outlined text-base text-primary">link</span>
-                                        3. 견적서 링크
-                                        <span className="ml-1 rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-400 dark:bg-slate-800">선택</span>
+                                        3. Үнийн саналын хуудасны холбоос
+                                        <span className="ml-1 rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-400 dark:bg-slate-800">сонголт</span>
                                     </h4>
                                     <p className="mb-2 text-[11px] font-medium text-slate-400">
-                                        비워두면 고객은 시스템 견적 페이지로 받습니다. 외부 견적서를 첨부할 때만 입력하세요.
+                                        Хоосон орхивол үйлчлүүлэгч системийн үнийн саналын хуудсаар хүлээн авна. Гадны үнийн саналын хуудас хавсаргах үед л оруулна уу.
                                     </p>
                                     <div className="flex flex-col gap-2 sm:flex-row">
                                         <input
                                             type="url"
                                             value={estimateUrl}
                                             onChange={(e) => setEstimateUrl(e.target.value)}
-                                            placeholder="https://docs.google.com/... (선택)"
+                                            placeholder="https://docs.google.com/... (сонголт)"
                                             className="min-w-0 flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-800 outline-none transition-all focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/10 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
                                         />
                                         <div className="flex gap-2">
@@ -685,7 +685,7 @@ export const QuoteDetailModal: React.FC<{
                                                 className={`h-[46px] px-3 rounded-xl text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-colors ${estimateUrl ? 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50' : 'bg-slate-100 dark:bg-slate-800 text-slate-400 cursor-default'}`}
                                             >
                                                 <span className="material-symbols-outlined text-[16px]">open_in_new</span>
-                                                보기
+                                                Харах
                                             </button>
                                             <button
                                                 type="button"
@@ -699,7 +699,7 @@ export const QuoteDetailModal: React.FC<{
                                                 className={`h-[46px] px-3 rounded-xl text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-colors ${estimateUrl ? 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50' : 'bg-slate-100 dark:bg-slate-800 text-slate-400 cursor-default'}`}
                                             >
                                                 <span className="material-symbols-outlined text-[16px]">{copiedEstimateUrl ? 'check' : 'content_copy'}</span>
-                                                {copiedEstimateUrl ? '복사됨' : '복사'}
+                                                {copiedEstimateUrl ? 'Хуулсан' : 'Хуулах'}
                                             </button>
                                         </div>
                                     </div>
@@ -709,8 +709,8 @@ export const QuoteDetailModal: React.FC<{
                                     <div className="mb-3 flex items-center justify-between gap-3">
                                         <h4 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
                                             <span className="material-symbols-outlined text-base text-primary">chat</span>
-                                            4. 고객 안내문
-                                            <span className="ml-1 rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-400 dark:bg-slate-800">선택</span>
+                                            4. Үйлчлүүлэгчид зориулсан тэмдэглэл
+                                            <span className="ml-1 rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-400 dark:bg-slate-800">сонголт</span>
                                         </h4>
                                         <div className="flex gap-1.5">
                                             {quickNotes.map((note) => (
@@ -728,7 +728,7 @@ export const QuoteDetailModal: React.FC<{
                                     <textarea
                                         value={adminNote}
                                         onChange={(e) => setAdminNote(e.target.value)}
-                                        placeholder="고객 화면에는 일본어로 보이므로 일본어 안내문을 입력하세요."
+                                        placeholder="Үйлчлүүлэгчийн дэлгэцэнд солонгос хэлээр харагдах тул солонгос хэлээр тэмдэглэл оруулна уу."
                                         className="h-28 w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-medium text-slate-800 outline-none transition-all focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/10 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
                                     />
                                 </div>
@@ -736,34 +736,34 @@ export const QuoteDetailModal: React.FC<{
                                 <div>
                                     <h4 className="mb-3 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
                                         <span className="material-symbols-outlined text-base text-primary">event_note</span>
-                                        5. 맞춤 일정표
-                                        <span className="ml-1 rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-400 dark:bg-slate-800">선택</span>
+                                        5. Захиалгат хөтөлбөр
+                                        <span className="ml-1 rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-400 dark:bg-slate-800">сонголт</span>
                                     </h4>
                                     <p className="mb-2 text-[11px] font-medium text-slate-400">
-                                        선택하면 고객 견적 화면에 <b>사진 포함 상세 일정표</b>가 비용과 함께 표시됩니다.
+                                        Сонговол үйлчлүүлэгчийн үнийн саналын дэлгэцэнд <b>зурагтай дэлгэрэнгүй хөтөлбөр</b> зардлын хамт харагдана.
                                     </p>
                                     <select
                                         value={itineraryTemplateId}
                                         onChange={(e) => setItineraryTemplateId(e.target.value)}
                                         className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-800 outline-none transition-all focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/10 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
                                     >
-                                        <option value="">일정표 없음 (비용만 안내)</option>
+                                        <option value="">Хөтөлбөргүй (зөвхөн зардал)</option>
                                         {templatesList.map((t) => (
                                             <option key={t.id} value={t.id}>{t.name}</option>
                                         ))}
                                     </select>
                                     {templatesList.length === 0 && (
-                                        <p className="mt-1.5 text-[11px] font-medium text-amber-600">등록된 일정표가 없습니다. [템플릿 관리]에서 먼저 만들어 주세요.</p>
+                                        <p className="mt-1.5 text-[11px] font-medium text-amber-600">Бүртгэгдсэн хөтөлбөр алга. [Загвар удирдлага] хэсэгт эхлээд үүсгэнэ үү.</p>
                                     )}
                                 </div>
 
                                 <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900/70">
-                                    <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">고객 화면 미리보기</p>
+                                    <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">Үйлчлүүлэгчийн дэлгэцийн урьдчилан харах</p>
                                     <div className="space-y-1 text-xs text-slate-600 dark:text-slate-300">
-                                        <p><b>見積金額:</b> {priceDetail.totalAmount ? `${priceDetail.totalAmount.toLocaleString()}円` : '未入力'}</p>
-                                        <p><b>予約金:</b> {priceDetail.deposit ? `${priceDetail.deposit.toLocaleString()}円` : '未入力'}</p>
-                                        <p><b>日程:</b> {confirmedStartDate && confirmedEndDate ? `${confirmedStartDate} ~ ${confirmedEndDate}` : '未入力'}</p>
-                                        <p><b>日程表:</b> {itineraryTemplateId ? (templatesList.find(t => t.id === itineraryTemplateId)?.name || '첨부됨') : '없음'}</p>
+                                        <p><b>견적 금액:</b> {priceDetail.totalAmount ? `${priceDetail.totalAmount.toLocaleString()}円` : '미입력'}</p>
+                                        <p><b>예약금:</b> {priceDetail.deposit ? `${priceDetail.deposit.toLocaleString()}円` : '미입력'}</p>
+                                        <p><b>일정:</b> {confirmedStartDate && confirmedEndDate ? `${confirmedStartDate} ~ ${confirmedEndDate}` : '미입력'}</p>
+                                        <p><b>일정표:</b> {itineraryTemplateId ? (templatesList.find(t => t.id === itineraryTemplateId)?.name || '첨부됨') : '없음'}</p>
                                     </div>
                                 </div>
 
@@ -772,16 +772,16 @@ export const QuoteDetailModal: React.FC<{
                                     className="mb-2 flex w-full items-center justify-center gap-2 rounded-xl border border-teal-300 bg-white px-5 py-3 text-sm font-black text-teal-700 transition-colors hover:bg-teal-50 dark:border-teal-700 dark:bg-slate-800 dark:text-teal-300"
                                 >
                                     <span className="material-symbols-outlined text-[20px]">edit_document</span>
-                                    문서 편집 (고객·금액 자동)
+                                    Баримт засах (үйлчлүүлэгч·үнэ автоматаар)
                                 </button>
                                 <button
                                     onClick={() => onSendEstimate(estimateUrl, adminNote, priceDetail, confirmedStartDate, confirmedEndDate, itineraryTemplateId)}
                                     disabled={!canSendEstimate}
                                     className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary-dark px-5 py-4 text-sm font-black text-white shadow-lg shadow-primary-dark/20 transition-all hover:bg-primary active:scale-[0.99] disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500 disabled:shadow-none dark:disabled:bg-slate-700"
-                                    title={!canSendEstimate ? '확정 일정과 금액·예약금을 입력하면 발송할 수 있습니다.' : undefined}
+                                    title={!canSendEstimate ? 'Баталгаажсан хөтөлбөр болон үнэ·урьдчилгааг оруулбал илгээх боломжтой.' : undefined}
                                 >
                                     <span className="material-symbols-outlined text-[20px]">send</span>
-                                    견적서 발송 처리
+                                    Үнийн санал илгээх
                                 </button>
                             </div>
                         </div>
@@ -792,7 +792,7 @@ export const QuoteDetailModal: React.FC<{
                         <div className="flex items-center justify-between mb-4">
                             <h3 className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest flex items-center gap-2">
                                 <span className="material-symbols-outlined text-base text-primary">hail</span>
-                                가이드 배정
+                                Хөтөч хуваарилах
                             </h3>
                         </div>
 
@@ -812,13 +812,13 @@ export const QuoteDetailModal: React.FC<{
                                         onClick={handleSendGuideInfo}
                                         className="text-xs px-3 py-1.5 bg-white dark:bg-slate-800 border border-primary/20 text-primary rounded-lg hover:bg-primary/5 font-bold"
                                     >
-                                        정보 발송
+                                        Мэдээлэл илгээх
                                     </button>
                                     <button
                                         onClick={() => setShowGuideModal(true)}
                                         className="text-xs px-3 py-1.5 bg-primary text-white rounded-lg hover:bg-primary-dark font-bold shadow-sm transition-all"
                                     >
-                                        변경
+                                        Солих
                                     </button>
                                 </div>
                             </div>
@@ -828,7 +828,7 @@ export const QuoteDetailModal: React.FC<{
                                 className="w-full py-8 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-xl flex flex-col items-center justify-center gap-2 text-slate-400 hover:text-primary-dark hover:border-primary/20 hover:bg-primary/5 transition-all"
                             >
                                 <span className="material-symbols-outlined text-3xl">add_circle</span>
-                                <span className="text-[10px] font-bold uppercase tracking-widest">가이드 배정하기</span>
+                                <span className="text-[10px] font-bold uppercase tracking-widest">Хөтөч хуваарилах</span>
                             </button>
                         )}
                     </div>
@@ -838,14 +838,14 @@ export const QuoteDetailModal: React.FC<{
                         <div className="flex items-center justify-between mb-6">
                             <h3 className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest flex items-center gap-2">
                                 <span className="material-symbols-outlined text-base text-primary">hotel</span>
-                                숙소 배정
+                                Байр хуваарилах
                             </h3>
                             <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-700 p-1 rounded-lg">
                                 <button
                                     onClick={() => setExtraDays(Math.max(0, extraDays - 1))}
                                     className="w-6 h-6 flex items-center justify-center rounded bg-white dark:bg-slate-800 shadow-sm text-slate-500"
                                 >-</button>
-                                <span className="text-[10px] font-bold px-2 text-slate-600 dark:text-slate-300">{getTripDays()}일차</span>
+                                <span className="text-[10px] font-bold px-2 text-slate-600 dark:text-slate-300">{getTripDays()} дэх өдөр</span>
                                 <button
                                     onClick={() => setExtraDays(extraDays + 1)}
                                     className="w-6 h-6 flex items-center justify-center rounded bg-white dark:bg-slate-800 shadow-sm text-slate-500"
@@ -863,7 +863,7 @@ export const QuoteDetailModal: React.FC<{
                                         className={`p-3 rounded-xl border transition-all ${assigned ? 'border-primary/10 bg-primary/10' : 'border-slate-100 bg-slate-50/50'}`}
                                     >
                                         <div className="flex items-center justify-between mb-2">
-                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{dayNum}일차</span>
+                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{dayNum} дэх өдөр</span>
                                             {assigned && (
                                                 <button
                                                     onClick={() => {
@@ -871,7 +871,7 @@ export const QuoteDetailModal: React.FC<{
                                                         setShowAccommodationModal(true);
                                                     }}
                                                     className="text-[10px] text-primary-dark font-bold"
-                                                >변경</button>
+                                                >Солих</button>
                                             )}
                                         </div>
                                         {assigned ? (
@@ -893,7 +893,7 @@ export const QuoteDetailModal: React.FC<{
                                                 className="w-full py-3 border border-dashed border-slate-200 rounded-lg flex items-center justify-center gap-1 text-slate-400 hover:text-primary hover:bg-white transition-all"
                                             >
                                                 <span className="material-symbols-outlined text-sm">add</span>
-                                                <span className="text-[10px] font-bold uppercase tracking-widest">배정</span>
+                                                <span className="text-[10px] font-bold uppercase tracking-widest">Хуваарилах</span>
                                             </button>
                                         )}
                                     </div>
@@ -907,20 +907,20 @@ export const QuoteDetailModal: React.FC<{
                         <div className="flex items-center justify-between mb-4">
                             <h3 className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest flex items-center gap-2">
                                 <span className="material-symbols-outlined text-base text-primary">person</span>
-                                신청자 정보
+                                Хүсэлт гаргагчийн мэдээлэл
                             </h3>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div className="bg-slate-50/50 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
-                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">성함</p>
+                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Нэр</p>
                                 <p className="text-sm font-bold text-slate-800 dark:text-slate-200">{request.name}</p>
                             </div>
                             <div className="bg-slate-50/50 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
-                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">연락처</p>
+                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Холбоо барих</p>
                                 <p className="text-sm font-bold text-slate-800 dark:text-slate-200">{request.phone}</p>
                             </div>
                             <div className="bg-slate-50/50 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
-                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">이메일</p>
+                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Имэйл</p>
                                 <p className="text-sm font-bold text-slate-800 dark:text-slate-200 truncate" title={request.email}>{request.email}</p>
                             </div>
                         </div>
@@ -931,19 +931,19 @@ export const QuoteDetailModal: React.FC<{
                         <div className="flex items-center justify-between mb-4">
                             <h3 className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest flex items-center gap-2">
                                 <span className="material-symbols-outlined text-base text-primary">explore</span>
-                                여행 기본 정보
+                                Аяллын үндсэн мэдээлэл
                             </h3>
                             <button
                                 onClick={() => isEditing ? handleSaveEdit() : setIsEditing(true)}
                                 className={`text-[10px] px-3 py-1 rounded-lg font-bold transition-all ${isEditing ? 'bg-primary text-white shadow-md' : 'bg-slate-100 text-slate-500 hover:bg-slate-200 dark:bg-slate-900/80 dark:text-slate-400'}`}
                             >
-                                {isEditing ? '저장 완료' : '정보 수정'}
+                                {isEditing ? 'Хадгалах' : 'Мэдээлэл засах'}
                             </button>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="space-y-3">
                                 <div className="flex justify-between items-center py-2 border-b border-slate-50 dark:border-slate-800">
-                                    <span className="text-xs text-slate-500">여행지</span>
+                                    <span className="text-xs text-slate-500">Аялах газар</span>
                                     {isEditing ? (
                                         <input
                                             value={editForm.destination}
@@ -955,7 +955,7 @@ export const QuoteDetailModal: React.FC<{
                                     )}
                                 </div>
                                 <div className="flex justify-between items-center py-2 border-b border-slate-50 dark:border-slate-800">
-                                    <span className="text-xs text-slate-500">인원</span>
+                                    <span className="text-xs text-slate-500">Хүний тоо</span>
                                     {isEditing ? (
                                         <input
                                             value={editForm.headcount}
@@ -969,7 +969,7 @@ export const QuoteDetailModal: React.FC<{
                             </div>
                             <div className="space-y-3">
                                 <div className="flex justify-between items-center py-2 border-b border-slate-50 dark:border-slate-800">
-                                    <span className="text-xs text-slate-500">희망 일정</span>
+                                    <span className="text-xs text-slate-500">Хүссэн хөтөлбөр</span>
                                     {isEditing ? (
                                         <input
                                             value={editForm.period}
@@ -981,7 +981,7 @@ export const QuoteDetailModal: React.FC<{
                                     )}
                                 </div>
                                 <div className="flex justify-between items-center py-2 border-b border-slate-50 dark:border-slate-800">
-                                    <span className="text-xs text-slate-500">예산 (인당)</span>
+                                    <span className="text-xs text-slate-500">Төсөв (нэг хүнд)</span>
                                     {isEditing ? (
                                         <input
                                             value={editForm.budget}
@@ -1000,11 +1000,11 @@ export const QuoteDetailModal: React.FC<{
                     <div>
                         <h3 className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4 flex items-center gap-2">
                             <span className="material-symbols-outlined text-base text-primary">format_list_bulleted</span>
-                            상세 요청 사항
+                            Дэлгэрэнгүй хүсэлт
                         </h3>
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
                             <div className="bg-slate-50/50 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
-                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-3">여행 스타일</span>
+                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-3">Аяллын төрөл</span>
                                 <div className="flex flex-wrap gap-1.5">
                                     {request.travelTypes.map(t => (
                                         <span key={t} className="px-2.5 py-1 bg-white dark:bg-slate-800 rounded-lg text-[10px] font-bold border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 shadow-sm">{t}</span>
@@ -1012,7 +1012,7 @@ export const QuoteDetailModal: React.FC<{
                                 </div>
                             </div>
                             <div className="bg-slate-50/50 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
-                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-3">희망 숙소</span>
+                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-3">Хүссэн байр</span>
                                 <div className="flex flex-wrap gap-1.5">
                                     {request.accommodations.map(t => (
                                         <span key={t} className="px-2.5 py-1 bg-white dark:bg-slate-800 rounded-lg text-[10px] font-bold border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 shadow-sm">{t}</span>
@@ -1020,13 +1020,13 @@ export const QuoteDetailModal: React.FC<{
                                 </div>
                             </div>
                             <div className="bg-slate-50/50 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-800">
-                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-3">차량/가이드</span>
+                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-3">Тээврийн хэрэгсэл/хөтөч</span>
                                 <p className="text-sm font-bold text-slate-800 dark:text-slate-200">{request.vehicle}</p>
                             </div>
                         </div>
                         <div className="bg-slate-50/50 dark:bg-slate-900/50 p-5 rounded-2xl border border-slate-100 dark:border-slate-800">
-                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">기타 요청사항</span>
-                            <div className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-wrap font-medium">{request.additionalRequest || '추가 요청사항이 없습니다.'}</div>
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Бусад хүсэлт</span>
+                            <div className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-wrap font-medium">{request.additionalRequest || 'Нэмэлт хүсэлт байхгүй.'}</div>
                         </div>
                     </div>
 
@@ -1035,7 +1035,7 @@ export const QuoteDetailModal: React.FC<{
                         <div className="p-5 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-700 bg-slate-50/30">
                             <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-4 flex items-center gap-2">
                                 <span className="material-symbols-outlined text-lg">attach_file</span>
-                                첨부파일
+                                Хавсралт файл
                             </h3>
                             <div className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between">
                                 <div className="flex items-center gap-3">
@@ -1052,7 +1052,7 @@ export const QuoteDetailModal: React.FC<{
                                     download={(request.attachment as File).name}
                                     className="px-4 py-2 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-xs font-bold rounded-lg hover:shadow-lg transition-all"
                                 >
-                                    파일 다운로드
+                                    Файл татаж авах
                                 </a>
                             </div>
                         </div>
@@ -1061,13 +1061,13 @@ export const QuoteDetailModal: React.FC<{
 
                 {/* Footer */}
                 <div className="px-6 py-4 border-t border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center justify-between sticky bottom-0 z-10">
-                    <p className="text-[10px] font-medium text-slate-400">요청 일시: {request.date} ({request.createdAt})</p>
+                    <p className="text-[10px] font-medium text-slate-400">Хүсэлтийн огноо: {request.date} ({request.createdAt})</p>
                     <div className="flex gap-2">
                         <button
                             onClick={onClose}
                             className="px-6 py-2 text-slate-500 font-bold hover:bg-slate-100 rounded-xl transition-colors text-sm"
                         >
-                            닫기
+                            Хаах
                         </button>
                     </div>
                 </div>
@@ -1076,7 +1076,7 @@ export const QuoteDetailModal: React.FC<{
             <ReservationDocumentEditor
                 open={docEditorOpen}
                 onClose={() => setDocEditorOpen(false)}
-                title={`${request.name || '고객'} · 見積提案書`}
+                title={`${request.name || 'Үйлчлүүлэгч'} · Үнийн саналын хуудас`}
                 customer={docCustomer}
                 initialContent={docInitialContent}
                 onSave={saveQuoteDoc}

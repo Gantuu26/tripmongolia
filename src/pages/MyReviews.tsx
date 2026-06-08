@@ -126,7 +126,7 @@ export const MyReviews: React.FC = () => {
                                             <p className="text-[11px] text-gray-400">{formatDate(review.date)}</p>
                                         </div>
                                     </div>
-                                    <div className="flex gap-0.5 shrink-0" aria-label={`${review.rating}点中5点`}>
+                                    <div className="flex gap-0.5 shrink-0" aria-label={`5점 만점에 ${review.rating}점`}>
                                         {[...Array(5)].map((_, i) => (
                                             <span key={i} className={`material-symbols-outlined text-[16px] ${i < review.rating ? 'text-primary fill-current' : 'text-gray-200'}`} style={{ fontVariationSettings: i < review.rating ? "'FILL' 1" : "'FILL' 0" }}>star</span>
                                         ))}
@@ -150,7 +150,7 @@ export const MyReviews: React.FC = () => {
                                             <img
                                                 key={idx}
                                                 src={img}
-                                                alt={`${review.author}様のレビュー写真 ${idx + 1}`}
+                                                alt={`${review.author}님의 리뷰 사진 ${idx + 1}`}
                                                 className="aspect-square rounded-lg object-cover w-full bg-gray-100 dark:bg-zinc-800"
                                                 loading="lazy"
                                                 decoding="async"

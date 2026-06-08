@@ -53,14 +53,14 @@ const TravelMateDetailDesktopContainer: React.FC = () => {
     if (loading) {
         return (
             <DesktopLayout>
-                <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>読み込み中...</div>
+                <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>불러오는 중...</div>
             </DesktopLayout>
         );
     }
     if (!post) {
         return (
             <DesktopLayout>
-                <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>投稿が見つかりません</div>
+                <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>게시글을 찾을 수 없습니다</div>
             </DesktopLayout>
         );
     }
@@ -88,7 +88,7 @@ const TravelMateDetailDesktopContainer: React.FC = () => {
     const onEdit = () => navigate(`/travel-mates/write?edit=${id}`);
     const onDelete = async () => {
         if (!id) return;
-        if (!confirm('この投稿を削除しますか？')) return;
+        if (!confirm('이 게시글을 삭제하시겠습니까?')) return;
         await api.travelMates.delete(id);
         navigate('/travel-mates');
     };
@@ -238,7 +238,7 @@ const TravelMateDetailMobile: React.FC = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     user_id: currentUser.id,
-                    user_name: currentUser.name || currentUser.email?.split('@')[0] || t('travel_mates.detail.anonymous', { defaultValue: 'Anonymous' }),
+                    user_name: currentUser.name || currentUser.email?.split('@')[0] || t('travel_mates.detail.anonymous', { defaultValue: '익명' }),
                     user_image: currentUser.avatarUrl || '',
                     content: commentText.trim()
                 })
@@ -275,7 +275,7 @@ const TravelMateDetailMobile: React.FC = () => {
             navigate('/travel-mates');
         } catch (error) {
             console.error('Error deleting post:', error);
-            alert('Failed to delete');
+            alert('삭제에 실패했습니다');
         }
     };
 
@@ -289,14 +289,14 @@ const TravelMateDetailMobile: React.FC = () => {
         const diffHours = Math.floor(diffMs / 3600000);
         const diffDays = Math.floor(diffMs / 86400000);
 
-        if (diffMins < 1) return t('travel_mates.detail.just_now', { defaultValue: 'Just now' });
-        if (diffMins < 60) return t('travel_mates.detail.mins_ago', { defaultValue: '{{count}} min ago', count: diffMins });
-        if (diffHours < 24) return t('travel_mates.detail.hours_ago', { defaultValue: '{{count}} hours ago', count: diffHours });
-        return t('travel_mates.detail.days_ago', { defaultValue: '{{count}} days ago', count: diffDays });
+        if (diffMins < 1) return t('travel_mates.detail.just_now', { defaultValue: '방금 전' });
+        if (diffMins < 60) return t('travel_mates.detail.mins_ago', { defaultValue: '{{count}}분 전', count: diffMins });
+        if (diffHours < 24) return t('travel_mates.detail.hours_ago', { defaultValue: '{{count}}시간 전', count: diffHours });
+        return t('travel_mates.detail.days_ago', { defaultValue: '{{count}}일 전', count: diffDays });
     };
 
     if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div></div>;
-    if (!post) return <div className="min-h-screen flex items-center justify-center">Post not found</div>;
+    if (!post) return <div className="min-h-screen flex items-center justify-center">게시글을 찾을 수 없습니다</div>;
 
     return (
         <div className="bg-background-light dark:bg-background-dark font-display antialiased min-h-screen pb-24">
@@ -332,7 +332,7 @@ const TravelMateDetailMobile: React.FC = () => {
                     <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                         <div className="flex items-center gap-2 mb-2">
                             <span className="px-2.5 py-1 rounded-lg bg-primary/90 text-white text-xs font-bold backdrop-blur-md shadow-sm">
-                                {post.status === 'closed' ? t('travel_mates.detail.closed_status') : t('travel_mates.detail.recruiting', { defaultValue: 'Recruiting' })}
+                                {post.status === 'closed' ? t('travel_mates.detail.closed_status') : t('travel_mates.detail.recruiting', { defaultValue: '모집 중' })}
                             </span>
                             <span className="px-2.5 py-1 rounded-lg bg-black/40 text-white/90 text-xs font-medium backdrop-blur-md">
                                 {t('travel_mates.detail.views', { count: post.views })}
@@ -342,8 +342,8 @@ const TravelMateDetailMobile: React.FC = () => {
                         <div className="flex items-center gap-3">
                             <img src={post.authorImage || `https://ui-avatars.com/api/?name=${post.authorName || 'Traveler'}&background=159e82&color=fff`} alt={post.authorName} className="w-10 h-10 rounded-full border-2 border-white/20" loading="lazy" decoding="async" />
                             <div>
-                                <p className="font-bold text-sm">{post.authorName || t('travel_mates.detail.anonymous', { defaultValue: 'Anonymous' })}</p>
-                                <p className="text-xs text-white/70">{post.authorInfo || t('travel_mates.detail.traveler', { defaultValue: 'Traveler' })}</p>
+                                <p className="font-bold text-sm">{post.authorName || t('travel_mates.detail.anonymous', { defaultValue: '익명' })}</p>
+                                <p className="text-xs text-white/70">{post.authorInfo || t('travel_mates.detail.traveler', { defaultValue: '여행자' })}</p>
                             </div>
                         </div>
                     </div>
@@ -410,7 +410,7 @@ const TravelMateDetailMobile: React.FC = () => {
 
                     {/* Description Text */}
                     <div className="space-y-3">
-                        <h2 className="text-lg font-bold text-gray-900 dark:text-white">{t('travel_mates.detail.description_title', { defaultValue: 'Description' })}</h2>
+                        <h2 className="text-lg font-bold text-gray-900 dark:text-white">{t('travel_mates.detail.description_title', { defaultValue: '소개' })}</h2>
                         <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed whitespace-pre-wrap">
                             {post.description}
                         </p>
@@ -421,7 +421,7 @@ const TravelMateDetailMobile: React.FC = () => {
                     {/* Comments Section */}
                     <div className="space-y-5">
                         <div className="flex items-center gap-2">
-                            <h2 className="text-lg font-bold text-gray-900 dark:text-white">{t('travel_mates.detail.comments_title', { defaultValue: 'Comments' })}</h2>
+                            <h2 className="text-lg font-bold text-gray-900 dark:text-white">{t('travel_mates.detail.comments_title', { defaultValue: '댓글' })}</h2>
                             <span className="text-sm text-gray-400 font-medium">{comments.length}</span>
                         </div>
 
@@ -436,7 +436,7 @@ const TravelMateDetailMobile: React.FC = () => {
                                     <textarea
                                         value={commentText}
                                         onChange={(e) => setCommentText(e.target.value)}
-                                        placeholder={t('travel_mates.detail.comment_placeholder', { defaultValue: 'Write a comment...' })}
+                                        placeholder={t('travel_mates.detail.comment_placeholder', { defaultValue: '댓글을 입력해 주세요...' })}
                                         className="w-full resize-none rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 px-4 py-3 text-sm text-gray-800 dark:text-gray-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all"
                                         rows={2}
                                     />
@@ -446,19 +446,19 @@ const TravelMateDetailMobile: React.FC = () => {
                                             disabled={commentLoading || !commentText.trim()}
                                             className="px-5 py-2 rounded-xl bg-primary text-white text-sm font-bold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary/90 active:scale-95 transition-all"
                                         >
-                                            {commentLoading ? t('travel_mates.detail.submitting', { defaultValue: 'Posting...' }) : t('travel_mates.detail.submit_comment', { defaultValue: 'Post' })}
+                                            {commentLoading ? t('travel_mates.detail.submitting', { defaultValue: '등록 중...' }) : t('travel_mates.detail.submit_comment', { defaultValue: '등록' })}
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         ) : (
                             <div className="text-center py-6 bg-gray-50 dark:bg-gray-800/50 rounded-2xl">
-                                <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">{t('travel_mates.detail.login_to_comment', { defaultValue: 'Login to leave a comment' })}</p>
+                                <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">{t('travel_mates.detail.login_to_comment', { defaultValue: '댓글을 작성하려면 로그인해 주세요' })}</p>
                                 <button
                                     onClick={() => navigate('/login')}
                                     className="px-6 py-2.5 rounded-xl bg-primary text-white text-sm font-bold hover:bg-primary/90 active:scale-95 transition-all"
                                 >
-                                    {t('travel_mates.detail.login_btn', { defaultValue: 'Login' })}
+                                    {t('travel_mates.detail.login_btn', { defaultValue: '로그인' })}
                                 </button>
                             </div>
                         )}
@@ -468,7 +468,7 @@ const TravelMateDetailMobile: React.FC = () => {
                             {comments.length === 0 ? (
                                 <div className="text-center py-8">
                                     <span className="material-symbols-outlined text-4xl text-gray-300 dark:text-gray-600">forum</span>
-                                    <p className="mt-2 text-sm text-gray-400">{t('travel_mates.detail.no_comments', { defaultValue: 'No comments yet. Be the first!' })}</p>
+                                    <p className="mt-2 text-sm text-gray-400">{t('travel_mates.detail.no_comments', { defaultValue: '아직 댓글이 없습니다. 첫 댓글을 남겨보세요!' })}</p>
                                 </div>
                             ) : (
                                 comments.map((comment: any) => (

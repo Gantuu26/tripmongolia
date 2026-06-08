@@ -63,7 +63,7 @@ export const AdminAssignment: React.FC = () => {
             }
         } catch (e) {
             console.error('Failed to load reservations', e);
-            alert('예약 목록을 불러오는데 실패했습니다.');
+            alert('Захиалгын жагсаалтыг ачаалахад алдаа гарлаа.');
         } finally {
             setIsLoading(false);
         }
@@ -148,34 +148,34 @@ export const AdminAssignment: React.FC = () => {
             return true;
         } catch (e) {
             console.error('Failed to update reservation', e);
-            alert('할당 저장에 실패했습니다. DB 컬럼이 존재하는지 확인해주세요.');
+            alert('Хуваарилалт хадгалахад алдаа гарлаа. DB багана байгаа эсэхийг шалгана уу.');
             return false;
         }
     };
 
     return (
-        <AdminLayout activePage="reservations" title="가이드/숙소 배정">
+        <AdminLayout activePage="reservations" title="Хөтөч/Байр хуваарилах">
             {isLoading ? (
                 <div className="empty">
                     <Icon name="progress_activity" />
-                    <p>예약 목록을 불러오는 중입니다.</p>
+                    <p>Захиалгын жагсаалтыг ачаалж байна.</p>
                 </div>
             ) : (
                 <div className="grid-2 route-anim">
-                    {/* 예약 목록 */}
+                    {/* Захиалгын жагсаалт */}
                     <div className="card">
                         <div className="card-head">
-                            <h2>예약 목록</h2>
+                            <h2>Захиалгын жагсаалт</h2>
                             <div className="spacer" />
-                            <span className="badge b-gray">{reservations.length}건</span>
+                            <span className="badge b-gray">{reservations.length} ширхэг</span>
                         </div>
                         <div className="tbl-wrap">
                             <table className="tbl">
                                 <thead>
                                     <tr>
-                                        <th>상품 / 예약자</th>
-                                        <th>일정</th>
-                                        <th className="c">가이드</th>
+                                        <th>Бүтээгдэхүүн / Захиалагч</th>
+                                        <th>Хуваарь</th>
+                                        <th className="c">Хөтөч</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -199,25 +199,25 @@ export const AdminAssignment: React.FC = () => {
                                             </td>
                                             <td className="c">
                                                 {reservation.assignedGuide
-                                                    ? <span className="badge b-purple">배정됨</span>
-                                                    : <span className="badge b-gray">미배정</span>}
+                                                    ? <span className="badge b-purple">Хуваарилсан</span>
+                                                    : <span className="badge b-gray">Хуваарилаагүй</span>}
                                             </td>
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
                             {reservations.length === 0 && (
-                                <div className="empty"><Icon name="inbox" /><p>예약이 없습니다.</p></div>
+                                <div className="empty"><Icon name="inbox" /><p>Захиалга алга байна.</p></div>
                             )}
                         </div>
                     </div>
 
-                    {/* 할당 패널 */}
+                    {/* Хуваарилалтын самбар */}
                     <div className="stack">
                         {selectedReservation ? (
                             <>
                                 <div className="trip-hero">
-                                    <div className="th-label">배정 중인 예약</div>
+                                    <div className="th-label">Хуваарилж буй захиалга</div>
                                     <div className="th-date">{selectedReservation.productName}</div>
                                     <div className="th-meta">
                                         <span><Icon name="person" />{selectedReservation.customerName}</span>
@@ -226,11 +226,11 @@ export const AdminAssignment: React.FC = () => {
                                     </div>
                                 </div>
 
-                                {/* 가이드 할당 */}
+                                {/* Хөтөч хуваарилах */}
                                 <div className="card">
                                     <div className="card-head">
                                         <Icon name="badge" />
-                                        <h2>담당 가이드</h2>
+                                        <h2>Хариуцсан хөтөч</h2>
                                     </div>
                                     <div className="card-pad">
                                         {selectedReservation.assignedGuide ? (
@@ -249,22 +249,22 @@ export const AdminAssignment: React.FC = () => {
                                                     style={{ marginLeft: 'auto' }}
                                                     onClick={() => setShowGuideModal(true)}
                                                 >
-                                                    <Icon name="swap_horiz" />변경
+                                                    <Icon name="swap_horiz" />Солих
                                                 </button>
                                             </div>
                                         ) : (
                                             <button className="assign-empty" onClick={() => setShowGuideModal(true)}>
-                                                <Icon name="add" />가이드 배정
+                                                <Icon name="add" />Хөтөч хуваарилах
                                             </button>
                                         )}
                                     </div>
                                 </div>
 
-                                {/* 숙소 할당 */}
+                                {/* Байр хуваарилах */}
                                 <div className="card">
                                     <div className="card-head">
                                         <Icon name="hotel" />
-                                        <h2>숙소 일정</h2>
+                                        <h2>Байрны хуваарь</h2>
                                     </div>
                                     <div className="card-pad">
                                         <div className="stack" style={{ gap: 10 }}>
@@ -277,7 +277,7 @@ export const AdminAssignment: React.FC = () => {
 
                                                 return (
                                                     <div key={day} className="accom-day">
-                                                        <span className="th-day">{day}일차<br />{dateStr}</span>
+                                                        <span className="th-day">{day} дэх өдөр<br />{dateStr}</span>
                                                         {assigned ? (
                                                             <div className="assign-row" style={{ flex: 1, padding: 0 }}>
                                                                 <div>
@@ -294,7 +294,7 @@ export const AdminAssignment: React.FC = () => {
                                                                         setShowAccommodationModal(true);
                                                                     }}
                                                                 >
-                                                                    <Icon name="swap_horiz" />변경
+                                                                    <Icon name="swap_horiz" />Солих
                                                                 </button>
                                                             </div>
                                                         ) : (
@@ -305,7 +305,7 @@ export const AdminAssignment: React.FC = () => {
                                                                     setShowAccommodationModal(true);
                                                                 }}
                                                             >
-                                                                <Icon name="add" />숙소 선택
+                                                                <Icon name="add" />Байр сонгох
                                                             </button>
                                                         )}
                                                     </div>
@@ -319,7 +319,7 @@ export const AdminAssignment: React.FC = () => {
                             <div className="card">
                                 <div className="empty">
                                     <Icon name="assignment" />
-                                    <p>예약을 선택하여 가이드와 숙소를 배정하세요.</p>
+                                    <p>Захиалга сонгож хөтөч болон байр хуваарилна уу.</p>
                                 </div>
                             </div>
                         )}

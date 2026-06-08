@@ -7,6 +7,8 @@
         "gobi_desert": "고비사막 투어",
         "travel_mates": "동행찾기",
         "custom_estimate": "맞춤견적",
+        "reviews": "여행 후기",
+        "travel_guide": "여행 가이드",
         "my_page": "마이페이지"
     },
     "header": {
@@ -74,7 +76,18 @@
             "title": "지금 떠나기 좋은 여행 코스 추천!",
             "subtitle": "몽골리아 은하수가 엄선한 최고의 여행지",
             "view_all": "전체보기",
-            "default_category": "여행"
+            "default_category": "여행",
+            "trust": {
+                "title": "몽골리아 은하수가 선택받는 이유",
+                "item1_title": "1. 한국어 완벽 대응",
+                "item1_desc": "한국어가 능통한 전문 가이드가 동행하여, 언어 장벽 없이 안심하고 즐기실 수 있습니다.",
+                "item2_title": "2. 24시간 지원",
+                "item2_desc": "여행 중 긴급 상황에도 한국어 채팅으로 24시간 신속하게 대응해 드립니다.",
+                "item3_title": "3. 한국인 입맛에 맞는 식사",
+                "item3_desc": "위생 관리를 철저히 하여, 한국인의 입맛에 맞는 맛있는 몽골 요리를 제안해 드립니다.",
+                "item4_title": "4. 안전 제일의 차량 관리",
+                "item4_desc": "정기 점검을 통과한 안전한 차량만을 사용하여, 쾌적한 이동을 보장합니다."
+            }
         },
         "reviews": {
             "title": "실제 여행객 후기",
@@ -112,6 +125,9 @@
         "header_title": "상품 상세",
         "error_not_found": "상품을 찾을 수 없습니다.",
         "no_images": "이미지가 없습니다",
+        "price_label": "1인당 요금",
+        "trust_badge": "한국어 가이드 동행 가능",
+        "trust_message": "한국어 소통에 전혀 불편함이 없습니다. 경험 많은 현지 한국인 스태프가 지원해 드립니다.",
         "tab_intro": "상품 소개",
         "tab_itinerary": "상세 일정",
         "tab_guide": "이용안내",
@@ -477,7 +493,8 @@
             "name_match": "입금자명은 반드시 예약자 성함과 동일해야 합니다.",
             "name_match_highlight": "예약자 성함",
             "auto_cancel": "24시간 이내 미입금 시 예약이 자동 취소됩니다.",
-            "local_payment": "현지 잔금은 여행 당일 가이드에게 직접 전달합니다."
+            "local_payment": "현지 잔금은 여행 당일 가이드에게 직접 전달합니다.",
+            "japan_support": "송금 및 결제 방법에 대해서는 상담 시 별도로 자세히 안내해 드립니다."
         },
         "agree_terms": "주문 내용을 확인하였으며, 결제에 동의합니다.",
         "processing": "처리 중...",
@@ -529,5 +546,23 @@
     "category_landing": {
         "view_products": "여행 상품 보기",
         "inquiry": "여행 문의하기"
+    },
+    "travel_guide": {
+        "title": "몽골 여행 가이드",
+        "search_placeholder": "궁금한 여행 정보를 검색해보세요",
+        "all": "전체",
+        "hot_guides": "지금 가장 인기 있는 가이드 🔥",
+        "popular": "인기",
+        "search_results": "검색 결과",
+        "collection": "여행 정보 모음 📚",
+        "no_results": "검색 결과가 없습니다.",
+        "no_guides": "등록된 가이드가 없습니다.",
+        "detail": {
+            "no_content": "내용이 없습니다.",
+            "loading_or_not_found": "매거진을 불러오는 중이거나 찾을 수 없습니다.",
+            "go_back_to_list": "목록으로 돌아가기",
+            "recommended_guides": "이 가이드는 어떠세요? 👀",
+            "related_tours": "추천 몽골 투어"
+        }
     }
 }

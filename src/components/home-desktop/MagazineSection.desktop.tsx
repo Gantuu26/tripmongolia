@@ -19,8 +19,8 @@ export function MagazineSectionDesktop({ magazines, contentWidth = 1280 }: Magaz
         <section style={{ maxWidth: contentWidth, margin: '0 auto', padding: '72px 32px 0' }}>
             <SectionHeader
                 eyebrow="Travel Magazine"
-                title="今すぐ出発したい旅行コース"
-                subtitle="モンゴリア銀河系が厳選した最高の旅行先"
+                title="지금 바로 떠나고 싶은 여행 코스"
+                subtitle="몽골리아 은하수가 엄선한 최고의 여행지"
                 onAll={() => navigate('/travel-guide')}
             />
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }}>

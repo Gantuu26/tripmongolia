@@ -84,7 +84,7 @@ export const ReservationDocumentEditor: React.FC<Props> = ({ open, onClose, titl
             await onSave({ name, description, days, documentSettings: docSettings });
             onClose();
         } catch (e: any) {
-            alert('저장 실패: ' + (e?.message || e));
+            alert('Хадгалахад алдаа гарлаа: ' + (e?.message || e));
         } finally {
             setSaving(false);
         }
@@ -101,29 +101,29 @@ export const ReservationDocumentEditor: React.FC<Props> = ({ open, onClose, titl
                             <span className="material-symbols-outlined">arrow_back</span>
                         </button>
                         <div className="min-w-0">
-                            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">고객 문서 편집</p>
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Үйлчлүүлэгчийн баримт засах</p>
                             <p className="truncate text-lg font-bold text-slate-900 dark:text-white">{title}</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
-                        <button onClick={onClose} className="px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">취소</button>
+                        <button onClick={onClose} className="px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">Цуцлах</button>
                         <button onClick={handleSave} disabled={saving} className="px-5 py-2 text-sm font-bold bg-teal-500 hover:bg-teal-600 text-white rounded-lg inline-flex items-center gap-1.5 shadow-md shadow-teal-500/20 disabled:opacity-50">
-                            <span className="material-symbols-outlined text-base">check</span>{saving ? '저장 중' : '저장'}
+                            <span className="material-symbols-outlined text-base">check</span>{saving ? 'Хадгалж байна' : 'Хадгалах'}
                         </button>
                     </div>
                 </div>
                 <div className="flex flex-shrink-0 flex-col gap-3 border-b border-slate-200 bg-white px-6 py-4 dark:border-slate-800 dark:bg-slate-900 lg:flex-row lg:items-center lg:justify-between">
                     <div className="grid gap-2 sm:grid-cols-3 lg:min-w-[520px]">
                         <div className="rounded-2xl border border-teal-100 bg-teal-50/70 px-4 py-3 dark:border-teal-900 dark:bg-teal-950/20">
-                            <p className="text-[10px] font-black uppercase tracking-widest text-teal-700 dark:text-teal-300">고객</p>
-                            <p className="mt-1 truncate text-sm font-black text-slate-900 dark:text-white">{customer.name || '고객명 없음'}</p>
+                            <p className="text-[10px] font-black uppercase tracking-widest text-teal-700 dark:text-teal-300">Үйлчлүүлэгч</p>
+                            <p className="mt-1 truncate text-sm font-black text-slate-900 dark:text-white">{customer.name || 'Нэр байхгүй'}</p>
                         </div>
                         <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-700 dark:bg-slate-800">
-                            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">예약번호</p>
+                            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Захиалгын дугаар</p>
                             <p className="mt-1 truncate text-sm font-black text-slate-900 dark:text-white">{customer.tripNumber || '-'}</p>
                         </div>
                         <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-700 dark:bg-slate-800">
-                            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">여행기간</p>
+                            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Аяллын хугацаа</p>
                             <p className="mt-1 truncate text-sm font-black text-slate-900 dark:text-white">{customer.period || customer.tripLength || '-'}</p>
                         </div>
                     </div>
@@ -132,7 +132,7 @@ export const ReservationDocumentEditor: React.FC<Props> = ({ open, onClose, titl
                         {onAssignGuide && (
                             <button onClick={onAssignGuide} className="inline-flex h-12 items-center gap-2 rounded-xl border border-teal-200 bg-white px-4 text-sm font-black text-teal-700 shadow-sm transition-colors hover:bg-teal-50 dark:border-teal-700 dark:bg-slate-800 dark:text-teal-300 dark:hover:bg-teal-900/30">
                                 <span className="material-symbols-outlined text-[20px]">{assignedGuide?.name ? 'badge' : 'person_add'}</span>
-                                <span>{assignedGuide?.name || '가이드 배정'}</span>
+                                <span>{assignedGuide?.name || 'Хөтөч хуваарилах'}</span>
                             </button>
                         )}
                         {onAssignAccommodation && (
@@ -143,7 +143,7 @@ export const ReservationDocumentEditor: React.FC<Props> = ({ open, onClose, titl
                                     return (
                                         <button key={i} onClick={() => onAssignAccommodation(dayNum)} className={`inline-flex h-12 items-center gap-1.5 rounded-xl border px-3 text-xs font-black shadow-sm transition-colors hover:bg-teal-50 dark:hover:bg-teal-900/30 ${a ? 'border-teal-200 bg-white text-teal-700 dark:border-teal-700 dark:bg-slate-800 dark:text-teal-300' : 'border-dashed border-slate-300 bg-white text-slate-500 dark:border-slate-600 dark:bg-slate-800'}`}>
                                             <span className="material-symbols-outlined text-[18px]">hotel</span>
-                                            <span>{dayNum}日: {a?.accommodation?.name || '숙소 선택'}</span>
+                                            <span>{dayNum} дэх өдөр: {a?.accommodation?.name || 'Зочид буудал сонгох'}</span>
                                         </button>
                                     );
                                 })}
@@ -154,7 +154,7 @@ export const ReservationDocumentEditor: React.FC<Props> = ({ open, onClose, titl
                 </div>
                 <div className="flex flex-shrink-0 items-center gap-2 border-b border-teal-200 bg-teal-50 px-6 py-2 text-xs font-bold text-[#0F8F84] dark:border-teal-800 dark:bg-teal-900/20">
                     <span className="material-symbols-outlined text-[16px]">tips_and_updates</span>
-                    <span>문서를 클릭해서 수정하고, 상단에서 담당 가이드와 일자별 숙소를 배정하면 일정표·계약서에 함께 반영됩니다.</span>
+                    <span>Баримт дээр дарж засна уу. Дээд хэсэгт хариуцсан хөтөч болон өдөр тус бүрийн зочид буудлыг хуваарилбал хөтөлбөр, гэрээнд хамт тусгагдана.</span>
                 </div>
                 <div className="flex-1 overflow-hidden bg-[#F7FAFA] dark:bg-slate-900">
                     <TemplatePreview

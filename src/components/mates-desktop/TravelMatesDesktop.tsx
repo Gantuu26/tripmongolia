@@ -56,20 +56,20 @@ interface MatePost {
 }
 
 const REGION_PILLS = [
-    { id: 'all', label: '全体', icon: '🌐' },
-    { id: 'central-mongolia', label: '中央モンゴル', icon: '🏞️' },
-    { id: 'gobi-desert', label: 'ゴビ砂漠', icon: '🏜️' },
-    { id: 'khuvsgul', label: 'フブスグル', icon: '🏔️' },
-    { id: 'terelj', label: 'テレルジ', icon: '🐎' },
-    { id: 'trekking', label: 'トレッキング', icon: '🥾' },
-    { id: 'golf', label: 'ゴルフ', icon: '⛳' },
+    { id: 'all', label: '전체', icon: '🌐' },
+    { id: 'central-mongolia', label: '중앙몽골', icon: '🏞️' },
+    { id: 'gobi-desert', label: '고비사막', icon: '🏜️' },
+    { id: 'khuvsgul', label: '홉스굴', icon: '🏔️' },
+    { id: 'terelj', label: '테렐지', icon: '🐎' },
+    { id: 'trekking', label: '트레킹', icon: '🥾' },
+    { id: 'golf', label: '골프', icon: '⛳' },
 ];
 
-const STYLE_OPTIONS = ['🌌 星空', '🐎 乗馬', '📸 撮影', '⛺ キャンプ', '🍽️ グルメ', '🧘 ヒーリング', '🥾 トレッキング', '🏛️ 文化'];
+const STYLE_OPTIONS = ['🌌 별빛', '🐎 승마', '📸 촬영', '⛺ 캠핑', '🍽️ 미식', '🧘 힐링', '🥾 트레킹', '🏛️ 문화'];
 const STATUS_OPTIONS = [
-    { v: 'open' as const, l: '募集中' },
-    { v: 'almost' as const, l: '残り席わずか' },
-    { v: 'full' as const, l: 'マッチ済み' },
+    { v: 'open' as const, l: '모집 중' },
+    { v: 'almost' as const, l: '잔여석 얼마 안 남음' },
+    { v: 'full' as const, l: '매칭 완료' },
 ];
 
 interface Filters {
@@ -118,13 +118,13 @@ function timeAgo(iso?: string): string {
     if (Number.isNaN(t)) return '';
     const diff = Date.now() - t;
     const m = Math.floor(diff / 60000);
-    if (m < 60) return `${m} 分前`;
+    if (m < 60) return `${m}분 전`;
     const h = Math.floor(m / 60);
-    if (h < 24) return `${h} 時間前`;
+    if (h < 24) return `${h}시간 전`;
     const d = Math.floor(h / 24);
-    if (d < 7) return `${d} 日前`;
+    if (d < 7) return `${d}일 전`;
     const w = Math.floor(d / 7);
-    return `${w} 週間前`;
+    return `${w}주 전`;
 }
 
 function statusFrom(p: ApiMatePost, capacity: number, joined: number): 'open' | 'almost' | 'full' {
@@ -152,7 +152,7 @@ export function TravelMatesDesktop({ contentWidth = 1280 }: { contentWidth?: num
                     const joined = p.currentMembers ?? p.current_members ?? 0;
                     const start = p.startDate || p.start_date;
                     const end = p.endDate || p.end_date;
-                    const authorName = p.authorName || p.author_name || '匿名';
+                    const authorName = p.authorName || p.author_name || '익명';
                     return {
                         id: p.id,
                         title: p.title || '',
@@ -163,7 +163,7 @@ export function TravelMatesDesktop({ contentWidth = 1280 }: { contentWidth?: num
                         duration: p.duration || '',
                         styles: parseJsonArray(p.styles).slice(0, 4),
                         ageGroups: parseJsonArray(p.ageGroups || p.age_groups),
-                        gender: p.gender || '問わず',
+                        gender: p.gender || '무관',
                         status: statusFrom(p, capacity, joined),
                         capacity,
                         joined,
@@ -212,11 +212,11 @@ export function TravelMatesDesktop({ contentWidth = 1280 }: { contentWidth?: num
         <div style={{ background: '#fff' }}>
             <PageHero
                 eyebrow="Travel Mates"
-                title="同行者を見つけよう"
-                subtitle="モンゴルを一緒に旅する仲間を募集・参加できます。同じ趣味・予算・日程で旅費を分担し、より深く現地を楽しめます。"
+                title="동행자를 찾아보세요"
+                subtitle="몽골을 함께 여행할 친구를 모집하거나 참여하실 수 있습니다. 같은 취미·예산·일정으로 여행 경비를 분담하여 더욱 깊이 있게 현지를 즐기실 수 있습니다."
                 breadcrumbs={[
-                    { label: 'ホーム', path: '/' },
-                    { label: '同行者募集' },
+                    { label: '홈', path: '/' },
+                    { label: '동행자 모집' },
                 ]}
                 contentWidth={contentWidth}
                 aside={
@@ -241,17 +241,17 @@ export function TravelMatesDesktop({ contentWidth = 1280 }: { contentWidth?: num
                             }}
                         >
                             <MatIcon name="add" size={18} color="#fff" />
-                            同行者を募集する
+                            동행자 모집하기
                         </button>
-                        <span style={{ fontSize: 11, color: 'var(--fg-5)' }}>無料 ・ 1分で投稿</span>
+                        <span style={{ fontSize: 11, color: 'var(--fg-5)' }}>무료 · 1분 만에 게시</span>
                     </div>
                 }
             >
                 <div style={{ display: 'flex', gap: 24, marginTop: 22 }}>
                     {[
-                        { n: String(posts.length), l: '募集中の旅' },
-                        { n: '1.2k', l: '登録メンバー' },
-                        { n: '~2日', l: '平均マッチ時間' },
+                        { n: String(posts.length), l: '모집 중인 여행' },
+                        { n: '1.2k', l: '등록 회원' },
+                        { n: '~2일', l: '평균 매칭 시간' },
                     ].map((s) => (
                         <div key={s.l}>
                             <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--fg-1)', letterSpacing: '-0.02em' }}>{s.n}</div>
@@ -277,7 +277,7 @@ export function TravelMatesDesktop({ contentWidth = 1280 }: { contentWidth?: num
                     <input
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        placeholder="行き先 (例: ゴビ砂漠、テレルジ)・キーワードで検索"
+                        placeholder="목적지 (예: 고비사막, 테렐지)·키워드로 검색"
                         style={{
                             flex: 1,
                             border: 'none',
@@ -346,10 +346,10 @@ export function TravelMatesDesktop({ contentWidth = 1280 }: { contentWidth?: num
                         >
                             <div>
                                 <h2 style={{ fontSize: 20, fontWeight: 700, color: 'var(--fg-1)', margin: 0, letterSpacing: '-0.01em' }}>
-                                    募集中のメンバー
+                                    모집 중인 멤버
                                 </h2>
                                 <div style={{ fontSize: 13, color: 'var(--fg-5)', marginTop: 4 }}>
-                                    <span style={{ color: 'var(--fg-1)', fontWeight: 700 }}>{filtered.length} 件</span> の募集が見つかりました
+                                    <span style={{ color: 'var(--fg-1)', fontWeight: 700 }}>{filtered.length}건</span>의 모집을 찾았습니다
                                 </div>
                             </div>
                             <select
@@ -357,14 +357,14 @@ export function TravelMatesDesktop({ contentWidth = 1280 }: { contentWidth?: num
                                 onChange={(e) => setSort(e.target.value as typeof sort)}
                                 style={selectStyle}
                             >
-                                <option value="recent">新着順</option>
-                                <option value="popular">人気順</option>
-                                <option value="almost">残り席わずか順</option>
+                                <option value="recent">최신순</option>
+                                <option value="popular">인기순</option>
+                                <option value="almost">잔여석 적은순</option>
                             </select>
                         </div>
 
                         {isLoading ? (
-                            <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>読み込み中...</div>
+                            <div style={{ padding: 80, textAlign: 'center', color: 'var(--fg-5)' }}>불러오는 중...</div>
                         ) : filtered.length === 0 ? (
                             <EmptyState onCta={() => navigate('/travel-mates/write')} />
                         ) : (
@@ -410,10 +410,10 @@ export function TravelMatesDesktop({ contentWidth = 1280 }: { contentWidth?: num
                             Be the host
                         </div>
                         <div style={{ fontSize: 24, fontWeight: 700, lineHeight: 1.3, letterSpacing: '-0.01em' }}>
-                            あなたが旅のホストになりませんか？
+                            당신이 여행의 호스트가 되어보지 않으시겠어요?
                         </div>
                         <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', marginTop: 8, lineHeight: 1.6 }}>
-                            募集を作成すると、平均2日で参加者が集まります。日程・費用を共有して、お得に深く旅を楽しめます。
+                            모집글을 작성하시면 평균 2일 만에 참가자가 모입니다. 일정·비용을 공유하여 알뜰하고 깊이 있게 여행을 즐기실 수 있습니다.
                         </div>
                     </div>
                     <button
@@ -435,7 +435,7 @@ export function TravelMatesDesktop({ contentWidth = 1280 }: { contentWidth?: num
                             position: 'relative',
                         }}
                     >
-                        同行者を募集する <MatIcon name="arrow_forward" size={18} color="var(--primary-dark)" />
+                        동행자 모집하기 <MatIcon name="arrow_forward" size={18} color="var(--primary-dark)" />
                     </button>
                 </div>
             </section>
@@ -457,9 +457,9 @@ function regionMatch(postRegion: string | undefined, pillId: string): boolean {
 function MateCard({ p, onClick }: { p: MatePost; onClick: () => void }) {
     const pct = p.capacity > 0 ? (p.joined / p.capacity) * 100 : 0;
     const statusInfo = {
-        open: { label: '募集中', bg: '#0f766e' },
-        almost: { label: '残り席わずか', bg: '#dc2626' },
-        full: { label: 'マッチ済み', bg: 'var(--fg-4)' },
+        open: { label: '모집 중', bg: '#0f766e' },
+        almost: { label: '잔여석 얼마 안 남음', bg: '#dc2626' },
+        full: { label: '매칭 완료', bg: 'var(--fg-4)' },
     }[p.status];
 
     return (
@@ -643,7 +643,7 @@ function MateCard({ p, onClick }: { p: MatePost; onClick: () => void }) {
                                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 12, color: 'var(--fg-3)' }}>
                                     <MatIcon name="group" size={15} color="var(--fg-3)" />
                                     <span style={{ fontWeight: 700, color: 'var(--fg-1)' }}>{p.joined}</span>
-                                    <span>/ {p.capacity} 名</span>
+                                    <span>/ {p.capacity}명</span>
                                 </div>
                                 <span
                                     style={{
@@ -652,7 +652,7 @@ function MateCard({ p, onClick }: { p: MatePost; onClick: () => void }) {
                                         color: p.status === 'full' ? 'var(--fg-5)' : '#0f766e',
                                     }}
                                 >
-                                    {p.status === 'full' ? '募集終了' : `残り ${p.capacity - p.joined} 席`}
+                                    {p.status === 'full' ? '모집 종료' : `잔여 ${p.capacity - p.joined}석`}
                                 </span>
                             </div>
                             <div style={{ height: 6, background: 'var(--bg-muted)', borderRadius: 999, overflow: 'hidden' }}>
@@ -741,48 +741,48 @@ function FilterSidebar({ filters, onChange, onReset }: { filters: Filters; onCha
             >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <MatIcon name="tune" size={18} color="var(--fg-2)" />
-                    <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--fg-1)' }}>絞り込み</span>
+                    <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--fg-1)' }}>필터</span>
                 </div>
                 <button
                     type="button"
                     onClick={onReset}
                     style={{ background: 'none', border: 'none', color: 'var(--fg-5)', fontSize: 12, cursor: 'pointer', fontFamily: 'inherit' }}
                 >
-                    リセット
+                    초기화
                 </button>
             </div>
 
-            <FilterGroup label="募集状況">
+            <FilterGroup label="모집 상태">
                 {STATUS_OPTIONS.map((o) => (
                     <FilterCheckbox key={o.v} label={o.l} checked={filters.status.includes(o.v)} onChange={() => toggle('status', o.v)} />
                 ))}
             </FilterGroup>
 
-            <FilterGroup label="性別">
+            <FilterGroup label="성별">
                 {[
-                    { v: 'any', l: '問わず' },
-                    { v: 'female', l: '女性のみ' },
-                    { v: 'male', l: '男性のみ' },
-                    { v: 'couple', l: '夫婦・カップル' },
+                    { v: 'any', l: '무관' },
+                    { v: 'female', l: '여성만' },
+                    { v: 'male', l: '남성만' },
+                    { v: 'couple', l: '부부·커플' },
                 ].map((o) => (
                     <FilterCheckbox key={o.v} label={o.l} checked={filters.gender.includes(o.v)} onChange={() => toggle('gender', o.v)} />
                 ))}
             </FilterGroup>
 
-            <FilterGroup label="年齢層">
-                {['20代', '30代', '40代', '50代以上'].map((o) => (
+            <FilterGroup label="연령대">
+                {['20대', '30대', '40대', '50대 이상'].map((o) => (
                     <FilterCheckbox key={o} label={o} checked={filters.age.includes(o)} onChange={() => toggle('age', o)} />
                 ))}
             </FilterGroup>
 
-            <FilterGroup label="旅行スタイル">
+            <FilterGroup label="여행 스타일">
                 {STYLE_OPTIONS.map((o) => (
                     <FilterCheckbox key={o} label={o} checked={filters.styles.includes(o)} onChange={() => toggle('styles', o)} />
                 ))}
             </FilterGroup>
 
-            <FilterGroup label="参加人数" last>
-                {['1〜2 名', '3〜4 名', '5 名以上'].map((o) => (
+            <FilterGroup label="참가 인원" last>
+                {['1~2명', '3~4명', '5명 이상'].map((o) => (
                     <FilterCheckbox key={o} label={o} checked={filters.people.includes(o)} onChange={() => toggle('people', o)} />
                 ))}
             </FilterGroup>
@@ -868,8 +868,8 @@ function EmptyState({ onCta }: { onCta: () => void }) {
             >
                 <MatIcon name="travel_explore" size={28} color="var(--fg-5)" />
             </div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--fg-1)' }}>条件に合う募集がありません</div>
-            <div style={{ fontSize: 13, color: 'var(--fg-4)' }}>あなたが最初の募集者になりませんか？</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--fg-1)' }}>조건에 맞는 모집이 없습니다</div>
+            <div style={{ fontSize: 13, color: 'var(--fg-4)' }}>당신이 첫 번째 모집자가 되어보지 않으시겠어요?</div>
             <button
                 type="button"
                 onClick={onCta}
@@ -885,7 +885,7 @@ function EmptyState({ onCta }: { onCta: () => void }) {
                     fontFamily: 'inherit',
                 }}
             >
-                同行者を募集する
+                동행자 모집하기
             </button>
         </div>
     );
