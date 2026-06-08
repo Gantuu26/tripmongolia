@@ -10,7 +10,7 @@ pages_build_output_dir = "./dist"
 [[d1_databases]]
 binding = "DB"
 database_name = "tripmongolia-db"
-database_id = "REPLACE_WITH_NEW_D1_ID"
+database_id = "206a4fa8-6d6e-438f-a0e2-86d47e8d734e"
 
 # R2 Bucket Binding
 # ⚠️ `wrangler r2 bucket create tripmongolia-assets` 로 생성 후 사용.
