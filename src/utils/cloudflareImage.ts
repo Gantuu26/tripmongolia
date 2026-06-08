@@ -61,18 +61,15 @@ export function getOptimizedImageUrl(
     // request — meaning a graceful degrade to the original URL is not automatic.
     const options = IMAGE_PRESETS[preset];
 
-    // 만약 original 프리셋 등 아무 옵션도 없으면 원본 반환
+    // 옵션이 없으면(original 프리셋 등) 원본 반환
     if (Object.keys(options).length === 0) return url;
 
-    const quality = (options as any).quality || 80;
-    const fit = (options as any).fit || 'cover';
-    const widthParam = 'width' in options ? `width=${(options as any).width},` : '';
-
-    // Cloudflare expects the source path WITHOUT a leading slash after the options
-    // (otherwise `/cdn-cgi/image/OPT/` + `/api/...` becomes `/cdn-cgi/image/OPT//api/...`
-    // with a double slash and Cloudflare returns 415).
-    const sourcePath = url.startsWith('/') ? url.slice(1) : url;
-    return `/cdn-cgi/image/${widthParam}quality=${quality},format=webp,fit=${fit}/${sourcePath}`;
+    // NOTE (2026-06-08): Cloudflare Image Resizing(`/cdn-cgi/image/...`)은 zone에서
+    // "Image Transformations"가 켜져 있어야 동작합니다. tripmongolia.kr에서는 꺼져 있어
+    // 변환 URL이 404를 반환 → 이미지가 깨집니다(히어로 배너 검은 박스 등).
+    // 그래서 원본 URL을 그대로 사용합니다. (관리자 업로드 시 클라이언트에서 이미 webp로 압축됨)
+    // 추후 Cloudflare 대시보드에서 Image Transformations를 켜면, 아래를 다시 /cdn-cgi/image/ 변환으로 복원하세요.
+    return url;
 }
 
 /**

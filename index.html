@@ -98,12 +98,10 @@
 
   <link rel="preload" href="/fonts/FlightSans-Regular.woff2" as="font" type="font/woff2" crossorigin />
 
-  <!-- Material Symbols — display=block prevents FOUT (no ligature text flash).
-       Loaded synchronously so @font-face is parsed before icons render. -->
-  <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" />
+  <!-- Material Symbols — SELF-HOSTED (2026-06-08) to eliminate Google-Fonts FOUT on mobile.
+       Served same-origin from Cloudflare; @font-face + ligature CSS are inlined below so
+       icons resolve instantly and reliably (no cross-origin dependency for icon rendering). -->
+  <link rel="preload" href="/fonts/MaterialSymbolsOutlined.woff2" as="font" type="font/woff2" crossorigin />
 
   <!-- Critical CSS Inline -->
   <style>
@@ -124,13 +122,36 @@
       descent-override: 0%;
       line-gap-override: 0%;
     }
+    /* Self-hosted Material Symbols variable font (same-origin Cloudflare).
+       font-display: block hides raw ligature text during load instead of flashing it. */
+    @font-face {
+      font-family: 'Material Symbols Outlined';
+      font-style: normal;
+      font-weight: 100 700;
+      font-display: block;
+      src: url('/fonts/MaterialSymbolsOutlined.woff2') format('woff2');
+    }
     .material-symbols-outlined,
     .material-symbols-rounded,
     .material-symbols-sharp {
       font-family: 'Material Symbols Outlined', 'MSO-fallback' !important;
-      /* Hide raw ligature characters until the document.fonts.ready event
-         confirms the icon font is loaded (set by the inline script below).
-         Layered defense on top of the size-adjust fallback above. */
+      font-weight: normal;
+      font-style: normal;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      /* 'liga' enables the ligature substitution that turns names like "menu" into
+         the icon glyph. Inlined here so it applies instantly (was previously provided
+         by the now-removed Google Fonts CSS — its absence caused the FOUT). */
+      -webkit-font-feature-settings: 'liga';
+      font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+      /* Hide raw ligature characters until document.fonts confirms the icon font
+         is loaded (mso-ready class set by the inline script below). */
       visibility: hidden;
     }
     html.mso-ready .material-symbols-outlined,
