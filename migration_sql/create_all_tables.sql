@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS quick_links (
 CREATE TABLE IF NOT EXISTS event_banners (
     id TEXT PRIMARY KEY,
     image TEXT,
-    background_color TEXT DEFAULT '#0F766E',
+    background_color TEXT DEFAULT '#FF385C',
     tag TEXT,
     title TEXT,
     icon TEXT,

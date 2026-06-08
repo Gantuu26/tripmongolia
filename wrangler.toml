@@ -1,20 +1,24 @@
 #:schema node_modules/wrangler/config-schema.json
-name = "milkyway-japan"
+# Trip Mongolia — 신규 별도 사이트 (2026-06-08)
+# 기존 milkyway-japan 운영 리소스와 분리된 새 D1/R2/Pages를 사용합니다.
+name = "tripmongolia"
 compatibility_date = "2024-09-23"
 pages_build_output_dir = "./dist"
 
 # D1 Database Binding
+# ⚠️ `wrangler d1 create tripmongolia-db` 실행 후 출력된 database_id를 아래에 붙여넣으세요.
 [[d1_databases]]
 binding = "DB"
-database_name = "milkyway-db"
-database_id = "2bb5ded7-f902-41b2-a00b-9f1fe9aa25ac"
+database_name = "tripmongolia-db"
+database_id = "REPLACE_WITH_NEW_D1_ID"
 
 # R2 Bucket Binding
+# ⚠️ `wrangler r2 bucket create tripmongolia-assets` 로 생성 후 사용.
 [[r2_buckets]]
 binding = "BUCKET"
-bucket_name = "milkyway-assets"
+bucket_name = "tripmongolia-assets"
 
 # Vars
 [vars]
 ENVIRONMENT = "production"
-ADMIN_EMAIL = "arvijixmeat@gmail.com"
+ADMIN_EMAIL = "gantumaidar@gmail.com"
