@@ -102,11 +102,7 @@ export function DesktopHeader({ contentWidth = 1280 }: DesktopHeaderProps) {
                     onClick={() => navigate('/')}
                     style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 12 }}
                 >
-                    <img src={logoSquare} alt="Trip Mongolia" style={{ height: 48, width: 48, objectFit: 'contain' }} />
-                    <div style={{ textAlign: 'left', lineHeight: 1.15 }}>
-                        <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--fg-1)', letterSpacing: '-0.01em' }}>Trip Mongolia</div>
-                        <div style={{ fontSize: 11, color: 'var(--fg-5)', marginTop: 2 }}>몽골 여행·몽골 투어 전문</div>
-                    </div>
+                    <img src={logoSquare} alt="Trip Mongolia" style={{ height: 40, width: 'auto', objectFit: 'contain' }} />
                 </button>
 
                 {/* Search */}
