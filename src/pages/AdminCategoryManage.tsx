@@ -271,7 +271,7 @@ export const AdminCategoryManage: React.FC = () => {
                                                 </span>
                                             </td>
                                             <td>
-                                                {category.icon.startsWith('data:') || category.icon.startsWith('http') || category.icon.startsWith('/') ? (
+                                                {category.icon && (category.icon.startsWith('data:') || category.icon.startsWith('http') || category.icon.startsWith('/')) ? (
                                                     <img
                                                         src={category.icon}
                                                         alt={category.name}
@@ -279,7 +279,7 @@ export const AdminCategoryManage: React.FC = () => {
                                                     />
                                                 ) : (
                                                     <span className="thumb sq" style={{ display: 'grid', placeItems: 'center', fontSize: 22 }}>
-                                                        <Icon name={category.icon} />
+                                                        <Icon name={category.icon || 'category'} />
                                                     </span>
                                                 )}
                                             </td>

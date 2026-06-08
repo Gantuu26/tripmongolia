@@ -63,7 +63,7 @@ export const TourProducts: React.FC = () => {
                 if (!Array.isArray(data) || data.length === 0) return [];
                 return data.filter((c: any) => c.type === 'product' || !c.type).map((c: any) => ({
                     id: c.id,
-                    icon: c.icon,
+                    icon: c.icon || '',
                     name: c.name,
                     description: c.description,
                     isActive: c.is_active,
@@ -313,7 +313,7 @@ export const TourProducts: React.FC = () => {
                                     ? 'ring-2 ring-primary ring-offset-2 dark:ring-offset-background-dark'
                                     : 'opacity-80 hover:opacity-100'
                                     }`}>
-                                    {category.icon.startsWith('data:') || category.icon.startsWith('http') || category.icon.startsWith('/') ? (
+                                    {category.icon && (category.icon.startsWith('data:') || category.icon.startsWith('http') || category.icon.startsWith('/')) ? (
                                         <img
                                             src={category.icon}
                                             alt={category.name}
@@ -325,7 +325,7 @@ export const TourProducts: React.FC = () => {
                                                 className={`material-symbols-outlined text-2xl ${selectedCategory === category.id ? 'text-primary' : 'text-gray-500 dark:text-gray-400'
                                                     }`}
                                             >
-                                                {category.icon}
+                                                {category.icon || 'landscape'}
                                             </span>
                                         </div>
                                     )}
