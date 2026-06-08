@@ -38,7 +38,7 @@ export const MagazineSection: React.FC<MagazineSectionProps> = ({ magazines }) =
                     </button>
                 </div>
                 <p className="text-[12px] sm:text-[13px] text-gray-500">
-                    {t('home.magazine.subtitle', { defaultValue: '몽골리아 은하수가 엄선한 최고의 여행지' })}
+                    {t('home.magazine.subtitle', { defaultValue: 'Trip Mongolia가 엄선한 최고의 여행지' })}
                 </p>
             </div>
 
@@ -67,7 +67,7 @@ export const MagazineSection: React.FC<MagazineSectionProps> = ({ magazines }) =
                                 </div>
                             )}
                             {/* Mint Brand Gradient at Bottom */}
-                            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#0f766e]/95 via-[#0f766e]/45 to-transparent" />
+                            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#ff385c]/95 via-[#ff385c]/45 to-transparent" />
                             {/* Subtle dark base for text contrast */}
                             <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent" />
                         </div>

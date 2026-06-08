@@ -43,11 +43,11 @@ export function ReservationCompleteDesktop({
                             height: 88,
                             margin: '0 auto 24px',
                             borderRadius: 999,
-                            background: '#0f766e',
+                            background: '#ff385c',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            boxShadow: '0 12px 32px -8px rgba(15,118,110,0.45)',
+                            boxShadow: '0 12px 32px -8px rgba(255, 56, 92,0.45)',
                         }}
                     >
                         <MatIcon name="check" size={52} color="#fff" />
@@ -79,7 +79,7 @@ export function ReservationCompleteDesktop({
                         <br />
                         PayPal 청구서를 보내드립니다.
                         <br />
-                        <strong style={{ color: '#0f766e', fontWeight: 700 }}>
+                        <strong style={{ color: '#ff385c', fontWeight: 700 }}>
                             결제가 완료되면 예약이 확정됩니다.
                         </strong>
                     </p>
@@ -189,14 +189,14 @@ export function ReservationCompleteDesktop({
                                         height: 36,
                                         borderRadius: 10,
                                         background:
-                                            'var(--primary-tint, rgba(15,118,110,0.08))',
+                                            'var(--primary-tint, rgba(255, 56, 92,0.08))',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
                                         flexShrink: 0,
                                     }}
                                 >
-                                    <MatIcon name={s.i} size={20} filled color="#0f766e" />
+                                    <MatIcon name={s.i} size={20} filled color="#ff385c" />
                                 </div>
                                 <div
                                     style={{
@@ -237,7 +237,7 @@ export function ReservationCompleteDesktop({
                             style={{
                                 flex: 1,
                                 padding: '16px',
-                                background: '#0f766e',
+                                background: '#ff385c',
                                 color: '#fff',
                                 border: 'none',
                                 borderRadius: 12,
@@ -249,7 +249,7 @@ export function ReservationCompleteDesktop({
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 gap: 8,
-                                boxShadow: '0 8px 20px -6px rgba(15,118,110,0.5)',
+                                boxShadow: '0 8px 20px -6px rgba(255, 56, 92,0.5)',
                             }}
                         >
                             <MatIcon name="receipt_long" size={18} color="#fff" /> 예약 내역 확인하기
@@ -281,7 +281,7 @@ export function ReservationCompleteDesktop({
                             justifyContent: 'center',
                         }}
                     >
-                        <MatIcon name="support_agent" size={22} color="#0f766e" />
+                        <MatIcon name="support_agent" size={22} color="#ff385c" />
                     </div>
                     <div style={{ flex: 1 }}>
                         <div

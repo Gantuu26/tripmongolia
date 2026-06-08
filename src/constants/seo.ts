@@ -1,6 +1,6 @@
 export const SEO_CONSTANTS = {
-    TITLE: "몽골여행·몽골투어 전문 | 현지 여행사 몽골리아 은하수",
-    DESCRIPTION: "몽골여행, 몽골투어, 몽골관광이라면 몽골 전문 현지 여행사 몽골리아 은하수로. 여름 몽골, 몽골 승마여행, 고비사막 투어 등 다채롭고 매력적인 몽골여행 상품을 제안해 드립니다.",
+    TITLE: "몽골여행·몽골투어 전문 | 현지 여행사 Trip Mongolia",
+    DESCRIPTION: "몽골여행, 몽골투어, 몽골관광이라면 몽골 전문 현지 여행사 Trip Mongolia로. 여름 몽골, 몽골 승마여행, 고비사막 투어 등 다채롭고 매력적인 몽골여행 상품을 제안해 드립니다.",
     KEYWORDS: [
         "몽골여행",
         "몽골투어",
@@ -14,7 +14,7 @@ export const SEO_CONSTANTS = {
         "울란바토르관광",
         "몽골별빛투어",
         "게르숙박",
-        "몽골리아 은하수"
+        "Trip Mongolia"
     ].join(", "),
     SITE_URL: "https://mongolryokou.com",
     OG_IMAGE: "/og-image.jpg"

@@ -20,7 +20,7 @@ export function MagazineSectionDesktop({ magazines, contentWidth = 1280 }: Magaz
             <SectionHeader
                 eyebrow="Travel Magazine"
                 title="지금 바로 떠나고 싶은 여행 코스"
-                subtitle="몽골리아 은하수가 엄선한 최고의 여행지"
+                subtitle="Trip Mongolia가 엄선한 최고의 여행지"
                 onAll={() => navigate('/travel-guide')}
             />
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }}>

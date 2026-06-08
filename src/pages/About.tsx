@@ -12,13 +12,13 @@ export const About: React.FC = () => {
         {
             '@context': 'https://schema.org',
             '@type': 'AboutPage',
-            name: '회사 소개 | Milkyway Japan',
+            name: '회사 소개 | Trip Mongolia',
             url: 'https://mongolryokou.com/about',
             inLanguage: 'ko',
             mainEntity: {
                 '@type': 'TravelAgency',
-                name: '몽골리아 은하수',
-                alternateName: ['Milkyway Japan', '몽골리아 은하수'],
+                name: 'Trip Mongolia',
+                alternateName: ['Trip Mongolia', 'Trip Mongolia'],
                 url: 'https://mongolryokou.com',
                 logo: 'https://mongolryokou.com/favicon.png',
                 founder: [
@@ -51,7 +51,7 @@ export const About: React.FC = () => {
         <>
             <SEO
                 title="회사 소개"
-                description="몽골 현지 여행사 '몽골리아 은하수'. 한국에서 호텔경영학과를 졸업하고 몽골에 거주하는 대표와 부대표가 설립한 가족 경영 몽골여행 회사입니다. 현지인만의 시각과 한국인 여행객의 정서에 맞춘 일정으로, 합리적인 가격에 어디에도 없는 여행을 선사합니다."
+                description="몽골 현지 여행사 'Trip Mongolia'. 한국에서 호텔경영학과를 졸업하고 몽골에 거주하는 대표와 부대표가 설립한 가족 경영 몽골여행 회사입니다. 현지인만의 시각과 한국인 여행객의 정서에 맞춘 일정으로, 합리적인 가격에 어디에도 없는 여행을 선사합니다."
                 canonical="/about"
                 image={DETAIL_IMAGE}
                 structuredData={structuredData}
@@ -60,7 +60,7 @@ export const About: React.FC = () => {
             <main className="bg-background-light dark:bg-background-dark min-h-screen pb-24 break-keep">
                 {/* SEO-friendly content mirroring the image (visually hidden, accessible to crawlers & screen readers). */}
                 <div className="sr-only">
-                    <h1>몽골 현지 여행사 '몽골리아 은하수'</h1>
+                    <h1>몽골 현지 여행사 'Trip Mongolia'</h1>
 
                     <h2>#여행 이념은?</h2>
                     <p>단순한 관광이 아니라, 몽골의 대자연과 온몸으로 소통하는 특별한 경험을 선사합니다.</p>
@@ -98,7 +98,7 @@ export const About: React.FC = () => {
                 {/* Visual: the full-length company intro design */}
                 <img
                     src={getOptimizedImageUrl(DETAIL_IMAGE, 'productDetailFull')}
-                    alt="몽골 현지 여행사 '몽골리아 은하수'의 회사 소개"
+                    alt="몽골 현지 여행사 'Trip Mongolia'의 회사 소개"
                     fetchPriority="high"
                     decoding="async"
                     className="block w-full h-auto mx-auto max-w-2xl"
@@ -115,13 +115,13 @@ export const About: React.FC = () => {
                     <div className="flex flex-wrap gap-3 justify-center">
                         <a
                             href="/products"
-                            className="px-6 py-3 bg-teal-500 hover:bg-teal-600 text-white font-bold rounded-full shadow transition-colors"
+                            className="px-6 py-3 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-full shadow transition-colors"
                         >
                             투어 상품 보기
                         </a>
                         <a
                             href="/custom-estimate"
-                            className="px-6 py-3 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-teal-600 dark:text-teal-400 border border-teal-500 font-bold rounded-full shadow transition-colors"
+                            className="px-6 py-3 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-rose-600 dark:text-rose-400 border border-rose-500 font-bold rounded-full shadow transition-colors"
                         >
                             맞춤 여행 상담
                         </a>

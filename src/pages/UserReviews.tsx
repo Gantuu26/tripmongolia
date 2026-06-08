@@ -128,7 +128,7 @@ const UserReviewsMobile: React.FC = () => {
     const reviewStructuredData = totalReviews > 0 ? {
         "@context": "https://schema.org",
         "@type": "TravelAgency",
-        "name": "Milkyway Japan",
+        "name": "Trip Mongolia",
         "url": "https://mongolryokou.com",
         "aggregateRating": {
             "@type": "AggregateRating",
@@ -144,7 +144,7 @@ const UserReviewsMobile: React.FC = () => {
             <SEO
                 title="고객 몽골 여행 후기"
                 description={`몽골 투어에 참가하신 고객님들의 생생한 여행 후기${totalReviews > 0 ? `(${totalReviews}건·평균 ${averageRating}점)` : ''}. 실제 체험담으로 투어 선택에 참고해 주세요.`}
-                keywords="몽골 여행 후기, 몽골 투어 후기, 몽골 여행 체험담, Milkyway Japan 후기"
+                keywords="몽골 여행 후기, 몽골 투어 후기, 몽골 여행 체험담, Trip Mongolia 후기"
                 canonical="/reviews"
                 structuredData={reviewStructuredData}
             />

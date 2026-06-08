@@ -59,7 +59,7 @@ export function CardHeader({
                             fontSize: 11,
                             fontWeight: 700,
                             letterSpacing: '0.12em',
-                            color: '#0f766e',
+                            color: '#ff385c',
                             textTransform: 'uppercase',
                             marginBottom: 6,
                         }}
@@ -157,7 +157,7 @@ export function InfoRow({
                     flexShrink: 0,
                 }}
             >
-                <MatIcon name={icon} size={18} color="#0f766e" />
+                <MatIcon name={icon} size={18} color="#ff385c" />
             </div>
             <div>
                 <div style={{ fontSize: 11, color: 'var(--fg-5)', fontWeight: 600 }}>{k}</div>
@@ -316,4 +316,4 @@ export function isUsableImageUrl(v: unknown): v is string {
 
 /** Brand-color gradient used whenever no usable image is available. */
 export const FALLBACK_HERO_GRADIENT =
-    'linear-gradient(135deg, #134e4a 0%, #115e59 50%, #0f766e 100%)';
+    'linear-gradient(135deg, #881337 0%, #e00b41 50%, #ff385c 100%)';

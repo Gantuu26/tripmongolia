@@ -78,8 +78,8 @@ export const GuideApply: React.FC = () => {
         return (
             <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
                 <div className="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full text-center">
-                    <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span className="material-symbols-outlined text-teal-600 text-3xl">check_circle</span>
+                    <div className="w-16 h-16 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="material-symbols-outlined text-rose-600 text-3xl">check_circle</span>
                     </div>
                     <h2 className="text-2xl font-bold text-gray-800 mb-3">신청이 접수되었습니다</h2>
                     <p className="text-gray-600 leading-relaxed">
@@ -96,8 +96,8 @@ export const GuideApply: React.FC = () => {
             <div className="max-w-lg mx-auto">
                 {/* Header */}
                 <div className="text-center mb-8">
-                    <div className="inline-flex items-center gap-2 bg-teal-600 text-white px-4 py-2 rounded-full text-sm font-bold mb-4">
-                        🐴 Milkyway Japan
+                    <div className="inline-flex items-center gap-2 bg-rose-600 text-white px-4 py-2 rounded-full text-sm font-bold mb-4">
+                        🐴 Trip Mongolia
                     </div>
                     <h1 className="text-3xl font-bold text-gray-800 mb-2">가이드 등록 신청</h1>
                     <p className="text-gray-500 text-sm">몽골여행 공인 가이드로 등록 신청을 하실 수 있습니다</p>
@@ -143,7 +143,7 @@ export const GuideApply: React.FC = () => {
                             value={form.name}
                             onChange={e => setForm({ ...form, name: e.target.value })}
                             placeholder="홍길동"
-                            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500"
                         />
                     </div>
 
@@ -157,7 +157,7 @@ export const GuideApply: React.FC = () => {
                             value={form.phone}
                             onChange={e => setForm({ ...form, phone: e.target.value })}
                             placeholder="010-0000-0000"
-                            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500"
                         />
                     </div>
 
@@ -172,7 +172,7 @@ export const GuideApply: React.FC = () => {
                                 value={form.experience_years}
                                 onChange={e => setForm({ ...form, experience_years: e.target.value })}
                                 placeholder="0"
-                                className="w-28 px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 text-center"
+                                className="w-28 px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 text-center"
                             />
                             <span className="text-sm text-gray-600">년</span>
                         </div>
@@ -186,7 +186,7 @@ export const GuideApply: React.FC = () => {
                             onChange={e => setForm({ ...form, bio: e.target.value })}
                             placeholder="가이드 경력, 자신 있는 지역, 자격증 등을 기입해 주세요"
                             rows={4}
-                            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 resize-none"
+                            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 resize-none"
                         />
                     </div>
 
@@ -201,7 +201,7 @@ export const GuideApply: React.FC = () => {
                                     onClick={() => toggle('languages', lang)}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                                         form.languages.includes(lang)
-                                            ? 'bg-teal-500 text-white'
+                                            ? 'bg-rose-500 text-white'
                                             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                                     }`}
                                 >
@@ -222,7 +222,7 @@ export const GuideApply: React.FC = () => {
                                     onClick={() => toggle('specialties', sp)}
                                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                                         form.specialties.includes(sp)
-                                            ? 'bg-teal-500 text-white'
+                                            ? 'bg-rose-500 text-white'
                                             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                                     }`}
                                 >
@@ -239,7 +239,7 @@ export const GuideApply: React.FC = () => {
                     <button
                         type="submit"
                         disabled={loading || imageUploading}
-                        className="w-full bg-teal-600 text-white font-bold py-4 rounded-xl hover:bg-teal-700 transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+                        className="w-full bg-rose-600 text-white font-bold py-4 rounded-xl hover:bg-rose-700 transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
                     >
                         {loading ? (
                             <><div className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />전송 중...</>
@@ -248,7 +248,7 @@ export const GuideApply: React.FC = () => {
                 </form>
 
                 <p className="text-center text-xs text-gray-400 mt-4">
-                    © Milkyway Japan — mongolryokou.com
+                    © Trip Mongolia — mongolryokou.com
                 </p>
             </div>
         </div>

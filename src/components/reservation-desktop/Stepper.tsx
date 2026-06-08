@@ -28,7 +28,7 @@ export function Stepper({ step }: { step: StepIdx }) {
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     background:
-                                        state === 'upcoming' ? '#fff' : '#0f766e',
+                                        state === 'upcoming' ? '#fff' : '#ff385c',
                                     color: state === 'upcoming' ? 'var(--fg-5)' : '#fff',
                                     border:
                                         state === 'upcoming' ? '1px solid var(--border)' : 'none',
@@ -36,7 +36,7 @@ export function Stepper({ step }: { step: StepIdx }) {
                                     fontWeight: 700,
                                     boxShadow:
                                         state === 'current'
-                                            ? '0 0 0 4px var(--primary-tint, rgba(15,118,110,0.12))'
+                                            ? '0 0 0 4px var(--primary-tint, rgba(255, 56, 92,0.12))'
                                             : 'none',
                                     transition: 'all 200ms',
                                 }}
@@ -76,7 +76,7 @@ export function Stepper({ step }: { step: StepIdx }) {
                                 style={{
                                     flex: 1,
                                     height: 2,
-                                    background: state === 'done' ? '#0f766e' : 'var(--border)',
+                                    background: state === 'done' ? '#ff385c' : 'var(--border)',
                                     marginTop: 4,
                                 }}
                             />

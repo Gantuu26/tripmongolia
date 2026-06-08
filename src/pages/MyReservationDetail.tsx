@@ -123,7 +123,7 @@ const TONE_STYLES: Record<StatusTone, { bg: string; fg: string; dot: string }> =
 };
 
 const HISTORY_ICON: Record<string, { icon: string; color: string }> = {
-    status_change: { icon: 'sync', color: 'text-teal-600' },
+    status_change: { icon: 'sync', color: 'text-rose-600' },
     modification: { icon: 'edit_note', color: 'text-indigo-600' },
     document_added: { icon: 'description', color: 'text-emerald-600' },
     email: { icon: 'mail', color: 'text-sky-600' },
@@ -273,8 +273,8 @@ export const MyReservationDetail: React.FC = () => {
                 {/* TourHero */}
                 <section className="px-5 pt-4">
                     <div
-                        className="relative rounded-[20px] overflow-hidden text-white px-5 pt-5 pb-[22px] shadow-[0_10px_30px_-10px_rgba(15,118,110,0.45)]"
-                        style={{ background: 'linear-gradient(135deg, #0f766e 0%, #115e59 60%, #0c4a44 100%)' }}
+                        className="relative rounded-[20px] overflow-hidden text-white px-5 pt-5 pb-[22px] shadow-[0_10px_30px_-10px_rgba(255, 56, 92,0.45)]"
+                        style={{ background: 'linear-gradient(135deg, #ff385c 0%, #e00b41 60%, #0c4a44 100%)' }}
                     >
                         {/* decorative rings */}
                         <svg
@@ -347,8 +347,8 @@ export const MyReservationDetail: React.FC = () => {
                                             />
                                             <defs>
                                                 <linearGradient id="paymentGrad" x1="0" y1="0" x2="1" y2="1">
-                                                    <stop offset="0%" stopColor="#14b8a6" />
-                                                    <stop offset="100%" stopColor="#0f766e" />
+                                                    <stop offset="0%" stopColor="#f43f5e" />
+                                                    <stop offset="100%" stopColor="#ff385c" />
                                                 </linearGradient>
                                             </defs>
                                         </svg>
@@ -442,7 +442,7 @@ export const MyReservationDetail: React.FC = () => {
                                 ) : (
                                     <div
                                         className="w-14 h-14 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0"
-                                        style={{ background: 'linear-gradient(135deg, #0f766e, #14b8a6)' }}
+                                        style={{ background: 'linear-gradient(135deg, #ff385c, #f43f5e)' }}
                                     >
                                         {guide.name[0]}
                                     </div>

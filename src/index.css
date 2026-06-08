@@ -40,10 +40,10 @@
    continue to use existing Tailwind classes.
    ============================================================ */
 :root {
-    --primary-dark: #115e59;
-    --primary-soft: #ccfbf1;
-    --primary-tint: rgba(15, 118, 110, 0.06);
-    --primary-ring: rgba(15, 118, 110, 0.20);
+    --primary-dark: #e00b41;
+    --primary-soft: #ffe4e6;
+    --primary-tint: rgba(255, 56, 92, 0.06);
+    --primary-ring: rgba(255, 56, 92, 0.20);
     --bg-muted: #f8fafc;
     --fg-1: #0e1a18;
     --fg-2: #191f28;

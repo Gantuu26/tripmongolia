@@ -27,7 +27,7 @@
         "terms_of_service": "이용약관",
         "privacy_policy": "개인정보처리방침",
         "mongolia_office": "[몽골본사]",
-        "mongolia_office_info_1": "상호명 : 몽골리아 은하수(SUUN ZAM) | 대표 : Davaasuren Bilguun",
+        "mongolia_office_info_1": "상호명 : Trip Mongolia(SUUN ZAM) | 대표 : Davaasuren Bilguun",
         "mongolia_office_info_2": "사업자등록번호 : 9011640064 | 관광사업등록번호 : 6124313",
         "mongolia_office_info_3": "전화 번호 : +976 9594 5838 | Tel: +976-8010-7766",
         "mongolia_office_info_4": "위치 : 울란바타르 바양줄르구 13동 DACO센터 3층 306호",
@@ -36,13 +36,13 @@
         "korea_office_info_2": "사업자등록번호: 730-54-00614 | 통신판매업번호: 제2022-서울중랑-1776호",
         "korea_office_info_3": "| 이메일: bolor1@hanmail.net",
         "korea_office_info_4": "문의 : 카카오톡채널로 문의 바랍니다.",
-        "disclaimer_1": "본 여행상품의 판매자는 몽골현지 여행사(몽골본사)인 '몽골리아 은하수'입니다.",
+        "disclaimer_1": "본 여행상품의 판매자는 몽골현지 여행사(몽골본사)인 'Trip Mongolia'입니다.",
         "disclaimer_2": "'한국 대리점'인 '헬로볼라'는 통신판매중개자이며, 통신판매의 당사자가 아닙니다. 따라서 상품/거래정보 및 거래에 대하여 책임을 지지 않습니다.",
         "disclaimer_3": "부득이한 사정에 의해 확정된 여행일정이 변경되는 경우 여행자의 사전 동의를 받습니다."
     },
     "home": {
-        "seo_title": "몽골리아 은하수 | 몽골 현지 전문 여행사 & 패키지 투어 추천",
-        "seo_description": "몽골 현지 전문 여행사 몽골리아 은하수. 몽골 패키지 여행, 고비사막, 테를지, 홉스굴 투어 등 차별화된 맞춤 여행을 제공합니다.",
+        "seo_title": "Trip Mongolia | 몽골 현지 전문 여행사 & 패키지 투어 추천",
+        "seo_description": "몽골 현지 전문 여행사 Trip Mongolia. 몽골 패키지 여행, 고비사막, 테를지, 홉스굴 투어 등 차별화된 맞춤 여행을 제공합니다.",
         "seo_keywords": "몽골여행, 몽골현지여행사, 몽골전문여행사, 몽골패키지여행, 고비사막투어",
         "hero": {
             "banner1_tag": "Premium Trip",
@@ -74,11 +74,11 @@
         },
         "magazine": {
             "title": "지금 떠나기 좋은 여행 코스 추천!",
-            "subtitle": "몽골리아 은하수가 엄선한 최고의 여행지",
+            "subtitle": "Trip Mongolia가 엄선한 최고의 여행지",
             "view_all": "전체보기",
             "default_category": "여행",
             "trust": {
-                "title": "몽골리아 은하수가 선택받는 이유",
+                "title": "Trip Mongolia가 선택받는 이유",
                 "item1_title": "1. 한국어 완벽 대응",
                 "item1_desc": "한국어가 능통한 전문 가이드가 동행하여, 언어 장벽 없이 안심하고 즐기실 수 있습니다.",
                 "item2_title": "2. 24시간 지원",
@@ -98,7 +98,7 @@
         }
     },
     "products": {
-        "seo_title": "여행 상품 | 몽골리아 은하수",
+        "seo_title": "여행 상품 | Trip Mongolia",
         "seo_description": "고비사막, 테를지, 훕스굴 등 다양한 몽골 투어 상품을 만나보세요. 전문 가이드와 함께하는 안전한 몽골 여행!",
         "seo_keywords": "몽골 투어, 고비사막 투어, 테를지 투어, 몽골 여행 상품",
         "header_title": "여행 상품",

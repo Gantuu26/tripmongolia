@@ -67,14 +67,14 @@ export function DestinationsMap({ places, height = 340, borderRadius = 20 }: Des
                     height: 32px;
                     border-radius: 999px;
                     background: #fff;
-                    border: 2px solid #0f766e;
+                    border: 2px solid #ff385c;
                     box-shadow: 0 2px 6px rgba(0,0,0,0.18);
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     font-size: 12px;
                     font-weight: 700;
-                    color: #0f766e;
+                    color: #ff385c;
                     font-family: ui-monospace, Menlo, monospace;
                 ">${i + 1}</div>`,
                 iconSize: [32, 32],
@@ -93,7 +93,7 @@ export function DestinationsMap({ places, height = 340, borderRadius = 20 }: Des
         if (places.length >= 2) {
             const coords: [number, number][] = places.map((p) => [p.lat, p.lng]);
             L.polyline(coords, {
-                color: '#115e59',
+                color: '#e00b41',
                 weight: 2,
                 opacity: 0.7,
                 dashArray: '6 6',

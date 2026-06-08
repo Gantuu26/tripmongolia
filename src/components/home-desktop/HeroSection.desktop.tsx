@@ -121,7 +121,7 @@ export function HeroSectionDesktop({ contentWidth = 1280 }: HeroSectionDesktopPr
     // Soft brand-color gradient — used when the slide has no usable image (e.g.,
     // admin hasn't uploaded a banner yet) so we never render a broken-image black box.
     const fallbackGradient =
-        'linear-gradient(135deg, #134e4a 0%, #115e59 35%, #0f766e 65%, #0a4a45 100%)';
+        'linear-gradient(135deg, #881337 0%, #e00b41 35%, #ff385c 65%, #0a4a45 100%)';
     const hasUsableImage = (img: string) =>
         !!img && img !== '/og-image.jpg' && (img.startsWith('http') || img.startsWith('/'));
 
@@ -149,7 +149,7 @@ export function HeroSectionDesktop({ contentWidth = 1280 }: HeroSectionDesktopPr
             {hasUsableImage(cur.img) && (
                 <img
                     src={cur.img}
-                    alt={`${cur.title}${cur.title2 ? ' ' + cur.title2 : ''}｜몽골여행·몽골투어 전문 몽골리아 은하수`}
+                    alt={`${cur.title}${cur.title2 ? ' ' + cur.title2 : ''}｜몽골여행·몽골투어 전문 Trip Mongolia`}
                     width={1280}
                     height={640}
                     loading="eager"
@@ -348,7 +348,7 @@ export function HeroSectionDesktop({ contentWidth = 1280 }: HeroSectionDesktopPr
                                 border: '1px solid rgba(255,255,255,0.12)',
                             }}
                         >
-                            <MatIcon name={b.i} size={16} filled color="#5eead4" /> {b.t}
+                            <MatIcon name={b.i} size={16} filled color="#fda4af" /> {b.t}
                         </div>
                     ))}
                 </div>

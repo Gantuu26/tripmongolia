@@ -11,7 +11,7 @@
 ## 1. 프로젝트 정체
 
 - **사이트**: [mongolryokou.com](https://mongolryokou.com) (도메인의 `ryokou`는 旅行의 일본어 로마자 — 일본 시절 잔재이며 사이트 내용은 현재 한국어)
-- **상호(법인)**: 몽골리아 은하수 / Сүүнзам трэйд (몽골 현지 법인). 영문명 `Milkyway Japan`은 일본 시절 브랜드명, 한국어 표기 브랜드는 **몽골리아 은하수**
+- **서비스/브랜드명: Trip Mongolia** (2026-06-08 리브랜딩). 법인명은 Сүүнзам трэйд(몽골 현지). 구 브랜드 `몽골리아 은하수`/`Milkyway Japan`은 SEO 연속성을 위해 JSON-LD `alternateName`·키워드에만 잔존
 - **사업**: 몽골 현지 여행사 (B2C)
 - **운영 언어**: **한국어** (관리자 페이지는 **키릴 몽골어**)
 - **타겟 시장**: **한국** (일본/EN 페이지 없음)
@@ -71,7 +71,7 @@
 | 위치 | 내용 |
 |---|---|
 | `index.html` | TravelAgency + WebSite JSON-LD, OG(`og:locale=ko_KR`), Twitter, hreflang(`ko`), pre-render SEO content(#root .pre-render-seo, 시각적으로 숨김 + 크롤러용). `lang="ko"`. 전부 한국어. |
-| `src/components/seo/SEO.tsx` | 공통 SEO 컴포넌트. `htmlAttributes={{ lang: 'ko' }}`, `og:locale=ko_KR`, `og:site_name="몽골리아 은하수"`. `structuredData` prop으로 JSON-LD 다중 스키마 지원 |
+| `src/components/seo/SEO.tsx` | 공통 SEO 컴포넌트. `htmlAttributes={{ lang: 'ko' }}`, `og:locale=ko_KR`, `og:site_name="Trip Mongolia"`. `structuredData` prop으로 JSON-LD 다중 스키마 지원 |
 | `src/constants/seo.ts` | `SITE_URL`, 한국어 기본 타이틀/디스크립션/키워드 (트레일링 슬래시 없음) |
 
 ### 5.2 페이지별 JSON-LD 현황
@@ -142,6 +142,13 @@ sitemap.xml.ts의 try/catch가 에러를 조용히 삼켜서 카테고리 URL이
 - **검증**: `tsc --noEmit` 통과, `vite build` 통과
 - **미처리(의도적/별도작업)**: ① 운영 DB 실데이터 일본어 → 한국어 재입력(오너 작업) ② JSON-LD의 `inLanguage`/통화/국가 코드 점검 ③ `docs/design-system/*` 문서가 아직 일본어 폰트·톤을 서술(아래 §9.5 참고)
 
+### 2026-06-08 (2) — 리브랜딩 + Airbnb 색상
+
+- **브랜드명 `몽골리아 은하수`/`Milkyway Japan` → `Trip Mongolia`** (전체 공개+관리자+SEO). 구 브랜드는 JSON-LD `alternateName`·키워드에 SEO 연속성 목적으로 보존
+- **사용자 화면 색상 teal `#0f766e` → Airbnb Rausch `#FF385C`** (hover `#E00B41`). teal 계열 hex/클래스는 rose 계열로 결정적 치환(스크립트). `tailwind.config.js`의 `primary` 토큰, `index.html --primary`, `index.css --primary-*` 갱신
+- **관리자 콘솔은 teal 유지** (사용자 화면만 변경 요청). 단 공유 `primary` 토큰을 쓰는 관리자 일부(약 12곳)는 빨강이 묻을 수 있음
+- 검증: `tsc` 통과, `vite build` 통과
+
 ### 2026-05-02 — (일본어 시절) SEO 작업 시리즈 *[역사적]*
 
 - PR `fix/sitemap-categories`(머지): categories SQL 버그 수정으로 카테고리 URL 복구, 홈 트레일링 슬래시, privacy/terms sitemap 추가 (19→24 URL)
@@ -182,7 +189,7 @@ UI 컴포넌트를 새로 만들거나 디자인을 변경하기 전에 다음 �
 > ⚠️ 이 `docs/design-system/*` 문서들은 아직 **일본어 폰트(Noto Sans JP)·일본어 카피 톤**을 서술하고 있어 **부분적으로 낡았습니다.** 실제 코드는 Noto Sans KR·한국어로 전환됨. 아래 핵심 원칙(전환 반영본)을 우선하세요.
 
 핵심 원칙 (반드시 외워둘 것):
-- **단일 primary 컬러: teal `#0f766e`.** 보조 색상 없음. 나머지는 슬레이트 뉴트럴.
+- **단일 primary 컬러: Airbnb Rausch `#FF385C`** (hover/dark `#E00B41`). 보조 색상 없음. 나머지는 슬레이트 뉴트럴. (2026-06-08 teal `#0f766e`→Airbnb 전환. teal 계열 hex/클래스는 rose 계열로 매핑됨. **관리자 콘솔은 기존 teal 유지** — 사용자 화면만 Airbnb)
 - **모바일 우선, max-width 480px.** 데스크톱은 480px 컬럼 + soft shadow 프레임.
 - **실사 사진** 위주. 그라데이션/일러스트 X.
 - **Material Symbols Outlined** 일반 UI 아이콘 + **3D plasticine 아이콘**(assets/icons/) 숏컷 행 전용. 절대 직접 SVG 그리지 말 것.

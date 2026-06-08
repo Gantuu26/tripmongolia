@@ -22,7 +22,7 @@ export const SEO: React.FC<SEOProps> = ({
     structuredData
 }) => {
     const metaTitle = title
-        ? `${title} | 몽골리아 은하수`
+        ? `${title} | Trip Mongolia`
         : SEO_CONSTANTS.TITLE;
 
     const metaDescription = description || SEO_CONSTANTS.DESCRIPTION;
@@ -52,7 +52,7 @@ export const SEO: React.FC<SEOProps> = ({
             <meta property="og:title" content={metaTitle} />
             <meta property="og:description" content={metaDescription} />
             <meta property="og:image" content={metaImage} />
-            <meta property="og:site_name" content="몽골리아 은하수" />
+            <meta property="og:site_name" content="Trip Mongolia" />
 
             {/* Twitter */}
             <meta property="twitter:card" content="summary_large_image" />

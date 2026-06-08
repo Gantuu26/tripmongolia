@@ -191,7 +191,7 @@ export function ReservationDesktop({
                                     style={{
                                         marginTop: 16,
                                         padding: '14px 18px',
-                                        background: 'var(--primary-tint, rgba(15,118,110,0.08))',
+                                        background: 'var(--primary-tint, rgba(255, 56, 92,0.08))',
                                         borderRadius: 12,
                                         display: 'flex',
                                         alignItems: 'center',
@@ -202,13 +202,13 @@ export function ReservationDesktop({
                                         name="event_available"
                                         size={20}
                                         filled
-                                        color="var(--primary-dark, #115e59)"
+                                        color="var(--primary-dark, #e00b41)"
                                     />
                                     <div>
                                         <div
                                             style={{
                                                 fontSize: 11,
-                                                color: 'var(--primary-dark, #115e59)',
+                                                color: 'var(--primary-dark, #e00b41)',
                                                 opacity: 0.75,
                                                 fontWeight: 600,
                                             }}
@@ -219,7 +219,7 @@ export function ReservationDesktop({
                                             style={{
                                                 fontSize: 15,
                                                 fontWeight: 700,
-                                                color: 'var(--primary-dark, #115e59)',
+                                                color: 'var(--primary-dark, #e00b41)',
                                                 marginTop: 2,
                                             }}
                                         >
@@ -356,7 +356,7 @@ export function ReservationDesktop({
                                                     : 'pointer',
                                         }}
                                     >
-                                        <MatIcon name="add" size={18} color="#0f766e" />
+                                        <MatIcon name="add" size={18} color="#ff385c" />
                                     </button>
                                 </div>
                             </div>
@@ -383,7 +383,7 @@ export function ReservationDesktop({
                                     <span style={{ fontSize: 13, color: 'var(--fg-3)' }}>
                                         현재 인원 기준 1인{' '}
                                         <strong
-                                            style={{ color: '#0f766e', fontWeight: 700 }}
+                                            style={{ color: '#ff385c', fontWeight: 700 }}
                                         >
                                             ₩{formatPrice(baseOption?.pricePerPerson ?? 0)}
                                         </strong>
@@ -631,8 +631,8 @@ function OptionCard({
                 textAlign: 'left',
                 padding: '18px 20px',
                 borderRadius: 14,
-                background: on ? 'var(--primary-tint, rgba(15,118,110,0.08))' : '#fff',
-                border: on ? '2px solid #0f766e' : '1px solid var(--border)',
+                background: on ? 'var(--primary-tint, rgba(255, 56, 92,0.08))' : '#fff',
+                border: on ? '2px solid #ff385c' : '1px solid var(--border)',
                 cursor: 'pointer',
                 fontFamily: 'inherit',
                 position: 'relative',
@@ -647,7 +647,7 @@ function OptionCard({
                         fontSize: 10,
                         fontWeight: 700,
                         padding: '3px 8px',
-                        background: '#0f766e',
+                        background: '#ff385c',
                         color: '#fff',
                         borderRadius: 4,
                         letterSpacing: '0.06em',
@@ -681,7 +681,7 @@ function OptionCard({
                         <MatIcon
                             name={icon}
                             size={20}
-                            color={on ? '#0f766e' : 'var(--fg-3)'}
+                            color={on ? '#ff385c' : 'var(--fg-3)'}
                         />
                     )
                 )}
@@ -711,7 +711,7 @@ function OptionCard({
                 style={{
                     fontSize: 13,
                     fontWeight: 700,
-                    color: on ? 'var(--primary-dark, #115e59)' : 'var(--fg-2)',
+                    color: on ? 'var(--primary-dark, #e00b41)' : 'var(--fg-2)',
                 }}
             >
                 {priceModifier === 0

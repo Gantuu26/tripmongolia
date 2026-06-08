@@ -155,7 +155,7 @@ const InfoRow = ({ label, value }: { label: string; value: React.ReactNode }) =>
 );
 
 const Chip = ({ children }: { children: React.ReactNode }) => (
-    <span className="inline-flex items-center rounded-full bg-teal-50 px-2.5 py-1 text-[11px] font-bold text-teal-700">
+    <span className="inline-flex items-center rounded-full bg-rose-50 px-2.5 py-1 text-[11px] font-bold text-rose-700">
         {children}
     </span>
 );
@@ -189,7 +189,7 @@ export const DocumentItinerary: React.FC = () => {
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-slate-100">
-                <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-200 border-t-teal-600" />
+                <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-200 border-t-rose-600" />
             </div>
         );
     }
@@ -241,7 +241,7 @@ export const DocumentItinerary: React.FC = () => {
                             <div className="flex items-center gap-3 text-[#0F8F84]">
                                 <span className="material-symbols-outlined text-[34px]">landscape</span>
                                 <div>
-                                    <p className="text-base font-black">몽골 은하수 여행사</p>
+                                    <p className="text-base font-black">Trip Mongolia</p>
                                     <p className="text-[10px] font-bold tracking-[0.2em]">MILKYWAY JAPAN</p>
                                 </div>
                             </div>
@@ -339,7 +339,7 @@ export const DocumentItinerary: React.FC = () => {
                     <section className="px-5 py-7 sm:px-8">
                         <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
                             <div>
-                                <p className="text-[12px] font-black uppercase tracking-widest text-teal-700">Detailed Itinerary</p>
+                                <p className="text-[12px] font-black uppercase tracking-widest text-rose-700">Detailed Itinerary</p>
                                 <h2 className="mt-1 text-2xl font-black text-slate-950">{detail.title || '여행 일정표(상세)'}</h2>
                             </div>
                             <p className="rounded-full bg-[#39C4B7]/10 px-3 py-1 text-sm font-black text-[#0F8F84]">{days.length}일간</p>
@@ -365,7 +365,7 @@ export const DocumentItinerary: React.FC = () => {
                                             <div className="min-w-0">
                                                 <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                                                     <div>
-                                                        {day.region && <p className="text-[11px] font-black uppercase tracking-widest text-teal-700">{day.region}</p>}
+                                                        {day.region && <p className="text-[11px] font-black uppercase tracking-widest text-rose-700">{day.region}</p>}
                                                         <h3 className="text-lg font-black text-[#0F8F84]">{day.title || `${day.day}일차`}</h3>
                                                     </div>
                                                     {accommodation && <Chip>숙박：{accommodation.name}</Chip>}
@@ -447,7 +447,7 @@ export const DocumentItinerary: React.FC = () => {
                             </div>
                             <div className="rounded-xl border border-[#8FE7DE]/70 bg-white p-4">
                                 <p className="text-[12px] font-black uppercase tracking-widest text-slate-400">Contact</p>
-                                <p className="mt-2 font-black text-slate-950">Milkyway Japan</p>
+                                <p className="mt-2 font-black text-slate-950">Trip Mongolia</p>
                                 <p className="mt-1 text-sm text-slate-500">{guideSettings.emergencyPhone || guide?.phone || '+976-80-1234-5678'}</p>
                                 <p className="text-sm text-slate-500">{guideSettings.emergencyEmail || 'info@mongolryokou.com'}</p>
                                 {guideSettings.closingMessage && <p className="mt-4 text-sm font-bold leading-relaxed text-[#0F8F84]">{guideSettings.closingMessage}</p>}
@@ -466,7 +466,7 @@ export const DocumentItinerary: React.FC = () => {
                     <div className="no-print sticky bottom-0 flex justify-center border-t border-slate-200 bg-white/90 px-5 py-3 backdrop-blur">
                         <button
                             onClick={() => window.print()}
-                            className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-teal-700 px-5 text-sm font-bold text-white transition-colors hover:bg-teal-800"
+                            className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-rose-700 px-5 text-sm font-bold text-white transition-colors hover:bg-rose-800"
                         >
                             <span className="material-symbols-outlined text-base">print</span>
                             인쇄 / PDF 저장

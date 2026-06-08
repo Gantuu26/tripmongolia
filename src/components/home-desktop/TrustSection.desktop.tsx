@@ -17,8 +17,8 @@ export function TrustSectionDesktop({ contentWidth = 1280 }: TrustSectionProps) 
         <section style={{ background: '#fff', padding: '72px 0 24px', marginTop: 72 }}>
             <div style={{ maxWidth: contentWidth, margin: '0 auto', padding: '0 32px' }}>
                 <SectionHeader
-                    eyebrow="Why Milkyway Japan"
-                    title="몽골리아 은하수가 선택받는 4가지 이유"
+                    eyebrow="Why Trip Mongolia"
+                    title="Trip Mongolia가 선택받는 4가지 이유"
                     subtitle="몽골 현지 여행사이기에 가능한, 확실한 지원과 안심의 품질."
                 />
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
@@ -48,13 +48,13 @@ export function TrustSectionDesktop({ contentWidth = 1280 }: TrustSectionProps) 
                                         boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
                                     }}
                                 >
-                                    <MatIcon name={it.i} size={28} color="#0f766e" />
+                                    <MatIcon name={it.i} size={28} color="#ff385c" />
                                 </div>
                                 <div
                                     style={{
                                         fontSize: 28,
                                         fontWeight: 700,
-                                        color: '#0f766e',
+                                        color: '#ff385c',
                                         opacity: 0.5,
                                         fontFamily: 'ui-monospace, Menlo, monospace',
                                         letterSpacing: '-0.02em',

@@ -42,7 +42,7 @@ export function CategoryLandingDesktop({
 }: Props) {
     const navigate = useNavigate();
     const { t } = useTranslation();
-    const accent = content.accentColor || '#0f766e';
+    const accent = content.accentColor || '#ff385c';
 
     return (
         <div style={{ background: '#fff' }}>
@@ -197,7 +197,7 @@ export function CategoryLandingDesktop({
                 <div
                     style={{
                         padding: '44px 56px',
-                        background: `linear-gradient(120deg, ${accent} 0%, #115e59 60%, #134e4a 100%)`,
+                        background: `linear-gradient(120deg, ${accent} 0%, #e00b41 60%, #881337 100%)`,
                         borderRadius: 28,
                         color: '#fff',
                         display: 'grid',
@@ -221,7 +221,7 @@ export function CategoryLandingDesktop({
                         }}
                     />
                     <div style={{ position: 'relative' }}>
-                        <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', color: '#5eead4', textTransform: 'uppercase', marginBottom: 10 }}>
+                        <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', color: '#fda4af', textTransform: 'uppercase', marginBottom: 10 }}>
                             Custom Tour
                         </div>
                         <div style={{ fontSize: 28, fontWeight: 700, lineHeight: 1.25, letterSpacing: '-0.02em' }}>

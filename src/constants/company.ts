@@ -1,9 +1,9 @@
-// 몽골리아 은하수 — 법적 문서에 사용되는 회사 공통 상수.
+// Trip Mongolia — 법적 문서에 사용되는 회사 공통 상수.
 // 이곳을 수정하면 모든 계약서에 일괄 반영됩니다.
 
 export const COMPANY_INFO = {
-    nameJa: '몽골리아 은하수',
-    nameEn: 'Milkyway Japan',
+    nameJa: 'Trip Mongolia',
+    nameEn: 'Trip Mongolia',
     phoneKR: '82-10-6376-7901',
     phoneMGL: '976-9594-5838',
     representative: 'DAVAASUREN BOLOR',  // 담당자 (대리)

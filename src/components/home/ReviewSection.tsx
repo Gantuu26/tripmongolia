@@ -66,7 +66,7 @@ export const ReviewSection: React.FC = () => {
                         >
                             <div className="flex flex-col h-full">
                                 <div className="flex items-center gap-3 mb-4">
-                                    <div className="w-10 h-10 rounded-full bg-teal-50 dark:bg-teal-900/50 flex items-center justify-center text-teal-600 dark:text-teal-400 font-bold text-sm shrink-0">
+                                    <div className="w-10 h-10 rounded-full bg-rose-50 dark:bg-rose-900/50 flex items-center justify-center text-rose-600 dark:text-rose-400 font-bold text-sm shrink-0">
                                         {review.author?.charAt(0) || t('home.reviews.anonymous')}
                                     </div>
                                     <div>

@@ -137,7 +137,7 @@ export function ReviewDetailDesktop({ review, helpful = false, onHelpful, onAddC
                             height: 64,
                             borderRadius: 999,
                             background: avatar ? `url(${avatar}) center/cover` : 'var(--primary-tint)',
-                            color: '#0f766e',
+                            color: '#ff385c',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
@@ -259,7 +259,7 @@ export function ReviewDetailDesktop({ review, helpful = false, onHelpful, onAddC
                             padding: '12px 24px',
                             background: helpful ? 'var(--primary-tint)' : '#fff',
                             color: helpful ? 'var(--primary-dark)' : 'var(--fg-2)',
-                            border: helpful ? '1px solid #0f766e' : '1px solid var(--border)',
+                            border: helpful ? '1px solid #ff385c' : '1px solid var(--border)',
                             borderRadius: 999,
                             fontSize: 13,
                             fontWeight: 700,
@@ -267,7 +267,7 @@ export function ReviewDetailDesktop({ review, helpful = false, onHelpful, onAddC
                             fontFamily: 'inherit',
                         }}
                     >
-                        <MatIcon name="thumb_up" size={16} filled={helpful} color={helpful ? '#0f766e' : 'var(--fg-3)'} />
+                        <MatIcon name="thumb_up" size={16} filled={helpful} color={helpful ? '#ff385c' : 'var(--fg-3)'} />
                         도움이 됐어요 ({helpfulCount + (helpful ? 1 : 0)})
                     </button>
                 </div>
@@ -284,7 +284,7 @@ export function ReviewDetailDesktop({ review, helpful = false, onHelpful, onAddC
                                 width: 40,
                                 height: 40,
                                 borderRadius: 999,
-                                background: '#0f766e',
+                                background: '#ff385c',
                                 color: '#fff',
                                 display: 'flex',
                                 alignItems: 'center',
@@ -321,7 +321,7 @@ export function ReviewDetailDesktop({ review, helpful = false, onHelpful, onAddC
                                     disabled={!comment.trim()}
                                     style={{
                                         padding: '10px 22px',
-                                        background: comment.trim() ? '#0f766e' : 'var(--bg-muted)',
+                                        background: comment.trim() ? '#ff385c' : 'var(--bg-muted)',
                                         color: comment.trim() ? '#fff' : 'var(--fg-5)',
                                         border: 'none',
                                         borderRadius: 10,
@@ -360,7 +360,7 @@ export function ReviewDetailDesktop({ review, helpful = false, onHelpful, onAddC
                                             height: 40,
                                             borderRadius: 999,
                                             background: 'var(--primary-tint)',
-                                            color: '#0f766e',
+                                            color: '#ff385c',
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center',

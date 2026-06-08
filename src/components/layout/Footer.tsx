@@ -4,7 +4,7 @@ import logoHorizontal from '../../assets/logo_horizontal.webp';
 
 const PHONE_PRIMARY = '+976 9594 5838';
 const EMAIL = 'bolor1@hanmail.net';
-const ADDRESS_QUERY = 'Mongolia Milky Way, DACO Center, Bayanzurkh, Ulaanbaatar';
+const ADDRESS_QUERY = 'Trip Mongolia, DACO Center, Bayanzurkh, Ulaanbaatar';
 
 export const Footer: React.FC = () => {
     const { t } = useTranslation();
@@ -16,7 +16,7 @@ export const Footer: React.FC = () => {
             <div className="flex flex-col items-center mb-6">
                 <img
                     src={logoHorizontal}
-                    alt="Milkyway Japan"
+                    alt="Trip Mongolia"
                     className="h-8 object-contain mb-2 opacity-90"
                     loading="lazy"
                     decoding="async"
@@ -116,7 +116,7 @@ export const Footer: React.FC = () => {
 
             {/* Copyright */}
             <div className="mt-6 text-center text-[11px] text-slate-400 dark:text-slate-500">
-                © {new Date().getFullYear()} Mongolia Milky Way. All rights reserved.
+                © {new Date().getFullYear()} Trip Mongolia. All rights reserved.
             </div>
         </footer>
     );

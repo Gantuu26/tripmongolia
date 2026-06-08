@@ -18,7 +18,7 @@ export function SectionHeader({ eyebrow, title, subtitle, onAll, allLabel = '전
                             fontSize: 12,
                             fontWeight: 700,
                             letterSpacing: '0.12em',
-                            color: '#0f766e',
+                            color: '#ff385c',
                             textTransform: 'uppercase',
                             marginBottom: 8,
                         }}

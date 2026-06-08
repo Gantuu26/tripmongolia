@@ -270,7 +270,7 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
                                     fontSize: 12,
                                     fontWeight: 700,
                                     letterSpacing: '0.12em',
-                                    color: '#0f766e',
+                                    color: '#ff385c',
                                     textTransform: 'uppercase',
                                     marginBottom: 10,
                                 }}
@@ -339,11 +339,11 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
                                     padding: 0,
                                     cursor: 'pointer',
                                     textAlign: 'left',
-                                    border: on ? '2px solid #0f766e' : '1px solid var(--border)',
+                                    border: on ? '2px solid #ff385c' : '1px solid var(--border)',
                                     background: allCat
-                                        ? (on ? 'linear-gradient(135deg, #0f766e 0%, #115e59 100%)' : '#fff')
+                                        ? (on ? 'linear-gradient(135deg, #ff385c 0%, #e00b41 100%)' : '#fff')
                                         : '#000',
-                                    boxShadow: on ? '0 8px 20px -8px rgba(15,118,110,0.4)' : '0 2px 8px rgba(0,0,0,0.04)',
+                                    boxShadow: on ? '0 8px 20px -8px rgba(255, 56, 92,0.4)' : '0 2px 8px rgba(0,0,0,0.04)',
                                     transition: 'all 200ms var(--ease-out)',
                                     fontFamily: 'inherit',
                                 }}
@@ -441,7 +441,7 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
                                                 padding: '4px 10px',
                                                 borderRadius: 999,
                                                 background: on
-                                                    ? (allCat ? 'rgba(255,255,255,0.25)' : '#0f766e')
+                                                    ? (allCat ? 'rgba(255,255,255,0.25)' : '#ff385c')
                                                     : (allCat ? 'var(--bg-muted)' : 'rgba(255,255,255,0.22)'),
                                                 color: on || !allCat ? '#fff' : 'var(--fg-3)',
                                                 backdropFilter: !allCat ? 'blur(8px)' : 'none',
@@ -595,7 +595,7 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
             <section style={{ maxWidth: contentWidth, margin: '72px auto 0', padding: '0 32px' }}>
                 <div
                     style={{
-                        background: 'linear-gradient(120deg, #0f766e 0%, #115e59 60%, #134e4a 100%)',
+                        background: 'linear-gradient(120deg, #ff385c 0%, #e00b41 60%, #881337 100%)',
                         borderRadius: 28,
                         padding: '44px 56px',
                         color: '#fff',
@@ -605,7 +605,7 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
                         alignItems: 'center',
                         position: 'relative',
                         overflow: 'hidden',
-                        boxShadow: '0 20px 48px -16px rgba(15,118,110,0.4)',
+                        boxShadow: '0 20px 48px -16px rgba(255, 56, 92,0.4)',
                     }}
                 >
                     <div
@@ -620,7 +620,7 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
                         }}
                     />
                     <div style={{ position: 'relative' }}>
-                        <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', color: '#5eead4', textTransform: 'uppercase', marginBottom: 10 }}>
+                        <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', color: '#fda4af', textTransform: 'uppercase', marginBottom: 10 }}>
                             Custom Tour
                         </div>
                         <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)', marginBottom: 8 }}>
@@ -824,8 +824,8 @@ function Checkbox({ label, checked, onChange }: { label: string; checked: boolea
                     width: 18,
                     height: 18,
                     borderRadius: 5,
-                    border: '1.5px solid ' + (checked ? '#0f766e' : 'var(--border-strong)'),
-                    background: checked ? '#0f766e' : '#fff',
+                    border: '1.5px solid ' + (checked ? '#ff385c' : 'var(--border-strong)'),
+                    background: checked ? '#ff385c' : '#fff',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -860,7 +860,7 @@ function PriceSlider({ value, onChange }: { value: [number, number]; onChange: (
                 step={10000}
                 value={value[1]}
                 onChange={(e) => onChange([value[0], parseInt(e.target.value, 10)])}
-                style={{ width: '100%', accentColor: '#0f766e' }}
+                style={{ width: '100%', accentColor: '#ff385c' }}
             />
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: 'var(--fg-5)', marginTop: 6 }}>
                 <span>₩0</span>
@@ -921,7 +921,7 @@ function ActiveFilterChips({
                         onClick={c.onX}
                         aria-label={`Remove ${c.label}`}
                         style={{
-                            background: '#0f766e',
+                            background: '#ff385c',
                             color: '#fff',
                             border: 'none',
                             width: 18,
@@ -993,7 +993,7 @@ function EmptyState({ onReset }: { onReset: () => void }) {
                 style={{
                     marginTop: 8,
                     padding: '10px 20px',
-                    background: '#0f766e',
+                    background: '#ff385c',
                     color: '#fff',
                     border: 'none',
                     borderRadius: 999,
@@ -1094,7 +1094,7 @@ function ListCard({ p, onClick }: { p: ProductRow; onClick: () => void }) {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginTop: 12 }}>
                     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12, color: 'var(--fg-5)' }}>
-                        <MatIcon name="verified" size={14} filled color="#0f766e" /> 한국어 가이드 동행
+                        <MatIcon name="verified" size={14} filled color="#ff385c" /> 한국어 가이드 동행
                     </span>
                     {firstTag && (
                         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12, color: 'var(--fg-5)' }}>
@@ -1111,7 +1111,7 @@ function ListCard({ p, onClick }: { p: ProductRow; onClick: () => void }) {
                         </div>
                     )}
                     <div style={{ fontSize: 11, color: 'var(--fg-5)' }}>1인 기준</div>
-                    <div style={{ fontSize: 24, fontWeight: 700, color: '#0f766e', letterSpacing: '-0.01em' }}>
+                    <div style={{ fontSize: 24, fontWeight: 700, color: '#ff385c', letterSpacing: '-0.01em' }}>
                         ₩{p.price.toLocaleString()}<span style={{ fontSize: 14 }}>~</span>
                     </div>
                 </div>
@@ -1189,8 +1189,8 @@ function Pagination({ page, total, onChange }: { page: number; total: number; on
                         style={{
                             minWidth: 40,
                             height: 40,
-                            border: '1px solid ' + (p === page ? '#0f766e' : 'var(--border)'),
-                            background: p === page ? '#0f766e' : '#fff',
+                            border: '1px solid ' + (p === page ? '#ff385c' : 'var(--border)'),
+                            background: p === page ? '#ff385c' : '#fff',
                             color: p === page ? '#fff' : 'var(--fg-2)',
                             borderRadius: 10,
                             fontSize: 14,

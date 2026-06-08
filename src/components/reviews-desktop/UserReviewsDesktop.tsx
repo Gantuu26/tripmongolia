@@ -122,7 +122,7 @@ export function UserReviewsDesktop({ contentWidth = 1280 }: { contentWidth?: num
                         onClick={() => navigate('/reviews/write')}
                         style={{
                             padding: '14px 24px',
-                            background: '#0f766e',
+                            background: '#ff385c',
                             color: '#fff',
                             border: 'none',
                             borderRadius: 12,
@@ -133,7 +133,7 @@ export function UserReviewsDesktop({ contentWidth = 1280 }: { contentWidth?: num
                             display: 'inline-flex',
                             alignItems: 'center',
                             gap: 8,
-                            boxShadow: '0 8px 20px -6px rgba(15,118,110,0.45)',
+                            boxShadow: '0 8px 20px -6px rgba(255, 56, 92,0.45)',
                         }}
                     >
                         <MatIcon name="edit" size={18} color="#fff" />
@@ -181,7 +181,7 @@ export function UserReviewsDesktop({ contentWidth = 1280 }: { contentWidth?: num
                                         style={{
                                             width: `${stats.dist[i]}%`,
                                             height: '100%',
-                                            background: 'linear-gradient(to right, #0f766e, #115e59)',
+                                            background: 'linear-gradient(to right, #ff385c, #e00b41)',
                                             borderRadius: 999,
                                         }}
                                     />
@@ -278,7 +278,7 @@ export function UserReviewsDesktop({ contentWidth = 1280 }: { contentWidth?: num
                             style={{
                                 marginTop: 8,
                                 padding: '10px 20px',
-                                background: '#0f766e',
+                                background: '#ff385c',
                                 color: '#fff',
                                 border: 'none',
                                 borderRadius: 999,
@@ -340,7 +340,7 @@ function ReviewCard({ r, onClick }: { r: Review; onClick: () => void }) {
                         height: 44,
                         borderRadius: 999,
                         background: r.avatar ? `url(${r.avatar}) center/cover` : 'var(--primary-tint)',
-                        color: '#0f766e',
+                        color: '#ff385c',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',

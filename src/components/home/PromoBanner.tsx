@@ -24,7 +24,7 @@ export const PromoBanner: React.FC = () => {
                     setBanners(data.map((e: any) => ({
                         id: e.id,
                         image: e.image,
-                        backgroundColor: e.background_color || '#0F766E',
+                        backgroundColor: e.background_color || '#ff385c',
                         tag: e.tag,
                         title: e.title,
                         icon: e.icon,

@@ -259,8 +259,8 @@ export function BookingSummary({
                                         width: 36,
                                         height: 36,
                                         borderRadius: 999,
-                                        background: 'var(--primary-soft, rgba(15,118,110,0.18))',
-                                        color: 'var(--primary-dark, #115e59)',
+                                        background: 'var(--primary-soft, rgba(255, 56, 92,0.18))',
+                                        color: 'var(--primary-dark, #e00b41)',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
@@ -291,7 +291,7 @@ export function BookingSummary({
                             <div
                                 style={{
                                     fontWeight: 700,
-                                    color: '#0f766e',
+                                    color: '#ff385c',
                                     marginTop: 2,
                                 }}
                             >
@@ -316,7 +316,7 @@ export function BookingSummary({
                         style={{
                             width: '100%',
                             padding: '16px',
-                            background: canProceed ? '#0f766e' : 'var(--fg-6)',
+                            background: canProceed ? '#ff385c' : 'var(--fg-6)',
                             color: '#fff',
                             border: 'none',
                             borderRadius: 12,
@@ -329,7 +329,7 @@ export function BookingSummary({
                             justifyContent: 'center',
                             gap: 8,
                             boxShadow: canProceed
-                                ? '0 8px 20px -6px rgba(15,118,110,0.5)'
+                                ? '0 8px 20px -6px rgba(255, 56, 92,0.5)'
                                 : 'none',
                             transition: 'all 150ms',
                         }}
@@ -358,10 +358,10 @@ export function BookingSummary({
                         style={{
                             marginTop: 12,
                             padding: '10px 12px',
-                            background: 'var(--primary-tint, rgba(15,118,110,0.08))',
+                            background: 'var(--primary-tint, rgba(255, 56, 92,0.08))',
                             borderRadius: 10,
                             fontSize: 11,
-                            color: 'var(--primary-dark, #115e59)',
+                            color: 'var(--primary-dark, #e00b41)',
                             display: 'flex',
                             alignItems: 'center',
                             gap: 6,
@@ -372,7 +372,7 @@ export function BookingSummary({
                             name="verified"
                             size={14}
                             filled
-                            color="var(--primary-dark, #115e59)"
+                            color="var(--primary-dark, #e00b41)"
                         />
                         <span>
                             <strong>무료 취소</strong> — 출발 30일 전까지 전액 환불

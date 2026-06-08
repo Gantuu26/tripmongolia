@@ -12,11 +12,11 @@
     /* slate-300 */
     --fc-button-active-bg-color: #f1f5f9;
     /* slate-100 */
-    --fc-today-bg-color: #f0fdfa;
-    /* teal-50 */
-    --fc-event-bg-color: #0d9488;
-    /* teal-600 */
-    --fc-event-border-color: #0d9488;
+    --fc-today-bg-color: #fff1f2;
+    /* rose-50 */
+    --fc-event-bg-color: #e11d48;
+    /* rose-600 */
+    --fc-event-border-color: #e11d48;
     --fc-page-bg-color: #ffffff;
 }
 
@@ -32,8 +32,8 @@
     --fc-button-hover-border-color: #475569;
     --fc-button-active-bg-color: #0f172a;
     /* slate-900 */
-    --fc-today-bg-color: #115e59;
-    /* teal-900 with opacity */
+    --fc-today-bg-color: #e00b41;
+    /* rose-900 with opacity */
     --fc-page-bg-color: #1e293b;
 }
 

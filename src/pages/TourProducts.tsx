@@ -88,7 +88,7 @@ export const TourProducts: React.FC = () => {
                 return data.map((e: any) => ({
                     id: e.id,
                     image: e.image,
-                    backgroundColor: e.background_color || '#0F766E',
+                    backgroundColor: e.background_color || '#ff385c',
                     tag: e.tag,
                     title: e.title,
                     icon: e.icon,
@@ -249,11 +249,11 @@ export const TourProducts: React.FC = () => {
     const collectionLd = {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
-        name: '몽골투어 상품 목록 | Milkyway Japan',
+        name: '몽골투어 상품 목록 | Trip Mongolia',
         description: t('products.seo_description'),
         url: 'https://mongolryokou.com/products',
         inLanguage: 'ja',
-        isPartOf: { '@type': 'WebSite', name: 'Milkyway Japan', url: 'https://mongolryokou.com' },
+        isPartOf: { '@type': 'WebSite', name: 'Trip Mongolia', url: 'https://mongolryokou.com' },
     };
 
     return (
@@ -476,11 +476,11 @@ export const TourProducts: React.FC = () => {
                                 ))
                         ) : (
                             // Fallback if no banners
-                            <div className="w-full p-6 rounded-2xl bg-teal-700 text-white flex items-center justify-between relative overflow-hidden">
+                            <div className="w-full p-6 rounded-2xl bg-rose-700 text-white flex items-center justify-between relative overflow-hidden">
                                 <div className="relative z-10">
                                     <p className="text-sm font-medium opacity-90 mb-1">{t('products.custom_banner.text')}</p>
                                     <h4 className="text-xl font-bold leading-tight mb-4">{t('products.custom_banner.title')}</h4>
-                                    <button className="bg-white text-teal-700 px-4 py-2 rounded-lg text-sm font-bold shadow-sm">{t('products.custom_banner.button')}</button>
+                                    <button className="bg-white text-rose-700 px-4 py-2 rounded-lg text-sm font-bold shadow-sm">{t('products.custom_banner.button')}</button>
                                 </div>
                                 <div className="relative z-10">
                                     <span className="material-symbols-outlined text-6xl opacity-30">description</span>

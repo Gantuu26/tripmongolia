@@ -444,7 +444,7 @@ const MyPageMobile: React.FC = () => {
                     <div className="bg-surface-light dark:bg-surface-dark rounded-3xl overflow-hidden shadow-sm">
                         <button onClick={() => navigate('/faq')} className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group w-full">
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-full bg-[#eef6ef] dark:bg-teal-900/30 flex items-center justify-center p-2">
+                                <div className="w-10 h-10 rounded-full bg-[#eef6ef] dark:bg-rose-900/30 flex items-center justify-center p-2">
                                     <img src={faqIcon} alt={t('mypage.faq')} className="w-full h-full object-contain" loading="lazy" decoding="async" />
                                 </div>
                                 <span className="text-text-main dark:text-white font-medium text-[15px]">{t('mypage.faq')}</span>

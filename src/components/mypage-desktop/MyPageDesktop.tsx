@@ -140,7 +140,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                             justifyContent: 'center',
                         }}
                     >
-                        <MatIcon name="person" size={36} color="#0f766e" />
+                        <MatIcon name="person" size={36} color="#ff385c" />
                     </div>
                     <h2 style={{ fontSize: 22, fontWeight: 700, color: 'var(--fg-1)', margin: 0, letterSpacing: '-0.01em' }}>로그인이 필요합니다</h2>
                     <p style={{ fontSize: 14, color: 'var(--fg-4)', marginTop: 10, lineHeight: 1.7 }}>
@@ -152,7 +152,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                         style={{
                             marginTop: 22,
                             padding: '14px 32px',
-                            background: '#0f766e',
+                            background: '#ff385c',
                             color: '#fff',
                             border: 'none',
                             borderRadius: 12,
@@ -160,7 +160,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                             fontWeight: 700,
                             cursor: 'pointer',
                             fontFamily: 'inherit',
-                            boxShadow: '0 8px 20px -6px rgba(15,118,110,0.5)',
+                            boxShadow: '0 8px 20px -6px rgba(255, 56, 92,0.5)',
                         }}
                     >
                         로그인
@@ -211,7 +211,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                     borderRadius: 999,
                                     background: me?.image || me?.avatarUrl
                                         ? `url(${me.image || me.avatarUrl}) center/cover`
-                                        : 'linear-gradient(135deg, #0f766e, #115e59)',
+                                        : 'linear-gradient(135deg, #ff385c, #e00b41)',
                                     color: '#fff',
                                     margin: '0 auto 14px',
                                     display: 'flex',
@@ -219,7 +219,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                     justifyContent: 'center',
                                     fontSize: 32,
                                     fontWeight: 700,
-                                    boxShadow: '0 8px 24px -8px rgba(15,118,110,0.4)',
+                                    boxShadow: '0 8px 24px -8px rgba(255, 56, 92,0.4)',
                                 }}
                             >
                                 {!me?.image && !me?.avatarUrl && (me?.name || me?.email || '?').charAt(0).toUpperCase()}
@@ -294,7 +294,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                         textAlign: 'left',
                                     }}
                                 >
-                                    <MatIcon name={it.icon} size={20} color={i === 0 ? '#0f766e' : 'var(--fg-4)'} />
+                                    <MatIcon name={it.icon} size={20} color={i === 0 ? '#ff385c' : 'var(--fg-4)'} />
                                     <span style={{ flex: 1 }}>{it.label}</span>
                                     <MatIcon name="chevron_right" size={16} color="var(--fg-5)" />
                                 </button>
@@ -329,7 +329,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                             fontSize: 11,
                                             fontWeight: 700,
                                             letterSpacing: '0.12em',
-                                            color: '#0f766e',
+                                            color: '#ff385c',
                                             textTransform: 'uppercase',
                                             marginBottom: 6,
                                         }}
@@ -367,7 +367,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                             onClick={() => navigate('/products')}
                                             style={{
                                                 padding: '10px 18px',
-                                                background: '#0f766e',
+                                                background: '#ff385c',
                                                 color: '#fff',
                                                 border: 'none',
                                                 borderRadius: 999,
@@ -475,7 +475,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                                             : q.status === 'completed'
                                                                 ? '#15803d'
                                                                 : 'var(--fg-5)',
-                                                    border: '1px solid ' + (q.status === 'answered' ? 'rgba(15,118,110,0.3)' : 'var(--border-subtle)'),
+                                                    border: '1px solid ' + (q.status === 'answered' ? 'rgba(255, 56, 92,0.3)' : 'var(--border-subtle)'),
                                                 }}
                                             >
                                                 {q.status === 'answered' ? '답변 완료' : q.status === 'completed' ? '완료' : '처리 중'}
@@ -505,7 +505,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                         fontSize: 11,
                                         fontWeight: 700,
                                         letterSpacing: '0.12em',
-                                        color: '#0f766e',
+                                        color: '#ff385c',
                                         textTransform: 'uppercase',
                                         marginBottom: 8,
                                     }}
@@ -544,7 +544,7 @@ export function MyPageDesktop({ contentWidth = 1280 }: { contentWidth?: number }
                                     }}
                                     style={{
                                         padding: '12px 22px',
-                                        background: '#0f766e',
+                                        background: '#ff385c',
                                         color: '#fff',
                                         border: 'none',
                                         borderRadius: 999,
@@ -607,7 +607,7 @@ function StatCard({ label, value, icon, onClick }: { label: string; value: strin
                         justifyContent: 'center',
                     }}
                 >
-                    <MatIcon name={icon} size={22} color="#0f766e" />
+                    <MatIcon name={icon} size={22} color="#ff385c" />
                 </div>
                 <MatIcon name="arrow_outward" size={16} color="var(--fg-5)" />
             </div>
@@ -630,7 +630,7 @@ function ReservationRow({ r, onClick }: { r: Reservation; onClick: () => void })
         r.status === 'confirmed'
             ? '#16a34a'
             : r.status === 'paid'
-                ? '#0f766e'
+                ? '#ff385c'
                 : r.status === 'pending'
                     ? '#f59e0b'
                     : 'var(--fg-5)';
@@ -703,7 +703,7 @@ function QuickAction({
             type="button"
             onClick={onClick}
             style={{
-                background: primary ? 'linear-gradient(135deg, #0f766e 0%, #115e59 100%)' : '#fff',
+                background: primary ? 'linear-gradient(135deg, #ff385c 0%, #e00b41 100%)' : '#fff',
                 color: primary ? '#fff' : 'var(--fg-1)',
                 border: primary ? 'none' : '1px solid var(--border-subtle)',
                 borderRadius: 16,
@@ -711,7 +711,7 @@ function QuickAction({
                 cursor: 'pointer',
                 fontFamily: 'inherit',
                 textAlign: 'left',
-                boxShadow: primary ? '0 8px 20px -6px rgba(15,118,110,0.4)' : 'var(--shadow-toss)',
+                boxShadow: primary ? '0 8px 20px -6px rgba(255, 56, 92,0.4)' : 'var(--shadow-toss)',
                 transition: 'all 150ms',
             }}
             onMouseEnter={(e) => {
@@ -731,7 +731,7 @@ function QuickAction({
                     marginBottom: 14,
                 }}
             >
-                <MatIcon name={icon} size={22} color={primary ? '#fff' : '#0f766e'} />
+                <MatIcon name={icon} size={22} color={primary ? '#fff' : '#ff385c'} />
             </div>
             <div style={{ fontSize: 15, fontWeight: 700, letterSpacing: '-0.01em' }}>{title}</div>
             <div style={{ fontSize: 12, color: primary ? 'rgba(255,255,255,0.8)' : 'var(--fg-5)', marginTop: 4 }}>{desc}</div>

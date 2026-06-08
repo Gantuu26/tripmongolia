@@ -59,7 +59,7 @@ const fallbackContract: Required<ContractSettings> = {
     intro: '본 여행조건서 및 아래 여행조건에 근거하여 모집형 기획여행 계약을 체결합니다.',
     paymentMethod: '은행 송금',
     paymentDeadline: '안내 메일에 기재된 기한까지',
-    bankInfo: '미쓰이스미토모은행 신주쿠지점(보통) 1234567\n몽골 은하수 여행사(주)',
+    bankInfo: '미쓰이스미토모은행 신주쿠지점(보통) 1234567\nTrip Mongolia(주)',
     includedText: '숙박비, 식사비, 전용차, 기사, 한국어 가이드, 일정표 기재 체험 요금',
     excludedText: '국제선 항공권, 해외여행 보험, 개인 비용, 일정표에 기재되지 않은 식사',
     cancellationRows: [
@@ -168,7 +168,7 @@ export const DocumentContract: React.FC = () => {
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-slate-50">
-                <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-200 border-t-teal-500" />
+                <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-200 border-t-rose-500" />
             </div>
         );
     }
@@ -221,7 +221,7 @@ export const DocumentContract: React.FC = () => {
                             <div className="flex items-center gap-3 text-[#0F8F84]">
                                 <span className="material-symbols-outlined text-[34px]">landscape</span>
                                 <div>
-                                    <p className="text-base font-black">몽골 은하수 여행사</p>
+                                    <p className="text-base font-black">Trip Mongolia</p>
                                     <p className="text-[10px] font-bold tracking-[0.2em]">MILKYWAY JAPAN</p>
                                 </div>
                             </div>
@@ -236,11 +236,11 @@ export const DocumentContract: React.FC = () => {
                     </div>
 
                     <div className="px-6 py-6">
-                        <div className="no-print mb-6 rounded-xl border-2 border-teal-300 bg-teal-50/50 p-5">
+                        <div className="no-print mb-6 rounded-xl border-2 border-rose-300 bg-rose-50/50 p-5">
                             <div className="mb-1 flex items-center gap-2">
-                                <span className="material-symbols-outlined text-teal-600">edit_note</span>
-                                <h2 className="text-base font-bold text-teal-800">고객 정보 확인</h2>
-                                {saved && <span className="ml-auto rounded-full bg-teal-600 px-2.5 py-0.5 text-[11px] font-bold text-white">전송 완료</span>}
+                                <span className="material-symbols-outlined text-rose-600">edit_note</span>
+                                <h2 className="text-base font-bold text-rose-800">고객 정보 확인</h2>
+                                {saved && <span className="ml-auto rounded-full bg-rose-600 px-2.5 py-0.5 text-[11px] font-bold text-white">전송 완료</span>}
                             </div>
                             <p className="mb-4 text-xs text-slate-600">여권 정보와 동의 내용을 확인해 주세요. 입력 후 여행사로 전송됩니다.</p>
 
@@ -251,19 +251,19 @@ export const DocumentContract: React.FC = () => {
                                         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                                             <label className="block">
                                                 <span className="mb-1 block text-[11px] font-bold text-slate-500">성명</span>
-                                                <input value={t.name || ''} onChange={e => updTraveler(i, 'name', e.target.value)} placeholder="홍 길동" className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/10" />
+                                                <input value={t.name || ''} onChange={e => updTraveler(i, 'name', e.target.value)} placeholder="홍 길동" className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-rose-500 focus:outline-none focus:ring-2 focus:ring-rose-500/10" />
                                             </label>
                                             <label className="block">
                                                 <span className="mb-1 block text-[11px] font-bold text-slate-500">여권 표기명</span>
-                                                <input value={t.passportName || ''} onChange={e => updTraveler(i, 'passportName', e.target.value)} placeholder="HONG GILDONG" className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm uppercase focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/10" />
+                                                <input value={t.passportName || ''} onChange={e => updTraveler(i, 'passportName', e.target.value)} placeholder="HONG GILDONG" className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm uppercase focus:border-rose-500 focus:outline-none focus:ring-2 focus:ring-rose-500/10" />
                                             </label>
                                             <label className="block">
                                                 <span className="mb-1 block text-[11px] font-bold text-slate-500">생년월일</span>
-                                                <input type="date" value={t.birthdate || ''} onChange={e => updTraveler(i, 'birthdate', e.target.value)} className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/10" />
+                                                <input type="date" value={t.birthdate || ''} onChange={e => updTraveler(i, 'birthdate', e.target.value)} className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-rose-500 focus:outline-none focus:ring-2 focus:ring-rose-500/10" />
                                             </label>
                                             <label className="block">
                                                 <span className="mb-1 block text-[11px] font-bold text-slate-500">성별</span>
-                                                <select value={t.gender || ''} onChange={e => updTraveler(i, 'gender', e.target.value)} className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/10">
+                                                <select value={t.gender || ''} onChange={e => updTraveler(i, 'gender', e.target.value)} className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-rose-500 focus:outline-none focus:ring-2 focus:ring-rose-500/10">
                                                     <option value="">선택</option>
                                                     <option value="男性">남성</option>
                                                     <option value="女性">여성</option>
@@ -271,30 +271,30 @@ export const DocumentContract: React.FC = () => {
                                             </label>
                                             <label className="block sm:col-span-2">
                                                 <span className="mb-1 block text-[11px] font-bold text-slate-500">전화번호</span>
-                                                <input value={t.phone || ''} onChange={e => updTraveler(i, 'phone', e.target.value)} placeholder="090-1234-5678" className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/10" />
+                                                <input value={t.phone || ''} onChange={e => updTraveler(i, 'phone', e.target.value)} placeholder="090-1234-5678" className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-rose-500 focus:outline-none focus:ring-2 focus:ring-rose-500/10" />
                                             </label>
                                         </div>
                                     </div>
                                 ))}
                                 <div className="flex items-center gap-3">
-                                    <button onClick={() => setFormTravelers(prev => [...prev, { name: '', passportName: '', birthdate: '', gender: '', phone: '' }])} className="text-xs font-bold text-teal-600 hover:text-teal-700">＋여행자 추가</button>
+                                    <button onClick={() => setFormTravelers(prev => [...prev, { name: '', passportName: '', birthdate: '', gender: '', phone: '' }])} className="text-xs font-bold text-rose-600 hover:text-rose-700">＋여행자 추가</button>
                                     {formTravelers.length > 1 && <button onClick={() => setFormTravelers(prev => prev.slice(0, -1))} className="text-xs font-bold text-slate-400 hover:text-slate-600">마지막 항목 삭제</button>}
                                 </div>
                             </div>
 
                             <div className="mt-5 rounded-lg border border-slate-200 bg-white p-4">
                                 <label className="flex cursor-pointer items-start gap-2">
-                                    <input type="checkbox" checked={agreed} onChange={e => setAgreed(e.target.checked)} className="mt-1 h-4 w-4 accent-teal-600" />
-                                    <span className="text-sm text-slate-700">여행 계약 내용, 여행 조건, 취소 규정을 확인하고 <b className="text-teal-700">동의합니다.</b></span>
+                                    <input type="checkbox" checked={agreed} onChange={e => setAgreed(e.target.checked)} className="mt-1 h-4 w-4 accent-rose-600" />
+                                    <span className="text-sm text-slate-700">여행 계약 내용, 여행 조건, 취소 규정을 확인하고 <b className="text-rose-700">동의합니다.</b></span>
                                 </label>
                                 <div className="mt-3">
                                     <span className="mb-1 block text-[11px] font-bold text-slate-500">서명(성함)</span>
-                                    <input value={signerName} onChange={e => setSignerName(e.target.value)} placeholder="성함을 입력해 주세요" className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/10" />
+                                    <input value={signerName} onChange={e => setSignerName(e.target.value)} placeholder="성함을 입력해 주세요" className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-rose-500 focus:outline-none focus:ring-2 focus:ring-rose-500/10" />
                                 </div>
-                                <button onClick={handleCustomerSubmit} disabled={saving} className="mt-4 w-full rounded-xl bg-teal-600 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-700 disabled:opacity-50">
+                                <button onClick={handleCustomerSubmit} disabled={saving} className="mt-4 w-full rounded-xl bg-rose-600 py-3 text-sm font-bold text-white transition-colors hover:bg-rose-700 disabled:opacity-50">
                                     {saving ? '전송 중...' : saved ? '다시 전송하기' : '동의하고 전송하기'}
                                 </button>
-                                {saved && <p className="mt-2 text-center text-xs font-bold text-teal-600">계약 내용이 전송되었습니다.</p>}
+                                {saved && <p className="mt-2 text-center text-xs font-bold text-rose-600">계약 내용이 전송되었습니다.</p>}
                             </div>
                         </div>
 
@@ -429,7 +429,7 @@ export const DocumentContract: React.FC = () => {
                                         {contract.agreement?.agreed ? (
                                             <div>
                                                 <span className="font-bold text-slate-800">{contract.agreement.name}</span>
-                                                <span className="ml-2 text-xs text-teal-600">전자 동의 완료{contract.agreement.agreedAt ? `：${contract.agreement.agreedAt.split('T')[0]}` : ''}</span>
+                                                <span className="ml-2 text-xs text-rose-600">전자 동의 완료{contract.agreement.agreedAt ? `：${contract.agreement.agreedAt.split('T')[0]}` : ''}</span>
                                             </div>
                                         ) : <span>&nbsp;</span>}
                                     </td>

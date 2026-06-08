@@ -367,7 +367,7 @@ export const ProductDetail: React.FC = () => {
 
     const handleShare = async () => {
         const shareUrl = window.location.href;
-        const shareTitle = product?.name ? `${product.name} | Milkyway Japan` : 'Milkyway Japan';
+        const shareTitle = product?.name ? `${product.name} | Trip Mongolia` : 'Trip Mongolia';
         const shareText = product?.description || product?.name || '';
 
         // Prefer native share sheet on mobile; silently ignore AbortError when user cancels.
@@ -546,7 +546,7 @@ export const ProductDetail: React.FC = () => {
         "offerCount": pricingOptionPrices.length,
         "availability": availability,
         "url": window.location.href,
-        "seller": { "@type": "Organization", "name": "Milkyway Japan" },
+        "seller": { "@type": "Organization", "name": "Trip Mongolia" },
         "shippingDetails": shippingDetails,
         "hasMerchantReturnPolicy": merchantReturnPolicy,
     } : {
@@ -557,7 +557,7 @@ export const ProductDetail: React.FC = () => {
         "priceValidUntil": priceValidUntil,
         "itemCondition": "https://schema.org/NewCondition",
         "availability": availability,
-        "seller": { "@type": "Organization", "name": "Milkyway Japan" },
+        "seller": { "@type": "Organization", "name": "Trip Mongolia" },
         "shippingDetails": shippingDetails,
         "hasMerchantReturnPolicy": merchantReturnPolicy,
     };
@@ -571,7 +571,7 @@ export const ProductDetail: React.FC = () => {
         "description": (product.included && product.included.length > 0)
             ? `${product.description || ''}. 투어에 포함된 것: ${product.included.join(', ')}`
             : (product.description || product.highlights?.[0]?.description || t('product_detail.header_title')),
-        "brand": { "@type": "Brand", "name": "Milkyway Japan" },
+        "brand": { "@type": "Brand", "name": "Trip Mongolia" },
         "category": product.category || "몽골투어",
         "touristType": product.category || "몽골투어",
         ...(product.duration ? { "additionalProperty": [

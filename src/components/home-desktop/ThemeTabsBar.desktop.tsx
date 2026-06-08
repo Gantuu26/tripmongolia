@@ -44,7 +44,7 @@ export function ThemeTabsBarDesktop({ categories, contentWidth = 1280 }: ThemeTa
                                 fontWeight: on ? 700 : 500,
                                 cursor: 'pointer',
                                 fontFamily: 'inherit',
-                                boxShadow: on ? '0 4px 14px -4px rgba(15,118,110,0.4)' : 'none',
+                                boxShadow: on ? '0 4px 14px -4px rgba(255, 56, 92,0.4)' : 'none',
                                 transition: 'all 150ms',
                             }}
                         >

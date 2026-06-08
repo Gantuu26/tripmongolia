@@ -32,7 +32,7 @@ export const TrustSection: React.FC = () => {
             <div className="max-w-7xl mx-auto px-5">
                 <div className="text-center mb-12">
                     <h2 className="text-2xl md:text-3xl font-black text-slate-800 dark:text-white mb-4">
-                        {t('home.magazine.trust.title', { defaultValue: '몽골리아 은하수가 선택받는 이유' })}
+                        {t('home.magazine.trust.title', { defaultValue: 'Trip Mongolia가 선택받는 이유' })}
                     </h2>
                     <div className="w-12 h-1 bg-primary mx-auto rounded-full"></div>
                 </div>

@@ -262,8 +262,8 @@ export const EstimateDetail: React.FC = () => {
 
                     {/* Reservation Conversion Banner - Show when converted */}
                     {estimate.status === 'converted' && (
-                        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-teal-500 to-emerald-500 p-[1px] shadow-xl animate-in fade-in slide-in-from-top-2 duration-300">
-                            <div className="relative bg-gradient-to-br from-primary/95 via-teal-500/95 to-emerald-500/95 backdrop-blur-xl rounded-2xl p-5">
+                        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-rose-500 to-emerald-500 p-[1px] shadow-xl animate-in fade-in slide-in-from-top-2 duration-300">
+                            <div className="relative bg-gradient-to-br from-primary/95 via-rose-500/95 to-emerald-500/95 backdrop-blur-xl rounded-2xl p-5">
                                 {/* Decorative elements */}
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
                                 <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>

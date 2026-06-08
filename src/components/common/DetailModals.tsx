@@ -93,10 +93,10 @@ export const GuideDetailModal: React.FC<GuideDetailModalProps> = ({ guide, open,
             <div className="flex-1 overflow-y-auto p-5">
                 <div className="flex flex-col items-center text-center mb-5">
                     {guide.image ? (
-                        <img src={guide.image} alt={guide.name} className="w-28 h-28 rounded-full object-cover ring-4 ring-white shadow-lg shadow-teal-500/20 mb-3" loading="lazy" decoding="async" />
+                        <img src={guide.image} alt={guide.name} className="w-28 h-28 rounded-full object-cover ring-4 ring-white shadow-lg shadow-rose-500/20 mb-3" loading="lazy" decoding="async" />
                     ) : (
                         <div className="w-28 h-28 rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-lg mb-3"
-                            style={{ background: 'linear-gradient(135deg, #0f766e, #14b8a6)' }}>
+                            style={{ background: 'linear-gradient(135deg, #ff385c, #f43f5e)' }}>
                             {guide.name?.[0] || '?'}
                         </div>
                     )}
@@ -112,7 +112,7 @@ export const GuideDetailModal: React.FC<GuideDetailModalProps> = ({ guide, open,
                 {(languages.length > 0 || specialties.length > 0) && (
                     <div className="flex flex-wrap gap-1.5 justify-center mb-5">
                         {languages.map((l, i) => (
-                            <span key={`l-${i}`} className="text-xs font-semibold px-2.5 py-1 rounded-full bg-teal-100 text-teal-700">{l}</span>
+                            <span key={`l-${i}`} className="text-xs font-semibold px-2.5 py-1 rounded-full bg-rose-100 text-rose-700">{l}</span>
                         ))}
                         {specialties.map((s, i) => (
                             <span key={`s-${i}`} className="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">{s}</span>
@@ -132,7 +132,7 @@ export const GuideDetailModal: React.FC<GuideDetailModalProps> = ({ guide, open,
             {(guide.phone || guide.kakaoId) && (
                 <div className="px-5 py-4 border-t border-slate-100 dark:border-slate-800 flex gap-2 flex-shrink-0">
                     {guide.phone && (
-                        <a href={`tel:${guide.phone}`} className="flex-1 inline-flex items-center justify-center gap-1.5 py-3 bg-teal-500 hover:bg-teal-600 text-white rounded-xl text-sm font-bold transition-colors">
+                        <a href={`tel:${guide.phone}`} className="flex-1 inline-flex items-center justify-center gap-1.5 py-3 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-sm font-bold transition-colors">
                             <span className="material-symbols-outlined text-base">call</span>
                             전화하기
                         </a>
@@ -239,7 +239,7 @@ export const AccommodationDetailModal: React.FC<AccommodationDetailModalProps> =
                         <div className="min-w-0">
                             <h2 className="text-lg font-bold text-slate-900 dark:text-white">{accommodation.name}</h2>
                             {accommodation.type && (
-                                <span className="inline-block mt-1 text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-teal-100 text-teal-700">{accommodation.type}</span>
+                                <span className="inline-block mt-1 text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-rose-100 text-rose-700">{accommodation.type}</span>
                             )}
                         </div>
                         {accommodation.rating != null && accommodation.rating > 0 && (
@@ -256,7 +256,7 @@ export const AccommodationDetailModal: React.FC<AccommodationDetailModalProps> =
                             href={mapsUrl || '#'}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-start gap-2 mb-4 text-xs text-slate-600 dark:text-slate-300 leading-relaxed hover:text-teal-600"
+                            className="flex items-start gap-2 mb-4 text-xs text-slate-600 dark:text-slate-300 leading-relaxed hover:text-rose-600"
                         >
                             <span className="material-symbols-outlined text-base text-slate-400 mt-0.5 flex-shrink-0">location_on</span>
                             <span className="flex-1">{accommodation.location}</span>
@@ -271,7 +271,7 @@ export const AccommodationDetailModal: React.FC<AccommodationDetailModalProps> =
                             <div className="flex flex-wrap gap-1.5">
                                 {facilities.map((f, i) => (
                                     <span key={i} className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-                                        <span className="material-symbols-outlined text-sm text-teal-600">check</span>
+                                        <span className="material-symbols-outlined text-sm text-rose-600">check</span>
                                         {f}
                                     </span>
                                 ))}

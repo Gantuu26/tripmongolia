@@ -222,9 +222,9 @@ export function PaymentDesktop({
                                     alignItems: 'center',
                                     padding: '16px 18px',
                                     margin: '12px 0',
-                                    background: 'var(--primary-tint, rgba(15,118,110,0.08))',
+                                    background: 'var(--primary-tint, rgba(255, 56, 92,0.08))',
                                     borderRadius: 12,
-                                    border: '1px dashed #0f766e',
+                                    border: '1px dashed #ff385c',
                                 }}
                             >
                                 <span
@@ -234,7 +234,7 @@ export function PaymentDesktop({
                                         gap: 6,
                                         fontSize: 14,
                                         fontWeight: 700,
-                                        color: 'var(--primary-dark, #115e59)',
+                                        color: 'var(--primary-dark, #e00b41)',
                                     }}
                                 >
                                     지금 결제하실 예약금
@@ -243,7 +243,7 @@ export function PaymentDesktop({
                                     style={{
                                         fontSize: 22,
                                         fontWeight: 700,
-                                        color: '#0f766e',
+                                        color: '#ff385c',
                                         letterSpacing: '-0.01em',
                                     }}
                                 >
@@ -437,14 +437,14 @@ export function PaymentDesktop({
                                             borderRadius: 12,
                                             background:
                                                 c.tone === 'ok'
-                                                    ? 'var(--primary-tint, rgba(15,118,110,0.08))'
+                                                    ? 'var(--primary-tint, rgba(255, 56, 92,0.08))'
                                                     : c.tone === 'warn'
                                                         ? '#fef3c7'
                                                         : '#fee2e2',
                                             border:
                                                 '1px solid ' +
                                                 (c.tone === 'ok'
-                                                    ? 'var(--primary-soft, rgba(15,118,110,0.18))'
+                                                    ? 'var(--primary-soft, rgba(255, 56, 92,0.18))'
                                                     : c.tone === 'warn'
                                                         ? '#fde68a'
                                                         : '#fecaca'),
@@ -465,7 +465,7 @@ export function PaymentDesktop({
                                                 fontWeight: 700,
                                                 color:
                                                     c.tone === 'ok'
-                                                        ? 'var(--primary-dark, #115e59)'
+                                                        ? 'var(--primary-dark, #e00b41)'
                                                         : c.tone === 'warn'
                                                             ? '#92400e'
                                                             : '#991b1b',
@@ -509,8 +509,8 @@ export function PaymentDesktop({
                                     height: 22,
                                     borderRadius: 6,
                                     border:
-                                        '1.5px solid ' + (agreeToTerms ? '#0f766e' : 'var(--border-strong)'),
-                                    background: agreeToTerms ? '#0f766e' : '#fff',
+                                        '1.5px solid ' + (agreeToTerms ? '#ff385c' : 'var(--border-strong)'),
+                                    background: agreeToTerms ? '#ff385c' : '#fff',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',

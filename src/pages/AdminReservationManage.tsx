@@ -550,7 +550,7 @@ const ReservationDetailModal = ({ reservation, onClose, onUpdate }: { reservatio
     const copyCustomerMessage = async (kind: 'itinerary' | 'contract' | 'final') => {
         const url = kind === 'contract' ? contractUrl : itineraryUrl;
         const title = kind === 'contract' ? '해외여행 계약서' : kind === 'itinerary' ? '확정 일정표' : '출발 전 최종 안내';
-        const body = `${reservation.customerName || '고객'} 님\n\n안녕하세요. Milkyway Japan입니다.\n${reservation.productName}의 ${title}를 준비해 드렸습니다.\n아래 링크에서 내용을 확인해 주시기 바랍니다.\n\n${url}\n\n궁금하신 점이나 수정을 원하시는 부분이 있으시면 이 메일로 회신해 주시기 바랍니다.`;
+        const body = `${reservation.customerName || '고객'} 님\n\n안녕하세요. Trip Mongolia입니다.\n${reservation.productName}의 ${title}를 준비해 드렸습니다.\n아래 링크에서 내용을 확인해 주시기 바랍니다.\n\n${url}\n\n궁금하신 점이나 수정을 원하시는 부분이 있으시면 이 메일로 회신해 주시기 바랍니다.`;
         await navigator.clipboard.writeText(body);
         setCopiedDocId(`${kind}-message`);
         setTimeout(() => setCopiedDocId(null), 1500);

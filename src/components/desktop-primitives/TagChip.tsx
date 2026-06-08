@@ -9,7 +9,7 @@ interface TagChipProps {
 }
 
 const toneBg: Record<TagTone, string> = {
-    premium: '#115e59',
+    premium: '#e00b41',
     hot: '#dc2626',
     new: '#0ea5e9',
     light: 'rgba(255,255,255,0.18)',

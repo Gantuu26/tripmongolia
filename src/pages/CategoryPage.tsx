@@ -64,7 +64,7 @@ export const CategoryPage: React.FC = () => {
     if (isLoadingCategory) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-slate-50">
-                <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-200 border-t-teal-500" />
+                <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-200 border-t-rose-500" />
             </div>
         );
     }
@@ -92,7 +92,7 @@ export const CategoryPage: React.FC = () => {
         heroTagline: category.landing_hero_tagline || undefined,
         heroTitle: category.landing_hero_title || category.name,
         heroSubtitle: category.landing_hero_subtitle || category.description || undefined,
-        accentColor: category.landing_accent_color || '#0f766e',
+        accentColor: category.landing_accent_color || '#ff385c',
         highlights: Array.isArray(category.landing_highlights) ? category.landing_highlights : [],
         productGridTitle: category.landing_product_grid_title || `${category.name} 투어`,
     };
@@ -127,11 +127,11 @@ export const CategoryPage: React.FC = () => {
     const collectionLd = {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
-        name: `${category.name} | Milkyway Japan`,
+        name: `${category.name} | Trip Mongolia`,
         description: seoDescription,
         url: seoUrl,
         inLanguage: 'ja',
-        isPartOf: { '@type': 'WebSite', name: 'Milkyway Japan', url: 'https://mongolryokou.com' },
+        isPartOf: { '@type': 'WebSite', name: 'Trip Mongolia', url: 'https://mongolryokou.com' },
     };
 
     return (

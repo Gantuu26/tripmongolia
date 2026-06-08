@@ -39,7 +39,7 @@ export function PCard({ p, onClick, layout = 'flex' }: PCardProps) {
     const hasImage = !!firstImg && (firstImg.startsWith('http') || firstImg.startsWith('/')) && firstImg !== '/og-image.jpg';
     const imageBackground = hasImage
         ? `url(${firstImg})`
-        : 'linear-gradient(135deg, #134e4a 0%, #115e59 50%, #0f766e 100%)';
+        : 'linear-gradient(135deg, #881337 0%, #e00b41 50%, #ff385c 100%)';
     const firstTag = p.tags?.[0];
     const hasOriginal = !!p.originalPrice && p.originalPrice > p.price;
 
@@ -167,7 +167,7 @@ export function PCard({ p, onClick, layout = 'flex' }: PCardProps) {
                                 ₩{p.originalPrice!.toLocaleString()}
                             </div>
                         )}
-                        <div style={{ fontSize: 18, fontWeight: 700, color: '#0f766e' }}>
+                        <div style={{ fontSize: 18, fontWeight: 700, color: '#ff385c' }}>
                             ₩{p.price.toLocaleString()}<span style={{ fontSize: 13 }}>〜</span>
                         </div>
                     </div>

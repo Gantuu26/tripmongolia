@@ -199,7 +199,7 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                                             onClick={() => toggle(accommodations, setAccommodations, a.v)}
                                             style={chipBtn(on)}
                                         >
-                                            <MatIcon name={a.icon} size={22} color={on ? '#0f766e' : 'var(--fg-3)'} />
+                                            <MatIcon name={a.icon} size={22} color={on ? '#ff385c' : 'var(--fg-3)'} />
                                             <span>{a.v}</span>
                                             {on && (
                                                 <span style={checkMark}>
@@ -223,7 +223,7 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                                             onClick={() => setVehicle(v.v)}
                                             style={{
                                                 padding: '16px 18px',
-                                                border: on ? '2px solid #0f766e' : '1px solid var(--border)',
+                                                border: on ? '2px solid #ff385c' : '1px solid var(--border)',
                                                 background: on ? 'var(--primary-tint)' : '#fff',
                                                 borderRadius: 14,
                                                 cursor: 'pointer',
@@ -234,7 +234,7 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                                                 gap: 14,
                                             }}
                                         >
-                                            <MatIcon name="directions_car" size={24} color={on ? '#0f766e' : 'var(--fg-3)'} />
+                                            <MatIcon name="directions_car" size={24} color={on ? '#ff385c' : 'var(--fg-3)'} />
                                             <div>
                                                 <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--fg-1)' }}>{v.v}</div>
                                                 <div style={{ fontSize: 12, color: 'var(--fg-5)', marginTop: 2 }}>{v.sub}</div>
@@ -248,7 +248,7 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                         <FormSection number="07" title="예산" hint="1인당 (만원)">
                             <div style={{ padding: '4px 2px' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 14, fontSize: 14 }}>
-                                    <span style={{ fontSize: 22, fontWeight: 700, color: '#0f766e', letterSpacing: '-0.01em' }}>
+                                    <span style={{ fontSize: 22, fontWeight: 700, color: '#ff385c', letterSpacing: '-0.01em' }}>
                                         {priceRange} 만원
                                     </span>
                                     <span style={{ color: 'var(--fg-5)' }}>예상</span>
@@ -260,7 +260,7 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                                     step={5}
                                     value={priceRange}
                                     onChange={(e) => setPriceRange(parseInt(e.target.value, 10))}
-                                    style={{ width: '100%', accentColor: '#0f766e' }}
+                                    style={{ width: '100%', accentColor: '#ff385c' }}
                                 />
                                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: 'var(--fg-5)', marginTop: 6 }}>
                                     <span>10 만원</span>
@@ -317,7 +317,7 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                                     fontSize: 12,
                                     fontWeight: 700,
                                     letterSpacing: '0.08em',
-                                    color: '#0f766e',
+                                    color: '#ff385c',
                                     textTransform: 'uppercase',
                                     marginBottom: 14,
                                 }}
@@ -338,7 +338,7 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                                     width: '100%',
                                     padding: '16px',
                                     marginTop: 20,
-                                    background: canSubmit ? '#0f766e' : 'var(--bg-muted)',
+                                    background: canSubmit ? '#ff385c' : 'var(--bg-muted)',
                                     color: canSubmit ? '#fff' : 'var(--fg-5)',
                                     border: 'none',
                                     borderRadius: 12,
@@ -346,7 +346,7 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                                     fontWeight: 700,
                                     cursor: canSubmit ? 'pointer' : 'not-allowed',
                                     fontFamily: 'inherit',
-                                    boxShadow: canSubmit ? '0 8px 20px -6px rgba(15,118,110,0.5)' : 'none',
+                                    boxShadow: canSubmit ? '0 8px 20px -6px rgba(255, 56, 92,0.5)' : 'none',
                                 }}
                             >
                                 {submitting ? '전송 중...' : '견적 요청하기'}
@@ -376,7 +376,7 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                         <div style={{ background: 'var(--bg-muted)', borderRadius: 16, padding: 18, fontSize: 12, color: 'var(--fg-4)', lineHeight: 1.7 }}>
                             <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fg-1)', marginBottom: 8 }}>전화 문의도 가능합니다</div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                                <MatIcon name="phone" size={16} color="#0f766e" />
+                                <MatIcon name="phone" size={16} color="#ff385c" />
                                 <a href="tel:+97695945838" style={{ color: 'var(--fg-2)', textDecoration: 'none', fontWeight: 700 }}>
                                     +976 9594 5838
                                 </a>
@@ -400,7 +400,7 @@ function FormSection({ number, title, hint, children }: { number: string; title:
                     style={{
                         fontSize: 13,
                         fontWeight: 700,
-                        color: '#0f766e',
+                        color: '#ff385c',
                         fontFamily: 'ui-monospace, Menlo, monospace',
                         letterSpacing: '0.04em',
                     }}
@@ -545,7 +545,7 @@ function chipBtn(on: boolean): CSSProperties {
         position: 'relative',
         padding: '20px 16px',
         background: on ? 'var(--primary-tint)' : '#fff',
-        border: on ? '2px solid #0f766e' : '1px solid var(--border)',
+        border: on ? '2px solid #ff385c' : '1px solid var(--border)',
         borderRadius: 14,
         cursor: 'pointer',
         fontFamily: 'inherit',
@@ -567,7 +567,7 @@ const checkMark: CSSProperties = {
     width: 20,
     height: 20,
     borderRadius: 999,
-    background: '#0f766e',
+    background: '#ff385c',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

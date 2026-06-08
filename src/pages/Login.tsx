@@ -71,7 +71,7 @@ export const Login: React.FC = () => {
             {/* Content Content - Centered */}
             <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-6">
                 <div className="mb-8 animate-fade-in-up">
-                    <img src={logo} alt="몽골리아 은하수" className="h-32 mb-6 mx-auto object-contain drop-shadow-xl" loading="lazy" decoding="async" />
+                    <img src={logo} alt="Trip Mongolia" className="h-32 mb-6 mx-auto object-contain drop-shadow-xl" loading="lazy" decoding="async" />
 
                     <h1 className="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-2 drop-shadow-xl">
                         {t('auth.title_line1')}<br />

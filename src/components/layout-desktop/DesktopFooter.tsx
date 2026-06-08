@@ -79,7 +79,7 @@ export function DesktopFooter({ contentWidth = 1280 }: DesktopFooterProps) {
                                 fontSize: 13,
                                 fontWeight: 700,
                                 letterSpacing: '0.1em',
-                                color: '#5eead4',
+                                color: '#fda4af',
                                 textTransform: 'uppercase',
                                 marginBottom: 6,
                             }}
@@ -99,7 +99,7 @@ export function DesktopFooter({ contentWidth = 1280 }: DesktopFooterProps) {
                             onClick={() => navigate('/custom-estimate')}
                             style={{
                                 padding: '14px 22px',
-                                background: '#0f766e',
+                                background: '#ff385c',
                                 color: '#fff',
                                 border: 'none',
                                 borderRadius: 999,
@@ -152,8 +152,8 @@ export function DesktopFooter({ contentWidth = 1280 }: DesktopFooterProps) {
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
                         <img src={logoSquare} alt="" style={{ height: 44, width: 44, objectFit: 'contain' }} />
                         <div>
-                            <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--fg-1)' }}>Milkyway Japan</div>
-                            <div style={{ fontSize: 11, color: 'var(--fg-5)', marginTop: 2 }}>Mongolia Milky Way (SUUN ZAM)</div>
+                            <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--fg-1)' }}>Trip Mongolia</div>
+                            <div style={{ fontSize: 11, color: 'var(--fg-5)', marginTop: 2 }}>Trip Mongolia (SUUN ZAM)</div>
                         </div>
                     </div>
                     <div style={{ fontSize: 12, color: 'var(--fg-4)', lineHeight: 1.75 }}>
@@ -195,7 +195,7 @@ export function DesktopFooter({ contentWidth = 1280 }: DesktopFooterProps) {
                                         type="button"
                                         onClick={item.onClick ? item.onClick : () => item.path && navigate(item.path)}
                                         style={footerLinkBtn}
-                                        onMouseEnter={(e) => (e.currentTarget.style.color = '#0f766e')}
+                                        onMouseEnter={(e) => (e.currentTarget.style.color = '#ff385c')}
                                         onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--fg-4)')}
                                     >
                                         {item.label}
@@ -212,7 +212,7 @@ export function DesktopFooter({ contentWidth = 1280 }: DesktopFooterProps) {
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, marginBottom: 16 }}>
                         <div>
                             <div style={{ fontWeight: 700, color: 'var(--fg-3)', marginBottom: 6 }}>[몽골 본사]</div>
-                            <div>상호: Mongolia Milky Way (SUUN ZAM) | 대표자: Davaasuren Bilguun</div>
+                            <div>상호: Trip Mongolia (SUUN ZAM) | 대표자: Davaasuren Bilguun</div>
                             <div>사업자등록번호: 9011640064 | 관광사업등록번호: 6124313</div>
                             <div>전화: +976 9594 5838 | Tel: +976-8010-7766</div>
                             <div>소재지: 울란바토르 바양주르흐구 13동 DACO센터 3층 306</div>
@@ -233,7 +233,7 @@ export function DesktopFooter({ contentWidth = 1280 }: DesktopFooterProps) {
                             justifyContent: 'space-between',
                         }}
                     >
-                        <div>© 2026 Mongolia Milky Way. All rights reserved.</div>
+                        <div>© 2026 Trip Mongolia. All rights reserved.</div>
                         <div style={{ display: 'flex', gap: 18 }}>
                             <button type="button" onClick={() => navigate('/about')} style={legalLinkBtn}>
                                 회사 소개

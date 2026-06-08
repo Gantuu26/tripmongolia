@@ -100,7 +100,7 @@ export const ReservationStatus: React.FC = () => {
                         <div className="h-px bg-gray-50 dark:bg-zinc-700"></div>
                         <div className="flex flex-col gap-1">
                             <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">예금주</span>
-                            <p className="text-base font-bold text-[#0e1a18] dark:text-white">(주)몽골리아 은하수</p>
+                            <p className="text-base font-bold text-[#0e1a18] dark:text-white">(주)Trip Mongolia</p>
                         </div>
                     </div>
 

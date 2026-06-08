@@ -129,16 +129,16 @@ export function CalendarBig({ value, onChange, nights }: CalendarBigProps) {
                                 padding: 0,
                                 position: 'relative',
                                 background: isStart
-                                    ? '#0f766e'
+                                    ? '#ff385c'
                                     : ranged
-                                        ? 'var(--primary-soft, rgba(15,118,110,0.18))'
+                                        ? 'var(--primary-soft, rgba(255, 56, 92,0.18))'
                                         : 'transparent',
                                 color: past
                                     ? 'var(--fg-6)'
                                     : isStart
                                         ? '#fff'
                                         : ranged
-                                            ? 'var(--primary-dark, #115e59)'
+                                            ? 'var(--primary-dark, #e00b41)'
                                             : dow === 0
                                                 ? '#dc2626'
                                                 : dow === 6
@@ -165,7 +165,7 @@ export function CalendarBig({ value, onChange, nights }: CalendarBigProps) {
                                         fontWeight: 700,
                                         padding: '1px 5px',
                                         background: 'rgba(255,255,255,0.95)',
-                                        color: 'var(--primary-dark, #115e59)',
+                                        color: 'var(--primary-dark, #e00b41)',
                                         borderRadius: 4,
                                         letterSpacing: '0.04em',
                                     }}
@@ -192,7 +192,7 @@ export function CalendarBig({ value, onChange, nights }: CalendarBigProps) {
             >
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                     <span
-                        style={{ width: 12, height: 12, borderRadius: 999, background: '#0f766e' }}
+                        style={{ width: 12, height: 12, borderRadius: 999, background: '#ff385c' }}
                     />{' '}
                     출발일
                 </span>
@@ -202,7 +202,7 @@ export function CalendarBig({ value, onChange, nights }: CalendarBigProps) {
                             width: 12,
                             height: 12,
                             borderRadius: 3,
-                            background: 'var(--primary-soft, rgba(15,118,110,0.18))',
+                            background: 'var(--primary-soft, rgba(255, 56, 92,0.18))',
                         }}
                     />{' '}
                     여행 기간

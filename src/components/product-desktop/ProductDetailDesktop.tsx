@@ -334,7 +334,7 @@ export function ProductDetailDesktop({
                                     border: '1px solid var(--border-subtle)',
                                 }}
                             >
-                                <MatIcon name={s.i} size={20} color="#0f766e" />
+                                <MatIcon name={s.i} size={20} color="#ff385c" />
                             </div>
                             <div>
                                 <div style={{ fontSize: 11, color: 'var(--fg-5)' }}>{s.k}</div>
@@ -375,8 +375,8 @@ export function ProductDetailDesktop({
                                         cursor: 'pointer',
                                         fontSize: 13,
                                         fontWeight: on ? 700 : 500,
-                                        color: on ? '#0f766e' : 'var(--fg-4)',
-                                        borderBottom: on ? '2px solid #0f766e' : '2px solid transparent',
+                                        color: on ? '#ff385c' : 'var(--fg-4)',
+                                        borderBottom: on ? '2px solid #ff385c' : '2px solid transparent',
                                         marginBottom: -1,
                                         fontFamily: 'inherit',
                                         whiteSpace: 'nowrap',
@@ -484,10 +484,10 @@ export function ProductDetailDesktop({
                                 )}
                             </div>
                             <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginBottom: 18 }}>
-                                <span style={{ fontSize: 32, fontWeight: 700, color: '#0f766e', letterSpacing: '-0.02em' }}>
+                                <span style={{ fontSize: 32, fontWeight: 700, color: '#ff385c', letterSpacing: '-0.02em' }}>
                                     ₩{pricePerPerson.toLocaleString()}
                                 </span>
-                                <span style={{ fontSize: 16, color: '#0f766e', fontWeight: 700 }}>~</span>
+                                <span style={{ fontSize: 16, color: '#ff385c', fontWeight: 700 }}>~</span>
                             </div>
 
                             {sortedPricingOptions.length > 0 ? (
@@ -574,7 +574,7 @@ export function ProductDetailDesktop({
                                     width: '100%',
                                     padding: '16px',
                                     marginTop: 14,
-                                    background: '#0f766e',
+                                    background: '#ff385c',
                                     color: '#fff',
                                     border: 'none',
                                     borderRadius: 12,
@@ -582,7 +582,7 @@ export function ProductDetailDesktop({
                                     fontWeight: 700,
                                     cursor: 'pointer',
                                     fontFamily: 'inherit',
-                                    boxShadow: '0 8px 20px -6px rgba(15,118,110,0.5)',
+                                    boxShadow: '0 8px 20px -6px rgba(255, 56, 92,0.5)',
                                 }}
                             >
                                 예약하기
@@ -655,7 +655,7 @@ export function ProductDetailDesktop({
                                                     flexShrink: 0,
                                                 }}
                                             >
-                                                <MatIcon name={c.i} size={16} color="#0f766e" />
+                                                <MatIcon name={c.i} size={16} color="#ff385c" />
                                             </div>
                                             <div>
                                                 <div style={{ fontWeight: 700, color: 'var(--fg-1)' }}>{c.t}</div>
@@ -737,7 +737,7 @@ export function ProductDetailDesktop({
                         </div>
                         <div style={{ textAlign: 'right' }}>
                             <div style={{ fontSize: 11, color: 'var(--fg-5)' }}>합계</div>
-                            <div style={{ fontSize: 20, fontWeight: 700, color: '#0f766e', letterSpacing: '-0.01em' }}>
+                            <div style={{ fontSize: 20, fontWeight: 700, color: '#ff385c', letterSpacing: '-0.01em' }}>
                                 ₩{total.toLocaleString()}
                             </div>
                         </div>
@@ -767,7 +767,7 @@ export function ProductDetailDesktop({
                             onClick={handleBook}
                             style={{
                                 padding: '14px 32px',
-                                background: '#0f766e',
+                                background: '#ff385c',
                                 color: '#fff',
                                 border: 'none',
                                 borderRadius: 12,
@@ -775,7 +775,7 @@ export function ProductDetailDesktop({
                                 fontWeight: 700,
                                 cursor: 'pointer',
                                 fontFamily: 'inherit',
-                                boxShadow: '0 8px 20px -6px rgba(15,118,110,0.5)',
+                                boxShadow: '0 8px 20px -6px rgba(255, 56, 92,0.5)',
                             }}
                         >
                             예약하기
@@ -815,7 +815,7 @@ function Section({ id, title, eyebrow, children }: { id: string; title: string; 
                         fontSize: 11,
                         fontWeight: 700,
                         letterSpacing: '0.12em',
-                        color: '#0f766e',
+                        color: '#ff385c',
                         textTransform: 'uppercase',
                         marginBottom: 8,
                     }}
@@ -842,7 +842,7 @@ function Section({ id, title, eyebrow, children }: { id: string; title: string; 
 function GallerySection({ gallery, onOpen }: { gallery: string[]; onOpen: () => void }) {
     // Soft brand-color gradient — used when admin hasn't uploaded any photos yet so
     // we never render a broken-image black box.
-    const fallbackGradient = 'linear-gradient(135deg, #134e4a 0%, #115e59 50%, #0f766e 100%)';
+    const fallbackGradient = 'linear-gradient(135deg, #881337 0%, #e00b41 50%, #ff385c 100%)';
     const tile = (img: string | undefined, extra: CSSProperties = {}): CSSProperties => ({
         backgroundImage: img ? `url(${img})` : fallbackGradient,
         backgroundSize: 'cover',
@@ -1241,13 +1241,13 @@ function OptionsBlock({ product }: { product: TourProduct }) {
             {pricing.length > 0 && (
                 <div>
                     <h3 style={subSectionHeading}>
-                        <MatIcon name="payments" size={20} color="#0f766e" /> 인원별 요금
+                        <MatIcon name="payments" size={20} color="#ff385c" /> 인원별 요금
                     </h3>
                     <div style={{ display: 'grid', gridTemplateColumns: `repeat(${Math.min(pricing.length, 4)}, 1fr)`, gap: 12 }}>
                         {pricing.map((p, i) => (
                             <div key={i} style={pricingCardStyle}>
                                 <div style={{ fontSize: 12, color: 'var(--fg-5)', marginBottom: 4 }}>{p.people}명</div>
-                                <div style={{ fontSize: 22, fontWeight: 700, color: '#0f766e', letterSpacing: '-0.01em' }}>
+                                <div style={{ fontSize: 22, fontWeight: 700, color: '#ff385c', letterSpacing: '-0.01em' }}>
                                     ₩{p.pricePerPerson.toLocaleString()}
                                     <span style={{ fontSize: 12, color: 'var(--fg-5)', fontWeight: 500, marginLeft: 4 }}>/ 인</span>
                                 </div>
@@ -1270,7 +1270,7 @@ function OptionsBlock({ product }: { product: TourProduct }) {
             {accommodations.length > 0 && (
                 <div>
                     <h3 style={subSectionHeading}>
-                        <MatIcon name="hotel" size={20} color="#0f766e" /> 숙박 옵션
+                        <MatIcon name="hotel" size={20} color="#ff385c" /> 숙박 옵션
                     </h3>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
                         {accommodations.map((a) => (
@@ -1311,7 +1311,7 @@ function OptionsBlock({ product }: { product: TourProduct }) {
             {vehicles.length > 0 && (
                 <div>
                     <h3 style={subSectionHeading}>
-                        <MatIcon name="directions_car" size={20} color="#0f766e" /> 차량 옵션
+                        <MatIcon name="directions_car" size={20} color="#ff385c" /> 차량 옵션
                     </h3>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
                         {vehicles.map((v) => (
@@ -1383,7 +1383,7 @@ function priceModifierStyle(modifier: number): CSSProperties {
         marginTop: 8,
         fontSize: 13,
         fontWeight: 700,
-        color: modifier > 0 ? '#0f766e' : '#16a34a',
+        color: modifier > 0 ? '#ff385c' : '#16a34a',
     };
 }
 
@@ -1572,8 +1572,8 @@ function DayTabs({ days }: { days: DayGroup[] }) {
                             transition: 'color 150ms',
                         }}
                         onMouseEnter={(e) => {
-                            e.currentTarget.style.color = '#0f766e';
-                            e.currentTarget.style.borderBottomColor = '#0f766e';
+                            e.currentTarget.style.color = '#ff385c';
+                            e.currentTarget.style.borderBottomColor = '#ff385c';
                         }}
                         onMouseLeave={(e) => {
                             e.currentTarget.style.color = 'var(--fg-3)';
@@ -1945,7 +1945,7 @@ function DaySection({
                                     key={i}
                                     style={{ fontSize: 14, color: 'var(--fg-2)' }}
                                 >
-                                    <span style={{ color: '#0f766e', fontWeight: 700 }}>
+                                    <span style={{ color: '#ff385c', fontWeight: 700 }}>
                                         [{m.k}]
                                     </span>{' '}
                                     <span style={{ fontWeight: 600 }}>{m.v}</span>
@@ -1998,7 +1998,7 @@ function LocationHeaderRow({
                         width: 9,
                         height: 9,
                         borderRadius: 999,
-                        background: '#0f766e',
+                        background: '#ff385c',
                         boxShadow: '0 0 0 2px #fff',
                     }}
                 />
@@ -2094,8 +2094,8 @@ function SpineRow({
                             height: 9,
                             borderRadius: 999,
                             // Brand teal — single primary color per design system
-                            // (CLAUDE.md 9.5: 'teal #0f766e, no secondary colors').
-                            background: '#0f766e',
+                            // (CLAUDE.md 9.5: 'teal #ff385c, no secondary colors').
+                            background: '#ff385c',
                             // Smaller white halo (2px) so the spine line stays
                             // visible right up to the dot edges.
                             boxShadow: '0 0 0 2px #fff',
@@ -2468,18 +2468,18 @@ function GuideCard() {
                     width: 120,
                     height: 120,
                     borderRadius: 999,
-                    background: 'linear-gradient(135deg, #0f766e 0%, #115e59 100%)',
+                    background: 'linear-gradient(135deg, #ff385c 0%, #e00b41 100%)',
                     color: '#fff',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    boxShadow: '0 10px 30px -10px rgba(15,118,110,0.4)',
+                    boxShadow: '0 10px 30px -10px rgba(255, 56, 92,0.4)',
                 }}
             >
                 <MatIcon name="translate" size={56} color="#fff" />
             </div>
             <div>
-                <div style={{ fontSize: 12, fontWeight: 700, color: '#0f766e', letterSpacing: '0.08em', marginBottom: 6 }}>YOUR GUIDE</div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: '#ff385c', letterSpacing: '0.08em', marginBottom: 6 }}>YOUR GUIDE</div>
                 <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--fg-1)', letterSpacing: '-0.01em', marginBottom: 10 }}>
                     {intro.title}
                 </div>
@@ -2562,8 +2562,8 @@ function LocationBlock({ product }: { product: TourProduct }) {
                                 justifyContent: 'center',
                                 fontSize: 13,
                                 fontWeight: 700,
-                                color: '#0f766e',
-                                border: '1.5px solid #0f766e',
+                                color: '#ff385c',
+                                border: '1.5px solid #ff385c',
                                 flexShrink: 0,
                             }}
                         >
@@ -2604,7 +2604,7 @@ function IncludedBlock({ product }: { product: TourProduct }) {
                         gap: 8,
                     }}
                 >
-                    <MatIcon name="check_circle" size={20} filled color="#0f766e" /> 포함사항
+                    <MatIcon name="check_circle" size={20} filled color="#ff385c" /> 포함사항
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px 24px' }}>
                     {inc.map((x, i) => (
@@ -2619,7 +2619,7 @@ function IncludedBlock({ product }: { product: TourProduct }) {
                                 lineHeight: 1.5,
                             }}
                         >
-                            <MatIcon name="check_circle" size={18} filled color="#0f766e" style={{ flexShrink: 0, marginTop: 1 }} />
+                            <MatIcon name="check_circle" size={18} filled color="#ff385c" style={{ flexShrink: 0, marginTop: 1 }} />
                             <span>{x}</span>
                         </div>
                     ))}
@@ -2733,7 +2733,7 @@ function ReviewsBlockV2({ reviews, rating, count }: { reviews: ReviewLike[]; rat
                                     style={{
                                         width: `${d.pct}%`,
                                         height: '100%',
-                                        background: 'linear-gradient(to right, #0f766e, #115e59)',
+                                        background: 'linear-gradient(to right, #ff385c, #e00b41)',
                                         borderRadius: 999,
                                     }}
                                 />
@@ -2903,8 +2903,8 @@ function ReviewCardLink({ review: r }: { review: ReviewLike }) {
                         width: 40,
                         height: 40,
                         borderRadius: 999,
-                        background: 'var(--primary-tint, rgba(15,118,110,0.08))',
-                        color: '#0f766e',
+                        background: 'var(--primary-tint, rgba(255, 56, 92,0.08))',
+                        color: '#ff385c',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -2964,13 +2964,13 @@ function ReviewCardLink({ review: r }: { review: ReviewLike }) {
                         marginTop: 14,
                         fontSize: 12,
                         fontWeight: 700,
-                        color: '#0f766e',
+                        color: '#ff385c',
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: 4,
                     }}
                 >
-                    전문 보기 <MatIcon name="arrow_forward" size={14} color="#0f766e" />
+                    전문 보기 <MatIcon name="arrow_forward" size={14} color="#ff385c" />
                 </div>
             )}
         </article>
@@ -3042,7 +3042,7 @@ function FAQBlock({ product }: { product: TourProduct }) {
                             <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--fg-1)', letterSpacing: '-0.01em' }}>
                                 <span
                                     style={{
-                                        color: '#0f766e',
+                                        color: '#ff385c',
                                         marginRight: 10,
                                         fontWeight: 700,
                                         fontFamily: 'ui-monospace, Menlo, monospace',
@@ -3096,7 +3096,7 @@ function PricingTierSelector({
                             onClick={() => onSelect(opt.people)}
                             style={{
                                 padding: '10px 12px',
-                                border: on ? '2px solid #0f766e' : '1px solid var(--border)',
+                                border: on ? '2px solid #ff385c' : '1px solid var(--border)',
                                 background: on ? 'var(--primary-tint)' : '#fff',
                                 borderRadius: 10,
                                 cursor: 'pointer',
@@ -3205,7 +3205,7 @@ function RelatedTours({ productId, category }: { productId: string; category: st
                         style={{
                             fontSize: 11,
                             fontWeight: 700,
-                            color: '#0f766e',
+                            color: '#ff385c',
                             letterSpacing: '0.12em',
                             textTransform: 'uppercase',
                             marginBottom: 8,

@@ -91,7 +91,7 @@ export function ReviewSectionDesktop({ contentWidth = 1280 }: ReviewSectionProps
                                         height: 44,
                                         borderRadius: 999,
                                         background: 'var(--primary-tint)',
-                                        color: '#0f766e',
+                                        color: '#ff385c',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',

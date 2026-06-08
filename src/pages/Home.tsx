@@ -34,7 +34,7 @@ export const Home: React.FC = () => {
                     "@context": "https://schema.org",
                     "@type": "TravelAgency",
                     "@id": "https://mongolryokou.com/#organization",
-                    "name": "Milkyway Japan",
+                    "name": "Trip Mongolia",
                     "alternateName": "밀키웨이 재팬",
                     "image": "https://mongolryokou.com/og-image.jpg",
                     "url": "https://mongolryokou.com",
@@ -55,7 +55,7 @@ export const Home: React.FC = () => {
                     "@type": "WebSite",
                     "@id": "https://mongolryokou.com/#website",
                     "url": "https://mongolryokou.com",
-                    "name": "Milkyway Japan | 몽골여행 전문",
+                    "name": "Trip Mongolia | 몽골여행 전문",
                     "publisher": { "@id": "https://mongolryokou.com/#organization" },
                     "inLanguage": "ja",
                     "potentialAction": {
@@ -84,7 +84,7 @@ export const Home: React.FC = () => {
                 <section className="sr-only">
                     <h1>몽골투어・몽골여행 전문 현지 여행사</h1>
                     <p>
-                        Milkyway Japan은 한국어 가이드 동행으로 안심할 수 있는 몽골투어를 안내해 드립니다. 승마여행, 고비사막, 테렐지 국립공원 등 다채로운 플랜을 준비하고 있습니다.
+                        Trip Mongolia은 한국어 가이드 동행으로 안심할 수 있는 몽골투어를 안내해 드립니다. 승마여행, 고비사막, 테렐지 국립공원 등 다채로운 플랜을 준비하고 있습니다.
                     </p>
                 </section>
 
@@ -123,7 +123,7 @@ export const Home: React.FC = () => {
             <section className="sr-only">
                 <h1>몽골투어・몽골여행 전문 현지 여행사</h1>
                 <p>
-                    Milkyway Japan은 한국어 가이드 동행으로 안심할 수 있는 몽골투어를 안내해 드립니다. 승마여행, 고비사막, 테렐지 국립공원 등 다채로운 플랜을 준비하고 있습니다.
+                    Trip Mongolia은 한국어 가이드 동행으로 안심할 수 있는 몽골투어를 안내해 드립니다. 승마여행, 고비사막, 테렐지 국립공원 등 다채로운 플랜을 준비하고 있습니다.
                 </p>
             </section>
 

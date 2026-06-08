@@ -215,7 +215,7 @@ const HighlightCardView: React.FC<{ card: HighlightCard; onClick?: () => void }>
 );
 
 // ─── Highlight Section ────────────────────────────────────
-const HighlightSectionView: React.FC<{ section: HighlightSection; accent?: string }> = ({ section, accent = '#0f766e' }) => {
+const HighlightSectionView: React.FC<{ section: HighlightSection; accent?: string }> = ({ section, accent = '#ff385c' }) => {
     const navigate = useNavigate();
     return (
         <section className="py-6 sm:py-8">
@@ -259,7 +259,7 @@ export const CategoryLanding: React.FC<Props> = ({
     headerTitle,
 }) => {
     const navigate = useNavigate();
-    const accent = content.accentColor || '#0f766e';
+    const accent = content.accentColor || '#ff385c';
 
     return (
         <div className="bg-background-light dark:bg-background-dark font-display text-[#0e1a18] dark:text-white min-h-screen pb-24">

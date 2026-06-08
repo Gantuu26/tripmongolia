@@ -108,17 +108,17 @@ export const TravelGuide: React.FC = () => {
     const collectionLd = {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
-        name: '몽골여행 가이드 | Milkyway Japan',
+        name: '몽골여행 가이드 | Trip Mongolia',
         description: guideDescription,
         url: 'https://mongolryokou.com/travel-guide',
         inLanguage: 'ja',
-        isPartOf: { '@type': 'WebSite', name: 'Milkyway Japan', url: 'https://mongolryokou.com' },
+        isPartOf: { '@type': 'WebSite', name: 'Trip Mongolia', url: 'https://mongolryokou.com' },
     };
 
     return (
         <div className="bg-[#f8f7f8] dark:bg-background-dark text-text-primary dark:text-white pb-24 min-h-screen font-display">
             <SEO
-                title={`${t('travel_guide.title')} | Milkyway Japan`}
+                title={`${t('travel_guide.title')} | Trip Mongolia`}
                 description={guideDescription}
                 keywords="몽골여행 가이드, 몽골 정보, 몽골 문화, 몽골 요리, 몽골여행 준비"
                 canonical="/travel-guide"
@@ -208,7 +208,7 @@ export const TravelGuide: React.FC = () => {
                                         </div>
                                     )}
                                     {/* Mint Brand Gradient at Bottom */}
-                                    <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#0f766e]/85 via-[#0f766e]/25 to-transparent"></div>
+                                    <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#ff385c]/85 via-[#ff385c]/25 to-transparent"></div>
                                     <div className="absolute top-3 left-3 bg-white text-primary text-[11px] font-bold px-2.5 py-1 rounded-lg shadow-sm">
                                         {t('travel_guide.popular')}
                                     </div>
@@ -261,7 +261,7 @@ export const TravelGuide: React.FC = () => {
                                             src={item.image} loading="lazy" decoding="async" />
                                     )}
                                     {/* Mint accent at bottom of thumbnail */}
-                                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0f766e]/55 to-transparent pointer-events-none"></div>
+                                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#ff385c]/55 to-transparent pointer-events-none"></div>
                                 </div>
                             </div>
                         ))

@@ -67,8 +67,8 @@ export function DesktopHeader({ contentWidth = 1280 }: DesktopHeaderProps) {
                     }}
                 >
                     <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: '#5eead4' }}>
-                            <MatIcon name="verified" size={14} filled color="#5eead4" /> 한국어 완벽 지원·현지 여행사
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: '#fda4af' }}>
+                            <MatIcon name="verified" size={14} filled color="#fda4af" /> 한국어 완벽 지원·현지 여행사
                         </span>
                         <span style={{ opacity: 0.4 }}>|</span>
                         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
@@ -102,9 +102,9 @@ export function DesktopHeader({ contentWidth = 1280 }: DesktopHeaderProps) {
                     onClick={() => navigate('/')}
                     style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 12 }}
                 >
-                    <img src={logoSquare} alt="Milkyway Japan" style={{ height: 48, width: 48, objectFit: 'contain' }} />
+                    <img src={logoSquare} alt="Trip Mongolia" style={{ height: 48, width: 48, objectFit: 'contain' }} />
                     <div style={{ textAlign: 'left', lineHeight: 1.15 }}>
-                        <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--fg-1)', letterSpacing: '-0.01em' }}>Milkyway Japan</div>
+                        <div style={{ fontSize: 17, fontWeight: 700, color: 'var(--fg-1)', letterSpacing: '-0.01em' }}>Trip Mongolia</div>
                         <div style={{ fontSize: 11, color: 'var(--fg-5)', marginTop: 2 }}>몽골 여행·몽골 투어 전문</div>
                     </div>
                 </button>
@@ -154,7 +154,7 @@ export function DesktopHeader({ contentWidth = 1280 }: DesktopHeaderProps) {
                     <button
                         type="submit"
                         style={{
-                            background: '#0f766e',
+                            background: '#ff385c',
                             color: '#fff',
                             border: 'none',
                             borderRadius: 999,
@@ -184,7 +184,7 @@ export function DesktopHeader({ contentWidth = 1280 }: DesktopHeaderProps) {
                             alignItems: 'center',
                             gap: 8,
                             padding: '10px 18px',
-                            background: '#0f766e',
+                            background: '#ff385c',
                             color: '#fff',
                             border: 'none',
                             borderRadius: 999,
@@ -192,7 +192,7 @@ export function DesktopHeader({ contentWidth = 1280 }: DesktopHeaderProps) {
                             fontWeight: 700,
                             cursor: 'pointer',
                             fontFamily: 'inherit',
-                            boxShadow: '0 6px 18px -6px rgba(15,118,110,0.45)',
+                            boxShadow: '0 6px 18px -6px rgba(255, 56, 92,0.45)',
                         }}
                     >
                         <MatIcon name="chat_bubble" size={16} filled color="#fff" /> 무료 상담
@@ -240,7 +240,7 @@ export function DesktopHeader({ contentWidth = 1280 }: DesktopHeaderProps) {
                                             left: 18,
                                             right: 18,
                                             height: 2,
-                                            background: '#0f766e',
+                                            background: '#ff385c',
                                         }}
                                     />
                                 )}
@@ -252,7 +252,7 @@ export function DesktopHeader({ contentWidth = 1280 }: DesktopHeaderProps) {
                             href="tel:+97695945838"
                             style={{ display: 'inline-flex', alignItems: 'center', gap: 6, textDecoration: 'none' }}
                         >
-                            <MatIcon name="phone" size={16} color="#0f766e" />
+                            <MatIcon name="phone" size={16} color="#ff385c" />
                             <span style={{ fontWeight: 700, color: 'var(--fg-1)' }}>+976 9594 5838</span>
                         </a>
                     </div>

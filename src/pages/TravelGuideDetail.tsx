@@ -215,11 +215,11 @@ export const TravelGuideDetail: React.FC = () => {
         dateModified: magazine.updatedAt || magazine.createdAt,
         author: {
             '@type': magazine.author ? 'Person' : 'Organization',
-            name: magazine.author || 'Milkyway Japan',
+            name: magazine.author || 'Trip Mongolia',
         },
         publisher: {
             '@type': 'Organization',
-            name: 'Milkyway Japan',
+            name: 'Trip Mongolia',
             logo: {
                 '@type': 'ImageObject',
                 url: 'https://mongolryokou.com/favicon.png',
@@ -276,7 +276,7 @@ export const TravelGuideDetail: React.FC = () => {
                 </button>
 
                 {/* Mint Brand Gradient at Bottom */}
-                <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-[#0f766e]/90 via-[#0f766e]/35 to-transparent"></div>
+                <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-[#ff385c]/90 via-[#ff385c]/35 to-transparent"></div>
                 <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent"></div>
 
                 <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 text-white">

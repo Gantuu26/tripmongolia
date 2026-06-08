@@ -226,7 +226,7 @@ export function TravelMatesDesktop({ contentWidth = 1280 }: { contentWidth?: num
                             onClick={() => navigate('/travel-mates/write')}
                             style={{
                                 padding: '14px 24px',
-                                background: '#0f766e',
+                                background: '#ff385c',
                                 color: '#fff',
                                 border: 'none',
                                 borderRadius: 12,
@@ -237,7 +237,7 @@ export function TravelMatesDesktop({ contentWidth = 1280 }: { contentWidth?: num
                                 display: 'inline-flex',
                                 alignItems: 'center',
                                 gap: 8,
-                                boxShadow: '0 8px 20px -6px rgba(15,118,110,0.45)',
+                                boxShadow: '0 8px 20px -6px rgba(255, 56, 92,0.45)',
                             }}
                         >
                             <MatIcon name="add" size={18} color="#fff" />
@@ -315,7 +315,7 @@ export function TravelMatesDesktop({ contentWidth = 1280 }: { contentWidth?: num
                                     display: 'inline-flex',
                                     alignItems: 'center',
                                     gap: 8,
-                                    boxShadow: on ? '0 4px 14px -4px rgba(15,118,110,0.4)' : 'none',
+                                    boxShadow: on ? '0 4px 14px -4px rgba(255, 56, 92,0.4)' : 'none',
                                 }}
                             >
                                 <span>{r.icon}</span>
@@ -383,7 +383,7 @@ export function TravelMatesDesktop({ contentWidth = 1280 }: { contentWidth?: num
                 <div
                     style={{
                         padding: '36px 48px',
-                        background: 'linear-gradient(120deg, #0f766e 0%, #115e59 100%)',
+                        background: 'linear-gradient(120deg, #ff385c 0%, #e00b41 100%)',
                         borderRadius: 24,
                         color: '#fff',
                         display: 'grid',
@@ -406,7 +406,7 @@ export function TravelMatesDesktop({ contentWidth = 1280 }: { contentWidth?: num
                         }}
                     />
                     <div style={{ position: 'relative' }}>
-                        <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', color: '#5eead4', textTransform: 'uppercase', marginBottom: 8 }}>
+                        <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.12em', color: '#fda4af', textTransform: 'uppercase', marginBottom: 8 }}>
                             Be the host
                         </div>
                         <div style={{ fontSize: 24, fontWeight: 700, lineHeight: 1.3, letterSpacing: '-0.01em' }}>
@@ -457,7 +457,7 @@ function regionMatch(postRegion: string | undefined, pillId: string): boolean {
 function MateCard({ p, onClick }: { p: MatePost; onClick: () => void }) {
     const pct = p.capacity > 0 ? (p.joined / p.capacity) * 100 : 0;
     const statusInfo = {
-        open: { label: '모집 중', bg: '#0f766e' },
+        open: { label: '모집 중', bg: '#ff385c' },
         almost: { label: '잔여석 얼마 안 남음', bg: '#dc2626' },
         full: { label: '매칭 완료', bg: 'var(--fg-4)' },
     }[p.status];
@@ -649,7 +649,7 @@ function MateCard({ p, onClick }: { p: MatePost; onClick: () => void }) {
                                     style={{
                                         fontSize: 11,
                                         fontWeight: 700,
-                                        color: p.status === 'full' ? 'var(--fg-5)' : '#0f766e',
+                                        color: p.status === 'full' ? 'var(--fg-5)' : '#ff385c',
                                     }}
                                 >
                                     {p.status === 'full' ? '모집 종료' : `잔여 ${p.capacity - p.joined}석`}
@@ -665,7 +665,7 @@ function MateCard({ p, onClick }: { p: MatePost; onClick: () => void }) {
                                                 ? 'var(--fg-5)'
                                                 : p.status === 'almost'
                                                     ? 'linear-gradient(to right, #dc2626, #ef4444)'
-                                                    : 'linear-gradient(to right, #0f766e, #115e59)',
+                                                    : 'linear-gradient(to right, #ff385c, #e00b41)',
                                         borderRadius: 999,
                                     }}
                                 />
@@ -690,7 +690,7 @@ function MateCard({ p, onClick }: { p: MatePost; onClick: () => void }) {
                                     height: 28,
                                     borderRadius: 999,
                                     background: 'var(--primary-tint)',
-                                    color: '#0f766e',
+                                    color: '#ff385c',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
@@ -825,8 +825,8 @@ function FilterCheckbox({ label, checked, onChange }: { label: string; checked: 
                     width: 18,
                     height: 18,
                     borderRadius: 5,
-                    border: '1.5px solid ' + (checked ? '#0f766e' : 'var(--border-strong)'),
-                    background: checked ? '#0f766e' : '#fff',
+                    border: '1.5px solid ' + (checked ? '#ff385c' : 'var(--border-strong)'),
+                    background: checked ? '#ff385c' : '#fff',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -875,7 +875,7 @@ function EmptyState({ onCta }: { onCta: () => void }) {
                 onClick={onCta}
                 style={{
                     padding: '10px 18px',
-                    background: '#0f766e',
+                    background: '#ff385c',
                     color: '#fff',
                     border: 'none',
                     borderRadius: 999,

@@ -107,7 +107,7 @@ export const FAQPage: React.FC = () => {
                             placeholder="궁금한 내용을 검색해 보세요"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-12 pr-4 py-3 bg-gray-100 dark:bg-gray-800 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 outline-none focus:ring-2 focus:ring-teal-500"
+                            className="w-full pl-12 pr-4 py-3 bg-gray-100 dark:bg-gray-800 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 outline-none focus:ring-2 focus:ring-rose-500"
                         />
                     </div>
                 </div>
@@ -120,7 +120,7 @@ export const FAQPage: React.FC = () => {
                                 key={category}
                                 onClick={() => setSelectedCategory(category)}
                                 className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${selectedCategory === category
-                                    ? 'bg-teal-500 text-white'
+                                    ? 'bg-rose-500 text-white'
                                     : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
                                     }`}
                             >
@@ -146,7 +146,7 @@ export const FAQPage: React.FC = () => {
                                         className="w-full flex items-center justify-between p-4 text-left"
                                     >
                                         <div className="flex items-start gap-3">
-                                            <span className="text-teal-500 font-bold">Q</span>
+                                            <span className="text-rose-500 font-bold">Q</span>
                                             <span className="text-gray-900 dark:text-white font-medium">{faq.question}</span>
                                         </div>
                                         <span className={`material-symbols-outlined text-gray-400 transition-transform ${expandedId === faq.id ? 'rotate-180' : ''}`}>

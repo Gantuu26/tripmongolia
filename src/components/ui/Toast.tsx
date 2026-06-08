@@ -81,8 +81,8 @@ const ConfirmModal: React.FC<{
         },
         info: {
             icon: 'info',
-            iconBg: 'bg-teal-100 text-teal-600',
-            confirmBtn: 'bg-teal-500 hover:bg-teal-600 text-white'
+            iconBg: 'bg-rose-100 text-rose-600',
+            confirmBtn: 'bg-rose-500 hover:bg-rose-600 text-white'
         }
     };
 

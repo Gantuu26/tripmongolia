@@ -130,7 +130,7 @@ export function TravelMateDetailDesktop({
     const authorInitial = authorName.charAt(0);
     const views = post.viewCount ?? post.view_count ?? 0;
     const statusInfo = {
-        open: { label: '모집 중', bg: '#0f766e' },
+        open: { label: '모집 중', bg: '#ff385c' },
         almost: { label: '잔여석 얼마 안 남음', bg: '#dc2626' },
         full: { label: '매칭 완료', bg: 'var(--fg-4)' },
     }[status];
@@ -198,7 +198,7 @@ export function TravelMateDetailDesktop({
                             </span>
                             {post.region && (
                                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 12, color: 'var(--fg-3)' }}>
-                                    <MatIcon name="location_on" size={14} filled color="#0f766e" /> {post.region}
+                                    <MatIcon name="location_on" size={14} filled color="#ff385c" /> {post.region}
                                 </span>
                             )}
                             <span style={{ width: 3, height: 3, borderRadius: 999, background: 'var(--border-strong)' }} />
@@ -278,7 +278,7 @@ export function TravelMateDetailDesktop({
                                             boxShadow: 'var(--shadow-toss)',
                                         }}
                                     >
-                                        <MatIcon name={s.i} size={22} color="#0f766e" />
+                                        <MatIcon name={s.i} size={22} color="#ff385c" />
                                     </div>
                                     <div>
                                         <div style={{ fontSize: 11, color: 'var(--fg-5)' }}>{s.k}</div>
@@ -371,7 +371,7 @@ export function TravelMateDetailDesktop({
                                         width: 40,
                                         height: 40,
                                         borderRadius: 999,
-                                        background: '#0f766e',
+                                        background: '#ff385c',
                                         color: '#fff',
                                         display: 'flex',
                                         alignItems: 'center',
@@ -408,7 +408,7 @@ export function TravelMateDetailDesktop({
                                             disabled={!comment.trim()}
                                             style={{
                                                 padding: '10px 22px',
-                                                background: comment.trim() ? '#0f766e' : 'var(--bg-muted)',
+                                                background: comment.trim() ? '#ff385c' : 'var(--bg-muted)',
                                                 color: comment.trim() ? '#fff' : 'var(--fg-5)',
                                                 border: 'none',
                                                 borderRadius: 10,
@@ -446,8 +446,8 @@ export function TravelMateDetailDesktop({
                                                     width: 40,
                                                     height: 40,
                                                     borderRadius: 999,
-                                                    background: c.isAuthor ? '#0f766e' : 'var(--primary-tint)',
-                                                    color: c.isAuthor ? '#fff' : '#0f766e',
+                                                    background: c.isAuthor ? '#ff385c' : 'var(--primary-tint)',
+                                                    color: c.isAuthor ? '#fff' : '#ff385c',
                                                     display: 'flex',
                                                     alignItems: 'center',
                                                     justifyContent: 'center',
@@ -469,7 +469,7 @@ export function TravelMateDetailDesktop({
                                                                 fontSize: 10,
                                                                 fontWeight: 700,
                                                                 padding: '2px 7px',
-                                                                background: '#0f766e',
+                                                                background: '#ff385c',
                                                                 color: '#fff',
                                                                 borderRadius: 4,
                                                                 letterSpacing: '0.04em',
@@ -508,7 +508,7 @@ export function TravelMateDetailDesktop({
                                     fontSize: 12,
                                     fontWeight: 700,
                                     letterSpacing: '0.08em',
-                                    color: '#0f766e',
+                                    color: '#ff385c',
                                     textTransform: 'uppercase',
                                     marginBottom: 10,
                                 }}
@@ -529,7 +529,7 @@ export function TravelMateDetailDesktop({
                                             style={{
                                                 fontSize: 13,
                                                 fontWeight: 700,
-                                                color: status === 'full' ? 'var(--fg-5)' : '#0f766e',
+                                                color: status === 'full' ? 'var(--fg-5)' : '#ff385c',
                                             }}
                                         >
                                             {status === 'full' ? '모집 종료' : `잔여 ${capacity - joined}석`}
@@ -541,7 +541,7 @@ export function TravelMateDetailDesktop({
                                                 width: `${pct}%`,
                                                 height: '100%',
                                                 background:
-                                                    status === 'full' ? 'var(--fg-5)' : 'linear-gradient(to right, #0f766e, #115e59)',
+                                                    status === 'full' ? 'var(--fg-5)' : 'linear-gradient(to right, #ff385c, #e00b41)',
                                                 borderRadius: 999,
                                             }}
                                         />
@@ -556,7 +556,7 @@ export function TravelMateDetailDesktop({
                                 style={{
                                     width: '100%',
                                     padding: '16px',
-                                    background: status === 'full' ? 'var(--bg-muted)' : requested ? '#16a34a' : '#0f766e',
+                                    background: status === 'full' ? 'var(--bg-muted)' : requested ? '#16a34a' : '#ff385c',
                                     color: status === 'full' ? 'var(--fg-5)' : '#fff',
                                     border: 'none',
                                     borderRadius: 12,
@@ -564,7 +564,7 @@ export function TravelMateDetailDesktop({
                                     fontWeight: 700,
                                     cursor: status === 'full' ? 'default' : 'pointer',
                                     fontFamily: 'inherit',
-                                    boxShadow: status !== 'full' && !requested ? '0 8px 20px -6px rgba(15,118,110,0.5)' : 'none',
+                                    boxShadow: status !== 'full' && !requested ? '0 8px 20px -6px rgba(255, 56, 92,0.5)' : 'none',
                                     display: 'inline-flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
@@ -655,7 +655,7 @@ export function TravelMateDetailDesktop({
                                         width: 56,
                                         height: 56,
                                         borderRadius: 999,
-                                        background: 'linear-gradient(135deg, #0f766e, #115e59)',
+                                        background: 'linear-gradient(135deg, #ff385c, #e00b41)',
                                         color: '#fff',
                                         display: 'flex',
                                         alignItems: 'center',

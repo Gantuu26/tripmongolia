@@ -11,14 +11,14 @@ export const PrivacyPolicy = () => {
             <>
                 <SEO
                     title="개인정보처리방침"
-                    description="몽골리아 은하수의 개인정보처리방침입니다."
+                    description="Trip Mongolia의 개인정보처리방침입니다."
                 />
                 <div className="container mx-auto px-4 py-8 max-w-4xl font-display">
                     <h1 className="text-3xl font-bold mb-6">개인정보처리방침</h1>
 
                     <div className="prose prose-slate max-w-none">
                         <p className="mb-6">
-                            몽골리아 은하수(이하 "회사")는 개인정보 보호법 등 관련 법령에 따라 이용자의 개인정보를 보호하고, 이와 관련한 고충을 신속하고 원활하게 처리하기 위하여 다음과 같이 개인정보처리방침을 수립·공개합니다.
+                            Trip Mongolia(이하 "회사")는 개인정보 보호법 등 관련 법령에 따라 이용자의 개인정보를 보호하고, 이와 관련한 고충을 신속하고 원활하게 처리하기 위하여 다음과 같이 개인정보처리방침을 수립·공개합니다.
                         </p>
 
                         <section className="mb-8">
@@ -218,14 +218,14 @@ export const PrivacyPolicy = () => {
         <>
             <SEO
                 title="개인정보처리방침"
-                description="몽골리아 은하수의 개인정보처리방침입니다."
+                description="Trip Mongolia의 개인정보처리방침입니다."
             />
             <div className="container mx-auto px-4 py-8 max-w-4xl font-display">
                 <h1 className="text-3xl font-bold mb-6">개인정보처리방침</h1>
 
                 <div className="prose prose-slate max-w-none">
                     <p className="mb-6">
-                        몽골리아 은하수(이하 "회사")는 개인정보 보호법 등 관련 법령에 따라 이용자의 개인정보를 보호하고,
+                        Trip Mongolia(이하 "회사")는 개인정보 보호법 등 관련 법령에 따라 이용자의 개인정보를 보호하고,
                         이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 다음과 같이 개인정보처리방침을 수립·공개합니다.
                     </p>
 

@@ -94,8 +94,8 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                     style={{
                         marginTop: 14,
                         padding: '14px 18px',
-                        background: 'var(--primary-tint, rgba(15,118,110,0.08))',
-                        border: '2px solid #0f766e',
+                        background: 'var(--primary-tint, rgba(255, 56, 92,0.08))',
+                        border: '2px solid #ff385c',
                         borderRadius: 14,
                         display: 'flex',
                         justifyContent: 'space-between',
@@ -129,7 +129,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                             style={{
                                 fontSize: 22,
                                 fontWeight: 700,
-                                color: 'var(--primary-dark, #115e59)',
+                                color: 'var(--primary-dark, #e00b41)',
                                 marginTop: 4,
                                 letterSpacing: '-0.02em',
                             }}
@@ -183,7 +183,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                                     border: 'none',
                                     borderTop: '1px solid var(--border-subtle)',
                                     background: on
-                                        ? 'var(--primary-tint, rgba(15,118,110,0.08))'
+                                        ? 'var(--primary-tint, rgba(255, 56, 92,0.08))'
                                         : '#fff',
                                     cursor: 'pointer',
                                     fontFamily: 'inherit',
@@ -196,7 +196,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                                             fontSize: 16,
                                             fontWeight: 700,
                                             color: on
-                                                ? 'var(--primary-dark, #115e59)'
+                                                ? 'var(--primary-dark, #e00b41)'
                                                 : 'var(--fg-1)',
                                         }}
                                     >
@@ -208,7 +208,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                                                 fontSize: 10,
                                                 fontWeight: 700,
                                                 padding: '3px 8px',
-                                                background: '#0f766e',
+                                                background: '#ff385c',
                                                 color: '#fff',
                                                 borderRadius: 4,
                                             }}
@@ -268,7 +268,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                                         textAlign: 'right',
                                         fontSize: 15,
                                         fontWeight: 700,
-                                        color: on ? 'var(--primary-dark, #115e59)' : 'var(--fg-1)',
+                                        color: on ? 'var(--primary-dark, #e00b41)' : 'var(--fg-1)',
                                     }}
                                 >
                                     ₩{formatPrice(totalForGroup)}
@@ -349,7 +349,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                         width: '100%',
                         padding: '16px',
                         marginTop: 16,
-                        background: '#0f766e',
+                        background: '#ff385c',
                         color: '#fff',
                         border: 'none',
                         borderRadius: 12,
@@ -357,7 +357,7 @@ export function PriceTableModal({ options, current, onChange, onClose }: PriceTa
                         fontWeight: 700,
                         cursor: 'pointer',
                         fontFamily: 'inherit',
-                        boxShadow: '0 8px 20px -6px rgba(15,118,110,0.5)',
+                        boxShadow: '0 8px 20px -6px rgba(255, 56, 92,0.5)',
                     }}
                 >
                     이 인원으로 예약하기
