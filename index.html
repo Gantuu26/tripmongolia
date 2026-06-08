@@ -212,64 +212,9 @@
     })();
   </script>
 
-  <!-- Channel Talk — stub only. The real SDK (~400KB) is loaded lazily after the
-       page is fully interactive (5s after 'load') OR on the first click that calls
-       window.openChannelTalk(). This keeps Channel Talk out of the LCP/TBT budget. -->
-  <script>
-    (function () {
-      var w = window;
-      if (w.ChannelIO) return;
-      // Queue calls so ChannelIO('boot', ...) before the SDK arrives still works.
-      var ch = function () { ch.c(arguments); };
-      ch.q = [];
-      ch.c = function (args) { ch.q.push(args); };
-      w.ChannelIO = ch;
-
-      var loaded = false;
-      function loadChannelTalk() {
-        if (loaded || w.ChannelIOInitialized) return Promise.resolve();
-        loaded = true;
-        w.ChannelIOInitialized = true;
-        return new Promise(function (resolve) {
-          var s = document.createElement('script');
-          s.type = 'text/javascript';
-          s.async = true;
-          s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-          s.onload = function () {
-            ChannelIO('boot', { pluginKey: '64f569ac-a282-48c8-85c5-c8263bc2ba57', language: 'ko' });
-            resolve();
-          };
-          var x = document.getElementsByTagName('script')[0];
-          if (x.parentNode) x.parentNode.insertBefore(s, x);
-        });
-      }
-
-      // Expose for explicit click (footer / floating consultation button can call this
-      // with a small delay to avoid blocking the interaction).
-      w.openChannelTalk = function () {
-        loadChannelTalk().then(function () {
-          if (w.ChannelIO && typeof w.ChannelIO === 'function') {
-            try { w.ChannelIO('showMessenger'); } catch (e) {}
-          }
-        });
-      };
-
-      // Fallback: load ~5 seconds after the page is fully interactive so returning
-      // visitors still see the floating button without tanking first-load perf.
-      function scheduleBackgroundLoad() {
-        if ('requestIdleCallback' in w) {
-          w.requestIdleCallback(loadChannelTalk, { timeout: 8000 });
-        } else {
-          setTimeout(loadChannelTalk, 5000);
-        }
-      }
-      if (document.readyState === 'complete') {
-        setTimeout(scheduleBackgroundLoad, 5000);
-      } else {
-        w.addEventListener('load', function () { setTimeout(scheduleBackgroundLoad, 5000); }, { once: true });
-      }
-    })();
-  </script>
+  <!-- Chat: Channel Talk 위젯 제거됨 (2026-06-08).
+       상담은 카카오톡으로 — 앱 내 FloatingConsultation 컴포넌트가 처리.
+       링크는 src/constants/contact.ts 의 KAKAO_CHANNEL_URL 에서 관리. -->
 </head>
 
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display antialiased">

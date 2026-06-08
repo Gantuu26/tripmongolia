@@ -16,6 +16,7 @@ import { SEO } from './components/seo/SEO'
 import { NotificationProvider } from './contexts/NotificationContext'
 import { HeroSkeleton } from './components/skeletons/HeroSkeleton' // Minimal loading state
 import { FloatingConsultation } from './components/common/FloatingConsultation'
+import { openKakaoChat } from './constants/contact'
 
 // Lazy Load Pages - Handling Named Exports
 const Reservation = lazy(() => import('./pages/Reservation').then(module => ({ default: module.Reservation })))
@@ -92,6 +93,12 @@ function App() {
       document.body.style.backgroundColor = document.documentElement.classList.contains('dark') ? '#111827' : '#f3f4f6';
     }
   }, [isAdminRoute]);
+
+  // 채널톡 제거 후, 기존 '상담하기' 버튼들이 호출하는 window.openChannelTalk를
+  // 카카오톡 열기로 연결 (레거시 호환).
+  useEffect(() => {
+    window.openChannelTalk = openKakaoChat;
+  }, []);
 
   return (
     <div className={isAdminRoute ? "admin-app-wrapper" : "mobile-app-wrapper"}>
