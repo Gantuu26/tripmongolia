@@ -4,19 +4,9 @@ import { api } from '../lib/api';
 import { BottomNav } from '../components/layout/BottomNav';
 import { useUser } from '../contexts/UserContext';
 import { useTranslation } from 'react-i18next';
-import notificationBell from '../assets/notification_bell.png';
-import wishlistHeart from '../assets/wishlist_heart.png';
-import companionIcon from '../assets/companion_search.png';
 import { useIsDesktop } from '../hooks/useIsDesktop';
 import { DesktopLayout } from '../components/layout-desktop/DesktopLayout';
 import { MyPageDesktop } from '../components/mypage-desktop/MyPageDesktop';
-
-
-import wishlistIcon from '../assets/wishlist_icon.png';
-import myReviewsIcon from '../assets/my_reviews.png';
-import faqIcon from '../assets/faq_icon.png';
-import contactIcon from '../assets/contact_icon.png';
-import recentlyViewedIcon from '../assets/recently_viewed.png';
 
 interface NotificationItem {
     id: string;
@@ -221,7 +211,7 @@ const MyPageMobile: React.FC = () => {
                                 onClick={() => setShowNotifications(!showNotifications)}
                                 className="hover:scale-105 transition-transform relative"
                             >
-                                <img src={notificationBell} alt={t('mypage.notifications')} className="w-7 h-7 object-contain" loading="lazy" decoding="async" />
+                                <span className="material-symbols-outlined text-[26px] text-text-main dark:text-white">notifications</span>
                                 {notifications.length > 0 && (
                                     <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white dark:border-slate-900 pointer-events-none"></span>
                                 )}
@@ -389,8 +379,8 @@ const MyPageMobile: React.FC = () => {
                     <div className="bg-surface-light dark:bg-surface-dark rounded-3xl overflow-hidden shadow-sm">
                         <button onClick={() => navigate('/mypage/travel-mates')} className="w-full flex items-center justify-between p-5 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-full bg-[#eef6ef] dark:bg-blue-900/10 flex items-center justify-center p-2">
-                                    <img src={companionIcon} alt={t('mypage.travel_mate_posts')} className="w-full h-full object-contain" loading="lazy" decoding="async" />
+                                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                    <span className="material-symbols-outlined text-primary text-[22px]">groups</span>
                                 </div>
                                 <div className="flex flex-col items-start">
                                     <span className="text-text-main dark:text-white font-medium text-[15px]">{t('mypage.travel_mate_posts')}</span>
@@ -410,8 +400,8 @@ const MyPageMobile: React.FC = () => {
                     <div className="bg-surface-light dark:bg-surface-dark rounded-3xl overflow-hidden shadow-sm">
                         <button onClick={() => navigate('/mypage/wishlist')} className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group w-full">
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-full bg-[#eef6ef] dark:bg-gray-800 flex items-center justify-center p-2">
-                                    <img src={wishlistIcon} alt={t('mypage.wishlist_items')} className="w-full h-full object-contain" loading="lazy" decoding="async" />
+                                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                    <span className="material-symbols-outlined text-primary text-[22px]">favorite</span>
                                 </div>
                                 <span className="text-text-main dark:text-white font-medium text-[15px]">{t('mypage.wishlist_items')}</span>
                             </div>
@@ -419,8 +409,8 @@ const MyPageMobile: React.FC = () => {
                         </button>
                         <button onClick={() => navigate('/mypage/recently-viewed')} className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group w-full">
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-full bg-[#eef6ef] dark:bg-orange-900/30 flex items-center justify-center p-2">
-                                    <img src={recentlyViewedIcon} alt={t('mypage.recently_viewed')} className="w-full h-full object-contain" loading="lazy" decoding="async" />
+                                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                    <span className="material-symbols-outlined text-primary text-[22px]">history</span>
                                 </div>
                                 <span className="text-text-main dark:text-white font-medium text-[15px]">{t('mypage.recently_viewed')}</span>
                             </div>
@@ -428,8 +418,8 @@ const MyPageMobile: React.FC = () => {
                         </button>
                         <button onClick={() => navigate('/mypage/reviews')} className="flex items-center justify-between p-5 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group w-full">
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-full bg-[#eef6ef] dark:bg-yellow-900/30 flex items-center justify-center p-2">
-                                    <img src={myReviewsIcon} alt={t('mypage.my_reviews')} className="w-full h-full object-contain" loading="lazy" decoding="async" />
+                                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                    <span className="material-symbols-outlined text-primary text-[22px]">reviews</span>
                                 </div>
                                 <span className="text-text-main dark:text-white font-medium text-[15px]">{t('mypage.my_reviews')}</span>
                             </div>
@@ -444,8 +434,8 @@ const MyPageMobile: React.FC = () => {
                     <div className="bg-surface-light dark:bg-surface-dark rounded-3xl overflow-hidden shadow-sm">
                         <button onClick={() => navigate('/faq')} className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group w-full">
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-full bg-[#eef6ef] dark:bg-rose-900/30 flex items-center justify-center p-2">
-                                    <img src={faqIcon} alt={t('mypage.faq')} className="w-full h-full object-contain" loading="lazy" decoding="async" />
+                                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                    <span className="material-symbols-outlined text-primary text-[22px]">quiz</span>
                                 </div>
                                 <span className="text-text-main dark:text-white font-medium text-[15px]">{t('mypage.faq')}</span>
                             </div>
@@ -453,8 +443,8 @@ const MyPageMobile: React.FC = () => {
                         </button>
                         <a href="https://jzz1k.channel.io/home" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-5 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-full bg-[#eef6ef] dark:bg-yellow-900/30 flex items-center justify-center p-2">
-                                    <img src={contactIcon} alt={t('mypage.contact_us')} className="w-full h-full object-contain" loading="lazy" decoding="async" />
+                                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                    <span className="material-symbols-outlined text-primary text-[22px]">support_agent</span>
                                 </div>
                                 <span className="text-text-main dark:text-white font-medium text-[15px]">{t('mypage.contact_us')}</span>
                             </div>
