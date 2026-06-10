@@ -153,7 +153,7 @@ export function DesktopFooter({ contentWidth = 1280 }: DesktopFooterProps) {
                         <img src={logoSquare} alt="" style={{ height: 44, width: 44, objectFit: 'contain' }} />
                         <div>
                             <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--fg-1)' }}>Trip Mongolia</div>
-                            <div style={{ fontSize: 11, color: 'var(--fg-5)', marginTop: 2 }}>Trip Mongolia (SUUN ZAM)</div>
+                            <div style={{ fontSize: 11, color: 'var(--fg-5)', marginTop: 2 }}>Trip Mongolia</div>
                         </div>
                     </div>
                     <div style={{ fontSize: 12, color: 'var(--fg-4)', lineHeight: 1.75 }}>
@@ -209,20 +209,13 @@ export function DesktopFooter({ contentWidth = 1280 }: DesktopFooterProps) {
 
             <div style={{ maxWidth: contentWidth, margin: '0 auto', padding: '0 32px 32px' }}>
                 <div style={{ borderTop: '1px solid var(--border)', paddingTop: 24, fontSize: 11, color: 'var(--fg-5)', lineHeight: 1.8 }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, marginBottom: 16 }}>
+                    <div style={{ marginBottom: 16 }}>
                         <div>
                             <div style={{ fontWeight: 700, color: 'var(--fg-3)', marginBottom: 6 }}>[몽골 본사]</div>
-                            <div>상호: Trip Mongolia (SUUN ZAM) | 대표자: Davaasuren Bilguun</div>
-                            <div>사업자등록번호: 9011640064 | 관광사업등록번호: 6124313</div>
-                            <div>전화: +976 9594 5838 | Tel: +976-8010-7766</div>
-                            <div>소재지: 울란바토르 바양주르흐구 13동 DACO센터 3층 306</div>
-                        </div>
-                        <div>
-                            <div style={{ fontWeight: 700, color: 'var(--fg-3)', marginBottom: 6 }}>[한국 대리점]</div>
-                            <div>상호: Hello Bolor | 대표자: Davaasuren Bolor</div>
-                            <div>사업자등록번호: 730-54-00614 | 통신판매업번호: 제2022-서울중랑-1776호</div>
-                            <div>이메일: bolor1@hanmail.net</div>
-                            <div>문의: 공식 LINE 또는 채팅으로 문의해 주세요.</div>
+                            <div>상호: Trip Mongolia | 대표자: Tsendee Tserendejid</div>
+                            <div>사업자등록번호: 9011825028</div>
+                            <div>전화: +976 9187 7227</div>
+                            <div>소재지: 몽골 울란바토르 13구역 25동 남양주거리 170-18호</div>
                         </div>
                     </div>
                     <div

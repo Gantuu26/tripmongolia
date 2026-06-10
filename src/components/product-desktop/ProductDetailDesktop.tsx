@@ -637,7 +637,7 @@ export function ProductDetailDesktop({
                             <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fg-1)', marginBottom: 12 }}>문의하기</div>
                             <div style={{ display: 'grid', gap: 10 }}>
                                 {[
-                                    { i: 'phone', t: '+976 9594 5838', sub: '평일 9:00-18:00 (JST)', href: 'tel:+97695945838' },
+                                    { i: 'phone', t: '+976 9187 7227', sub: '평일 9:00-18:00', href: 'tel:+97691877227' },
                                     { i: 'mail', t: 'info@mongolryokou.com', href: 'mailto:info@mongolryokou.com' },
                                     { i: 'chat', t: '채팅 상담', sub: '24시간 대응', onClick: handleConsult },
                                 ].map((c) => {

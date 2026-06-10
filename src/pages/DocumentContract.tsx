@@ -419,7 +419,7 @@ export const DocumentContract: React.FC = () => {
                                     <td className="label" style={{ width: 160 }}>회사명</td>
                                     <td className="value">{COMPANY_INFO.nameJa}</td>
                                 </tr>
-                                <tr><td className="label">전화번호</td><td className="value">{COMPANY_INFO.phoneKR}</td></tr>
+                                <tr><td className="label">전화번호</td><td className="value">{COMPANY_INFO.phoneMGL}</td></tr>
                                 <tr><td className="label">대표자</td><td className="value">{COMPANY_INFO.representative || COMPANY_INFO.ceo}</td></tr>
                                 <tr><td className="label">등록번호</td><td className="value">{COMPANY_INFO.registrationNumber}</td></tr>
                                 <tr><td className="label">Web</td><td className="value">{COMPANY_INFO.website}</td></tr>

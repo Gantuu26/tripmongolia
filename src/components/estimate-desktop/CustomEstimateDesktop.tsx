@@ -377,8 +377,8 @@ export function CustomEstimateDesktop({ contentWidth = 1280 }: { contentWidth?: 
                             <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fg-1)', marginBottom: 8 }}>전화 문의도 가능합니다</div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                                 <MatIcon name="phone" size={16} color="#ff385c" />
-                                <a href="tel:+97695945838" style={{ color: 'var(--fg-2)', textDecoration: 'none', fontWeight: 700 }}>
-                                    +976 9594 5838
+                                <a href="tel:+97691877227" style={{ color: 'var(--fg-2)', textDecoration: 'none', fontWeight: 700 }}>
+                                    +976 9187 7227
                                 </a>
                             </div>
                             <div style={{ marginTop: 4 }}>평일 9:00-18:00 (JST)</div>

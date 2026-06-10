@@ -4,12 +4,11 @@
 export const COMPANY_INFO = {
     nameJa: 'Trip Mongolia',
     nameEn: 'Trip Mongolia',
-    phoneKR: '82-10-6376-7901',
-    phoneMGL: '976-9594-5838',
-    representative: 'DAVAASUREN BOLOR',  // 담당자 (대리)
-    ceo: 'DAVAASUREN BILGUUN',           // 대표자
-    registrationNumber: '9011640064',     // 사업자등록번호
-    registrationNote: 'Сүүнзам трэйд',
+    phoneMGL: '976-9187-7227',
+    representative: 'Tsendee Tserendejid',  // 대표자
+    ceo: 'Tsendee Tserendejid',             // 대표자
+    registrationNumber: '9011825028',     // 사업자등록번호
+    registrationNote: '',
     email: 'info@mongolryokou.com',
     website: 'tripmongolia.kr',
     stampImage: '/stamp.png',             // public/stamp.png 위치에 도장 이미지를 둡니다

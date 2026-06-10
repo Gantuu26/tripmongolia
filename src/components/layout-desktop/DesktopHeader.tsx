@@ -245,11 +245,11 @@ export function DesktopHeader({ contentWidth = 1280 }: DesktopHeaderProps) {
                     })}
                     <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 20, fontSize: 13, color: 'var(--fg-4)' }}>
                         <a
-                            href="tel:+97695945838"
+                            href="tel:+97691877227"
                             style={{ display: 'inline-flex', alignItems: 'center', gap: 6, textDecoration: 'none' }}
                         >
                             <MatIcon name="phone" size={16} color="#ff385c" />
-                            <span style={{ fontWeight: 700, color: 'var(--fg-1)' }}>+976 9594 5838</span>
+                            <span style={{ fontWeight: 700, color: 'var(--fg-1)' }}>+976 9187 7227</span>
                         </a>
                     </div>
                 </div>

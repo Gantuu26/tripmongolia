@@ -2,9 +2,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import logoHorizontal from '../../assets/logo_horizontal.webp';
 
-const PHONE_PRIMARY = '+976 9594 5838';
+const PHONE_PRIMARY = '+976 9187 7227';
 const EMAIL = 'bolor1@hanmail.net';
-const ADDRESS_QUERY = 'Trip Mongolia, DACO Center, Bayanzurkh, Ulaanbaatar';
+const ADDRESS_QUERY = 'Trip Mongolia, Ulaanbaatar, Mongolia';
 
 export const Footer: React.FC = () => {
     const { t } = useTranslation();
@@ -96,20 +96,9 @@ export const Footer: React.FC = () => {
                         t('footer.mongolia_office_info_4'),
                     ]}
                 />
-                <OfficeBlock
-                    title={t('footer.korea_office')}
-                    lines={[
-                        t('footer.korea_office_info_1'),
-                        t('footer.korea_office_info_2'),
-                        t('footer.korea_office_info_3'),
-                        t('footer.korea_office_info_4'),
-                    ]}
-                />
-
                 {/* Disclaimer */}
                 <div className="pt-3 border-t border-slate-200 dark:border-slate-800 text-[11px] text-slate-400 dark:text-slate-500 leading-[1.6] space-y-1.5">
                     <p>{t('footer.disclaimer_1')}</p>
-                    <p>{t('footer.disclaimer_2')}</p>
                     <p>{t('footer.disclaimer_3')}</p>
                 </div>
             </div>

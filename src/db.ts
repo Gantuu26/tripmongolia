@@ -263,7 +263,7 @@ const sampleReservations: Reservation[] = [
         bankAccount: {
             bankName: '신한은행',
             accountNumber: '110-123-456789',
-            accountHolder: '몽골리아은하수'
+            accountHolder: 'Trip Mongolia'
         },
         createdAt: '2023-09-15T10:00:00Z',
         history: []
@@ -291,7 +291,7 @@ const sampleReservations: Reservation[] = [
         bankAccount: {
             bankName: '신한은행',
             accountNumber: '110-123-456789',
-            accountHolder: '몽골리아은하수'
+            accountHolder: 'Trip Mongolia'
         },
         createdAt: '2023-09-20T10:00:00Z',
         history: []

@@ -31,7 +31,7 @@ export const About: React.FC = () => {
                 areaServed: { '@type': 'Country', name: '몽골' },
                 address: {
                     '@type': 'PostalAddress',
-                    streetAddress: '바양주르흐구 13동 DACO센터 3층 306호',
+                    streetAddress: '13구역 25동 남양주거리 170-18호',
                     addressLocality: '울란바토르',
                     addressCountry: 'MN',
                 },
