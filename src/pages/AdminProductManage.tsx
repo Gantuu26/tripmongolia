@@ -986,6 +986,9 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
     // → empty box → file picker for each one.
     const [itineraryBulkUploading, setItineraryBulkUploading] = useState(false);
     const [itineraryBulkProgress, setItineraryBulkProgress] = useState<{ done: number; total: number } | null>(null);
+    // Day-based itinerary editor UI state: which day cards are collapsed / showing the advanced menu.
+    const [collapsedDays, setCollapsedDays] = useState<Set<string>>(new Set());
+    const [advancedDays, setAdvancedDays] = useState<Set<string>>(new Set());
     const bulkAddItineraryImages = async (files: File[]) => {
         if (files.length === 0) return;
         setItineraryBulkUploading(true);
@@ -1161,6 +1164,142 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
             const el = document.querySelector(`[data-itinerary-block="${newBlock.id}"]`);
             if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 50);
+    };
+
+    // ─────────────────────────────────────────────────────────────────────
+    // Day-based itinerary editor (날짜별 카드).
+    //
+    // The public renderer groups the flat `itineraryBlocks` array by `dayInfo`
+    // markers: each dayInfo starts a new day, the blocks after it are that day's
+    // events. We keep that exact storage shape but project it into day cards so
+    // the admin never has to hand-order a flat block list. All content editing
+    // still flows through the existing index-based handlers (updateTimelineInBlock,
+    // handleTimelineBlockImages, master pickers, …) — only structural ops are new.
+    // ─────────────────────────────────────────────────────────────────────
+    type EditorEvent = { block: DetailContentBlock; flatIndex: number };
+    type EditorDay = { dayInfo: DetailContentBlock; dayInfoFlatIndex: number; events: EditorEvent[] };
+    type PlainDay = { dayInfo: DetailContentBlock; events: DetailContentBlock[] };
+
+    const isSpacerBlock = (b: DetailContentBlock) =>
+        b.type === 'divider' && (b.content as DividerContent)?.style === 'space';
+
+    // Read-only projection for the render layer. Cosmetic spacer dividers (auto
+    // inserted between days) are hidden from the per-day event lists.
+    const groupItineraryForEditor = (blocks: DetailContentBlock[]): { pre: EditorEvent[]; days: EditorDay[] } => {
+        const pre: EditorEvent[] = [];
+        const days: EditorDay[] = [];
+        let cur: EditorDay | null = null;
+        blocks.forEach((block, flatIndex) => {
+            if (block.type === 'dayInfo') {
+                cur = { dayInfo: block, dayInfoFlatIndex: flatIndex, events: [] };
+                days.push(cur);
+            } else if (isSpacerBlock(block)) {
+                // skip — regenerated on serialize
+            } else if (cur) {
+                cur.events.push({ block, flatIndex });
+            } else {
+                pre.push({ block, flatIndex });
+            }
+        });
+        return { pre, days };
+    };
+
+    // Serialize day groups back to the canonical flat array: renumber day labels
+    // sequentially, put exactly one space divider between consecutive days.
+    const flattenItineraryDays = (pre: DetailContentBlock[], days: PlainDay[]): DetailContentBlock[] => {
+        const out: DetailContentBlock[] = [...pre];
+        days.forEach((d, i) => {
+            const dc = d.dayInfo.content as DayInfoContent;
+            out.push({ ...d.dayInfo, content: { ...dc, dayLabel: DAY_LABELS_JP[i] || `${i + 1}일차` } });
+            out.push(...d.events);
+            if (i < days.length - 1) {
+                out.push({ id: `block-sep-${d.dayInfo.id}`, type: 'divider', content: { style: 'space', height: 40 } });
+            }
+        });
+        return out;
+    };
+
+    // Regroup current blocks → let the mutator edit the plain groups → flatten → set.
+    const rebuildItinerary = (mutate: (g: { pre: DetailContentBlock[]; days: PlainDay[] }) => void) => {
+        setFormData((prev) => {
+            const blocks = prev.itineraryBlocks || [];
+            const pre: DetailContentBlock[] = [];
+            const days: PlainDay[] = [];
+            let cur: PlainDay | null = null;
+            for (const b of blocks) {
+                if (b.type === 'dayInfo') { cur = { dayInfo: b, events: [] }; days.push(cur); }
+                else if (isSpacerBlock(b)) { /* drop cosmetic spacer; regenerated on flatten */ }
+                else if (cur) { cur.events.push(b); }
+                else { pre.push(b); }
+            }
+            const g = { pre, days };
+            mutate(g);
+            return { ...prev, itineraryBlocks: flattenItineraryDays(g.pre, g.days) };
+        });
+    };
+
+    const makeItineraryBlock = (type: 'timeline' | 'image' | 'slide' | 'divider'): DetailContentBlock => {
+        const stamp = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+        if (type === 'timeline') return { id: `block-${stamp}`, type, content: { id: `timeline-${stamp}`, time: '', title: '', description: '', images: [] } };
+        if (type === 'slide') return { id: `block-${stamp}`, type, content: { id: `slide-${stamp}`, type: 'day', dayLabel: '', title: '', description: '', images: [] } };
+        if (type === 'divider') return { id: `block-${stamp}`, type, content: { style: 'line', height: 20 } };
+        return { id: `block-${stamp}`, type, content: '' }; // image
+    };
+
+    const addItineraryDay = () => {
+        const stamp = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+        rebuildItinerary((g) => {
+            g.days.push({
+                dayInfo: {
+                    id: `block-${stamp}-info`,
+                    type: 'dayInfo',
+                    content: { id: `dayinfo-${stamp}`, dayLabel: '', dayDate: '', title: '', description: '', meals: { breakfast: '', lunch: '', dinner: '' }, accommodation: '' },
+                },
+                events: [],
+            });
+        });
+    };
+
+    const removeItineraryDay = (dayGroupIndex: number) => {
+        rebuildItinerary((g) => { g.days.splice(dayGroupIndex, 1); });
+    };
+
+    const moveItineraryDay = (dayGroupIndex: number, dir: -1 | 1) => {
+        rebuildItinerary((g) => {
+            const t = dayGroupIndex + dir;
+            if (t < 0 || t >= g.days.length) return;
+            [g.days[dayGroupIndex], g.days[t]] = [g.days[t], g.days[dayGroupIndex]];
+        });
+    };
+
+    const addItineraryEvent = (dayGroupIndex: number, type: 'timeline' | 'image' | 'slide' | 'divider') => {
+        const block = makeItineraryBlock(type);
+        rebuildItinerary((g) => { g.days[dayGroupIndex]?.events.push(block); });
+        setTimeout(() => {
+            const el = document.querySelector(`[data-itinerary-block="${block.id}"]`);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 50);
+    };
+
+    const removeItineraryEvent = (dayGroupIndex: number, eventIndex: number) => {
+        rebuildItinerary((g) => { g.days[dayGroupIndex]?.events.splice(eventIndex, 1); });
+    };
+
+    const moveItineraryEvent = (dayGroupIndex: number, eventIndex: number, dir: -1 | 1) => {
+        rebuildItinerary((g) => {
+            const evs = g.days[dayGroupIndex]?.events;
+            if (!evs) return;
+            const t = eventIndex + dir;
+            if (t < 0 || t >= evs.length) return;
+            [evs[eventIndex], evs[t]] = [evs[t], evs[eventIndex]];
+        });
+    };
+
+    const toggleDayCollapsed = (id: string) => {
+        setCollapsedDays((prev) => { const n = new Set(prev); if (n.has(id)) n.delete(id); else n.add(id); return n; });
+    };
+    const toggleDayAdvanced = (id: string) => {
+        setAdvancedDays((prev) => { const n = new Set(prev); if (n.has(id)) n.delete(id); else n.add(id); return n; });
     };
 
     const removeItineraryBlock = (index: number) => {
@@ -1978,307 +2117,230 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                     progress={itineraryBulkProgress}
                                 />
 
-                                {/* Itinerary Block Content Section */}
+                                {/* Itinerary — day-based editor (날짜별 카드).
+                                    Projects the flat itineraryBlocks array into day cards for
+                                    editing, then serializes back to the SAME flat shape the public
+                                    renderer expects. Public site / DB untouched. */}
                                 <div>
-                                    <div className="block-add-bar">
-                                        <span className="block-add-label"><Icon name="add" />Блок нэмэх</span>
-                                        <button
-                                            type="button"
-                                            onClick={() => addItineraryBlock('timeline')}
-                                            className="chip"
-                                            title="Цаг·гарчиг·тайлбар·зураг агуулсан хөтөлбөрийн зүйл (жишээ: '10:00 Зайсан толгой + 3 зураг')"
-                                        >
-                                            <Icon name="add_location" style={{ fontSize: 16 }} />Хөтөлбөрийн зүйл нэмэх
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={() => addItineraryBlock('image')}
-                                            className="chip"
-                                            title="Ганц зураг (урт нэг зурагт тохиромжтой)"
-                                        >
-                                            <Icon name="image" style={{ fontSize: 16 }} />1 зураг
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={() => addItineraryBlock('slide')}
-                                            className="chip"
-                                            title="Хэд хэдэн зургийг хэвтээ галерейд багцлах (гарчиг өгөх боломжтой)"
-                                        >
-                                            <Icon name="view_carousel" style={{ fontSize: 16 }} />Галерей
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={() => addItineraryBlock('divider')}
-                                            className="chip"
-                                            title="Блок хоорондын зай эсвэл хэвтээ зураас"
-                                        >
-                                            <Icon name="horizontal_rule" style={{ fontSize: 16 }} />Зураас
-                                        </button>
-                                    </div>
                                     <div className="card-muted-note" style={{ marginBottom: 14, display: 'block' }}>
-                                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontWeight: 700 }}><Icon name="lightbulb" />Ашиглах заавар</div>
+                                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontWeight: 700 }}><Icon name="lightbulb" />Хөтөлбөрийг өдрөөр нь амархан бөглөнө</div>
                                         <ul style={{ margin: '8px 0 0', paddingLeft: 20, listStyle: 'disc', lineHeight: 1.7 }}>
-                                            <li><strong>1일차, 2일차 толгой</strong>-г дээд талын <strong>「N өдрийн хөтөлбөрийн араг яс үүсгэх」</strong> товчоор нэг дор үүсгэнэ үү. Толгой дотор хотын нэр·хоол·байрыг оруулна уу.</li>
-                                            <li><strong>Тухайн өдрийн доторх үйл явдал</strong>(жишээ: Зайсан толгой үзэх + 5 зураг)-ыг <strong>「Хөтөлбөрийн зүйл нэмэх」</strong> товчоор нэмнэ. Цаг·гарчиг·тайлбар·хэд хэдэн зураг оруулах боломжтой.</li>
-                                            <li>Тухайн өдрийн хоол·байрыг тэр өдрийн <strong>DAY INFO</strong> блок дотор оруулна — PC дэлгэц дээр автоматаар тэр өдрийн хамгийн доор харагдана.</li>
-                                            <li>Зөвхөн зургийг урт нэг нэгээр нь оруулдаг бүтээгдэхүүнийг дээд талын <strong>чирч буулгах хайрцаг</strong>аар нэг дор оруулна.</li>
+                                            <li>Доорх <strong>「Хоног нэмэх」</strong> товчоор 1, 2, 3... дахь өдрийг нэмнэ. Өдрийн дугаар автоматаар тавигдана.</li>
+                                            <li>Өдөр бүрийн карт дотор <strong>гарчиг·огноо·хоол·байр</strong>-ыг бөглөж, <strong>「Хөтөлбөрийн зүйл нэмэх」</strong>-ээр тухайн өдрийн үйл явдлуудыг (цаг·газар·зураг) дараалан нэмнэ.</li>
+                                            <li>Аялалын газар / Зочид буудлын <strong>мастераас сонгох</strong> товчоор гарчиг·тайлбар·зураг автоматаар бөглөгдөнө.</li>
+                                            <li>Олон зургийг нэг дор оруулах бол дээд талын <strong>зураг чирэх хайрцаг</strong>-ыг ашиглана.</li>
                                         </ul>
                                     </div>
 
-                                    <div className="stack" style={{ gap: 12 }}>
-                                        {(formData.itineraryBlocks || []).map((block, index) => (
-                                            <div key={block.id} data-itinerary-block={block.id} className="edit-row">
-                                                <div className="edit-move">
-                                                    <button type="button" onClick={() => moveItineraryBlock(index, index - 1)} disabled={index === 0}><Icon name="expand_less" /></button>
-                                                    <button type="button" onClick={() => moveItineraryBlock(index, index + 1)} disabled={index === (formData.itineraryBlocks?.length || 0) - 1}><Icon name="expand_more" /></button>
-                                                </div>
-                                                <div style={{ flex: 1, minWidth: 0 }}>
-                                                    {/* Block Header */}
-                                                    <div className="row" style={{ gap: 8, marginBottom: 10 }}>
-                                                        <span className="badge b-gray">
-                                                            {block.type === 'image' ? 'SINGLE' : (block.type === 'slide' ? 'SLIDE' : (block.type === 'timeline' ? 'TIMELINE' : (block.type === 'dayInfo' ? 'DAY INFO' : 'DIVIDER')))}
-                                                        </span>
-                                                        <span className="cell-muted" style={{ fontSize: 12 }}>{index + 1}-р блок</span>
-                                                    </div>
+                                    {(() => {
+                                        const { pre, days } = groupItineraryForEditor(formData.itineraryBlocks || []);
+                                        const typeLabel = (t: string) => (t === 'image' ? 'Зураг' : t === 'slide' ? 'Галерей' : t === 'divider' ? 'Зураас' : 'Хөтөлбөр');
 
-                                                    {/* Block Content */}
-                                                    {block.type === 'image' ? (
-                                                        // IMAGE BLOCK
-                                                        <div className="block-img">
-                                                            {block.content ? (
-                                                                <div style={{ position: 'relative' }}>
-                                                                    <img
-                                                                        src={getOptimizedImageUrl(block.content as string, 'productThumbnail')}
-                                                                        alt={`Block ${index + 1}`}
-                                                                    />
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() => updateItineraryBlockContent(index, '')}
-                                                                        className="btn btn-ink btn-sm"
-                                                                        style={{ position: 'absolute', top: 8, right: 8 }}
-                                                                    >
-                                                                        Солих
-                                                                    </button>
-                                                                </div>
-                                                            ) : (
-                                                                <label className="block-img-empty" style={{ cursor: 'pointer' }}>
-                                                                    <Icon name="add_photo_alternate" />
-                                                                    Зураг байршуулах
-                                                                    <input
-                                                                        type="file"
-                                                                        accept="image/*"
-                                                                        onChange={(e) => {
-                                                                            if (e.target.files?.[0]) handleItineraryBlockImageUpload(index, e.target.files[0]);
-                                                                        }}
-                                                                        style={{ display: 'none' }}
-                                                                    />
-                                                                </label>
-                                                            )}
+                                        const renderEventBody = (block: DetailContentBlock, flatIndex: number) => {
+                                            if (block.type === 'timeline') {
+                                                const c = block.content as TimelineContent;
+                                                return (
+                                                    <div className="stack" style={{ gap: 8 }}>
+                                                        <div className="row" style={{ gap: 8, flexWrap: 'wrap' }}>
+                                                            <button type="button" onClick={() => setSpotPickerForIndex(flatIndex)} className="btn btn-blue btn-sm" title="Аялалын газрын мастераас сонгох"><Icon name="location_on" />Газар сонгох</button>
+                                                            <button type="button" onClick={() => setHotelPickerTarget({ kind: 'timeline', index: flatIndex })} className="btn btn-ghost btn-sm" title="Зочид буудлын мастераас сонгох"><Icon name="hotel" />Буудал сонгох</button>
                                                         </div>
-                                                    ) : block.type === 'slide' ? (
-                                                        // SLIDE BLOCK
-                                                        <div className="stack" style={{ gap: 8 }}>
-                                                            <input
-                                                                type="text"
-                                                                className="inp"
-                                                                value={(block.content as DetailSlide).title || ''}
-                                                                onChange={(e) => updateItinerarySlideInBlock(index, 'title', e.target.value)}
-                                                                placeholder="Слайдын гарчиг (жишээ: 1-р өдрийн байр)"
-                                                            />
-                                                            <div>
-                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Зургийн жагсаалт (олон зураг байршуулах боломжтой)</label>
-                                                                <input
-                                                                    type="file"
-                                                                    accept="image/*"
-                                                                    multiple
-                                                                    onChange={(e) => handleItinerarySlideBlockImages(index, e.target.files)}
-                                                                    className="inp"
-                                                                    style={{ height: 'auto', paddingTop: 8, paddingBottom: 8, fontSize: 13 }}
-                                                                />
-                                                            </div>
-                                                            {(block.content as DetailSlide).images?.length > 0 && (
-                                                                <div className="row" style={{ gap: 8, overflowX: 'auto', paddingBottom: 8 }}>
-                                                                    {(block.content as DetailSlide).images.map((img, imgIdx) => (
-                                                                        <div key={imgIdx} style={{ position: 'relative', flex: 'none' }}>
-                                                                            <img src={getOptimizedImageUrl(img, 'productThumbnail')} alt={`Slide Img ${imgIdx}`} style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 'var(--r-md)', border: '1px solid var(--border-default)' }} />
-                                                                            <button
-                                                                                type="button"
-                                                                                onClick={() => removeItinerarySlideBlockImage(index, imgIdx)}
-                                                                                style={{ position: 'absolute', top: -6, right: -6, width: 22, height: 22, borderRadius: '50%', border: 'none', background: 'var(--mrt-red)', color: '#fff', cursor: 'pointer', display: 'grid', placeItems: 'center' }}
-                                                                            >
-                                                                                <Icon name="close" style={{ fontSize: 14 }} />
-                                                                            </button>
-                                                                        </div>
-                                                                    ))}
-                                                                </div>
-                                                            )}
+                                                        <div className="row" style={{ gap: 8 }}>
+                                                            <input type="text" className="inp" style={{ width: 120 }} value={c.time || ''} onChange={(e) => updateTimelineInBlock('itinerary', flatIndex, 'time', e.target.value)} placeholder="Цаг (10:00)" />
+                                                            <input type="text" className="inp" style={{ flex: 1, fontWeight: 700 }} value={c.title || ''} onChange={(e) => updateTimelineInBlock('itinerary', flatIndex, 'title', e.target.value)} placeholder="Гарчиг (Зайсан толгой)" />
                                                         </div>
-                                                    ) : block.type === 'timeline' ? (
-                                                        // TIMELINE BLOCK
-                                                        <div className="stack" style={{ gap: 8 }}>
-                                                            {/* Master picker buttons — pull in spot or hotel data with one click. */}
-                                                            <div className="row" style={{ gap: 8, flexWrap: 'wrap' }}>
-                                                                <button
-                                                                    type="button"
-                                                                    onClick={() => setSpotPickerForIndex(index)}
-                                                                    className="btn btn-blue btn-sm"
-                                                                    title="Аялал жуулчлалын газрын мастераас мэдээлэл татаж гарчиг/тайлбар/зургийг автоматаар бөглөнө"
-                                                                >
-                                                                    <Icon name="location_on" />Аялалын газраас сонгох
-                                                                </button>
-                                                                <button
-                                                                    type="button"
-                                                                    onClick={() => setHotelPickerTarget({ kind: 'timeline', index })}
-                                                                    className="btn btn-ghost btn-sm"
-                                                                    title="Зочид буудлын мастераас мэдээлэл татаж гарчиг/тайлбар/зургийг автоматаар бөглөнө"
-                                                                >
-                                                                    <Icon name="hotel" />Зочид буудлаас сонгох
-                                                                </button>
-                                                            </div>
-                                                            <div className="card-muted-note" style={{ display: 'block' }}>
-                                                                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontWeight: 700 }}><Icon name="lightbulb" />3 аргын аль нэгийг сонгох</div>
-                                                                <ol style={{ margin: '6px 0 0', paddingLeft: 20, listStyle: 'decimal', lineHeight: 1.7 }}>
-                                                                    <li><strong>Аялалын газар/Зочид буудлаас сонгох</strong> — мастер дата автоматаар бөглөгдөнө</li>
-                                                                    <li>Доор <strong>гарчиг·тайлбарыг шууд оруулах</strong> + зураг байршуулах → цагаан картаар харагдана</li>
-                                                                    <li>Доор <strong>зөвхөн гарчиг·тайлбар оруулах</strong> (зураггүй) → том пин+текстээр харагдана (бүс нутгийн заавар·зам мэдээлэлд зориулсан)</li>
-                                                                </ol>
-                                                            </div>
-                                                            <div className="row" style={{ gap: 8 }}>
-                                                                <input type="text" className="inp" style={{ width: 140 }} value={(block.content as TimelineContent).time || ''} onChange={(e) => updateTimelineInBlock('itinerary', index, 'time', e.target.value)} placeholder="Цаг (жишээ: 10:00)" />
-                                                                <input type="text" className="inp" style={{ flex: 1, fontWeight: 700 }} value={(block.content as TimelineContent).title || ''} onChange={(e) => updateTimelineInBlock('itinerary', index, 'title', e.target.value)} placeholder="Гарчиг (жишээ: Зайсан толгой)" />
-                                                            </div>
-                                                            <textarea className="inp" value={(block.content as TimelineContent).description || ''} onChange={(e) => updateTimelineInBlock('itinerary', index, 'description', e.target.value)} placeholder="Тайлбар" rows={3} />
-                                                            <div>
-                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Зургийн жагсаалт (олон зураг байршуулах боломжтой)</label>
-                                                                <input type="file" accept="image/*" multiple onChange={(e) => handleTimelineBlockImages('itinerary', index, e.target.files)} className="inp" style={{ height: 'auto', paddingTop: 8, paddingBottom: 8, fontSize: 13 }} />
-                                                            </div>
-                                                            {(block.content as TimelineContent).images?.length > 0 && (
-                                                                <div className="row" style={{ gap: 8, overflowX: 'auto', paddingBottom: 8 }}>
-                                                                    {(block.content as TimelineContent).images.map((img, imgIdx) => (
-                                                                        <div key={imgIdx} style={{ position: 'relative', flex: 'none' }}>
-                                                                            <img src={getOptimizedImageUrl(img, 'productThumbnail')} alt={`TL Img ${imgIdx}`} style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 'var(--r-md)', border: '1px solid var(--border-default)' }} />
-                                                                            <button type="button" onClick={() => removeTimelineBlockImage('itinerary', index, imgIdx)} style={{ position: 'absolute', top: -6, right: -6, width: 22, height: 22, borderRadius: '50%', border: 'none', background: 'var(--mrt-red)', color: '#fff', cursor: 'pointer', display: 'grid', placeItems: 'center' }}><Icon name="close" style={{ fontSize: 14 }} /></button>
-                                                                        </div>
-                                                                    ))}
-                                                                </div>
-                                                            )}
-                                                        </div>
-                                                    ) : block.type === 'dayInfo' ? (
-                                                        // DAY INFO BLOCK
-                                                        <div className="stack" style={{ gap: 8 }}>
-                                                            <div className="field-row">
-                                                                <div>
-                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Өдөр</label>
-                                                                    <div className="badge b-amber" style={{ height: 44, borderRadius: 'var(--r-md)', width: '100%', justifyContent: 'flex-start', padding: '0 14px', fontSize: 14 }}>{(block.content as DayInfoContent).dayLabel || 'Тодорхойгүй'}</div>
-                                                                </div>
-                                                                <div>
-                                                                    <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Огноо (жишээ: 05/26(Мяг))</label>
-                                                                    <input type="text" className="inp" value={(block.content as DayInfoContent).dayDate || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), dayDate: e.target.value })} placeholder="05/26(Мяг)" />
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Хөтөлбөрийн гарчиг</label>
-                                                                <input type="text" className="inp" value={(block.content as DayInfoContent).title || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), title: e.target.value })} placeholder="Инчон, Улаанбаатар, Горхи-Тэрэлж" />
-                                                            </div>
-                                                            <div>
-                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Гол хөтөлбөрийн товч</label>
-                                                                <input type="text" className="inp" value={(block.content as DayInfoContent).description || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), description: e.target.value })} placeholder="Их дэлгүүр, Тэрэлж байгалийн цогцолбор, Мэлхий хад..." />
-                                                            </div>
-                                                            <div>
-                                                                <label className="cell-strong" style={{ fontSize: 12.5, display: 'block', marginBottom: 6 }}>🍽 Хоолны мэдээлэл</label>
-                                                                <div className="meal-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
-                                                                    <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>Өглөө</span><input value={(block.content as DayInfoContent).meals?.breakfast || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), meals: { ...(block.content as DayInfoContent).meals, breakfast: e.target.value } })} placeholder="Кэмпийн хоол" /></div>
-                                                                    <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>Өдөр</span><input value={(block.content as DayInfoContent).meals?.lunch || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), meals: { ...(block.content as DayInfoContent).meals, lunch: e.target.value } })} placeholder="Орон нутгийн хоол" /></div>
-                                                                    <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>Орой</span><input value={(block.content as DayInfoContent).meals?.dinner || ''} onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), meals: { ...(block.content as DayInfoContent).meals, dinner: e.target.value } })} placeholder="Кэмпийн хоол" /></div>
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <div className="row" style={{ marginBottom: 6 }}>
-                                                                    <label className="cell-strong" style={{ fontSize: 12.5 }}>🏠 Байрны мэдээлэл</label>
-                                                                    <div className="spacer" style={{ flex: 1 }} />
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() => setHotelPickerForIndex(index)}
-                                                                        className="btn btn-ghost btn-sm"
-                                                                    >
-                                                                        <Icon name="hotel" />Зочид буудлын мастераас сонгох
-                                                                    </button>
-                                                                </div>
-                                                                <div className="inp-mini"><span className="pre"><Icon name="hotel" style={{ fontSize: 14 }} /></span>
-                                                                    <input
-                                                                        value={(block.content as DayInfoContent).accommodation || ''}
-                                                                        onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DayInfoContent), accommodation: e.target.value, accommodationHotelId: undefined })}
-                                                                        placeholder="Тусдаа ариун цэврийн өрөө, шүршүүртэй тансаг гэр (эсвэл дээрх товчоор мастераас сонгох)"
-                                                                    />
-                                                                </div>
-                                                                {(block.content as DayInfoContent).accommodationHotelId && (
-                                                                    <div className="row" style={{ gap: 4, marginTop: 6, fontSize: 11, color: 'var(--mrt-blue-strong)' }}>
-                                                                        <Icon name="link" style={{ fontSize: 14 }} />
-                                                                        Зочид буудлын мастераас сонгосон. Шууд оруулбал холбоос сална.
+                                                        <textarea className="inp" value={c.description || ''} onChange={(e) => updateTimelineInBlock('itinerary', flatIndex, 'description', e.target.value)} placeholder="Тайлбар" rows={2} />
+                                                        <input type="file" accept="image/*" multiple onChange={(e) => handleTimelineBlockImages('itinerary', flatIndex, e.target.files)} className="inp" style={{ height: 'auto', paddingTop: 8, paddingBottom: 8, fontSize: 13 }} />
+                                                        {c.images?.length > 0 && (
+                                                            <div className="row" style={{ gap: 8, overflowX: 'auto', paddingBottom: 4 }}>
+                                                                {c.images.map((img, imgIdx) => (
+                                                                    <div key={imgIdx} style={{ position: 'relative', flex: 'none' }}>
+                                                                        <img src={getOptimizedImageUrl(img, 'productThumbnail')} alt={`Зураг ${imgIdx + 1}`} style={{ width: 64, height: 64, objectFit: 'cover', borderRadius: 'var(--r-md)', border: '1px solid var(--border-default)' }} />
+                                                                        <button type="button" onClick={() => removeTimelineBlockImage('itinerary', flatIndex, imgIdx)} style={{ position: 'absolute', top: -6, right: -6, width: 20, height: 20, borderRadius: '50%', border: 'none', background: 'var(--mrt-red)', color: '#fff', cursor: 'pointer', display: 'grid', placeItems: 'center' }}><Icon name="close" style={{ fontSize: 13 }} /></button>
                                                                     </div>
-                                                                )}
+                                                                ))}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                );
+                                            }
+                                            if (block.type === 'image') {
+                                                return (
+                                                    <div className="block-img">
+                                                        {block.content ? (
+                                                            <div style={{ position: 'relative' }}>
+                                                                <img src={getOptimizedImageUrl(block.content as string, 'productThumbnail')} alt="Блок зураг" />
+                                                                <button type="button" onClick={() => updateItineraryBlockContent(flatIndex, '')} className="btn btn-ink btn-sm" style={{ position: 'absolute', top: 8, right: 8 }}>Солих</button>
+                                                            </div>
+                                                        ) : (
+                                                            <label className="block-img-empty" style={{ cursor: 'pointer' }}>
+                                                                <Icon name="add_photo_alternate" />Зураг байршуулах
+                                                                <input type="file" accept="image/*" onChange={(e) => { if (e.target.files?.[0]) handleItineraryBlockImageUpload(flatIndex, e.target.files[0]); }} style={{ display: 'none' }} />
+                                                            </label>
+                                                        )}
+                                                    </div>
+                                                );
+                                            }
+                                            if (block.type === 'slide') {
+                                                const c = block.content as DetailSlide;
+                                                return (
+                                                    <div className="stack" style={{ gap: 8 }}>
+                                                        <input type="text" className="inp" value={c.title || ''} onChange={(e) => updateItinerarySlideInBlock(flatIndex, 'title', e.target.value)} placeholder="Галерейн гарчиг (сонголтоор)" />
+                                                        <input type="file" accept="image/*" multiple onChange={(e) => handleItinerarySlideBlockImages(flatIndex, e.target.files)} className="inp" style={{ height: 'auto', paddingTop: 8, paddingBottom: 8, fontSize: 13 }} />
+                                                        {c.images?.length > 0 && (
+                                                            <div className="row" style={{ gap: 8, overflowX: 'auto', paddingBottom: 4 }}>
+                                                                {c.images.map((img, imgIdx) => (
+                                                                    <div key={imgIdx} style={{ position: 'relative', flex: 'none' }}>
+                                                                        <img src={getOptimizedImageUrl(img, 'productThumbnail')} alt={`Галерей ${imgIdx + 1}`} style={{ width: 64, height: 64, objectFit: 'cover', borderRadius: 'var(--r-md)', border: '1px solid var(--border-default)' }} />
+                                                                        <button type="button" onClick={() => removeItinerarySlideBlockImage(flatIndex, imgIdx)} style={{ position: 'absolute', top: -6, right: -6, width: 20, height: 20, borderRadius: '50%', border: 'none', background: 'var(--mrt-red)', color: '#fff', cursor: 'pointer', display: 'grid', placeItems: 'center' }}><Icon name="close" style={{ fontSize: 13 }} /></button>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                );
+                                            }
+                                            // divider (line)
+                                            const dvc = block.content as DividerContent;
+                                            return (
+                                                <div className="row" style={{ gap: 16, alignItems: 'flex-end' }}>
+                                                    <div style={{ flex: 1 }}>
+                                                        <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Хэвтээ зураас</label>
+                                                        <div style={{ height: 1, background: 'var(--border-strong)', width: '100%', marginBottom: 6 }} />
+                                                    </div>
+                                                    <div style={{ width: 140 }}>
+                                                        <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Зай ({dvc.height}px)</label>
+                                                        <input type="range" min="10" max="120" step="10" value={dvc.height} onChange={(e) => updateItineraryBlockContent(flatIndex, { ...dvc, height: parseInt(e.target.value) })} style={{ width: '100%' }} />
+                                                    </div>
+                                                </div>
+                                            );
+                                        };
+
+                                        return (
+                                            <div className="stack" style={{ gap: 14 }}>
+                                                {pre.length > 0 && (
+                                                    <div className="stack" style={{ gap: 10, border: '1px dashed var(--border-strong)', borderRadius: 'var(--r-lg)', padding: 14 }}>
+                                                        <div className="row" style={{ gap: 6 }}><Icon name="info" /><span className="cell-strong" style={{ fontSize: 12.5 }}>Өдөрт хамаараагүй зүйлс</span></div>
+                                                        <p className="muted" style={{ fontSize: 11, margin: 0 }}>「Хоног нэмэх」-ийг дарвал эдгээр нь эхний өдрийн агуулга болж харагдана.</p>
+                                                        {pre.map((ev) => (
+                                                            <div key={ev.block.id} data-itinerary-block={ev.block.id} className="edit-row" style={{ background: 'var(--mrt-gray-50, #f8f9fa)', borderRadius: 'var(--r-md)', padding: 10 }}>
+                                                                <div style={{ flex: 1, minWidth: 0 }}>
+                                                                    <div className="row" style={{ gap: 8, marginBottom: 8 }}><span className="badge b-gray">{typeLabel(ev.block.type)}</span></div>
+                                                                    {renderEventBody(ev.block, ev.flatIndex)}
+                                                                </div>
+                                                                <button type="button" className="act-btn danger" onClick={() => removeItineraryBlock(ev.flatIndex)} title="Устгах"><Icon name="delete" /></button>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
+
+                                                {days.length === 0 && (
+                                                    <div style={{ textAlign: 'center', padding: '32px 16px', border: '1.5px dashed var(--border-strong)', borderRadius: 'var(--r-lg)', color: 'var(--mrt-gray-500)' }}>
+                                                        <Icon name="event_note" style={{ fontSize: 32, opacity: 0.4 }} />
+                                                        <div style={{ marginTop: 8, fontSize: 14 }}>Хоног одоогоор алга. Доорх товчоор эхний өдрийг нэмнэ үү.</div>
+                                                    </div>
+                                                )}
+
+                                                {days.map((day, dayIdx) => {
+                                                    const dc = day.dayInfo.content as DayInfoContent;
+                                                    const collapsed = collapsedDays.has(day.dayInfo.id);
+                                                    const showAdv = advancedDays.has(day.dayInfo.id);
+                                                    const eventCount = day.events.filter((e) => e.block.type === 'timeline').length;
+                                                    return (
+                                                        <div key={day.dayInfo.id} data-itinerary-block={day.dayInfo.id} style={{ border: '1px solid var(--border-default)', borderRadius: 'var(--r-lg)', overflow: 'hidden', background: '#fff' }}>
+                                                            {/* Day header */}
+                                                            <div className="row" style={{ gap: 8, alignItems: 'center', padding: '12px 14px', background: 'var(--mrt-gray-50, #f8f9fa)', borderBottom: collapsed ? 'none' : '1px solid var(--border-subtle)' }}>
+                                                                <button type="button" className="act-btn" onClick={() => toggleDayCollapsed(day.dayInfo.id)} title={collapsed ? 'Дэлгэх' : 'Хураах'}><Icon name={collapsed ? 'expand_more' : 'expand_less'} /></button>
+                                                                <span className="badge b-amber" style={{ flex: 'none' }}>{dc.dayLabel || `${dayIdx + 1}일차`}</span>
+                                                                <input type="text" className="inp" style={{ flex: 1, fontWeight: 700 }} value={dc.title || ''} onChange={(e) => updateItineraryBlockContent(day.dayInfoFlatIndex, { ...dc, title: e.target.value })} placeholder="Тухайн өдрийн гарчиг (Улаанбаатар → Тэрэлж)" />
+                                                                {collapsed && eventCount > 0 && <span className="cell-muted" style={{ fontSize: 12, flex: 'none' }}>{eventCount} зүйл</span>}
+                                                                <div className="edit-move" style={{ flex: 'none' }}>
+                                                                    <button type="button" onClick={() => moveItineraryDay(dayIdx, -1)} disabled={dayIdx === 0}><Icon name="expand_less" /></button>
+                                                                    <button type="button" onClick={() => moveItineraryDay(dayIdx, 1)} disabled={dayIdx === days.length - 1}><Icon name="expand_more" /></button>
+                                                                </div>
+                                                                <button type="button" className="act-btn danger" style={{ flex: 'none' }} onClick={() => { if (window.confirm(`${dc.dayLabel || `${dayIdx + 1}일차`}-ийг бүхэлд нь устгах уу?`)) removeItineraryDay(dayIdx); }} title="Энэ өдрийг устгах"><Icon name="delete" /></button>
                                                             </div>
 
-                                                            {/* ★ Add an event to this specific day — inserts a timeline block
-                                                                right after this dayInfo so admin can pile on events without
-                                                                using ↑/↓ arrows. */}
-                                                            <div style={{ marginTop: 6, paddingTop: 14, borderTop: '1.5px dashed var(--border-strong)' }}>
-                                                                <button
-                                                                    type="button"
-                                                                    onClick={() => addTimelineAfterDay(index)}
-                                                                    className="add-line"
-                                                                >
-                                                                    <Icon name="add_circle" />Энэ өдөрт хөтөлбөрийн зүйл нэмэх
-                                                                </button>
-                                                                <p className="muted" style={{ marginTop: 8, fontSize: 11, textAlign: 'center' }}>
-                                                                    Энэ товчийг дарвал <strong style={{ color: 'var(--mrt-blue-strong)' }}>{(block.content as DayInfoContent).dayLabel || 'энэ өдөр'}</strong>-ийн сүүлчийн хөтөлбөр болгож шинэ зүйл нэмэгдэнэ.
-                                                                    Аялалын газрын мастераас нэг дор бөглөж болно.
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    ) : (
-                                                        // DIVIDER BLOCK
-                                                        <div className="row" style={{ gap: 16, alignItems: 'flex-end' }}>
-                                                            <div style={{ flex: 1 }}>
-                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Загвар</label>
-                                                                <div className="row" style={{ gap: 8 }}>
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() => updateItineraryBlockContent(index, { ...(block.content as DividerContent), style: 'line' })}
-                                                                        className={`btn btn-sm ${(block.content as DividerContent).style === 'line' ? 'btn-ink' : 'btn-ghost'}`}
-                                                                        style={{ flex: 1 }}
-                                                                    >
-                                                                        Хэвтээ зураас
-                                                                    </button>
-                                                                    <button
-                                                                        type="button"
-                                                                        onClick={() => updateItineraryBlockContent(index, { ...(block.content as DividerContent), style: 'space' })}
-                                                                        className={`btn btn-sm ${(block.content as DividerContent).style === 'space' ? 'btn-ink' : 'btn-ghost'}`}
-                                                                        style={{ flex: 1 }}
-                                                                    >
-                                                                        Зай
-                                                                    </button>
+                                                            {!collapsed && (
+                                                                <div className="stack" style={{ gap: 12, padding: 14 }}>
+                                                                    <div className="field-row">
+                                                                        <div>
+                                                                            <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Огноо (сонголтоор)</label>
+                                                                            <input type="text" className="inp" value={dc.dayDate || ''} onChange={(e) => updateItineraryBlockContent(day.dayInfoFlatIndex, { ...dc, dayDate: e.target.value })} placeholder="05/26(Мяг)" />
+                                                                        </div>
+                                                                        <div>
+                                                                            <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Гол хөтөлбөрийн товч (сонголтоор)</label>
+                                                                            <input type="text" className="inp" value={dc.description || ''} onChange={(e) => updateItineraryBlockContent(day.dayInfoFlatIndex, { ...dc, description: e.target.value })} placeholder="Их дэлгүүр, Тэрэлж, Мэлхий хад..." />
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <label className="cell-strong" style={{ fontSize: 12.5, display: 'block', marginBottom: 6 }}>🍽 Хоол</label>
+                                                                        <div className="meal-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+                                                                            <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>Өглөө</span><input value={dc.meals?.breakfast || ''} onChange={(e) => updateItineraryBlockContent(day.dayInfoFlatIndex, { ...dc, meals: { ...dc.meals, breakfast: e.target.value } })} placeholder="Буудлын хоол" /></div>
+                                                                            <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>Өдөр</span><input value={dc.meals?.lunch || ''} onChange={(e) => updateItineraryBlockContent(day.dayInfoFlatIndex, { ...dc, meals: { ...dc.meals, lunch: e.target.value } })} placeholder="Орон нутгийн хоол" /></div>
+                                                                            <div className="inp-mini"><span className="pre" style={{ fontSize: 11 }}>Орой</span><input value={dc.meals?.dinner || ''} onChange={(e) => updateItineraryBlockContent(day.dayInfoFlatIndex, { ...dc, meals: { ...dc.meals, dinner: e.target.value } })} placeholder="Кэмпийн хоол" /></div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <div className="row" style={{ marginBottom: 6 }}>
+                                                                            <label className="cell-strong" style={{ fontSize: 12.5 }}>🏠 Байр</label>
+                                                                            <div className="spacer" style={{ flex: 1 }} />
+                                                                            <button type="button" onClick={() => setHotelPickerForIndex(day.dayInfoFlatIndex)} className="btn btn-ghost btn-sm"><Icon name="hotel" />Мастераас сонгох</button>
+                                                                        </div>
+                                                                        <div className="inp-mini"><span className="pre"><Icon name="hotel" style={{ fontSize: 14 }} /></span>
+                                                                            <input value={dc.accommodation || ''} onChange={(e) => updateItineraryBlockContent(day.dayInfoFlatIndex, { ...dc, accommodation: e.target.value, accommodationHotelId: undefined })} placeholder="Тусдаа ариун цэвэр·шүршүүртэй тансаг гэр (эсвэл мастераас сонгох)" />
+                                                                        </div>
+                                                                        {dc.accommodationHotelId && (
+                                                                            <div className="row" style={{ gap: 4, marginTop: 6, fontSize: 11, color: 'var(--mrt-blue-strong)' }}><Icon name="link" style={{ fontSize: 14 }} />Мастераас сонгосон. Гараар бичвэл холбоос сална.</div>
+                                                                        )}
+                                                                    </div>
+
+                                                                    <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: 12 }}>
+                                                                        <label className="cell-strong" style={{ fontSize: 12.5, display: 'block', marginBottom: 8 }}><Icon name="timeline" style={{ fontSize: 16, verticalAlign: '-3px' }} /> Энэ өдрийн хөтөлбөр</label>
+                                                                        {day.events.length === 0 && (
+                                                                            <p className="muted" style={{ fontSize: 12, padding: '2px 0 8px', margin: 0 }}>Одоогоор зүйл алга. Доорх товчоор нэмнэ үү.</p>
+                                                                        )}
+                                                                        <div className="stack" style={{ gap: 10 }}>
+                                                                            {day.events.map((ev, evIdx) => (
+                                                                                <div key={ev.block.id} data-itinerary-block={ev.block.id} className="edit-row" style={{ background: 'var(--mrt-gray-50, #f8f9fa)', borderRadius: 'var(--r-md)', padding: 10 }}>
+                                                                                    <div className="edit-move">
+                                                                                        <button type="button" onClick={() => moveItineraryEvent(dayIdx, evIdx, -1)} disabled={evIdx === 0}><Icon name="expand_less" /></button>
+                                                                                        <button type="button" onClick={() => moveItineraryEvent(dayIdx, evIdx, 1)} disabled={evIdx === day.events.length - 1}><Icon name="expand_more" /></button>
+                                                                                    </div>
+                                                                                    <div style={{ flex: 1, minWidth: 0 }}>
+                                                                                        <div className="row" style={{ gap: 8, marginBottom: 8 }}><span className="badge b-gray">{typeLabel(ev.block.type)}</span></div>
+                                                                                        {renderEventBody(ev.block, ev.flatIndex)}
+                                                                                    </div>
+                                                                                    <button type="button" className="act-btn danger" onClick={() => removeItineraryEvent(dayIdx, evIdx)} title="Устгах"><Icon name="delete" /></button>
+                                                                                </div>
+                                                                            ))}
+                                                                        </div>
+
+                                                                        <button type="button" onClick={() => addItineraryEvent(dayIdx, 'timeline')} className="add-line" style={{ marginTop: 10 }}><Icon name="add_circle" />Хөтөлбөрийн зүйл нэмэх</button>
+
+                                                                        <div style={{ marginTop: 8 }}>
+                                                                            <button type="button" onClick={() => toggleDayAdvanced(day.dayInfo.id)} className="btn btn-ghost btn-sm" style={{ fontSize: 12 }}><Icon name={showAdv ? 'expand_less' : 'tune'} />Нэмэлт (зураг·галерей·зураас)</button>
+                                                                            {showAdv && (
+                                                                                <div className="row" style={{ gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
+                                                                                    <button type="button" onClick={() => addItineraryEvent(dayIdx, 'image')} className="chip"><Icon name="image" style={{ fontSize: 16 }} />1 зураг</button>
+                                                                                    <button type="button" onClick={() => addItineraryEvent(dayIdx, 'slide')} className="chip"><Icon name="view_carousel" style={{ fontSize: 16 }} />Галерей</button>
+                                                                                    <button type="button" onClick={() => addItineraryEvent(dayIdx, 'divider')} className="chip"><Icon name="horizontal_rule" style={{ fontSize: 16 }} />Зураас</button>
+                                                                                </div>
+                                                                            )}
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div style={{ width: 140 }}>
-                                                                <label className="muted" style={{ fontSize: 12, display: 'block', marginBottom: 4 }}>Өндөр ({(block.content as DividerContent).height}px)</label>
-                                                                <input
-                                                                    type="range"
-                                                                    min="10"
-                                                                    max="120"
-                                                                    step="10"
-                                                                    value={(block.content as DividerContent).height}
-                                                                    onChange={(e) => updateItineraryBlockContent(index, { ...(block.content as DividerContent), height: parseInt(e.target.value) })}
-                                                                    style={{ width: '100%' }}
-                                                                />
-                                                            </div>
+                                                            )}
                                                         </div>
-                                                    )}
-                                                </div>
-                                                <button type="button" className="act-btn danger" onClick={() => removeItineraryBlock(index)} title="Устгах"><Icon name="delete" /></button>
+                                                    );
+                                                })}
+
+                                                <button type="button" onClick={addItineraryDay} className="add-line" style={{ padding: 14, fontSize: 14, fontWeight: 700, borderWidth: 1.5 }}><Icon name="add" />Хоног нэмэх</button>
                                             </div>
-                                        ))}
-                                    </div>
+                                        );
+                                    })()}
                                 </div>
                             </div>
                         )}
