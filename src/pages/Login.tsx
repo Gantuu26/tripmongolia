@@ -2,16 +2,16 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import loginBg2 from '../assets/login_bg_2.jpg';
 import logo from '../assets/new_logo_2026.png';
-import loginBg3 from '../assets/login_bg_3.jpg';
-import loginBg4 from '../assets/login_bg_4.jpg';
-import loginBg5 from '../assets/login_bg_5.jpg';
+import login1 from '../assets/login1.jpg';
+import login2 from '../assets/login2.jpg';
+import login3 from '../assets/login3.jpg';
+import login4 from '../assets/login4.jpg';
 
 const MONGOLIA_IMAGES = [
-    loginBg2, loginBg3, loginBg4,
-    loginBg5, loginBg2, loginBg3,
-    loginBg4, loginBg5, loginBg2,
+    login1, login2, login3,
+    login4, login1, login2,
+    login3, login4, login1,
 ];
 
 const ScrollingColumn: React.FC<{ images: string[]; direction: 'up' | 'down'; duration: string; delay?: string }> = ({ images, direction, duration, delay }) => {
