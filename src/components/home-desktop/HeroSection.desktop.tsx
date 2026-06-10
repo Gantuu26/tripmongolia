@@ -90,13 +90,14 @@ export function HeroSectionDesktop({ contentWidth = 1280 }: HeroSectionDesktopPr
                     // then fall back to the mobile image, then to the bundled fallback.
                     const pcImg = b.pc_image || b.pcImage || '';
                     return {
-                        img: pcImg || b.image || b.image_url || FALLBACK_SLIDES[0].img,
-                        tag: (tag || 'PREMIUM TRIP').toUpperCase().slice(0, 24),
+                        img: pcImg || b.image || b.image_url || '',
+                        // 관리자가 실제 입력한 값만 사용 — 비어 있으면 하드코딩 문구를 주입하지 않음
+                        tag: tag.slice(0, 30),
                         tone: (['premium', 'hot', 'new'] as TagTone[])[i % 3],
-                        eyebrow: tag || '2026 SEASON',
-                        title: lines[0] || FALLBACK_SLIDES[0].title,
-                        title2: lines[1] || (lines.length === 1 ? '' : subtitle) || FALLBACK_SLIDES[0].title2,
-                        body: subtitle || FALLBACK_SLIDES[0].body,
+                        eyebrow: '', // tag를 칩과 옆 텍스트에 두 번 보여주던 중복 제거
+                        title: lines[0] || '',
+                        title2: lines[1] || '',
+                        body: subtitle,
                         cta: b.link || '/products',
                     };
                 });
@@ -191,20 +192,25 @@ export function HeroSectionDesktop({ contentWidth = 1280 }: HeroSectionDesktopPr
                 }}
             >
                 <div style={{ maxWidth: 780 }}>
-                    <div style={{ marginBottom: 22, display: 'flex', alignItems: 'center', gap: 12 }}>
-                        <TagChip tone={cur.tone}>{cur.tag}</TagChip>
-                        <span
-                            style={{
-                                fontSize: 12,
-                                fontWeight: 500,
-                                letterSpacing: '0.08em',
-                                textTransform: 'uppercase',
-                                color: 'rgba(255,255,255,0.85)',
-                            }}
-                        >
-                            {cur.eyebrow}
-                        </span>
-                    </div>
+                    {(cur.tag || cur.eyebrow) && (
+                        <div style={{ marginBottom: 22, display: 'flex', alignItems: 'center', gap: 12 }}>
+                            {cur.tag && <TagChip tone={cur.tone}>{cur.tag}</TagChip>}
+                            {cur.eyebrow && (
+                                <span
+                                    style={{
+                                        fontSize: 12,
+                                        fontWeight: 500,
+                                        letterSpacing: '0.08em',
+                                        textTransform: 'uppercase',
+                                        color: 'rgba(255,255,255,0.85)',
+                                    }}
+                                >
+                                    {cur.eyebrow}
+                                </span>
+                            )}
+                        </div>
+                    )}
+                    {cur.title && (
                     <h1
                         style={{
                             // Auto-shrink font for long Korean headlines so each
@@ -241,6 +247,7 @@ export function HeroSectionDesktop({ contentWidth = 1280 }: HeroSectionDesktopPr
                             </>
                         )}
                     </h1>
+                    )}
                     {cur.body && (
                         <p
                             style={{
