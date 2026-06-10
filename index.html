@@ -218,9 +218,9 @@
   <script>
     (function () {
       var done = function () { document.documentElement.classList.add('mso-ready'); };
-      // Safety: never leave icons hidden longer than ~4s even if fonts.ready
+      // Safety: never leave icons hidden longer than ~8s even if fonts.ready
       // hangs on a flaky network — better to show an icon than nothing.
-      var timer = setTimeout(done, 4000);
+      var timer = setTimeout(done, 8000);
       if (document.fonts && document.fonts.load) {
         document.fonts.load('24px "Material Symbols Outlined"').then(function () {
           clearTimeout(timer);

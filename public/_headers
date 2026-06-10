@@ -1,0 +1,10 @@
+# Cloudflare Pages headers
+# Self-hosted webfonts are content-stable, so cache them hard. Without this the
+# Material Symbols font (~3.4MB) was served with must-revalidate and re-downloaded
+# on every mobile refresh — slow loads made icons flash as ligature text (FOUT).
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Vite-hashed build assets are immutable by content hash.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
