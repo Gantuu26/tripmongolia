@@ -25,8 +25,10 @@ export const CategoryRowSection: React.FC<CategoryRowSectionProps> = ({ category
     const { ref, revealClass } = useScrollReveal(0.05);
 
     const displayProducts = useMemo(() => {
-        return products.filter(p => p.category === category.name).slice(0, 5);
-    }, [products, category.name]);
+        // 상품의 category 필드는 슬러그(id)로 저장되는데, 카테고리 객체는 한글 name을 가짐.
+        // 데스크탑(CategorySection.desktop)과 동일하게 id 또는 name 둘 다 매칭해야 모바일에서도 상품이 노출됨.
+        return products.filter(p => p.category === category.id || p.category === category.name).slice(0, 5);
+    }, [products, category.id, category.name]);
 
     if (displayProducts.length === 0) {
         return null;
@@ -40,7 +42,7 @@ export const CategoryRowSection: React.FC<CategoryRowSectionProps> = ({ category
                     <h3 className="text-[19px] font-bold text-slate-900 dark:text-white pt-0.5">{category.name}</h3>
                 </div>
                 <button 
-                    onClick={() => navigate(`/products?category=${category.name}`)}
+                    onClick={() => navigate(`/products?category=${category.id}`)}
                     className="text-sm text-primary font-bold flex items-center hover:opacity-80 transition-opacity"
                 >
                     {t('home.theme.more_items', '더보기')}

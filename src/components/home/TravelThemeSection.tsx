@@ -37,8 +37,9 @@ export const TravelThemeSection: React.FC<TravelThemeSectionProps> = ({ products
 
     const categoryProducts = useMemo(() => {
         if (!currentTabInfo) return [];
-        return products.filter(p => p.category === currentTabInfo?.name);
-    }, [products, currentTabInfo?.name]);
+        // 상품 category는 슬러그(id)로 저장됨 → id/name 둘 다 매칭
+        return products.filter(p => p.category === currentTabInfo?.id || p.category === currentTabInfo?.name);
+    }, [products, currentTabInfo?.id, currentTabInfo?.name]);
 
     // If no tabs exist, don't render anything
     if (!currentTabInfo || tabs.length === 0) {
