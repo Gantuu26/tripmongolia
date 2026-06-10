@@ -163,8 +163,8 @@ export function DesktopFooter({ contentWidth = 1280 }: DesktopFooterProps) {
                         {[
                             { icon: 'photo_camera', label: 'Instagram', href: 'https://instagram.com' },
                             { icon: 'chat', label: 'LINE', onClick: onConsult },
-                            { icon: 'mail', label: 'Email', href: 'mailto:bolor1@hanmail.net' },
-                            { icon: 'phone', label: 'Phone', href: 'tel:+97695945838' },
+                            { icon: 'mail', label: 'Email', href: 'mailto:ts.dejidlala@gmail.com' },
+                            { icon: 'phone', label: 'Phone', href: 'tel:+97691877227' },
                         ].map((s) =>
                             s.href ? (
                                 <a

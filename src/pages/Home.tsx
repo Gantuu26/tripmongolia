@@ -38,7 +38,7 @@ export const Home: React.FC = () => {
                     "alternateName": "밀키웨이 재팬",
                     "image": "https://tripmongolia.kr/og-image.jpg",
                     "url": "https://tripmongolia.kr",
-                    "email": "info@mongolryokou.com",
+                    "email": "ts.dejidlala@gmail.com",
                     "address": {
                         "@type": "PostalAddress",
                         "addressCountry": "MN",

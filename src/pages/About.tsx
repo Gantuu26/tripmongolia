@@ -22,11 +22,7 @@ export const About: React.FC = () => {
                 url: 'https://tripmongolia.kr',
                 logo: 'https://tripmongolia.kr/favicon.png',
                 founder: [
-                    { '@type': 'Person', name: 'Bilguun', jobTitle: '대표' },
-                    { '@type': 'Person', name: 'Gantuu', jobTitle: '부대표' },
-                ],
-                employee: [
-                    { '@type': 'Person', name: 'Bolor', jobTitle: '여행 디자이너' },
+                    { '@type': 'Person', name: 'Tsendee Tserendejid', jobTitle: '대표' },
                 ],
                 areaServed: { '@type': 'Country', name: '몽골' },
                 address: {
@@ -74,9 +70,7 @@ export const About: React.FC = () => {
 
                     <h2>팀</h2>
                     <ul>
-                        <li>Bilguun - 대표</li>
-                        <li>Gantuu - 부대표</li>
-                        <li>Bolor - 여행 디자이너</li>
+                        <li>Tsendee Tserendejid - 대표</li>
                     </ul>
 
                     <h2>1. 몽골여행 패키지는 몽골인이 계획해야 합니다.</h2>

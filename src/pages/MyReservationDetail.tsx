@@ -579,7 +579,7 @@ export const MyReservationDetail: React.FC = () => {
                         </div>
                         <div className="grid grid-cols-2 gap-2">
                             <ContactBtn icon="chat" label="채팅 상담" onClick={handleChat} />
-                            <ContactBtn icon="mail" label="이메일 문의" href="mailto:info@mongolryokou.com" />
+                            <ContactBtn icon="mail" label="이메일 문의" href="mailto:ts.dejidlala@gmail.com" />
                         </div>
                     </div>
                 </div>

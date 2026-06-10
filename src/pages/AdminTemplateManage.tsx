@@ -108,7 +108,7 @@ export const defaultDocumentSettings = (): DocumentSettings => ({
         guidePhone: '',
         accommodationInfo: '',
         emergencyPhone: '+976-80-1234-5678',
-        emergencyEmail: 'info@mongolryokou.com',
+        emergencyEmail: 'ts.dejidlala@gmail.com',
         closingMessage: '몽골의 대자연과 문화를 마음껏 즐기시기 바랍니다.',
         qrLabel: '고객 전용 페이지',
     },

@@ -449,7 +449,7 @@ export const DocumentItinerary: React.FC = () => {
                                 <p className="text-[12px] font-black uppercase tracking-widest text-slate-400">Contact</p>
                                 <p className="mt-2 font-black text-slate-950">Trip Mongolia</p>
                                 <p className="mt-1 text-sm text-slate-500">{guideSettings.emergencyPhone || guide?.phone || '+976-80-1234-5678'}</p>
-                                <p className="text-sm text-slate-500">{guideSettings.emergencyEmail || 'info@mongolryokou.com'}</p>
+                                <p className="text-sm text-slate-500">{guideSettings.emergencyEmail || 'ts.dejidlala@gmail.com'}</p>
                                 {guideSettings.closingMessage && <p className="mt-4 text-sm font-bold leading-relaxed text-[#0F8F84]">{guideSettings.closingMessage}</p>}
                             </div>
                         </div>

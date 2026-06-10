@@ -9,7 +9,7 @@ export const COMPANY_INFO = {
     ceo: 'Tsendee Tserendejid',             // 대표자
     registrationNumber: '9011825028',     // 사업자등록번호
     registrationNote: '',
-    email: 'info@mongolryokou.com',
+    email: 'ts.dejidlala@gmail.com',
     website: 'tripmongolia.kr',
     stampImage: '/stamp.png',             // public/stamp.png 위치에 도장 이미지를 둡니다
 };

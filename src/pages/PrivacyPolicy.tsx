@@ -167,7 +167,7 @@ export const PrivacyPolicy = () => {
                                 <ul className="space-y-1 text-sm">
                                     <li>- 성명: 주수정</li>
                                     <li>- 직책: 여행 플래너</li>
-                                    <li>- 연락처: <a href="mailto:bolor1@hanmail.net" className="text-blue-600 hover:underline">bolor1@hanmail.net</a></li>
+                                    <li>- 연락처: <a href="mailto:ts.dejidlala@gmail.com" className="text-blue-600 hover:underline">ts.dejidlala@gmail.com</a></li>
                                 </ul>
                                 <p className="mt-2 text-xs text-gray-500">※ 개인정보 보호 담당 부서로 연결됩니다.</p>
                             </div>
@@ -377,7 +377,7 @@ export const PrivacyPolicy = () => {
                             <ul className="space-y-1 text-sm">
                                 <li>- 성명: 주수정</li>
                                 <li>- 직책: 여행 플래너</li>
-                                <li>- 연락처: <a href="mailto:bolor1@hanmail.net" className="text-blue-600 hover:underline">bolor1@hanmail.net</a></li>
+                                <li>- 연락처: <a href="mailto:ts.dejidlala@gmail.com" className="text-blue-600 hover:underline">ts.dejidlala@gmail.com</a></li>
                             </ul>
                             <p className="mt-2 text-xs text-gray-500">※ 개인정보 보호 담당부서로 연결됩니다.</p>
                         </div>

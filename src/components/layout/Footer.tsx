@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import logoHorizontal from '../../assets/logo_horizontal.webp';
 
 const PHONE_PRIMARY = '+976 9187 7227';
-const EMAIL = 'bolor1@hanmail.net';
+const EMAIL = 'ts.dejidlala@gmail.com';
 const ADDRESS_QUERY = 'Trip Mongolia, Ulaanbaatar, Mongolia';
 
 export const Footer: React.FC = () => {
