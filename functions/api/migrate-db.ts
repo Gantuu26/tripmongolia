@@ -53,6 +53,38 @@ app.get('/', async (c) => {
         }
     }
 
+    // Product columns the minimal seed schema lacked. The admin product editor
+    // writes these (main_images, gallery_images, detail/itinerary blocks 등), so
+    // without them every product save fails with "no such column". Idempotent.
+    const productColumns = [
+        "duration TEXT",
+        "original_price REAL DEFAULT 0",
+        "main_images TEXT DEFAULT '[]'",
+        "gallery_images TEXT DEFAULT '[]'",
+        "detail_images TEXT DEFAULT '[]'",
+        "itinerary_images TEXT DEFAULT '[]'",
+        "is_featured INTEGER DEFAULT 0",
+        "is_popular INTEGER DEFAULT 0",
+        "included TEXT DEFAULT '[]'",
+        "excluded TEXT DEFAULT '[]'",
+        "detail_slides TEXT DEFAULT '[]'",
+        "detail_blocks TEXT DEFAULT '[]'",
+        "itinerary_blocks TEXT DEFAULT '[]'",
+        "highlights TEXT DEFAULT '[]'",
+        "pricing_options TEXT DEFAULT '[]'",
+        "accommodation_options TEXT DEFAULT '[]'",
+        "vehicle_options TEXT DEFAULT '[]'",
+        "booking_count INTEGER DEFAULT 0",
+    ];
+    for (const colDef of productColumns) {
+        try {
+            await c.env.DB.prepare(`ALTER TABLE products ADD COLUMN ${colDef}`).run();
+            migrationResults.push(`Added products.${colDef}`);
+        } catch (e: any) {
+            migrationResults.push(`Skipped products.${colDef}: ${e.message}`);
+        }
+    }
+
     // In-app notifications table
     try {
         await c.env.DB.prepare(`
