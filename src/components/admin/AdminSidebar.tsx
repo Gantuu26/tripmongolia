@@ -35,6 +35,7 @@ const settingItems: NavItem[] = [
     { id: 'hotels', icon: 'hotel', label: 'Зочид буудлын мастер', href: '/admin/hotels' },
     { id: 'tourist-spots', icon: 'location_on', label: 'Үзвэрийн газрын мастер', href: '/admin/tourist-spots' },
     { id: 'guide-intro', icon: 'translate', label: 'Хөтчийн танилцуулга (нийтлэг)', href: '/admin/guide-intro' },
+    { id: 'payment', icon: 'account_balance', label: 'Төлбөрийн данс', href: '/admin/payment' },
 ];
 
 export const AdminSidebar: React.FC<AdminSidebarProps> = ({ activePage }) => {

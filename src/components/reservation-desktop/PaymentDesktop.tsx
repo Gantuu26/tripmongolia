@@ -3,6 +3,7 @@ import { MatIcon } from '../desktop-primitives/MatIcon';
 import { Card, CardHeader, Field, InfoRow, fmtFull, formatPrice, inputStyle } from './primitives';
 import { ReservationShell } from './ReservationShell';
 import { BookingSummary } from './BookingSummary';
+import { useBankAccount } from '../../hooks/useBankAccount';
 
 interface PaymentDesktopProps {
     product: TourProduct;
@@ -48,6 +49,7 @@ export function PaymentDesktop({
     onSubmit,
     onBack,
 }: PaymentDesktopProps) {
+    const { account: bankAccount } = useBankAccount();
     const cleanTitle = product.name.replace(/^\[[^\]]+\]\s*/, '');
     const canSubmit =
         !!customerInfo.name.trim() &&
@@ -282,9 +284,9 @@ export function PaymentDesktop({
                             <div
                                 style={{
                                     padding: '20px 22px',
-                                    background: '#f0f5ff',
+                                    background: 'var(--primary-soft)',
                                     borderRadius: 14,
-                                    border: '1px solid #dbe7ff',
+                                    border: '1px solid var(--border-subtle)',
                                     display: 'grid',
                                     gridTemplateColumns: '56px 1fr',
                                     gap: 18,
@@ -300,10 +302,10 @@ export function PaymentDesktop({
                                         alignItems: 'center',
                                         justifyContent: 'center',
                                         flexShrink: 0,
-                                        border: '1px solid #dbe7ff',
+                                        border: '1px solid var(--border-subtle)',
                                     }}
                                 >
-                                    <MatIcon name="mail" size={28} color="#1e40af" />
+                                    <MatIcon name="account_balance" size={28} color="#ff385c" />
                                 </div>
                                 <div>
                                     <div
@@ -315,55 +317,50 @@ export function PaymentDesktop({
                                             letterSpacing: '-0.01em',
                                         }}
                                     >
-                                        PayPal 청구서 (이메일)
+                                        무통장 입금
                                     </div>
-                                    <div
-                                        style={{
-                                            fontSize: 13,
-                                            color: 'var(--fg-3)',
-                                            lineHeight: 1.7,
-                                        }}
-                                    >
-                                        예약 신청 완료 후, 입력하신 이메일 주소로
-                                        PayPal 청구서를 보내드립니다.
-                                        <br />
-                                        메일 안의 링크를 통해 신용카드 등으로 안전하게 결제하실 수 있습니다.
-                                    </div>
-                                    <div
-                                        style={{
-                                            display: 'flex',
-                                            gap: 8,
-                                            marginTop: 14,
-                                            flexWrap: 'wrap',
-                                        }}
-                                    >
-                                        {[
-                                            { i: 'credit_card', t: '신용카드' },
-                                            { i: 'payments', t: '체크카드' },
-                                            { i: 'account_balance', t: 'PayPal 잔액' },
-                                        ].map((p) => (
-                                            <span
-                                                key={p.t}
+                                    {bankAccount.accountNumber ? (
+                                        <>
+                                            <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--fg-1)', marginBottom: 4 }}>
+                                                {bankAccount.bankName} {bankAccount.accountNumber}
+                                            </div>
+                                            <div style={{ fontSize: 13, color: 'var(--fg-3)', marginBottom: 12 }}>
+                                                예금주 : {bankAccount.accountHolder}
+                                            </div>
+                                            <button
+                                                type="button"
+                                                onClick={() => { try { navigator.clipboard?.writeText(bankAccount.accountNumber); } catch { /* ignore */ } }}
                                                 style={{
                                                     display: 'inline-flex',
                                                     alignItems: 'center',
                                                     gap: 4,
-                                                    padding: '5px 10px',
+                                                    padding: '6px 12px',
                                                     background: '#fff',
+                                                    border: '1px solid var(--border)',
                                                     borderRadius: 999,
-                                                    fontSize: 11,
-                                                    color: 'var(--fg-3)',
-                                                    fontWeight: 500,
+                                                    fontSize: 12,
+                                                    fontWeight: 700,
+                                                    color: '#ff385c',
+                                                    cursor: 'pointer',
                                                 }}
                                             >
-                                                <MatIcon
-                                                    name={p.i}
-                                                    size={14}
-                                                    color="var(--fg-4)"
-                                                />{' '}
-                                                {p.t}
-                                            </span>
-                                        ))}
+                                                <MatIcon name="content_copy" size={14} color="#ff385c" />{' '}
+                                                계좌번호 복사
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <div
+                                            style={{
+                                                fontSize: 13,
+                                                color: 'var(--fg-3)',
+                                                lineHeight: 1.7,
+                                            }}
+                                        >
+                                            계좌 정보 준비 중입니다. 예약 신청 후 별도로 안내드립니다.
+                                        </div>
+                                    )}
+                                    <div style={{ fontSize: 12, color: 'var(--fg-4)', marginTop: 12, lineHeight: 1.7 }}>
+                                        예약 신청 후 24시간 이내에 위 계좌로 예약금을 입금해 주시면 예약이 확정됩니다.
                                     </div>
                                 </div>
                             </div>

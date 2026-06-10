@@ -6,13 +6,22 @@ import { sendNotificationEmail } from '../lib/email';
 import { SEO } from '../components/seo/SEO';
 import { useIsDesktop } from '../hooks/useIsDesktop';
 import { PaymentDesktop } from '../components/reservation-desktop/PaymentDesktop';
+import { useBankAccount } from '../hooks/useBankAccount';
 
 export const Payment: React.FC = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const location = useLocation();
     const isDesktop = useIsDesktop();
+    const { account: bankAccount } = useBankAccount();
     const [showToast, setShowToast] = useState(false);
+
+    const handleCopyAccount = () => {
+        if (!bankAccount.accountNumber) return;
+        try { navigator.clipboard?.writeText(bankAccount.accountNumber); } catch { /* ignore */ }
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 2000);
+    };
 
     // Customer info state
     const [customerInfo, setCustomerInfo] = useState({
@@ -467,31 +476,46 @@ export const Payment: React.FC = () => {
                     <div className="h-2 bg-gray-50 dark:bg-zinc-800/30"></div>
 
                     <div className="px-5 py-8">
-                        <h3 className="text-[#0e1a18] dark:text-white text-lg font-bold mb-6">{t('payment.paypal_invoice_title', { defaultValue: '예약금 결제 안내' })}</h3>
-                        <div className="border border-blue-100 dark:border-blue-900/50 rounded-2xl bg-blue-50/50 dark:bg-blue-900/10 overflow-hidden shadow-sm">
-                            <div className="flex items-center gap-4 p-5">
+                        <h3 className="text-[#0e1a18] dark:text-white text-lg font-bold mb-6">{t('payment.payment_method_info', { defaultValue: '결제 수단 및 계좌 정보' })}</h3>
+
+                        {/* 무통장 입금 계좌 */}
+                        <div className="border border-primary/20 rounded-2xl bg-primary/5 overflow-hidden shadow-sm">
+                            <div className="flex items-center gap-4 p-5 border-b border-primary/10">
                                 <div className="size-12 bg-white dark:bg-zinc-800 rounded-full flex items-center justify-center shadow-sm shrink-0">
-                                    <span className="material-symbols-outlined text-[#003087] text-2xl">mail</span>
+                                    <span className="material-symbols-outlined text-primary text-2xl">account_balance</span>
                                 </div>
                                 <div className="flex-1">
-                                    <p className="text-[#0e1a18] dark:text-white font-bold text-[15px] mb-1">{t('payment.paypal_invoice_method', { defaultValue: 'PayPal 청구서 (이메일)' })}</p>
-                                    <p className="text-[13px] text-gray-600 dark:text-gray-400 leading-relaxed">
-                                        {t('payment.paypal_invoice_desc1', { defaultValue: '예약 신청 완료 후, 입력해주신 이메일 주소로 PayPal 청구서를 보내드립니다.' })}
-                                        <br />
-                                        {t('payment.paypal_invoice_desc2', { defaultValue: '이메일 내 링크를 통해 신용카드 등으로 안전하게 결제하실 수 있습니다.' })}
-                                    </p>
+                                    <p className="text-[#0e1a18] dark:text-white font-bold text-[15px] mb-0.5">{t('payment.bank_transfer', { defaultValue: '무통장 입금' })}</p>
+                                    <p className="text-[13px] text-gray-600 dark:text-gray-400">{t('payment.bank_transfer_desc', { defaultValue: '24시간 이내 입금 시 예약 확정' })}</p>
                                 </div>
                             </div>
+                            <div className="p-5 bg-white dark:bg-zinc-900">
+                                <p className="text-xs font-bold text-gray-500 dark:text-gray-400 mb-3">{t('payment.deposit_account', { defaultValue: '입금 계좌' })}</p>
+                                {bankAccount.accountNumber ? (
+                                    <div className="flex items-center justify-between gap-3">
+                                        <div className="min-w-0">
+                                            <p className="text-[#0e1a18] dark:text-white font-bold text-base">{bankAccount.bankName} {bankAccount.accountNumber}</p>
+                                            <p className="text-[13px] text-gray-500 dark:text-gray-400">{t('payment.account_holder', { defaultValue: '예금주' })} : {bankAccount.accountHolder}</p>
+                                        </div>
+                                        <button onClick={handleCopyAccount} className="shrink-0 flex items-center gap-1 bg-primary/10 text-primary font-bold text-xs px-3 py-2 rounded-lg active:scale-95 transition-transform">
+                                            <span className="material-symbols-outlined text-[16px]">content_copy</span>
+                                            {t('payment.copy', { defaultValue: '복사' })}
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <p className="text-sm text-gray-400">계좌 정보 준비 중입니다. 예약 신청 후 별도로 안내드립니다.</p>
+                                )}
+                            </div>
                         </div>
+
                         <div className="mt-6 p-4 bg-gray-50 dark:bg-zinc-800/50 rounded-xl">
                             <p className="text-[13px] font-bold text-gray-600 dark:text-gray-300 mb-2 flex items-center gap-1">
                                 <span className="material-symbols-outlined text-sm">info</span>
                                 {t('payment.deposit_notices.title')}
                             </p>
                             <ul className="text-xs text-gray-500 dark:text-gray-400 space-y-2 list-disc pl-4">
-                                <li>{t('payment.paypal_notices.check_email', { defaultValue: '청구서 이메일에 결제 기한이 기재되어 있습니다. 기한 내에 결제 부탁드립니다.' })}</li>
+                                <li>{t('payment.deposit_notices.name_match', { defaultValue: '입금자명은 반드시 예약자 성함과 동일해야 합니다.' })}</li>
                                 <li>{t('payment.deposit_notices.auto_cancel')}</li>
-                                <li>{t('payment.japan_support')}</li>
                                 <li>{t('payment.deposit_notices.local_payment')}</li>
                             </ul>
                         </div>

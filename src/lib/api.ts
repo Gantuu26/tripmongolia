@@ -94,11 +94,13 @@ export const api = {
         }),
     },
     settings: {
+        // GET /api/settings returns the FULL key→value map (the ?key param is ignored by the backend).
         get: async (key?: string) => request(`${API_BASE}/settings${key ? `?key=${key}` : ''}`),
+        // PUT /api/settings expects a { key: value, ... } map (it iterates entries), so we send { [key]: value }.
         save: async (key: string, value: any) => request(`${API_BASE}/settings`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ key, value })
+            body: JSON.stringify({ [key]: value })
         }),
     },
     faqs: {
