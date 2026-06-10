@@ -1023,13 +1023,13 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
     };
 
     // ─── N-day skeleton generator ────────────────────────────────────
-    // One click → creates N dayInfo blocks (1日目 … N日目) with dividers
+    // One click → creates N dayInfo blocks (1일차 … N일차) with dividers
     // between them. Admin then just fills in titles / descriptions per day.
     const DAY_LABELS_JP = [
-        '1日目（いちにちめ）', '2日目（ふつかめ）', '3日目（みっかめ）',
-        '4日目（よっかめ）', '5日目（いつかめ）', '6日目（むいかめ）',
-        '7日目（なのかめ）', '8日目（ようかめ）', '9日目（ここのかめ）',
-        '10日目（とおかめ）',
+        '1일차', '2일차', '3일차',
+        '4일차', '5일차', '6일차',
+        '7일차', '8일차', '9일차',
+        '10일차',
     ];
     const addDaysSkeleton = (days: number) => {
         if (!Number.isFinite(days) || days < 1) return;
@@ -1042,7 +1042,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                 type: 'dayInfo',
                 content: {
                     id: `dayinfo-${stamp}-${i}`,
-                    dayLabel: DAY_LABELS_JP[i] || `${i + 1}日目`,
+                    dayLabel: DAY_LABELS_JP[i] || `${i + 1}일차`,
                     dayDate: '',
                     title: '',
                     description: '',
@@ -1754,16 +1754,16 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                 style={{ height: 36, fontSize: 13 }}
                                             >
                                                 <option value="" disabled>📅 Өдөр нэмэх</option>
-                                                <option value="1日目（いちにちめ）">1日目（いちにちめ）</option>
-                                                <option value="2日目（ふつかめ）">2日目（ふつかめ）</option>
-                                                <option value="3日目（みっかめ）">3日目（みっかめ）</option>
-                                                <option value="4日目（よっかめ）">4日目（よっかめ）</option>
-                                                <option value="5日目（いつかめ）">5日目（いつかめ）</option>
-                                                <option value="6日目（むいかめ）">6日目（むいかめ）</option>
-                                                <option value="7日目（なのかめ）">7日目（なのかめ）</option>
-                                                <option value="8日目（ようかめ）">8日目（ようかめ）</option>
-                                                <option value="9日目（ここのかめ）">9日目（ここのかめ）</option>
-                                                <option value="10日目（とおかめ）">10日目（とおかめ）</option>
+                                                <option value="1일차">1일차</option>
+                                                <option value="2일차">2일차</option>
+                                                <option value="3일차">3일차</option>
+                                                <option value="4일차">4일차</option>
+                                                <option value="5일차">5일차</option>
+                                                <option value="6일차">6일차</option>
+                                                <option value="7일차">7일차</option>
+                                                <option value="8일차">8일차</option>
+                                                <option value="9일차">9일차</option>
+                                                <option value="10일차">10일차</option>
                                             </select>
                                             <button type="button" className="chip" onClick={() => addDetailBlock('divider')}>
                                                 <Icon name="horizontal_rule" style={{ fontSize: 16 }} />Зураас/Зай
@@ -2018,7 +2018,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                     <div className="card-muted-note" style={{ marginBottom: 14, display: 'block' }}>
                                         <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontWeight: 700 }}><Icon name="lightbulb" />Ашиглах заавар</div>
                                         <ul style={{ margin: '8px 0 0', paddingLeft: 20, listStyle: 'disc', lineHeight: 1.7 }}>
-                                            <li><strong>1日目, 2日目 толгой</strong>-г дээд талын <strong>「N өдрийн хөтөлбөрийн араг яс үүсгэх」</strong> товчоор нэг дор үүсгэнэ үү. Толгой дотор хотын нэр·хоол·байрыг оруулна уу.</li>
+                                            <li><strong>1일차, 2일차 толгой</strong>-г дээд талын <strong>「N өдрийн хөтөлбөрийн араг яс үүсгэх」</strong> товчоор нэг дор үүсгэнэ үү. Толгой дотор хотын нэр·хоол·байрыг оруулна уу.</li>
                                             <li><strong>Тухайн өдрийн доторх үйл явдал</strong>(жишээ: Зайсан толгой үзэх + 5 зураг)-ыг <strong>「Хөтөлбөрийн зүйл нэмэх」</strong> товчоор нэмнэ. Цаг·гарчиг·тайлбар·хэд хэдэн зураг оруулах боломжтой.</li>
                                             <li>Тухайн өдрийн хоол·байрыг тэр өдрийн <strong>DAY INFO</strong> блок дотор оруулна — PC дэлгэц дээр автоматаар тэр өдрийн хамгийн доор харагдана.</li>
                                             <li>Зөвхөн зургийг урт нэг нэгээр нь оруулдаг бүтээгдэхүүнийг дээд талын <strong>чирч буулгах хайрцаг</strong>аар нэг дор оруулна.</li>
@@ -2604,7 +2604,7 @@ const ItineraryQuickActions: React.FC<ItineraryQuickActionsProps> = ({
                 <div style={{ flex: 1, minWidth: 0 }}>
                     <div className="cell-strong" style={{ color: '#8a5a12' }}>N өдрийн хөтөлбөрийн араг яс үүсгэх</div>
                     <div style={{ fontSize: 12, color: '#9a6a22', marginTop: 2 }}>
-                        1日目 ~ N日目 толгой ба зураасыг нэг дор үүсгэнэ. Өдөр бүрийг дэлгэж агуулгыг бөглөнө үү.
+                        1일차 ~ N일차 толгой ба зураасыг нэг дор үүсгэнэ. Өдөр бүрийг дэлгэж агуулгыг бөглөнө үү.
                     </div>
                 </div>
                 <div className="row" style={{ gap: 8, flex: 'none' }}>
