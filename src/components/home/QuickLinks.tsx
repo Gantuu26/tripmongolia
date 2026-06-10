@@ -3,6 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { api } from '../../lib/api';
 import { useNavigate } from 'react-router-dom';
 
+// Custom red line icons supplied by the owner (transparent PNG).
+import tourIcon from '../../assets/icons/tour.png';
+import matesIcon from '../../assets/icons/mates.png';
+import quoteIcon from '../../assets/icons/quote.png';
+
 interface QuickLink {
     id: string;
     icon: string;
@@ -16,9 +21,9 @@ interface QuickLink {
 // with no sub-labels. PC (QuickLinksRow.desktop) keeps the full 6-item row.
 // quick_links DB rows (if ≥3) still override these defaults.
 const DEFAULT_LINKS: QuickLink[] = [
-    { id: 'tour', icon: 'explore', label: '투어 상품', path: '/products' },
-    { id: 'mates', icon: 'groups', label: '동행자 모집', path: '/travel-mates' },
-    { id: 'quote', icon: 'request_quote', label: '견적 문의', path: '/custom-estimate' },
+    { id: 'tour', icon: 'explore', image: tourIcon, label: '투어 상품', path: '/products' },
+    { id: 'mates', icon: 'groups', image: matesIcon, label: '동행자 모집', path: '/travel-mates' },
+    { id: 'quote', icon: 'request_quote', image: quoteIcon, label: '견적 문의', path: '/custom-estimate' },
 ];
 
 export const QuickLinks: React.FC = () => {
@@ -58,8 +63,20 @@ export const QuickLinks: React.FC = () => {
                         onClick={() => link.path !== '#' && navigate(link.path)}
                         className="flex flex-col items-center gap-1.5 group"
                     >
-                        <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center group-active:scale-95 transition-all">
-                            <span className="material-symbols-outlined text-primary" style={{ fontSize: 30 }}>{link.icon}</span>
+                        <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center group-active:scale-95 transition-all overflow-hidden p-3">
+                            {link.image ? (
+                                <img
+                                    src={link.image}
+                                    alt={link.label}
+                                    width={64}
+                                    height={64}
+                                    loading="lazy"
+                                    decoding="async"
+                                    className="w-full h-full object-contain"
+                                />
+                            ) : (
+                                <span className="material-symbols-outlined text-primary" style={{ fontSize: 30 }}>{link.icon}</span>
+                            )}
                         </div>
                         <span className="text-[13px] font-bold text-slate-700 dark:text-slate-300 leading-tight">{link.label}</span>
                     </button>
