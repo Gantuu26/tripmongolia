@@ -204,16 +204,6 @@ export const AdminAccommodationManage: React.FC = () => {
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </label>
-                    <div className="spacer" />
-                    <button
-                        className="btn btn-ink"
-                        onClick={() => {
-                            resetForm();
-                            setIsModalOpen(true);
-                        }}
-                    >
-                        <Icon name="add" />Байр нэмэх
-                    </button>
                 </div>
 
                 {/* Accommodation table */}

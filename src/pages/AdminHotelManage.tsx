@@ -194,10 +194,6 @@ export const AdminHotelManage: React.FC = () => {
                     <span className="cell-muted" style={{ fontSize: 13 }}>
                         Нийт {hotels.length}-аас <b style={{ color: 'var(--text-strong)' }}>{filtered.length}</b> харуулж байна
                     </span>
-                    <button type="button" onClick={startNew} className="btn btn-ink">
-                        <Icon name="add" />
-                        Зочид буудал нэмэх
-                    </button>
                 </div>
 
                 <div className="card">

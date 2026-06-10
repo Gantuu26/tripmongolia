@@ -6,6 +6,7 @@ import { TravelThemeSection } from '../components/home/TravelThemeSection';
 import { PromoBanner } from '../components/home/PromoBanner';
 import { ReviewSection } from '../components/home/ReviewSection';
 import { CategoryRowSection } from '../components/home/CategoryRowSection';
+import { QuickLinks } from '../components/home/QuickLinks';
 import { MagazineSection } from '../components/home/MagazineSection';
 import { useHomeData } from '../hooks/useHomeData';
 import { useIsDesktop } from '../hooks/useIsDesktop';
@@ -118,6 +119,9 @@ export const Home: React.FC = () => {
             <div style={{ contentVisibility: 'auto', containIntrinsicSize: '400px' }}>
                 <HeroSection />
             </div>
+
+            {/* Shortcut row — same 6 icons as PC (QuickLinksRow.desktop) */}
+            <QuickLinks />
 
             {/* SEO: H1 + Intro (Visually hidden but available for crawlers and screen readers) */}
             <section className="sr-only">

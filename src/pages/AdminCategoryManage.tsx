@@ -210,17 +210,6 @@ export const AdminCategoryManage: React.FC = () => {
                     <div className="cell-muted" style={{ fontSize: 13.5, fontWeight: 600 }}>
                         Эрэмбийн товчоор харагдах дарааллыг өөрчилж болно.
                     </div>
-                    <div className="spacer" />
-                    <button
-                        onClick={() => {
-                            setSelectedCategory(null);
-                            setIsModalOpen(true);
-                        }}
-                        className="btn btn-ink"
-                    >
-                        <Icon name="add" />
-                        Ангилал нэмэх
-                    </button>
                 </div>
 
                 <div className="card">

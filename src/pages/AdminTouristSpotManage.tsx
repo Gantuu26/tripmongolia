@@ -207,14 +207,10 @@ export const AdminTouristSpotManage: React.FC = () => {
                         <option value="active">Ашиглаж буй</option>
                         <option value="inactive">Ашиглахгүй</option>
                     </select>
+                    <div className="spacer" />
                     <div className="cell-muted" style={{ fontSize: 13, fontWeight: 600 }}>
                         Нийт {spots.length}-аас <b className="cell-strong">{filtered.length}</b>
                     </div>
-                    <div className="spacer" />
-                    <button type="button" onClick={startNew} className="btn btn-ink">
-                        <Icon name="add" />
-                        Аялал жуулчлалын газар нэмэх
-                    </button>
                 </div>
 
                 {/* Card + table */}
