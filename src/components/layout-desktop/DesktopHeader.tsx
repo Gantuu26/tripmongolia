@@ -2,6 +2,7 @@ import { useEffect, useState, type CSSProperties, type FormEvent } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import logoSquare from '../../assets/new_logo_2026.png';
 import { MatIcon } from '../desktop-primitives/MatIcon';
+import { useUser } from '../../contexts/UserContext';
 
 interface DesktopHeaderProps {
     contentWidth?: number;
@@ -19,6 +20,7 @@ const NAV_ITEMS: { id: string; label: string; path: string; match?: (p: string) 
 export function DesktopHeader({ contentWidth = 1280 }: DesktopHeaderProps) {
     const navigate = useNavigate();
     const location = useLocation();
+    const { user, logout } = useUser();
     const [scrolled, setScrolled] = useState(false);
     const [searchValue, setSearchValue] = useState('');
 
@@ -76,12 +78,30 @@ export function DesktopHeader({ contentWidth = 1280 }: DesktopHeaderProps) {
                         </span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                        <button type="button" onClick={() => navigate('/login')} style={utilLinkBtn}>
-                            로그인
-                        </button>
-                        <button type="button" onClick={() => navigate('/login')} style={utilLinkBtn}>
-                            회원가입
-                        </button>
+                        {user ? (
+                            <>
+                                <button type="button" onClick={() => navigate('/mypage')} style={utilLinkBtn}>
+                                    {user.name} 님
+                                </button>
+                                <span style={{ opacity: 0.4 }}>|</span>
+                                <button type="button" onClick={() => navigate('/mypage')} style={utilLinkBtn}>
+                                    마이페이지
+                                </button>
+                                <span style={{ opacity: 0.4 }}>|</span>
+                                <button type="button" onClick={() => logout()} style={utilLinkBtn}>
+                                    로그아웃
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <button type="button" onClick={() => navigate('/login')} style={utilLinkBtn}>
+                                    로그인
+                                </button>
+                                <button type="button" onClick={() => navigate('/login')} style={utilLinkBtn}>
+                                    회원가입
+                                </button>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
