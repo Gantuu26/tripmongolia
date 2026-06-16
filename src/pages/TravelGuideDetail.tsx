@@ -231,7 +231,7 @@ export const TravelGuideDetail: React.FC = () => {
         },
         articleSection: magazine.category || undefined,
         keywords: [magazine.category, magazine.tag].filter(Boolean).join(', ') || undefined,
-        inLanguage: 'ja',
+        inLanguage: 'ko',
     };
 
     const breadcrumbLd = {

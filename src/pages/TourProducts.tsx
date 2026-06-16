@@ -252,7 +252,7 @@ export const TourProducts: React.FC = () => {
         name: '몽골투어 상품 목록 | Trip Mongolia',
         description: t('products.seo_description'),
         url: 'https://tripmongolia.kr/products',
-        inLanguage: 'ja',
+        inLanguage: 'ko',
         isPartOf: { '@type': 'WebSite', name: 'Trip Mongolia', url: 'https://tripmongolia.kr' },
     };
 

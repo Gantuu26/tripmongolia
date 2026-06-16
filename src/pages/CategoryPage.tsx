@@ -130,7 +130,7 @@ export const CategoryPage: React.FC = () => {
         name: `${category.name} | Trip Mongolia`,
         description: seoDescription,
         url: seoUrl,
-        inLanguage: 'ja',
+        inLanguage: 'ko',
         isPartOf: { '@type': 'WebSite', name: 'Trip Mongolia', url: 'https://tripmongolia.kr' },
     };
 

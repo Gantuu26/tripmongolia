@@ -111,7 +111,7 @@ export const TravelGuide: React.FC = () => {
         name: '몽골여행 가이드 | Trip Mongolia',
         description: guideDescription,
         url: 'https://tripmongolia.kr/travel-guide',
-        inLanguage: 'ja',
+        inLanguage: 'ko',
         isPartOf: { '@type': 'WebSite', name: 'Trip Mongolia', url: 'https://tripmongolia.kr' },
     };
 

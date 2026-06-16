@@ -36,7 +36,6 @@ export const Home: React.FC = () => {
                     "@type": "TravelAgency",
                     "@id": "https://tripmongolia.kr/#organization",
                     "name": "Trip Mongolia",
-                    "alternateName": "밀키웨이 재팬",
                     "image": "https://tripmongolia.kr/og-image.jpg",
                     "url": "https://tripmongolia.kr",
                     "email": "ts.dejidlala@gmail.com",
@@ -47,8 +46,8 @@ export const Home: React.FC = () => {
                     },
                     "description": t('home.seo_description'),
                     "priceRange": "$$",
-                    "areaServed": "JP",
-                    "knowsLanguage": ["ja", "mn"],
+                    "areaServed": "KR",
+                    "knowsLanguage": ["ko", "mn"],
                     "sameAs": []
                 },
                 {
@@ -58,7 +57,7 @@ export const Home: React.FC = () => {
                     "url": "https://tripmongolia.kr",
                     "name": "Trip Mongolia | 몽골여행 전문",
                     "publisher": { "@id": "https://tripmongolia.kr/#organization" },
-                    "inLanguage": "ja",
+                    "inLanguage": "ko",
                     "potentialAction": {
                         "@type": "SearchAction",
                         "target": {
