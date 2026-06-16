@@ -737,8 +737,8 @@ export const QuoteDetailModal: React.FC<{
                                     onClick={() => setDocEditorOpen(true)}
                                     className="mb-2 flex w-full items-center justify-center gap-2 rounded-xl border border-teal-300 bg-white px-5 py-3 text-sm font-black text-teal-700 transition-colors hover:bg-teal-50 dark:border-teal-700 dark:bg-slate-800 dark:text-teal-300"
                                 >
-                                    <span className="material-symbols-outlined text-[20px]">edit_document</span>
-                                    Баримт засах (үйлчлүүлэгч·үнэ автоматаар)
+                                    <span className="material-symbols-outlined text-[20px]">edit_calendar</span>
+                                    Хөтөлбөр засах · нэр·огноо·хүн·үнэ автоматаар бөглөгдөнө
                                 </button>
                                 <button
                                     onClick={() => onSendEstimate(estimateUrl, adminNote, priceDetail, confirmedStartDate, confirmedEndDate, itineraryTemplateId)}
