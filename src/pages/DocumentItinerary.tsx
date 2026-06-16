@@ -386,10 +386,14 @@ export const DocumentItinerary: React.FC = () => {
                                     const accommodationImage = parseImage(accommodation?.images);
 
                                     return (
-                                        <article key={day.day} className="print-break grid gap-3 rounded-2xl border border-[#FFD9E0]/70 bg-white p-3 sm:grid-cols-[84px_1fr]">
-                                            <div className="rounded-xl bg-gradient-to-b from-[#E00B41] to-[#FF385C] px-3 py-4 text-center text-white">
+                                        <article key={day.day} className="print-break grid gap-4 rounded-2xl border border-[#FFD9E0]/70 bg-white p-4 sm:grid-cols-[84px_1fr]">
+                                            <div className="flex flex-col items-center justify-center rounded-xl bg-gradient-to-b from-[#E00B41] to-[#FF385C] px-3 py-4 text-center text-white">
                                                 <p className="text-xs font-black uppercase">DAY {day.day}</p>
-                                                <p className="mt-1 text-sm font-bold">{formatShortDate(new Date(new Date(reservation.startDate).getTime() + (day.day - 1) * 86400000).toISOString())}</p>
+                                                {(() => {
+                                                    const base = reservation.startDate ? new Date(reservation.startDate) : null;
+                                                    if (!base || isNaN(base.getTime()) || base.getTime() <= 0) return null;
+                                                    return <p className="mt-1 text-sm font-bold">{formatShortDate(new Date(base.getTime() + (day.day - 1) * 86400000).toISOString())}</p>;
+                                                })()}
                                             </div>
                                             <div className="min-w-0">
                                                 <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
@@ -405,25 +409,21 @@ export const DocumentItinerary: React.FC = () => {
                                                         const type = activity.type || 'other';
                                                         const imgs = parseMaybeJson(activity.images).filter(Boolean);
                                                         return (
-                                                            <div key={index} className="relative pb-4 last:pb-0">
-                                                                <span className="absolute -left-[27px] top-2 h-3 w-3 rounded-full bg-[#E00B41] ring-[3px] ring-white" />
-                                                                <div className="grid gap-2 sm:grid-cols-[70px_1fr]">
-                                                                    <p className="font-mono text-sm font-black text-slate-400">{activity.time || '--:--'}</p>
-                                                                    <div>
-                                                                        <div className="flex flex-wrap items-center gap-2">
-                                                                            <p className="font-black text-slate-900">{activity.title || '안내'}</p>
-                                                                            <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-500">{ACTIVITY_LABEL[type] || ACTIVITY_LABEL.other}</span>
-                                                                        </div>
-                                                                        {activity.description && <p className="mt-1 whitespace-pre-wrap text-sm leading-relaxed text-slate-500">{activity.description}</p>}
-                                                                        {imgs.length > 0 && (
-                                                                            <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
-                                                                                {imgs.slice(0, 6).map((img: string, i: number) => (
-                                                                                    <img key={i} src={img} alt={activity.title} loading="lazy" className="h-24 w-full rounded-lg object-cover" />
-                                                                                ))}
-                                                                            </div>
-                                                                        )}
-                                                                    </div>
+                                                            <div key={index} className="relative pb-3.5 last:pb-0">
+                                                                <span className="absolute -left-[27px] top-[6px] h-3 w-3 rounded-full bg-[#E00B41] ring-[3px] ring-white" />
+                                                                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                                                                    {activity.time && activity.time !== '--:--' && <span className="font-mono text-xs font-bold text-slate-400">{activity.time}</span>}
+                                                                    <p className="text-[15px] font-bold leading-snug text-slate-900">{activity.title || '안내'}</p>
+                                                                    <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-400">{ACTIVITY_LABEL[type] || ACTIVITY_LABEL.other}</span>
                                                                 </div>
+                                                                {activity.description && <p className="mt-1 whitespace-pre-wrap text-sm leading-relaxed text-slate-500">{activity.description}</p>}
+                                                                {imgs.length > 0 && (
+                                                                    <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
+                                                                        {imgs.slice(0, 6).map((img: string, i: number) => (
+                                                                            <img key={i} src={img} alt={activity.title} loading="lazy" className="h-24 w-full rounded-lg object-cover" />
+                                                                        ))}
+                                                                    </div>
+                                                                )}
                                                             </div>
                                                         );
                                                     }) : (
