@@ -234,13 +234,13 @@
 .admin-app-wrapper .tbl-wrap { overflow-x: auto; }
 .admin-app-wrapper table.tbl { width: 100%; border-collapse: collapse; font-size: 13.5px; }
 .admin-app-wrapper .tbl thead th {
-  text-align: left; padding: 11px 18px; font-size: 11.5px; font-weight: 700;
+  text-align: left; padding: 10px 12px; font-size: 11.5px; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-tertiary);
   background: var(--mrt-gray-50); border-bottom: 1px solid var(--border-subtle); white-space: nowrap;
 }
 .admin-app-wrapper .tbl thead th.r { text-align: right; }
 .admin-app-wrapper .tbl thead th.c { text-align: center; }
-.admin-app-wrapper .tbl tbody td { padding: 14px 18px; border-bottom: 1px solid var(--border-subtle); color: var(--text-body); vertical-align: middle; white-space: nowrap; }
+.admin-app-wrapper .tbl tbody td { padding: 11px 12px; border-bottom: 1px solid var(--border-subtle); color: var(--text-body); vertical-align: middle; white-space: nowrap; }
 .admin-app-wrapper .tbl tbody tr:last-child td { border-bottom: none; }
 .admin-app-wrapper .tbl tbody tr { transition: background var(--dur-fast); cursor: pointer; }
 .admin-app-wrapper .tbl tbody tr:hover { background: var(--mrt-gray-50); }

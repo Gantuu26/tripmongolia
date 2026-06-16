@@ -2002,7 +2002,7 @@ export const AdminReservationManage: React.FC = () => {
                                                     <div className="cell-mono">#{reservationNo}</div>
                                                     <div style={{ marginTop: 3 }}>
                                                         <span className={`tag-type ${res.type === 'quote' ? 'quote' : 'reservation'}`}>
-                                                            {res.type === 'quote' ? 'Захиалгат үнийн санал' : 'Энгийн бүтээгдэхүүн'}
+                                                            {res.type === 'quote' ? 'Үнийн санал' : 'Бүтээгдэхүүн'}
                                                         </span>
                                                     </div>
                                                 </td>
@@ -2012,7 +2012,7 @@ export const AdminReservationManage: React.FC = () => {
                                                         <div className="cell-muted" style={{ fontSize: 12 }}>{res.email || res.phone || 'Холбоо барих мэдээлэл оруулаагүй'}</div>
                                                     </div>
                                                 </td>
-                                                <td className="cell-muted" style={{ maxWidth: 240 }}>
+                                                <td className="cell-muted" style={{ maxWidth: 170 }}>
                                                     <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={res.productName}>{res.productName}</div>
                                                 </td>
                                                 <td className="c cell-mono">{res.headcount || 'Тодорхойгүй'}</td>
@@ -2036,13 +2036,9 @@ export const AdminReservationManage: React.FC = () => {
                                                                     setSelectedReservation(res);
                                                                 }
                                                             }}
-                                                            title={nextAction.description}
+                                                            title={nextAction.label}
                                                         >
                                                             <Icon name={nextAction.icon} />
-                                                            {nextAction.label}
-                                                        </button>
-                                                        <button className="act-btn" title="Дэлгэрэнгүй" onClick={() => setSelectedReservation(res)}>
-                                                            <Icon name="visibility" />
                                                         </button>
                                                         <button className="act-btn danger" title="Устгах" onClick={() => handleDelete(res.id, res.type)}>
                                                             <Icon name="delete" />
