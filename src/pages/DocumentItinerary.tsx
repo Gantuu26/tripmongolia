@@ -406,9 +406,7 @@ export const DocumentItinerary: React.FC = () => {
                                                         const imgs = parseMaybeJson(activity.images).filter(Boolean);
                                                         return (
                                                             <div key={index} className="relative pb-4 last:pb-0">
-                                                                <span className="absolute -left-[31px] top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#E00B41] ring-4 ring-white">
-                                                                    <span className="material-symbols-outlined text-[12px] text-white">{ACTIVITY_ICON[type] || ACTIVITY_ICON.other}</span>
-                                                                </span>
+                                                                <span className="absolute -left-[27px] top-2 h-3 w-3 rounded-full bg-[#E00B41] ring-[3px] ring-white" />
                                                                 <div className="grid gap-2 sm:grid-cols-[70px_1fr]">
                                                                     <p className="font-mono text-sm font-black text-slate-400">{activity.time || '--:--'}</p>
                                                                     <div>
