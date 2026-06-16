@@ -406,15 +406,15 @@ export const DocumentItinerary: React.FC = () => {
 
                                                 <div className="relative ml-2 space-y-0 border-l-2 border-dashed border-[#FFD9E0] pl-5">
                                                     {day.activities.length > 0 ? day.activities.map((activity, index) => {
-                                                        const type = activity.type || 'other';
                                                         const imgs = parseMaybeJson(activity.images).filter(Boolean);
+                                                        // 제목·시간·설명·사진이 모두 비어 있으면 표시하지 않음(빈 점·안내 방지)
+                                                        if (!activity.title && !activity.time && !activity.description && imgs.length === 0) return null;
                                                         return (
                                                             <div key={index} className="relative pb-3.5 last:pb-0">
                                                                 <span className="absolute -left-[27px] top-[6px] h-3 w-3 rounded-full bg-[#E00B41] ring-[3px] ring-white" />
                                                                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                                                                     {activity.time && activity.time !== '--:--' && <span className="font-mono text-xs font-bold text-slate-400">{activity.time}</span>}
-                                                                    <p className="text-[15px] font-bold leading-snug text-slate-900">{activity.title || '안내'}</p>
-                                                                    <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-400">{ACTIVITY_LABEL[type] || ACTIVITY_LABEL.other}</span>
+                                                                    {activity.title && <p className="text-[15px] font-bold leading-snug text-slate-900">{activity.title}</p>}
                                                                 </div>
                                                                 {activity.description && <p className="mt-1 whitespace-pre-wrap text-sm leading-relaxed text-slate-500">{activity.description}</p>}
                                                                 {imgs.length > 0 && (
