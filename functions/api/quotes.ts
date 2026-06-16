@@ -26,6 +26,12 @@ const parseQuoteRow = (q: any) => {
             try { out[f] = JSON.parse(v); } catch { /* leave as string */ }
         }
     }
+    // 견적 문서 편집 내용(일정·문서설정)은 JSON 객체 문자열 → 객체로 파싱해
+    // 목록(/api/quotes)에서도 편집본을 그대로 다시 열 수 있게 함
+    const dc = out.documentContent;
+    if (typeof dc === 'string' && dc.trim().startsWith('{')) {
+        try { out.documentContent = JSON.parse(dc); } catch { /* leave as string */ }
+    }
     return out;
 };
 
@@ -164,7 +170,15 @@ app.put('/:id', async (c) => {
 
     // Explicitly map snake_case keys that must persist to their camelCase model props
     const itineraryTemplateId = body.itinerary_template_id ?? body.itineraryTemplateId;
-    const documentContent = body.document_content ?? body.documentContent;
+    const documentContentRaw = body.document_content ?? body.documentContent;
+    // 항상 문자열로 저장 (객체로 들어오면 직렬화)
+    const documentContent = documentContentRaw !== undefined
+        ? (typeof documentContentRaw === 'string' ? documentContentRaw : JSON.stringify(documentContentRaw))
+        : undefined;
+
+    // snake_case 원본 키는 drizzle 컬럼 매핑에 없어 SET을 깨뜨릴 수 있으므로 제거
+    delete body.document_content;
+    delete body.itinerary_template_id;
 
     // Update
     await db.update(quotes).set({

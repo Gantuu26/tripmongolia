@@ -385,7 +385,9 @@ export const QuoteDetailModal: React.FC<{
         peopleCount: quotePeople || undefined,
     };
     const docInitialContent: ReservationDocContent | null = (() => {
-        const dc = request.documentContent || request.document_content;
+        let dc: any = request.documentContent ?? request.document_content;
+        // 목록 응답 등에서 문자열로 올 수 있으므로 방어적으로 파싱
+        if (typeof dc === 'string') { try { dc = JSON.parse(dc); } catch { dc = null; } }
         if (dc && (Array.isArray(dc.days) || dc.documentSettings)) {
             return { name: dc.name || '', description: dc.description || '', days: dc.days || [], documentSettings: mergeDocumentSettings(dc.documentSettings) };
         }
