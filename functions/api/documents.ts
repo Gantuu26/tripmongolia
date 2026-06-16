@@ -18,18 +18,51 @@ const decodeTemplateDescription = (raw = '') => {
     }
 };
 
+// 문서(일정표·계약서)는 예약(reservations)뿐 아니라 견적(quotes)도 열 수 있어야 함.
+// 예약에 없으면 견적을 찾아 예약과 같은 형태(snake_case)로 매핑해 반환.
+async function resolveReservationOrQuote(db: any, id: string) {
+    const r = await db.prepare(
+        'SELECT * FROM reservations WHERE id = ? OR reservation_number = ?'
+    ).bind(id, id).first();
+    if (r) return r;
+
+    const q: any = await db.prepare('SELECT * FROM quotes WHERE id = ?').bind(id).first();
+    if (!q) return null;
+    const price = typeof q.confirmed_price === 'number' ? q.confirmed_price : null;
+    const deposit = typeof q.deposit === 'number' ? q.deposit : null;
+    return {
+        id: q.id,
+        reservation_number: null,
+        product_name: q.destination ? `${q.destination} 맞춤 견적` : '맞춤 여행 견적',
+        customer_name: q.name,
+        customer_email: q.email,
+        customer_phone: q.phone,
+        travelers: q.headcount || q.travelers,
+        start_date: q.confirmed_start_date,
+        end_date: q.confirmed_end_date,
+        status: q.status,
+        total_price: price,
+        deposit_amount: deposit,
+        balance_amount: price !== null && deposit !== null ? price - deposit : null,
+        created_at: q.created_at,
+        document_content: q.document_content ?? null,
+        itinerary_template_id: q.itinerary_template_id ?? null,
+        daily_accommodations: q.daily_accommodations ?? null,
+        assigned_guide: q.assigned_guide ?? null,
+        contract_data: q.contract_data ?? null,
+    };
+}
+
 // GET /api/documents/itinerary/:reservationId
 // Public endpoint — no auth. Returns everything the itinerary page needs.
 app.get('/itinerary/:reservationId', async (c) => {
     const reservationId = c.req.param('reservationId');
     const db = c.env.DB;
 
-    const reservation = await db.prepare(
-        'SELECT * FROM reservations WHERE id = ? OR reservation_number = ?'
-    ).bind(reservationId, reservationId).first();
+    const reservation = await resolveReservationOrQuote(db, reservationId);
 
     if (!reservation) {
-        return c.json({ error: 'Reservation not found' }, 404);
+        return c.json({ error: 'Document not found' }, 404);
     }
 
     // Parse JSON fields
@@ -120,12 +153,10 @@ app.get('/contract/:reservationId', async (c) => {
     const reservationId = c.req.param('reservationId');
     const db = c.env.DB;
 
-    const reservation = await db.prepare(
-        'SELECT * FROM reservations WHERE id = ? OR reservation_number = ?'
-    ).bind(reservationId, reservationId).first();
+    const reservation = await resolveReservationOrQuote(db, reservationId);
 
     if (!reservation) {
-        return c.json({ error: 'Reservation not found' }, 404);
+        return c.json({ error: 'Document not found' }, 404);
     }
 
     let contractData: any = {};

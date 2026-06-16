@@ -740,6 +740,14 @@ export const QuoteDetailModal: React.FC<{
                                     <span className="material-symbols-outlined text-[20px]">edit_calendar</span>
                                     Хөтөлбөр засах · нэр·огноо·хүн·үнэ автоматаар бөглөгдөнө
                                 </button>
+                                <div className="mb-2 grid grid-cols-2 gap-2">
+                                    <button type="button" onClick={() => window.open(`/documents/itinerary/${request.id}`, '_blank')} className="flex items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-xs font-bold text-slate-600 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300" title="Үйлчлүүлэгчид харагдах хэлбэрээр (шинэ цонх)">
+                                        <span className="material-symbols-outlined text-[18px]">visibility</span>Хөтөлбөр урьдчилан харах
+                                    </button>
+                                    <button type="button" onClick={() => window.open(`/documents/contract/${request.id}`, '_blank')} className="flex items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-xs font-bold text-slate-600 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300" title="Гэрээг урьдчилан харах (шинэ цонх)">
+                                        <span className="material-symbols-outlined text-[18px]">description</span>Гэрээ урьдчилан харах
+                                    </button>
+                                </div>
                                 <button
                                     onClick={() => onSendEstimate(estimateUrl, adminNote, priceDetail, confirmedStartDate, confirmedEndDate, itineraryTemplateId)}
                                     disabled={!canSendEstimate}

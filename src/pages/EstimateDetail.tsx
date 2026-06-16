@@ -163,6 +163,7 @@ export const EstimateDetail: React.FC = () => {
                     confirmedStartDate: data.confirmed_start_date,
                     confirmedEndDate: data.confirmed_end_date,
                     itinerary: data.itinerary || null,
+                    hasDocument: !!(data.itinerary_template_id || data.itineraryTemplateId || data.document_content || data.documentContent),
                 });
             } catch (error) {
                 console.error('Error fetching estimate:', error);
@@ -358,6 +359,17 @@ export const EstimateDetail: React.FC = () => {
                                         </button>
                                     )}
                                 </div>
+
+                                {estimate.hasDocument && (
+                                    <div className="grid grid-cols-2 gap-3 mb-3">
+                                        <a href={`/documents/itinerary/${estimate.id}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 py-3 bg-white dark:bg-zinc-800 border border-primary/40 text-primary rounded-xl font-bold hover:bg-primary/5 transition-all active:scale-[0.98]">
+                                            <span className="material-symbols-outlined">map</span>일정표 보기
+                                        </a>
+                                        <a href={`/documents/contract/${estimate.id}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 py-3 bg-white dark:bg-zinc-800 border border-primary/40 text-primary rounded-xl font-bold hover:bg-primary/5 transition-all active:scale-[0.98]">
+                                            <span className="material-symbols-outlined">description</span>계약서 보기
+                                        </a>
+                                    </div>
+                                )}
 
                                 {(estimate.confirmedPrice && estimate.confirmedPrice > 0) && (
                                     <div className="bg-gray-50 dark:bg-zinc-700/30 border border-gray-100 dark:border-zinc-700 p-4 rounded-xl space-y-3">
