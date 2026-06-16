@@ -46,7 +46,7 @@ app.post('/apply', async (c) => {
 
         // Admin notification email
         if (c.env.RESEND_API_KEY) {
-            const adminEmail = c.env.ADMIN_EMAIL || 'arvijixmeat@gmail.com';
+            const adminEmail = c.env.ADMIN_EMAIL || 'ts.dejidlala@gmail.com';
             await fetch('https://api.resend.com/emails', {
                 method: 'POST',
                 headers: {
@@ -54,15 +54,16 @@ app.post('/apply', async (c) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    from: 'Milkyway Japan <noreply@mongolryokou.com>',
+                    from: 'Trip Mongolia <noreply@tripmongolia.kr>',
+                    reply_to: 'ts.dejidlala@gmail.com',
                     to: [adminEmail],
-                    subject: `【ガイド申請】${data.name} 様`,
-                    html: `<p>新しいガイド申請が届きました。</p>
-                           <p><strong>名前:</strong> ${data.name}</p>
-                           <p><strong>電話:</strong> ${data.phone}</p>
-                           <p><strong>言語:</strong> ${(data.languages || []).join(', ')}</p>
-                           <p><strong>専門分野:</strong> ${(data.specialties || []).join(', ')}</p>
-                           <p><a href="https://tripmongolia.kr/admin/guides">管理画面で確認する</a></p>`,
+                    subject: `[가이드 지원] ${data.name} 님`,
+                    html: `<p>새 가이드 지원이 접수되었습니다.</p>
+                           <p><strong>이름:</strong> ${data.name}</p>
+                           <p><strong>전화:</strong> ${data.phone}</p>
+                           <p><strong>언어:</strong> ${(data.languages || []).join(', ')}</p>
+                           <p><strong>전문 분야:</strong> ${(data.specialties || []).join(', ')}</p>
+                           <p><a href="https://tripmongolia.kr/admin/guides">관리자 화면에서 확인하기</a></p>`,
                 }),
             }).catch(() => {});
         }

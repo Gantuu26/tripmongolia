@@ -16,31 +16,31 @@ const app = new Hono<{ Bindings: Env }>();
 function tplPaymentReminder(data: { customerName: string; reservationNumber: string; productName: string; depositAmount: number }) {
     return baseLayout(`
 <div class="header">
-  <h1>🐴 Milkyway Japan</h1>
-  <p>お支払いリマインダー</p>
+  <h1>🐴 Trip Mongolia</h1>
+  <p>예약금 입금 안내</p>
 </div>
 <div class="body">
-  <p class="greeting">${data.customerName} 様</p>
-  <p>ご予約いただきありがとうございます。<br>予約金のお支払いがまだ確認できておりません。</p>
+  <p class="greeting">${data.customerName} 님</p>
+  <p>예약해 주셔서 감사합니다.<br>아직 예약금 입금이 확인되지 않았습니다.</p>
   <div class="card">
-    <div class="card-row"><span class="label">予約番号</span><span class="value" style="color:#1eb496;font-size:18px;font-weight:800;">${data.reservationNumber}</span></div>
-    <div class="card-row"><span class="label">ツアー名</span><span class="value">${data.productName}</span></div>
-    <div class="card-row"><span class="label">予約金（PayPal）</span><span class="value" style="color:#1eb496;">${data.depositAmount.toLocaleString()}円</span></div>
+    <div class="card-row"><span class="label">예약번호</span><span class="value" style="color:#E00B41;font-size:18px;font-weight:800;">${data.reservationNumber}</span></div>
+    <div class="card-row"><span class="label">투어명</span><span class="value">${data.productName}</span></div>
+    <div class="card-row"><span class="label">예약금</span><span class="value" style="color:#E00B41;">₩${data.depositAmount.toLocaleString('ko-KR')}</span></div>
   </div>
   <div class="alert">
-    <strong>⚠️ お支払い期限が近づいています</strong><br><br>
-    PayPalインボイスはすでにこのメールアドレス宛にお送りしております。<br>
-    メールをご確認いただき、<strong>期限内にお支払い</strong>をお願いいたします。<br><br>
-    メールが見つからない場合は <strong>迷惑メールフォルダ</strong> もご確認ください。
+    <strong>⚠️ 입금 기한이 다가오고 있습니다</strong><br><br>
+    안내해 드린 계좌로 <strong>예약금을 입금</strong>해 주세요(무통장입금).<br>
+    입금이 확인되면 현지 수배를 시작합니다.<br><br>
+    계좌 정보를 찾지 못하시면 아래 이메일로 문의해 주세요.
   </div>
-  <p style="font-size:14px;color:#4a6b64;">
-    ご不明な点は <a href="mailto:info@mongolryokou.com" style="color:#1eb496;">info@mongolryokou.com</a> までご連絡ください。
+  <p style="font-size:14px;color:#6b5560;">
+    문의: <a href="mailto:ts.dejidlala@gmail.com" style="color:#E00B41;">ts.dejidlala@gmail.com</a>
   </p>
-  <a class="btn" href="https://tripmongolia.kr/mypage/reservations">予約を確認する</a>
+  <a class="btn" href="https://tripmongolia.kr/mypage/reservations">예약 확인하기</a>
 </div>
 <div class="footer">
   <a href="https://tripmongolia.kr">tripmongolia.kr</a> |
-  <a href="mailto:info@mongolryokou.com">info@mongolryokou.com</a>
+  <a href="mailto:ts.dejidlala@gmail.com">ts.dejidlala@gmail.com</a>
 </div>`);
 }
 
@@ -74,11 +74,11 @@ app.post('/', async (c) => {
             await sendEmail(
                 c.env.RESEND_API_KEY,
                 r.customerEmail,
-                `【お支払いリマインダー】${r.productName || 'ツアー'} 予約金のご確認 | Milkyway Japan`,
+                `[예약금 입금 안내] ${r.productName || '투어'} 예약금 확인 부탁드립니다 | Trip Mongolia`,
                 tplPaymentReminder({
-                    customerName: r.customerName || 'お客様',
+                    customerName: r.customerName || '고객',
                     reservationNumber: r.reservationNumber || r.id.slice(0, 8).toUpperCase(),
-                    productName: r.productName || 'ツアー',
+                    productName: r.productName || '투어',
                     depositAmount: r.depositAmount || 0,
                 }),
             );

@@ -19,17 +19,17 @@ function tplDailyDigest(data: {
     unpaid: any[];
     newToday: any[];
 }) {
-    const fmt = (n: number) => n.toLocaleString();
+    const fmt = (n: number) => `₩${(n || 0).toLocaleString('ko-KR')}`;
 
     const departureRows = data.departures.length
         ? data.departures.map(r => `
     <tr>
-      <td style="color:#1eb496;font-weight:700;">${r.reservationNumber || '-'}</td>
+      <td style="color:#E00B41;font-weight:700;">${r.reservationNumber || '-'}</td>
       <td>${r.customerName || '-'}</td>
       <td>${r.productName || '-'}</td>
-      <td>${r.travelers || 1}名</td>
+      <td>${r.travelers || 1}명</td>
     </tr>`).join('')
-        : '<tr><td colspan="4" style="color:#9ca3af;text-align:center;">本日の出発なし</td></tr>';
+        : '<tr><td colspan="4" style="color:#9ca3af;text-align:center;">오늘 출발 없음</td></tr>';
 
     const unpaidRows = data.unpaid.length
         ? data.unpaid.map(r => `
@@ -37,49 +37,49 @@ function tplDailyDigest(data: {
       <td style="color:#ef4444;font-weight:700;">${r.reservationNumber || '-'}</td>
       <td>${r.customerName || '-'}</td>
       <td>${r.productName || '-'}</td>
-      <td style="color:#ef4444;">${fmt(r.depositAmount || 0)}円</td>
+      <td style="color:#ef4444;">${fmt(r.depositAmount || 0)}</td>
     </tr>`).join('')
-        : '<tr><td colspan="4" style="color:#9ca3af;text-align:center;">未払いなし ✅</td></tr>';
+        : '<tr><td colspan="4" style="color:#9ca3af;text-align:center;">미입금 없음 ✅</td></tr>';
 
     const newRows = data.newToday.length
         ? data.newToday.map(r => `
     <tr>
-      <td style="color:#1eb496;font-weight:700;">${r.reservationNumber || '-'}</td>
+      <td style="color:#E00B41;font-weight:700;">${r.reservationNumber || '-'}</td>
       <td>${r.customerName || '-'}</td>
       <td>${r.productName || '-'}</td>
-      <td>${fmt(r.totalPrice || 0)}円</td>
+      <td>${fmt(r.totalPrice || 0)}</td>
     </tr>`).join('')
-        : '<tr><td colspan="4" style="color:#9ca3af;text-align:center;">本日の新規予約なし</td></tr>';
+        : '<tr><td colspan="4" style="color:#9ca3af;text-align:center;">오늘 신규 예약 없음</td></tr>';
 
     return baseLayout(`
 <div class="header">
-  <h1>📊 日次レポート</h1>
-  <p>${data.date} | Milkyway Japan</p>
+  <h1>📊 일일 리포트</h1>
+  <p>${data.date} | Trip Mongolia</p>
 </div>
 <div class="body">
-  <p class="greeting">おはようございます。本日の予約状況です。</p>
+  <p class="greeting">안녕하세요. 오늘의 예약 현황입니다.</p>
 
-  <h3 style="color:#1a2e2a;margin-top:28px;margin-bottom:8px;">✈️ 本日出発 (${data.departures.length}件)</h3>
+  <h3 style="color:#1f2937;margin-top:28px;margin-bottom:8px;">✈️ 오늘 출발 (${data.departures.length}건)</h3>
   <table>
-    <tr><th>予約番号</th><th>お客様</th><th>ツアー</th><th>人数</th></tr>
+    <tr><th>예약번호</th><th>고객</th><th>투어</th><th>인원</th></tr>
     ${departureRows}
   </table>
 
-  <h3 style="color:#1a2e2a;margin-top:28px;margin-bottom:8px;">⚠️ 未払い予約 (${data.unpaid.length}件)</h3>
+  <h3 style="color:#1f2937;margin-top:28px;margin-bottom:8px;">⚠️ 미입금 예약 (${data.unpaid.length}건)</h3>
   <table>
-    <tr><th>予約番号</th><th>お客様</th><th>ツアー</th><th>予約金</th></tr>
+    <tr><th>예약번호</th><th>고객</th><th>투어</th><th>예약금</th></tr>
     ${unpaidRows}
   </table>
 
-  <h3 style="color:#1a2e2a;margin-top:28px;margin-bottom:8px;">🆕 本日の新規予約 (${data.newToday.length}件)</h3>
+  <h3 style="color:#1f2937;margin-top:28px;margin-bottom:8px;">🆕 오늘 신규 예약 (${data.newToday.length}건)</h3>
   <table>
-    <tr><th>予約番号</th><th>お客様</th><th>ツアー</th><th>合計</th></tr>
+    <tr><th>예약번호</th><th>고객</th><th>투어</th><th>합계</th></tr>
     ${newRows}
   </table>
 
-  <a class="btn" href="https://tripmongolia.kr/admin/reservations" style="margin-top:28px;">管理画面を開く</a>
+  <a class="btn" href="https://tripmongolia.kr/admin/reservations" style="margin-top:28px;">관리자 화면 열기</a>
 </div>
-<div class="footer">Milkyway Japan 管理システム | 自動送信メール</div>`);
+<div class="footer">Trip Mongolia 관리 시스템 | 자동 발송 메일</div>`);
 }
 
 // POST /api/cron/daily-digest
@@ -99,14 +99,14 @@ app.post('/', async (c) => {
     ]);
 
     const adminEmail = c.env.ADMIN_EMAIL || 'agape_ibeel@hanpass.com';
-    const dateLabel = new Date().toLocaleDateString('ja-JP', {
+    const dateLabel = new Date().toLocaleDateString('ko-KR', {
         year: 'numeric', month: 'long', day: 'numeric', weekday: 'short',
     });
 
     await sendEmail(
         c.env.RESEND_API_KEY,
         adminEmail,
-        `【日次レポート】${today} の予約状況 | Milkyway Japan`,
+        `[일일 리포트] ${today} 예약 현황 | Trip Mongolia`,
         tplDailyDigest({ date: dateLabel, departures, unpaid, newToday }),
     );
 

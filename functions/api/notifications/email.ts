@@ -9,9 +9,11 @@ interface Env {
 
 const app = new Hono<{ Bindings: Env }>();
 
-const FROM = 'Milkyway Japan <noreply@mongolryokou.com>';
+const FROM = 'Trip Mongolia <noreply@tripmongolia.kr>';
+const REPLY_TO = 'ts.dejidlala@gmail.com';
 const SITE_URL = 'https://tripmongolia.kr';
-const CONTACT_EMAIL = 'info@mongolryokou.com';
+const CONTACT_EMAIL = 'ts.dejidlala@gmail.com';
+const BRAND = 'Trip Mongolia';
 
 async function sendEmail(apiKey: string, to: string | string[], subject: string, html: string) {
     const res = await fetch('https://api.resend.com/emails', {
@@ -22,6 +24,7 @@ async function sendEmail(apiKey: string, to: string | string[], subject: string,
         },
         body: JSON.stringify({
             from: FROM,
+            reply_to: REPLY_TO,
             to: Array.isArray(to) ? to : [to],
             subject,
             html,
@@ -47,7 +50,7 @@ function escapeHtml(value: unknown) {
 
 function money(value: unknown) {
     if (value === null || value === undefined || value === '') return '-';
-    if (typeof value === 'number') return `${value.toLocaleString('ja-JP')}円`;
+    if (typeof value === 'number') return `₩${value.toLocaleString('ko-KR')}`;
     return escapeHtml(value);
 }
 
@@ -67,43 +70,43 @@ function cta(label: string, url: string) {
     return `
         <div class="cta-wrap">
             <a class="btn" href="${escapeHtml(url)}">${escapeHtml(label)}</a>
-            <p class="url-note">開けない場合はこちらをコピーしてください：<br><span>${escapeHtml(url)}</span></p>
+            <p class="url-note">버튼이 열리지 않으면 아래 주소를 복사해 주세요:<br><span>${escapeHtml(url)}</span></p>
         </div>
     `;
 }
 
 function baseLayout(preheader: string, content: string) {
     return `<!doctype html>
-<html lang="ja">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Milkyway Japan</title>
+<title>${BRAND}</title>
 <style>
-  body{margin:0;padding:0;background:#f3f7f6;color:#102522;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;line-height:1.65;}
+  body{margin:0;padding:0;background:#f6f7f8;color:#1f2937;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.65;}
   .preheader{display:none!important;visibility:hidden;opacity:0;color:transparent;height:0;width:0;overflow:hidden;}
-  .wrap{max-width:640px;margin:28px auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(15,118,110,.12);}
-  .header{background:#0f766e;padding:30px 34px;color:#fff;}
-  .brand{font-size:13px;letter-spacing:.18em;text-transform:uppercase;opacity:.82;margin:0 0 8px;}
+  .wrap{max-width:640px;margin:28px auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(224,11,65,.10);}
+  .header{background:#E00B41;padding:30px 34px;color:#fff;}
+  .brand{font-size:13px;letter-spacing:.18em;text-transform:uppercase;opacity:.85;margin:0 0 8px;}
   .header h1{font-size:22px;line-height:1.35;margin:0;font-weight:800;}
   .body{padding:34px;}
-  .lead{font-size:16px;font-weight:700;margin:0 0 14px;color:#102522;}
-  p{font-size:14px;margin:0 0 16px;color:#365a55;}
-  .notice{background:#ecfdf9;border:1px solid #c8eee5;border-radius:14px;padding:16px 18px;margin:22px 0;color:#234d47;font-size:14px;}
-  .panel{border:1px solid #e4eeeb;border-radius:14px;overflow:hidden;margin:22px 0;background:#fbfefd;}
-  .panel-title{margin:0;padding:13px 16px;background:#f2faf8;color:#0f766e;font-size:13px;font-weight:800;letter-spacing:.04em;}
+  .lead{font-size:16px;font-weight:700;margin:0 0 14px;color:#111827;}
+  p{font-size:14px;margin:0 0 16px;color:#475467;}
+  .notice{background:#fff1f3;border:1px solid #ffd9e0;border-radius:14px;padding:16px 18px;margin:22px 0;color:#7a1230;font-size:14px;}
+  .panel{border:1px solid #eceef1;border-radius:14px;overflow:hidden;margin:22px 0;background:#fcfcfd;}
+  .panel-title{margin:0;padding:13px 16px;background:#fff5f7;color:#E00B41;font-size:13px;font-weight:800;letter-spacing:.02em;}
   table{width:100%;border-collapse:collapse;}
-  th,td{font-size:14px;padding:12px 16px;border-top:1px solid #e4eeeb;vertical-align:top;}
-  th{width:34%;text-align:left;color:#6b817d;font-weight:700;background:#fbfefd;}
-  td{color:#122d29;font-weight:650;text-align:right;}
-  .steps{padding-left:18px;margin:10px 0 0;color:#365a55;font-size:14px;}
+  th,td{font-size:14px;padding:12px 16px;border-top:1px solid #eceef1;vertical-align:top;}
+  th{width:34%;text-align:left;color:#7a8694;font-weight:700;background:#fcfcfd;}
+  td{color:#1f2937;font-weight:650;text-align:right;}
+  .steps{padding-left:18px;margin:10px 0 0;color:#475467;font-size:14px;}
   .steps li{margin:6px 0;}
   .cta-wrap{text-align:center;margin:28px 0 20px;}
-  .btn{display:inline-block;background:#0f766e;color:#fff!important;text-decoration:none;border-radius:12px;padding:14px 28px;font-size:15px;font-weight:800;}
-  .url-note{font-size:12px;color:#78918d;margin-top:10px;word-break:break-all;}
-  .url-note span{color:#0f766e;}
-  .footer{background:#f7faf9;padding:22px 34px;text-align:center;font-size:12px;color:#6b817d;}
-  .footer a{color:#0f766e;text-decoration:none;font-weight:700;}
+  .btn{display:inline-block;background:#E00B41;color:#fff!important;text-decoration:none;border-radius:12px;padding:14px 28px;font-size:15px;font-weight:800;}
+  .url-note{font-size:12px;color:#98a2b3;margin-top:10px;word-break:break-all;}
+  .url-note span{color:#E00B41;}
+  .footer{background:#f9fafb;padding:22px 34px;text-align:center;font-size:12px;color:#7a8694;}
+  .footer a{color:#E00B41;text-decoration:none;font-weight:700;}
   @media(max-width:680px){.wrap{margin:0;border-radius:0}.header,.body,.footer{padding-left:22px;padding-right:22px}th,td{display:block;width:auto;text-align:left}td{padding-top:0;border-top:none}th{padding-bottom:4px}}
 </style>
 </head>
@@ -117,204 +120,204 @@ function baseLayout(preheader: string, content: string) {
 function footer() {
     return `
         <div class="footer">
-            Milkyway Japan / Mongolia Milky Way Travel<br>
+            ${BRAND} · 몽골 현지 여행사<br>
             <a href="${SITE_URL}">tripmongolia.kr</a> · <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>
         </div>
     `;
 }
 
 function tplReservationRequested(data: any) {
-    return baseLayout('ご予約リクエストを受け付けました。予約金のお支払い方法をご案内します。', `
+    return baseLayout('예약 요청이 접수되었습니다. 예약금 입금 방법을 안내해 드립니다.', `
 <div class="header">
-  <p class="brand">Milkyway Japan</p>
-  <h1>ご予約リクエストを受け付けました</h1>
+  <p class="brand">${BRAND}</p>
+  <h1>예약 요청이 접수되었습니다</h1>
 </div>
 <div class="body">
-  <p class="lead">${escapeHtml(data.customerName || 'お客様')} 様</p>
-  <p>この度はMilkyway Japanへお申し込みいただき、誠にありがとうございます。担当者が内容を確認し、予約金のお支払い方法と今後の流れをご案内いたします。</p>
+  <p class="lead">${escapeHtml(data.customerName || '고객')} 님</p>
+  <p>${BRAND}를 이용해 주셔서 진심으로 감사합니다. 담당자가 내용을 확인한 뒤, 예약금 입금 방법과 이후 진행 절차를 안내해 드립니다.</p>
   <div class="panel">
-    <p class="panel-title">予約内容</p>
+    <p class="panel-title">예약 내용</p>
     <table>${fieldRows([
-        ['予約番号', data.reservationId || data.reservationNumber],
-        ['ツアー名', data.productName],
-        ['予約金', money(data.depositAmount)],
-        ['現地お支払い予定額', money(data.localAmount)],
+        ['예약번호', data.reservationId || data.reservationNumber],
+        ['투어명', data.productName],
+        ['예약금', money(data.depositAmount)],
+        ['현지 결제 예정액', money(data.localAmount)],
     ])}</table>
   </div>
   <div class="notice">
-    <strong>今後の流れ</strong>
+    <strong>이후 진행 안내</strong>
     <ol class="steps">
-      <li>PayPalインボイスを別途メールでお送りします。</li>
-      <li>予約金のご入金確認後、手配を開始します。</li>
-      <li>確定日程表、契約書、ガイド情報を順番にご案内します。</li>
+      <li>안내해 드리는 계좌로 예약금을 입금해 주세요(무통장입금).</li>
+      <li>예약금 입금이 확인되면 현지 수배를 시작합니다.</li>
+      <li>확정 일정표, 계약서, 가이드 정보를 순서대로 안내해 드립니다.</li>
     </ol>
   </div>
-  ${cta('予約状況を確認する', `${SITE_URL}/mypage/reservations${data.reservationDbId ? `/${data.reservationDbId}` : ''}`)}
+  ${cta('예약 현황 확인하기', `${SITE_URL}/mypage/reservations${data.reservationDbId ? `/${data.reservationDbId}` : ''}`)}
 </div>
 ${footer()}`);
 }
 
 function tplAdminNewReservation(data: any) {
-    return baseLayout('新しい予約が入りました。管理画面で内容を確認してください。', `
+    return baseLayout('새 예약이 접수되었습니다. 관리자 화면에서 확인해 주세요.', `
 <div class="header">
   <p class="brand">Admin Notice</p>
-  <h1>新しい予約が入りました</h1>
+  <h1>새 예약이 접수되었습니다</h1>
 </div>
 <div class="body">
-  <p>管理画面で予約内容を確認し、PayPalインボイスと手配状況を更新してください。</p>
+  <p>관리자 화면에서 예약 내용을 확인하고, 입금 안내와 수배 상태를 업데이트해 주세요.</p>
   <div class="panel">
-    <p class="panel-title">予約情報</p>
+    <p class="panel-title">예약 정보</p>
     <table>${fieldRows([
-        ['予約番号', data.reservationId || data.reservationNumber],
-        ['お客様名', data.customerName],
-        ['ツアー名', data.productName],
-        ['メール', data.customerEmail],
-        ['電話番号', data.customerPhone],
-        ['予約金', money(data.depositAmount)],
+        ['예약번호', data.reservationId || data.reservationNumber],
+        ['고객명', data.customerName],
+        ['투어명', data.productName],
+        ['이메일', data.customerEmail],
+        ['전화번호', data.customerPhone],
+        ['예약금', money(data.depositAmount)],
     ])}</table>
   </div>
-  ${cta('管理画面を開く', `${SITE_URL}/admin/reservations`)}
+  ${cta('관리자 화면 열기', `${SITE_URL}/admin/reservations`)}
 </div>
 ${footer()}`);
 }
 
 function tplQuoteReceived(data: any) {
-    return baseLayout('お見積りリクエストを受け付けました。担当者よりご連絡します。', `
+    return baseLayout('견적 요청이 접수되었습니다. 담당자가 연락드립니다.', `
 <div class="header">
-  <p class="brand">Milkyway Japan</p>
-  <h1>お見積りリクエストを受け付けました</h1>
+  <p class="brand">${BRAND}</p>
+  <h1>견적 요청이 접수되었습니다</h1>
 </div>
 <div class="body">
-  <p class="lead">${escapeHtml(data.customerName || 'お客様')} 様</p>
-  <p>ご希望内容を確認のうえ、担当者より通常24時間以内にご連絡いたします。日程、人数、ご予算に合わせて最適なプランをご提案します。</p>
+  <p class="lead">${escapeHtml(data.customerName || '고객')} 님</p>
+  <p>요청하신 내용을 확인한 뒤, 담당자가 보통 24시간 이내에 연락드립니다. 일정·인원·예산에 맞춰 최적의 플랜을 제안해 드립니다.</p>
   <div class="panel">
-    <p class="panel-title">ご相談内容</p>
+    <p class="panel-title">상담 내용</p>
     <table>${fieldRows([
-        ['内容', data.productName || data.destination || 'オーダーメイド旅行相談'],
+        ['내용', data.productName || data.destination || '맞춤 여행 상담'],
     ])}</table>
   </div>
-  ${cta('マイページを確認する', `${SITE_URL}/mypage/estimates`)}
+  ${cta('마이페이지 확인하기', `${SITE_URL}/mypage/estimates`)}
 </div>
 ${footer()}`);
 }
 
 function tplAdminNewQuote(data: any) {
-    return baseLayout('新しい見積り相談が入りました。', `
+    return baseLayout('새 견적 상담이 접수되었습니다.', `
 <div class="header">
   <p class="brand">Admin Notice</p>
-  <h1>新しい見積り相談が入りました</h1>
+  <h1>새 견적 상담이 접수되었습니다</h1>
 </div>
 <div class="body">
   <div class="panel">
-    <p class="panel-title">相談者情報</p>
+    <p class="panel-title">상담자 정보</p>
     <table>${fieldRows([
-        ['お客様名', data.customerName],
-        ['メール', data.customerEmail],
-        ['電話番号', data.customerPhone],
-        ['内容', data.productName || data.destination],
+        ['고객명', data.customerName],
+        ['이메일', data.customerEmail],
+        ['전화번호', data.customerPhone],
+        ['내용', data.productName || data.destination],
     ])}</table>
   </div>
-  ${cta('見積り管理を開く', `${SITE_URL}/admin/quotes`)}
+  ${cta('견적 관리 열기', `${SITE_URL}/admin/quotes`)}
 </div>
 ${footer()}`);
 }
 
 function tplGuideAssigned(data: any) {
-    return baseLayout('担当ガイドと宿泊情報をご案内します。', `
+    return baseLayout('담당 가이드와 숙소 정보를 안내해 드립니다.', `
 <div class="header">
-  <p class="brand">Milkyway Japan</p>
-  <h1>担当ガイド・宿泊先のご案内</h1>
+  <p class="brand">${BRAND}</p>
+  <h1>담당 가이드·숙소 안내</h1>
 </div>
 <div class="body">
-  <p class="lead">${escapeHtml(data.customerName || 'お客様')} 様</p>
-  <p>ご旅行の担当ガイドおよび現地手配情報が決まりましたのでご案内いたします。出発前の確認事項がある場合は、担当者より追加でご連絡します。</p>
+  <p class="lead">${escapeHtml(data.customerName || '고객')} 님</p>
+  <p>여행을 함께할 담당 가이드와 현지 수배 정보가 확정되어 안내해 드립니다. 출발 전 확인할 사항이 있으면 담당자가 추가로 연락드립니다.</p>
   <div class="panel">
-    <p class="panel-title">担当情報</p>
+    <p class="panel-title">담당 정보</p>
     <table>${fieldRows([
-        ['ツアー名', data.productName],
-        ['担当ガイド', data.guideName],
-        ['ガイド連絡先', data.guidePhone],
+        ['투어명', data.productName],
+        ['담당 가이드', data.guideName],
+        ['가이드 연락처', data.guidePhone],
     ])}</table>
   </div>
-  ${cta('予約詳細を確認する', `${SITE_URL}/mypage/reservations${data.reservationDbId ? `/${data.reservationDbId}` : ''}`)}
+  ${cta('예약 상세 확인하기', `${SITE_URL}/mypage/reservations${data.reservationDbId ? `/${data.reservationDbId}` : ''}`)}
 </div>
 ${footer()}`);
 }
 
 function tplEstimateCompleted(data: any) {
-    return baseLayout('お見積りが完成しました。内容をご確認ください。', `
+    return baseLayout('견적이 완성되었습니다. 내용을 확인해 주세요.', `
 <div class="header">
-  <p class="brand">Milkyway Japan</p>
-  <h1>お見積りが完成しました</h1>
+  <p class="brand">${BRAND}</p>
+  <h1>견적이 완성되었습니다</h1>
 </div>
 <div class="body">
-  <p class="lead">${escapeHtml(data.customerName || 'お客様')} 様</p>
-  <p>ご希望内容に合わせたモンゴル旅行プランのお見積りをご用意しました。内容をご確認のうえ、ご不明点や調整希望がございましたらお気軽にご返信ください。</p>
+  <p class="lead">${escapeHtml(data.customerName || '고객')} 님</p>
+  <p>요청하신 내용에 맞춘 몽골 여행 플랜 견적을 준비했습니다. 내용을 확인하시고, 궁금한 점이나 조정을 원하시면 편하게 회신해 주세요.</p>
   <div class="panel">
-    <p class="panel-title">お見積り概要</p>
+    <p class="panel-title">견적 개요</p>
     <table>${fieldRows([
-        ['目的地', data.destination],
-        ['合計金額', money(data.totalAmount)],
+        ['목적지', data.destination],
+        ['합계 금액', money(data.totalAmount)],
     ])}</table>
   </div>
-  ${data.adminNote ? `<div class="notice"><strong>担当者メモ</strong><br>${escapeHtml(data.adminNote).replace(/\n/g, '<br>')}</div>` : ''}
-  ${cta('お見積り・旅行日程を確認する', `${SITE_URL}/estimate/${data.quoteId || data.reservationId || ''}`)}
-  ${data.estimateUrl ? `<p style="text-align:center;margin-top:8px"><a href="${data.estimateUrl}" style="color:#0f766e;font-size:13px">外部見積書(PDF/資料)はこちら</a></p>` : ''}
+  ${data.adminNote ? `<div class="notice"><strong>담당자 메모</strong><br>${escapeHtml(data.adminNote).replace(/\n/g, '<br>')}</div>` : ''}
+  ${cta('견적·여행 일정 확인하기', `${SITE_URL}/estimate/${data.quoteId || data.reservationId || ''}`)}
+  ${data.estimateUrl ? `<p style="text-align:center;margin-top:8px"><a href="${data.estimateUrl}" style="color:#E00B41;font-size:13px">외부 견적서(PDF·자료) 보기</a></p>` : ''}
 </div>
 ${footer()}`);
 }
 
 function tplContractReady(data: any) {
     const url = data.contractUrl || `${SITE_URL}/documents/contract/${data.reservationId || ''}`;
-    return baseLayout('海外旅行契約書をご用意しました。内容をご確認ください。', `
+    return baseLayout('여행 계약서를 준비했습니다. 내용을 확인해 주세요.', `
 <div class="header">
-  <p class="brand">Milkyway Japan</p>
-  <h1>海外旅行契約書のご案内</h1>
+  <p class="brand">${BRAND}</p>
+  <h1>여행 계약서 안내</h1>
 </div>
 <div class="body">
-  <p class="lead">${escapeHtml(data.customerName || 'お客様')} 様</p>
-  <p>海外旅行契約書をご用意しました。旅行条件、旅行者情報、お支払い内容をご確認ください。修正が必要な場合は、このメールへご返信ください。</p>
+  <p class="lead">${escapeHtml(data.customerName || '고객')} 님</p>
+  <p>여행 계약서를 준비했습니다. 여행 조건, 여행자 정보, 결제 내용을 확인해 주세요. 수정이 필요하시면 이 메일로 회신해 주세요.</p>
   <div class="panel">
-    <p class="panel-title">契約書情報</p>
+    <p class="panel-title">계약서 정보</p>
     <table>${fieldRows([
-        ['ツアー名', data.productName],
-        ['旅行期間', data.travelDates],
-        ['予約番号', data.reservationNumber || data.reservationId],
+        ['투어명', data.productName],
+        ['여행 기간', data.travelDates],
+        ['예약번호', data.reservationNumber || data.reservationId],
     ])}</table>
   </div>
-  <div class="notice">予約金のご入金確認後、契約内容に基づき現地手配を進めます。</div>
-  ${cta('契約書を確認する', url)}
+  <div class="notice">예약금 입금이 확인되면 계약 내용에 따라 현지 수배를 진행합니다.</div>
+  ${cta('계약서 확인하기', url)}
 </div>
 ${footer()}`);
 }
 
 function tplItineraryReady(data: any) {
     const url = data.itineraryUrl || `${SITE_URL}/documents/itinerary/${data.reservationId || ''}`;
-    return baseLayout('確定日程表をご用意しました。集合時間、宿泊先、行程をご確認ください。', `
+    return baseLayout('확정 일정표를 준비했습니다. 집합 시간·숙소·일정을 확인해 주세요.', `
 <div class="header">
-  <p class="brand">Milkyway Japan</p>
-  <h1>確定日程表のご案内</h1>
+  <p class="brand">${BRAND}</p>
+  <h1>확정 일정표 안내</h1>
 </div>
 <div class="body">
-  <p class="lead">${escapeHtml(data.customerName || 'お客様')} 様</p>
-  <p>ご旅行の確定日程表をご用意しました。日別行程、宿泊先、担当ガイド情報をご確認ください。</p>
+  <p class="lead">${escapeHtml(data.customerName || '고객')} 님</p>
+  <p>여행의 확정 일정표를 준비했습니다. 일자별 일정, 숙소, 담당 가이드 정보를 확인해 주세요.</p>
   <div class="panel">
-    <p class="panel-title">ご旅行情報</p>
+    <p class="panel-title">여행 정보</p>
     <table>${fieldRows([
-        ['ツアー名', data.productName],
-        ['旅行期間', data.travelDates],
-        ['予約番号', data.reservationNumber || data.reservationId],
+        ['투어명', data.productName],
+        ['여행 기간', data.travelDates],
+        ['예약번호', data.reservationNumber || data.reservationId],
     ])}</table>
   </div>
   <div class="notice">
-    <strong>ご出発前にご確認ください</strong>
+    <strong>출발 전 확인해 주세요</strong>
     <ol class="steps">
-      <li>集合時間、フライト情報、宿泊先に誤りがないかご確認ください。</li>
-      <li>天候や道路状況により、現地で安全を優先して順序を調整する場合があります。</li>
-      <li>変更希望やご不明点は、出発前に担当者へご連絡ください。</li>
+      <li>집합 시간, 항공 정보, 숙소에 오류가 없는지 확인해 주세요.</li>
+      <li>날씨나 도로 상황에 따라 현지에서 안전을 우선해 순서가 조정될 수 있습니다.</li>
+      <li>변경 희망이나 궁금한 점은 출발 전 담당자에게 연락해 주세요.</li>
     </ol>
   </div>
-  ${cta('日程表を確認する', url)}
+  ${cta('일정표 확인하기', url)}
 </div>
 ${footer()}`);
 }
@@ -337,36 +340,36 @@ app.post('/', async (c) => {
 
         switch (type) {
             case 'RESERVATION_REQUESTED':
-                subject = `【予約受付】${data.productName || 'モンゴル旅行'}のお申し込みありがとうございます | Milkyway Japan`;
+                subject = `[예약 접수] ${data.productName || '몽골 여행'} 신청 감사합니다 | ${BRAND}`;
                 html = tplReservationRequested(data);
-                adminSubject = `【新規予約】${data.customerName || 'お客様'} - ${data.productName || 'ツアー'}`;
+                adminSubject = `[신규 예약] ${data.customerName || '고객'} - ${data.productName || '투어'}`;
                 adminHtml = tplAdminNewReservation({ ...data, customerEmail: to });
                 break;
 
             case 'QUOTE_RECEIVED':
-                subject = '【見積り受付】ご相談ありがとうございます | Milkyway Japan';
+                subject = `[견적 접수] 상담 감사합니다 | ${BRAND}`;
                 html = tplQuoteReceived(data);
-                adminSubject = `【新規見積り】${data.customerName || 'お客様'}`;
+                adminSubject = `[신규 견적] ${data.customerName || '고객'}`;
                 adminHtml = tplAdminNewQuote({ ...data, customerEmail: to });
                 break;
 
             case 'GUIDE_ASSIGNED':
-                subject = `【担当ガイド決定】${data.productName || 'ご旅行'}の現地手配情報 | Milkyway Japan`;
+                subject = `[가이드 배정] ${data.productName || '여행'} 현지 안내 | ${BRAND}`;
                 html = tplGuideAssigned(data);
                 break;
 
             case 'ESTIMATE_COMPLETED':
-                subject = '【お見積り完成】モンゴル旅行プランをご確認ください | Milkyway Japan';
+                subject = `[견적 완성] 몽골 여행 플랜을 확인해 주세요 | ${BRAND}`;
                 html = tplEstimateCompleted(data);
                 break;
 
             case 'ITINERARY_READY':
-                subject = `【確定日程表】${data.productName || 'ご旅行'}のご案内 | Milkyway Japan`;
+                subject = `[확정 일정표] ${data.productName || '여행'} 안내 | ${BRAND}`;
                 html = tplItineraryReady(data);
                 break;
 
             case 'CONTRACT_READY':
-                subject = `【海外旅行契約書】${data.productName || 'ご旅行'}のご案内 | Milkyway Japan`;
+                subject = `[여행 계약서] ${data.productName || '여행'} 안내 | ${BRAND}`;
                 html = tplContractReady(data);
                 break;
 
@@ -384,14 +387,14 @@ app.post('/', async (c) => {
 
         const targetUserId = data.userId || data.user_id;
         if (targetUserId && c.env.DB) {
-            const inAppTitle = subject.replace(/\s*\|\s*Milkyway Japan\s*$/, '');
+            const inAppTitle = subject.replace(new RegExp(`\\s*\\|\\s*${BRAND}\\s*$`), '');
             const inAppMessage =
-                type === 'ITINERARY_READY' ? '確定日程表をご用意しました。内容をご確認ください。' :
-                type === 'CONTRACT_READY' ? '海外旅行契約書をご用意しました。内容をご確認ください。' :
-                type === 'GUIDE_ASSIGNED' ? '担当ガイドと現地手配情報をご案内しました。' :
-                type === 'RESERVATION_REQUESTED' ? 'ご予約リクエストを受け付けました。' :
-                type === 'QUOTE_RECEIVED' ? 'お見積りリクエストを受け付けました。' :
-                type === 'ESTIMATE_COMPLETED' ? 'お見積りが完成しました。内容をご確認ください。' : '';
+                type === 'ITINERARY_READY' ? '확정 일정표를 준비했습니다. 내용을 확인해 주세요.' :
+                type === 'CONTRACT_READY' ? '여행 계약서를 준비했습니다. 내용을 확인해 주세요.' :
+                type === 'GUIDE_ASSIGNED' ? '담당 가이드와 현지 안내 정보를 전달했습니다.' :
+                type === 'RESERVATION_REQUESTED' ? '예약 요청이 접수되었습니다.' :
+                type === 'QUOTE_RECEIVED' ? '견적 요청이 접수되었습니다.' :
+                type === 'ESTIMATE_COMPLETED' ? '견적이 완성되었습니다. 내용을 확인해 주세요.' : '';
             const link =
                 type === 'ITINERARY_READY' ? (data.reservationDbId ? `/mypage/reservations/${data.reservationDbId}` : `/documents/itinerary/${data.reservationId || ''}`) :
                 type === 'CONTRACT_READY' ? (data.reservationDbId ? `/mypage/reservations/${data.reservationDbId}` : `/documents/contract/${data.reservationId || ''}`) :
@@ -408,8 +411,12 @@ app.post('/', async (c) => {
             });
         }
 
-        if (adminSubject && adminHtml) {
-            await sendEmail(apiKey, adminEmail, adminSubject, adminHtml);
+        if (adminSubject && adminHtml && apiKey) {
+            try {
+                await sendEmail(apiKey, adminEmail, adminSubject, adminHtml);
+            } catch (adminErr) {
+                console.error('Admin email send failed:', adminErr);
+            }
         }
 
         return c.json({ success: true });
