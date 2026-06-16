@@ -422,13 +422,6 @@ export const QuoteDetailModal: React.FC<{
 
     const currentStepIndex = Math.max(0, workflowSteps.findIndex((step) => step.key === request.status));
     const statusMeta = quoteStatusMeta[request.status] || quoteStatusMeta.new;
-    const checklistItems = [
-        { label: 'Аяллын нөхцөл шалгах', done: Boolean(request.destination && request.headcount && request.period) },
-        { label: 'Баталгаажсан хөтөлбөр оруулах', done: Boolean(confirmedStartDate && confirmedEndDate) },
-        { label: 'Үнэ/урьдчилгаа оруулах', done: priceDetail.totalAmount > 0 && priceDetail.deposit >= 0 },
-        { label: 'Үнийн саналын хуудасны холбоос', done: Boolean(estimateUrl), optional: true },
-        { label: 'Үйлчлүүлэгчид зориулсан тэмдэглэл', done: Boolean(adminNote.trim()), optional: true },
-    ];
     // 발송 조건: Google 견적서 URL이 있으면 그것만으로 발송 가능.
     // URL이 없을 때만 기존처럼 확정 일정 + 견적 금액(금액 ≥ 예약금)을 요구 — 빈 견적 발송 방지.
     const hasEstimateUrl = Boolean((estimateUrl || '').trim());
@@ -503,7 +496,6 @@ export const QuoteDetailModal: React.FC<{
                         </div>
                     </div>
 
-                    <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
                         <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-800">
                             <div className="mb-4 flex items-center justify-between">
                                 <h3 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
@@ -540,27 +532,6 @@ export const QuoteDetailModal: React.FC<{
                                 </div>
                             </div>
                         </div>
-
-                        <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-800">
-                            <h3 className="mb-4 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                                <span className="material-symbols-outlined text-base text-primary">checklist</span>
-                                Илгээхийн өмнөх шалгалт
-                            </h3>
-                            <div className="space-y-2">
-                                {checklistItems.map((item) => (
-                                    <div key={item.label} className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-900/60">
-                                        <span className="text-xs font-bold text-slate-600 dark:text-slate-300">
-                                            {item.label}
-                                            {item.optional && <span className="ml-1.5 text-[10px] font-bold text-slate-400">сонголт</span>}
-                                        </span>
-                                        <span className={`material-symbols-outlined text-[18px] ${item.done ? 'text-teal-500' : item.optional ? 'text-slate-200' : 'text-slate-300'}`}>
-                                            {item.done ? 'check_circle' : 'radio_button_unchecked'}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
 
                     {/* Quote Workspace */}
                     <div className="overflow-hidden rounded-2xl border border-teal-100 bg-white shadow-sm dark:border-teal-500/20 dark:bg-slate-800">
