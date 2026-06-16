@@ -28,32 +28,32 @@ const LEGACY_REDIRECTS: Record<string, string> = {
 // Per-page SEO configurations for static routes
 const STATIC_PAGE_META: Record<string, { title: string; description: string }> = {
     '/products': {
-        title: 'モンゴルツアー商品一覧 | Milkyway Japan',
-        description: 'モンゴル乗馬旅行、ゴビ砂漠ツアー、テレルジ国立公園、フブスグル湖など、地域・テーマ別にモンゴルツアーをお探しいただけます。日本語ガイド同行で安心。'
+        title: '몽골투어 상품 목록 | Trip Mongolia',
+        description: '몽골 승마여행, 고비사막 투어, 테렐지 국립공원, 홉스굴 호수 등 지역·테마별 몽골투어를 한눈에. 한국어 가이드 동행으로 안심하고 떠나세요.'
     },
     '/travel-guide': {
-        title: 'モンゴル旅行ガイド | Milkyway Japan',
-        description: 'モンゴルの大自然、遊牧文化、おすすめスポット、持ち物リストなど、モンゴル旅行前に知っておきたい情報をまとめてご紹介。'
+        title: '몽골 여행 가이드 | Trip Mongolia',
+        description: '몽골의 대자연, 유목 문화, 추천 명소, 준비물 등 몽골 여행 전에 알아두면 좋은 정보를 한곳에 정리했습니다.'
     },
     '/faq': {
-        title: 'よくある質問（FAQ） | Milkyway Japan',
-        description: 'モンゴル旅行に関するよくある質問と回答。予約方法、ツアー内容、持ち物、ビザ、決済・キャンセルなど、モンゴルツアーの疑問を解決します。'
+        title: '자주 묻는 질문(FAQ) | Trip Mongolia',
+        description: '몽골 여행 관련 자주 묻는 질문과 답변. 예약 방법, 투어 내용, 준비물, 비자, 결제·취소 등 몽골투어 궁금증을 풀어 드립니다.'
     },
     '/reviews': {
-        title: 'お客様のモンゴル旅行レビュー | Milkyway Japan',
-        description: 'モンゴルツアーに参加されたお客様のリアルな旅行レビュー。実際の体験談でツアー選びの参考にしてください。'
+        title: '고객 몽골 여행 후기 | Trip Mongolia',
+        description: '몽골투어에 참여하신 고객들의 생생한 여행 후기. 실제 경험담으로 투어 선택에 참고하세요.'
     },
     '/custom-estimate': {
-        title: 'オーダーメイド見積もり | Milkyway Japan',
-        description: 'お客様のご要望に合わせたモンゴルツアーのオーダーメイドプランをご提案。日程・予算・目的地を自由にカスタマイズ。'
+        title: '맞춤 견적 문의 | Trip Mongolia',
+        description: '고객 요청에 맞춘 몽골투어 맞춤 플랜을 제안해 드립니다. 일정·예산·목적지를 자유롭게 구성하세요.'
     },
     '/travel-mates': {
-        title: '同行者募集 | Milkyway Japan',
-        description: 'モンゴル旅行の同行者を募集・検索。一人旅が不安な方も、旅仲間を見つけてモンゴルツアーを一緒に楽しみましょう。'
+        title: '동행자 모집 | Trip Mongolia',
+        description: '몽골 여행 동행자를 모집·검색하세요. 혼자 여행이 부담되는 분도 여행 메이트를 찾아 함께 몽골투어를 즐기실 수 있습니다.'
     },
     '/about': {
-        title: '会社案内 – モンゴル現地の旅行会社 | Milkyway Japan',
-        description: 'モンゴル現地の旅行会社「モンゴリア銀河系（天の川）」。韓国でホテル経営学科を卒業しモンゴルで暮らす代表と副代表が設立した家族経営の旅行会社です。日本人旅行客に合わせた日程とリーズナブルな価格で、どこにもないモンゴル旅行をご提案します。'
+        title: '회사 소개 – 몽골 현지 여행사 | Trip Mongolia',
+        description: '몽골 현지 여행사 Trip Mongolia. 한국어가 능통한 현지 전문 가이드가 동행하여, 한국 여행객에 맞춘 일정과 합리적인 가격으로 어디에도 없는 몽골 여행을 제안해 드립니다.'
     }
 };
 
@@ -108,7 +108,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
             const productArr = await db.select().from(products).where(eq(products.id, productId)).limit(1);
             if (productArr.length > 0) {
                 const product = productArr[0];
-                pageTitle = `${product.name} | Milkyway Japan`;
+                pageTitle = `${product.name} | Trip Mongolia`;
                 pageDescription = product.description || SEO_CONSTANTS.DESCRIPTION;
 
                 // Parse images if stored as stringified JSON
@@ -135,32 +135,32 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
                     name: product.name,
                     image: absoluteImages.length > 0 ? absoluteImages : undefined,
                     description: product.description || SEO_CONSTANTS.DESCRIPTION,
-                    brand: { '@type': 'Brand', name: 'Milkyway Japan' },
-                    category: product.category || 'モンゴルツアー',
-                    touristType: product.category || 'モンゴルツアー',
+                    brand: { '@type': 'Brand', name: 'Trip Mongolia' },
+                    category: product.category || '몽골투어',
+                    touristType: product.category || '몽골투어',
                     ...(product.duration ? {
                         additionalProperty: [
-                            { '@type': 'PropertyValue', name: '所要時間', value: product.duration }
+                            { '@type': 'PropertyValue', name: '소요시간', value: product.duration }
                         ]
                     } : {}),
                     offers: {
                         '@type': 'Offer',
                         url: pageUrl,
-                        priceCurrency: 'JPY',
+                        priceCurrency: 'KRW',
                         price: product.price,
                         priceValidUntil: priceValidUntil,
                         itemCondition: 'https://schema.org/NewCondition',
                         availability: product.status === 'active'
                             ? 'https://schema.org/InStock'
                             : 'https://schema.org/OutOfStock',
-                        seller: { '@type': 'Organization', name: 'Milkyway Japan' },
+                        seller: { '@type': 'Organization', name: 'Trip Mongolia' },
                         // Tour bookings are digital — no shipping is required. Declaring a
                         // free, zero-delay shipping policy satisfies Google's Merchant Listing
                         // requirement and avoids the "shippingDetails missing" warning.
                         shippingDetails: {
                             '@type': 'OfferShippingDetails',
-                            shippingRate: { '@type': 'MonetaryAmount', value: 0, currency: 'JPY' },
-                            shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'JP' },
+                            shippingRate: { '@type': 'MonetaryAmount', value: 0, currency: 'KRW' },
+                            shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'KR' },
                             deliveryTime: {
                                 '@type': 'ShippingDeliveryTime',
                                 handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 0, unitCode: 'DAY' },
@@ -171,7 +171,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
                         // satisfies Google's requirement and signals a trustworthy refund policy.
                         hasMerchantReturnPolicy: {
                             '@type': 'MerchantReturnPolicy',
-                            applicableCountry: 'JP',
+                            applicableCountry: 'KR',
                             returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
                             merchantReturnDays: 14,
                             returnMethod: 'https://schema.org/ReturnByMail',
@@ -185,8 +185,8 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
                     '@context': 'https://schema.org',
                     '@type': 'BreadcrumbList',
                     itemListElement: [
-                        { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SEO_CONSTANTS.SITE_URL}/` },
-                        { '@type': 'ListItem', position: 2, name: 'モンゴルツアー商品', item: `${SEO_CONSTANTS.SITE_URL}/products` },
+                        { '@type': 'ListItem', position: 1, name: '홈', item: `${SEO_CONSTANTS.SITE_URL}/` },
+                        { '@type': 'ListItem', position: 2, name: '몽골투어 상품', item: `${SEO_CONSTANTS.SITE_URL}/products` },
                         { '@type': 'ListItem', position: 3, name: product.name, item: canonicalUrl },
                     ],
                 };
@@ -202,7 +202,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
                     // Fetch magazine using raw D1 prepare as Drizzle schema limits import
                     const guide = await context.env.DB.prepare("SELECT * FROM magazines WHERE id = ?").bind(guideId).first();
                     if (guide) {
-                        pageTitle = `${guide.title} | Milkyway Japan Travel Guide`;
+                        pageTitle = `${guide.title} | Trip Mongolia 여행 가이드`;
                         pageDescription = (guide.subtitle || guide.description || SEO_CONSTANTS.DESCRIPTION) as string;
 
                         const imageStr = (guide.thumbnail || guide.image) as string;
@@ -221,11 +221,11 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
                             dateModified: guide.updated_at || guide.created_at,
                             author: {
                                 '@type': guide.author ? 'Person' : 'Organization',
-                                name: guide.author || 'Milkyway Japan',
+                                name: guide.author || 'Trip Mongolia',
                             },
                             publisher: {
                                 '@type': 'Organization',
-                                name: 'Milkyway Japan',
+                                name: 'Trip Mongolia',
                                 logo: {
                                     '@type': 'ImageObject',
                                     url: `${SEO_CONSTANTS.SITE_URL}/favicon.png`,
@@ -233,7 +233,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
                             },
                             mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
                             articleSection: guide.category || undefined,
-                            inLanguage: 'ja',
+                            inLanguage: 'ko',
                         };
                         extraJsonLd.push(JSON.stringify(articleLd));
 
@@ -241,8 +241,8 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
                             '@context': 'https://schema.org',
                             '@type': 'BreadcrumbList',
                             itemListElement: [
-                                { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SEO_CONSTANTS.SITE_URL}/` },
-                                { '@type': 'ListItem', position: 2, name: '旅行ガイド', item: `${SEO_CONSTANTS.SITE_URL}/travel-guide` },
+                                { '@type': 'ListItem', position: 1, name: '홈', item: `${SEO_CONSTANTS.SITE_URL}/` },
+                                { '@type': 'ListItem', position: 2, name: '여행 가이드', item: `${SEO_CONSTANTS.SITE_URL}/travel-guide` },
                                 { '@type': 'ListItem', position: 3, name: guide.title, item: canonicalUrl },
                             ],
                         };
