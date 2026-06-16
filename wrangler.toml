@@ -21,4 +21,4 @@ bucket_name = "tripmongolia-assets"
 # Vars
 [vars]
 ENVIRONMENT = "production"
-ADMIN_EMAIL = "gantumaidar@gmail.com"
+ADMIN_EMAIL = "ts.dejidlala@gmail.com"

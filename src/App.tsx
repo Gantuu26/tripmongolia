@@ -125,7 +125,7 @@ function App() {
             <Route path="/reviews" element={<UserReviews />} />
             <Route path="/reviews/write" element={<AuthGuard><ReviewWrite /></AuthGuard>} />
             <Route path="/reviews/:id" element={<ReviewDetail />} />
-            <Route path="/custom-estimate" element={<CustomEstimate />} />
+            <Route path="/custom-estimate" element={<AuthGuard><CustomEstimate /></AuthGuard>} />
             <Route path="/estimate/:id" element={<EstimateDetail />} />
             <Route path="/estimate-complete" element={<EstimateComplete />} />
 

@@ -326,7 +326,7 @@ app.post('/', async (c) => {
     try {
         const { to, type, data = {} } = await c.req.json();
         const apiKey = c.env.RESEND_API_KEY;
-        const adminEmail = c.env.ADMIN_EMAIL || 'agape_ibeel@hanpass.com';
+        const adminEmail = c.env.ADMIN_EMAIL || 'ts.dejidlala@gmail.com';
 
         // 이메일 키가 없어도 인앱 알림은 계속 생성해야 하므로 여기서 중단하지 않음
         if (!apiKey) {

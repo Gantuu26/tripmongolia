@@ -98,7 +98,7 @@ app.post('/', async (c) => {
         db.select().from(reservations).where(like(reservations.createdAt, `${today}%`)).all(),
     ]);
 
-    const adminEmail = c.env.ADMIN_EMAIL || 'agape_ibeel@hanpass.com';
+    const adminEmail = c.env.ADMIN_EMAIL || 'ts.dejidlala@gmail.com';
     const dateLabel = new Date().toLocaleDateString('ko-KR', {
         year: 'numeric', month: 'long', day: 'numeric', weekday: 'short',
     });
