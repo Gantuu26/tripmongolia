@@ -529,8 +529,8 @@ export const QuoteDetailModal: React.FC<{
                                 </div>
                                 <div className="rounded-xl bg-slate-50 p-4 dark:bg-slate-900/60">
                                     <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Үнийн санал</p>
-                                    <p className="mt-1 text-sm font-black text-slate-900 dark:text-white">{priceDetail.totalAmount ? `${priceDetail.totalAmount.toLocaleString()}엔` : 'Оруулаагүй'}</p>
-                                    <p className="mt-1 text-xs text-slate-500">Урьдчилгаа {priceDetail.deposit ? `${priceDetail.deposit.toLocaleString()}엔` : '0엔'}</p>
+                                    <p className="mt-1 text-sm font-black text-slate-900 dark:text-white">{priceDetail.totalAmount ? `${priceDetail.totalAmount.toLocaleString()}원` : 'Оруулаагүй'}</p>
+                                    <p className="mt-1 text-xs text-slate-500">Урьдчилгаа {priceDetail.deposit ? `${priceDetail.deposit.toLocaleString()}원` : '0원'}</p>
                                 </div>
                             </div>
                         </div>
@@ -611,7 +611,7 @@ export const QuoteDetailModal: React.FC<{
                                                     className="w-full bg-transparent text-right text-2xl font-black text-slate-900 outline-none dark:text-white"
                                                     placeholder="0"
                                                 />
-                                                <span className="text-sm font-bold text-slate-400">엔</span>
+                                                <span className="text-sm font-bold text-slate-400">원</span>
                                             </div>
                                         </div>
                                         <div className="rounded-xl border border-teal-200 bg-teal-50 p-4 dark:border-teal-500/30 dark:bg-teal-500/10">
@@ -624,14 +624,14 @@ export const QuoteDetailModal: React.FC<{
                                                     className="w-full bg-transparent text-right text-2xl font-black text-primary outline-none dark:text-teal-300"
                                                     placeholder="0"
                                                 />
-                                                <span className="text-sm font-bold text-teal-500">엔</span>
+                                                <span className="text-sm font-bold text-teal-500">원</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div className={`mt-3 flex items-center justify-between rounded-xl border px-4 py-3 ${priceDetail.totalAmount - priceDetail.deposit < 0 ? 'border-red-200 bg-red-50 text-red-700' : 'border-slate-200 bg-white text-slate-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200'}`}>
                                         <span className="text-xs font-bold">Тооцоолсон үлдэгдэл</span>
                                         <span className="text-base font-black">
-                                            {typeof priceDetail.totalAmount === 'number' && typeof priceDetail.deposit === 'number' && !isNaN(priceDetail.totalAmount) && !isNaN(priceDetail.deposit) ? (priceDetail.totalAmount - priceDetail.deposit).toLocaleString() : 0}엔
+                                            {typeof priceDetail.totalAmount === 'number' && typeof priceDetail.deposit === 'number' && !isNaN(priceDetail.totalAmount) && !isNaN(priceDetail.deposit) ? (priceDetail.totalAmount - priceDetail.deposit).toLocaleString() : 0}원
                                         </span>
                                     </div>
                                 </div>
