@@ -429,8 +429,13 @@ export const QuoteDetailModal: React.FC<{
         { label: 'Үнийн саналын хуудасны холбоос', done: Boolean(estimateUrl), optional: true },
         { label: 'Үйлчлүүлэгчид зориулсан тэмдэглэл', done: Boolean(adminNote.trim()), optional: true },
     ];
-    // 발송 필수 = 일정·금액·예약금만. 견적서 링크/안내문은 선택(고객은 시스템 견적 페이지로 받음).
-    const canSendEstimate = checklistItems.filter((item) => !item.optional).every((item) => item.done) && priceDetail.totalAmount >= priceDetail.deposit;
+    // 발송 조건: Google 견적서 URL이 있으면 그것만으로 발송 가능.
+    // URL이 없을 때만 기존처럼 확정 일정 + 견적 금액(금액 ≥ 예약금)을 요구 — 빈 견적 발송 방지.
+    const hasEstimateUrl = Boolean((estimateUrl || '').trim());
+    const hasConfirmedPlan = Boolean(confirmedStartDate && confirmedEndDate)
+        && priceDetail.totalAmount > 0
+        && priceDetail.totalAmount >= priceDetail.deposit;
+    const canSendEstimate = hasEstimateUrl || hasConfirmedPlan;
     const quickNotes = [
         {
             label: 'Үндсэн заавар',
@@ -566,7 +571,7 @@ export const QuoteDetailModal: React.FC<{
                                     Үнийн санал боловсруулах ажлын талбар
                                 </h3>
                                 <p className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">
-                                    Баталгаажсан хөтөлбөр, үнэ болон урьдчилгааг оруулахад л илгээх боломжтой. Гадны үнийн саналын хуудасгүйгээр системийн үнийн саналын хуудсаар дамжуулна.
+                                    Google үнийн саналын холбоос оруулбал шууд илгээх боломжтой. Холбоосгүй бол баталгаажсан хөтөлбөр, үнэ·урьдчилгааг оруулна уу.
                                 </p>
                             </div>
                             {request.status === 'reservation_requested' && (
@@ -778,7 +783,7 @@ export const QuoteDetailModal: React.FC<{
                                     onClick={() => onSendEstimate(estimateUrl, adminNote, priceDetail, confirmedStartDate, confirmedEndDate, itineraryTemplateId)}
                                     disabled={!canSendEstimate}
                                     className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary-dark px-5 py-4 text-sm font-black text-white shadow-lg shadow-primary-dark/20 transition-all hover:bg-primary active:scale-[0.99] disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500 disabled:shadow-none dark:disabled:bg-slate-700"
-                                    title={!canSendEstimate ? 'Баталгаажсан хөтөлбөр болон үнэ·урьдчилгааг оруулбал илгээх боломжтой.' : undefined}
+                                    title={!canSendEstimate ? 'Google үнийн саналын холбоос эсвэл баталгаажсан хөтөлбөр+үнэ·урьдчилгааг оруулбал илгээнэ.' : undefined}
                                 >
                                     <span className="material-symbols-outlined text-[20px]">send</span>
                                     Үнийн санал илгээх
