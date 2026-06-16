@@ -762,16 +762,6 @@ export const QuoteDetailModal: React.FC<{
                                     )}
                                 </div>
 
-                                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900/70">
-                                    <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">Үйлчлүүлэгчийн дэлгэцийн урьдчилан харах</p>
-                                    <div className="space-y-1 text-xs text-slate-600 dark:text-slate-300">
-                                        <p><b>견적 금액:</b> {priceDetail.totalAmount ? `${priceDetail.totalAmount.toLocaleString()}円` : '미입력'}</p>
-                                        <p><b>예약금:</b> {priceDetail.deposit ? `${priceDetail.deposit.toLocaleString()}円` : '미입력'}</p>
-                                        <p><b>일정:</b> {confirmedStartDate && confirmedEndDate ? `${confirmedStartDate} ~ ${confirmedEndDate}` : '미입력'}</p>
-                                        <p><b>일정표:</b> {itineraryTemplateId ? (templatesList.find(t => t.id === itineraryTemplateId)?.name || '첨부됨') : '없음'}</p>
-                                    </div>
-                                </div>
-
                                 <button
                                     onClick={() => setDocEditorOpen(true)}
                                     className="mb-2 flex w-full items-center justify-center gap-2 rounded-xl border border-teal-300 bg-white px-5 py-3 text-sm font-black text-teal-700 transition-colors hover:bg-teal-50 dark:border-teal-700 dark:bg-slate-800 dark:text-teal-300"
