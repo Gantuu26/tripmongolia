@@ -430,7 +430,10 @@ export const QuoteDetailModal: React.FC<{
     const hasConfirmedPlan = Boolean(confirmedStartDate && confirmedEndDate)
         && priceDetail.totalAmount > 0
         && priceDetail.totalAmount >= priceDetail.deposit;
-    const canSendEstimate = hasEstimateUrl || hasConfirmedPlan;
+    // Хөтөлбөр засах(일정표 편집)으로 일정을 저장했거나, 등록된 템플릿을 선택해도 발송 가능
+    const hasDocument = Boolean(itineraryTemplateId)
+        || Boolean(docInitialContent && Array.isArray(docInitialContent.days) && docInitialContent.days.length > 0);
+    const canSendEstimate = hasEstimateUrl || hasConfirmedPlan || hasDocument;
     const quickNotes = [
         {
             label: 'Үндсэн заавар',
@@ -750,11 +753,19 @@ export const QuoteDetailModal: React.FC<{
                                         <span className="material-symbols-outlined text-[18px]">description</span>Гэрээ урьдчилан харах
                                     </button>
                                 </div>
+                                <div className={`mb-2 flex items-start gap-2 rounded-xl border px-3 py-2 text-[11px] font-bold leading-relaxed ${canSendEstimate ? 'border-teal-200 bg-teal-50 text-teal-700 dark:border-teal-700 dark:bg-teal-900/20 dark:text-teal-300' : 'border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-700 dark:bg-amber-900/20 dark:text-amber-300'}`}>
+                                    <span className="material-symbols-outlined text-[16px] flex-shrink-0">{canSendEstimate ? 'check_circle' : 'info'}</span>
+                                    <span>
+                                        {canSendEstimate
+                                            ? 'Илгээхэд бэлэн боллоо. «Үнийн санал илгээх» товчийг дарна уу.'
+                                            : 'Илгээхийн тулд дараахаас НЭГийг гүйцэтгэнэ үү: ① «Хөтөлбөр засах» дотор хөтөлбөрөө засаад хадгалах, ② Google холбоос оруулах, эсвэл ③ Баталгаажсан огноо + үнэ оруулах.'}
+                                    </span>
+                                </div>
                                 <button
                                     onClick={() => onSendEstimate(estimateUrl, adminNote, priceDetail, confirmedStartDate, confirmedEndDate, itineraryTemplateId)}
                                     disabled={!canSendEstimate}
                                     className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary-dark px-5 py-4 text-sm font-black text-white shadow-lg shadow-primary-dark/20 transition-all hover:bg-primary active:scale-[0.99] disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500 disabled:shadow-none dark:disabled:bg-slate-700"
-                                    title={!canSendEstimate ? 'Google үнийн саналын холбоос эсвэл баталгаажсан хөтөлбөр+үнэ·урьдчилгааг оруулбал илгээнэ.' : undefined}
+                                    title={!canSendEstimate ? '«Хөтөлбөр засах»-аар хөтөлбөр хадгалах, эсвэл Google холбоос, эсвэл баталгаажсан огноо+үнэ оруулбал илгээнэ.' : undefined}
                                 >
                                     <span className="material-symbols-outlined text-[20px]">send</span>
                                     Үнийн санал илгээх
