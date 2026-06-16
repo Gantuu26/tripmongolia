@@ -178,6 +178,7 @@ export const ReservationDocumentEditor: React.FC<Props> = ({ open, onClose, titl
                         onRemoveDay={removeDay}
                         onRemoveActivity={removeActivity}
                         onDayActivitiesText={(d, text) => setDays(ds => ds.map((x, i) => i === d ? { ...x, activities: parseDayActivitiesText(text) } : x))}
+                        onDayPatch={(d, patch) => setDays(ds => ds.map((x, i) => i === d ? { ...x, ...patch } : x))}
                     />
                 </div>
             </div>

@@ -38,6 +38,8 @@ interface DocumentSettings {
         excludedText?: string;
         pricePerPerson?: string;
         paymentNote?: string;
+        pricingTiers?: { people: string; price: string; deposit: string; balance: string; recommended?: boolean }[];
+        pricingNote?: string;
     };
     detail?: {
         title?: string;
@@ -148,8 +150,8 @@ const parseImage = (value: any): string => {
 };
 
 const InfoRow = ({ label, value }: { label: string; value: React.ReactNode }) => (
-    <div className="grid grid-cols-[126px_1fr] border-b border-[#8FE7DE]/70 last:border-b-0">
-        <div className="bg-[#F7FAFA] px-3 py-2.5 text-[12px] font-black text-[#0F8F84]">{label}</div>
+    <div className="grid grid-cols-[126px_1fr] border-b border-[#FFD9E0]/70 last:border-b-0">
+        <div className="bg-[#FFF5F7] px-3 py-2.5 text-[12px] font-black text-[#E00B41]">{label}</div>
         <div className="px-3 py-2.5 text-[13px] font-bold text-slate-800">{value || '-'}</div>
     </div>
 );
@@ -197,7 +199,7 @@ export const DocumentItinerary: React.FC = () => {
     if (error || !data) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-slate-100 p-6">
-                <div className="max-w-sm rounded-2xl bg-white p-6 text-center shadow-sm border border-[#8FE7DE]/70">
+                <div className="max-w-sm rounded-2xl bg-white p-6 text-center shadow-sm border border-[#FFD9E0]/70">
                     <span className="material-symbols-outlined text-4xl text-slate-300">event_busy</span>
                     <p className="mt-3 text-lg font-bold text-slate-800">일정표를 표시할 수 없습니다</p>
                     <p className="mt-1 text-sm text-slate-500">{error || 'URL을 확인해 주세요.'}</p>
@@ -221,6 +223,10 @@ export const DocumentItinerary: React.FC = () => {
     const includedList = splitItems(overview.includedText);
     const excludedList = splitItems(overview.excludedText);
     const includedDisplay = includedList.length ? includedList : included.map(i => i.label);
+    const pricingTiers = Array.isArray(overview.pricingTiers) ? overview.pricingTiers : [];
+    // 템플릿 days(원본 JSON)에서 일차별 식사·숙박 텍스트를 조회
+    const templateDayMap = new Map<number, any>();
+    (template?.days || []).forEach((td: any) => { if (td && typeof td.day === 'number') templateDayMap.set(td.day, td); });
 
     return (
         <>
@@ -234,19 +240,19 @@ export const DocumentItinerary: React.FC = () => {
                 @page { margin: 12mm; }
             `}</style>
 
-            <div className="min-h-screen bg-[#F7FAFA] px-3 py-4 sm:px-4 sm:py-8 print:bg-white print:p-0">
-                <main className="doc-shell mx-auto max-w-[920px] overflow-hidden rounded-[24px] border border-[#8FE7DE]/70 bg-white shadow-xl print:shadow-none">
-                    <section className="border-b border-[#8FE7DE]/70 bg-white px-5 py-4 sm:px-8">
+            <div className="min-h-screen bg-[#FFF5F7] px-3 py-4 sm:px-4 sm:py-8 print:bg-white print:p-0">
+                <main className="doc-shell mx-auto max-w-[920px] overflow-hidden rounded-[24px] border border-[#FFD9E0]/70 bg-white shadow-xl print:shadow-none">
+                    <section className="border-b border-[#FFD9E0]/70 bg-white px-5 py-4 sm:px-8">
                         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                            <div className="flex items-center gap-3 text-[#0F8F84]">
+                            <div className="flex items-center gap-3 text-[#E00B41]">
                                 <span className="material-symbols-outlined text-[34px]">landscape</span>
                                 <div>
                                     <p className="text-base font-black">Trip Mongolia</p>
-                                    <p className="text-[10px] font-bold tracking-[0.2em]">MILKYWAY JAPAN</p>
+                                    <p className="text-[10px] font-bold tracking-[0.2em]">몽골 현지 여행사</p>
                                 </div>
                             </div>
                             <div className="text-left sm:text-right">
-                                <h1 className="text-2xl font-black tracking-[0.14em] text-[#0F8F84] sm:text-3xl">여행 일정표</h1>
+                                <h1 className="text-2xl font-black tracking-[0.14em] text-[#E00B41] sm:text-3xl">여행 일정표</h1>
                                 <p className="mt-1 text-sm font-semibold text-slate-500">{overview.subtitle || '은하수 아래에서 대자연과 문화를 체험하는 특별한 여행으로'}</p>
                             </div>
                         </div>
@@ -254,9 +260,9 @@ export const DocumentItinerary: React.FC = () => {
 
                     <section className="relative h-[300px] overflow-hidden sm:h-[360px]">
                         <img src={mongoliaHero} alt="Mongolia nature" className="h-full w-full object-cover" />
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#00796F]/95 via-[#0F8F84]/60 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#B00935]/95 via-[#E00B41]/60 to-transparent" />
                         <div className="absolute bottom-7 left-5 right-5 text-white sm:left-8">
-                            <span className="inline-flex rounded-xl bg-[#0F8F84] px-4 py-2 text-sm font-black">
+                            <span className="inline-flex rounded-xl bg-[#E00B41] px-4 py-2 text-sm font-black">
                                 {duration ? `${duration.nights}박 ${duration.days}일` : `${days.length}일간`}
                             </span>
                             <h2 className="mt-4 max-w-2xl text-3xl font-black leading-tight sm:text-4xl">{template?.name || reservation.productName}</h2>
@@ -266,12 +272,12 @@ export const DocumentItinerary: React.FC = () => {
                         </div>
                     </section>
 
-                    <section className="grid gap-5 border-b border-[#8FE7DE]/70 px-5 py-6 sm:grid-cols-[1.1fr_0.9fr] sm:px-8">
+                    <section className="grid gap-5 border-b border-[#FFD9E0]/70 px-5 py-6 sm:grid-cols-[1.1fr_0.9fr] sm:px-8">
                         <div>
-                            <h3 className="mb-3 flex items-center gap-2 text-base font-black text-[#0F8F84]">
+                            <h3 className="mb-3 flex items-center gap-2 text-base font-black text-[#E00B41]">
                                 <span className="material-symbols-outlined text-[20px]">check_circle</span>여행 개요
                             </h3>
-                            <div className="overflow-hidden rounded-xl border border-[#8FE7DE]/70">
+                            <div className="overflow-hidden rounded-xl border border-[#FFD9E0]/70">
                                 <InfoRow label="여행 번호" value={documentNumber} />
                                 <InfoRow label="여행 기간" value={`${formatDate(reservation.startDate)} ~ ${formatDate(reservation.endDate)}`} />
                                 <InfoRow label="참가 인원" value={`${reservation.travelers || '-'}명`} />
@@ -281,11 +287,11 @@ export const DocumentItinerary: React.FC = () => {
                             </div>
                         </div>
                         <div>
-                            <h3 className="mb-3 flex items-center gap-2 text-base font-black text-[#0F8F84]">
+                            <h3 className="mb-3 flex items-center gap-2 text-base font-black text-[#E00B41]">
                                 <span className="material-symbols-outlined text-[20px]">info</span>안내
                             </h3>
-                            <div className="rounded-xl border border-[#8FE7DE]/70 bg-[#39C4B7]/10 p-4">
-                                <p className="whitespace-pre-wrap text-sm font-semibold leading-relaxed text-[#064E48]">
+                            <div className="rounded-xl border border-[#FFD9E0]/70 bg-[#FF385C]/10 p-4">
+                                <p className="whitespace-pre-wrap text-sm font-semibold leading-relaxed text-[#7a1230]">
                                     {overview.intro || '예약 내용을 바탕으로 여행 개요・일정・대금을 정리한 확인용 여행 일정표입니다.'}
                                 </p>
                                 {overview.paymentNote && <p className="mt-3 text-xs font-bold leading-relaxed text-slate-500">{overview.paymentNote}</p>}
@@ -293,14 +299,14 @@ export const DocumentItinerary: React.FC = () => {
                         </div>
                     </section>
 
-                    <section className="border-b border-[#8FE7DE]/70 px-5 py-6 sm:px-8">
+                    <section className="border-b border-[#FFD9E0]/70 px-5 py-6 sm:px-8">
                         <div className="grid gap-5 sm:grid-cols-2">
                             <div>
-                                <h3 className="mb-3 text-base font-black text-[#0F8F84]">포함 사항</h3>
+                                <h3 className="mb-3 text-base font-black text-[#E00B41]">포함 사항</h3>
                                 <ul className="space-y-1.5">
                                     {includedDisplay.map((t, i) => (
                                         <li key={i} className="flex items-start gap-2 text-sm font-semibold text-slate-700">
-                                            <span className="material-symbols-outlined text-[18px] text-[#0F8F84]">check_circle</span>{t}
+                                            <span className="material-symbols-outlined text-[18px] text-[#E00B41]">check_circle</span>{t}
                                         </li>
                                     ))}
                                 </ul>
@@ -318,22 +324,45 @@ export const DocumentItinerary: React.FC = () => {
                                 </div>
                             )}
                         </div>
-                        {pricePerPerson > 0 && (
+                        {pricingTiers.length > 0 ? (
+                            <div className="mt-6">
+                                <h3 className="mb-3 text-base font-black text-[#E00B41]">인원별 요금 안내</h3>
+                                <div className="overflow-hidden rounded-xl border border-[#FFD9E0]/70">
+                                    <div className="grid grid-cols-4 bg-slate-800 text-[12px] font-black text-white">
+                                        <div className="px-3 py-2.5">인원 (1팀)</div>
+                                        <div className="px-3 py-2.5 text-right">1인 가격</div>
+                                        <div className="px-3 py-2.5 text-right">예약금</div>
+                                        <div className="px-3 py-2.5 text-right">잔금</div>
+                                    </div>
+                                    {pricingTiers.map((tier, i) => (
+                                        <div key={i} className={`grid grid-cols-4 border-t border-[#FFD9E0]/60 text-[13px] ${tier.recommended ? 'bg-[#FFF1F3]' : 'bg-white'}`}>
+                                            <div className="px-3 py-2.5 font-bold text-slate-800">
+                                                {tier.people}{tier.recommended && <span className="ml-1 text-[10px] font-black text-[#E00B41]">★추천</span>}
+                                            </div>
+                                            <div className="px-3 py-2.5 text-right font-black text-slate-900">{tier.price ? `₩${tier.price}` : '-'}</div>
+                                            <div className="px-3 py-2.5 text-right font-bold text-[#E00B41]">{tier.deposit ? `₩${tier.deposit}` : '-'}</div>
+                                            <div className="px-3 py-2.5 text-right font-bold text-slate-600">{tier.balance ? `₩${tier.balance}` : '-'}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                                {overview.pricingNote && <p className="mt-2 text-[11px] font-semibold text-slate-400">· {overview.pricingNote}</p>}
+                            </div>
+                        ) : pricePerPerson > 0 ? (
                             <div className="mt-5 grid gap-3 sm:grid-cols-3">
                                 <div className="rounded-xl border border-amber-200 bg-white p-4 text-center">
-                                    <p className="text-xs font-black text-[#0F8F84]">여행 대금(1인당)</p>
-                                    <p className="mt-1 text-2xl font-black text-[#0F8F84]">{pricePerPerson.toLocaleString('ko-KR')}원</p>
+                                    <p className="text-xs font-black text-[#E00B41]">여행 대금(1인당)</p>
+                                    <p className="mt-1 text-2xl font-black text-[#E00B41]">{pricePerPerson.toLocaleString('ko-KR')}원</p>
                                 </div>
-                                <div className="rounded-xl border border-[#8FE7DE]/70 bg-white p-4 text-center">
+                                <div className="rounded-xl border border-[#FFD9E0]/70 bg-white p-4 text-center">
                                     <p className="text-xs font-black text-slate-400">참가 인원</p>
                                     <p className="mt-2 text-lg font-black text-slate-700">{reservation.travelers || '-'}명</p>
                                 </div>
-                                <div className="rounded-xl bg-gradient-to-br from-[#0F8F84] to-[#39C4B7] p-4 text-center text-white">
+                                <div className="rounded-xl bg-gradient-to-br from-[#E00B41] to-[#FF385C] p-4 text-center text-white">
                                     <p className="text-xs font-black">참고 합계</p>
                                     <p className="mt-1 text-2xl font-black">{(pricePerPerson * (reservation.travelers || 1)).toLocaleString('ko-KR')}원</p>
                                 </div>
                             </div>
-                        )}
+                        ) : null}
                     </section>
 
                     <section className="px-5 py-7 sm:px-8">
@@ -342,11 +371,11 @@ export const DocumentItinerary: React.FC = () => {
                                 <p className="text-[12px] font-black uppercase tracking-widest text-rose-700">Detailed Itinerary</p>
                                 <h2 className="mt-1 text-2xl font-black text-slate-950">{detail.title || '여행 일정표(상세)'}</h2>
                             </div>
-                            <p className="rounded-full bg-[#39C4B7]/10 px-3 py-1 text-sm font-black text-[#0F8F84]">{days.length}일간</p>
+                            <p className="rounded-full bg-[#FF385C]/10 px-3 py-1 text-sm font-black text-[#E00B41]">{days.length}일간</p>
                         </div>
 
                         {days.length === 0 ? (
-                            <div className="rounded-xl border border-dashed border-[#8FE7DE] bg-slate-50 p-8 text-center">
+                            <div className="rounded-xl border border-dashed border-[#FFD9E0] bg-slate-50 p-8 text-center">
                                 <span className="material-symbols-outlined text-4xl text-slate-300">edit_calendar</span>
                                 <p className="mt-2 text-sm font-bold text-slate-500">일정은 현재 준비 중입니다.</p>
                             </div>
@@ -357,8 +386,8 @@ export const DocumentItinerary: React.FC = () => {
                                     const accommodationImage = parseImage(accommodation?.images);
 
                                     return (
-                                        <article key={day.day} className="print-break grid gap-3 rounded-2xl border border-[#8FE7DE]/70 bg-white p-3 sm:grid-cols-[84px_1fr]">
-                                            <div className="rounded-xl bg-gradient-to-b from-[#0F8F84] to-[#39C4B7] px-3 py-4 text-center text-white">
+                                        <article key={day.day} className="print-break grid gap-3 rounded-2xl border border-[#FFD9E0]/70 bg-white p-3 sm:grid-cols-[84px_1fr]">
+                                            <div className="rounded-xl bg-gradient-to-b from-[#E00B41] to-[#FF385C] px-3 py-4 text-center text-white">
                                                 <p className="text-xs font-black uppercase">DAY {day.day}</p>
                                                 <p className="mt-1 text-sm font-bold">{formatShortDate(new Date(new Date(reservation.startDate).getTime() + (day.day - 1) * 86400000).toISOString())}</p>
                                             </div>
@@ -366,18 +395,18 @@ export const DocumentItinerary: React.FC = () => {
                                                 <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                                                     <div>
                                                         {day.region && <p className="text-[11px] font-black uppercase tracking-widest text-rose-700">{day.region}</p>}
-                                                        <h3 className="text-lg font-black text-[#0F8F84]">{day.title || `${day.day}일차`}</h3>
+                                                        <h3 className="text-lg font-black text-[#E00B41]">{day.title || `${day.day}일차`}</h3>
                                                     </div>
                                                     {accommodation && <Chip>숙박：{accommodation.name}</Chip>}
                                                 </div>
 
-                                                <div className="relative ml-2 space-y-0 border-l-2 border-dashed border-[#8FE7DE] pl-5">
+                                                <div className="relative ml-2 space-y-0 border-l-2 border-dashed border-[#FFD9E0] pl-5">
                                                     {day.activities.length > 0 ? day.activities.map((activity, index) => {
                                                         const type = activity.type || 'other';
                                                         const imgs = parseMaybeJson(activity.images).filter(Boolean);
                                                         return (
                                                             <div key={index} className="relative pb-4 last:pb-0">
-                                                                <span className="absolute -left-[31px] top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#0F8F84] ring-4 ring-white">
+                                                                <span className="absolute -left-[31px] top-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#E00B41] ring-4 ring-white">
                                                                     <span className="material-symbols-outlined text-[12px] text-white">{ACTIVITY_ICON[type] || ACTIVITY_ICON.other}</span>
                                                                 </span>
                                                                 <div className="grid gap-2 sm:grid-cols-[70px_1fr]">
@@ -404,6 +433,32 @@ export const DocumentItinerary: React.FC = () => {
                                                     )}
                                                 </div>
 
+                                                {(() => {
+                                                    const td = templateDayMap.get(day.day);
+                                                    const meals = td?.meals || {};
+                                                    const accText = (td?.accommodation || accommodation?.name || '').trim();
+                                                    const mealParts = [
+                                                        meals.breakfast && `조식: ${meals.breakfast}`,
+                                                        meals.lunch && `중식: ${meals.lunch}`,
+                                                        meals.dinner && `석식: ${meals.dinner}`,
+                                                    ].filter(Boolean) as string[];
+                                                    if (mealParts.length === 0 && !accText) return null;
+                                                    return (
+                                                        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-[#FFD9E0]/50 pt-2.5 text-[11px] font-bold">
+                                                            {mealParts.length > 0 && (
+                                                                <span className="inline-flex items-center gap-1.5 text-slate-600">
+                                                                    <span className="h-1.5 w-1.5 rounded-full bg-[#E00B41]" />{mealParts.join('  |  ')}
+                                                                </span>
+                                                            )}
+                                                            {accText && (
+                                                                <span className="inline-flex items-center gap-1.5 text-slate-600">
+                                                                    <span className="h-1.5 w-1.5 rounded-full bg-slate-700" />숙박: {accText}
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                    );
+                                                })()}
+
                                                 {accommodation && (
                                                     <button
                                                         onClick={() => setAccModal({ accommodation, day: day.day })}
@@ -425,17 +480,17 @@ export const DocumentItinerary: React.FC = () => {
                         )}
                     </section>
 
-                    <section className="border-t border-[#8FE7DE]/70 bg-[#F7FAFA] px-5 py-6 sm:px-8">
+                    <section className="border-t border-[#FFD9E0]/70 bg-[#FFF5F7] px-5 py-6 sm:px-8">
                         <div className="grid gap-4 sm:grid-cols-[1fr_280px]">
-                            <div className="rounded-xl border border-[#8FE7DE]/70 bg-white p-4">
-                                <p className="font-black text-[#0F8F84]">안내・유의사항</p>
+                            <div className="rounded-xl border border-[#FFD9E0]/70 bg-white p-4">
+                                <p className="font-black text-[#E00B41]">안내・유의사항</p>
                                 <div className="mt-3 grid gap-3 sm:grid-cols-2">
                                     {(guideSettings.notices?.length ? guideSettings.notices : [
                                         { title: '복장에 관하여', body: '아침저녁으로 기온이 내려갈 수 있으니 걸칠 수 있는 겉옷을 준비해 주세요.' },
                                         { title: '숙박에 관하여', body: '현지 사정에 따라 동급 등급으로 변경될 수 있습니다.' },
                                     ]).map((notice, index) => (
                                         <div key={`${notice.title}-${index}`} className="flex gap-2">
-                                            <span className="material-symbols-outlined text-[20px] text-[#0F8F84]">info</span>
+                                            <span className="material-symbols-outlined text-[20px] text-[#E00B41]">info</span>
                                             <div>
                                                 <p className="text-sm font-black text-slate-800">{notice.title}</p>
                                                 <p className="mt-1 whitespace-pre-wrap text-xs leading-relaxed text-slate-500">{notice.body}</p>
@@ -445,19 +500,19 @@ export const DocumentItinerary: React.FC = () => {
                                 </div>
                                 {detail.note && <p className="mt-4 text-xs font-bold leading-relaxed text-slate-500">※ {detail.note}</p>}
                             </div>
-                            <div className="rounded-xl border border-[#8FE7DE]/70 bg-white p-4">
+                            <div className="rounded-xl border border-[#FFD9E0]/70 bg-white p-4">
                                 <p className="text-[12px] font-black uppercase tracking-widest text-slate-400">Contact</p>
                                 <p className="mt-2 font-black text-slate-950">Trip Mongolia</p>
                                 <p className="mt-1 text-sm text-slate-500">{guideSettings.emergencyPhone || guide?.phone || '+976-80-1234-5678'}</p>
                                 <p className="text-sm text-slate-500">{guideSettings.emergencyEmail || 'ts.dejidlala@gmail.com'}</p>
-                                {guideSettings.closingMessage && <p className="mt-4 text-sm font-bold leading-relaxed text-[#0F8F84]">{guideSettings.closingMessage}</p>}
+                                {guideSettings.closingMessage && <p className="mt-4 text-sm font-bold leading-relaxed text-[#E00B41]">{guideSettings.closingMessage}</p>}
                             </div>
                         </div>
 
                         {detail.footerBadges?.length && (
                             <div className="mt-5 grid gap-2 sm:grid-cols-4">
                                 {detail.footerBadges.map((badge, index) => (
-                                    <div key={`${badge}-${index}`} className="rounded-xl bg-[#0F8F84] px-3 py-3 text-center text-xs font-black text-white">{badge}</div>
+                                    <div key={`${badge}-${index}`} className="rounded-xl bg-[#E00B41] px-3 py-3 text-center text-xs font-black text-white">{badge}</div>
                                 ))}
                             </div>
                         )}
