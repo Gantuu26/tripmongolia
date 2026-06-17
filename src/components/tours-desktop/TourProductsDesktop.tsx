@@ -316,7 +316,7 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
 
             {/* ===== Category banner row ===== */}
             <section style={{ maxWidth: contentWidth, margin: '0 auto', padding: '40px 32px 0' }}>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 28, justifyContent: 'center' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 36, justifyContent: 'center' }}>
                     {tourCats.map((c) => {
                         const on = cat === c.id;
                         const isImg = !!c.icon && (c.icon.startsWith('data:') || c.icon.startsWith('http') || c.icon.startsWith('/'));
@@ -333,8 +333,8 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
                                     display: 'flex',
                                     flexDirection: 'column',
                                     alignItems: 'center',
-                                    gap: 10,
-                                    width: 108,
+                                    gap: 12,
+                                    width: 132,
                                     fontFamily: 'inherit',
                                     transition: 'transform 200ms var(--ease-out)',
                                 }}
@@ -345,33 +345,34 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
                             >
                                 <div
                                     style={{
-                                        width: 96,
-                                        height: 96,
+                                        width: 116,
+                                        height: 116,
                                         borderRadius: 999,
                                         overflow: 'hidden',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        border: on ? '3px solid #ff385c' : '3px solid transparent',
-                                        boxShadow: on ? '0 8px 20px -8px rgba(255, 56, 92,0.45)' : '0 2px 10px rgba(0,0,0,0.08)',
-                                        background: isImg ? '#000' : (on ? 'var(--primary-tint)' : 'var(--bg-muted)'),
+                                        boxShadow: on
+                                            ? '0 0 0 3px #ff385c, 0 10px 22px -10px rgba(255, 56, 92,0.5)'
+                                            : '0 2px 10px rgba(0,0,0,0.08)',
+                                        background: on ? 'var(--primary-tint)' : 'var(--bg-muted)',
                                         transition: 'all 200ms var(--ease-out)',
                                     }}
                                 >
                                     {isImg ? (
                                         <img src={c.icon} alt={c.label} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                     ) : (
-                                        <MatIcon name={c.icon || 'landscape'} size={34} color={on ? '#ff385c' : 'var(--fg-4)'} />
+                                        <MatIcon name={c.icon || 'landscape'} size={44} color={on ? '#ff385c' : 'var(--fg-4)'} />
                                     )}
                                 </div>
                                 <div
                                     style={{
-                                        fontSize: 14,
+                                        fontSize: 15,
                                         fontWeight: on ? 700 : 600,
                                         color: on ? '#ff385c' : 'var(--fg-2)',
                                         textAlign: 'center',
                                         lineHeight: 1.3,
-                                        maxWidth: 108,
+                                        maxWidth: 132,
                                         overflow: 'hidden',
                                         textOverflow: 'ellipsis',
                                         whiteSpace: 'nowrap',
