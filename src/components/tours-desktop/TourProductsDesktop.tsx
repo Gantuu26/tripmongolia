@@ -522,7 +522,7 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
             </section>
 
             {/* ===== Custom tour CTA ===== */}
-            <section style={{ maxWidth: contentWidth, margin: '72px auto 0', padding: '0 32px' }}>
+            <section style={{ maxWidth: contentWidth, margin: '72px auto 88px', padding: '0 32px' }}>
                 <div
                     style={{
                         background: 'linear-gradient(120deg, #ff385c 0%, #e00b41 60%, #881337 100%)',
