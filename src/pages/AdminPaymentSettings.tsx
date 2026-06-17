@@ -22,9 +22,13 @@ export const AdminPaymentSettings: React.FC = () => {
 
     useEffect(() => {
         // 카카오 OAuth 콜백 결과(?kakao=connected|error) 처리 후 상태 조회
-        const p = new URLSearchParams(window.location.search).get('kakao');
+        const sp = new URLSearchParams(window.location.search);
+        const p = sp.get('kakao');
         if (p === 'connected') setKakaoMsg('Kakao холбогдлоо. (연결 완료)');
-        else if (p === 'error') setKakaoMsg('Kakao холболт амжилтгүй боллоо. (연결 실패)');
+        else if (p === 'error') {
+            const reason = sp.get('reason');
+            setKakaoMsg('Kakao холболт амжилтгүй боллоо. (연결 실패)' + (reason ? ` — ${reason}` : ''));
+        }
         if (p) window.history.replaceState({}, '', '/admin/payment');
         (async () => {
             try { setKakaoStatus(await api.kakao.status()); } catch { /* ignore */ }

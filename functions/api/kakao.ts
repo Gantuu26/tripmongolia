@@ -32,7 +32,8 @@ app.get('/callback', requireAdmin, async (c) => {
         return c.redirect('/admin/payment?kakao=connected');
     } catch (e: any) {
         console.error('[kakao] callback failed', e);
-        return c.redirect('/admin/payment?kakao=error');
+        const reason = encodeURIComponent(String(e?.message || 'unknown').slice(0, 200));
+        return c.redirect(`/admin/payment?kakao=error&reason=${reason}`);
     }
 });
 
