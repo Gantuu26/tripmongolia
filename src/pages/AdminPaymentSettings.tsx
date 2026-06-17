@@ -16,6 +16,20 @@ export const AdminPaymentSettings: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [savedAt, setSavedAt] = useState<string | null>(null);
+    const [kakaoStatus, setKakaoStatus] = useState<{ connected: boolean; configured: boolean }>({ connected: false, configured: false });
+    const [kakaoBusy, setKakaoBusy] = useState(false);
+    const [kakaoMsg, setKakaoMsg] = useState<string | null>(null);
+
+    useEffect(() => {
+        // 카카오 OAuth 콜백 결과(?kakao=connected|error) 처리 후 상태 조회
+        const p = new URLSearchParams(window.location.search).get('kakao');
+        if (p === 'connected') setKakaoMsg('Kakao холбогдлоо. (연결 완료)');
+        else if (p === 'error') setKakaoMsg('Kakao холболт амжилтгүй боллоо. (연결 실패)');
+        if (p) window.history.replaceState({}, '', '/admin/payment');
+        (async () => {
+            try { setKakaoStatus(await api.kakao.status()); } catch { /* ignore */ }
+        })();
+    }, []);
 
     useEffect(() => {
         let cancelled = false;
@@ -68,6 +82,20 @@ export const AdminPaymentSettings: React.FC = () => {
             <Icon name="check" />{saving ? 'Хадгалж байна...' : 'Хадгалах'}
         </button>
     );
+
+    const kakaoConnect = () => { window.location.href = '/api/kakao/connect'; };
+    const kakaoTest = async () => {
+        setKakaoBusy(true); setKakaoMsg(null);
+        try { await api.kakao.test(); setKakaoMsg('Тест мэдэгдэл илгээгдлээ. KakaoTalk-аа шалгана уу. (테스트 발송 완료)'); }
+        catch (e: any) { setKakaoMsg('Илгээж чадсангүй: ' + (e?.message || 'алдаа')); }
+        finally { setKakaoBusy(false); }
+    };
+    const kakaoDisconnect = async () => {
+        setKakaoBusy(true); setKakaoMsg(null);
+        try { await api.kakao.disconnect(); setKakaoStatus(s => ({ ...s, connected: false })); setKakaoMsg('Холболт салгагдлаа. (연결 해제)'); }
+        catch (e: any) { setKakaoMsg('Алдаа: ' + (e?.message || '')); }
+        finally { setKakaoBusy(false); }
+    };
 
     return (
         <AdminLayout activePage="payment" title="Төлбөрийн данс (Дансаар шилжүүлэх)" actions={saveBtn}>
@@ -129,6 +157,50 @@ export const AdminPaymentSettings: React.FC = () => {
                                 <div>예금주 : <b style={{ color: 'var(--fg-1)' }}>{accountHolder || '—'}</b></div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                {/* 카카오톡 "나에게 보내기" 알림 연동 */}
+                <div style={{ marginTop: 30 }}>
+                    <div className="sec-label">KakaoTalk мэдэгдэл (카톡 알림 · 나에게 보내기)</div>
+                    <div className="card card-pad" style={{ maxWidth: 640 }}>
+                        <div className="card-muted-note" style={{ marginTop: 0 }}>
+                            <Icon name="info" />
+                            <span>Шинэ <b>захиалга / үнийн саналын хүсэлт</b> ирэх бүрд админ өөрийн KakaoTalk-аар мэдэгдэл хүлээн авна. (새 예약·견적 요청이 오면 관리자 카카오톡으로 알림이 옵니다.)</span>
+                        </div>
+
+                        <div className="row" style={{ gap: 8, marginTop: 14, alignItems: 'center' }}>
+                            <span className="row" style={{ gap: 6, fontSize: 14, fontWeight: 800, color: kakaoStatus.connected ? 'var(--mrt-green)' : 'var(--fg-3)' }}>
+                                <Icon name={kakaoStatus.connected ? 'check_circle' : 'cancel'} fill style={{ fontSize: 18 }} />
+                                {kakaoStatus.connected ? 'Холбогдсон (연결됨)' : 'Холбогдоогүй (미연결)'}
+                            </span>
+                        </div>
+
+                        <div className="row" style={{ gap: 8, marginTop: 14 }}>
+                            {kakaoStatus.connected ? (
+                                <>
+                                    <button className="btn btn-ink" onClick={kakaoTest} disabled={kakaoBusy}>
+                                        <Icon name="send" />Тест илгээх (테스트)
+                                    </button>
+                                    <button className="btn" onClick={kakaoDisconnect} disabled={kakaoBusy}>
+                                        <Icon name="link_off" />Салгах (해제)
+                                    </button>
+                                </>
+                            ) : (
+                                <button className="btn btn-ink" onClick={kakaoConnect} disabled={!kakaoStatus.configured}>
+                                    <Icon name="link" />Kakao холбох (카카오 연결)
+                                </button>
+                            )}
+                        </div>
+
+                        {kakaoMsg && (
+                            <div style={{ marginTop: 12, fontSize: 13, fontWeight: 700, color: 'var(--fg-2)' }}>{kakaoMsg}</div>
+                        )}
+                        {!kakaoStatus.configured && (
+                            <div className="muted" style={{ marginTop: 12, fontSize: 13, lineHeight: 1.7 }}>
+                                ⚠ <b>KAKAO_REST_API_KEY</b> орчны хувьсагч тохируулаагүй байна. Cloudflare-т бүртгэсний дараа холбоно. (Cloudflare 환경변수 등록 후 연결 가능)
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

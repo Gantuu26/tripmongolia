@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
 import { createNotification } from './index';
+import { notifyAdminKakao } from '../../lib/kakao';
 
 interface Env {
     DB: any;
@@ -417,6 +418,15 @@ app.post('/', async (c) => {
             } catch (adminErr) {
                 console.error('Admin email send failed:', adminErr);
             }
+        }
+
+        // 관리자 카카오톡 알림(나에게 보내기) — 신규 견적·예약일 때만, 연결돼 있으면 발송
+        if (type === 'QUOTE_RECEIVED' || type === 'RESERVATION_REQUESTED') {
+            const kakaoText = type === 'QUOTE_RECEIVED'
+                ? `🆕 새 견적 요청\n고객: ${data.customerName || '고객'}\n목적지: ${data.destination || data.productName || '-'}`
+                : `🆕 새 예약 요청\n고객: ${data.customerName || '고객'}\n상품: ${data.productName || '-'}`;
+            const kakaoLink = type === 'QUOTE_RECEIVED' ? `${SITE_URL}/admin/quotes` : `${SITE_URL}/admin/reservations`;
+            await notifyAdminKakao(c.env as any, kakaoText, kakaoLink);
         }
 
         return c.json({ success: true });

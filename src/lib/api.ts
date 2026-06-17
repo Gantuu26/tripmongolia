@@ -103,6 +103,12 @@ export const api = {
             body: JSON.stringify({ [key]: value })
         }),
     },
+    // 카카오톡 "나에게 보내기" 알림 연동 (관리자 전용). connect는 브라우저 리디렉션이라 별도.
+    kakao: {
+        status: async () => request(`${API_BASE}/kakao/status`),
+        test: async () => request(`${API_BASE}/kakao/test`, { method: 'POST' }),
+        disconnect: async () => request(`${API_BASE}/kakao/disconnect`, { method: 'POST' }),
+    },
     faqs: {
         list: async () => request(`${API_BASE}/faqs`),
         create: async (data: any) => request(`${API_BASE}/faqs`, {
