@@ -1210,7 +1210,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
         const out: DetailContentBlock[] = [...pre];
         days.forEach((d, i) => {
             const dc = d.dayInfo.content as DayInfoContent;
-            out.push({ ...d.dayInfo, content: { ...dc, dayLabel: DAY_LABELS_JP[i] || `${i + 1}일차` } });
+            out.push({ ...d.dayInfo, content: { ...dc, dayLabel: dc.dayLabel || DAY_LABELS_JP[i] || `${i + 1}일차` } });
             out.push(...d.events);
             if (i < days.length - 1) {
                 out.push({ id: `block-sep-${d.dayInfo.id}`, type: 'divider', content: { style: 'space', height: 40 } });
@@ -1269,6 +1269,25 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
             const t = dayGroupIndex + dir;
             if (t < 0 || t >= g.days.length) return;
             [g.days[dayGroupIndex], g.days[t]] = [g.days[t], g.days[dayGroupIndex]];
+        });
+    };
+
+    // 한 일차(제목·날짜·식사·숙박·일정 항목 전체)를 통째로 복제해 바로 아래에 추가
+    const duplicateItineraryDay = (dayGroupIndex: number) => {
+        const stamp = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+        let n = 0;
+        const cloneBlock = (b: DetailContentBlock): DetailContentBlock => {
+            const content = JSON.parse(JSON.stringify(b.content ?? null));
+            if (content && typeof content === 'object' && 'id' in content) content.id = `c-${stamp}-${n}`;
+            return { ...b, id: `block-${stamp}-${n++}`, content };
+        };
+        rebuildItinerary((g) => {
+            const src = g.days[dayGroupIndex];
+            if (!src) return;
+            g.days.splice(dayGroupIndex + 1, 0, {
+                dayInfo: cloneBlock(src.dayInfo),
+                events: src.events.map(cloneBlock),
+            });
         });
     };
 
@@ -2251,13 +2270,23 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                             {/* Day header */}
                                                             <div className="row" style={{ gap: 8, alignItems: 'center', padding: '12px 14px', background: 'var(--mrt-gray-50, #f8f9fa)', borderBottom: collapsed ? 'none' : '1px solid var(--border-subtle)' }}>
                                                                 <button type="button" className="act-btn" onClick={() => toggleDayCollapsed(day.dayInfo.id)} title={collapsed ? 'Дэлгэх' : 'Хураах'}><Icon name={collapsed ? 'expand_more' : 'expand_less'} /></button>
-                                                                <span className="badge b-amber" style={{ flex: 'none' }}>{dc.dayLabel || `${dayIdx + 1}일차`}</span>
+                                                                <input
+                                                                    type="text"
+                                                                    value={dc.dayLabel || ''}
+                                                                    placeholder={`${dayIdx + 1}일차`}
+                                                                    onChange={(e) => updateItineraryBlockContent(day.dayInfoFlatIndex, { ...dc, dayLabel: e.target.value })}
+                                                                    title="Өдрийн шошго засах (일차 라벨 수정)"
+                                                                    style={{ flex: 'none', width: 66, textAlign: 'center', fontWeight: 700, fontSize: 12, color: '#b45309', background: '#fef3c7', border: '1px solid transparent', borderRadius: 999, padding: '5px 6px', outline: 'none' }}
+                                                                    onFocus={(e) => { e.currentTarget.style.borderColor = '#f59e0b'; e.currentTarget.style.background = '#fff'; }}
+                                                                    onBlur={(e) => { e.currentTarget.style.borderColor = 'transparent'; e.currentTarget.style.background = '#fef3c7'; }}
+                                                                />
                                                                 <input type="text" className="inp" style={{ flex: 1, fontWeight: 700 }} value={dc.title || ''} onChange={(e) => updateItineraryBlockContent(day.dayInfoFlatIndex, { ...dc, title: e.target.value })} placeholder="Тухайн өдрийн гарчиг (Улаанбаатар → Тэрэлж)" />
                                                                 {collapsed && eventCount > 0 && <span className="cell-muted" style={{ fontSize: 12, flex: 'none' }}>{eventCount} зүйл</span>}
                                                                 <div className="edit-move" style={{ flex: 'none' }}>
                                                                     <button type="button" onClick={() => moveItineraryDay(dayIdx, -1)} disabled={dayIdx === 0}><Icon name="expand_less" /></button>
                                                                     <button type="button" onClick={() => moveItineraryDay(dayIdx, 1)} disabled={dayIdx === days.length - 1}><Icon name="expand_more" /></button>
                                                                 </div>
+                                                                <button type="button" className="act-btn" style={{ flex: 'none' }} onClick={() => duplicateItineraryDay(dayIdx)} title="Энэ өдрийг хуулбарлах (이 일차 복사)"><Icon name="content_copy" /></button>
                                                                 <button type="button" className="act-btn danger" style={{ flex: 'none' }} onClick={() => { if (window.confirm(`${dc.dayLabel || `${dayIdx + 1}일차`}-ийг бүхэлд нь устгах уу?`)) removeItineraryDay(dayIdx); }} title="Энэ өдрийг устгах"><Icon name="delete" /></button>
                                                             </div>
 

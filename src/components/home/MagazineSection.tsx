@@ -32,7 +32,7 @@ export const MagazineSection: React.FC<MagazineSectionProps> = ({ magazines }) =
                     </h3>
                     <button
                         onClick={() => navigate('/travel-guide')}
-                        className="text-[13px] sm:text-[15px] font-bold text-[#0D7A66] dark:text-[#18c9a6] flex items-center shrink-0 mt-0.5 active:scale-95 transition-transform"
+                        className="text-[13px] sm:text-[15px] font-bold text-primary flex items-center shrink-0 mt-0.5 active:scale-95 transition-transform"
                     >
                         {t('home.magazine.view_all', { defaultValue: '전체보기' })} <span className="material-symbols-outlined text-base sm:text-lg ml-0.5">chevron_right</span>
                     </button>
