@@ -316,7 +316,7 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
 
             {/* ===== Category banner row ===== */}
             <section style={{ maxWidth: contentWidth, margin: '0 auto', padding: '40px 32px 0' }}>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 36, justifyContent: 'center' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 36, justifyContent: 'flex-start' }}>
                     {tourCats.map((c) => {
                         const on = cat === c.id;
                         const isImg = !!c.icon && (c.icon.startsWith('data:') || c.icon.startsWith('http') || c.icon.startsWith('/'));
