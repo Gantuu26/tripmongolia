@@ -82,6 +82,7 @@ export function ReviewSectionDesktop({ contentWidth = 1280 }: ReviewSectionProps
             style={{
                 flex: '0 0 auto',
                 width: 340,
+                marginRight: 18,
                 background: '#fff',
                 borderRadius: 20,
                 padding: 26,
@@ -173,7 +174,7 @@ export function ReviewSectionDesktop({ contentWidth = 1280 }: ReviewSectionProps
                 onAll={() => navigate('/reviews')}
             />
             <div style={{ overflow: 'hidden', WebkitMaskImage: edgeFade, maskImage: edgeFade }}>
-                <div className="tm-review-marquee" style={{ display: 'flex', gap: 18, width: 'max-content', paddingBottom: 6 }}>
+                <div className="tm-review-marquee" style={{ display: 'flex', width: 'max-content', paddingBottom: 6 }}>
                     {loop.map((r, i) => card(r, `${r.id}-${i}`))}
                 </div>
             </div>
