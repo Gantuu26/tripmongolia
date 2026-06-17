@@ -2317,6 +2317,9 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, categories, onClos
                                                                             <label className="cell-strong" style={{ fontSize: 12.5 }}>🏠 Байр</label>
                                                                             <div className="spacer" style={{ flex: 1 }} />
                                                                             <button type="button" onClick={() => setHotelPickerForIndex(day.dayInfoFlatIndex)} className="btn btn-ghost btn-sm"><Icon name="hotel" />Мастераас сонгох</button>
+                                                                            {(dc.accommodation || dc.accommodationHotelId) && (
+                                                                                <button type="button" onClick={() => updateItineraryBlockContent(day.dayInfoFlatIndex, { ...dc, accommodation: '', accommodationHotelId: undefined })} className="btn btn-ghost btn-sm" style={{ color: '#ef4444', marginLeft: 6 }} title="Сонгосон байрыг цэвэрлэх (숙소 선택 해제)"><Icon name="close" />Цэвэрлэх</button>
+                                                                            )}
                                                                         </div>
                                                                         <div className="inp-mini"><span className="pre"><Icon name="hotel" style={{ fontSize: 14 }} /></span>
                                                                             <input value={dc.accommodation || ''} onChange={(e) => updateItineraryBlockContent(day.dayInfoFlatIndex, { ...dc, accommodation: e.target.value, accommodationHotelId: undefined })} placeholder="Тусдаа ариун цэвэр·шүршүүртэй тансаг гэр (эсвэл мастераас сонгох)" />
