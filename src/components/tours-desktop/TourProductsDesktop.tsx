@@ -228,22 +228,16 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
         setSearchParams({});
     };
 
-    // Category banners (up to 3 + "all")
+    // Category circles (모바일과 동일하게 카테고리 자체 이미지 c.icon 사용, 전체 카테고리 노출)
     const tourCats = useMemo(() => {
-        const items: { id: string; label: string; img?: string; sub: string; count: number; bg?: string }[] = [
-            { id: 'all', label: '전체', sub: '모든 몽골여행', count: products.length },
-            ...categories.slice(0, 3).map((c) => {
-                const count = products.filter((p) => p.category === c.id || p.category === c.name).length;
-                // pick a banner from one of the products in this category
-                const sample = products.find((p) => (p.category === c.id || p.category === c.name) && (p.mainImages?.[0]));
-                return {
-                    id: c.id,
-                    label: c.name,
-                    img: sample?.mainImages?.[0] || undefined,
-                    sub: c.description || '',
-                    count,
-                };
-            }),
+        const items: { id: string; label: string; icon: string; count: number }[] = [
+            { id: 'all', label: '전체', icon: 'grid_view', count: products.length },
+            ...categories.map((c) => ({
+                id: c.id,
+                label: c.name,
+                icon: c.icon || '',
+                count: products.filter((p) => p.category === c.id || p.category === c.name).length,
+            })),
         ];
         return items;
     }, [categories, products]);
@@ -322,135 +316,70 @@ export function TourProductsDesktop({ contentWidth = 1280 }: Props) {
 
             {/* ===== Category banner row ===== */}
             <section style={{ maxWidth: contentWidth, margin: '0 auto', padding: '40px 32px 0' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: `repeat(${tourCats.length}, 1fr)`, gap: 14 }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 28, justifyContent: 'center' }}>
                     {tourCats.map((c) => {
                         const on = cat === c.id;
-                        const allCat = c.id === 'all';
+                        const isImg = !!c.icon && (c.icon.startsWith('data:') || c.icon.startsWith('http') || c.icon.startsWith('/'));
                         return (
                             <button
                                 key={c.id}
                                 type="button"
                                 onClick={() => handleCat(c.id)}
                                 style={{
-                                    position: 'relative',
-                                    height: 168,
-                                    borderRadius: 20,
-                                    overflow: 'hidden',
+                                    background: 'none',
+                                    border: 'none',
                                     padding: 0,
                                     cursor: 'pointer',
-                                    textAlign: 'left',
-                                    border: on ? '2px solid #ff385c' : '1px solid var(--border)',
-                                    background: allCat
-                                        ? (on ? 'linear-gradient(135deg, #ff385c 0%, #e00b41 100%)' : '#fff')
-                                        : '#000',
-                                    boxShadow: on ? '0 8px 20px -8px rgba(255, 56, 92,0.4)' : '0 2px 8px rgba(0,0,0,0.04)',
-                                    transition: 'all 200ms var(--ease-out)',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    gap: 10,
+                                    width: 108,
                                     fontFamily: 'inherit',
+                                    transition: 'transform 200ms var(--ease-out)',
                                 }}
                                 onMouseEnter={(e) => {
-                                    if (!on) e.currentTarget.style.transform = 'translateY(-3px)';
+                                    if (!on) e.currentTarget.style.transform = 'translateY(-4px)';
                                 }}
                                 onMouseLeave={(e) => (e.currentTarget.style.transform = '')}
                             >
-                                {c.img && (
-                                    <>
-                                        <div
-                                            style={{
-                                                position: 'absolute',
-                                                inset: 0,
-                                                backgroundImage: `url(${c.img})`,
-                                                backgroundSize: 'cover',
-                                                backgroundPosition: 'center',
-                                                opacity: on ? 1 : 0.85,
-                                            }}
-                                        />
-                                        <div
-                                            style={{
-                                                position: 'absolute',
-                                                inset: 0,
-                                                background:
-                                                    'linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.1) 100%)',
-                                            }}
-                                        />
-                                    </>
-                                )}
-                                {allCat && (
-                                    <div
-                                        style={{
-                                            position: 'absolute',
-                                            inset: 0,
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            opacity: 0.5,
-                                        }}
-                                    >
-                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
-                                            {[0, 1, 2, 3].map((i) => (
-                                                <div
-                                                    key={i}
-                                                    style={{
-                                                        width: 26,
-                                                        height: 26,
-                                                        borderRadius: 6,
-                                                        background: on ? 'rgba(255,255,255,0.3)' : 'var(--primary-tint)',
-                                                    }}
-                                                />
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
                                 <div
                                     style={{
-                                        position: 'absolute',
-                                        left: 18,
-                                        right: 18,
-                                        bottom: 16,
-                                        color: allCat && !on ? 'var(--fg-1)' : '#fff',
+                                        width: 96,
+                                        height: 96,
+                                        borderRadius: 999,
+                                        overflow: 'hidden',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        border: on ? '3px solid #ff385c' : '3px solid transparent',
+                                        boxShadow: on ? '0 8px 20px -8px rgba(255, 56, 92,0.45)' : '0 2px 10px rgba(0,0,0,0.08)',
+                                        background: isImg ? '#000' : (on ? 'var(--primary-tint)' : 'var(--bg-muted)'),
+                                        transition: 'all 200ms var(--ease-out)',
                                     }}
                                 >
-                                    <div
-                                        style={{
-                                            fontSize: 11,
-                                            opacity: allCat && !on ? 0.7 : 0.85,
-                                            marginBottom: 4,
-                                            fontWeight: 500,
-                                            overflow: 'hidden',
-                                            textOverflow: 'ellipsis',
-                                            whiteSpace: 'nowrap',
-                                        }}
-                                    >
-                                        {c.sub || ' '}
-                                    </div>
-                                    <div
-                                        style={{
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                            alignItems: 'flex-end',
-                                            gap: 12,
-                                        }}
-                                    >
-                                        <div style={{ fontSize: 18, fontWeight: 700, letterSpacing: '-0.01em', lineHeight: 1.25 }}>
-                                            {c.label}
-                                        </div>
-                                        <div
-                                            style={{
-                                                flexShrink: 0,
-                                                fontSize: 10,
-                                                fontWeight: 700,
-                                                padding: '4px 10px',
-                                                borderRadius: 999,
-                                                background: on
-                                                    ? (allCat ? 'rgba(255,255,255,0.25)' : '#ff385c')
-                                                    : (allCat ? 'var(--bg-muted)' : 'rgba(255,255,255,0.22)'),
-                                                color: on || !allCat ? '#fff' : 'var(--fg-3)',
-                                                backdropFilter: !allCat ? 'blur(8px)' : 'none',
-                                            }}
-                                        >
-                                            {c.count}개 플랜
-                                        </div>
-                                    </div>
+                                    {isImg ? (
+                                        <img src={c.icon} alt={c.label} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                    ) : (
+                                        <MatIcon name={c.icon || 'landscape'} size={34} color={on ? '#ff385c' : 'var(--fg-4)'} />
+                                    )}
                                 </div>
+                                <div
+                                    style={{
+                                        fontSize: 14,
+                                        fontWeight: on ? 700 : 600,
+                                        color: on ? '#ff385c' : 'var(--fg-2)',
+                                        textAlign: 'center',
+                                        lineHeight: 1.3,
+                                        maxWidth: 108,
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
+                                        whiteSpace: 'nowrap',
+                                    }}
+                                >
+                                    {c.label}
+                                </div>
+                                <div style={{ fontSize: 11, color: 'var(--fg-5)', marginTop: -4 }}>{c.count}개 플랜</div>
                             </button>
                         );
                     })}
